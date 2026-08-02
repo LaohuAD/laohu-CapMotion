@@ -1,0 +1,4 @@
+interface:
+  display_name: "剪映 SRT 识别桥接"
+  short_description: "调用剪映识别视频语音并导出、校验标准 SRT 字幕"
+  default_prompt: "Use $jianying-srt-bridge to recognize this video in Jianying and return a validated SRT file."

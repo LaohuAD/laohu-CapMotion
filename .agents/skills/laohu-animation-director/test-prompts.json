@@ -1,0 +1,27 @@
+[
+  {
+    "name": "vague-time-range",
+    "prompt": "请在 05:20 到 06:24 做一个动画，我没有明确想法。先读 ASR 和素材再推荐。",
+    "expected": "先分析语义和补充内容，再推荐主组件与备选，不直接套最近组件。"
+  },
+  {
+    "name": "explicit-matrix",
+    "prompt": "这个时间段我想做路线矩阵，六条路线要全部保留。",
+    "expected": "优先 DecisionCanvas.matrix，并检查六条输入是否完整显示。"
+  },
+  {
+    "name": "source-enrichment",
+    "prompt": "ASR 只说了四个模块标题，请结合原始素材补充每个模块解释。",
+    "expected": "补充内容带 source-doc 或 editorial 来源；事实和数字不能无来源。"
+  },
+  {
+    "name": "schema-gap",
+    "prompt": "我需要流程节点同时展示负责人，但现有 schema 没有负责人字段。",
+    "expected": "说明一次性适配、可选字段升级或拆组件的取舍，不硬塞现有字段。"
+  },
+  {
+    "name": "standalone-remotion",
+    "prompt": "这个片段只用 Remotion 独立导出，不要接 HyperFrames。",
+    "expected": "使用 standalone 输出，不把 HyperFrames 当强制前置或最终出口。"
+  }
+]

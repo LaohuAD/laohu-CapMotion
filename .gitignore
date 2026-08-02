@@ -1,0 +1,58 @@
+.DS_Store
+Thumbs.db
+
+# Local credentials and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Private workspace material
+AGENTS.md
+LOG.md
+skills-lock.json
+作品/
+知识沉淀/
+参考项目/
+归档/
+
+# Vendored skills are installed from their upstream repositories
+.agents/skills/remotion-*/
+
+# Node / Remotion generated files
+node_modules/
+**/node_modules/
+**/.cache/
+**/.remotion/
+**/dist/
+**/out/
+**/renders/
+**/.thumbnails/
+
+# Local-only Remotion notes; the reusable workspace is public
+模板/remotion-assets/README.md
+
+# Media, transcripts, edit decisions, and render outputs
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+*.wav
+*.m4a
+*.mp3
+*.aac
+*.flac
+*.srt
+*.ass
+*.vtt
+*.edl.json
+*.raw.json
+
+# Editor and OS files
+.idea/
+.vscode/
+*.swp
+*.tmp
+*.log

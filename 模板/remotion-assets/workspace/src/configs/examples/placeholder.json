@@ -1,0 +1,22 @@
+{
+  "component": "PlaceholderComposition",
+  "sourceTimeRange": {
+    "start": 0,
+    "end": 6
+  },
+  "audienceEffect": "understand",
+  "stylePreset": "laohu-default",
+  "title": "组件库占位画面",
+  "subtitle": "真实组件必须先完成 schema 和观众效果判断，再进入制作。",
+  "implementation": {
+    "engine": "Remotion",
+    "output": "png",
+    "mountInHyperFrames": true
+  },
+  "qa": {
+    "mobileReadable": true,
+    "avoidEmptyArea": true,
+    "noTextOverlap": true,
+    "mustScreenshotCheck": true
+  }
+}

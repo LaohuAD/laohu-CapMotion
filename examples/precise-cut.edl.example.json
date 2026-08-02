@@ -1,0 +1,21 @@
+{
+  "source": "/absolute/path/input.mp4",
+  "rawJson": "/absolute/path/input.raw.json",
+  "output": "/absolute/path/output.precise-cut.mp4",
+  "handleMs": 50,
+  "mergeGapMs": 100,
+  "precisionSequence": [
+    1,
+    "3-5",
+    {
+      "startMs": 18420,
+      "endMs": 22180,
+      "cueIds": [8],
+      "reason": "把后录的背景说明移到开场之后"
+    }
+  ],
+  "videoCodec": "libx264",
+  "videoPreset": "medium",
+  "videoCrf": 19,
+  "audioBitrate": "128k"
+}

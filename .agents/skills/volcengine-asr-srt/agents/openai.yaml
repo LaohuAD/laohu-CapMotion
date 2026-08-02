@@ -1,0 +1,4 @@
+interface:
+  display_name: "火山引擎 SRT 识别"
+  short_description: "优先调用火山大模型录音识别极速版并生成时间戳 SRT"
+  default_prompt: "Use $volcengine-asr-srt to transcribe this media with Volcengine flash Base64 mode when eligible, preserve raw JSON, and return a validated SRT."
