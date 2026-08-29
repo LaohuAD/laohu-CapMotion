@@ -2337,6 +2337,7 @@ impl From<MotionValidationError> for ProjectValidationError {
 #[derive(Type, Serialize, Deserialize, Clone, Debug)]
 #[serde(rename_all = "camelCase", default)]
 pub struct ProjectConfiguration {
+    pub project_revision: u64,
     pub aspect_ratio: Option<AspectRatio>,
     pub background: BackgroundConfiguration,
     pub camera: Camera,
@@ -2393,6 +2394,7 @@ fn camera_config_needs_migration(value: &Value) -> bool {
 impl Default for ProjectConfiguration {
     fn default() -> Self {
         Self {
+            project_revision: 0,
             aspect_ratio: Default::default(),
             background: Default::default(),
             camera: Default::default(),
