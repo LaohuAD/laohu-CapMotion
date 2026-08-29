@@ -20,6 +20,7 @@ import {
 	onMount,
 } from "solid-js";
 import { createStore, produce, reconcile, unwrap } from "solid-js/store";
+import toast from "solid-toast";
 
 import { generalSettingsStore } from "~/store";
 import {
@@ -77,6 +78,7 @@ import {
 } from "./clip-transitions";
 import { normalizeColorCorrection } from "./colorCorrection";
 import type { MaskSegment } from "./masks";
+import { type MotionProjectFields, normalizeMotionFields } from "./motion";
 import type { SnapGuide } from "./snapping";
 import type { TextSegment } from "./text";
 import {
@@ -172,6 +174,7 @@ export const getPreviewResolution = (
 
 export type TimelineTrackType =
 	| "clip"
+	| "motion"
 	| "caption"
 	| "keyboard"
 	| "text"
@@ -233,7 +236,7 @@ export type EditorProjectConfiguration = Omit<
 	captions: EditorCaptionsData | null;
 	hiddenTextSegments?: number[];
 	colorCorrection: ColorCorrectionConfiguration;
-};
+} & MotionProjectFields;
 
 function withCornerDefaults<
 	T extends {
@@ -309,6 +312,7 @@ export function normalizeProject(
 
 	return {
 		...config,
+		...normalizeMotionFields(config),
 		keyboard,
 		timeline,
 		captions,
@@ -408,6 +412,7 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 						(segment) => segment.end - segment.start,
 					);
 					const tracks = [
+						project.motion.segments,
 						timeline.zoomSegments,
 						timeline.sceneSegments ?? [],
 						timeline.maskSegments,
@@ -838,6 +843,30 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 					setEditorState("timeline", "selection", null);
 				});
 			},
+			deleteMotionSegments: (segmentIndices: number[]) => {
+				batch(() => {
+					setProject(
+						produce((project) => {
+							const sorted = [...new Set(segmentIndices)]
+								.filter(
+									(index) =>
+										Number.isInteger(index) &&
+										index >= 0 &&
+										index < project.motion.segments.length,
+								)
+								.sort((a, b) => b - a);
+							for (const index of sorted) {
+								const [removed] = project.motion.segments.splice(index, 1);
+								if (!removed?.artifactId) continue;
+								project.motion.artifacts = project.motion.artifacts.filter(
+									(artifact) => artifact.id !== removed.artifactId,
+								);
+							}
+						}),
+					);
+					setEditorState("timeline", "selection", null);
+				});
+			},
 			splitAudioSegment: (index: number, time: number) => {
 				setProject(
 					"timeline",
@@ -1206,6 +1235,7 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 		let saveInFlight = false;
 		let shouldResave = false;
 		let hasPendingProjectSave = false;
+		let persistedProjectRevision = project.projectRevision;
 
 		const flushProjectConfig = async () => {
 			if (!hasPendingProjectSave && !saveInFlight) return;
@@ -1220,9 +1250,19 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 			hasPendingProjectSave = false;
 			try {
 				const config = serializeProjectConfiguration(project);
-				await commands.setProjectConfig(config);
+				(
+					config as ProjectConfiguration & Partial<MotionProjectFields>
+				).projectRevision = persistedProjectRevision;
+				persistedProjectRevision = (await commands.setProjectConfig(
+					config,
+				)) as unknown as number;
 			} catch (error) {
 				console.error("Failed to persist project config", error);
+				if (String(error).includes("revision conflict")) {
+					toast.error(
+						"This project changed outside Cap. Reload it before saving again.",
+					);
+				}
 			} finally {
 				saveInFlight = false;
 				if (shouldResave) {
@@ -1411,6 +1451,10 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 		const initialAudioTrackCount = getUsedTrackCount(
 			project.timeline?.audioSegments ?? [],
 		);
+		const initialMotionTrackCount = Math.max(
+			getUsedTrackCount(project.motion.segments),
+			1,
+		);
 		const initialCaptionTrackVisible =
 			project.captions?.settings.enabled ??
 			(project.timeline?.captionSegments?.length ?? 0) > 0;
@@ -1440,6 +1484,7 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 				splitPreview: null as null | { time: number; snapped: boolean },
 				selection: null as
 					| null
+					| { type: "motion"; indices: number[] }
 					| { type: "zoom"; indices: number[] }
 					| { type: "clip"; indices: number[] }
 					| { type: "transition"; index: number }
@@ -1488,6 +1533,7 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 				},
 				tracks: {
 					clip: true,
+					motion: initialMotionTrackCount,
 					caption: initialCaptionTrackVisible,
 					keyboard: initialKeyboardTrackVisible,
 					zoom: true,

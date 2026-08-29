@@ -2,6 +2,7 @@ use std::sync::{Arc, Barrier};
 
 use cap_project::{
     MotionDefinition, ProjectConfiguration, ProjectTransactionError, mutate_project,
+    replace_project_configuration,
 };
 
 fn create_project() -> tempfile::TempDir {
@@ -135,4 +136,29 @@ fn concurrent_writers_with_the_same_revision_cannot_both_commit() {
     let loaded = ProjectConfiguration::load(directory.path()).unwrap();
     assert_eq!(loaded.project_revision, 1);
     assert_eq!(loaded.motion.definitions.len(), 1);
+}
+
+#[test]
+fn editor_replacement_uses_the_same_revision_transaction() {
+    let directory = create_project();
+    let mut replacement = ProjectConfiguration::load(directory.path()).unwrap();
+    replacement.audio.mute = true;
+
+    let updated = replace_project_configuration(directory.path(), replacement).unwrap();
+
+    assert_eq!(updated.project_revision, 1);
+    assert!(updated.audio.mute);
+    let mut stale = ProjectConfiguration::default();
+    stale.project_revision = 0;
+    let error = replace_project_configuration(directory.path(), stale).unwrap_err();
+    assert!(matches!(
+        error,
+        ProjectTransactionError::RevisionConflict {
+            expected: 0,
+            actual: 1
+        }
+    ));
+    let persisted = ProjectConfiguration::load(directory.path()).unwrap();
+    assert!(persisted.audio.mute);
+    assert_eq!(persisted.project_revision, 1);
 }

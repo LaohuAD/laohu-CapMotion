@@ -3476,14 +3476,12 @@ async fn set_playhead_position(
 async fn set_project_config(
     editor_instance: WindowEditorInstance,
     config: ProjectConfiguration,
-) -> Result<(), String> {
-    editor_instance.project_config.0.send(config.clone()).ok();
-
-    config
-        .write(&editor_instance.project_path)
+) -> Result<u64, String> {
+    let config = cap_project::replace_project_configuration(&editor_instance.project_path, config)
         .map_err(|error| format!("Failed to write project config: {error}"))?;
-
-    Ok(())
+    let revision = config.project_revision;
+    editor_instance.project_config.0.send(config).ok();
+    Ok(revision)
 }
 
 #[tauri::command]

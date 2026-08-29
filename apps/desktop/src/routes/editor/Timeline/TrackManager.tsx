@@ -25,6 +25,10 @@ const TRACK_META: Record<TimelineTrackType, TrackMeta> = {
 		description: "Your recorded screen footage.",
 		unavailableHint: "",
 	},
+	motion: {
+		description: "Agent-authored animation layers and reusable templates.",
+		unavailableHint: "",
+	},
 	zoom: {
 		description: "Smooth zoom-ins that follow the action.",
 		unavailableHint: "",

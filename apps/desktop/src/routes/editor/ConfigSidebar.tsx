@@ -141,6 +141,11 @@ import {
 	type MaskSegment,
 } from "./masks";
 import {
+	type MotionDurationPolicy,
+	type MotionSegment,
+	staleLinkedArtifact,
+} from "./motion";
+import {
 	DEFAULT_BACKGROUND_PADDING,
 	DEFAULT_BACKGROUND_ROUNDING,
 	DEFAULT_CAMERA_SCALE_DURING_ZOOM,
@@ -1402,6 +1407,69 @@ export function ConfigSidebar() {
 											{(item) => (
 												<div class="p-4 rounded-lg border border-gray-200">
 													<AudioSegmentConfig
+														segment={item.segment}
+														segmentIndex={item.index}
+													/>
+												</div>
+											)}
+										</For>
+									</div>
+								)}
+							</Show>
+							<Show
+								when={(() => {
+									const motionSelection = selection();
+									if (motionSelection.type !== "motion") return;
+									const segments = motionSelection.indices
+										.map((index) => ({
+											index,
+											segment: project.motion.segments[index],
+										}))
+										.filter(
+											(
+												item,
+											): item is { index: number; segment: MotionSegment } =>
+												item.segment !== undefined,
+										);
+									if (segments.length === 0) {
+										setEditorState("timeline", "selection", null);
+										return;
+									}
+									return { segments };
+								})()}
+							>
+								{(value) => (
+									<div class="space-y-4">
+										<div class="flex flex-row justify-between items-center">
+											<div class="flex gap-2 items-center">
+												<EditorButton
+													onClick={() =>
+														setEditorState("timeline", "selection", null)
+													}
+													leftIcon={<IconLucideCheck />}
+												>
+													Done
+												</EditorButton>
+												<span class="text-sm text-gray-10">
+													{value().segments.length} motion selected
+												</span>
+											</div>
+											<EditorButton
+												variant="danger"
+												onClick={() =>
+													projectActions.deleteMotionSegments(
+														value().segments.map((item) => item.index),
+													)
+												}
+												leftIcon={<IconCapTrash />}
+											>
+												Delete
+											</EditorButton>
+										</div>
+										<For each={value().segments}>
+											{(item) => (
+												<div class="p-4 rounded-lg border border-gray-200">
+													<MotionSegmentConfig
 														segment={item.segment}
 														segmentIndex={item.index}
 													/>
@@ -4436,6 +4504,141 @@ function CaptionSegmentConfig(props: {
 						</span>
 					</div>
 				</div>
+			</Field>
+		</div>
+	);
+}
+
+function MotionSegmentConfig(props: {
+	segment: MotionSegment;
+	segmentIndex: number;
+}) {
+	const { project, setProject } = useEditorContext();
+	const [propsText, setPropsText] = createSignal(
+		JSON.stringify(props.segment.props, null, 2),
+	);
+	const definition = () =>
+		project.motion.definitions.find(
+			(candidate) =>
+				candidate.id === props.segment.definitionId &&
+				candidate.version === props.segment.definitionVersion,
+		);
+	const artifact = () =>
+		props.segment.artifactId
+			? project.motion.artifacts.find(
+					(candidate) => candidate.id === props.segment.artifactId,
+				)
+			: undefined;
+
+	const updateSegment = (
+		update: (segment: MotionSegment) => void,
+		stale = true,
+	) => {
+		setProject(
+			produce((project) => {
+				const segment = project.motion.segments[props.segmentIndex];
+				if (!segment) return;
+				update(segment);
+				if (stale) staleLinkedArtifact(project.motion, segment);
+			}),
+		);
+	};
+
+	const applyProps = () => {
+		try {
+			const value = JSON.parse(propsText()) as unknown;
+			if (!value || Array.isArray(value) || typeof value !== "object") {
+				throw new Error("Props must be a JSON object");
+			}
+			updateSegment((segment) => {
+				segment.props = value as Record<string, unknown>;
+			});
+			setPropsText(JSON.stringify(value, null, 2));
+		} catch (error) {
+			toast.error(
+				error instanceof Error ? error.message : "Invalid JSON props",
+			);
+		}
+	};
+
+	return (
+		<div class="space-y-6">
+			<Field name="Animation" icon={<IconLucideSparkles class="size-4" />}>
+				<div class="flex flex-col gap-1 text-xs">
+					<span class="font-medium text-gray-12">
+						{definition()?.compositionId ?? props.segment.definitionId}
+					</span>
+					<span class="text-gray-9">
+						{props.segment.definitionId}@{props.segment.definitionVersion}
+					</span>
+					<span class="text-gray-9">
+						Artifact: {artifact()?.status ?? "not rendered"}
+					</span>
+				</div>
+			</Field>
+			<Field name="Duration behavior" icon={<IconLucideTimer class="size-4" />}>
+				<select
+					class="px-2 w-full h-9 text-sm rounded-lg border bg-gray-1 border-gray-4 text-gray-12"
+					value={props.segment.durationPolicy}
+					onChange={(event) =>
+						updateSegment((segment) => {
+							segment.durationPolicy = event.currentTarget
+								.value as MotionDurationPolicy;
+						})
+					}
+				>
+					<option value="responsive">Responsive</option>
+					<option value="retime">Retime</option>
+					<option value="trim">Trim</option>
+				</select>
+			</Field>
+			<Field name="Opacity" icon={<IconLucideEyeOff class="size-4" />}>
+				<Slider
+					value={[props.segment.opacity]}
+					onChange={([value]) =>
+						updateSegment((segment) => {
+							segment.opacity = value;
+						})
+					}
+					minValue={0}
+					maxValue={1}
+					step={0.01}
+				/>
+			</Field>
+			<Field name="Scale" icon={<IconCapEnlarge class="size-4" />}>
+				<Slider
+					value={[props.segment.transform.scaleX]}
+					onChange={([value]) =>
+						updateSegment((segment) => {
+							segment.transform.scaleX = value;
+							segment.transform.scaleY = value;
+						})
+					}
+					minValue={0.1}
+					maxValue={3}
+					step={0.01}
+				/>
+			</Field>
+			<Field name="Position X" icon={<IconLucideMoveRight class="size-4" />}>
+				<Slider
+					value={[props.segment.transform.x]}
+					onChange={([value]) =>
+						updateSegment((segment) => {
+							segment.transform.x = value;
+						})
+					}
+					minValue={-1}
+					maxValue={1}
+					step={0.01}
+				/>
+			</Field>
+			<Field name="Parameters" icon={<IconLucideGrid class="size-4" />}>
+				<textarea
+					class="p-2 w-full min-h-32 font-mono text-xs rounded-lg border resize-y bg-gray-1 border-gray-4 text-gray-12"
+					value={propsText()}
+					onInput={(event) => setPropsText(event.currentTarget.value)}
+					onBlur={applyProps}
+				/>
 			</Field>
 		</div>
 	);

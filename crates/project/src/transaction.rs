@@ -80,3 +80,15 @@ where
     lock_file.unlock()?;
     result
 }
+
+pub fn replace_project_configuration(
+    project_path: impl AsRef<Path>,
+    replacement: ProjectConfiguration,
+) -> Result<ProjectConfiguration, ProjectTransactionError> {
+    let expected_revision = replacement.project_revision;
+    mutate_project(project_path, expected_revision, move |project| {
+        *project = replacement;
+        project.project_revision = expected_revision;
+        Ok(())
+    })
+}

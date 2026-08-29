@@ -53,6 +53,7 @@ import { TimelineContextProvider, useTimelineContext } from "./context";
 import { type KeyboardSegmentDragState, KeyboardTrack } from "./KeyboardTrack";
 import { type MaskSegmentDragState, MaskTrack } from "./MaskTrack";
 import { Minimap } from "./Minimap";
+import { type MotionSegmentDragState, MotionTrack } from "./MotionTrack";
 import { type SceneSegmentDragState, SceneTrack } from "./SceneTrack";
 import { type TextSegmentDragState, TextTrack } from "./TextTrack";
 import { type ThreeDSegmentDragState, ThreeDTrack } from "./ThreeDTrack";
@@ -69,6 +70,7 @@ const START_SNAP_PX = 10;
 
 const trackIcons: Record<TimelineTrackType, () => JSX.Element> = {
 	clip: () => <IconLucideClapperboard class="size-4" />,
+	motion: () => <IconLucideSparkles class="size-4" />,
 	caption: () => <IconCapCaptions class="size-4" />,
 	keyboard: () => <IconLucideKeyboard class="size-4" />,
 	text: () => <IconLucideType class="size-4" />,
@@ -91,6 +93,12 @@ const trackDefinitions: TrackDefinition[] = [
 		type: "clip",
 		label: "Clip",
 		icon: trackIcons.clip,
+		locked: true,
+	},
+	{
+		type: "motion",
+		label: "Motion",
+		icon: trackIcons.motion,
 		locked: true,
 	},
 	{
@@ -254,6 +262,9 @@ export function Timeline(props: {
 			trackState().audio,
 		),
 	);
+	const motionTrackRows = createMemo(() =>
+		getTrackRowsWithCount(project.motion.segments, trackState().motion),
+	);
 	const visibleTrackCount = createMemo(
 		() =>
 			2 +
@@ -262,6 +273,7 @@ export function Timeline(props: {
 			textTrackRows().length +
 			maskTrackRows().length +
 			audioTrackRows().length +
+			motionTrackRows().length +
 			(threeDTrackVisible() ? 1 : 0) +
 			(sceneTrackVisible() ? 1 : 0),
 	);
@@ -741,6 +753,7 @@ export function Timeline(props: {
 	}
 
 	let zoomSegmentDragState = { type: "idle" } as ZoomSegmentDragState;
+	let motionSegmentDragState = { type: "idle" } as MotionSegmentDragState;
 	let sceneSegmentDragState = { type: "idle" } as SceneSegmentDragState;
 	let maskSegmentDragState = { type: "idle" } as MaskSegmentDragState;
 	let textSegmentDragState = { type: "idle" } as TextSegmentDragState;
@@ -862,6 +875,7 @@ export function Timeline(props: {
 			audioSegmentDragState.type !== "moving" &&
 			captionSegmentDragState.type !== "moving" &&
 			keyboardSegmentDragState.type !== "moving" &&
+			motionSegmentDragState.type !== "moving" &&
 			threeDSegmentDragState.type !== "moving"
 		) {
 			const newTime = timelineTimeFromClientX(e.clientX);
@@ -976,6 +990,8 @@ export function Timeline(props: {
 
 			if (selection.type === "zoom") {
 				projectActions.deleteZoomSegments(selection.indices);
+			} else if (selection.type === "motion") {
+				projectActions.deleteMotionSegments(selection.indices);
 			} else if (selection.type === "caption") {
 				projectActions.deleteCaptionSegments(selection.indices);
 			} else if (selection.type === "keyboard") {
@@ -1030,6 +1046,7 @@ export function Timeline(props: {
 			const timeline = project.timeline;
 			const segmentCount = {
 				clip: timeline?.segments.length ?? 0,
+				motion: project.motion.segments.length,
 				zoom: timeline?.zoomSegments?.length ?? 0,
 				scene: timeline?.sceneSegments?.length ?? 0,
 				mask: timeline?.maskSegments?.length ?? 0,
@@ -1432,6 +1449,38 @@ export function Timeline(props: {
 										/>
 									</TrackRow>
 								)}
+							</For>
+							<For each={motionTrackRows()}>
+								{(laneIndex) => {
+									const laneIndices = () =>
+										project.motion.segments
+											.map((segment, index) => ({ segment, index }))
+											.filter(({ segment }) => segment.track === laneIndex)
+											.map(({ index }) => index);
+									return (
+										<TrackRow
+											icon={trackIcons.motion}
+											label="Motion"
+											type="motion"
+											onDelete={
+												laneIndices().length > 0
+													? () =>
+															projectActions.deleteMotionSegments(laneIndices())
+													: undefined
+											}
+											deleteLabel="Clear"
+											deleteTitle="Delete motion segments on this lane"
+										>
+											<MotionTrack
+												laneIndex={laneIndex}
+												onDragStateChanged={(value) => {
+													motionSegmentDragState = value;
+												}}
+												handleUpdatePlayhead={handleUpdatePlayhead}
+											/>
+										</TrackRow>
+									);
+								}}
 							</For>
 							<TrackRow
 								icon={trackIcons.zoom}
