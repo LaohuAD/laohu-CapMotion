@@ -11,7 +11,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use specta::Type;
 
-use crate::DisplayNotch;
+use crate::{DisplayNotch, MotionConfiguration, MotionValidationError};
 
 #[derive(Type, Serialize, Deserialize, Clone, Debug, Default)]
 #[serde(rename_all = "camelCase")]
@@ -2305,6 +2305,35 @@ impl Annotation {
     }
 }
 
+#[derive(Debug)]
+pub enum ProjectValidationError {
+    Annotation(AnnotationValidationError),
+    Motion(MotionValidationError),
+}
+
+impl fmt::Display for ProjectValidationError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::Annotation(error) => error.fmt(formatter),
+            Self::Motion(error) => error.fmt(formatter),
+        }
+    }
+}
+
+impl std::error::Error for ProjectValidationError {}
+
+impl From<AnnotationValidationError> for ProjectValidationError {
+    fn from(error: AnnotationValidationError) -> Self {
+        Self::Annotation(error)
+    }
+}
+
+impl From<MotionValidationError> for ProjectValidationError {
+    fn from(error: MotionValidationError) -> Self {
+        Self::Motion(error)
+    }
+}
+
 #[derive(Type, Serialize, Deserialize, Clone, Debug)]
 #[serde(rename_all = "camelCase", default)]
 pub struct ProjectConfiguration {
@@ -2319,6 +2348,7 @@ pub struct ProjectConfiguration {
     pub keyboard: Option<KeyboardData>,
     pub clips: Vec<ClipConfiguration>,
     pub annotations: Vec<Annotation>,
+    pub motion: MotionConfiguration,
     #[serde(skip_serializing)]
     pub hidden_text_segments: Vec<usize>,
     #[serde(default = "ProjectConfiguration::default_screen_motion_blur")]
@@ -2374,6 +2404,7 @@ impl Default for ProjectConfiguration {
             keyboard: Default::default(),
             clips: Default::default(),
             annotations: Default::default(),
+            motion: Default::default(),
             hidden_text_segments: Default::default(),
             screen_motion_blur: Self::default_screen_motion_blur(),
             screen_movement_spring: Default::default(),
@@ -2392,10 +2423,12 @@ impl ProjectConfiguration {
         1.0
     }
 
-    pub fn validate(&self) -> Result<(), AnnotationValidationError> {
+    pub fn validate(&self) -> Result<(), ProjectValidationError> {
         for annotation in &self.annotations {
             annotation.validate()?;
         }
+
+        self.motion.validate()?;
 
         Ok(())
     }

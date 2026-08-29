@@ -3,12 +3,14 @@ mod configuration;
 pub mod cursor;
 pub mod keyboard;
 mod meta;
+mod motion;
 
 pub use animated_gradient::*;
 pub use configuration::*;
 pub use cursor::*;
 pub use keyboard::*;
 pub use meta::*;
+pub use motion::*;
 
 use serde::{Deserialize, Serialize};
 use specta::Type;
