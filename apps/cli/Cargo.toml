@@ -7,6 +7,7 @@ edition = "2024"
 clap = { version = "4.5.23", features = ["derive"] }
 clap_complete = "4.5.38"
 cap-project = { path = "../../crates/project" }
+cap-motion-cli = { path = "../../crates/motion-cli" }
 cap-recording = { path = "../../crates/recording" }
 cap-editor = { path = "../../crates/editor" }
 cap-export = { path = "../../crates/export" }

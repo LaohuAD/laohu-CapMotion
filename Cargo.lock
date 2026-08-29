@@ -1200,6 +1200,7 @@ dependencies = [
  "cap-editor",
  "cap-export",
  "cap-media-info",
+ "cap-motion-cli",
  "cap-project",
  "cap-recording",
  "cap-timestamp",
@@ -1767,6 +1768,17 @@ dependencies = [
  "windows 0.60.0",
  "windows-core 0.60.1",
  "workspace-hack",
+]
+
+[[package]]
+name = "cap-motion-cli"
+version = "0.1.0"
+dependencies = [
+ "cap-project",
+ "clap",
+ "serde",
+ "serde_json",
+ "tempfile",
 ]
 
 [[package]]

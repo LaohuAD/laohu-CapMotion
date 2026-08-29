@@ -195,6 +195,8 @@ enum Commands {
     ExportPreview(ExportPreview),
     /// Inspect or validate a '.cap' project
     Project(ProjectArgs),
+    /// Safely create and edit motion animation instances in a '.cap' project
+    Motion(cap_motion_cli::MotionArgs),
     /// Start a recording or list available capture targets and devices
     Record(RecordArgs),
     /// Capture a still screenshot of a screen or window
@@ -564,6 +566,7 @@ async fn run(cli: Cli) -> Result<(), String> {
         Commands::ExportPreview(e) => e.run().await,
         Commands::Selftest(args) => args.run(json).await,
         Commands::Project(args) => args.run(json),
+        Commands::Motion(args) => run_motion(args, json),
         Commands::Record(RecordArgs { command, args }) => match command {
             Some(RecordCommands::Start(args)) => args.run(json).await,
             Some(RecordCommands::Stop(args)) => args.run(json).await,
@@ -637,6 +640,33 @@ async fn run(cli: Cli) -> Result<(), String> {
             Ok(())
         }
     }
+}
+
+fn run_motion(args: cap_motion_cli::MotionArgs, json: bool) -> Result<(), String> {
+    let emit_json = json || args.output_format() == cap_motion_cli::MotionOutputFormat::Json;
+    let output = match args.run() {
+        Ok(output) => output,
+        Err(message) => {
+            if emit_json {
+                let _ = write_json(&serde_json::json!({ "ok": false, "error": message }));
+            }
+            return Err(message);
+        }
+    };
+
+    if emit_json {
+        return write_json(&output);
+    }
+
+    println!("revision: {}", output.revision);
+    if let Some(definition) = output.definition {
+        println!("definition: {}@{}", definition.id, definition.version);
+    }
+    if let Some(segment) = output.segment {
+        println!("segment: {}", segment.id);
+        println!("time: {:.3} - {:.3}", segment.start, segment.end);
+    }
+    Ok(())
 }
 
 fn print_welcome(json: bool) -> Result<(), String> {

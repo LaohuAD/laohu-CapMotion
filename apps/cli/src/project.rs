@@ -13,6 +13,7 @@ use crate::{OutputFormat, write_json};
 pub struct ProjectInspection {
     pub project_path: PathBuf,
     pub output_path: PathBuf,
+    pub revision: u64,
     /// camelCase convenience fields so agents never reach into the snake_case `meta` passthrough.
     pub name: String,
     pub recording_type: &'static str,
@@ -61,11 +62,13 @@ pub fn inspect(project_path: PathBuf, format: OutputFormat) -> Result<(), String
             println!("name: {}", meta.pretty_name);
             println!("type: {}", recording_type(&meta));
             println!("output: {}", output_path.display());
+            println!("revision: {}", config.project_revision);
             Ok(())
         }
         OutputFormat::Json => write_json(&ProjectInspection {
             project_path,
             output_path,
+            revision: config.project_revision,
             name: meta.pretty_name.clone(),
             recording_type: recording_type(&meta),
             meta,

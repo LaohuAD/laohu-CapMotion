@@ -4,6 +4,7 @@ pub mod cursor;
 pub mod keyboard;
 mod meta;
 mod motion;
+mod motion_operations;
 mod transaction;
 
 pub use animated_gradient::*;
@@ -12,6 +13,7 @@ pub use cursor::*;
 pub use keyboard::*;
 pub use meta::*;
 pub use motion::*;
+pub use motion_operations::*;
 pub use transaction::*;
 
 use serde::{Deserialize, Serialize};

@@ -1,0 +1,16 @@
+[package]
+name = "cap-motion-cli"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+cap-project = { path = "../project" }
+clap = { version = "4.5.23", features = ["derive"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3.23.0"
