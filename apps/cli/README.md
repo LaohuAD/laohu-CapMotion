@@ -68,6 +68,7 @@ cap record start --screen <id> --json --detach  # start in the background -> {"t
 # ... the agent performs whatever it needs to capture ...
 cap record stop --id <recordingId> --json  # finalize -> {"type":"stopped","path","recordingMetaExists":true}
 cap project validate <path.cap> --json     # confirm the recording is complete before exporting
+cap project inspect <path.cap> --json      # read projectRevision before a mutation
 cap export <path.cap> --output out.mp4 --json
 cap upload out.mp4 --json                   # -> {"type":"uploaded","id","link"} (auto-auth via Cap Desktop)
 ```
@@ -82,6 +83,7 @@ step.
 - `cap screenshot` — capture a still of a screen/window (`--json` → `{path,width,height}`).
 - `cap targets` (`screens`/`windows`/`cameras`/`mics`) — enumerate capture inputs.
 - `cap project inspect` / `validate` / `config get|set` — inspect and edit `.cap` projects.
+- `cap motion definition register` / `add` / `move` / `resize` / `props set` — revision-safe animation timeline edits.
 - `cap recordings list` — list `.cap` recordings in the desktop library.
 - `cap upload` — upload a `.cap` project or video file and get a shareable link.
 - `cap update` — download and install the latest Cap Desktop bundle, then repair the `cap` shim.
@@ -101,3 +103,33 @@ notification, and open-editor actions are desktop-only and are skipped on the CL
 rules with `cap automations list --json`.
 
 Run `cap --help` or `cap <command> --help` for full flag documentation.
+
+## Revision-safe motion workflow
+
+Every mutation carries the revision returned by the previous command. If Cap or another Agent has saved the project in between, the stale command fails instead of overwriting that work.
+
+```sh
+cap project inspect /path/to/demo.cap --format json
+
+cap motion definition register /path/to/demo.cap \
+  --expected-revision 0 --id case-cards --version 1 \
+  --source motion/case-cards --composition-id CaseCards \
+  --min-duration 1 --default-duration 5 --max-duration 12 --format json
+
+cap motion add /path/to/demo.cap \
+  --expected-revision 1 --definition-id case-cards --definition-version 1 \
+  --segment-id motion-1 --start 12.5 --duration 5 \
+  --props-json '{"title":"两个案例"}' --format json
+
+cap motion move /path/to/demo.cap \
+  --expected-revision 2 --segment motion-1 --start 18 --format json
+
+cap motion resize /path/to/demo.cap \
+  --expected-revision 3 --segment motion-1 --duration 8 --format json
+
+cap motion props set /path/to/demo.cap \
+  --expected-revision 4 --segment motion-1 \
+  --props-json '{"title":"更新后的案例"}' --format json
+```
+
+This phase records animation definitions and instances but does not render Remotion artifacts yet. Preview/final rendering and Cap's MotionTrack UI are subsequent phases.

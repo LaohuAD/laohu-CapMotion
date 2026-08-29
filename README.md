@@ -29,6 +29,8 @@ Cap 与 Codex 保持独立。用户在 Codex 中通过自然语言提出要求�
 - Cap 与 CLI 使用 revision 防止人工修改和 Agent 修改互相覆盖。
 - 最终长视频继续由 Cap 的原生媒体管线统一导出。
 
+当前已落地第一批工程能力：向后兼容的 Motion 定义/实例/缓存模型、`projectRevision` 原子事务、并发写锁，以及 `cap motion definition register / add / move / resize / props set` 命令协议。MotionTrack 界面、Remotion 渲染桥和录制时手动放大仍属于后续阶段。
+
 完整架构见：
 
 - [`docs/superpowers/specs/2026-08-29-cap-codex-motion-workflow-design.md`](docs/superpowers/specs/2026-08-29-cap-codex-motion-workflow-design.md)
@@ -73,6 +75,8 @@ pnpm install
 pnpm env-setup
 pnpm cap-setup
 ```
+
+macOS 上完整编译 Cap CLI 和桌面媒体栈还需要安装完整 Xcode；仅安装 Command Line Tools 不包含 `xcodebuild` 所需的系统 SDK。纯工程层可独立运行 `cargo test -p cap-project` 和 `cargo test -p cap-motion-cli`。
 
 常用检查：
 

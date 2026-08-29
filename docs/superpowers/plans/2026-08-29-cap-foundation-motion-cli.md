@@ -4,7 +4,7 @@
 
 **Goal:** Make Cap the repository root while preserving the existing Laohu workflow assets, then add a backward-compatible Motion data model and revision-checked CLI operations for `.cap` projects.
 
-**Architecture:** Merge the shallow Cap upstream history into the current repository instead of copying it as an unrelated reference directory. Store motion definitions, instances, and artifacts in a defaulted top-level `motion` configuration so existing timeline struct literals remain source compatible. Protect CLI mutations with a sidecar revision file and an advisory project lock; every mutation reloads the current configuration after acquiring the lock and fails on a stale expected revision.
+**Architecture:** Merge the shallow Cap upstream history into the current repository instead of copying it as an unrelated reference directory. Store motion definitions, instances, and artifacts in a defaulted top-level `motion` configuration so existing timeline struct literals remain source compatible. Store `projectRevision` in the same atomically replaced `project-config.json`, protect mutations with an advisory project lock, and fail on stale expected revisions. Keep command parsing in the lightweight `cap-motion-cli` crate so its complete mutation chain remains testable without loading Cap's native media stack.
 
 **Tech Stack:** Git, Rust 2024, serde, specta, fs2 advisory locks, clap, Cap CLI integration tests.
 
@@ -19,17 +19,18 @@
 - `docs/architecture/repository-layout.md`: explains which directories are Cap product source and which are Agent workflow assets.
 - `workflows/laohu-video/README.md`: single navigation entry for all video workflow assets.
 - `crates/project/src/motion.rs`: motion definitions, instances, artifacts, validation, and duration behavior.
-- `crates/project/src/revision.rs`: project lock, revision sidecar, and atomic revision-checked configuration mutation.
+- `crates/project/src/transaction.rs`: project lock and atomic revision-checked configuration mutation.
 - `crates/project/src/lib.rs`: exports the new motion and revision modules.
 - `crates/project/src/configuration.rs`: adds the defaulted `motion` field to `ProjectConfiguration`.
 - `crates/project/Cargo.toml`: adds `fs2` for advisory file locking.
-- `apps/cli/src/motion.rs`: motion add, move, resize, and props domain operations.
+- `crates/project/src/motion_operations.rs`: tested motion add, move, resize, and props domain operations.
+- `crates/motion-cli/`: isolated clap protocol and command-chain tests.
 - `apps/cli/src/project.rs`: exposes current revision in project inspection.
 - `apps/cli/src/main.rs`: clap command definitions and dispatch.
 - `apps/cli/tests/cli.rs`: black-box CLI coverage.
 - `apps/cli/README.md`: command reference and examples.
 
-### Task 1: Merge Cap upstream into the product root
+### Task 1: Merge Cap upstream into the product root — completed
 
 **Files:**
 - Modify: repository Git history and root tracked tree
@@ -154,7 +155,7 @@ git commit -m "feat: adopt Cap as the product foundation"
 
 Expected: one merge commit with Cap source at root and all pre-existing workflow assets retained.
 
-### Task 2: Add the backward-compatible Motion domain model
+### Task 2: Add the backward-compatible Motion domain model — completed
 
 **Files:**
 - Create: `crates/project/src/motion.rs`
@@ -273,10 +274,10 @@ git commit -m "feat: add motion project model"
 
 Expected: all motion tests pass and old `{}` configurations deserialize.
 
-### Task 3: Add revision-checked project mutation
+### Task 3: Add revision-checked project mutation — completed with single-file revision
 
 **Files:**
-- Create: `crates/project/src/revision.rs`
+- Create: `crates/project/src/transaction.rs`
 - Modify: `crates/project/src/lib.rs`
 - Modify: `crates/project/Cargo.toml`
 - Test: `crates/project/src/revision.rs`
@@ -315,19 +316,17 @@ cargo test -p cap-project revision -- --nocapture
 
 Expected: FAIL because revision support does not exist.
 
-- [ ] **Step 3: Implement the sidecar and advisory lock**
+- [x] **Step 3: Implement the single-file revision and advisory lock**
 
 Add `fs2 = "0.4"` and implement:
 
 ```rust
-pub struct ProjectRevision { pub revision: u64 }
-pub enum ProjectMutationError { Io(std::io::Error), InvalidConfiguration(String), RevisionConflict { current: u64, expected: u64 } }
-pub fn load_project_revision(project_path: &Path) -> Result<u64, ProjectMutationError>;
-pub fn mutate_project<F>(project_path: &Path, expected_revision: u64, mutate: F) -> Result<u64, ProjectMutationError>
+pub enum ProjectTransactionError { Io(std::io::Error), RevisionConflict { expected: u64, actual: u64 }, RevisionOverflow, Mutation(String) }
+pub fn mutate_project<F>(project_path: &Path, expected_revision: u64, mutate: F) -> Result<ProjectConfiguration, ProjectTransactionError>
 where F: FnOnce(&mut ProjectConfiguration) -> Result<(), String>;
 ```
 
-`mutate_project` must open `.project-config.lock`, acquire an exclusive advisory lock, reload the sidecar and `project-config.json`, check the expected revision, run the closure, validate motion configuration, write the project through `ProjectConfiguration::write`, atomically write `project-revision.json`, and then release the lock. The revision sidecar defaults to `0` when absent.
+`mutate_project` opens `.project-config.lock`, acquires an exclusive advisory lock, reloads `project-config.json`, checks `projectRevision`, runs the closure, validates the full configuration, increments the revision, and atomically replaces the one configuration file. This removes the failure window and directory clutter of a separate revision sidecar.
 
 - [ ] **Step 4: Run scoped checks and commit**
 
@@ -343,13 +342,15 @@ git commit -m "feat: add revision checked project mutations"
 
 Expected: stale revisions never alter the configuration and successful mutations increment exactly once.
 
-### Task 4: Implement Motion CLI domain operations
+### Task 4: Implement Motion CLI domain operations — core complete, native binary verification pending Xcode
 
 **Files:**
-- Create: `apps/cli/src/motion.rs`
+- Create: `crates/motion-cli/src/lib.rs`
+- Create: `crates/project/src/motion_operations.rs`
 - Modify: `apps/cli/src/main.rs`
 - Modify: `apps/cli/src/project.rs`
-- Test: `apps/cli/tests/cli.rs`
+- Test: `crates/motion-cli/tests/commands.rs`
+- Test: `crates/project/tests/motion_operations.rs`
 
 - [ ] **Step 1: Write failing black-box CLI tests**
 
@@ -391,13 +392,13 @@ assert_eq!(json["segment"]["start"], 12.5);
 
 - [ ] **Step 2: Run the CLI test and verify it fails**
 
-Run:
+The original black-box command cannot currently reach the feature test because Cap's macOS `cidre` dependency calls `xcodebuild`, and this machine only has Command Line Tools. The command protocol is therefore tested through the isolated crate:
 
 ```bash
-cargo test -p cap --test cli motion_ -- --nocapture
+cargo test -p cap-motion-cli
 ```
 
-Expected: FAIL because the `motion` command does not exist.
+The full `cargo check -p cap` remains an explicit environment-gated acceptance check.
 
 - [ ] **Step 3: Implement typed motion operations**
 
@@ -445,7 +446,7 @@ git commit -m "feat: add revision safe motion CLI"
 
 Expected: all motion commands round-trip through the real CLI binary and stale updates fail safely.
 
-### Task 5: Document and verify the first vertical slice
+### Task 5: Document and verify the first vertical slice — in progress
 
 **Files:**
 - Modify: `apps/cli/README.md`

@@ -191,7 +191,7 @@ Cap 根据 Schema 自动生成简洁的属性控件。未参数化的临时动�
 
 工程修改采用版本化局部事务：
 
-1. 每次保存产生单调递增的 `revision`。
+1. `projectRevision` 与时间线保存在同一份 `project-config.json` 中，由一次原子替换共同提交；旧工程缺少该字段时按 `0` 读取。
 2. CLI 修改必须携带 `expectedRevision`。
 3. 如果工程已经被用户修改，CLI 返回结构化冲突，不允许覆盖。
 4. Cap 保存未落盘编辑后再应用外部事务。
@@ -204,12 +204,15 @@ CLI 优先提供领域命令，而不是暴露整份 JSON 覆盖：
 cap project inspect <project>
 cap project validate <project>
 cap project transaction apply <project> --expected-revision <n> --patch <file>
-cap motion add <project> --definition <id> --start <seconds> --duration <seconds>
-cap motion move <project> --segment <id> --start <seconds>
-cap motion resize <project> --segment <id> --duration <seconds>
-cap motion props set <project> --segment <id> --props <file>
+cap motion definition register <project> --expected-revision <n> ...
+cap motion add <project> --expected-revision <n> --definition-id <id> --start <seconds> --duration <seconds>
+cap motion move <project> --expected-revision <n> --segment <id> --start <seconds>
+cap motion resize <project> --expected-revision <n> --segment <id> --duration <seconds>
+cap motion props set <project> --expected-revision <n> --segment <id> --props-json <json>
 cap motion render <project> --segment <id> --quality preview|final
 ```
+
+首个纵向切片把工程规则放在 `cap-project`，把可独立测试的命令协议放在 `cap-motion-cli`，现有 `cap` 二进制只负责挂载子命令和输出。`motion render` 属于后续 Remotion 编排与媒体桥阶段，当前尚未实现。
 
 ## 10. Remotion 预览与渲染
 
@@ -339,10 +342,12 @@ cap motion render <project> --segment <id> --quality preview|final
 - 建立工程 revision、事务和兼容迁移。
 - 扩展 CLI 的安全检查和局部修改基础。
 
+当前已完成：Cap 根基底、Motion 工程模型、单文件 revision、写锁、冲突拒绝和 Motion 命令协议。完整 `cap` 二进制在当前机器上仍需安装完整 Xcode 后做原生媒体依赖验收。
+
 ### 阶段二：MotionTrack 纵向切片
 
 - 增加动画数据模型。
-- 增加 CLI inspect/add/move/resize/props。
+- 增加 CLI inspect/add/move/resize/props。命令协议与工程修改已完成，Cap 时间线 UI 尚未开始。
 - 增加时间线轨道、拖拽、缩放、撤销和属性面板。
 - 使用占位或静态素材完成端到端数据闭环。
 
