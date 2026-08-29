@@ -81,7 +81,7 @@ impl Default for ManualFollowConfig {
 }
 ```
 
-For each axis, compute viewport half-size `0.5 / amount`, safe half-size `viewport_half * safe_zone_ratio`, and the nearest center that places the cursor back on the safe-zone boundary. Smooth toward that target with frame-rate-independent alpha `1.0 - exp(-response * dt)`, then clamp the center to `[viewport_half, 1.0 - viewport_half]`. Invalid values fall back to the defaults.
+For each axis, keep follow state in source-UV physical-center space. Compute viewport half-size `0.5 / amount`, safe half-size `viewport_half * safe_zone_ratio`, and the nearest center that places the cursor back on the safe-zone boundary. Smooth toward that target with frame-rate-independent alpha `1.0 - exp(-response * dt)`, then clamp the physical center to `[viewport_half, 1.0 - viewport_half]`. Invalid values fall back to the defaults. Before calling the legacy renderer's `SegmentBounds::from_amount_center`, convert the physical center to its travel-space scalar with `(center - viewport_half) / (1.0 - 2.0 * viewport_half)`. The live overlay renders the physical center directly. This explicit conversion is required for live-preview/export parity.
 
 - [ ] **Step 4: Run the test and verify GREEN**
 

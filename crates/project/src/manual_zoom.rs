@@ -1,4 +1,4 @@
-use crate::{GlideDirection, ZoomMode, ZoomSegment};
+use crate::{GlideDirection, ManualFollowConfig, ZoomMode, ZoomSegment};
 
 const MIN_MANUAL_ZOOM_DURATION: f64 = 0.05;
 
@@ -88,9 +88,10 @@ impl ManualZoomSession {
             start: active.start,
             end,
             amount: active.amount,
-            mode: ZoomMode::Manual {
+            mode: ZoomMode::ManualFollow {
                 x: active.x,
                 y: active.y,
+                config: ManualFollowConfig::default(),
             },
             glide_direction: GlideDirection::None,
             glide_speed: 0.5,

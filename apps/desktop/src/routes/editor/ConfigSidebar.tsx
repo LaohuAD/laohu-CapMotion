@@ -80,6 +80,7 @@ import {
 	type StereoMode,
 	type TimelineSegment,
 	type XY,
+	type ZoomMode,
 	type ZoomSegment,
 } from "~/utils/tauri";
 import IconLucideAlignCenter from "~icons/lucide/align-center";
@@ -5933,6 +5934,25 @@ function ZoomSegmentPreview(props: {
 	);
 }
 
+function manualZoomPosition(mode: Exclude<ZoomMode, "auto">): XY<number> {
+	return "manual" in mode ? mode.manual : mode.manualFollow;
+}
+
+function withManualZoomPosition(
+	mode: ZoomMode,
+	position: XY<number>,
+): ZoomMode {
+	if (mode !== "auto" && "manualFollow" in mode) {
+		return {
+			manualFollow: {
+				...mode.manualFollow,
+				...position,
+			},
+		};
+	}
+	return { manual: { ...position } };
+}
+
 function ZoomSegmentConfig(props: {
 	segmentIndex: number;
 	segment: ZoomSegment;
@@ -5946,7 +5966,7 @@ function ZoomSegmentConfig(props: {
 		manual:
 			props.segment.mode === "auto"
 				? { x: 0.5, y: 0.5 }
-				: props.segment.mode.manual,
+				: manualZoomPosition(props.segment.mode),
 	};
 
 	return (
@@ -6022,7 +6042,7 @@ function ZoomSegmentConfig(props: {
 								const m = props.segment.mode;
 								if (m === "auto") return;
 
-								return m.manual;
+								return manualZoomPosition(m);
 							})()}
 						>
 							{(mode) => {
@@ -6176,8 +6196,7 @@ function ZoomSegmentConfig(props: {
 															"zoomSegments",
 															props.segmentIndex,
 															"mode",
-															"manual",
-															{
+															withManualZoomPosition(props.segment.mode, {
 																x: Math.max(
 																	Math.min(
 																		(moveEvent.clientX - bounds.left) /
@@ -6194,7 +6213,7 @@ function ZoomSegmentConfig(props: {
 																	),
 																	0,
 																),
-															},
+															}),
 														);
 													},
 												}),
@@ -6270,7 +6289,9 @@ function ZoomMultiSegmentConfig(props: {
 
 	const manualPositions = () =>
 		props.segments.map((s) =>
-			s.segment.mode === "auto" ? { x: 0.5, y: 0.5 } : s.segment.mode.manual,
+			s.segment.mode === "auto"
+				? { x: 0.5, y: 0.5 }
+				: manualZoomPosition(s.segment.mode),
 		);
 
 	const manualPositionsMixed = () => {
@@ -6310,10 +6331,14 @@ function ZoomMultiSegmentConfig(props: {
 
 	const setAllManualPositions = (pos: XY<number>) =>
 		batch(() => {
-			for (const { index } of props.segments)
-				setProject("timeline", "zoomSegments", index, "mode", {
-					manual: { ...pos },
-				});
+			for (const { index, segment } of props.segments)
+				setProject(
+					"timeline",
+					"zoomSegments",
+					index,
+					"mode",
+					withManualZoomPosition(segment.mode, pos),
+				);
 		});
 
 	const removeFromSelection = (segmentIndex: number) => {

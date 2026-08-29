@@ -27,10 +27,11 @@
 
 use cap_project::{
     Crop, CursorEvents, ProjectConfiguration, ScreenMovementSpring, TimelineConfiguration, XY,
-    ZoomMode, ZoomSegment,
+    ZoomMode, ZoomSegment, advance_manual_follow, manual_follow_center_to_travel,
 };
 
 use crate::{
+    cursor_interpolation::interpolate_cursor,
     spring_mass_damper::{SpringMassDamperSimulation, SpringMassDamperSimulationConfig},
     zoom::{InterpolatedZoom, SegmentBounds},
 };
@@ -404,6 +405,13 @@ struct PrecomputeState {
     /// Last center target while a segment was active. Held during zoom-out so
     /// the outgoing framing stays anchored instead of re-aiming mid-flight.
     held_center_target: XY<f32>,
+    manual_follow: Option<ManualFollowState>,
+}
+
+#[derive(Clone, Copy)]
+struct ManualFollowState {
+    segment_index: usize,
+    source_center: (f32, f32),
 }
 
 struct StepTargets {
@@ -427,6 +435,8 @@ pub struct ZoomTransformTimeline {
     /// Parallel to `zoom_segments`: prebuilt clusters (RECORDING-time ms) for
     /// Auto segments, `None` for Manual ones.
     clusters: Vec<Option<Vec<ClickCluster>>>,
+    cursor_events: CursorEvents,
+    crop: Option<CursorCropMap>,
     time_map: Vec<TimeMapSegment>,
     recording_clip: Option<u32>,
     prefer_outgoing: bool,
@@ -504,7 +514,7 @@ impl ZoomTransformTimeline {
                         crop,
                     ))
                 }
-                ZoomMode::Manual { .. } => None,
+                ZoomMode::Manual { .. } | ZoomMode::ManualFollow { .. } => None,
             })
             .collect();
 
@@ -527,6 +537,8 @@ impl ZoomTransformTimeline {
                 state: None,
                 zoom_segments,
                 clusters,
+                cursor_events: cursor_events.clone(),
+                crop,
                 time_map,
                 recording_clip,
                 prefer_outgoing,
@@ -545,6 +557,8 @@ impl ZoomTransformTimeline {
             state: None,
             zoom_segments,
             clusters,
+            cursor_events: cursor_events.clone(),
+            crop,
             time_map,
             recording_clip,
             prefer_outgoing,
@@ -553,7 +567,8 @@ impl ZoomTransformTimeline {
 
         // Seed the simulations at rest on the t=0 target so the very first
         // frame is already correct and `samples` is never empty.
-        let initial = timeline.targets_at(0.0, XY::new(0.5, 0.5));
+        let mut manual_follow = None;
+        let initial = timeline.targets_at(0.0, XY::new(0.5, 0.5), &mut manual_follow);
         let mut center_sim = SpringMassDamperSimulation::new(spring_config);
         center_sim.set_position(initial.center);
         center_sim.set_velocity(XY::new(0.0, 0.0));
@@ -577,6 +592,7 @@ impl ZoomTransformTimeline {
             center_sim,
             aux_sim,
             held_center_target: initial.center,
+            manual_follow,
         });
         timeline
     }
@@ -743,14 +759,16 @@ impl ZoomTransformTimeline {
             return;
         };
         let held_center = state.held_center_target;
+        let mut manual_follow = state.manual_follow;
 
         let step_index = self.samples.len();
         let step_secs = step_index as f64 * STEP_MS / 1000.0;
-        let targets = self.targets_at(step_secs, held_center);
+        let targets = self.targets_at(step_secs, held_center, &mut manual_follow);
 
         let Some(state) = self.state.as_mut() else {
             return;
         };
+        state.manual_follow = manual_follow;
 
         if targets.segment_active {
             state.held_center_target = targets.center;
@@ -812,7 +830,12 @@ impl ZoomTransformTimeline {
         }
     }
 
-    fn targets_at(&self, timeline_secs: f64, held_center: XY<f32>) -> StepTargets {
+    fn targets_at(
+        &self,
+        timeline_secs: f64,
+        held_center: XY<f32>,
+        manual_follow: &mut Option<ManualFollowState>,
+    ) -> StepTargets {
         // Same active predicate `SegmentsCursor` used: (start, end].
         let active = self
             .zoom_segments
@@ -835,9 +858,51 @@ impl ZoomTransformTimeline {
                 };
                 let center = match segment.mode {
                     ZoomMode::Manual { x, y } => {
+                        *manual_follow = None;
                         (f64::from(x).clamp(0.0, 1.0), f64::from(y).clamp(0.0, 1.0))
                     }
+                    ZoomMode::ManualFollow { x, y, config } => {
+                        let source_center = match manual_follow {
+                            Some(state) if state.segment_index == index => state.source_center,
+                            _ => (x, y),
+                        };
+                        let recording_secs = map_timeline_to_recording_secs(
+                            &self.time_map,
+                            timeline_secs,
+                            self.recording_clip,
+                            self.prefer_outgoing,
+                        );
+                        let cursor =
+                            interpolate_cursor(&self.cursor_events, recording_secs as f32, None)
+                                .map(|cursor| {
+                                    let raw = (cursor.position.coord.x, cursor.position.coord.y);
+                                    self.crop.map_or(raw, |crop| crop.map(raw.0, raw.1))
+                                })
+                                .unwrap_or((f64::from(x), f64::from(y)));
+                        let source_center = advance_manual_follow(
+                            source_center,
+                            (cursor.0 as f32, cursor.1 as f32),
+                            amount as f32,
+                            (STEP_MS / 1000.0) as f32,
+                            config,
+                        );
+                        *manual_follow = Some(ManualFollowState {
+                            segment_index: index,
+                            source_center,
+                        });
+                        (
+                            f64::from(manual_follow_center_to_travel(
+                                source_center.0,
+                                amount as f32,
+                            )),
+                            f64::from(manual_follow_center_to_travel(
+                                source_center.1,
+                                amount as f32,
+                            )),
+                        )
+                    }
                     ZoomMode::Auto => {
+                        *manual_follow = None;
                         let recording_ms = map_timeline_to_recording_secs(
                             &self.time_map,
                             timeline_secs,
@@ -863,15 +928,18 @@ impl ZoomTransformTimeline {
                     snap,
                 }
             }
-            None => StepTargets {
-                amount: 1.0,
-                // Hold the last active framing while zooming out so the
-                // outgoing shot stays anchored (irrelevant once amount = 1).
-                center: held_center,
-                activity: 0.0,
-                segment_active: false,
-                snap,
-            },
+            None => {
+                *manual_follow = None;
+                StepTargets {
+                    amount: 1.0,
+                    // Hold the last active framing while zooming out so the
+                    // outgoing shot stays anchored (irrelevant once amount = 1).
+                    center: held_center,
+                    activity: 0.0,
+                    segment_active: false,
+                    snap,
+                }
+            }
         }
     }
 }
@@ -905,6 +973,23 @@ mod tests {
         ZoomSegment {
             mode: ZoomMode::Auto,
             ..manual_segment(start, end, amount, 0.5, 0.5)
+        }
+    }
+
+    fn manual_follow_segment(start: f64, end: f64, amount: f64, x: f64, y: f64) -> ZoomSegment {
+        ZoomSegment {
+            start,
+            end,
+            amount,
+            mode: ZoomMode::ManualFollow {
+                x: x as f32,
+                y: y as f32,
+                config: cap_project::ManualFollowConfig::default(),
+            },
+            glide_direction: GlideDirection::default(),
+            glide_speed: 0.5,
+            instant_animation: false,
+            edge_snap_ratio: 0.25,
         }
     }
 
@@ -951,6 +1036,22 @@ mod tests {
         assert!(timeline.state.is_none());
         assert_eq!(timeline.samples.len(), 1);
         assert_eq!(timeline.sample(60.0 * 60.0).display_amount(), 1.0);
+    }
+
+    #[test]
+    fn manual_follow_stays_stable_then_tracks_edge_cursor() {
+        let cursor = CursorEvents {
+            moves: vec![move_event(500.0, 0.55, 0.5), move_event(1_500.0, 0.9, 0.5)],
+            clicks: vec![],
+        };
+        let segments = vec![manual_follow_segment(0.0, 3.0, 2.0, 0.5, 0.5)];
+        let mut timeline = timeline_for(&segments, &cursor, 3.0);
+        timeline.precompute();
+
+        let stable = timeline.sample(0.75).bounds;
+        let followed = timeline.sample(2.0).bounds;
+        assert!((stable.top_left.x + 0.5).abs() < 0.03);
+        assert!(followed.top_left.x < stable.top_left.x - 0.02);
     }
 
     /// Max |value delta| and |slope delta| between adjacent 8ms sample

@@ -974,7 +974,16 @@ impl ZoomSegment {
 #[serde(rename_all = "camelCase")]
 pub enum ZoomMode {
     Auto,
-    Manual { x: f32, y: f32 },
+    Manual {
+        x: f32,
+        y: f32,
+    },
+    ManualFollow {
+        x: f32,
+        y: f32,
+        #[serde(default)]
+        config: crate::ManualFollowConfig,
+    },
 }
 
 #[derive(Type, Serialize, Deserialize, Clone, Copy, Debug)]

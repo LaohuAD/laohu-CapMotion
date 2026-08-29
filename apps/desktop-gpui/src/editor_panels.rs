@@ -2840,10 +2840,26 @@ impl EditorWindow {
             }
             PadKey::ZoomManual(index) => {
                 self.edit_zoom_segment("zoom-position", index, window, cx, move |segment| {
-                    segment.mode = ZoomMode::Manual {
-                        x: x as f32,
-                        y: y as f32,
-                    };
+                    match &mut segment.mode {
+                        ZoomMode::Manual {
+                            x: current_x,
+                            y: current_y,
+                        }
+                        | ZoomMode::ManualFollow {
+                            x: current_x,
+                            y: current_y,
+                            ..
+                        } => {
+                            *current_x = x as f32;
+                            *current_y = y as f32;
+                        }
+                        ZoomMode::Auto => {
+                            segment.mode = ZoomMode::Manual {
+                                x: x as f32,
+                                y: y as f32,
+                            };
+                        }
+                    }
                     true
                 })
             }
@@ -2857,10 +2873,26 @@ impl EditorWindow {
                     let mut changed = false;
                     for index in indices {
                         if let Some(segment) = timeline.zoom_segments.get_mut(index) {
-                            segment.mode = ZoomMode::Manual {
-                                x: x as f32,
-                                y: y as f32,
-                            };
+                            match &mut segment.mode {
+                                ZoomMode::Manual {
+                                    x: current_x,
+                                    y: current_y,
+                                }
+                                | ZoomMode::ManualFollow {
+                                    x: current_x,
+                                    y: current_y,
+                                    ..
+                                } => {
+                                    *current_x = x as f32;
+                                    *current_y = y as f32;
+                                }
+                                ZoomMode::Auto => {
+                                    segment.mode = ZoomMode::Manual {
+                                        x: x as f32,
+                                        y: y as f32,
+                                    };
+                                }
+                            }
                             changed = true;
                         }
                     }
@@ -2889,7 +2921,9 @@ impl EditorWindow {
                 (point.x, point.y)
             }
             PadKey::ZoomManual(index) => match timeline.zoom_segments.get(index).map(|s| &s.mode) {
-                Some(ZoomMode::Manual { x, y }) => (f64::from(*x), f64::from(*y)),
+                Some(ZoomMode::Manual { x, y } | ZoomMode::ManualFollow { x, y, .. }) => {
+                    (f64::from(*x), f64::from(*y))
+                }
                 _ => (0.5, 0.5),
             },
             // `averageManualPosition` (`:5926-5935`).
@@ -2899,7 +2933,9 @@ impl EditorWindow {
                     .iter()
                     .filter_map(|index| timeline.zoom_segments.get(*index))
                     .map(|segment| match &segment.mode {
-                        ZoomMode::Manual { x, y } => (f64::from(*x), f64::from(*y)),
+                        ZoomMode::Manual { x, y } | ZoomMode::ManualFollow { x, y, .. } => {
+                            (f64::from(*x), f64::from(*y))
+                        }
                         ZoomMode::Auto => (0.5, 0.5),
                     })
                     .collect();
@@ -3161,7 +3197,12 @@ impl EditorWindow {
         let manual = self
             .timeline()
             .and_then(|timeline| timeline.zoom_segments.get(index))
-            .is_some_and(|segment| matches!(segment.mode, ZoomMode::Manual { .. }));
+            .is_some_and(|segment| {
+                matches!(
+                    segment.mode,
+                    ZoomMode::Manual { .. } | ZoomMode::ManualFollow { .. }
+                )
+            });
 
         div()
             .flex()
@@ -3213,7 +3254,12 @@ impl EditorWindow {
             .is_some_and(|first| amounts.iter().any(|value| value != first));
         let modes: Vec<bool> = segments
             .iter()
-            .map(|segment| matches!(segment.mode, ZoomMode::Manual { .. }))
+            .map(|segment| {
+                matches!(
+                    segment.mode,
+                    ZoomMode::Manual { .. } | ZoomMode::ManualFollow { .. }
+                )
+            })
             .collect();
         let shared_mode = modes
             .first()
@@ -3223,13 +3269,13 @@ impl EditorWindow {
         let manual = shared_mode.unwrap_or(false);
         let positions_mixed = {
             let first = segments.first().map(|segment| match &segment.mode {
-                ZoomMode::Manual { x, y } => (*x, *y),
+                ZoomMode::Manual { x, y } | ZoomMode::ManualFollow { x, y, .. } => (*x, *y),
                 ZoomMode::Auto => (0.5, 0.5),
             });
             first.is_some_and(|first| {
                 segments.iter().any(|segment| {
                     let point = match &segment.mode {
-                        ZoomMode::Manual { x, y } => (*x, *y),
+                        ZoomMode::Manual { x, y } | ZoomMode::ManualFollow { x, y, .. } => (*x, *y),
                         ZoomMode::Auto => (0.5, 0.5),
                     };
                     point != first
@@ -3566,7 +3612,7 @@ impl EditorWindow {
         self.edit_zoom_segment("zoom-mode", index, window, cx, move |segment| {
             let next = if manual {
                 match segment.mode {
-                    ZoomMode::Manual { .. } => return false,
+                    ZoomMode::Manual { .. } | ZoomMode::ManualFollow { .. } => return false,
                     ZoomMode::Auto => ZoomMode::Manual { x: 0.5, y: 0.5 },
                 }
             } else {

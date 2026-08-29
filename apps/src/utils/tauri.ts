@@ -711,6 +711,7 @@ export type LogicalPosition = { x: number; y: number }
 export type LogicalSize = { width: number; height: number }
 export type MacOSVersionInfo = { major: number; minor: number; patch: number; displayName: string; buildNumber: string; isAppleSilicon: boolean }
 export type MainWindowRecordingStartBehaviour = "close" | "minimise"
+export type ManualFollowConfig = { safeZoneRatio: number; response: number }
 export type ManualZoomChanged = { enabled: boolean; x: number; y: number; amount: number }
 export type MaskKeyframes = { position?: MaskVectorKeyframe[]; size?: MaskVectorKeyframe[]; intensity?: MaskScalarKeyframe[] }
 export type MaskKind = "sensitive" | "highlight"
@@ -814,7 +815,7 @@ export type WindowId = string
 export type WindowPosition = { x: number; y: number; displayId?: DisplayId | null }
 export type WindowUnderCursor = { id: WindowId; app_name: string; bounds: LogicalBounds }
 export type XY<T> = { x: T; y: T }
-export type ZoomMode = "auto" | { manual: { x: number; y: number } }
+export type ZoomMode = "auto" | { manual: { x: number; y: number } } | { manualFollow: { x: number; y: number; config?: ManualFollowConfig } }
 export type ZoomSegment = { start: number; end: number; amount: number; mode: ZoomMode; glideDirection?: GlideDirection; glideSpeed?: number; instantAnimation?: boolean; edgeSnapRatio?: number }
 
 /** tauri-specta globals **/

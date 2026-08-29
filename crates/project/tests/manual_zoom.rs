@@ -32,7 +32,24 @@ fn toggle_pause_resume_and_finish_preserve_recording_time() {
     assert_eq!(segments[0].amount, 2.0);
     assert!(matches!(
         segments[0].mode,
-        ZoomMode::Manual { x, y } if x == 0.8 && y == 0.3
+        ZoomMode::ManualFollow { x, y, .. } if x == 0.8 && y == 0.3
+    ));
+}
+
+#[test]
+fn old_fixed_manual_zoom_json_still_deserializes() {
+    let mode: ZoomMode = serde_json::from_str(r#"{"manual":{"x":0.4,"y":0.6}}"#).unwrap();
+    assert!(matches!(mode, ZoomMode::Manual { x, y } if x == 0.4 && y == 0.6));
+}
+
+#[test]
+fn new_recordings_create_manual_follow_segments() {
+    let mut session = ManualZoomSession::default();
+    assert!(session.toggle(1.0, 0.7, 0.4, 2.0));
+    assert!(!session.toggle(3.0, 0.7, 0.4, 2.0));
+    assert!(matches!(
+        session.segments()[0].mode,
+        ZoomMode::ManualFollow { x, y, .. } if x == 0.7 && y == 0.4
     ));
 }
 
