@@ -79,6 +79,38 @@ Remotion 是动画生成器，不是 Cap 的主时间线：
 - 原 `参考项目/Cap` 在迁移和验证完成后移除，避免重复源码和错误项目定位。
 - 根许可证必须保留 Cap 的 AGPLv3 与分组件许可证；原有 Laohu 工作流的 MIT 许可单独保存在 `licenses/` 中，不能用 MIT 覆盖 Cap 上游许可。
 
+### 5.1 目录整洁与检索原则
+
+目录结构同时服务人工浏览、Agent 检索和上游同步，遵守以下规则：
+
+- Cap 是产品主体，`apps/`、`crates/`、`packages/`、`infra/`、`scripts/` 等上游目录保持在根目录，不额外套一层 `product/`，避免破坏构建工具和上游同步。
+- Laohu 口播工作流集中放入 `workflows/laohu-video/`，不再让 `规范/`、`模板/`、`知识沉淀/`、`作品/`、`参考项目/` 和 `归档/` 分散占据根目录。
+- `.agents/skills/` 保留在根目录，作为 Codex 的标准技能发现入口；技能内部通过稳定路径访问 `workflows/laohu-video/`。
+- 根目录只保留产品源码、通用配置、`docs/`、`.agents/` 和 `workflows/` 等少量一级入口。
+- 同一资产只保留一份主文件；禁止为了兼容旧路径长期复制两份。需要兼容时使用一次性迁移或明确的入口链接。
+- `workflows/laohu-video/README.md` 是工作流总入口，说明规则、模板、示例、私有知识和作品各自归属。
+- `docs/architecture/repository-layout.md` 是全仓库导航入口，说明产品源码、Agent 入口和工作流资产的边界。
+- 目录和文件按职责划分，不使用 `v1`、`最终版`、`杂项`、`临时` 等无法表达归属的长期目录。
+
+目标结构：
+
+```text
+/
+  apps/ crates/ packages/ infra/ scripts/   Cap 产品源码
+  .agents/skills/                            Agent 技能发现入口
+  docs/                                      产品设计、架构和实施计划
+  workflows/
+    laohu-video/
+      README.md                              工作流总入口
+      规范/                                  制作和判断规则
+      模板/                                  剪辑与动画资产
+      示例/                                  无隐私的公开示例
+      知识沉淀/                              本地长期经验，默认不入 Git
+      作品/                                  本地作品记录，默认不入 Git
+      参考资料/                              本地第三方参考，默认不入 Git
+      归档/                                  已结束材料，默认不入 Git
+```
+
 ## 6. 动画三层模型
 
 每一个动画由三层组成：

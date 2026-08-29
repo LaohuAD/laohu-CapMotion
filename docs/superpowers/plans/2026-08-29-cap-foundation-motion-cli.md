@@ -17,6 +17,7 @@
 - `.gitignore`: merged Cap build exclusions plus Laohu private-media exclusions; `docs/` remains trackable.
 - `README.md`: product positioning, upstream relationship, build entry points, and retained workflow documentation.
 - `docs/architecture/repository-layout.md`: explains which directories are Cap product source and which are Agent workflow assets.
+- `workflows/laohu-video/README.md`: single navigation entry for all video workflow assets.
 - `crates/project/src/motion.rs`: motion definitions, instances, artifacts, validation, and duration behavior.
 - `crates/project/src/revision.rs`: project lock, revision sidecar, and atomic revision-checked configuration mutation.
 - `crates/project/src/lib.rs`: exports the new motion and revision modules.
@@ -109,13 +110,39 @@ The README must state:
 - upstream sync uses the CapSoftware/Cap remote.
 ```
 
-`docs/architecture/repository-layout.md` must map `apps/`, `crates/`, and `packages/` to Cap, and `.agents/skills/`, `规范/`, `模板/`, `知识沉淀/`, and `作品/` to the Laohu workflow.
+`docs/architecture/repository-layout.md` must map `apps/`, `crates/`, and `packages/` to Cap, `.agents/skills/` to Agent discovery, and `workflows/laohu-video/` to the Laohu workflow.
 
-- [ ] **Step 6: Remove the duplicate nested Cap checkout from the working tree**
+Consolidate tracked workflow assets under one owner directory:
 
-Delete only `参考项目/Cap` after verifying that root `apps/`, `crates/`, `packages/`, `Cargo.toml`, and `package.json` exist. The whole `参考项目/` directory remains ignored and may contain unrelated user references.
+```text
+规范/                    -> workflows/laohu-video/规范/
+模板/                    -> workflows/laohu-video/模板/
+examples/                -> workflows/laohu-video/示例/
+.env.example             -> workflows/laohu-video/.env.example
+```
 
-- [ ] **Step 7: Validate and commit the merge**
+Keep `.agents/skills/` at the root because it is the standard Agent discovery path. Update tracked references after moving files; do not keep duplicate compatibility copies.
+
+Create `workflows/laohu-video/README.md` as the only workflow navigation entry. It must identify the private local directories `知识沉淀/`, `作品/`, `参考资料/`, and `归档/`, even when they are absent from a fresh clone.
+
+- [ ] **Step 6: Move local private workflow directories into their owner area**
+
+If present, move ignored local directories without adding their contents to Git:
+
+```text
+知识沉淀/                 -> workflows/laohu-video/知识沉淀/
+作品/                     -> workflows/laohu-video/作品/
+参考项目/                 -> workflows/laohu-video/参考资料/
+归档/                     -> workflows/laohu-video/归档/
+```
+
+Before each move, verify the source and destination explicitly. If both exist, merge by named child entry and stop on a name collision; never overwrite private files.
+
+- [ ] **Step 7: Remove the duplicate nested Cap checkout from the working tree**
+
+Delete only the migrated `workflows/laohu-video/参考资料/Cap` after verifying that root `apps/`, `crates/`, `packages/`, `Cargo.toml`, and `package.json` exist. Preserve every unrelated reference entry.
+
+- [ ] **Step 8: Validate and commit the merge**
 
 Run:
 
@@ -461,8 +488,8 @@ Run:
 test -d apps/desktop
 test -d crates/project
 test -d .agents/skills
-test -d 规范
-test -d 模板
+test -d workflows/laohu-video/规范
+test -d workflows/laohu-video/模板
 git remote -v
 git status --short
 ```
