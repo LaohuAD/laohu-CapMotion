@@ -216,6 +216,30 @@ mod tests {
         assert!(camera_preview_attempt_is_final(3, 3));
     }
 
+    #[test]
+    fn active_recording_snapshot_contains_recoverable_clock_fields() {
+        let fields = current_recording_clock_fields(Some(
+            recording::RecordingSessionSnapshot {
+                session_id: "session-one".to_string(),
+                elapsed_ms: 12_345,
+                paused: true,
+            },
+        ));
+
+        assert_eq!(fields.session_id, Some("session-one".to_string()));
+        assert_eq!(fields.elapsed_ms, 12_345);
+        assert!(fields.paused);
+    }
+
+    #[test]
+    fn pending_recording_has_no_session_clock() {
+        let fields = current_recording_clock_fields(None);
+
+        assert_eq!(fields.session_id, None);
+        assert_eq!(fields.elapsed_ms, 0);
+        assert!(!fields.paused);
+    }
+
     #[cfg(target_os = "linux")]
     #[test]
     fn wayland_clipboard_fallback_requires_wayland_without_x11() {
@@ -2663,6 +2687,32 @@ struct CurrentRecording {
     target: CurrentRecordingTarget,
     mode: RecordingMode,
     status: RecordingStatus,
+    session_id: Option<String>,
+    elapsed_ms: u64,
+    paused: bool,
+}
+
+struct CurrentRecordingClockFields {
+    session_id: Option<String>,
+    elapsed_ms: u64,
+    paused: bool,
+}
+
+fn current_recording_clock_fields(
+    snapshot: Option<recording::RecordingSessionSnapshot>,
+) -> CurrentRecordingClockFields {
+    match snapshot {
+        Some(snapshot) => CurrentRecordingClockFields {
+            session_id: Some(snapshot.session_id),
+            elapsed_ms: snapshot.elapsed_ms,
+            paused: snapshot.paused,
+        },
+        None => CurrentRecordingClockFields {
+            session_id: None,
+            elapsed_ms: 0,
+            paused: false,
+        },
+    }
 }
 
 #[tauri::command]
@@ -2673,15 +2723,21 @@ async fn get_current_recording(
 ) -> Result<TypedJsonValue<Option<CurrentRecording>>, ()> {
     let state = state.read().await;
 
-    let (mode, capture_target, status) = match &state.recording_state {
+    let (mode, capture_target, status, clock_fields) = match &state.recording_state {
         RecordingState::None => {
             return Ok(TypedJsonValue::new(&None));
         }
-        RecordingState::Pending { mode, target } => (*mode, target, RecordingStatus::Pending),
+        RecordingState::Pending { mode, target } => (
+            *mode,
+            target,
+            RecordingStatus::Pending,
+            current_recording_clock_fields(None),
+        ),
         RecordingState::Active(inner) => (
             inner.mode(),
             inner.capture_target(),
             RecordingStatus::Recording,
+            current_recording_clock_fields(Some(inner.common().clock.snapshot())),
         ),
     };
 
@@ -2706,6 +2762,9 @@ async fn get_current_recording(
         target,
         mode,
         status,
+        session_id: clock_fields.session_id,
+        elapsed_ms: clock_fields.elapsed_ms,
+        paused: clock_fields.paused,
     })))
 }
 

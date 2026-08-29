@@ -43,8 +43,8 @@ use std::{
     panic::AssertUnwindSafe,
     path::{Path, PathBuf},
     str::FromStr,
-    sync::Arc,
-    time::Duration,
+    sync::{Arc, Mutex},
+    time::{Duration, Instant},
 };
 use tauri::{AppHandle, Manager, Position, Size, WebviewUrl, WebviewWindow, path::BaseDirectory};
 use tauri_plugin_dialog::{DialogExt, MessageDialogBuilder};
@@ -708,12 +708,91 @@ fn downscale_background_snapshot_in_place(path: &Path) -> Result<bool, String> {
     Ok(true)
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct RecordingSessionSnapshot {
+    pub session_id: String,
+    pub elapsed_ms: u64,
+    pub paused: bool,
+}
+
+#[derive(Debug)]
+struct RecordingSessionClockState {
+    paused_at: Option<Instant>,
+    accumulated_pause: Duration,
+}
+
+#[derive(Clone, Debug)]
+pub struct RecordingSessionClock {
+    session_id: String,
+    started_at: Instant,
+    state: Arc<Mutex<RecordingSessionClockState>>,
+}
+
+impl RecordingSessionClock {
+    fn new() -> Self {
+        Self::new_at(Instant::now())
+    }
+
+    fn new_at(started_at: Instant) -> Self {
+        Self {
+            session_id: uuid::Uuid::new_v4().to_string(),
+            started_at,
+            state: Arc::new(Mutex::new(RecordingSessionClockState {
+                paused_at: None,
+                accumulated_pause: Duration::ZERO,
+            })),
+        }
+    }
+
+    pub fn pause(&self) {
+        self.pause_at(Instant::now());
+    }
+
+    fn pause_at(&self, now: Instant) {
+        let mut state = self.state.lock().unwrap_or_else(|error| error.into_inner());
+        if state.paused_at.is_none() {
+            state.paused_at = Some(now);
+        }
+    }
+
+    pub fn resume(&self) {
+        self.resume_at(Instant::now());
+    }
+
+    fn resume_at(&self, now: Instant) {
+        let mut state = self.state.lock().unwrap_or_else(|error| error.into_inner());
+        if let Some(paused_at) = state.paused_at.take() {
+            state.accumulated_pause += now.checked_duration_since(paused_at).unwrap_or_default();
+        }
+    }
+
+    pub fn snapshot(&self) -> RecordingSessionSnapshot {
+        self.snapshot_at(Instant::now())
+    }
+
+    fn snapshot_at(&self, now: Instant) -> RecordingSessionSnapshot {
+        let state = self.state.lock().unwrap_or_else(|error| error.into_inner());
+        let effective_now = state.paused_at.unwrap_or(now);
+        let elapsed = effective_now
+            .checked_duration_since(self.started_at)
+            .unwrap_or_default()
+            .saturating_sub(state.accumulated_pause);
+
+        RecordingSessionSnapshot {
+            session_id: self.session_id.clone(),
+            elapsed_ms: elapsed.as_millis().min(u128::from(u64::MAX)) as u64,
+            paused: state.paused_at.is_some(),
+        }
+    }
+}
+
 #[derive(Clone)]
 pub struct InProgressRecordingCommon {
     pub target_name: String,
     pub inputs: StartRecordingInputs,
     pub recording_dir: PathBuf,
     pub health: Arc<crate::recording_telemetry::RecordingHealthAccumulator>,
+    pub clock: RecordingSessionClock,
 }
 
 pub struct StopFailureContext {
@@ -846,14 +925,18 @@ impl InProgressRecording {
         match self {
             Self::Instant { handle, .. } => handle.pause().await,
             Self::Studio { handle, .. } => handle.pause().await,
-        }
+        }?;
+        self.common().clock.pause();
+        Ok(())
     }
 
     pub async fn resume(&self) -> anyhow::Result<()> {
         match self {
             Self::Instant { handle, .. } => handle.resume().await,
             Self::Studio { handle, .. } => handle.resume().await,
-        }
+        }?;
+        self.common().clock.resume();
+        Ok(())
     }
 
     pub async fn is_paused(&self) -> anyhow::Result<bool> {
@@ -2030,6 +2113,7 @@ pub async fn start_recording(
                 inputs: inputs.clone(),
                 recording_dir: recording_dir.clone(),
                 health,
+                clock: RecordingSessionClock::new(),
             };
 
             #[cfg(target_os = "macos")]
@@ -4487,6 +4571,40 @@ async fn emit_recording_started_telemetry(app: &AppHandle, state_mtx: &MutableSt
 mod tests {
     use super::*;
     use tempfile::tempdir;
+
+    #[test]
+    fn recording_session_clock_excludes_paused_time() {
+        let started = Instant::now();
+        let clock = RecordingSessionClock::new_at(started);
+
+        assert_eq!(
+            clock
+                .snapshot_at(started + Duration::from_secs(4))
+                .elapsed_ms,
+            4_000
+        );
+        clock.pause_at(started + Duration::from_secs(4));
+        assert_eq!(
+            clock
+                .snapshot_at(started + Duration::from_secs(9))
+                .elapsed_ms,
+            4_000
+        );
+        clock.resume_at(started + Duration::from_secs(9));
+        assert_eq!(
+            clock
+                .snapshot_at(started + Duration::from_secs(12))
+                .elapsed_ms,
+            7_000
+        );
+    }
+
+    #[test]
+    fn recording_session_clock_keeps_one_session_id() {
+        let clock = RecordingSessionClock::new_at(Instant::now());
+
+        assert_eq!(clock.snapshot().session_id, clock.snapshot().session_id);
+    }
 
     #[cfg(target_os = "macos")]
     #[test]
