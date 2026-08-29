@@ -1073,6 +1073,50 @@ pub async fn spawn_decoder(
     }
 }
 
+/// Creates a software FFmpeg decoder so source alpha is not discarded by
+/// hardware video paths that expose only NV12/YUV surfaces.
+pub async fn spawn_alpha_decoder(
+    name: &'static str,
+    path: PathBuf,
+    fps: u32,
+) -> Result<AsyncVideoDecoderHandle, String> {
+    let path_display = path.display().to_string();
+    let (ready_tx, ready_rx) = oneshot::channel::<Result<DecoderInitResult, String>>();
+    let (tx, rx) = mpsc::channel();
+
+    ffmpeg::FfmpegDecoder::spawn_with_hw_config(name, path, fps, rx, ready_tx, false)
+        .map_err(|error| format!("'{name}' alpha decoder / {error}"))?;
+
+    match tokio::time::timeout(Duration::from_secs(30), ready_rx).await {
+        Ok(Ok(Ok(init_result))) => {
+            info!(
+                "Video '{}' using software alpha decoder ({}x{})",
+                name, init_result.width, init_result.height
+            );
+            Ok(AsyncVideoDecoderHandle {
+                sender: tx,
+                offset: 0.0,
+                status: DecoderStatus {
+                    decoder_type: DecoderType::FFmpegSoftware,
+                    video_width: init_result.width,
+                    video_height: init_result.height,
+                    fallback_reason: None,
+                },
+                max_fallback_distance: DEFAULT_MAX_FALLBACK_DISTANCE,
+            })
+        }
+        Ok(Ok(Err(error))) => Err(format!(
+            "'{name}' alpha decoder initialization failed: {error} ({path_display})"
+        )),
+        Ok(Err(error)) => Err(format!(
+            "'{name}' alpha decoder channel closed: {error} ({path_display})"
+        )),
+        Err(_) => Err(format!(
+            "'{name}' alpha decoder timed out after 30s initializing: {path_display}"
+        )),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

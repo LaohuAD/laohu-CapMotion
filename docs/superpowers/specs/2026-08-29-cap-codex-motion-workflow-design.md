@@ -152,6 +152,8 @@ Remotion 是动画生成器，不是 Cap 的主时间线：
 
 移动动画实例不改变内容哈希，不触发 Remotion 重渲染。修改公开参数、动画定义、响应式时长、尺寸或帧率时，旧缓存标记为 `stale`，只重渲染该动画。
 
+通用变换采用输出画布像素坐标：`x/y` 是相对画布中心的像素偏移，`scaleX/scaleY` 是相对完整画布的缩放，`rotation` 使用角度。预览和导出都由同一个原生 MotionLayer 把这些值转换为 GPU 合成参数，前端不得再叠加一套 HTML 视频预览。
+
 ## 7. MotionTrack 交互
 
 MotionTrack 在交互上与 ZoomTrack 保持一致：
@@ -217,6 +219,8 @@ cap motion render <project> --segment <id> --quality preview|final
 ## 10. Remotion 预览与渲染
 
 第一阶段不把 `@remotion/player` 嵌入 Cap 主预览。Cap 预览与最终导出使用同一套媒体合成路径，避免浏览器预览与最终成片不一致。
+
+已落地的媒体桥使用 Cap 原生 `RendererLayers` 中的 MotionLayer：它按工程时间选择活动实例、把时间映射到缓存本地时间、解码动画帧，并在摄像头/屏幕内容之后、字幕和编辑标注之前做 Alpha 合成。透明素材强制走软件 FFmpeg RGBA 解码，避免 VideoToolbox 或 Media Foundation 的 NV12 路径丢失 Alpha；无透明素材仍可使用平台硬件解码。
 
 渲染分为：
 
@@ -342,18 +346,18 @@ cap motion render <project> --segment <id> --quality preview|final
 - 建立工程 revision、事务和兼容迁移。
 - 扩展 CLI 的安全检查和局部修改基础。
 
-当前已完成：Cap 根基底、Motion 工程模型、单文件 revision、写锁、冲突拒绝和 Motion 命令协议。完整 `cap` 二进制在当前机器上仍需安装完整 Xcode 后做原生媒体依赖验收。
+当前已完成：Cap 根基底、Motion 工程模型、单文件 revision、写锁、冲突拒绝、Motion 命令协议、MotionTrack、属性面板和 revision 冲突提示。完整 `cap` 二进制在当前机器上仍需安装完整 Xcode，并把本机 FFmpeg 8 切换为项目兼容的 FFmpeg 7 后做原生媒体依赖验收。
 
 ### 阶段二：MotionTrack 纵向切片
 
 - 增加动画数据模型。
-- 增加 CLI inspect/add/move/resize/props。命令协议与工程修改已完成，Cap 时间线 UI 尚未开始。
-- 增加时间线轨道、拖拽、缩放、撤销和属性面板。
-- 使用占位或静态素材完成端到端数据闭环。
+- 增加 CLI inspect/add/move/resize/props。命令协议与工程修改已完成。
+- 增加时间线轨道、拖拽、缩放和属性面板。已完成首个可编辑纵向切片。
+- 字幕涟漪删除和转场时长变化已同步映射 MotionTrack，避免动画脱离口播时间轴。
 
 ### 阶段三：通用媒体叠加与导出
 
-- 增加动画媒体解码、Alpha 合成和层级。
+- 增加动画媒体解码、Alpha 合成和层级。代码已接入预览/导出共用的原生 RendererLayers；待完整 Xcode 与兼容 FFmpeg 环境做真实媒体验收。
 - 增加预览/最终缓存状态。
 - 验证 ProRes 4444 和候选预览格式。
 - 完成预览与最终导出的关键帧一致性测试。

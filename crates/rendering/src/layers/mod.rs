@@ -11,6 +11,7 @@ mod display;
 mod frame;
 mod keyboard;
 mod mask;
+mod motion;
 mod notch;
 mod text;
 
@@ -78,6 +79,7 @@ pub use display::*;
 pub use frame::*;
 pub use keyboard::*;
 pub use mask::*;
+pub use motion::*;
 pub use notch::*;
 pub use text::*;
 

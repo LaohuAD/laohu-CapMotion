@@ -32,6 +32,10 @@ struct Uniforms {
     color_adjust_b: vec4<f32>,
     // (grain amount, grain seed, grade-active flag, full-frame vignette flag).
     grain_params: vec4<f32>,
+    rotation_radians: f32,
+    _rotation_padding_a: f32,
+    _rotation_padding_b: f32,
+    _rotation_padding_c: f32,
 };
 
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
@@ -234,8 +238,15 @@ fn fs_main(@builtin(position) frag_coord: vec4<f32>) -> @location(0) vec4<f32> {
     let p = frag_coord.xy;
     let center = (uniforms.target_bounds.xy + uniforms.target_bounds.zw) * 0.5;
     let size = (uniforms.target_bounds.zw - uniforms.target_bounds.xy) * 0.5;
+    let delta = p - center;
+    let rotation_cos = cos(uniforms.rotation_radians);
+    let rotation_sin = sin(uniforms.rotation_radians);
+    let local_p = vec2<f32>(
+        rotation_cos * delta.x + rotation_sin * delta.y,
+        -rotation_sin * delta.x + rotation_cos * delta.y,
+    );
     
-    let dist = sdf_rounded_rect(p - center, size, corner_radius_for(p - center), uniforms.rounding_type);
+    let dist = sdf_rounded_rect(local_p, size, corner_radius_for(local_p), uniforms.rounding_type);
 
     let min_frame_size = min(size.x, size.y);
     let shadow_enabled = uniforms.shadow > 0.0;
@@ -268,7 +279,7 @@ fn fs_main(@builtin(position) frag_coord: vec4<f32>) -> @location(0) vec4<f32> {
     let shadow_strength_final = smoothstep(shadow_size + shadow_blur, -shadow_blur, abs(shadow_dist));
     let shadow_color = vec4<f32>(0.0, 0.0, 0.0, shadow_strength_final * shadow_opacity);
 
-    let target_uv = (p - uniforms.target_bounds.xy) / uniforms.target_size;
+    let target_uv = local_p / uniforms.target_size + vec2<f32>(0.5);
     let crop_bounds_uv = vec4<f32>(uniforms.crop_bounds.xy / uniforms.frame_size, uniforms.crop_bounds.zw / uniforms.frame_size);
     let edge_padding = max(2.0, uniforms.border_width + 2.0);
     let edge_padding_uv = edge_padding / uniforms.target_size;
@@ -297,15 +308,15 @@ fn fs_main(@builtin(position) frag_coord: vec4<f32>) -> @location(0) vec4<f32> {
 
     if (uniforms.border_enabled > 0.0) {
         let border_outer_coverage = rounded_rect_coverage(
-            p - center,
+            local_p,
             size + vec2<f32>(uniforms.border_width),
-            corner_radius_for(p - center) + uniforms.border_width,
+            corner_radius_for(local_p) + uniforms.border_width,
             uniforms.rounding_type
         );
         let border_inner_coverage = rounded_rect_coverage(
-            p - center,
+            local_p,
             size,
-            corner_radius_for(p - center),
+            corner_radius_for(local_p),
             uniforms.rounding_type
         );
         let border_coverage = clamp(border_outer_coverage - border_inner_coverage, 0.0, 1.0);
@@ -320,9 +331,9 @@ fn fs_main(@builtin(position) frag_coord: vec4<f32>) -> @location(0) vec4<f32> {
     }
 
     let shape_coverage = rounded_rect_coverage(
-        p - center,
+        local_p,
         size,
-        corner_radius_for(p - center),
+        corner_radius_for(local_p),
         uniforms.rounding_type
     );
 

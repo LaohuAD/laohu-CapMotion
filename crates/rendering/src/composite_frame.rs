@@ -100,6 +100,9 @@ pub struct CompositeVideoFrameUniforms {
     /// flag). The active flag gates the shader's whole color pass in one
     /// uniform branch, keeping ungraded layers bit-identical to before.
     pub grain_params: [f32; 4],
+    /// Clockwise rotation of the target rectangle around its center.
+    pub rotation_radians: f32,
+    pub _rotation_padding: [f32; 3],
 }
 
 impl Default for CompositeVideoFrameUniforms {
@@ -130,6 +133,8 @@ impl Default for CompositeVideoFrameUniforms {
             color_adjust_a: [0.0; 4],
             color_adjust_b: [0.0; 4],
             grain_params: [0.0; 4],
+            rotation_radians: 0.0,
+            _rotation_padding: [0.0; 3],
         }
     }
 }

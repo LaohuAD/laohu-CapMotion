@@ -112,3 +112,37 @@ fn segment_must_reference_an_existing_definition_version() {
         })
     );
 }
+
+#[test]
+fn frame_plan_uses_output_pixels_alpha_and_retime_mapping() {
+    let project = project_with_motion(serde_json::json!({
+        "definitions": [{
+            "id": "cards", "version": 1, "source": "motion/cards",
+            "compositionId": "Cards", "minDuration": 1.0,
+            "defaultDuration": 5.0, "maxDuration": 20.0
+        }],
+        "segments": [{
+            "id": "motion-1", "definitionId": "cards", "definitionVersion": 1,
+            "start": 4.0, "end": 14.0, "track": 2, "zIndex": 30,
+            "transform": { "x": 120.0, "y": -50.0, "scaleX": 0.5, "scaleY": 0.25, "rotation": 90.0 },
+            "opacity": 0.75, "durationPolicy": "retime", "artifactId": "preview-1"
+        }],
+        "artifacts": [{
+            "id": "preview-1", "segmentId": "motion-1", "contentHash": "hash",
+            "quality": "preview", "status": "ready", "path": "motion/cache/cards.webm",
+            "width": 1920, "height": 1080, "fps": 30.0, "hasAlpha": true,
+            "duration": 5.0
+        }]
+    }));
+
+    let plans = project.motion.frame_plans_at(9.0, 1920, 1080);
+    assert_eq!(plans.len(), 1);
+    let plan = &plans[0];
+    assert_eq!(plan.segment_id, "motion-1");
+    assert_eq!(plan.artifact_path, "motion/cache/cards.webm");
+    assert_eq!(plan.local_time, 2.5);
+    assert_eq!(plan.target_bounds, [600.0, 355.0, 1560.0, 625.0]);
+    assert_eq!(plan.rotation_radians, std::f64::consts::FRAC_PI_2);
+    assert_eq!(plan.opacity, 0.75);
+    assert!(plan.has_alpha);
+}

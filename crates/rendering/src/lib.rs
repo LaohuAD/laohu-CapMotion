@@ -21,7 +21,7 @@ use futures::future::OptionFuture;
 use layers::{
     Background, BackgroundLayer, BlurLayer, Camera3DBlurKind, Camera3DLayer, CameraLayer,
     CaptionsLayer, ClickRippleLayer, ColorGradeLayer, CursorLayer, DisplayLayer, FrameLayer,
-    KeyboardLayer, MaskLayer, NotchLayer, NotchUniforms, TextLayer,
+    KeyboardLayer, MaskLayer, MotionLayer, NotchLayer, NotchUniforms, TextLayer,
 };
 use specta::Type;
 use spring_mass_damper::SpringMassDamperSimulationConfig;
@@ -3981,6 +3981,8 @@ impl ProjectUniforms {
                         color_adjust_a: [0.0; 4],
                         color_adjust_b: [0.0; 4],
                         grain_params: [0.0; 4],
+                        rotation_radians: 0.0,
+                        _rotation_padding: [0.0; 3],
                     },
                     style: frame.style,
                     theme: frame.theme,
@@ -4050,6 +4052,8 @@ impl ProjectUniforms {
                             color_adjust_a: [0.0; 4],
                             color_adjust_b: [0.0; 4],
                             grain_params: [0.0; 4],
+                            rotation_radians: 0.0,
+                            _rotation_padding: [0.0; 3],
                         },
                         raster_size: [unzoomed.full_size[0] as f64, unzoomed.full_size[1] as f64],
                         source_crop: placement.source_crop,
@@ -4110,6 +4114,8 @@ impl ProjectUniforms {
                     color_adjust_a: screen_color_grade.color_adjust_a,
                     color_adjust_b: screen_color_grade.color_adjust_b,
                     grain_params: screen_color_grade.grain_params,
+                    rotation_radians: 0.0,
+                    _rotation_padding: [0.0; 3],
                 },
                 display_parent_motion_px,
                 frame_chrome,
@@ -4333,6 +4339,8 @@ impl ProjectUniforms {
                     color_adjust_a: camera_color_grade.color_adjust_a,
                     color_adjust_b: camera_color_grade.color_adjust_b,
                     grain_params: camera_color_grade.grain_params,
+                    rotation_radians: 0.0,
+                    _rotation_padding: [0.0; 3],
                 }
             });
 
@@ -4434,6 +4442,8 @@ impl ProjectUniforms {
                     color_adjust_a: camera_color_grade.color_adjust_a,
                     color_adjust_b: camera_color_grade.color_adjust_b,
                     grain_params: camera_color_grade.grain_params,
+                    rotation_radians: 0.0,
+                    _rotation_padding: [0.0; 3],
                 }
             });
 
@@ -5891,6 +5901,7 @@ pub struct RendererLayers {
     text: TextLayer,
     captions: CaptionsLayer,
     keyboard: KeyboardLayer,
+    motion: MotionLayer,
     camera3d: Camera3DLayer,
     camera_blur_processor: Option<cap_camera_effects::BlurProcessor>,
     camera_blur_init_failed: bool,
@@ -5931,13 +5942,18 @@ impl RendererLayers {
             ),
             camera_only: CameraLayer::new_with_all_shared_pipelines(
                 device,
-                shared_yuv_pipelines,
-                shared_composite_pipeline,
+                shared_yuv_pipelines.clone(),
+                shared_composite_pipeline.clone(),
             ),
             mask: MaskLayer::new(device),
             text: TextLayer::new(device, queue),
             captions: CaptionsLayer::new(device, queue),
             keyboard: KeyboardLayer::new(device, queue),
+            motion: MotionLayer::new(
+                shared_yuv_pipelines,
+                shared_composite_pipeline,
+                prefer_cpu_conversion,
+            ),
             camera3d: Camera3DLayer::new(device),
             camera_blur_processor: None,
             camera_blur_init_failed: false,
@@ -6178,6 +6194,8 @@ impl RendererLayers {
             self.captions.active_layout(),
         );
 
+        self.motion.prepare(constants, uniforms).await?;
+
         Ok(())
     }
 
@@ -6359,6 +6377,10 @@ impl RendererLayers {
         );
         timings.keyboard_prepare_duration = start.elapsed();
 
+        self.motion
+            .prepare_with_encoder(constants, uniforms, encoder)
+            .await?;
+
         self.camera3d.prepare(&constants.queue, uniforms);
 
         Ok(timings)
@@ -6397,6 +6419,7 @@ impl RendererLayers {
         }
         self.camera.copy_to_texture(encoder);
         self.camera_only.copy_to_texture(encoder);
+        self.motion.copy_to_textures(encoder);
         self.background.render_surface(encoder);
 
         {
@@ -6534,6 +6557,11 @@ impl RendererLayers {
                 session.swap_textures();
             }
             None => {}
+        }
+
+        if self.motion.has_content() {
+            let mut pass = render_pass!(session.current_texture_view(), wgpu::LoadOp::Load);
+            self.motion.render(&mut pass);
         }
 
         if !uniforms.masks.is_empty() {

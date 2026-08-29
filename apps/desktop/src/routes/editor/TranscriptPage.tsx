@@ -433,6 +433,7 @@ export function TranscriptPanel() {
 							range.start,
 							range.end,
 							range.segmentIndex,
+							p.motion.segments,
 						);
 					}
 				}

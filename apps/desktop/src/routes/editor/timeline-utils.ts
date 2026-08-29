@@ -165,6 +165,7 @@ export function rippleDeleteAllTracks(
 	cutStart: number,
 	cutEnd: number,
 	requestedSegmentIndex?: number,
+	motionSegments?: Array<{ start: number; end: number }>,
 ) {
 	// The clip cut below works in the gapless recording-flow domain, but the
 	// overlay tracks live in output time, which includes fullscreen-text
@@ -242,6 +243,13 @@ export function rippleDeleteAllTracks(
 			overlayCutEnd,
 			overlayShift,
 		);
+	if (motionSegments)
+		rippleDeleteFromTrack(
+			motionSegments,
+			overlayCutStart,
+			overlayCutEnd,
+			overlayShift,
+		);
 }
 
 if (import.meta.vitest) {
@@ -263,7 +271,8 @@ if (import.meta.vitest) {
 		};
 
 		// Delete recording content [5,6], which plays at output [7,8].
-		rippleDeleteAllTracks(timeline, 5, 6);
+		const motionSegments = [{ start: 8.25, end: 9.25 }];
+		rippleDeleteAllTracks(timeline, 5, 6, undefined, motionSegments);
 
 		expect(timeline.segments).toEqual([
 			{ start: 0, end: 5, timescale: 1 },
@@ -273,6 +282,7 @@ if (import.meta.vitest) {
 		// these output-time positions and mangled the zoom to [5,5.5].
 		expect(timeline.zoomSegments).toEqual([{ start: 5.5, end: 6.5 }]);
 		expect(timeline.keyboardSegments).toEqual([{ start: 7, end: 8 }]);
+		expect(motionSegments).toEqual([{ start: 7.25, end: 8.25 }]);
 		expect(timeline.textSegments).toHaveLength(1);
 	});
 

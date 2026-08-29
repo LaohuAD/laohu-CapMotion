@@ -228,6 +228,23 @@ pub struct MotionConfiguration {
     pub artifacts: Vec<MotionArtifact>,
 }
 
+#[derive(Clone, Debug, PartialEq)]
+pub struct MotionFramePlan {
+    pub segment_id: String,
+    pub artifact_id: String,
+    pub artifact_path: String,
+    pub artifact_fps: f64,
+    pub artifact_width: u32,
+    pub artifact_height: u32,
+    pub local_time: f64,
+    pub target_bounds: [f64; 4],
+    pub rotation_radians: f64,
+    pub opacity: f64,
+    pub z_index: i32,
+    pub track: u32,
+    pub has_alpha: bool,
+}
+
 impl MotionConfiguration {
     pub fn definition(&self, id: &str, version: u32) -> Option<&MotionDefinition> {
         self.definitions
@@ -241,6 +258,79 @@ impl MotionConfiguration {
 
     pub fn segment_mut(&mut self, id: &str) -> Option<&mut MotionSegment> {
         self.segments.iter_mut().find(|segment| segment.id == id)
+    }
+
+    pub fn frame_plans_at(
+        &self,
+        timeline_time: f64,
+        output_width: u32,
+        output_height: u32,
+    ) -> Vec<MotionFramePlan> {
+        let mut plans = Vec::new();
+
+        for segment in self
+            .segments
+            .iter()
+            .filter(|segment| timeline_time >= segment.start && timeline_time < segment.end)
+        {
+            let mut artifacts = self
+                .artifacts
+                .iter()
+                .filter(|artifact| {
+                    artifact.segment_id == segment.id
+                        && !artifact.path.is_empty()
+                        && artifact.duration > 0.0
+                        && matches!(
+                            artifact.status,
+                            MotionArtifactStatus::Ready | MotionArtifactStatus::Stale
+                        )
+                })
+                .collect::<Vec<_>>();
+            artifacts.sort_by_key(|artifact| {
+                let linked = artifact.id == segment.artifact_id.as_deref().unwrap_or_default();
+                let preview = artifact.quality == MotionArtifactQuality::Preview;
+                (!linked, !preview)
+            });
+            let Some(artifact) = artifacts.first().copied() else {
+                continue;
+            };
+
+            let elapsed = timeline_time - segment.start;
+            let local_time = match segment.duration_policy {
+                MotionDurationPolicy::Retime => elapsed / segment.duration() * artifact.duration,
+                MotionDurationPolicy::Responsive | MotionDurationPolicy::Trim => elapsed,
+            }
+            .clamp(0.0, artifact.duration);
+
+            let center_x = output_width as f64 * 0.5 + segment.transform.x;
+            let center_y = output_height as f64 * 0.5 + segment.transform.y;
+            let half_width = output_width as f64 * segment.transform.scale_x * 0.5;
+            let half_height = output_height as f64 * segment.transform.scale_y * 0.5;
+
+            plans.push(MotionFramePlan {
+                segment_id: segment.id.clone(),
+                artifact_id: artifact.id.clone(),
+                artifact_path: artifact.path.clone(),
+                artifact_fps: artifact.fps,
+                artifact_width: artifact.width,
+                artifact_height: artifact.height,
+                local_time,
+                target_bounds: [
+                    center_x - half_width,
+                    center_y - half_height,
+                    center_x + half_width,
+                    center_y + half_height,
+                ],
+                rotation_radians: segment.transform.rotation.to_radians(),
+                opacity: segment.opacity,
+                z_index: segment.z_index,
+                track: segment.track,
+                has_alpha: artifact.has_alpha,
+            });
+        }
+
+        plans.sort_by_key(|plan| (plan.z_index, plan.track));
+        plans
     }
 
     pub fn validate(&self) -> Result<(), MotionValidationError> {

@@ -4598,7 +4598,7 @@ function MotionSegmentConfig(props: {
 					onChange={([value]) =>
 						updateSegment((segment) => {
 							segment.opacity = value;
-						})
+						}, false)
 					}
 					minValue={0}
 					maxValue={1}
@@ -4612,7 +4612,7 @@ function MotionSegmentConfig(props: {
 						updateSegment((segment) => {
 							segment.transform.scaleX = value;
 							segment.transform.scaleY = value;
-						})
+						}, false)
 					}
 					minValue={0.1}
 					maxValue={3}
@@ -4625,11 +4625,49 @@ function MotionSegmentConfig(props: {
 					onChange={([value]) =>
 						updateSegment((segment) => {
 							segment.transform.x = value;
-						})
+						}, false)
 					}
-					minValue={-1}
-					maxValue={1}
-					step={0.01}
+					minValue={-1920}
+					maxValue={1920}
+					step={1}
+				/>
+			</Field>
+			<Field name="Position Y" icon={<IconLucideMove class="size-4" />}>
+				<Slider
+					value={[props.segment.transform.y]}
+					onChange={([value]) =>
+						updateSegment((segment) => {
+							segment.transform.y = value;
+						}, false)
+					}
+					minValue={-1080}
+					maxValue={1080}
+					step={1}
+				/>
+			</Field>
+			<Field name="Rotation" icon={<IconLucideRotateCw class="size-4" />}>
+				<Slider
+					value={[props.segment.transform.rotation]}
+					onChange={([value]) =>
+						updateSegment((segment) => {
+							segment.transform.rotation = value;
+						}, false)
+					}
+					minValue={-180}
+					maxValue={180}
+					step={1}
+				/>
+			</Field>
+			<Field name="Layer" icon={<IconLucideGrid class="size-4" />}>
+				<Input
+					type="number"
+					value={props.segment.zIndex}
+					step="1"
+					onChange={(event) =>
+						updateSegment((segment) => {
+							segment.zIndex = Number.parseInt(event.currentTarget.value, 10);
+						}, false)
+					}
 				/>
 			</Field>
 			<Field name="Parameters" icon={<IconLucideGrid class="size-4" />}>
