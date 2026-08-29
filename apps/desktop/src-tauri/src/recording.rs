@@ -46,7 +46,10 @@ use std::{
     sync::Arc,
     time::Duration,
 };
-use tauri::{AppHandle, Manager, path::BaseDirectory};
+use tauri::{
+    AppHandle, Manager, PhysicalPosition, PhysicalSize, WebviewUrl, WebviewWindow,
+    path::BaseDirectory,
+};
 use tauri_plugin_dialog::{DialogExt, MessageDialogBuilder};
 use tauri_plugin_global_shortcut::GlobalShortcutExt;
 use tauri_plugin_store::StoreExt;
@@ -92,6 +95,104 @@ const CURRENT_DESKTOP_BACKGROUND_FILENAME: &str = "current-desktop-background.jp
 const CURRENT_DESKTOP_BACKGROUND_PENDING_FILENAME: &str = "current-desktop-background.pending.jpg";
 const DESKTOP_BACKGROUND_MAX_DIMENSION: u32 = 2560;
 const DESKTOP_BACKGROUND_JPEG_QUALITY: u8 = 82;
+const MANUAL_ZOOM_OVERLAY_LABEL: &str = "manual-zoom-overlay";
+
+fn close_manual_zoom_overlay(app: &AppHandle) {
+    if let Some(window) = app.get_webview_window(MANUAL_ZOOM_OVERLAY_LABEL) {
+        let _ = window.close();
+    }
+}
+
+fn capture_target_physical_bounds(
+    target: &ScreenCaptureTarget,
+) -> Option<(PhysicalPosition<i32>, PhysicalSize<u32>)> {
+    use scap_targets::Window;
+
+    let convert = |bounds: scap_targets::bounds::PhysicalBounds| {
+        Some((
+            PhysicalPosition::new(
+                bounds.position().x().round() as i32,
+                bounds.position().y().round() as i32,
+            ),
+            PhysicalSize::new(
+                bounds.size().width().round().max(1.0) as u32,
+                bounds.size().height().round().max(1.0) as u32,
+            ),
+        ))
+    };
+
+    match target {
+        ScreenCaptureTarget::Display { .. } => {
+            convert(target.display()?.raw_handle().physical_bounds()?)
+        }
+        ScreenCaptureTarget::Window { id } => {
+            convert(Window::from_id(id)?.raw_handle().physical_bounds()?)
+        }
+        ScreenCaptureTarget::Area { bounds, .. } => {
+            let display = target.display()?;
+            let physical = display.raw_handle().physical_bounds()?;
+            let logical = display.raw_handle().logical_bounds()?;
+            let scale_x = physical.size().width() / logical.size().width();
+            let scale_y = physical.size().height() / logical.size().height();
+            Some((
+                PhysicalPosition::new(
+                    (physical.position().x() + bounds.position().x() * scale_x).round() as i32,
+                    (physical.position().y() + bounds.position().y() * scale_y).round() as i32,
+                ),
+                PhysicalSize::new(
+                    (bounds.size().width() * scale_x).round().max(1.0) as u32,
+                    (bounds.size().height() * scale_y).round().max(1.0) as u32,
+                ),
+            ))
+        }
+        ScreenCaptureTarget::CameraOnly => None,
+    }
+}
+
+fn show_manual_zoom_overlay(
+    app: &AppHandle,
+    target: &ScreenCaptureTarget,
+    x: f64,
+    y: f64,
+    amount: f64,
+) -> Result<(), String> {
+    close_manual_zoom_overlay(app);
+    let (position, size) = capture_target_physical_bounds(target)
+        .ok_or_else(|| "Unable to determine the capture target bounds".to_string())?;
+    let url = format!("/manual-zoom-overlay?x={x}&y={y}&amount={amount}");
+    let window =
+        WebviewWindow::builder(app, MANUAL_ZOOM_OVERLAY_LABEL, WebviewUrl::App(url.into()))
+            .title("Cap Manual Zoom Preview")
+            .inner_size(800.0, 600.0)
+            .minimizable(false)
+            .maximizable(false)
+            .resizable(false)
+            .decorations(false)
+            .shadow(false)
+            .skip_taskbar(true)
+            .always_on_top(true)
+            .visible_on_all_workspaces(true)
+            .content_protected(true)
+            .transparent(true)
+            .focused(false)
+            .visible(false)
+            .build()
+            .map_err(|error| format!("Failed to show the manual zoom preview: {error}"))?;
+
+    window.set_ignore_cursor_events(true).map_err(|error| {
+        format!("Failed to make the manual zoom preview click-through: {error}")
+    })?;
+    window
+        .set_position(position)
+        .map_err(|error| format!("Failed to position the manual zoom preview: {error}"))?;
+    window
+        .set_size(size)
+        .map_err(|error| format!("Failed to size the manual zoom preview: {error}"))?;
+    window
+        .show()
+        .map_err(|error| format!("Failed to reveal the manual zoom preview: {error}"))?;
+    Ok(())
+}
 
 fn current_desktop_background_snapshot_path(recording_dir: &Path) -> PathBuf {
     recording_dir
@@ -1141,6 +1242,15 @@ pub enum RecordingEvent {
     InputRestored { input: RecordingInputKind },
     Degraded { reason: String },
     Recovered,
+}
+
+#[derive(tauri_specta::Event, specta::Type, Clone, Debug, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ManualZoomChanged {
+    pub enabled: bool,
+    pub x: f64,
+    pub y: f64,
+    pub amount: f64,
 }
 
 /// Every abort path out of `start_recording` must be observable: in the log, and as an
@@ -2518,6 +2628,60 @@ pub async fn toggle_pause_recording(
     Ok(())
 }
 
+#[tauri::command]
+#[specta::specta]
+#[instrument(skip(app, state))]
+pub async fn toggle_manual_zoom(
+    app: AppHandle,
+    state: MutableState<'_, App>,
+) -> Result<(), String> {
+    let state = state.read().await;
+    let recording = state
+        .current_recording()
+        .ok_or_else(|| "No recording in progress".to_string())?;
+    let InProgressRecording::Studio { handle, .. } = recording else {
+        return Err("Manual zoom is only available for editable Studio recordings".to_string());
+    };
+    let was_enabled = handle
+        .is_manual_zoom_enabled()
+        .await
+        .map_err(|error| error.to_string())?;
+    let (x, y) = if was_enabled {
+        (0.5, 0.5)
+    } else {
+        cap_recording::screen_capture::normalized_cursor_position(&handle.capture_target)
+            .ok_or_else(|| "The cursor is outside the active capture target".to_string())?
+    };
+    let amount = GeneralSettingsStore::get(&app)
+        .ok()
+        .flatten()
+        .and_then(|settings| settings.default_zoom_amount)
+        .unwrap_or(DEFAULT_AUTO_ZOOM_AMOUNT);
+    let enabled = handle
+        .toggle_manual_zoom(x, y, amount)
+        .await
+        .map_err(|error| error.to_string())?;
+
+    if enabled {
+        if let Err(error) = show_manual_zoom_overlay(&app, &handle.capture_target, x, y, amount) {
+            let _ = handle.toggle_manual_zoom(x, y, amount).await;
+            return Err(error);
+        }
+    } else {
+        close_manual_zoom_overlay(&app);
+    }
+
+    ManualZoomChanged {
+        enabled,
+        x,
+        y,
+        amount,
+    }
+    .emit(&app)
+    .ok();
+    Ok(())
+}
+
 async fn handle_spawn_failure(
     app: &AppHandle,
     state_mtx: &MutableState<'_, App>,
@@ -2751,6 +2915,7 @@ async fn discard_recording(app: &AppHandle, recording: InProgressRecording) -> R
 #[specta::specta]
 #[instrument(skip(app, state))]
 pub async fn stop_recording(app: AppHandle, state: MutableState<'_, App>) -> Result<(), String> {
+    close_manual_zoom_overlay(&app);
     let mut state = state.write().await;
     let recording_pending = matches!(&state.recording_state, RecordingState::Pending { .. });
     let Some(current_recording) = state.clear_current_recording() else {
@@ -2797,6 +2962,7 @@ pub async fn restart_recording(
     app: AppHandle,
     state: MutableState<'_, App>,
 ) -> Result<RecordingAction, String> {
+    close_manual_zoom_overlay(&app);
     let Some(recording) = state.write().await.clear_current_recording() else {
         return Err("No recording in progress".to_string());
     };
@@ -3082,6 +3248,7 @@ async fn handle_recording_end(
     app: &mut App,
     recording_dir: PathBuf,
 ) -> Result<(), String> {
+    close_manual_zoom_overlay(&handle);
     let cleared = app.clear_recording_state();
 
     if let Some(in_progress) = cleared.as_ref() {
@@ -3456,6 +3623,7 @@ async fn handle_recording_finish(
                     project_path: recording.project_path,
                     meta: updated_studio_meta.clone(),
                     cursor_data: recording.cursor_data,
+                    manual_zoom_segments: recording.manual_zoom_segments,
                 },
                 &recordings,
                 PresetsStore::get_default_preset(app)?.map(|p| p.config),
@@ -3705,6 +3873,7 @@ async fn finalize_studio_recording(
             project_path: recording.project_path,
             meta: updated_studio_meta,
             cursor_data: recording.cursor_data,
+            manual_zoom_segments: recording.manual_zoom_segments,
         },
         &recordings,
         default_preset,
@@ -3939,7 +4108,7 @@ fn project_config_from_recording(
         })
         .collect::<Vec<_>>();
 
-    let zoom_segments = if settings.auto_zoom_on_clicks {
+    let auto_zoom_segments = if settings.auto_zoom_on_clicks {
         generate_zoom_segments_from_clicks(
             completed_recording,
             recordings,
@@ -3950,6 +4119,10 @@ fn project_config_from_recording(
     } else {
         Vec::new()
     };
+    let zoom_segments = cap_project::merge_manual_zoom_segments(
+        auto_zoom_segments,
+        completed_recording.manual_zoom_segments.clone(),
+    );
 
     if should_enable_notch_overlay(
         capture_target,

@@ -25,6 +25,7 @@ import toast from "solid-toast";
 import themePreviewAuto from "~/assets/theme-previews/auto.jpg";
 import themePreviewDark from "~/assets/theme-previews/dark.jpg";
 import themePreviewLight from "~/assets/theme-previews/light.jpg";
+import { type AppLanguage, useI18n } from "~/i18n";
 import { Input, Slider } from "~/routes/editor/ui";
 import {
 	authStore,
@@ -154,11 +155,15 @@ function AppearanceSection(props: {
 	currentTheme: AppTheme;
 	onThemeChange: (theme: AppTheme) => void;
 }) {
-	const options = [
-		{ id: "system", name: "System" },
-		{ id: "light", name: "Light" },
-		{ id: "dark", name: "Dark" },
-	] satisfies { id: AppTheme; name: string }[];
+	const { t } = useI18n();
+	const options = createMemo(
+		() =>
+			[
+				{ id: "system", name: t("settings.theme.system") },
+				{ id: "light", name: t("settings.theme.light") },
+				{ id: "dark", name: t("settings.theme.dark") },
+			] satisfies { id: AppTheme; name: string }[],
+	);
 
 	const previews = {
 		system: themePreviewAuto,
@@ -168,15 +173,15 @@ function AppearanceSection(props: {
 
 	return (
 		<Section
-			title="Appearance"
-			description="Match Cap to your system theme or pick a fixed look."
+			title={t("settings.appearance.title")}
+			description={t("settings.appearance.description")}
 		>
 			<SectionCard padded>
 				<div
 					class="grid grid-cols-3 gap-3"
 					onContextMenu={(e) => e.preventDefault()}
 				>
-					<For each={options}>
+					<For each={options()}>
 						{(theme) => {
 							const isSelected = () => props.currentTheme === theme.id;
 							return (
@@ -228,6 +233,7 @@ function Inner(props: {
 	initialStore: GeneralSettingsStore | null;
 	initialRecordingStartSafety: RecordingStartSafetySettings;
 }) {
+	const i18n = useI18n();
 	const [settings, setSettings] = createStore<ExtendedGeneralSettingsStore>(
 		deriveGeneralSettings(props.initialStore),
 	);
@@ -462,6 +468,7 @@ function Inner(props: {
 	// Helper function to render select dropdown for recording behaviors
 	const SelectSettingItem = <
 		T extends
+			| AppLanguage
 			| MainWindowRecordingStartBehaviour
 			| PostStudioRecordingBehaviour
 			| PostDeletionBehaviour
@@ -514,6 +521,27 @@ function Inner(props: {
 			class="cap-settings-page flex flex-col h-full custom-scroll"
 		>
 			<SettingsPageContent>
+				<Section
+					title={i18n.t("settings.language.title")}
+					description={i18n.t("settings.language.description")}
+				>
+					<SectionRows>
+						<SelectSettingItem
+							label={i18n.t("settings.language.label")}
+							description={i18n.t("settings.language.hint")}
+							value={(settings.uiLanguage ?? i18n.language()) as AppLanguage}
+							onChange={(language) => {
+								setSettings("uiLanguage", language);
+								void i18n.setLanguage(language);
+							}}
+							options={[
+								{ text: i18n.t("language.chinese"), value: "zh-CN" },
+								{ text: i18n.t("language.english"), value: "en" },
+							]}
+						/>
+					</SectionRows>
+				</Section>
+
 				<AppearanceSection
 					currentTheme={settings.theme ?? "system"}
 					onThemeChange={(newTheme) => {

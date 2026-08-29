@@ -24,6 +24,7 @@ import "unfonts.css";
 import "./styles/theme.css";
 
 import { CapErrorBoundary } from "./components/CapErrorBoundary";
+import { I18nProvider } from "./i18n";
 import WindowChromeLayout from "./routes/(window-chrome)";
 import SettingsLayout from "./routes/(window-chrome)/settings";
 import { authStore, generalSettingsStore } from "./store";
@@ -90,6 +91,9 @@ const InProgressRecordingPage = lazy(
 	() => import("./routes/in-progress-recording"),
 );
 const ModeSelectPage = lazy(() => import("./routes/mode-select"));
+const ManualZoomOverlayPage = lazy(
+	() => import("./routes/manual-zoom-overlay"),
+);
 const NotificationsPage = lazy(() => import("./routes/notifications"));
 const RecordingsOverlayPage = lazy(() => import("./routes/recordings-overlay"));
 const ScreenshotEditorPage = lazy(() => import("./routes/screenshot-editor"));
@@ -118,9 +122,11 @@ const queryClient = new QueryClient({
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<Suspense>
-				<Inner />
-			</Suspense>
+			<I18nProvider>
+				<Suspense>
+					<Inner />
+				</Suspense>
+			</I18nProvider>
 		</QueryClientProvider>
 	);
 }
@@ -244,6 +250,10 @@ function Inner() {
 						component={InProgressRecordingPage}
 					/>
 					<Route path="/mode-select" component={ModeSelectPage} />
+					<Route
+						path="/manual-zoom-overlay"
+						component={ManualZoomOverlayPage}
+					/>
 					<Route path="/notifications" component={NotificationsPage} />
 					<Route path="/recordings-overlay" component={RecordingsOverlayPage} />
 					<Route

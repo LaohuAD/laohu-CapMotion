@@ -58,6 +58,7 @@ pub enum HotkeyAction {
     StopRecording,
     RestartRecording,
     TogglePauseRecording,
+    ToggleManualZoom,
     CycleRecordingMode,
     OpenRecordingPicker,
     OpenRecordingPickerDisplay,
@@ -239,6 +240,9 @@ async fn handle_hotkey(app: AppHandle, action: HotkeyAction) -> Result<(), Strin
             .map(|_| ()),
         HotkeyAction::TogglePauseRecording => {
             recording::toggle_pause_recording(app.clone(), app.state()).await
+        }
+        HotkeyAction::ToggleManualZoom => {
+            recording::toggle_manual_zoom(app.clone(), app.state()).await
         }
         HotkeyAction::CycleRecordingMode => {
             let current = RecordingSettingsStore::get(&app)

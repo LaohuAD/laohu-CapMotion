@@ -17,6 +17,7 @@ import {
 	Show,
 } from "solid-js";
 import { createStore } from "solid-js/store";
+import { type TranslationKey, useI18n } from "~/i18n";
 import { generalSettingsStore } from "~/store";
 import {
 	isPermissionGranted as isPermitted,
@@ -112,41 +113,98 @@ const modes: ModeDetail[] = [
 	},
 ];
 
+const modeTranslationKeys: Record<
+	ModeId,
+	{
+		title: TranslationKey;
+		tagline: TranslationKey;
+		description: TranslationKey;
+		features: [TranslationKey, TranslationKey, TranslationKey, TranslationKey];
+	}
+> = {
+	instant: {
+		title: "onboarding.mode.instant.title",
+		tagline: "onboarding.mode.instant.tagline",
+		description: "onboarding.mode.instant.description",
+		features: [
+			"onboarding.mode.instant.feature1",
+			"onboarding.mode.instant.feature2",
+			"onboarding.mode.instant.feature3",
+			"onboarding.mode.instant.feature4",
+		],
+	},
+	studio: {
+		title: "onboarding.mode.studio.title",
+		tagline: "onboarding.mode.studio.tagline",
+		description: "onboarding.mode.studio.description",
+		features: [
+			"onboarding.mode.studio.feature1",
+			"onboarding.mode.studio.feature2",
+			"onboarding.mode.studio.feature3",
+			"onboarding.mode.studio.feature4",
+		],
+	},
+	screenshot: {
+		title: "onboarding.mode.screenshot.title",
+		tagline: "onboarding.mode.screenshot.tagline",
+		description: "onboarding.mode.screenshot.description",
+		features: [
+			"onboarding.mode.screenshot.feature1",
+			"onboarding.mode.screenshot.feature2",
+			"onboarding.mode.screenshot.feature3",
+			"onboarding.mode.screenshot.feature4",
+		],
+	},
+};
+
+function useLocalizedModes() {
+	const { t } = useI18n();
+	return createMemo(() =>
+		modes.map((mode) => {
+			const keys = modeTranslationKeys[mode.id];
+			return {
+				...mode,
+				title: t(keys.title),
+				tagline: t(keys.tagline),
+				description: t(keys.description),
+				features: keys.features.map(t),
+			};
+		}),
+	);
+}
+
 type SetupPermission = {
-	name: string;
+	nameKey: TranslationKey;
 	key: OSPermission;
-	description: string;
+	descriptionKey: TranslationKey;
 	requiresManualGrant: boolean;
 	optional?: boolean;
 };
 
 const setupPermissions: readonly SetupPermission[] = [
 	{
-		name: "Screen Recording",
+		nameKey: "onboarding.permissions.screen.name",
 		key: "screenRecording",
-		description:
-			"Click Grant to allow when macOS asks, or pick Cap in System Settings if needed. Restart the app after allowing screen recording.",
+		descriptionKey: "onboarding.permissions.screen.description",
 		requiresManualGrant: false,
 	},
 	{
-		name: "Accessibility",
+		nameKey: "onboarding.permissions.accessibility.name",
 		key: "accessibility",
-		description:
-			"During recording, Cap collects mouse activity locally to generate automatic zoom in segments.",
+		descriptionKey: "onboarding.permissions.accessibility.description",
 		requiresManualGrant: false,
 	},
 	{
-		name: "Microphone",
+		nameKey: "onboarding.permissions.microphone.name",
 		key: "microphone",
-		description: "This permission is required to record audio in your Caps.",
+		descriptionKey: "onboarding.permissions.microphone.description",
 		requiresManualGrant: false,
 		optional: true,
 	},
 	{
-		name: "Camera",
+		nameKey: "onboarding.permissions.camera.name",
 		key: "camera",
-		description:
-			"This permission is required to record your camera in your Caps.",
+		descriptionKey: "onboarding.permissions.camera.description",
 		requiresManualGrant: false,
 		optional: true,
 	},
@@ -303,6 +361,70 @@ function OnboardingAmbientBackdrop() {
 }
 
 export default function OnboardingPage() {
+	const i18n = useI18n();
+	return (
+		<Show when={i18n.ready()}>
+			<Show when={i18n.languageSelected()} fallback={<LanguageSelectionPage />}>
+				<OnboardingFlow />
+			</Show>
+		</Show>
+	);
+}
+
+function LanguageSelectionPage() {
+	const { setLanguage } = useI18n();
+	const [saving, setSaving] = createSignal(false);
+	const choose = async (language: "en" | "zh-CN") => {
+		if (saving()) return;
+		setSaving(true);
+		try {
+			await setLanguage(language);
+		} finally {
+			setSaving(false);
+		}
+	};
+
+	return (
+		<>
+			<WindowChromeHeader hideMaximize>
+				<div class="flex-1" data-tauri-drag-region />
+			</WindowChromeHeader>
+			<div class="relative flex flex-col flex-1 items-center justify-center overflow-hidden bg-gray-1 px-8">
+				<OnboardingAmbientBackdrop />
+				<div class="relative z-10 w-full max-w-[620px] text-center">
+					<h1 class="text-3xl font-bold text-gray-12">选择界面语言</h1>
+					<p class="mt-2 text-sm text-gray-10">
+						Choose your language · 以后可在设置中随时修改
+					</p>
+					<div class="mt-8 grid grid-cols-2 gap-4">
+						<button
+							type="button"
+							disabled={saving()}
+							onClick={() => void choose("zh-CN")}
+							class="group rounded-2xl border border-gray-5 bg-gray-2/90 p-7 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-blue-8 hover:shadow-lg disabled:opacity-60"
+						>
+							<div class="text-2xl font-bold text-gray-12">简体中文</div>
+							<div class="mt-2 text-sm text-gray-10">使用中文界面继续</div>
+						</button>
+						<button
+							type="button"
+							disabled={saving()}
+							onClick={() => void choose("en")}
+							class="group rounded-2xl border border-gray-5 bg-gray-2/90 p-7 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-blue-8 hover:shadow-lg disabled:opacity-60"
+						>
+							<div class="text-2xl font-bold text-gray-12">English</div>
+							<div class="mt-2 text-sm text-gray-10">Continue in English</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</>
+	);
+}
+
+function OnboardingFlow() {
+	const { t } = useI18n();
+	const localizedModes = useLocalizedModes();
 	const isMacOS = createMemo(() => ostype() === "macos");
 	const minStep = createMemo(() => (isMacOS() ? 0 : 1));
 
@@ -413,9 +535,9 @@ export default function OnboardingPage() {
 	});
 
 	const nextLabel = () => {
-		if (permissionsOnly()) return "Continue to Cap";
-		if (step() === totalSteps() - 1) return "Start Using Cap";
-		return "Continue";
+		if (permissionsOnly()) return t("onboarding.continueToCap");
+		if (step() === totalSteps() - 1) return t("onboarding.startUsing");
+		return t("onboarding.continue");
 	};
 
 	const nextDisabled = () => isMacOS() && step() === 0 && !permsGranted();
@@ -509,17 +631,26 @@ export default function OnboardingPage() {
 								<ModesOverviewStep active={step() === 1} />
 							</StepPanel>
 							<StepPanel active={step() === 2} index={2} currentStep={step()}>
-								<ModeDetailStep mode={modes[0]} active={step() === 2}>
+								<ModeDetailStep
+									mode={localizedModes()[0]}
+									active={step() === 2}
+								>
 									<InstantMockup active={step() === 2} />
 								</ModeDetailStep>
 							</StepPanel>
 							<StepPanel active={step() === 3} index={3} currentStep={step()}>
-								<ModeDetailStep mode={modes[1]} active={step() === 3}>
+								<ModeDetailStep
+									mode={localizedModes()[1]}
+									active={step() === 3}
+								>
 									<StudioMockup active={step() === 3} />
 								</ModeDetailStep>
 							</StepPanel>
 							<StepPanel active={step() === 4} index={4} currentStep={step()}>
-								<ModeDetailStep mode={modes[2]} active={step() === 4}>
+								<ModeDetailStep
+									mode={localizedModes()[2]}
+									active={step() === 4}
+								>
 									<ScreenshotMockup active={step() === 4} />
 								</ModeDetailStep>
 							</StepPanel>
@@ -574,6 +705,7 @@ function StepNavigation(props: {
 	showSkipOnboarding?: boolean;
 	onSkip?: () => void;
 }) {
+	const { t } = useI18n();
 	return (
 		<div
 			data-tauri-drag-region="false"
@@ -589,7 +721,7 @@ function StepNavigation(props: {
 							class="flex items-center gap-1.5 text-[13px] text-gray-10 hover:text-gray-12 transition-colors duration-200"
 						>
 							<IconLucideArrowLeft class="size-3.5" />
-							Back
+							{t("onboarding.back")}
 						</button>
 					</Show>
 				</div>
@@ -634,14 +766,14 @@ function StepNavigation(props: {
 								onClick={() => props.onSkip?.()}
 								class="text-[11px] text-gray-9 hover:text-gray-11 transition-colors duration-200 py-0.5"
 							>
-								Skip onboarding
+								{t("onboarding.skip")}
 							</button>
 						</Show>
 					</div>
 				</div>
 			</div>
 			<span class="text-[10px] text-gray-8 tabular-nums">
-				Press Enter ↵ or use ← → arrow keys
+				{t("onboarding.keyboardHint")}
 			</span>
 		</div>
 	);
@@ -676,6 +808,8 @@ function StepPanel(props: {
 }
 
 function ModesOverviewStep(props: { active: boolean }) {
+	const { t } = useI18n();
+	const localizedModes = useLocalizedModes();
 	const [visible, setVisible] = createSignal(false);
 
 	createEffect(() => {
@@ -697,16 +831,15 @@ function ModesOverviewStep(props: { active: boolean }) {
 				)}
 			>
 				<h2 class="text-2xl font-bold text-gray-12 tracking-tight">
-					One app, every workflow
+					{t("onboarding.modes.overviewTitle")}
 				</h2>
 				<p class="text-[14px] text-gray-10 leading-relaxed">
-					Whether you need speed, studio quality, or a quick screenshot — Cap
-					has a mode for it.
+					{t("onboarding.modes.overviewDescription")}
 				</p>
 			</div>
 
 			<div class="flex gap-4 w-full max-w-[540px]">
-				<For each={modes}>
+				<For each={localizedModes()}>
 					{(mode, index) => (
 						<div
 							class="flex-1 flex flex-col items-center gap-3 p-5 rounded-2xl border border-gray-4 bg-white dark:bg-gray-2 transition-all duration-500 ease-out shadow-xs"
@@ -811,6 +944,8 @@ function ModeDetailStep(props: {
 }
 
 function ToggleStep(props: { active: boolean }) {
+	const { t } = useI18n();
+	const localizedModes = useLocalizedModes();
 	const [visible, setVisible] = createSignal(false);
 	const [activeMode, setActiveMode] = createSignal(0);
 	const [userClicked, setUserClicked] = createSignal(false);
@@ -854,10 +989,10 @@ function ToggleStep(props: { active: boolean }) {
 				)}
 			>
 				<h2 class="text-2xl font-bold text-gray-12 tracking-tight">
-					Switch modes anytime
+					{t("onboarding.toggle.title")}
 				</h2>
 				<p class="text-[14px] text-gray-10 leading-relaxed">
-					Toggle between modes with a single click from the main Cap window.
+					{t("onboarding.toggle.description")}
 				</p>
 			</div>
 
@@ -885,7 +1020,7 @@ function ToggleStep(props: { active: boolean }) {
 						class="relative flex"
 						style={{ gap: `${GAP}px`, padding: `${PAD}px` }}
 					>
-						<For each={modes}>
+						<For each={localizedModes()}>
 							{(mode, index) => (
 								<div
 									class={cx(
@@ -922,7 +1057,7 @@ function ToggleStep(props: { active: boolean }) {
 						"padding-right": `${PAD}px`,
 					}}
 				>
-					<For each={modes}>
+					<For each={localizedModes()}>
 						{(mode, index) => (
 							<span
 								class={cx(
@@ -945,6 +1080,7 @@ function ToggleStep(props: { active: boolean }) {
 }
 
 function ShortcutsStep(props: { active: boolean }) {
+	const { t } = useI18n();
 	const [visible, setVisible] = createSignal(false);
 
 	createEffect(() => {
@@ -957,24 +1093,24 @@ function ShortcutsStep(props: { active: boolean }) {
 		}
 	});
 
-	const settingsAreas = [
+	const settingsAreas = createMemo(() => [
 		{
-			title: "Keyboard Shortcuts",
-			desc: "Global hotkeys for recording, screenshots, and switching modes",
+			title: t("onboarding.customize.shortcuts.title"),
+			desc: t("onboarding.customize.shortcuts.description"),
 		},
 		{
-			title: "Custom S3 Storage",
-			desc: "Connect your own S3-compatible bucket for full control over your recordings",
+			title: t("onboarding.customize.storage.title"),
+			desc: t("onboarding.customize.storage.description"),
 		},
 		{
-			title: "Custom Domain",
-			desc: "Use your own domain for shareable links instead of cap.so",
+			title: t("onboarding.customize.domain.title"),
+			desc: t("onboarding.customize.domain.description"),
 		},
 		{
-			title: "Recording Preferences",
-			desc: "FPS, quality, countdown timer, cursor effects, and more",
+			title: t("onboarding.customize.recording.title"),
+			desc: t("onboarding.customize.recording.description"),
 		},
-	];
+	]);
 
 	return (
 		<div class="flex flex-col items-center justify-center min-h-full px-12 gap-6">
@@ -988,11 +1124,10 @@ function ShortcutsStep(props: { active: boolean }) {
 					<IconCapSettings class="size-5 text-gray-11" />
 				</div>
 				<h2 class="text-2xl font-bold text-gray-12 tracking-tight">
-					Make Cap yours
+					{t("onboarding.customize.title")}
 				</h2>
 				<p class="text-[14px] text-gray-10 leading-relaxed">
-					Customize everything from keyboard shortcuts to storage. Cap adapts to
-					your workflow.
+					{t("onboarding.customize.description")}
 				</p>
 			</div>
 
@@ -1002,7 +1137,7 @@ function ShortcutsStep(props: { active: boolean }) {
 					visible() ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4",
 				)}
 			>
-				<For each={settingsAreas}>
+				<For each={settingsAreas()}>
 					{(area, index) => (
 						<div
 							class="flex flex-col gap-1 px-4 py-3 rounded-xl border border-gray-4 bg-white dark:bg-gray-2 transition-all duration-500 shadow-xs"
@@ -1029,13 +1164,14 @@ function ShortcutsStep(props: { active: boolean }) {
 					visible() ? "opacity-100" : "opacity-0",
 				)}
 			>
-				Change any of these at any time in Settings
+				{t("onboarding.customize.hint")}
 			</p>
 		</div>
 	);
 }
 
 function FaqStep(props: { active: boolean }) {
+	const { t } = useI18n();
 	const [visible, setVisible] = createSignal(false);
 
 	createEffect(() => {
@@ -1057,10 +1193,10 @@ function FaqStep(props: { active: boolean }) {
 				)}
 			>
 				<h2 class="text-2xl font-bold text-gray-12 tracking-tight">
-					Frequently Asked Questions
+					{t("onboarding.faq.title")}
 				</h2>
 				<p class="text-[14px] text-gray-10">
-					Everything you need to know to get started.
+					{t("onboarding.faq.description")}
 				</p>
 			</div>
 
@@ -1070,46 +1206,37 @@ function FaqStep(props: { active: boolean }) {
 					visible() ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4",
 				)}
 			>
-				<FaqItem question="Is Cap free to use?">
+				<FaqItem question={t("onboarding.faq.free.question")}>
 					<p class="text-[13px] text-gray-10 leading-relaxed">
-						Cap is free for personal use. For teams and commercial use, check
-						out our{" "}
+						{t("onboarding.faq.free.answer")}{" "}
 						<button
 							type="button"
 							onClick={() => shell.open("https://cap.so/pricing")}
 							class="text-blue-10 hover:text-blue-11 underline underline-offset-2"
 						>
-							pricing plans
+							{t("onboarding.faq.pricing")}
 						</button>
 						.
 					</p>
 				</FaqItem>
-				<FaqItem question="What's the difference between Instant and Studio?">
+				<FaqItem question={t("onboarding.faq.modes.question")}>
 					<p class="text-[13px] text-gray-10 leading-relaxed">
-						Instant mode uploads as you record — stop recording and you'll have
-						a shareable link immediately. Studio mode records locally in full
-						quality, letting you edit with backgrounds, effects, and more before
-						sharing.
+						{t("onboarding.faq.modes.answer")}
 					</p>
 				</FaqItem>
-				<FaqItem question="Where are my recordings stored?">
+				<FaqItem question={t("onboarding.faq.storage.question")}>
 					<p class="text-[13px] text-gray-10 leading-relaxed">
-						All recordings are stored locally on your computer. In Instant mode,
-						they're also uploaded to Cap's cloud for easy sharing. You can
-						manage storage in Settings.
+						{t("onboarding.faq.storage.answer")}
 					</p>
 				</FaqItem>
-				<FaqItem question="Can I change my shortcuts later?">
+				<FaqItem question={t("onboarding.faq.shortcuts.question")}>
 					<p class="text-[13px] text-gray-10 leading-relaxed">
-						Head to Settings → Shortcuts at any time to customize all your
-						keyboard shortcuts.
+						{t("onboarding.faq.shortcuts.answer")}
 					</p>
 				</FaqItem>
-				<FaqItem question="How does sharing work?">
+				<FaqItem question={t("onboarding.faq.sharing.question")}>
 					<p class="text-[13px] text-gray-10 leading-relaxed">
-						In Instant mode, you get a shareable link automatically when you
-						stop recording. In Studio mode, export your edited video and share
-						via Cap's cloud or save locally.
+						{t("onboarding.faq.sharing.answer")}
 					</p>
 				</FaqItem>
 			</div>
@@ -1122,7 +1249,7 @@ function FaqStep(props: { active: boolean }) {
 					visible() ? "opacity-100" : "opacity-0",
 				)}
 			>
-				View pricing plans
+				{t("onboarding.faq.pricing")}
 				<IconLucideExternalLink class="size-3" />
 			</button>
 		</div>
@@ -1701,6 +1828,7 @@ function StartupOverlay(props: {
 	isExiting: boolean;
 	onGetStarted: () => void;
 }) {
+	const { t } = useI18n();
 	const [audioState, setAudioState] = makePersisted(
 		createStore({ isMuted: false }),
 		{ name: "audioSettings" },
@@ -1921,10 +2049,10 @@ function StartupOverlay(props: {
 						/>
 					</div>
 					<h1 class="text-5xl md:text-5xl font-bold mb-4 mt-8 drop-shadow-[0_0_20px_rgba(0,0,0,0.2)]">
-						Welcome to Cap
+						{t("onboarding.welcome.title")}
 					</h1>
 					<p class="text-xl md:text-2xl opacity-80 mx-auto drop-shadow-[0_0_20px_rgba(0,0,0,0.2)] whitespace-nowrap">
-						Beautiful screen recordings, owned by you.
+						{t("onboarding.welcome.owned")}
 					</p>
 				</div>
 
@@ -1934,7 +2062,7 @@ function StartupOverlay(props: {
 					size="lg"
 					onClick={handleGetStarted}
 				>
-					<span>Get Started</span>
+					<span>{t("onboarding.getStarted")}</span>
 					<span class="text-[11px] font-normal text-[rgba(22,27,38,0.58)] leading-tight inline-flex items-center justify-center gap-1">
 						<span>Click here, or press</span>
 						<kbd class="rounded border border-gray-6 bg-white dark:bg-gray-3 px-1 py-px text-[10px] font-medium text-gray-11 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
@@ -1952,6 +2080,7 @@ function PermissionsStep(props: {
 	onPermissionsChanged: (allRequired: boolean) => void;
 	onCorePermissionsChanged: (granted: boolean) => void;
 }) {
+	const { t } = useI18n();
 	const [visible, setVisible] = createSignal(false);
 	const [initialCheck, setInitialCheck] = createSignal(true);
 	const [check, setCheck] = createSignal<
@@ -2072,10 +2201,10 @@ function PermissionsStep(props: {
 					<IconLucideShield class="size-5 text-gray-11" />
 				</div>
 				<h2 class="text-2xl font-bold text-gray-12 tracking-tight">
-					Permissions Required
+					{t("onboarding.permissions.title")}
 				</h2>
 				<p class="text-[14px] text-gray-10 leading-relaxed">
-					Cap needs a few permissions to record your screen and capture audio.
+					{t("onboarding.permissions.description")}
 				</p>
 			</div>
 
@@ -2103,16 +2232,16 @@ function PermissionsStep(props: {
 									<div class="flex flex-col flex-1 min-w-0">
 										<div class="flex items-center gap-2">
 											<span class="text-[13px] font-medium text-gray-12">
-												{permission.name}
+												{t(permission.nameKey)}
 											</span>
 											<Show when={permission.optional}>
 												<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-2 dark:bg-gray-4 text-gray-9">
-													Optional
+													{t("onboarding.permissions.optional")}
 												</span>
 											</Show>
 										</div>
 										<span class="text-[11px] text-gray-10 leading-snug mt-0.5">
-											{permission.description}
+											{t(permission.descriptionKey)}
 										</span>
 									</div>
 									<Show
@@ -2120,7 +2249,7 @@ function PermissionsStep(props: {
 										fallback={
 											<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-3 border border-green-5 text-green-11 text-[12px] font-medium shrink-0">
 												<IconLucideCheck class="size-3" />
-												Granted
+												{t("onboarding.permissions.granted")}
 											</div>
 										}
 									>
@@ -2139,8 +2268,8 @@ function PermissionsStep(props: {
 										>
 											{permission.requiresManualGrant ||
 											permStatus() === "denied"
-												? "Open Settings"
-												: "Grant"}
+												? t("onboarding.permissions.openSettings")
+												: t("onboarding.permissions.grant")}
 										</Button>
 									</Show>
 								</div>

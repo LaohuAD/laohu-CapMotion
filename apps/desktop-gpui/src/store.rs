@@ -883,6 +883,7 @@ pub const DEFAULT_PROJECT_NAME_TEMPLATE: &str = "{target_name} ({target_kind}) {
 #[derive(Debug, Clone, PartialEq)]
 pub struct GeneralSettings {
     pub theme: AppTheme,
+    pub ui_language: Option<String>,
     pub hide_dock_icon: bool,
     pub enable_notifications: bool,
     pub instant_mode_max_resolution: u32,
@@ -1008,6 +1009,7 @@ impl GeneralSettings {
     fn from_sections(general: &Map<String, Value>, safety: &Map<String, Value>) -> Self {
         Self {
             theme: enum_at(general, "theme"),
+            ui_language: opt_string_at(general, "uiLanguage"),
             hide_dock_icon: bool_at(general, "hideDockIcon", false),
             enable_notifications: bool_at(general, "enableNotifications", true),
             instant_mode_max_resolution: u32_at(general, "instantModeMaxResolution", 1920),

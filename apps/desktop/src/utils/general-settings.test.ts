@@ -35,6 +35,10 @@ describe("general-settings", () => {
 		);
 	});
 
+	it("leaves the language unselected for first-run onboarding", () => {
+		expect(deriveGeneralSettings(null).uiLanguage).toBeNull();
+	});
+
 	it("defaults recording enhancements when fields are missing", () => {
 		expect(
 			deriveGeneralSettings({

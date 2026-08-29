@@ -4,6 +4,7 @@ import type {
 } from "~/utils/tauri";
 
 export type GeneralSettingsStore = TauriGeneralSettingsStore & {
+	uiLanguage?: "en" | "zh-CN" | null;
 	captureKeyboardEvents?: boolean;
 	transcriptionHints?: string[];
 	enableTelemetry?: boolean;
@@ -54,6 +55,7 @@ export function createDefaultGeneralSettings(): GeneralSettingsStore {
 		instantModeMaxResolution: 1920,
 		crashRecoveryRecording: true,
 		maxFps: 60,
+		uiLanguage: null,
 		transcriptionHints: [...DEFAULT_TRANSCRIPTION_HINTS],
 		enableTelemetry: true,
 	};

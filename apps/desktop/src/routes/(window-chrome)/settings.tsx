@@ -20,6 +20,7 @@ import {
 import toast from "solid-toast";
 import { CapErrorBoundary } from "~/components/CapErrorBoundary";
 import { SignInButton } from "~/components/SignInButton";
+import { useI18n } from "~/i18n";
 
 import { authStore, userProfileStore } from "~/store";
 import { resetUser, trackEvent } from "~/utils/analytics";
@@ -133,6 +134,7 @@ function SettingsContentSkeleton() {
 }
 
 export default function Settings(props: RouteSectionProps) {
+	const { t } = useI18n();
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const signIn = createSignInMutation();
@@ -194,68 +196,68 @@ export default function Settings(props: RouteSectionProps) {
 			return response.body;
 		},
 	}));
-	const settingsItems = [
+	const settingsItems = createMemo(() => [
 		{
 			href: "general",
-			name: "General",
+			name: t("settings.nav.general"),
 			icon: IconCapSettings,
 		},
 		{
 			href: "hotkeys",
-			name: "Shortcuts",
+			name: t("settings.nav.shortcuts"),
 			icon: IconCapHotkeys,
 		},
 		{
 			href: "cli",
-			name: "CLI",
+			name: t("settings.nav.cli"),
 			icon: IconLucideTerminal,
 		},
 		{
 			href: "recordings",
-			name: "Recordings",
+			name: t("settings.nav.recordings"),
 			icon: IconLucideSquarePlay,
 		},
 		{
 			href: "screenshots",
-			name: "Screenshots",
+			name: t("settings.nav.screenshots"),
 			icon: IconLucideImage,
 		},
 		{
 			href: "automations",
-			name: "Automations",
+			name: t("settings.nav.automations"),
 			icon: IconLucideZap,
 		},
 		{
 			href: "transcription",
-			name: "Transcription",
+			name: t("settings.nav.transcription"),
 			icon: IconCapCaptions,
 		},
 		{
 			href: "integrations",
-			name: "Integrations",
+			name: t("settings.nav.integrations"),
 			icon: IconLucideUnplug,
 		},
 		{
 			href: "license",
-			name: "License",
+			name: t("settings.nav.license"),
 			icon: IconLucideGift,
 		},
 		{
 			href: "experimental",
-			name: "Experimental",
+			name: t("settings.nav.experimental"),
 			icon: IconCapSettings,
 		},
 		{
 			href: "feedback",
-			name: "Feedback",
+			name: t("settings.nav.feedback"),
 			icon: IconLucideMessageSquarePlus,
 		},
 		{
 			href: "changelog",
-			name: "Changelog",
+			name: t("settings.nav.changelog"),
 			icon: IconLucideBell,
 		},
-	];
+	]);
 	const accountName = createMemo(() => {
 		if (!auth()) return "Click to sign in";
 		if (!userProfile.isSuccess) return "Signed in";
@@ -500,7 +502,7 @@ export default function Settings(props: RouteSectionProps) {
 					</div>
 				</button>
 				<ul class="cap-settings-nav min-w-48 h-full p-2.5 space-y-1 text-gray-12">
-					<For each={settingsItems}>
+					<For each={settingsItems()}>
 						{(item) => (
 							<li>
 								<A

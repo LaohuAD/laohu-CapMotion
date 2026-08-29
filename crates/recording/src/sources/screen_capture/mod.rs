@@ -1,6 +1,6 @@
 #[cfg(target_os = "macos")]
 use crate::SendableShareableContent;
-use cap_cursor_capture::CursorCropBounds;
+use cap_cursor_capture::{CursorCropBounds, RawCursorPosition};
 use cap_media_info::{AudioInfo, VideoInfo, ensure_even};
 use scap_targets::{Display, DisplayId, Window, WindowId, bounds::*};
 use serde::{Deserialize, Serialize};
@@ -284,6 +284,19 @@ impl ScreenCaptureTarget {
             ScreenCaptureTarget::CameraOnly => "Camera",
         }
     }
+}
+
+/// Samples the system cursor in the same normalized coordinate space used by
+/// recorded cursor events and `ZoomMode::Manual`.
+pub fn normalized_cursor_position(target: &ScreenCaptureTarget) -> Option<(f64, f64)> {
+    let display = target.display()?;
+    let crop = target.cursor_crop()?;
+    let position = RawCursorPosition::get()
+        .relative_to_display(display)?
+        .normalize()?
+        .with_crop(crop);
+
+    Some((position.x().clamp(0.0, 1.0), position.y().clamp(0.0, 1.0)))
 }
 
 pub struct ScreenCaptureConfig<TCaptureFormat: ScreenCaptureFormat> {

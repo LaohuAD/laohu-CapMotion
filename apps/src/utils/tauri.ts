@@ -47,6 +47,9 @@ async resumeRecording() : Promise<null> {
 async togglePauseRecording() : Promise<null> {
     return await TAURI_INVOKE("toggle_pause_recording");
 },
+async toggleManualZoom() : Promise<null> {
+    return await TAURI_INVOKE("toggle_manual_zoom");
+},
 async restartRecording() : Promise<RecordingAction> {
     return await TAURI_INVOKE("restart_recording");
 },
@@ -484,6 +487,7 @@ newStudioRecordingAdded: NewStudioRecordingAdded,
 onEscapePress: OnEscapePress,
 recordingDeleted: RecordingDeleted,
 recordingEvent: RecordingEvent,
+manualZoomChanged: ManualZoomChanged,
 recordingOptionsChanged: RecordingOptionsChanged,
 recordingStarted: RecordingStarted,
 recordingStopped: RecordingStopped,
@@ -511,6 +515,7 @@ newStudioRecordingAdded: "new-studio-recording-added",
 onEscapePress: "on-escape-press",
 recordingDeleted: "recording-deleted",
 recordingEvent: "recording-event",
+manualZoomChanged: "manual-zoom-changed",
 recordingOptionsChanged: "recording-options-changed",
 recordingStarted: "recording-started",
 recordingStopped: "recording-stopped",
@@ -537,6 +542,7 @@ export type Action = { type: "copyToClipboard"; source?: ClipboardSource } | { t
 export type Annotation = { id: string; type: AnnotationType; x: number; y: number; width: number; height: number; strokeColor: string; strokeWidth: number; fillColor: string; opacity: number; rotation: number; text: string | null; maskType?: MaskType | null; maskLevel?: number | null }
 export type AnnotationType = "arrow" | "circle" | "rectangle" | "text" | "mask"
 export type AppTheme = "system" | "light" | "dark"
+export type AppLanguage = "en" | "zh-CN"
 export type AspectRatio = "wide" | "vertical" | "square" | "classic" | "tall"
 export type Audio = { duration: number; sample_rate: number; channels: number; start_time: number }
 export type AudioConfiguration = { mute: boolean; improve: boolean; micVolumeDb: number; micStereoMode: StereoMode; systemVolumeDb: number }
@@ -669,7 +675,7 @@ export type ExportSettings = ({ format: "Mp4" } & Mp4ExportSettings) | ({ format
 export type FileType = "recording" | "screenshot"
 export type Flags = { captions: boolean }
 export type FramesRendered = { renderedCount: number; totalFrames: number; type: "FramesRendered" }
-export type GeneralSettingsStore = { instanceId?: string; uploadIndividualFiles?: boolean; hideDockIcon?: boolean; autoCreateShareableLink?: boolean; enableNotifications?: boolean; disableAutoOpenLinks?: boolean; hasCompletedStartup?: boolean; theme?: AppTheme; commercialLicense?: CommercialLicense | null; lastVersion?: string | null; windowTransparency?: boolean; postStudioRecordingBehaviour?: PostStudioRecordingBehaviour; mainWindowRecordingStartBehaviour?: MainWindowRecordingStartBehaviour; custom_cursor_capture2?: boolean; serverUrl?: string; recordingCountdown?: number | null; enableNativeCameraPreview: boolean; autoZoomOnClicks?: boolean; captureKeyboardEvents?: boolean; postDeletionBehaviour?: PostDeletionBehaviour; excludedWindows?: WindowExclusion[]; deleteInstantRecordingsAfterUpload?: boolean; instantModeMaxResolution?: number; defaultProjectNameTemplate?: string | null; crashRecoveryRecording?: boolean; maxFps?: number; transcriptionHints?: string[]; editorPreviewQuality?: EditorPreviewQuality; studioRecordingQuality?: StudioRecordingQuality; mainWindowPosition?: WindowPosition | null; cameraWindowPosition?: WindowPosition | null; cameraWindowPositionsByMonitorName?: { [key in string]: WindowPosition }; hasCompletedOnboarding?: boolean; enableTelemetry?: boolean; outOfProcessMuxer?: boolean; recordingsPath?: string | null }
+export type GeneralSettingsStore = { instanceId?: string; uploadIndividualFiles?: boolean; hideDockIcon?: boolean; autoCreateShareableLink?: boolean; enableNotifications?: boolean; disableAutoOpenLinks?: boolean; hasCompletedStartup?: boolean; theme?: AppTheme; uiLanguage?: AppLanguage | null; commercialLicense?: CommercialLicense | null; lastVersion?: string | null; windowTransparency?: boolean; postStudioRecordingBehaviour?: PostStudioRecordingBehaviour; mainWindowRecordingStartBehaviour?: MainWindowRecordingStartBehaviour; custom_cursor_capture2?: boolean; serverUrl?: string; recordingCountdown?: number | null; enableNativeCameraPreview: boolean; autoZoomOnClicks?: boolean; captureKeyboardEvents?: boolean; postDeletionBehaviour?: PostDeletionBehaviour; excludedWindows?: WindowExclusion[]; deleteInstantRecordingsAfterUpload?: boolean; instantModeMaxResolution?: number; defaultProjectNameTemplate?: string | null; crashRecoveryRecording?: boolean; maxFps?: number; transcriptionHints?: string[]; editorPreviewQuality?: EditorPreviewQuality; studioRecordingQuality?: StudioRecordingQuality; mainWindowPosition?: WindowPosition | null; cameraWindowPosition?: WindowPosition | null; cameraWindowPositionsByMonitorName?: { [key in string]: WindowPosition }; hasCompletedOnboarding?: boolean; enableTelemetry?: boolean; outOfProcessMuxer?: boolean; recordingsPath?: string | null }
 export type GifExportSettings = { fps: number; resolution_base: XY<number>; quality: GifQuality | null }
 export type GifQuality = { 
 /**
@@ -684,7 +690,7 @@ export type GlideDirection = "none" | "left" | "right" | "up" | "down"
 export type HapticPattern = "alignment" | "levelChange" | "generic"
 export type HapticPerformanceTime = "default" | "now" | "drawCompleted"
 export type Hotkey = { code: string; meta: boolean; ctrl: boolean; alt: boolean; shift: boolean }
-export type HotkeyAction = "startStudioRecording" | "startInstantRecording" | "stopRecording" | "restartRecording" | "togglePauseRecording" | "cycleRecordingMode" | "openRecordingPicker" | "openRecordingPickerDisplay" | "openRecordingPickerWindow" | "openRecordingPickerArea" | "screenshotDisplay" | "screenshotWindow" | "screenshotArea" | "other"
+export type HotkeyAction = "startStudioRecording" | "startInstantRecording" | "stopRecording" | "restartRecording" | "togglePauseRecording" | "toggleManualZoom" | "cycleRecordingMode" | "openRecordingPicker" | "openRecordingPickerDisplay" | "openRecordingPickerWindow" | "openRecordingPickerArea" | "screenshotDisplay" | "screenshotWindow" | "screenshotArea" | "other"
 export type HotkeysConfiguration = { show: boolean }
 export type HotkeysStore = { hotkeys: { [key in HotkeyAction]: Hotkey } }
 export type ImportStage = "Probing" | "Converting" | "Finalizing" | "Complete" | "Failed"
@@ -705,6 +711,7 @@ export type LogicalPosition = { x: number; y: number }
 export type LogicalSize = { width: number; height: number }
 export type MacOSVersionInfo = { major: number; minor: number; patch: number; displayName: string; buildNumber: string; isAppleSilicon: boolean }
 export type MainWindowRecordingStartBehaviour = "close" | "minimise"
+export type ManualZoomChanged = { enabled: boolean; x: number; y: number; amount: number }
 export type MaskKeyframes = { position?: MaskVectorKeyframe[]; size?: MaskVectorKeyframe[]; intensity?: MaskScalarKeyframe[] }
 export type MaskKind = "sensitive" | "highlight"
 export type MaskScalarKeyframe = { time: number; value: number }

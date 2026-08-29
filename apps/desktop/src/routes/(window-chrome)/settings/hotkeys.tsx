@@ -12,6 +12,7 @@ import {
 	Switch,
 } from "solid-js";
 import { createStore } from "solid-js/store";
+import { useI18n } from "~/i18n";
 import { hotkeysStore } from "~/store";
 
 import {
@@ -28,6 +29,7 @@ const ACTION_TEXT = {
 	restartRecording: "Restart recording",
 	stopRecording: "Stop recording",
 	togglePauseRecording: "Pause/resume recording",
+	toggleManualZoom: "Toggle manual recording zoom",
 	cycleRecordingMode: "Cycle recording mode",
 	openRecordingPicker: "Open recording picker",
 	openRecordingPickerDisplay: "Record display",
@@ -50,6 +52,7 @@ export default function () {
 
 const MODIFIER_KEYS = new Set(["Meta", "Shift", "Control", "Alt"]);
 function Inner(props: { initialStore: HotkeysStore | null }) {
+	const { t } = useI18n();
 	const [hotkeys, setHotkeys] = createStore<{
 		[K in HotkeyAction]?: Hotkey;
 	}>(props.initialStore?.hotkeys ?? {});
@@ -91,6 +94,7 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 			"stopRecording",
 			"restartRecording",
 			"togglePauseRecording",
+			"toggleManualZoom",
 			"cycleRecordingMode",
 			"openRecordingPickerDisplay",
 			"openRecordingPickerWindow",
@@ -101,8 +105,8 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 		<div class="cap-settings-page flex flex-col h-full custom-scroll">
 			<SettingsPageContent>
 				<Section
-					title="Shortcuts"
-					description="Configure system-wide keyboard shortcuts to control Cap."
+					title={t("shortcuts.title")}
+					description={t("shortcuts.description")}
 				>
 					<SectionCard class="flex flex-col gap-3 p-4">
 						<Index each={actions()}>
@@ -120,7 +124,9 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 									<>
 										<div class="flex flex-row justify-between items-center w-full h-8">
 											<p class="text-[13px] text-gray-12">
-												{ACTION_TEXT[item()]}
+												{item() === "toggleManualZoom"
+													? t("shortcuts.manualZoom")
+													: ACTION_TEXT[item()]}
 											</p>
 											<Switch>
 												<Match when={listening()?.action === item()}>

@@ -152,6 +152,14 @@ pub struct WindowPosition {
     pub display_id: Option<DisplayId>,
 }
 
+#[derive(Serialize, Deserialize, Type, Debug, Clone, Copy, PartialEq, Eq)]
+pub enum AppLanguage {
+    #[serde(rename = "en")]
+    English,
+    #[serde(rename = "zh-CN")]
+    SimplifiedChinese,
+}
+
 #[derive(Serialize, Deserialize, Type, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct GeneralSettingsStore {
@@ -171,6 +179,10 @@ pub struct GeneralSettingsStore {
     pub has_completed_startup: bool,
     #[serde(default)]
     pub theme: AppTheme,
+    /// `None` means a first-time user has not made the explicit onboarding
+    /// choice yet. Runtime UI falls back to English until they choose.
+    #[serde(default)]
+    pub ui_language: Option<AppLanguage>,
     #[serde(default)]
     pub commercial_license: Option<CommercialLicense>,
     #[serde(default)]
@@ -326,6 +338,7 @@ impl Default for GeneralSettingsStore {
             disable_auto_open_links: false,
             has_completed_startup: false,
             theme: AppTheme::System,
+            ui_language: None,
             commercial_license: None,
             last_version: None,
             window_transparency: false,

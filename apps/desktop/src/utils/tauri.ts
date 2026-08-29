@@ -73,6 +73,9 @@ async resumeRecording() : Promise<null> {
 async togglePauseRecording() : Promise<null> {
     return await TAURI_INVOKE("toggle_pause_recording");
 },
+async toggleManualZoom() : Promise<null> {
+    return await TAURI_INVOKE("toggle_manual_zoom");
+},
 async setMicRecordingMuted(muted: boolean) : Promise<null> {
     return await TAURI_INVOKE("set_mic_recording_muted", { muted });
 },
@@ -539,6 +542,7 @@ newStudioRecordingAdded: NewStudioRecordingAdded,
 onEscapePress: OnEscapePress,
 recordingDeleted: RecordingDeleted,
 recordingEvent: RecordingEvent,
+manualZoomChanged: ManualZoomChanged,
 recordingOptionsChanged: RecordingOptionsChanged,
 recordingStarted: RecordingStarted,
 recordingStopped: RecordingStopped,
@@ -571,6 +575,7 @@ newStudioRecordingAdded: "new-studio-recording-added",
 onEscapePress: "on-escape-press",
 recordingDeleted: "recording-deleted",
 recordingEvent: "recording-event",
+manualZoomChanged: "manual-zoom-changed",
 recordingOptionsChanged: "recording-options-changed",
 recordingStarted: "recording-started",
 recordingStopped: "recording-stopped",
@@ -607,6 +612,7 @@ export type AnimatedGradientStop = { color: [number, number, number]; position: 
 export type Annotation = { id: string; type: AnnotationType; x: number; y: number; width: number; height: number; strokeColor: string; strokeWidth: number; fillColor: string; opacity: number; rotation: number; text: string | null; maskType?: MaskType | null; maskLevel?: number | null; points?: ([number, number])[] | null }
 export type AnnotationType = "arrow" | "circle" | "rectangle" | "text" | "mask" | "draw"
 export type AppTheme = "system" | "light" | "dark"
+export type AppLanguage = "en" | "zh-CN"
 export type AspectRatio = "wide" | "vertical" | "square" | "classic" | "tall"
 export type Audio = { duration: number; sample_rate: number; channels: number; start_time: number }
 export type AudioConfiguration = { mute: boolean; improve: boolean; micVolumeDb: number; micStereoMode: StereoMode; systemVolumeDb: number }
@@ -1005,7 +1011,7 @@ export type FrameStyle =
 "macbook"
 export type FrameTheme = "dark" | "light"
 export type FramesRendered = { renderedCount: number; totalFrames: number; type: "FramesRendered" }
-export type GeneralSettingsStore = { instanceId?: string; uploadIndividualFiles?: boolean; hideDockIcon?: boolean; autoCreateShareableLink?: boolean; enableNotifications?: boolean; disableAutoOpenLinks?: boolean; hasCompletedStartup?: boolean; theme?: AppTheme; commercialLicense?: CommercialLicense | null; lastVersion?: string | null; windowTransparency?: boolean; postStudioRecordingBehaviour?: PostStudioRecordingBehaviour; mainWindowRecordingStartBehaviour?: MainWindowRecordingStartBehaviour; custom_cursor_capture2?: boolean; serverUrl?: string; recordingCountdown?: number | null; enableNativeCameraPreview: boolean; autoZoomOnClicks?: boolean; defaultZoomAmount?: number | null; 
+export type GeneralSettingsStore = { instanceId?: string; uploadIndividualFiles?: boolean; hideDockIcon?: boolean; autoCreateShareableLink?: boolean; enableNotifications?: boolean; disableAutoOpenLinks?: boolean; hasCompletedStartup?: boolean; theme?: AppTheme; uiLanguage?: AppLanguage | null; commercialLicense?: CommercialLicense | null; lastVersion?: string | null; windowTransparency?: boolean; postStudioRecordingBehaviour?: PostStudioRecordingBehaviour; mainWindowRecordingStartBehaviour?: MainWindowRecordingStartBehaviour; custom_cursor_capture2?: boolean; serverUrl?: string; recordingCountdown?: number | null; enableNativeCameraPreview: boolean; autoZoomOnClicks?: boolean; defaultZoomAmount?: number | null;
 /**
  * `None` until [`init`] seeds it from whether this machine has a notched
  * display. From then on it is the user's preference and nothing re-reads
@@ -1044,7 +1050,7 @@ export type GlideDirection = "none" | "left" | "right" | "up" | "down"
 export type HapticPattern = "alignment" | "levelChange" | "generic"
 export type HapticPerformanceTime = "default" | "now" | "drawCompleted"
 export type Hotkey = { code: string; meta: boolean; ctrl: boolean; alt: boolean; shift: boolean }
-export type HotkeyAction = "startStudioRecording" | "startInstantRecording" | "stopRecording" | "restartRecording" | "togglePauseRecording" | "cycleRecordingMode" | "openRecordingPicker" | "openRecordingPickerDisplay" | "openRecordingPickerWindow" | "openRecordingPickerArea" | "screenshotDisplay" | "screenshotWindow" | "screenshotArea" | "other"
+export type HotkeyAction = "startStudioRecording" | "startInstantRecording" | "stopRecording" | "restartRecording" | "togglePauseRecording" | "toggleManualZoom" | "cycleRecordingMode" | "openRecordingPicker" | "openRecordingPickerDisplay" | "openRecordingPickerWindow" | "openRecordingPickerArea" | "screenshotDisplay" | "screenshotWindow" | "screenshotArea" | "other"
 export type HotkeysConfiguration = { show: boolean }
 export type HotkeysStore = { hotkeys: { [key in HotkeyAction]: Hotkey } }
 export type ImportStage = "Probing" | "Converting" | "Finalizing" | "Complete" | "Failed"
@@ -1078,6 +1084,7 @@ export type MicrophoneInfo = { name: string; sampleRate: number; channels: numbe
 export type ModelDownloadState = "downloading" | "completed" | "failed"
 export type ModelDownloadStatus = { state: ModelDownloadState; progress: number; message: string }
 export type ModelIDType = string
+export type ManualZoomChanged = { enabled: boolean; x: number; y: number; amount: number }
 export type MovExportSettings = { fps: number; resolution_base: XY<number>; cursor_only?: boolean }
 export type Mp4ExportSettings = { fps: number; resolution_base: XY<number>; compression: ExportCompression; custom_bpp: number | null; force_ffmpeg_decoder?: boolean; optimize_filesize?: boolean }
 export type MultipleSegment = { display: VideoMeta; camera?: VideoMeta | null; mic?: AudioMeta | null; system_audio?: AudioMeta | null; cursor?: string | null; keyboard?: string | null; display_notch?: DisplayNotch | null }

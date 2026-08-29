@@ -97,6 +97,7 @@ pub struct Actor {
     state: Option<ActorState>,
     segment_factory: SegmentPipelineFactory,
     segments: Vec<RecordingSegment>,
+    manual_zoom: cap_project::ManualZoomSession,
     completion_tx: watch::Sender<Option<Result<(), PipelineDoneError>>>,
     // Resolved once at recording start: the display can be disconnected, or its
     // mode changed, by the time the recording stops.
@@ -104,6 +105,22 @@ pub struct Actor {
 }
 
 impl Actor {
+    fn recording_time(&self) -> f64 {
+        let completed = self
+            .segments
+            .iter()
+            .map(|segment| (segment.end - segment.start).max(0.0))
+            .sum::<f64>();
+        let active = match &self.state {
+            Some(ActorState::Recording {
+                segment_start_instant,
+                ..
+            }) => segment_start_instant.elapsed().as_secs_f64(),
+            _ => 0.0,
+        };
+        completed + active
+    }
+
     async fn stop_pipeline(
         &mut self,
         pipeline: Pipeline,
@@ -170,6 +187,8 @@ impl Message<Stop> for Actor {
     type Reply = anyhow::Result<CompletedRecording>;
 
     async fn handle(&mut self, _: Stop, ctx: &mut Context<Self, Self::Reply>) -> Self::Reply {
+        let recording_end = self.recording_time();
+        self.manual_zoom.finish(recording_end);
         let cursors = match self.state.take() {
             Some(ActorState::Recording {
                 pipeline,
@@ -197,6 +216,7 @@ impl Message<Stop> for Actor {
             cursors,
             self.segment_factory.fragmented,
             self.display_notch,
+            std::mem::take(&mut self.manual_zoom).into_segments(recording_end),
         )
         .await?;
 
@@ -212,6 +232,8 @@ impl Message<Pause> for Actor {
     type Reply = anyhow::Result<()>;
 
     async fn handle(&mut self, _: Pause, _: &mut Context<Self, Self::Reply>) -> Self::Reply {
+        let recording_time = self.recording_time();
+        self.manual_zoom.pause(recording_time);
         self.state = match self.state.take() {
             Some(ActorState::Recording {
                 pipeline,
@@ -266,7 +288,48 @@ impl Message<Resume> for Actor {
             state => state,
         };
 
+        let recording_time = self.recording_time();
+        self.manual_zoom.resume(recording_time);
+
         Ok(())
+    }
+}
+
+struct ToggleManualZoom {
+    x: f64,
+    y: f64,
+    amount: f64,
+}
+
+struct IsManualZoomEnabled;
+
+impl Message<IsManualZoomEnabled> for Actor {
+    type Reply = bool;
+
+    async fn handle(
+        &mut self,
+        _: IsManualZoomEnabled,
+        _: &mut Context<Self, Self::Reply>,
+    ) -> Self::Reply {
+        self.manual_zoom.is_enabled()
+    }
+}
+
+impl Message<ToggleManualZoom> for Actor {
+    type Reply = anyhow::Result<bool>;
+
+    async fn handle(
+        &mut self,
+        message: ToggleManualZoom,
+        _: &mut Context<Self, Self::Reply>,
+    ) -> Self::Reply {
+        if !matches!(self.state, Some(ActorState::Recording { .. })) {
+            bail!("Manual zoom is unavailable while recording is paused");
+        }
+        let recording_time = self.recording_time();
+        Ok(self
+            .manual_zoom
+            .toggle(recording_time, message.x, message.y, message.amount))
     }
 }
 
@@ -692,6 +755,17 @@ impl ActorHandle {
     pub async fn is_paused(&self) -> anyhow::Result<bool> {
         Ok(self.actor_ref.ask(IsPaused).await?)
     }
+
+    pub async fn toggle_manual_zoom(&self, x: f64, y: f64, amount: f64) -> anyhow::Result<bool> {
+        Ok(self
+            .actor_ref
+            .ask(ToggleManualZoom { x, y, amount })
+            .await?)
+    }
+
+    pub async fn is_manual_zoom_enabled(&self) -> anyhow::Result<bool> {
+        Ok(self.actor_ref.ask(IsManualZoomEnabled).await?)
+    }
 }
 
 impl Actor {
@@ -890,6 +964,7 @@ async fn spawn_studio_recording_actor(
         }),
         segment_factory: segment_pipeline_factory,
         segments: Vec::new(),
+        manual_zoom: Default::default(),
         completion_tx: completion_tx.clone(),
         display_notch: crate::capture_pipeline::resolve_display_notch(&base_inputs.capture_target),
     });
@@ -905,6 +980,7 @@ pub struct CompletedRecording {
     pub project_path: PathBuf,
     pub meta: StudioRecordingMeta,
     pub cursor_data: cap_project::CursorImages,
+    pub manual_zoom_segments: Vec<cap_project::ZoomSegment>,
 }
 
 fn snap_nearby_start_time(
@@ -926,6 +1002,7 @@ async fn stop_recording(
     cursors: Cursors,
     fragmented: bool,
     display_notch: Option<cap_project::DisplayNotch>,
+    manual_zoom_segments: Vec<cap_project::ZoomSegment>,
 ) -> Result<CompletedRecording, RecordingError> {
     use cap_project::*;
     use cap_timestamp::{AUDIO_OUTPUT_FRAMES, DEFAULT_SAMPLE_RATE};
@@ -1222,6 +1299,7 @@ async fn stop_recording(
         project_path: recording_dir,
         meta,
         cursor_data: Default::default(),
+        manual_zoom_segments,
         // display_source: actor.options.capture_target,
         // segments: actor.segments,
     })
@@ -2035,6 +2113,7 @@ mod tests {
             Default::default(),
             false,
             None,
+            Vec::new(),
         )
         .await
         .expect("recording should stop");
@@ -2233,6 +2312,7 @@ mod tests {
             Default::default(),
             false,
             None,
+            Vec::new(),
         )
         .await
         .expect("diagnostics sidecar failure should not abort stop_recording");
