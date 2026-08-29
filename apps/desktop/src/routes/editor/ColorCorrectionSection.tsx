@@ -3,6 +3,7 @@ import { cx } from "cva";
 import { createSignal, For, Show } from "solid-js";
 import { produce } from "solid-js/store";
 import { Toggle } from "~/components/Toggle";
+import { useI18n } from "~/i18n";
 import IconLucideGrip from "~icons/lucide/grip";
 import IconLucideMousePointer2 from "~icons/lucide/mouse-pointer-2";
 import IconLucideSlidersHorizontal from "~icons/lucide/sliders-horizontal";
@@ -83,6 +84,7 @@ export function ColorCorrectionSection(props: {
 	target: ColorCorrectionTarget;
 	scrollRef?: HTMLDivElement;
 }) {
+	const { text } = useI18n();
 	const { project, setProject } = useEditorContext();
 	const [adjustOpen, setAdjustOpen] = createSignal(false);
 
@@ -177,7 +179,7 @@ export function ColorCorrectionSection(props: {
 			<div class="w-full">
 				<KCollapsible open={adjustOpen()} onOpenChange={handleAdjustToggle}>
 					<KCollapsible.Trigger class="flex gap-1 items-center w-full text-sm font-medium text-left group text-gray-12 hover:text-gray-10 transition duration-200 outline-hidden">
-						Fine-tune colors
+						{text("Fine-tune colors")}
 						<IconCapChevronDown class="transition-transform duration-200 size-5 group-data-expanded:rotate-180" />
 					</KCollapsible.Trigger>
 					<KCollapsible.Content class="overflow-hidden opacity-0 transition-opacity animate-collapsible-up data-expanded:animate-collapsible-down data-expanded:opacity-100">

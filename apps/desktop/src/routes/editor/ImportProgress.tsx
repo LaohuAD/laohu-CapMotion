@@ -1,6 +1,7 @@
 import { Button } from "@cap/ui-solid";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { createSignal, Match, onCleanup, onMount, Switch } from "solid-js";
+import { useI18n } from "~/i18n";
 import {
 	events,
 	type VideoImportProgress as VideoImportProgressEvent,
@@ -25,6 +26,7 @@ export type ImportProgressProps = {
 };
 
 export function ImportProgress(props: ImportProgressProps) {
+	const { text } = useI18n();
 	const [progress, setProgress] = createSignal<VideoImportProgressEvent | null>(
 		null,
 	);
@@ -78,12 +80,12 @@ export function ImportProgress(props: ImportProgressProps) {
 							</div>
 
 							<h2 class="text-lg font-medium text-gray-12 mb-2">
-								Import Failed
+								{text("Import Failed")}
 							</h2>
 							<p class="text-sm text-gray-11 mb-6">{errorMessage()}</p>
 
 							<Button variant="gray" onClick={handleClose}>
-								Close
+								{text("Close")}
 							</Button>
 						</div>
 					)}
@@ -126,10 +128,10 @@ export function ImportProgress(props: ImportProgressProps) {
 						</div>
 
 						<h2 class="text-lg font-medium text-gray-12 mb-2">
-							Importing Video
+							{text("Importing Video")}
 						</h2>
 						<p class="text-sm text-gray-11 animate-pulse h-5 animate-pulse-slow">
-							{funMessages[messageIndex()]}
+							{text(funMessages[messageIndex()] ?? "")}
 						</p>
 					</div>
 				</Match>

@@ -12,7 +12,7 @@ import {
 	Switch,
 } from "solid-js";
 import { createStore } from "solid-js/store";
-import { useI18n } from "~/i18n";
+import { type TranslationKey, useI18n } from "~/i18n";
 import { hotkeysStore } from "~/store";
 
 import {
@@ -24,21 +24,19 @@ import {
 import { Section, SectionCard, SettingsPageContent } from "./Setting";
 
 const ACTION_TEXT = {
-	startStudioRecording: "Start studio recording",
-	startInstantRecording: "Start instant recording",
-	restartRecording: "Restart recording",
-	stopRecording: "Stop recording",
-	togglePauseRecording: "Pause/resume recording",
-	toggleManualZoom: "Toggle manual recording zoom",
-	cycleRecordingMode: "Cycle recording mode",
-	openRecordingPicker: "Open recording picker",
-	openRecordingPickerDisplay: "Record display",
-	openRecordingPickerWindow: "Record window",
-	openRecordingPickerArea: "Record area",
-	screenshotDisplay: "Screenshot current display",
-	screenshotWindow: "Screenshot current window",
-	screenshotArea: "Screenshot area picker",
-} satisfies { [K in HotkeyAction]?: string };
+	restartRecording: "shortcuts.action.restartRecording",
+	stopRecording: "shortcuts.action.stopRecording",
+	togglePauseRecording: "shortcuts.action.togglePauseRecording",
+	toggleManualZoom: "shortcuts.manualZoom",
+	cycleRecordingMode: "shortcuts.action.cycleRecordingMode",
+	openRecordingPicker: "shortcuts.action.openRecordingPicker",
+	openRecordingPickerDisplay: "shortcuts.action.openRecordingPickerDisplay",
+	openRecordingPickerWindow: "shortcuts.action.openRecordingPickerWindow",
+	openRecordingPickerArea: "shortcuts.action.openRecordingPickerArea",
+	screenshotDisplay: "shortcuts.action.screenshotDisplay",
+	screenshotWindow: "shortcuts.action.screenshotWindow",
+	screenshotArea: "shortcuts.action.screenshotArea",
+} satisfies { [K in HotkeyAction]?: TranslationKey };
 
 export default function () {
 	const [store] = createResource(() => hotkeysStore.get());
@@ -124,9 +122,7 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 									<>
 										<div class="flex flex-row justify-between items-center w-full h-8">
 											<p class="text-[13px] text-gray-12">
-												{item() === "toggleManualZoom"
-													? t("shortcuts.manualZoom")
-													: ACTION_TEXT[item()]}
+												{t(ACTION_TEXT[item()])}
 											</p>
 											<Switch>
 												<Match when={listening()?.action === item()}>
@@ -135,7 +131,7 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 															when={hotkeys[item()]}
 															fallback={
 																<p class="text-[13px] text-gray-11">
-																	Set hotkeys...
+																	{t("shortcuts.setPrompt")}
 																</p>
 															}
 														>
@@ -198,7 +194,7 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 																	class="flex items-center text-[11px] uppercase transition-colors hover:bg-gray-6 hover:border-gray-7
                         py-3 px-2.5 h-5 bg-gray-4 border border-gray-5 rounded-lg text-gray-11 hover:text-gray-12"
 																>
-																	None
+																	{t("shortcuts.none")}
 																</p>
 															}
 														>

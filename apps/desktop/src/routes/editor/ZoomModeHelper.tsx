@@ -1,12 +1,14 @@
 import { Collapsible as KCollapsible } from "@kobalte/core/collapsible";
+import { useI18n } from "~/i18n";
 import IconLucideInfo from "~icons/lucide/info";
 
 export function ZoomModeHelper(props: { mode: "auto" | "manual" }) {
+	const { text } = useI18n();
 	return (
 		<KCollapsible>
 			<KCollapsible.Trigger class="flex flex-row gap-1.5 items-center w-full text-xs font-medium transition-colors duration-200 group text-gray-11 hover:text-gray-12 outline-hidden">
 				<IconLucideInfo class="size-3.5" />
-				How does it work?
+				{text("How does it work?")}
 				<IconCapChevronDown class="ml-auto transition-transform duration-200 size-3.5 group-data-expanded:rotate-180" />
 			</KCollapsible.Trigger>
 			<KCollapsible.Content class="overflow-hidden opacity-0 transition-opacity animate-collapsible-up data-expanded:animate-collapsible-down data-expanded:opacity-100">
@@ -52,8 +54,8 @@ export function ZoomModeHelper(props: { mode: "auto" | "manual" }) {
 					</div>
 					<p class="text-xs text-gray-11">
 						{props.mode === "auto"
-							? "Automatic zoom follows your cursor around the screen."
-							: "Manual zoom stays on a fixed spot you pick below."}
+							? text("Automatic zoom follows your cursor around the screen.")
+							: text("Manual zoom stays on a fixed spot you pick below.")}
 					</p>
 				</div>
 			</KCollapsible.Content>

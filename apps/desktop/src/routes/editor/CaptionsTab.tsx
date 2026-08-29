@@ -17,6 +17,7 @@ import { produce } from "solid-js/store";
 import toast from "solid-toast";
 import { Toggle } from "~/components/Toggle";
 import Tooltip from "~/components/Tooltip";
+import { useI18n } from "~/i18n";
 import {
 	CAPTION_STYLE_PRESETS,
 	type CaptionAnimation,
@@ -242,6 +243,7 @@ function CaptionPresetPreview(props: { preset: CaptionStylePreset }) {
 export function CaptionsTab(props: {
 	brandColorSwatches: OrganizationBrandColorSwatch[];
 }) {
+	const { text, language } = useI18n();
 	const { project, setProject, editorInstance, editorState, setEditorState } =
 		useEditorContext();
 
@@ -672,14 +674,14 @@ export function CaptionsTab(props: {
 
 			await syncModelDownloadStatus(modelToDownload);
 			addDownloadedModel(modelToDownload);
-			toast.success("Caption model downloaded");
+			toast.success(text("Caption model downloaded"));
 		} catch (error) {
 			console.error("Error downloading model:", error);
 			const active = await syncModelDownloadStatus(modelToDownload).catch(
 				() => false,
 			);
 			if (!active) {
-				toast.error("Failed to download caption model");
+				toast.error(text("Failed to download caption model"));
 				setDownloadProgress(0);
 				setIsDownloading(false);
 				setDownloadingModel(null);
@@ -702,10 +704,10 @@ export function CaptionsTab(props: {
 			}
 
 			removeDownloadedModel(modelToDelete);
-			toast.success("Caption model deleted");
+			toast.success(text("Caption model deleted"));
 		} catch (error) {
 			console.error("Error deleting model:", error);
-			toast.error("Failed to delete caption model");
+			toast.error(text("Failed to delete caption model"));
 			await refreshDownloadedModels();
 		} finally {
 			setDeletingModel(null);
@@ -714,7 +716,7 @@ export function CaptionsTab(props: {
 
 	const generateCaptions = async () => {
 		if (!editorInstance) {
-			toast.error("Editor instance not found");
+			toast.error(text("Editor instance not found"));
 			return;
 		}
 
@@ -741,7 +743,7 @@ export function CaptionsTab(props: {
 				setEditorState("timeline", "tracks", "caption", true);
 				setEditorState("captions", "isStale", false);
 
-				toast.success("Captions generated successfully!");
+				toast.success(text("Captions generated successfully!"));
 			} else {
 				toast.error(
 					"No captions were generated. The audio might be too quiet or unclear.",
@@ -825,7 +827,7 @@ export function CaptionsTab(props: {
 									<div class="min-w-0 flex-1 text-left">
 										<div class="flex items-center gap-1.5">
 											<span class="truncate font-medium">
-												{selectedModelOption()?.label || "Select a model"}
+												{selectedModelOption()?.label || text("Select a model")}
 											</span>
 											<Show when={selectedModelOption()}>
 												<Tooltip
@@ -873,13 +875,16 @@ export function CaptionsTab(props: {
 
 						<Show when={!supportsParakeetTranscription()}>
 							<p class="text-xs text-gray-10">
-								Parakeet caption models are unavailable on Intel Macs. Whisper
-								models remain available.
+								{text(
+									"Parakeet caption models are unavailable on Intel Macs. Whisper models remain available.",
+								)}
 							</p>
 						</Show>
 
 						<p class="text-xs leading-relaxed text-gray-10">
-							One time download to your system. All captions are stored locally.
+							{text(
+								"One time download to your system. All captions are stored locally.",
+							)}
 						</p>
 
 						<Subfield name="Language">
@@ -911,7 +916,9 @@ export function CaptionsTab(props: {
 												(l) => l.code === state.selectedOption(),
 											);
 											return (
-												<span>{language?.label || "Select a language"}</span>
+												<span>
+													{language?.label || text("Select a language")}
+												</span>
 											);
 										}}
 									</KSelect.Value>
@@ -948,19 +955,19 @@ export function CaptionsTab(props: {
 												fallback={
 													<>
 														<IconLucideDownload class="size-4" />
-														Download{" "}
+														{text("Download")}{" "}
 														{
 															availableModelOptions().find(
 																(m) => m.name === selectedModel(),
 															)?.label
 														}{" "}
-														Model
+														{text("Model")}
 													</>
 												}
 											>
-												{`Downloading ${
-													downloadingModelOption()?.label ?? "model"
-												}... ${downloadPercent()}%`}
+												{language() === "zh-CN"
+													? `正在下载 ${downloadingModelOption()?.label ?? "模型"}… ${downloadPercent()}%`
+													: `Downloading ${downloadingModelOption()?.label ?? "model"}... ${downloadPercent()}%`}
 											</Show>
 										</Button>
 										<Show when={isDownloading()}>
@@ -981,7 +988,9 @@ export function CaptionsTab(props: {
 												</div>
 												<p class="text-xs leading-relaxed text-gray-10">
 													{downloadMessage() ||
-														"Keep Cap open while the model downloads. Editor reloads will reconnect automatically."}
+														text(
+															"Keep Cap open while the model downloads. Editor reloads will reconnect automatically.",
+														)}
 												</p>
 											</div>
 										</Show>
@@ -996,18 +1005,19 @@ export function CaptionsTab(props: {
 											class="w-full"
 										>
 											{isGenerating()
-												? "Generating..."
+												? text("Generating...")
 												: hasCaptions()
-													? "Regenerate Captions"
-													: "Generate Captions"}
+													? text("Regenerate Captions")
+													: text("Generate Captions")}
 										</Button>
 									</Show>
 									<div class="flex items-center justify-between gap-2 text-xs text-gray-10">
 										<span class="flex min-w-0 items-center gap-1.5">
 											<IconCapCircleCheck class="size-3.5 shrink-0 text-gray-9" />
 											<span class="truncate">
-												{selectedModelOption()?.label ?? "Caption"} model
-												downloaded
+												{language() === "zh-CN"
+													? `${selectedModelOption()?.label ?? "字幕"} 模型已下载`
+													: `${selectedModelOption()?.label ?? "Caption"} model downloaded`}
 											</span>
 										</span>
 										<Button
@@ -1023,8 +1033,8 @@ export function CaptionsTab(props: {
 										>
 											<IconLucideTrash2 class="size-3.5" />
 											{deletingModel() === selectedModel()
-												? "Deleting..."
-												: "Delete"}
+												? text("Deleting...")
+												: text("Delete")}
 										</Button>
 									</div>
 								</div>
@@ -1064,10 +1074,10 @@ export function CaptionsTab(props: {
 								<Show when={selectedPresetId() === "custom"}>
 									<div class="flex flex-col gap-1.5 rounded-lg border border-blue-9 p-1.5 text-left ring-1 ring-blue-9">
 										<div class="flex h-12 items-center justify-center rounded-md bg-gray-2 text-xs text-gray-10">
-											Custom
+											{text("Custom")}
 										</div>
 										<span class="px-0.5 text-xs font-medium text-gray-12">
-											Custom
+											{text("Custom")}
 										</span>
 									</div>
 								</Show>
@@ -1077,7 +1087,9 @@ export function CaptionsTab(props: {
 						<Field name="Font Settings" icon={<IconCapMessageBubble />}>
 							<div class="space-y-3">
 								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">Font Family</span>
+									<span class="text-gray-11 text-sm">
+										{text("Font Family")}
+									</span>
 									<KSelect<string>
 										options={FONT_OPTIONS.map((f) => f.value)}
 										value={getSetting("font")}
@@ -1128,7 +1140,7 @@ export function CaptionsTab(props: {
 								</div>
 
 								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">Size</span>
+									<span class="text-gray-11 text-sm">{text("Size")}</span>
 									<Slider
 										value={[getSetting("size")]}
 										onChange={(v) => updateCaptionSetting("size", v[0])}
@@ -1140,7 +1152,7 @@ export function CaptionsTab(props: {
 								</div>
 
 								<div class="flex items-center justify-between">
-									<span class="text-gray-11 text-sm">Uppercase</span>
+									<span class="text-gray-11 text-sm">{text("Uppercase")}</span>
 									<Toggle
 										checked={getSetting("uppercase")}
 										onChange={(checked) =>
@@ -1153,7 +1165,7 @@ export function CaptionsTab(props: {
 								<div class="flex flex-col gap-2">
 									<div class="flex items-center justify-between">
 										<span class="text-gray-11 text-sm">
-											Active Word Highlight
+											{text("Active Word Highlight")}
 										</span>
 										<Toggle
 											checked={getSetting("activeWordHighlight")}
@@ -1164,16 +1176,17 @@ export function CaptionsTab(props: {
 										/>
 									</div>
 									<p class="text-xs text-gray-10">
-										This is the first version of captions in Cap. Active word
-										highlighting may be inaccurate in some situations. We're
-										working on a fix for this and it will be released in
-										upcoming versions.
+										{text(
+											"This is the first version of captions in Cap. Active word highlighting may be inaccurate in some situations. We're working on a fix for this and it will be released in upcoming versions.",
+										)}
 									</p>
 								</div>
 
 								<Show when={getSetting("activeWordHighlight")}>
 									<div class="flex flex-col gap-2">
-										<span class="text-gray-11 text-sm">Highlight Style</span>
+										<span class="text-gray-11 text-sm">
+											{text("Highlight Style")}
+										</span>
 										<KSelect<string>
 											options={CAPTION_HIGHLIGHT_STYLE_OPTIONS.map(
 												(o) => o.value,
@@ -1229,7 +1242,7 @@ export function CaptionsTab(props: {
 								</Show>
 
 								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">Text Color</span>
+									<span class="text-gray-11 text-sm">{text("Text Color")}</span>
 									<HexColorInput
 										value={getSetting("color")}
 										brandColorSwatches={props.brandColorSwatches}
@@ -1242,7 +1255,9 @@ export function CaptionsTab(props: {
 						<Field name="Background Settings" icon={<IconCapMessageBubble />}>
 							<div class="space-y-3">
 								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">Background Color</span>
+									<span class="text-gray-11 text-sm">
+										{text("Background Color")}
+									</span>
 									<HexColorInput
 										value={getSetting("backgroundColor")}
 										brandColorSwatches={props.brandColorSwatches}
@@ -1253,7 +1268,9 @@ export function CaptionsTab(props: {
 								</div>
 
 								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">Background Opacity</span>
+									<span class="text-gray-11 text-sm">
+										{text("Background Opacity")}
+									</span>
 									<Slider
 										value={[getSetting("backgroundOpacity")]}
 										onChange={(v) =>
@@ -1324,7 +1341,9 @@ export function CaptionsTab(props: {
 						<Field name="Animation" icon={<IconCapMessageBubble />}>
 							<div class="space-y-3">
 								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">Animation Style</span>
+									<span class="text-gray-11 text-sm">
+										{text("Animation Style")}
+									</span>
 									<KSelect<string>
 										options={CAPTION_ANIMATION_OPTIONS.map((o) => o.value)}
 										value={getSetting("animation")}
@@ -1376,7 +1395,9 @@ export function CaptionsTab(props: {
 									</KSelect>
 								</div>
 								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">Highlight Color</span>
+									<span class="text-gray-11 text-sm">
+										{text("Highlight Color")}
+									</span>
 									<HexColorInput
 										value={getSetting("highlightColor")}
 										brandColorSwatches={props.brandColorSwatches}
@@ -1386,7 +1407,9 @@ export function CaptionsTab(props: {
 									/>
 								</div>
 								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">Fade Duration</span>
+									<span class="text-gray-11 text-sm">
+										{text("Fade Duration")}
+									</span>
 									<Slider
 										value={[getSetting("fadeDuration") * 100]}
 										onChange={(v) =>

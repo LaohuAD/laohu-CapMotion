@@ -2,6 +2,7 @@ import { cx } from "cva";
 import { createMemo, Show } from "solid-js";
 import { produce } from "solid-js/store";
 import toast from "solid-toast";
+import { useI18n } from "~/i18n";
 import {
 	applyCaptionResultToProject,
 	getSelectedTranscriptionSettings,
@@ -10,6 +11,7 @@ import {
 import { useEditorContext } from "./context";
 
 export function CaptionsRegenerateBadge(props: { class?: string }) {
+	const { text } = useI18n();
 	const { project, setProject, editorInstance, editorState, setEditorState } =
 		useEditorContext();
 
@@ -32,7 +34,9 @@ export function CaptionsRegenerateBadge(props: { class?: string }) {
 			);
 			if (result.segments.length < 1) {
 				toast.error(
-					"No captions were generated. The audio might be too quiet or unclear.",
+					text(
+						"No captions were generated. The audio might be too quiet or unclear.",
+					),
 				);
 				return;
 			}
@@ -49,10 +53,10 @@ export function CaptionsRegenerateBadge(props: { class?: string }) {
 			);
 
 			setEditorState("captions", "isStale", false);
-			toast.success("Captions regenerated!");
+			toast.success(text("Captions regenerated!"));
 		} catch (error) {
 			console.error("Error regenerating captions:", error);
-			toast.error("Failed to regenerate captions");
+			toast.error(text("Failed to regenerate captions"));
 		} finally {
 			setEditorState("captions", "isGenerating", false);
 		}
@@ -100,8 +104,8 @@ export function CaptionsRegenerateBadge(props: { class?: string }) {
 						<IconCapCaptions class="size-3.5" />
 					</Show>
 					{editorState.captions.isGenerating
-						? "Regenerating..."
-						: "Regenerate captions"}
+						? text("Regenerating...")
+						: text("Regenerate captions")}
 				</button>
 				<Show when={!editorState.captions.isGenerating}>
 					<div class="w-px h-4 bg-gray-6" />

@@ -11,6 +11,7 @@ import {
 	Show,
 } from "solid-js";
 import toast from "solid-toast";
+import { useI18n } from "~/i18n";
 
 import { commands, type ImportedAudioTrack } from "~/utils/tauri";
 import { AUDIO_IMPORT_EXTENSIONS } from "./audio";
@@ -79,6 +80,7 @@ export function AudioLibraryPanel(props: {
 	mode: AudioPickerMode;
 	onClose: () => void;
 }) {
+	const { text } = useI18n();
 	const { projectActions } = useEditorContext();
 	const [library] = useAudioLibrary();
 	const [busyId, setBusyId] = createSignal<string | null>(null);
@@ -158,7 +160,7 @@ export function AudioLibraryPanel(props: {
 			commit(await commands.addAudioLibraryTrack(id));
 		} catch (error) {
 			console.error("Failed to add audio track", error);
-			toast.error("Failed to add audio track");
+			toast.error(text("Failed to add audio track"));
 		} finally {
 			setBusyId(null);
 		}
@@ -176,7 +178,7 @@ export function AudioLibraryPanel(props: {
 			commit(await commands.importAudioTrackFile(selected));
 		} catch (error) {
 			console.error("Failed to import audio file", error);
-			toast.error("Failed to import audio file");
+			toast.error(text("Failed to import audio file"));
 		} finally {
 			setUploading(false);
 		}
@@ -192,14 +194,16 @@ export function AudioLibraryPanel(props: {
 					Done
 				</EditorButton>
 				<span class="text-sm text-gray-10">
-					{isReplace() ? "Change audio" : "Add audio"}
+					{text(isReplace() ? "Change audio" : "Add audio")}
 				</span>
 			</div>
 
 			<p class="text-xs text-gray-10">
-				{isReplace()
-					? "Pick a different track for this segment"
-					: "Add audio, music or other sounds to your video"}
+				{text(
+					isReplace()
+						? "Pick a different track for this segment"
+						: "Add audio, music or other sounds to your video",
+				)}
 			</p>
 
 			<Show when={categories().length > 0}>
@@ -221,7 +225,7 @@ export function AudioLibraryPanel(props: {
 						)}
 					</For>
 					<span class="text-[11px] text-gray-9">
-						More categories coming soon
+						{text("More categories coming soon")}
 					</span>
 				</div>
 			</Show>
@@ -262,9 +266,9 @@ export function AudioLibraryPanel(props: {
 										<button
 											type="button"
 											class="absolute inset-0 w-full h-full"
-											aria-label={
-												isPreviewing() ? "Pause preview" : "Play preview"
-											}
+											aria-label={text(
+												isPreviewing() ? "Pause preview" : "Play preview",
+											)}
 											onClick={() => togglePreview(track.id)}
 										>
 											<Show when={!isPreviewing()}>
@@ -301,7 +305,9 @@ export function AudioLibraryPanel(props: {
 
 										<button
 											type="button"
-											aria-label={isReplace() ? "Use track" : "Add to timeline"}
+											aria-label={text(
+												isReplace() ? "Use track" : "Add to timeline",
+											)}
 											class={cx(
 												"flex absolute top-1 right-1 justify-center items-center rounded-full border backdrop-blur-sm transition-all size-5",
 												"opacity-0 group-hover/tile:opacity-100",
@@ -358,7 +364,7 @@ export function AudioLibraryPanel(props: {
 					</Show>
 				</span>
 				<span class="text-[13px] font-medium text-gray-12">
-					{uploading() ? "Importing…" : "Upload your own"}
+					{text(uploading() ? "Importing…" : "Upload your own")}
 				</span>
 				<span class="text-[11px] text-gray-9">
 					MP3, WAV, M4A, OGG, FLAC, AAC

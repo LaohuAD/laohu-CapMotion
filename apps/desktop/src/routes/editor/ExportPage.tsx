@@ -25,6 +25,7 @@ import toast from "solid-toast";
 import { SignInButton } from "~/components/SignInButton";
 import Tooltip from "~/components/Tooltip";
 import CaptionControlsWindows11 from "~/components/titlebar/controls/CaptionControlsWindows11";
+import { useI18n } from "~/i18n";
 import { authStore } from "~/store";
 import { trackEvent } from "~/utils/analytics";
 import { createSignInMutation } from "~/utils/auth";
@@ -160,6 +161,7 @@ function buildExportSettings(
 }
 
 export function ExportPage() {
+	const { text } = useI18n();
 	const {
 		setDialog,
 		editorInstance,
@@ -522,8 +524,8 @@ export function ExportPage() {
 
 	const handleCancel = async () => {
 		if (
-			await ask("Are you sure you want to cancel the export?", {
-				title: "Cancel Export",
+			await ask(text("Are you sure you want to cancel the export?"), {
+				title: text("Cancel Export"),
 				kind: "warning",
 			})
 		) {
@@ -750,7 +752,7 @@ export function ExportPage() {
 				class="flex relative flex-row items-center w-full h-14 border-b border-gray-3 shrink-0"
 			>
 				<h1 class="absolute inset-0 flex items-center justify-center text-sm font-medium text-gray-12 pointer-events-none">
-					Export
+					{text("Export")}
 				</h1>
 				<div
 					data-tauri-drag-region
@@ -768,8 +770,14 @@ export function ExportPage() {
 			<div class="flex-1 min-h-0 flex relative">
 				<div class="flex-1 min-h-0 p-5 flex flex-col">
 					<div class="flex items-center gap-1.5 mb-2">
-						<span class="text-sm font-medium text-gray-11">Preview</span>
-						<Tooltip content="This is a rendered frame from your video. Adjust the settings below to see the quality of the final exported video.">
+						<span class="text-sm font-medium text-gray-11">
+							{text("Preview")}
+						</span>
+						<Tooltip
+							content={text(
+								"This is a rendered frame from your video. Adjust the settings below to see the quality of the final exported video.",
+							)}
+						>
 							<IconLucideInfo class="size-3.5 text-gray-9 hover:text-gray-11 cursor-help transition-colors" />
 						</Tooltip>
 					</div>
@@ -785,8 +793,8 @@ export function ExportPage() {
 												<IconLucideImage class="size-12 text-gray-8" />
 												<span class="text-sm">
 													{previewUnavailable()
-														? "Preview unavailable"
-														: "Generating preview..."}
+														? text("Preview unavailable")
+														: text("Generating preview...")}
 												</span>
 											</div>
 										}
@@ -802,7 +810,7 @@ export function ExportPage() {
 								<>
 									<img
 										src={url()}
-										alt="Export preview"
+										alt={text("Export preview")}
 										class="relative z-0 w-full h-full object-contain"
 									/>
 									<Show when={previewLoading()}>
@@ -898,7 +906,7 @@ export function ExportPage() {
 						class="flex flex-none gap-2 items-center px-4 w-full h-16 text-sm font-medium border-b transition-colors text-gray-12 border-gray-3 hover:bg-gray-3"
 					>
 						<IconCapMoveLeft class="size-4 text-gray-11" />
-						Back to editor
+						{text("Back to editor")}
 					</button>
 					<div class="flex-1 overflow-y-auto p-4 space-y-5">
 						<Field name="Destination" icon={<IconCapUpload class="size-4" />}>
@@ -912,8 +920,12 @@ export function ExportPage() {
 										const disabledReason = () =>
 											isDisabled()
 												? cursorOnly()
-													? "Cursor-only exports can only be saved to a file or clipboard"
-													: "Transparent exports can only be saved to a file or clipboard"
+													? text(
+															"Cursor-only exports can only be saved to a file or clipboard",
+														)
+													: text(
+															"Transparent exports can only be saved to a file or clipboard",
+														)
 												: undefined;
 										const button = (
 											<button
@@ -947,7 +959,9 @@ export function ExportPage() {
 														isSelected() ? "text-gray-12" : "text-gray-10",
 													)}
 												/>
-												<span class="text-xs font-medium">{option.label}</span>
+												<span class="text-xs font-medium">
+													{text(option.label)}
+												</span>
 											</button>
 										);
 
@@ -989,7 +1003,7 @@ export function ExportPage() {
 											menu.popup();
 										}}
 									>
-										<span class="text-gray-11">Organization</span>
+										<span class="text-gray-11">{text("Organization")}</span>
 										<span class="flex items-center gap-1 text-gray-12">
 											{
 												(
@@ -1016,12 +1030,12 @@ export function ExportPage() {
 
 										const disabledReason = () =>
 											cursorOnly()
-												? "Cursor-only export always uses transparent MOV"
+												? text("Cursor-only export always uses transparent MOV")
 												: option.value === "Mp4" && requiresTransparentExport()
-													? "MP4 doesn't support transparency"
+													? text("MP4 doesn't support transparency")
 													: option.value === "Gif" &&
 															settings.exportTo === "link"
-														? "Links require MP4 format"
+														? text("Links require MP4 format")
 														: undefined;
 
 										const button = (
@@ -1168,17 +1182,19 @@ export function ExportPage() {
 														setSettings("compression", option.value);
 													}}
 												>
-													{option.label === "Social Media"
-														? "Social"
-														: option.label}
+													{text(
+														option.label === "Social Media"
+															? "Social"
+															: option.label,
+													)}
 												</button>
 											);
 										}}
 									</For>
 								</div>
 								<div class="flex justify-between text-[10px] text-gray-10 mt-1.5 px-0.5">
-									<span>Smaller file</span>
-									<span>Larger file</span>
+									<span>{text("Smaller file")}</span>
+									<span>{text("Larger file")}</span>
 								</div>
 
 								<button
@@ -1209,9 +1225,11 @@ export function ExportPage() {
 										/>
 									</div>
 									<div class="text-left">
-										<span class="block">Optimize file size</span>
+										<span class="block">{text("Optimize file size")}</span>
 										<span class="text-[10px] text-gray-9">
-											Re-encodes with software for much smaller files (slower)
+											{text(
+												"Re-encodes with software for much smaller files (slower)",
+											)}
 										</span>
 									</div>
 								</button>
@@ -1232,7 +1250,9 @@ export function ExportPage() {
 								)}
 								onClick={() => setAdvancedMode(!advancedMode())}
 							>
-								<span>{advancedMode() ? "Hide options" : "Show options"}</span>
+								<span>
+									{text(advancedMode() ? "Hide options" : "Show options")}
+								</span>
 								<IconCapChevronDown
 									class={cx(
 										"size-4 transition-transform",
@@ -1264,10 +1284,11 @@ export function ExportPage() {
 											/>
 										</div>
 										<div class="text-left">
-											<span class="block">Export cursor only</span>
+											<span class="block">{text("Export cursor only")}</span>
 											<span class="text-[10px] text-gray-9">
-												Keeps the same cursor motion and clicks on a transparent
-												background
+												{text(
+													"Keeps the same cursor motion and clicks on a transparent background",
+												)}
 											</span>
 										</div>
 									</button>
@@ -1278,11 +1299,12 @@ export function ExportPage() {
 												<IconLucideAlertTriangle class="mt-0.5 size-4 shrink-0 text-amber-11" />
 												<div class="text-left">
 													<p class="text-xs font-medium text-amber-11">
-														Warning
+														{text("Warning")}
 													</p>
 													<p class="text-[10px] text-amber-11">
-														Exports as a transparent MOV. Files are large and
-														best for compositing or editing.
+														{text(
+															"Exports as a transparent MOV. Files are large and best for compositing or editing.",
+														)}
 													</p>
 												</div>
 											</div>
@@ -1292,7 +1314,9 @@ export function ExportPage() {
 									<Show when={settings.format === "Mp4" && !cursorOnly()}>
 										<div class="space-y-2 border-t border-gray-4 pt-3">
 											<div class="flex items-center justify-between text-xs">
-												<span class="text-gray-11">Bits per pixel</span>
+												<span class="text-gray-11">
+													{text("Bits per pixel")}
+												</span>
 												<span class="text-gray-12 font-medium tabular-nums">
 													{compressionBpp().toFixed(2)}
 												</span>
@@ -1319,12 +1343,12 @@ export function ExportPage() {
 												class="w-full h-1.5 bg-gray-4 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:h-3.5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-9 [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:hover:scale-110"
 											/>
 											<div class="flex justify-between text-[10px] text-gray-9">
-												<span>0.02 (tiny)</span>
-												<span>0.50 (huge)</span>
+												<span>0.02 ({text("tiny")})</span>
+												<span>0.50 ({text("huge")})</span>
 											</div>
 											<Show when={isCustomBpp()}>
 												<p class="text-[10px] text-amber-11 mt-1">
-													Using custom bitrate
+													{text("Using custom bitrate")}
 												</p>
 											</Show>
 
@@ -1334,7 +1358,7 @@ export function ExportPage() {
 														type="button"
 														role="switch"
 														aria-checked={forceFfmpegDecoder()}
-														aria-label="Force FFmpeg decoder"
+														aria-label={text("Force FFmpeg decoder")}
 														class="flex items-center gap-2 text-xs text-gray-11 hover:text-gray-12 transition-colors w-full"
 														onClick={() =>
 															setForceFfmpegDecoder(!forceFfmpegDecoder())
@@ -1358,9 +1382,13 @@ export function ExportPage() {
 															/>
 														</div>
 														<div class="text-left">
-															<span class="block">Force FFmpeg decoder</span>
+															<span class="block">
+																{text("Force FFmpeg decoder")}
+															</span>
 															<span class="text-[10px] text-gray-9">
-																Skip hardware decoder (auto-fallback enabled)
+																{text(
+																	"Skip hardware decoder (auto-fallback enabled)",
+																)}
 															</span>
 														</div>
 													</button>
@@ -1378,7 +1406,7 @@ export function ExportPage() {
 							<div class="flex flex-col items-center gap-2.5">
 								<SignInButton class="w-full justify-center">
 									<IconCapLink class="size-4" />
-									<span>Sign in to share</span>
+									<span>{text("Sign in to share")}</span>
 								</SignInButton>
 							</div>
 						) : (
@@ -1396,19 +1424,19 @@ export function ExportPage() {
 									{settings.exportTo === "file" && (
 										<>
 											<IconCapFile class="size-5" />
-											Export to File
+											{text("Export to File")}
 										</>
 									)}
 									{settings.exportTo === "clipboard" && (
 										<>
 											<IconCapCopy class="size-5" />
-											Export to Clipboard
+											{text("Export to Clipboard")}
 										</>
 									)}
 									{settings.exportTo === "link" && (
 										<>
 											<IconCapLink class="size-5" />
-											Export to Link
+											{text("Export to Link")}
 										</>
 									)}
 								</Button>
@@ -1426,7 +1454,7 @@ export function ExportPage() {
 			>
 				<div class="p-4">
 					<div class="flex items-center justify-between mb-4">
-						<h2 class="text-gray-12 font-medium">Quality Preview</h2>
+						<h2 class="text-gray-12 font-medium">{text("Quality Preview")}</h2>
 						<button
 							type="button"
 							onClick={() => setPreviewDialogOpen(false)}
@@ -1440,7 +1468,7 @@ export function ExportPage() {
 							{(url) => (
 								<img
 									src={url()}
-									alt="Export preview full size"
+									alt={text("Export preview full size")}
 									class="w-full h-full object-contain"
 								/>
 							)}
@@ -1454,7 +1482,8 @@ export function ExportPage() {
 							{(est) => {
 								return (
 									<span>
-										Estimated size: {est().estimatedSizeMb.toFixed(1)} MB
+										{text("Estimated size")}: {est().estimatedSizeMb.toFixed(1)}{" "}
+										MB
 									</span>
 								);
 							}}
@@ -1496,8 +1525,8 @@ export function ExportPage() {
 													<ActiveExport
 														heading={
 															renderState.type === "rendering"
-																? `Rendering ${exportMediumLabel()}`
-																: "Preparing export"
+																? `${text("Rendering")} ${text(exportMediumLabel())}`
+																: text("Preparing export")
 														}
 														state={renderState}
 														onCancel={handleCancel}
@@ -1505,12 +1534,12 @@ export function ExportPage() {
 												)}
 											</Match>
 											<Match when={copyState.type === "copying"}>
-												<ActiveExport heading="Copying to clipboard" />
+												<ActiveExport heading={text("Copying to clipboard")} />
 											</Match>
 											<Match when={copyState.type === "done"}>
 												<CompletedExport
-													title="Copied to clipboard"
-													subtitle={`Your ${exportMediumLabel()} is ready to paste`}
+													title={text("Copied to clipboard")}
+													subtitle={`${text("Your")} ${text(exportMediumLabel())} ${text("is ready to paste")}`}
 												/>
 											</Match>
 										</Switch>
@@ -1535,8 +1564,8 @@ export function ExportPage() {
 													<ActiveExport
 														heading={
 															renderState.type === "rendering"
-																? `Rendering ${exportMediumLabel()}`
-																: "Preparing export"
+																? `${text("Rendering")} ${text(exportMediumLabel())}`
+																: text("Preparing export")
 														}
 														state={renderState}
 														onCancel={handleCancel}
@@ -1544,12 +1573,12 @@ export function ExportPage() {
 												)}
 											</Match>
 											<Match when={saveState.type === "copying"}>
-												<ActiveExport heading="Saving to file" />
+												<ActiveExport heading={text("Saving to file")} />
 											</Match>
 											<Match when={saveState.type === "done"}>
 												<CompletedExport
-													title="Export complete"
-													subtitle={`Your ${exportMediumLabel()} is ready`}
+													title={text("Export complete")}
+													subtitle={`${text("Your")} ${text(exportMediumLabel())} ${text("is ready")}`}
 												/>
 											</Match>
 										</Switch>
@@ -1568,7 +1597,7 @@ export function ExportPage() {
 											>
 												{(uploading) => (
 													<ActiveExport
-														heading="Uploading"
+														heading={text("Uploading")}
 														percent={uploading.progress}
 													/>
 												)}
@@ -1585,8 +1614,8 @@ export function ExportPage() {
 													<ActiveExport
 														heading={
 															renderState.type === "rendering"
-																? `Rendering ${exportMediumLabel()}`
-																: "Preparing export"
+																? `${text("Rendering")} ${text(exportMediumLabel())}`
+																: text("Preparing export")
 														}
 														state={renderState}
 														onCancel={handleCancel}
@@ -1595,8 +1624,10 @@ export function ExportPage() {
 											</Match>
 											<Match when={uploadState.type === "done"}>
 												<CompletedExport
-													title="Upload complete"
-													subtitle="Your Cap has been uploaded successfully"
+													title={text("Upload complete")}
+													subtitle={text(
+														"Your Cap has been uploaded successfully",
+													)}
 												/>
 											</Match>
 										</Switch>
@@ -1629,7 +1660,7 @@ export function ExportPage() {
 													) : (
 														<IconLucideCheck class="transition-colors duration-200 text-gray-1 size-4 svgpathanimation group-hover:text-gray-12" />
 													)}
-													<p>Copy Link</p>
+													<p>{text("Copy Link")}</p>
 												</Button>
 												<a href={link()} target="_blank" rel="noreferrer">
 													<Button
@@ -1637,7 +1668,7 @@ export function ExportPage() {
 														class="flex gap-2 justify-center items-center"
 													>
 														<IconCapLink class="transition-colors duration-200 text-gray-1 size-4 group-hover:text-gray-12" />
-														<p>Open Link</p>
+														<p>{text("Open Link")}</p>
 													</Button>
 												</a>
 											</div>
@@ -1657,7 +1688,7 @@ export function ExportPage() {
 												}}
 											>
 												<IconCapFile class="size-4" />
-												Open File
+												{text("Open File")}
 											</Button>
 											<Button
 												variant="dark"
@@ -1681,7 +1712,7 @@ export function ExportPage() {
 												) : (
 													<IconLucideCheck class="size-4 svgpathanimation" />
 												)}
-												Copy to Clipboard
+												{text("Copy to Clipboard")}
 											</Button>
 										</div>
 									</Show>
@@ -1695,16 +1726,17 @@ export function ExportPage() {
 										}}
 									>
 										<IconCapMoveLeft class="size-4" />
-										Back to editor
+										{text("Back to editor")}
 									</Button>
 								</div>
 							</Show>
 
 							<Show when={exportState.type !== "done"}>
 								<p class="max-w-sm text-xs leading-relaxed text-center text-gray-11">
-									<span class="font-semibold text-gray-12">Tip:</span> Use
-									Instant Mode for your next recording to record and upload on
-									the fly, with no exporting required.
+									<span class="font-semibold text-gray-12">{text("Tip:")}</span>{" "}
+									{text(
+										"Use Instant Mode for your next recording to record and upload on the fly, with no exporting required.",
+									)}
 								</p>
 							</Show>
 						</div>
@@ -1763,6 +1795,7 @@ function ActiveExport(props: {
 	percent?: number;
 	onCancel?: () => void;
 }) {
+	const { text } = useI18n();
 	const frames = () =>
 		props.state?.type === "rendering" ? props.state.progress : null;
 
@@ -1784,14 +1817,14 @@ function ActiveExport(props: {
 					{(rendered) => (
 						<p class="text-sm tabular-nums text-gray-11">
 							{rendered().renderedCount.toLocaleString()} /{" "}
-							{rendered().totalFrames.toLocaleString()} frames
+							{rendered().totalFrames.toLocaleString()} {text("frames")}
 						</p>
 					)}
 				</Show>
 			</div>
 			<Show when={props.onCancel}>
 				<Button variant="gray" size="sm" onClick={() => props.onCancel?.()}>
-					Cancel
+					{text("Cancel")}
 				</Button>
 			</Show>
 		</div>

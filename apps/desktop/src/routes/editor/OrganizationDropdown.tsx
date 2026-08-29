@@ -13,6 +13,7 @@ import {
 } from "solid-js";
 import toast from "solid-toast";
 import { SignInButton } from "~/components/SignInButton";
+import { useI18n } from "~/i18n";
 import {
 	createSelectedOrganization,
 	type DesktopOrganization,
@@ -98,6 +99,7 @@ function BrandSettingsDialog(props: {
 	onOpenChange: (open: boolean) => void;
 	onSaved: (organization: DesktopOrganization) => void;
 }) {
+	const { text } = useI18n();
 	const [brandColors, setBrandColors] = createSignal<OrganizationBrandColors>(
 		EMPTY_ORGANIZATION_BRAND_COLORS,
 	);
@@ -151,11 +153,11 @@ function BrandSettingsDialog(props: {
 
 	const selectLogoFile = (file: File) => {
 		if (!isSupportedLogoContentType(file.type)) {
-			toast.error("Unsupported logo file type");
+			toast.error(text("Unsupported logo file type"));
 			return;
 		}
 		if (file.size > ORGANIZATION_LOGO_MAX_BYTES) {
-			toast.error("Logo file must be less than 1MB");
+			toast.error(text("Logo file must be less than 1MB"));
 			return;
 		}
 
@@ -197,14 +199,14 @@ function BrandSettingsDialog(props: {
 				},
 			);
 
-			toast.success("Organization branding updated");
+			toast.success(text("Organization branding updated"));
 			props.onSaved(updatedOrganization);
 			props.onOpenChange(false);
 		} catch (error) {
 			toast.error(
 				error instanceof Error
 					? error.message
-					: "Failed to update organization branding",
+					: text("Failed to update organization branding"),
 			);
 		} finally {
 			setSaving(false);
@@ -223,13 +225,13 @@ function BrandSettingsDialog(props: {
 							disabled={saving()}
 							onClick={() => props.onOpenChange(false)}
 						>
-							Cancel
+							{text("Cancel")}
 						</Button>
 						<Dialog.ConfirmButton
 							disabled={saving() || !props.organization}
 							onClick={() => void save()}
 						>
-							{saving() ? "Saving..." : "Save"}
+							{text(saving() ? "Saving..." : "Save")}
 						</Dialog.ConfirmButton>
 					</>
 				}
@@ -257,12 +259,12 @@ function BrandSettingsDialog(props: {
 							onClick={() => fileInput.click()}
 						>
 							<IconLucideUpload class="size-4" />
-							Upload
+							{text("Upload")}
 						</Button>
 						<Show when={displayedLogoUrl() || logoFile()}>
 							<Button variant="gray" class="gap-1.5" onClick={removeLogo}>
 								<IconLucideTrash2 class="size-4" />
-								Remove
+								{text("Remove")}
 							</Button>
 						</Show>
 					</div>
@@ -302,7 +304,7 @@ function BrandSettingsDialog(props: {
 														)
 													}
 												>
-													Set
+													{text("Set")}
 												</Button>
 											}
 										>
@@ -336,6 +338,7 @@ function BrandSettingsDialog(props: {
 }
 
 export function OrganizationDropdown() {
+	const { text } = useI18n();
 	const organizationSelection = createSelectedOrganization();
 	const [settingsOrganizationId, setSettingsOrganizationId] = createSignal<
 		string | null
@@ -402,7 +405,11 @@ export function OrganizationDropdown() {
 					leftIcon={<IconLucideBuilding2 class="size-4" />}
 					rightIcon={<IconCapChevronDown />}
 				>
-					<span class="max-w-32 truncate">{triggerLabel()}</span>
+					<span class="max-w-32 truncate">
+						{organizationSelection.availability() === "available"
+							? triggerLabel()
+							: text(triggerLabel())}
+					</span>
 				</EditorButton>
 				<KDropdownMenu.Portal>
 					<Suspense>
@@ -417,10 +424,10 @@ export function OrganizationDropdown() {
 										<div class="flex flex-col gap-3">
 											<div class="flex flex-col gap-1">
 												<span class="text-sm font-medium text-gray-12">
-													{fallbackTitle()}
+													{text(fallbackTitle())}
 												</span>
 												<span class="text-xs leading-5 text-gray-11">
-													{fallbackDescription()}
+													{text(fallbackDescription())}
 												</span>
 											</div>
 											<Show
@@ -429,7 +436,7 @@ export function OrganizationDropdown() {
 												}
 											>
 												<SignInButton class="w-full justify-center">
-													Sign In
+													{text("Sign In")}
 												</SignInButton>
 											</Show>
 											<Show
@@ -444,7 +451,7 @@ export function OrganizationDropdown() {
 													disabled={organizationSelection.refreshing()}
 												>
 													<IconLucideRefreshCw class="size-4" />
-													Retry
+													{text("Retry")}
 												</Button>
 											</Show>
 										</div>
@@ -459,7 +466,7 @@ export function OrganizationDropdown() {
 										each={organizationSelection.organizations()}
 										fallback={
 											<div class="py-1 text-center text-sm text-gray-11">
-												No organizations
+												{text("No organizations")}
 											</div>
 										}
 									>
@@ -494,7 +501,7 @@ export function OrganizationDropdown() {
 											}
 										>
 											<IconLucidePalette class="size-4" />
-											Brand settings
+											{text("Brand settings")}
 										</DropdownItem>
 									</MenuItemList>
 								</Show>

@@ -259,8 +259,8 @@ export default function Settings(props: RouteSectionProps) {
 		},
 	]);
 	const accountName = createMemo(() => {
-		if (!auth()) return "Click to sign in";
-		if (!userProfile.isSuccess) return "Signed in";
+		if (!auth()) return t("settings.account.clickToSignIn");
+		if (!userProfile.isSuccess) return t("settings.account.signedIn");
 
 		const name = userProfile.data?.name?.trim();
 		if (name) return name;
@@ -268,7 +268,7 @@ export default function Settings(props: RouteSectionProps) {
 		const email = userProfile.data?.email?.trim();
 		if (email) return email;
 
-		return "Signed in";
+		return t("settings.account.signedIn");
 	});
 	const accountRemoteImageUrl = createMemo(() => {
 		if (!userProfile.isSuccess) return null;
@@ -413,10 +413,10 @@ export default function Settings(props: RouteSectionProps) {
 	const copyVersion = async (appVersion: string) => {
 		try {
 			await writeText(appVersion);
-			toast.success("Version copied to clipboard");
+			toast.success(t("settings.account.versionCopied"));
 		} catch (error) {
 			console.error("Failed to copy app version:", error);
-			toast.error("Failed to copy version");
+			toast.error(t("settings.account.versionCopyFailed"));
 		}
 	};
 
@@ -427,13 +427,10 @@ export default function Settings(props: RouteSectionProps) {
 			const update = await commands.updatesCheck();
 
 			if (!update) {
-				await dialog.message(
-					"You're already using the latest version of Cap.",
-					{
-						title: "No Update Available",
-						kind: "info",
-					},
-				);
+				await dialog.message(t("settings.account.upToDateMessage"), {
+					title: t("settings.account.upToDateTitle"),
+					kind: "info",
+				});
 				return;
 			}
 
@@ -446,10 +443,11 @@ export default function Settings(props: RouteSectionProps) {
 		} catch (e) {
 			console.error("Failed to check for updates:", e);
 			const openDownload = await dialog
-				.confirm(
-					"Couldn't check for updates automatically. You can download the latest version of Cap from cap.so/download \u2014 your data won't be lost.",
-					{ title: "Update Cap", okLabel: "Download", cancelLabel: "Later" },
-				)
+				.confirm(t("settings.account.updateCheckFailedMessage"), {
+					title: t("settings.account.updateCheckFailedTitle"),
+					okLabel: "Download",
+					cancelLabel: "Later",
+				})
 				.catch(() => false);
 			if (openDownload) await shell.open("https://cap.so/download");
 		} finally {
@@ -497,7 +495,7 @@ export default function Settings(props: RouteSectionProps) {
 							{accountName()}
 						</p>
 						<p class="h-[13px] truncate text-[11px] leading-[13px] text-gray-10">
-							Account
+							{t("settings.account.label")}
 						</p>
 					</div>
 				</button>
@@ -524,7 +522,7 @@ export default function Settings(props: RouteSectionProps) {
 								<button
 									type="button"
 									class="-ml-1 cursor-copy rounded px-1 py-0.5 transition-colors hover:bg-gray-3 hover:text-gray-12"
-									title="Copy version to clipboard"
+									title={t("common.copy")}
 									aria-label={`Copy version ${v()} to clipboard`}
 									onClick={() => copyVersion(v())}
 								>
@@ -538,7 +536,7 @@ export default function Settings(props: RouteSectionProps) {
 											shell.open("https://cap.so/download/versions")
 										}
 									>
-										View previous versions
+										{t("settings.account.previousVersions")}
 									</button>
 									<button
 										type="button"
@@ -547,8 +545,8 @@ export default function Settings(props: RouteSectionProps) {
 										onClick={checkForUpdates}
 									>
 										{isCheckingForUpdates()
-											? "Checking..."
-											: "Check for updates"}
+											? t("settings.account.checkingUpdates")
+											: t("settings.account.checkUpdates")}
 									</button>
 								</div>
 							</div>
@@ -562,10 +560,10 @@ export default function Settings(props: RouteSectionProps) {
 					>
 						{auth() ? (
 							<Button onClick={handleAuth} variant="gray" class="w-full">
-								Sign Out
+								{t("settings.account.signOut")}
 							</Button>
 						) : (
-							<SignInButton>Sign In</SignInButton>
+							<SignInButton>{t("settings.account.signIn")}</SignInButton>
 						)}
 					</Show>
 				</div>

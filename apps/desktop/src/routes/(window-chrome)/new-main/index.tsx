@@ -39,6 +39,7 @@ import { Transition } from "solid-transition-group";
 import Mode from "~/components/Mode";
 import { RecoveryToast } from "~/components/RecoveryToast";
 import Tooltip from "~/components/Tooltip";
+import { useI18n } from "~/i18n";
 import { Input } from "~/routes/editor/ui";
 import {
 	authStore,
@@ -517,6 +518,7 @@ function CameraListItem(props: {
 	ref?: (el: HTMLButtonElement) => void;
 	settingsLabel?: string;
 }) {
+	const { t } = useI18n();
 	const formatDetails = () => {
 		if (props.settingsLabel) return props.settingsLabel;
 		if (!props.camera.bestFormat) return null;
@@ -566,8 +568,8 @@ function CameraListItem(props: {
 			<button
 				type="button"
 				disabled={props.disabled}
-				title="Device settings"
-				aria-label="Device settings"
+				title={t("capture.deviceSettings")}
+				aria-label={t("capture.deviceSettings")}
 				onPointerDown={(event) => event.stopPropagation()}
 				onClick={(event) => {
 					event.preventDefault();
@@ -598,6 +600,7 @@ function MicrophoneListItem(props: {
 	audioLevel?: number;
 	settingsLabel?: string;
 }) {
+	const { t } = useI18n();
 	const formatDetails = () => {
 		if (props.settingsLabel) return props.settingsLabel;
 		if (!props.mic.sampleRate) return null;
@@ -661,8 +664,8 @@ function MicrophoneListItem(props: {
 			<button
 				type="button"
 				disabled={props.disabled}
-				title="Device settings"
-				aria-label="Device settings"
+				title={t("capture.deviceSettings")}
+				aria-label={t("capture.deviceSettings")}
 				onPointerDown={(event) => event.stopPropagation()}
 				onClick={(event) => {
 					event.preventDefault();
@@ -688,6 +691,7 @@ function CameraSettingsPanel(props: {
 	onChange: (settings: CameraDeviceSettings) => void;
 	compatibilityStudioMode: boolean;
 }) {
+	const { t, text } = useI18n();
 	const formats = createMemo(() => {
 		const formats = props.camera.formats ?? [];
 		const seen = new Set<string>();
@@ -747,7 +751,7 @@ function CameraSettingsPanel(props: {
 				)}
 			>
 				<div class="flex-1 min-w-0">
-					<div class="truncate">Default</div>
+					<div class="truncate">{t("capture.default")}</div>
 					<Show when={defaultSetting()}>
 						{(setting) => (
 							<div
@@ -796,7 +800,7 @@ function CameraSettingsPanel(props: {
 													: "text-amber-11",
 											)}
 										>
-											Compatibility mode may reduce this setting.
+											{text("Compatibility mode may reduce this setting.")}
 										</div>
 									</Show>
 								</div>
@@ -818,6 +822,7 @@ function MicrophoneSettingsPanel(props: {
 	onChange: (settings: MicrophoneDeviceSettings) => void;
 	compatibilityStudioMode: boolean;
 }) {
+	const { t, text } = useI18n();
 	const formats = createMemo(() => {
 		const formats =
 			props.mic.formats && props.mic.formats.length > 0
@@ -874,7 +879,7 @@ function MicrophoneSettingsPanel(props: {
 				)}
 			>
 				<div class="flex-1 min-w-0">
-					<div class="truncate">Default</div>
+					<div class="truncate">{t("capture.default")}</div>
 					<Show when={defaultSetting()}>
 						{(setting) => (
 							<div
@@ -924,7 +929,7 @@ function MicrophoneSettingsPanel(props: {
 													: "text-amber-11",
 											)}
 										>
-											Compatibility mode may reduce this setting.
+											{text("Compatibility mode may reduce this setting.")}
 										</div>
 									</Show>
 								</div>
@@ -941,6 +946,7 @@ function MicrophoneSettingsPanel(props: {
 }
 
 function DeviceListPanel(props: DeviceListPanelProps) {
+	const { t } = useI18n();
 	const DB_SCALE = 40;
 	const requestPermission = useRequestPermission();
 	const [focusedIndex, setFocusedIndex] = createSignal(-1);
@@ -1106,7 +1112,9 @@ function DeviceListPanel(props: DeviceListPanelProps) {
 				</div>
 			</Show>
 			<Show when={props.isLoading}>
-				<div class="py-6 text-sm text-center text-gray-11">Loading...</div>
+				<div class="py-6 text-sm text-center text-gray-11">
+					{t("capture.preparing")}
+				</div>
 			</Show>
 			<Show when={!props.isLoading && !props.errorMessage}>
 				<button
@@ -1128,7 +1136,9 @@ function DeviceListPanel(props: DeviceListPanelProps) {
 				>
 					<IconLucideCircleOff class="size-4 shrink-0" />
 					<span class="truncate flex-1">
-						{props.variant === "camera" ? "No Camera" : "No Microphone"}
+						{props.variant === "camera"
+							? t("capture.noCamera")
+							: t("capture.noMicrophone")}
 					</span>
 					<Show when={isNoneSelected()}>
 						<IconLucideCheck class="size-4 shrink-0" />
@@ -1199,6 +1209,7 @@ function DeviceListPanel(props: DeviceListPanelProps) {
 }
 
 function TargetMenuPanel(props: TargetMenuPanelProps & SharedTargetMenuProps) {
+	const { t } = useI18n();
 	const [search, setSearch] = createSignal("");
 	const trimmedSearch = createMemo(() => search().trim());
 	const normalizedQuery = createMemo(() => trimmedSearch().toLowerCase());
@@ -1278,30 +1289,32 @@ function TargetMenuPanel(props: TargetMenuPanelProps & SharedTargetMenuProps) {
 		if (!target) return "";
 		return "device_id" in target ? target.display_name : target.name;
 	};
-	const placeholder =
+	const placeholder = t(
 		props.variant === "display"
-			? "Search displays"
+			? "capture.searchDisplays"
 			: props.variant === "window"
-				? "Search windows"
+				? "capture.searchWindows"
 				: props.variant === "recording"
-					? "Search recordings"
+					? "capture.searchRecordings"
 					: props.variant === "screenshot"
-						? "Search screenshots"
+						? "capture.searchScreenshots"
 						: props.variant === "camera"
-							? "Search cameras"
-							: "Search microphones";
-	const noResultsMessage =
+							? "capture.searchCameras"
+							: "capture.searchMicrophones",
+	);
+	const noResultsMessage = t(
 		props.variant === "display"
-			? "No matching displays"
+			? "capture.noMatchingDisplays"
 			: props.variant === "window"
-				? "No matching windows"
+				? "capture.noMatchingWindows"
 				: props.variant === "recording"
-					? "No matching recordings"
+					? "capture.noMatchingRecordings"
 					: props.variant === "screenshot"
-						? "No matching screenshots"
+						? "capture.noMatchingScreenshots"
 						: props.variant === "camera"
-							? "No matching cameras"
-							: "No matching microphones";
+							? "capture.noMatchingCameras"
+							: "capture.noMatchingMicrophones",
+	);
 
 	const handleVideoImport = async () => {
 		try {
@@ -1500,7 +1513,7 @@ function TargetMenuPanel(props: TargetMenuPanelProps & SharedTargetMenuProps) {
 							}
 							disabled={cameraProps.disabled}
 							emptyMessage={
-								trimmedSearch() ? noResultsMessage : "No cameras found"
+								trimmedSearch() ? noResultsMessage : t("capture.noCameras")
 							}
 							permissions={cameraProps.permissions}
 							deviceSettings={cameraProps.deviceSettings}
@@ -1558,7 +1571,7 @@ function TargetMenuPanel(props: TargetMenuPanelProps & SharedTargetMenuProps) {
 							onSettingsRequested={(mic) => handleSettingsTargetChange(mic)}
 							disabled={micProps.disabled}
 							emptyMessage={
-								trimmedSearch() ? noResultsMessage : "No microphones found"
+								trimmedSearch() ? noResultsMessage : t("capture.noMicrophones")
 							}
 							permissions={micProps.permissions}
 							deviceSettings={micProps.deviceSettings}
@@ -1591,10 +1604,12 @@ function TargetMenuPanel(props: TargetMenuPanelProps & SharedTargetMenuProps) {
 					class="flex h-[36px] gap-1 items-center shrink-0 rounded-md px-2 text-xs
 					text-gray-11 transition-colors hover:text-gray-12 hover:bg-gray-4
 					focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-9 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-1"
-					aria-label={inSettingsMode() ? "Back to list" : "Back"}
+					aria-label={
+						inSettingsMode() ? t("capture.backToList") : t("capture.back")
+					}
 				>
 					<IconLucideArrowLeft class="size-3 text-gray-11" />
-					<span class="font-medium text-gray-12">Back</span>
+					<span class="font-medium text-gray-12">{t("capture.back")}</span>
 				</button>
 				<Show
 					when={inSettingsMode()}
@@ -1639,7 +1654,9 @@ function TargetMenuPanel(props: TargetMenuPanelProps & SharedTargetMenuProps) {
 								>
 									<IconLucideImport class="size-3.5" />
 									<span>
-										{props.variant === "screenshot" ? "Import image" : "Import"}
+										{props.variant === "screenshot"
+											? t("capture.importImage")
+											: t("capture.import")}
 									</span>
 								</Button>
 							</Show>
@@ -1785,6 +1802,7 @@ function createUpdateCheck() {
 }
 
 function createUpdateReadyToast() {
+	const { language, text } = useI18n();
 	createTauriEventListener(events.updateReady, (update) => {
 		toast.custom(
 			(t) => (
@@ -1794,9 +1812,13 @@ function createUpdateReadyToast() {
 				// the window edge and gets clipped.
 				<div class="flex flex-col gap-2.5 px-4 py-3 rounded-xl border shadow-lg bg-gray-1 border-gray-4 text-gray-12 w-[min(24rem,calc(100vw-2rem))]">
 					<p class="text-sm">
-						{update.installed
-							? `Cap ${update.version} has been installed — restart to apply`
-							: `Cap ${update.version} is ready to install`}
+						{language() === "zh-CN"
+							? update.installed
+								? `Cap ${update.version} 已安装，重启后生效`
+								: `Cap ${update.version} 已可安装`
+							: update.installed
+								? `Cap ${update.version} has been installed — restart to apply`
+								: `Cap ${update.version} is ready to install`}
 					</p>
 					<div class="flex gap-2 items-center">
 						<button
@@ -1812,20 +1834,20 @@ function createUpdateReadyToast() {
 										toast.error(
 											typeof error === "string"
 												? error
-												: "Unable to restart Cap safely.",
+												: text("Unable to restart Cap safely."),
 										);
 									})
 									.finally(() => setInstallingUpdate(false));
 							}}
 						>
-							{update.installed ? "Restart now" : "Install and restart"}
+							{text(update.installed ? "Restart now" : "Install and restart")}
 						</button>
 						<button
 							type="button"
 							class="px-2.5 py-1 text-xs font-medium rounded-lg transition-colors text-gray-11 hover:text-gray-12"
 							onClick={() => toast.dismiss(t.id)}
 						>
-							Dismiss
+							{text("Dismiss")}
 						</button>
 					</div>
 				</div>
@@ -1840,8 +1862,9 @@ function createUpdateReadyToast() {
 }
 
 function MainWindowHelpButton() {
+	const { t } = useI18n();
 	return (
-		<Tooltip content={<span>Help & Tour</span>}>
+		<Tooltip content={<span>{t("capture.help")}</span>}>
 			<button
 				type="button"
 				onClick={() => {
@@ -1856,6 +1879,7 @@ function MainWindowHelpButton() {
 }
 
 function Page() {
+	const { t, text } = useI18n();
 	const queryClient = useQueryClient();
 	const { rawOptions, setOptions } = useRecordingOptions();
 	const currentRecording = createCurrentRecordingQuery();
@@ -2922,7 +2946,7 @@ function Page() {
 		} else {
 			const link = recording.sharing?.link;
 			if (!link) {
-				toast.error("This recording isn't ready to open yet.");
+				toast.error(text("This recording isn't ready to open yet."));
 				return;
 			}
 			await shell.open(link);
@@ -2956,7 +2980,7 @@ function Page() {
 	const BaseControls = () => (
 		<div class={cx("space-y-2", isExpanded() && "space-y-2.5")}>
 			<div>
-				<ExpandedControlLabel title="Camera" />
+				<ExpandedControlLabel title={t("onboarding.permissions.camera.name")} />
 				<CameraSelect
 					disabled={enableDeviceQueries() && devices.isPending}
 					options={devices.cameras}
@@ -2987,7 +3011,9 @@ function Page() {
 				/>
 			</div>
 			<div>
-				<ExpandedControlLabel title="Microphone" />
+				<ExpandedControlLabel
+					title={t("onboarding.permissions.microphone.name")}
+				/>
 				<MicrophoneSelect
 					disabled={enableDeviceQueries() && devices.isPending}
 					options={devices.microphones.map((m) => m.name)}
@@ -3008,7 +3034,7 @@ function Page() {
 				/>
 			</div>
 			<div>
-				<ExpandedControlLabel title="System audio" />
+				<ExpandedControlLabel title={t("capture.recordSystemAudio")} />
 				<SystemAudio />
 			</div>
 		</div>
@@ -3027,7 +3053,9 @@ function Page() {
 			<div class="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pb-1 w-full">
 				<Show when={isExpanded()}>
 					<div class="px-1 pb-0.5">
-						<h2 class="text-xs font-semibold text-gray-12">Capture</h2>
+						<h2 class="text-xs font-semibold text-gray-12">
+							{t("capture.title")}
+						</h2>
 					</div>
 				</Show>
 				<div class="flex flex-col gap-2 w-full text-xs text-gray-11">
@@ -3044,11 +3072,13 @@ function Page() {
 								selected={rawOptions.targetMode === "display"}
 								Component={IconMdiMonitor}
 								disabled={isRecording()}
-								description={isExpanded() ? "Entire screen" : undefined}
+								description={
+									isExpanded() ? t("capture.displayDescription") : undefined
+								}
 								onClick={() => {
 									toggleTargetMode("display");
 								}}
-								name="Display"
+								name={t("capture.display")}
 								class={cx(
 									"flex-1 rounded-none border-0 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0",
 									isExpanded() ? "pl-3" : "pl-5",
@@ -3072,7 +3102,7 @@ function Page() {
 									});
 								}}
 								aria-haspopup="menu"
-								aria-label="Choose display"
+								aria-label={t("capture.chooseDisplay")}
 							/>
 						</div>
 						<div
@@ -3087,11 +3117,13 @@ function Page() {
 								selected={rawOptions.targetMode === "window"}
 								Component={IconLucideAppWindowMac}
 								disabled={isRecording()}
-								description={isExpanded() ? "One app" : undefined}
+								description={
+									isExpanded() ? t("capture.windowDescription") : undefined
+								}
 								onClick={() => {
 									toggleTargetMode("window");
 								}}
-								name="Window"
+								name={t("capture.window")}
 								class={cx(
 									"flex-1 rounded-none border-0 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0",
 									isExpanded() ? "pl-3" : "pl-5",
@@ -3115,7 +3147,7 @@ function Page() {
 									});
 								}}
 								aria-haspopup="menu"
-								aria-label="Choose window"
+								aria-label={t("capture.chooseWindow")}
 							/>
 						</div>
 					</div>
@@ -3124,22 +3156,26 @@ function Page() {
 							selected={rawOptions.targetMode === "area"}
 							Component={IconMaterialSymbolsScreenshotFrame2Rounded}
 							disabled={isRecording()}
-							description={isExpanded() ? "Custom region" : undefined}
+							description={
+								isExpanded() ? t("capture.areaDescription") : undefined
+							}
 							onClick={() => {
 								toggleTargetMode("area");
 							}}
-							name="Area"
+							name={t("capture.area")}
 							class="flex-1"
 						/>
 						<TargetTypeButton
 							selected={rawOptions.targetMode === "camera"}
 							Component={IconLucideVideo}
 							disabled={isRecording()}
-							description={isExpanded() ? "No screen" : undefined}
+							description={
+								isExpanded() ? t("capture.cameraOnlyDescription") : undefined
+							}
 							onClick={() => {
 								toggleTargetMode("camera");
 							}}
-							name="Camera Only"
+							name={t("capture.cameraOnly")}
 							class="flex-1"
 						/>
 					</div>
@@ -3156,7 +3192,7 @@ function Page() {
 							}
 							errorMessage={
 								recentMedia.error && recentMedia.data === undefined
-									? "Unable to load recent captures"
+									? t("capture.recentLoadFailed")
 									: undefined
 							}
 							disabled={isRecording()}
@@ -3205,13 +3241,21 @@ function Page() {
 					<div class="flex-1 min-h-9 min-w-0" data-tauri-drag-region />
 					<div class="flex gap-1 items-center shrink-0" data-tauri-drag-region>
 						<Tooltip
-							content={<span>{isExpanded() ? "Collapse" : "Expand"}</span>}
+							content={
+								<span>
+									{isExpanded() ? t("capture.collapse") : t("capture.expand")}
+								</span>
+							}
 						>
 							<button
 								type="button"
 								disabled={isWindowResizing()}
 								onClick={() => void toggleMainWindowExpanded()}
-								aria-label={isExpanded() ? "Collapse window" : "Expand window"}
+								aria-label={
+									isExpanded()
+										? t("capture.collapseWindow")
+										: t("capture.expandWindow")
+								}
 								aria-pressed={isExpanded()}
 								class="flex items-center justify-center size-5 focus:outline-hidden disabled:opacity-50"
 							>
@@ -3225,7 +3269,7 @@ function Page() {
 								</Show>
 							</button>
 						</Tooltip>
-						<Tooltip content={<span>Settings</span>}>
+						<Tooltip content={<span>{t("capture.settings")}</span>}>
 							<button
 								type="button"
 								onClick={async () => {
@@ -3237,7 +3281,7 @@ function Page() {
 								<IconLucideSettings class="transition-colors text-gray-11 size-4 hover:text-gray-12" />
 							</button>
 						</Tooltip>
-						<Tooltip content={<span>Screenshots</span>}>
+						<Tooltip content={<span>{t("capture.screenshots")}</span>}>
 							<button
 								type="button"
 								onClick={() => {
@@ -3256,7 +3300,7 @@ function Page() {
 								<IconLucideImage class="transition-colors text-gray-11 size-4 hover:text-gray-12" />
 							</button>
 						</Tooltip>
-						<Tooltip content={<span>Recordings</span>}>
+						<Tooltip content={<span>{t("capture.recordings")}</span>}>
 							<button
 								type="button"
 								onClick={() => {
@@ -3275,12 +3319,12 @@ function Page() {
 								<IconLucideSquarePlay class="transition-colors text-gray-11 size-4 hover:text-gray-12" />
 							</button>
 						</Tooltip>
-						<Tooltip content={<span>Teleprompter</span>}>
+						<Tooltip content={<span>{t("capture.teleprompter")}</span>}>
 							<button
 								type="button"
 								onClick={() => void openTeleprompter()}
 								class="flex justify-center items-center size-5 focus:outline-hidden"
-								aria-label="Open teleprompter"
+								aria-label={t("capture.teleprompter")}
 							>
 								<IconLucideScanText class="transition-colors text-gray-11 size-4 hover:text-gray-12" />
 							</button>
@@ -3334,7 +3378,7 @@ function Page() {
 										}}
 										class="text-[0.6rem] ml-2 rounded-lg border border-gray-5 px-1 py-0.5 bg-gray-3 hover:bg-gray-5"
 									>
-										Personal
+										{t("capture.personal")}
 									</button>
 								</Show>
 							</Suspense>
@@ -3357,7 +3401,7 @@ function Page() {
 				<Show when={signIn.isPending}>
 					<div class="flex absolute inset-0 justify-center items-center bg-gray-1 animate-in fade-in">
 						<div class="flex flex-col gap-4 justify-center items-center">
-							<span>Signing In...</span>
+							<span>{t("capture.signingIn")}</span>
 
 							<Button
 								onClick={() => {
@@ -3367,7 +3411,7 @@ function Page() {
 								variant="gray"
 								class="w-full"
 							>
-								Cancel Sign In
+								{text("Cancel Sign In")}
 							</Button>
 						</div>
 					</div>
@@ -3407,7 +3451,9 @@ function Page() {
 									targets={recordingsData()}
 									isLoading={recordings.isPending}
 									errorMessage={
-										recordings.error ? "Failed to load recordings" : undefined
+										recordings.error
+											? t("capture.recordingsLoadFailed")
+											: undefined
 									}
 									onSelect={openRecording}
 									disabled={isRecording()}
@@ -3431,7 +3477,9 @@ function Page() {
 									targets={screenshotsData()}
 									isLoading={screenshots.isPending}
 									errorMessage={
-										screenshots.error ? "Failed to load screenshots" : undefined
+										screenshots.error
+											? t("capture.screenshotsLoadFailed")
+											: undefined
 									}
 									onSelect={openScreenshot}
 									disabled={isRecording()}
@@ -3528,7 +3576,7 @@ function Page() {
 							>
 								<IconCapStopCircle class="size-4" />
 							</Show>
-							<span>Stop Recording</span>
+							<span>{t("capture.stop")}</span>
 						</button>
 					</div>
 				</div>

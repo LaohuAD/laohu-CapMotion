@@ -21,6 +21,7 @@ import {
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Transition } from "solid-transition-group";
+import { useI18n } from "~/i18n";
 import { createKeyDownSignal } from "~/utils/events";
 
 import { commands } from "~/utils/tauri";
@@ -249,6 +250,7 @@ export function Cropper(
 		allowLightMode?: boolean;
 	}>,
 ) {
+	const { text } = useI18n();
 	let containerRef: HTMLDivElement | undefined;
 	let regionRef: HTMLDivElement | undefined;
 	let occTopRef: HTMLDivElement | undefined;
@@ -1324,7 +1326,7 @@ export function Cropper(
 				<button
 					type="button"
 					class="absolute inset-0 z-20 bg-transparent p-0 m-0 border-0"
-					aria-label="Start selection"
+					aria-label={text("Start selection")}
 					onPointerDown={onOverlayPointerDown}
 					style={{ cursor: cursorStyle() ?? "crosshair" }}
 				/>

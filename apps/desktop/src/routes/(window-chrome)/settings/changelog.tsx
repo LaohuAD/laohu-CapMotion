@@ -3,10 +3,12 @@ import { ErrorBoundary, For, Show } from "solid-js";
 import { SolidMarkdown } from "solid-markdown";
 
 import { AbsoluteInsetLoader } from "~/components/Loader";
+import { useI18n } from "~/i18n";
 import { apiClient } from "~/utils/web-api";
 import { SettingsPageContent } from "./Setting";
 
 export default function Page() {
+	const { text } = useI18n();
 	const changelog = createQuery(() => {
 		return {
 			queryKey: ["changelog"],
@@ -34,7 +36,7 @@ export default function Page() {
 								<div class="text-(--text-primary) font-medium">
 									{changelog.error instanceof Error
 										? changelog.error.message
-										: "Failed to fetch changelog"}
+										: text("Failed to fetch changelog")}
 								</div>
 							}
 						>
@@ -53,7 +55,7 @@ export default function Page() {
 													<Show when={i() === 0}>
 														<div class="bg-(--blue-400) text-(--text-primary) px-2 py-1 rounded-md uppercase font-bold">
 															<span style="color: #fff" class="text-xs">
-																New
+																{text("New")}
 															</span>
 														</div>
 													</Show>
@@ -62,7 +64,7 @@ export default function Page() {
 													{entry.title}
 												</h3>
 												<div class="text-xs leading-relaxed text-gray-10 mb-4">
-													Version {entry.version} -{" "}
+													{text("Version")} {entry.version} -{" "}
 													{new Date(entry.publishedAt).toLocaleDateString()}
 												</div>
 												<SolidMarkdown

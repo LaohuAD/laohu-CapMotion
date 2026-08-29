@@ -2,6 +2,7 @@ import { createEventListenerMap } from "@solid-primitives/event-listener";
 import { cx } from "cva";
 import { createMemo, createRoot, For } from "solid-js";
 import { produce } from "solid-js/store";
+import { useI18n } from "~/i18n";
 import { useEditorContext } from "../context";
 import {
 	type MotionDefinition,
@@ -28,6 +29,7 @@ export function MotionTrack(props: {
 	onDragStateChanged: (value: MotionSegmentDragState) => void;
 	handleUpdatePlayhead: (event: MouseEvent) => void;
 }) {
+	const { text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -141,7 +143,7 @@ export function MotionTrack(props: {
 				each={laneSegments()}
 				fallback={
 					<div class="flex absolute inset-0 justify-center items-center text-xs rounded-xl pointer-events-none bg-gray-3/20 text-gray-9">
-						Animations added by Codex appear here
+						{text("Animations added by Codex appear here")}
 					</div>
 				}
 			>

@@ -15,6 +15,7 @@ import {
 import { Toggle } from "~/components/Toggle";
 import CaptionControlsMacOS from "~/components/titlebar/controls/CaptionControlsMacOS";
 import CaptionControlsWindows11 from "~/components/titlebar/controls/CaptionControlsWindows11";
+import { useI18n } from "~/i18n";
 import {
 	type TeleprompterStore,
 	teleprompterDefaults,
@@ -48,11 +49,12 @@ function ToolButton(props: {
 	onClick: () => void;
 	children: JSX.Element;
 }) {
+	const { text } = useI18n();
 	return (
 		<button
 			type="button"
-			title={props.label}
-			aria-label={props.label}
+			title={text(props.label)}
+			aria-label={text(props.label)}
 			disabled={props.disabled}
 			onClick={props.onClick}
 			class={cx(
@@ -71,23 +73,25 @@ function SettingToggle(props: {
 	onChange: (active: boolean) => void;
 	children: JSX.Element;
 }) {
+	const { text } = useI18n();
 	return (
 		<div class="flex items-center justify-between px-2 py-2 text-xs text-gray-10">
 			<span class="flex items-center gap-2">
 				{props.children}
-				{props.label}
+				{text(props.label)}
 			</span>
 			<Toggle
 				size="sm"
 				checked={props.active}
 				onChange={props.onChange}
-				aria-label={props.label}
+				aria-label={text(props.label)}
 			/>
 		</div>
 	);
 }
 
 export default function Teleprompter() {
+	const { text } = useI18n();
 	const currentWindow = getCurrentWebviewWindow();
 	const platform = ostype();
 	const isMacOS = platform === "macos";
@@ -339,8 +343,8 @@ export default function Teleprompter() {
 					<IconLucideEyeOff class="size-3" />
 					<span>
 						{isLinux
-							? "This window may appear in recordings on Linux"
-							: "This window is hidden from Cap recordings"}
+							? text("This window may appear in recordings on Linux")
+							: text("This window is hidden from Cap recordings")}
 					</span>
 				</div>
 				<Show when={isWindows}>
@@ -377,13 +381,13 @@ export default function Teleprompter() {
 						spellcheck={true}
 						value={state().script}
 						onInput={(event) => updateScript(event.currentTarget.value)}
-						placeholder="Paste or type your script…"
+						placeholder={text("Paste or type your script…")}
 						class="block w-full resize-none overflow-hidden bg-transparent px-8 text-center font-medium tracking-[-0.025em] text-gray-12 outline-none placeholder:text-gray-8/70 selection:bg-blue-9/25"
 						style={{
 							"font-size": `${state().fontSize}px`,
 							"line-height": state().lineHeight,
 						}}
-						aria-label="Teleprompter script"
+						aria-label={text("Teleprompter script")}
 					/>
 					<div aria-hidden="true" style={{ height: spacerHeight() }} />
 				</div>
@@ -417,8 +421,8 @@ export default function Teleprompter() {
 			<footer class="flex h-11 shrink-0 items-center px-3 pb-2">
 				<button
 					type="button"
-					title={isPlaying() ? "Pause" : "Play"}
-					aria-label={isPlaying() ? "Pause" : "Play"}
+					title={text(isPlaying() ? "Pause" : "Play")}
+					aria-label={text(isPlaying() ? "Pause" : "Play")}
 					disabled={!hasScript()}
 					onClick={togglePlayback}
 					class="flex size-8 items-center justify-center rounded-full border border-gray-12/6 bg-gray-12/7 text-gray-12 shadow-sm backdrop-blur-xl transition hover:bg-gray-12/11 disabled:cursor-not-allowed disabled:opacity-30"
@@ -431,7 +435,7 @@ export default function Teleprompter() {
 					</Show>
 				</button>
 				<div
-					title={`Scroll speed: ${state().wordsPerMinute} wpm`}
+					title={`${text("Scroll speed")}: ${state().wordsPerMinute} wpm`}
 					class="ml-1.5 flex h-8 items-center gap-1.5 rounded-full border border-gray-12/6 bg-gray-12/5 px-2 backdrop-blur-xl"
 				>
 					<IconLucideGauge class="size-3.5 shrink-0 text-gray-9" />
@@ -448,7 +452,7 @@ export default function Teleprompter() {
 							}))
 						}
 						class="h-1 w-12 cursor-pointer appearance-none rounded-full bg-gray-12/10 [&::-webkit-slider-thumb]:size-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-9 [&::-webkit-slider-thumb]:shadow-sm"
-						aria-label="Scroll speed"
+						aria-label={text("Scroll speed")}
 					/>
 					<span class="w-12 text-right text-[10px] tabular-nums text-gray-9">
 						{state().wordsPerMinute} wpm
@@ -457,7 +461,7 @@ export default function Teleprompter() {
 
 				<div class="ml-auto flex items-center gap-1.5">
 					<div
-						title={`Window opacity: ${state().windowOpacityPercent}%`}
+						title={`${text("Window opacity")}: ${state().windowOpacityPercent}%`}
 						class="flex h-8 items-center gap-1.5 rounded-full border border-gray-12/6 bg-gray-12/5 px-2 backdrop-blur-xl"
 					>
 						<IconLucideLayers class="size-3.5 shrink-0 text-gray-9" />
@@ -474,7 +478,7 @@ export default function Teleprompter() {
 								}))
 							}
 							class="h-1 w-12 cursor-pointer appearance-none rounded-full bg-gray-12/10 [&::-webkit-slider-thumb]:size-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-11 [&::-webkit-slider-thumb]:shadow-sm"
-							aria-label="Window opacity"
+							aria-label={text("Window opacity")}
 						/>
 					</div>
 					<div class="flex h-8 items-center rounded-full border border-gray-12/6 bg-gray-12/5 px-0.5 backdrop-blur-xl">

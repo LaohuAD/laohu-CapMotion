@@ -7,6 +7,7 @@ import {
 	onCleanup,
 	Show,
 } from "solid-js";
+import { useI18n } from "~/i18n";
 import { Input } from "~/routes/editor/ui";
 import { generalSettingsStore } from "~/store";
 import {
@@ -29,6 +30,7 @@ export default function TranscriptionSettings() {
 }
 
 function Inner(props: { initialStore: GeneralSettingsStore | null }) {
+	const { text } = useI18n();
 	const [hints, setHints] = createSignal(
 		deriveGeneralSettings(props.initialStore).transcriptionHints ?? [],
 	);
@@ -104,10 +106,13 @@ function Inner(props: { initialStore: GeneralSettingsStore | null }) {
 					<SectionCard padded class="space-y-3">
 						<div class="flex items-center justify-between gap-3">
 							<div class="flex flex-col gap-0.5 min-w-0">
-								<p class="text-[13px] text-gray-12">Remembered terms</p>
+								<p class="text-[13px] text-gray-12">
+									{text("Remembered terms")}
+								</p>
 								<p class="text-xs leading-snug text-gray-10">
-									Add one term at a time to reduce typos and formatting
-									mistakes.
+									{text(
+										"Add one term at a time to reduce typos and formatting mistakes.",
+									)}
 								</p>
 							</div>
 							<div class="flex items-center gap-2">
@@ -120,14 +125,14 @@ function Inner(props: { initialStore: GeneralSettingsStore | null }) {
 											persist([]);
 										}}
 									>
-										Clear
+										{text("Clear")}
 									</Button>
 								</Show>
 								<span class="text-xs text-gray-11 min-w-15 text-right">
 									{saveState() === "saving"
-										? "Saving..."
+										? text("Saving...")
 										: saveState() === "saved"
-											? "Saved"
+											? text("Saved")
 											: ""}
 								</span>
 							</div>
@@ -143,7 +148,7 @@ function Inner(props: { initialStore: GeneralSettingsStore | null }) {
 									event.preventDefault();
 									addHint();
 								}}
-								placeholder="Add a term"
+								placeholder={text("Add a term")}
 								spellcheck={false}
 								autocapitalize="off"
 								autocomplete="off"
@@ -156,12 +161,14 @@ function Inner(props: { initialStore: GeneralSettingsStore | null }) {
 								class="shrink-0"
 							>
 								<IconLucidePlus class="size-4" />
-								Add
+								{text("Add")}
 							</Button>
 						</div>
 
 						<p class="text-xs leading-relaxed text-gray-10">
-							These hints are applied when you generate captions in the editor.
+							{text(
+								"These hints are applied when you generate captions in the editor.",
+							)}
 						</p>
 					</SectionCard>
 				</Section>
@@ -171,7 +178,7 @@ function Inner(props: { initialStore: GeneralSettingsStore | null }) {
 						title="Active hints"
 						right={
 							<span class="text-xs text-gray-10">
-								{hints().length} {hints().length === 1 ? "item" : "items"}
+								{hints().length} {text(hints().length === 1 ? "item" : "items")}
 							</span>
 						}
 					>

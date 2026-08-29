@@ -13,6 +13,7 @@ import {
 	Show,
 } from "solid-js";
 import { produce } from "solid-js/store";
+import { useI18n } from "~/i18n";
 
 import { useEditorContext } from "../context";
 import { useTimelineContext, useTrackContext } from "./context";
@@ -36,6 +37,7 @@ export function SceneTrack(props: {
 	onDragStateChanged: (v: SceneSegmentDragState) => void;
 	handleUpdatePlayhead: (e: MouseEvent) => void;
 }) {
+	const { text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -216,9 +218,9 @@ export function SceneTrack(props: {
 				each={project.timeline?.sceneSegments}
 				fallback={
 					<div class="text-center text-sm text-(--text-tertiary) flex flex-col justify-center items-center inset-0 w-full bg-gray-3/20 dark:bg-gray-3/10 hover:bg-gray-3/30 dark:hover:bg-gray-3/20 transition-colors rounded-xl pointer-events-none">
-						<div>Click to add scene segment</div>
+						<div>{text("Click to add scene segment")}</div>
 						<div class="text-[10px] text-(--text-tertiary)/40 mt-0.5">
-							(Make the camera full screen, or hide it)
+							{text("(Make the camera full screen, or hide it)")}
 						</div>
 					</div>
 				}
@@ -543,7 +545,7 @@ export function SceneTrack(props: {
 								<SegmentLabel
 									full={() => (
 										<div class="flex flex-col gap-1 justify-center items-center text-xs whitespace-nowrap text-gray-1 dark:text-gray-12 animate-in fade-in">
-											<span class="opacity-70">Scene</span>
+											<span class="opacity-70">{text("Scene")}</span>
 											<div class="flex gap-1 items-center text-md">
 												{getSceneIcon(segment.mode)}
 												<span class="text-xs">

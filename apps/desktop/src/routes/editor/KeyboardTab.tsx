@@ -3,6 +3,7 @@ import { Select as KSelect } from "@kobalte/core/select";
 import { cx } from "cva";
 import { batch, createMemo, createSignal, Show } from "solid-js";
 import { Toggle } from "~/components/Toggle";
+import { useI18n } from "~/i18n";
 import {
 	defaultKeyboardSettings,
 	type KeyboardSettings,
@@ -33,6 +34,7 @@ import {
 export function KeyboardTab(props: {
 	brandColorSwatches: OrganizationBrandColorSwatch[];
 }) {
+	const { text } = useI18n();
 	const { project, setProject, editorState, setEditorState } =
 		useEditorContext();
 
@@ -143,7 +145,7 @@ export function KeyboardTab(props: {
 					<Field name="Font Settings" icon={<IconLucideKeyboard />}>
 						<div class="space-y-3">
 							<div class="flex flex-col gap-2">
-								<span class="text-gray-11 text-sm">Font Family</span>
+								<span class="text-gray-11 text-sm">{text("Font Family")}</span>
 								<KSelect<string>
 									options={FONT_OPTIONS.map((f) => f.value)}
 									value={getSetting("font")}
@@ -193,7 +195,7 @@ export function KeyboardTab(props: {
 							</div>
 
 							<div class="flex flex-col gap-2">
-								<span class="text-gray-11 text-sm">Size</span>
+								<span class="text-gray-11 text-sm">{text("Size")}</span>
 								<Slider
 									value={[getSetting("size")]}
 									onChange={(v) => updateSetting("size", v[0])}
@@ -204,7 +206,7 @@ export function KeyboardTab(props: {
 							</div>
 
 							<div class="flex flex-col gap-2">
-								<span class="text-gray-11 text-sm">Text Color</span>
+								<span class="text-gray-11 text-sm">{text("Text Color")}</span>
 								<HexColorInput
 									value={getSetting("color")}
 									brandColorSwatches={props.brandColorSwatches}
@@ -217,7 +219,9 @@ export function KeyboardTab(props: {
 					<Field name="Background Settings" icon={<IconLucideKeyboard />}>
 						<div class="space-y-3">
 							<div class="flex flex-col gap-2">
-								<span class="text-gray-11 text-sm">Background Color</span>
+								<span class="text-gray-11 text-sm">
+									{text("Background Color")}
+								</span>
 								<HexColorInput
 									value={getSetting("backgroundColor")}
 									brandColorSwatches={props.brandColorSwatches}
@@ -226,7 +230,9 @@ export function KeyboardTab(props: {
 							</div>
 
 							<div class="flex flex-col gap-2">
-								<span class="text-gray-11 text-sm">Background Opacity</span>
+								<span class="text-gray-11 text-sm">
+									{text("Background Opacity")}
+								</span>
 								<Slider
 									value={[getSetting("backgroundOpacity")]}
 									onChange={(v) => updateSetting("backgroundOpacity", v[0])}
@@ -346,7 +352,9 @@ export function KeyboardTab(props: {
 					<Field name="Animation" icon={<IconLucideKeyboard />}>
 						<div class="space-y-3">
 							<div class="flex flex-col gap-2">
-								<span class="text-gray-11 text-sm">Fade Duration</span>
+								<span class="text-gray-11 text-sm">
+									{text("Fade Duration")}
+								</span>
 								<Slider
 									value={[getSetting("fadeDuration") * 100]}
 									onChange={(v) => updateSetting("fadeDuration", v[0] / 100)}
@@ -360,7 +368,9 @@ export function KeyboardTab(props: {
 							</div>
 
 							<div class="flex flex-col gap-2">
-								<span class="text-gray-11 text-sm">Linger Duration</span>
+								<span class="text-gray-11 text-sm">
+									{text("Linger Duration")}
+								</span>
 								<Slider
 									value={[getSetting("lingerDuration") * 100]}
 									onChange={(v) => updateSetting("lingerDuration", v[0] / 100)}
@@ -374,7 +384,9 @@ export function KeyboardTab(props: {
 							</div>
 
 							<div class="flex flex-col gap-2">
-								<span class="text-gray-11 text-sm">Grouping Threshold</span>
+								<span class="text-gray-11 text-sm">
+									{text("Grouping Threshold")}
+								</span>
 								<Slider
 									value={[getSetting("groupingThresholdMs")]}
 									onChange={(v) => updateSetting("groupingThresholdMs", v[0])}
@@ -393,7 +405,9 @@ export function KeyboardTab(props: {
 						<div class="space-y-3">
 							<div class="flex flex-col gap-2">
 								<div class="flex items-center justify-between">
-									<span class="text-gray-11 text-sm">Show Modifier Keys</span>
+									<span class="text-gray-11 text-sm">
+										{text("Show Modifier Keys")}
+									</span>
 									<Toggle
 										checked={getSetting("showModifiers")}
 										onChange={(checked) =>
@@ -405,7 +419,9 @@ export function KeyboardTab(props: {
 
 							<div class="flex flex-col gap-2">
 								<div class="flex items-center justify-between">
-									<span class="text-gray-11 text-sm">Show Special Keys</span>
+									<span class="text-gray-11 text-sm">
+										{text("Show Special Keys")}
+									</span>
 									<Toggle
 										checked={getSetting("showSpecialKeys")}
 										onChange={(checked) =>
@@ -417,7 +433,7 @@ export function KeyboardTab(props: {
 
 							<div class="flex flex-col gap-2">
 								<div class="flex items-center justify-between">
-									<span class="text-gray-11 text-sm">Uppercase</span>
+									<span class="text-gray-11 text-sm">{text("Uppercase")}</span>
 									<Toggle
 										checked={getSetting("uppercase")}
 										onChange={(checked) => updateSetting("uppercase", checked)}
@@ -434,10 +450,10 @@ export function KeyboardTab(props: {
 							class="w-full"
 						>
 							{isGenerating()
-								? "Generating..."
+								? text("Generating...")
 								: hasKeyboardSegments()
-									? "Regenerate Keyboard Segments"
-									: "Generate Keyboard Segments"}
+									? text("Regenerate Keyboard Segments")
+									: text("Generate Keyboard Segments")}
 						</Button>
 					</div>
 
@@ -540,10 +556,11 @@ export function KeyboardTab(props: {
 
 					<Show when={!hasKeyboardSegments()}>
 						<div class="text-center text-sm text-gray-11 py-4">
-							<p>No keyboard segments yet.</p>
+							<p>{text("No keyboard segments yet.")}</p>
 							<p class="text-xs mt-1 text-gray-10">
-								Click "Generate Keyboard Segments" to create segments from
-								recorded keyboard presses.
+								{text(
+									'Click "Generate Keyboard Segments" to create segments from recorded keyboard presses.',
+								)}
 							</p>
 						</div>
 					</Show>

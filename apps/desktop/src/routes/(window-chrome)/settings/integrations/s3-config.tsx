@@ -2,6 +2,7 @@ import { Button } from "@cap/ui-solid";
 import { createWritableMemo } from "@solid-primitives/memo";
 import { useMutation } from "@tanstack/solid-query";
 import { createResource, Show, Suspense } from "solid-js";
+import { useI18n } from "~/i18n";
 import { Input } from "~/routes/editor/ui";
 import { createSelectedOrganization } from "~/utils/organization-branding";
 import { commands } from "~/utils/tauri";
@@ -28,6 +29,7 @@ const DEFAULT_CONFIG = {
 };
 
 export default function S3ConfigPage() {
+	const { text, language } = useI18n();
 	const organizationSelection = createSelectedOrganization();
 	const [_s3Config, { refetch }] = createResource(
 		() => organizationSelection.selectedOrganizationId(),
@@ -60,7 +62,9 @@ export default function S3ConfigPage() {
 		},
 		onSuccess: async () => {
 			await refetch();
-			await commands.globalMessageDialog("S3 configuration saved successfully");
+			await commands.globalMessageDialog(
+				text("S3 configuration saved successfully"),
+			);
 		},
 	}));
 
@@ -77,7 +81,7 @@ export default function S3ConfigPage() {
 		onSuccess: async () => {
 			await refetch();
 			await commands.globalMessageDialog(
-				"S3 configuration deleted successfully",
+				text("S3 configuration deleted successfully"),
 			);
 		},
 	}));
@@ -117,7 +121,7 @@ export default function S3ConfigPage() {
 		},
 		onSuccess: async () => {
 			await commands.globalMessageDialog(
-				"S3 configuration test successful! Connection is working.",
+				text("S3 configuration test successful! Connection is working."),
 			);
 		},
 	}));
@@ -133,7 +137,7 @@ export default function S3ConfigPage() {
 		type: "text" | "password" = "text",
 	) => (
 		<div class="space-y-2">
-			<label class="text-[13px] text-gray-12">{label}</label>
+			<label class="text-[13px] text-gray-12">{text(label)}</label>
 			<Input
 				class="bg-gray-3!"
 				type={type}
@@ -162,17 +166,18 @@ export default function S3ConfigPage() {
 					title="Configuration"
 					description={
 						<>
-							It should take under 10 minutes to set up and connect your storage
-							bucket to Cap. View the{" "}
+							{language() === "zh-CN"
+								? "配置存储桶并连接到 Cap 通常不到 10 分钟。请查看"
+								: "It should take under 10 minutes to set up and connect your storage bucket to Cap. View the"}{" "}
 							<a
 								href="https://cap.so/docs/s3-config"
 								target="_blank"
 								class="underline text-gray-12"
 								rel="noopener"
 							>
-								Storage Config Guide
+								{text("Storage Config Guide")}
 							</a>{" "}
-							to get started.
+							{language() === "zh-CN" ? "开始配置。" : "to get started."}
 						</>
 					}
 				>
@@ -188,14 +193,15 @@ export default function S3ConfigPage() {
 								<Show when={managedByOrganization()}>
 									{(organization) => (
 										<p class="text-xs leading-relaxed text-gray-10">
-											Managed by your organization: {organization().name}
+											{text("Managed by your organization")}:{" "}
+											{organization().name}
 										</p>
 									)}
 								</Show>
 
 								<div class="space-y-2">
 									<label class="text-[13px] text-gray-12">
-										Storage Provider
+										{text("Storage Provider")}
 									</label>
 									<div class="relative">
 										<select
@@ -213,7 +219,9 @@ export default function S3ConfigPage() {
 											<option value="cloudflare">Cloudflare R2</option>
 											<option value="supabase">Supabase</option>
 											<option value="minio">MinIO</option>
-											<option value="other">Other S3-Compatible</option>
+											<option value="other">
+												{text("Other S3-Compatible")}
+											</option>
 										</select>
 										<div class="flex absolute inset-y-0 right-0 items-center px-2 pointer-events-none">
 											<svg
@@ -272,14 +280,16 @@ export default function S3ConfigPage() {
 									variant="destructive"
 									onClick={() => deleteConfig.mutate()}
 								>
-									{deleteConfig.isPending ? "Removing..." : "Remove Config"}
+									{text(
+										deleteConfig.isPending ? "Removing..." : "Remove Config",
+									)}
 								</Button>
 							)}
 							<Button
 								variant="gray"
 								onClick={() => testConfig.mutate(s3Config())}
 							>
-								{testConfig.isPending ? "Testing..." : "Test Connection"}
+								{text(testConfig.isPending ? "Testing..." : "Test Connection")}
 							</Button>
 						</div>
 						<Button
@@ -287,7 +297,7 @@ export default function S3ConfigPage() {
 							variant="primary"
 							onClick={() => saveConfig.mutate(s3Config())}
 						>
-							{saveConfig.isPending ? "Saving..." : "Save"}
+							{text(saveConfig.isPending ? "Saving..." : "Save")}
 						</Button>
 					</fieldset>
 				</div>

@@ -1,4 +1,5 @@
 import { createMemo, createUniqueId, For, Show } from "solid-js";
+import { useI18n } from "~/i18n";
 import type { OrganizationBrandColorSwatch } from "~/utils/organization-branding";
 import { BrandColorsDropdown } from "./BrandColorsDropdown";
 import { hexToRgb, RgbInput } from "./color-utils";
@@ -50,6 +51,7 @@ function randomColor(): RGBColor {
 export function GradientEditor(props: {
 	brandColorSwatches: OrganizationBrandColorSwatch[];
 }) {
+	const { text } = useI18n();
 	const { project, setProject } = useEditorContext();
 	const filterId = createUniqueId();
 
@@ -130,7 +132,9 @@ export function GradientEditor(props: {
 
 					<div class="flex gap-3 items-end">
 						<div class="flex-1 min-w-0">
-							<span class="text-[11px] text-gray-10 mb-1 block">From</span>
+							<span class="text-[11px] text-gray-10 mb-1 block">
+								{text("From")}
+							</span>
 							<div class="flex flex-col gap-2">
 								<RgbInput
 									value={src().from}
@@ -145,7 +149,9 @@ export function GradientEditor(props: {
 							</div>
 						</div>
 						<div class="flex-1 min-w-0">
-							<span class="text-[11px] text-gray-10 mb-1 block">To</span>
+							<span class="text-[11px] text-gray-10 mb-1 block">
+								{text("To")}
+							</span>
 							<div class="flex flex-col gap-2">
 								<RgbInput
 									value={src().to}
@@ -232,7 +238,7 @@ export function GradientEditor(props: {
 									to: randomColor(),
 								});
 							}}
-							title="Randomize"
+							title={text("Randomize")}
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

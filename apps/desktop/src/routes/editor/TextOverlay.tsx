@@ -15,6 +15,7 @@ import {
 	Show,
 } from "solid-js";
 import { produce } from "solid-js/store";
+import { useI18n } from "~/i18n";
 import type { TextSegment as TauriTextSegment } from "~/utils/tauri";
 import { useCanvasSnapTargets } from "./CanvasElementsOverlay";
 import { FPS, useEditorContext } from "./context";
@@ -316,6 +317,7 @@ function TextSegmentOverlay(props: {
 		onFinish?: () => void,
 	) => (downEvent: MouseEvent) => void;
 }) {
+	const { text } = useI18n();
 	const segment = createMemo(() => normalizeSegment(props.segment));
 	const {
 		setProject,
@@ -788,7 +790,7 @@ function TextSegmentOverlay(props: {
 						class="absolute px-1.5 py-0.5 text-[11px] font-medium text-white bg-blue-9 rounded pointer-events-none select-none"
 						style={labelStyle()}
 					>
-						Text
+						{text("Text")}
 					</div>
 				</Show>
 				<Show when={editing()}>

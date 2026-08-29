@@ -3,12 +3,14 @@ import { getVersion } from "@tauri-apps/api/app";
 import { createEffect, createResource } from "solid-js";
 import { createStore } from "solid-js/store";
 import Tooltip from "~/components/Tooltip";
+import { useI18n } from "~/i18n";
 import { hideCurrentWindow } from "~/utils/hide-window";
 import { commands } from "~/utils/tauri";
 import { apiClient } from "~/utils/web-api";
 import IconLucideBell from "~icons/lucide/bell";
 
 const ChangelogButton = () => {
+	const { t } = useI18n();
 	const [changelogState, setChangelogState] = makePersisted(
 		createStore({
 			hasUpdate: false,
@@ -64,7 +66,7 @@ const ChangelogButton = () => {
 	});
 
 	return (
-		<Tooltip openDelay={0} content="Changelog">
+		<Tooltip openDelay={0} content={t("capture.changelog")}>
 			<button
 				type="button"
 				onClick={handleChangelogClick}

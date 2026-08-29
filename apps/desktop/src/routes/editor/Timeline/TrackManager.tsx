@@ -1,6 +1,7 @@
 import { Popover } from "@kobalte/core/popover";
 import { cx } from "cva";
 import { createSignal, For, type JSX, Show } from "solid-js";
+import { useI18n } from "~/i18n";
 import type { TimelineTrackType } from "../context";
 import { CAP_TRACK_FILL_CLASS } from "./Track";
 
@@ -71,13 +72,14 @@ function TrackOptionRow(props: {
 	option: TrackManagerOption;
 	onSelect: () => void;
 }) {
+	const { text } = useI18n();
 	const meta = () => TRACK_META[props.option.type];
 	const accent = () => trackColor(props.option.type);
 	const available = () => props.option.available;
 	const isToggle = () => !props.option.supportsMultiple;
 	const isOn = () => props.option.active;
 	const description = () =>
-		available() ? meta().description : meta().unavailableHint;
+		text(available() ? meta().description : meta().unavailableHint);
 
 	return (
 		<button
@@ -112,7 +114,7 @@ function TrackOptionRow(props: {
 
 			<span class="flex flex-col flex-1 min-w-0">
 				<span class="flex gap-1.5 items-center text-[0.8125rem] font-medium leading-tight text-gray-12">
-					<span class="truncate">{props.option.label}</span>
+					<span class="truncate">{text(props.option.label)}</span>
 					<Show when={!isToggle() && (props.option.count ?? 0) > 0}>
 						<span
 							class="rounded-full min-w-4 px-1.5 py-px text-center text-[0.625rem] font-semibold leading-none text-white tabular-nums"
@@ -159,6 +161,7 @@ export function TrackManager(props: {
 	onToggle(type: TimelineTrackType, next: boolean): void;
 	onAdd(type: TimelineTrackType): void;
 }) {
+	const { text } = useI18n();
 	const selectable = () => props.options.filter((option) => !option.locked);
 	const [open, setOpen] = createSignal(false);
 
@@ -187,7 +190,7 @@ export function TrackManager(props: {
 				onMouseDown={(e) => e.stopPropagation()}
 			>
 				<IconLucidePlus class="size-3.5 shrink-0" />
-				<span class="truncate">Add track</span>
+				<span class="truncate">{text("Add track")}</span>
 				<IconCapChevronDown class="size-2.5 shrink-0 text-white/70 transition-transform duration-200 group-data-expanded:rotate-180" />
 			</Popover.Trigger>
 			<Popover.Portal>
@@ -204,10 +207,12 @@ export function TrackManager(props: {
 				>
 					<div class="flex flex-col gap-0.5 px-4 pt-3.5 pb-3 border-b shrink-0 border-gray-3">
 						<span class="text-[0.8125rem] font-semibold text-gray-12">
-							Add a track
+							{text("Add a track")}
 						</span>
 						<span class="text-[0.6875rem] leading-snug text-gray-10">
-							Layer captions, audio, zooms and more onto your timeline.
+							{text(
+								"Layer captions, audio, zooms and more onto your timeline.",
+							)}
 						</span>
 					</div>
 					<div class="flex overflow-y-auto flex-col flex-1 gap-0.5 p-1.5 min-h-0 scrollbar-none">
@@ -230,7 +235,7 @@ export function TrackManager(props: {
 					<div class="p-1.5 border-t shrink-0 border-gray-3">
 						<Popover.CloseButton class="flex gap-1.5 justify-center items-center px-3 w-full h-9 text-[0.8125rem] font-medium rounded-lg border transition-colors duration-150 outline-hidden border-gray-4/70 bg-gray-2 text-gray-12 hover:bg-gray-3 hover:border-gray-5">
 							<IconLucideX class="size-3.5" />
-							Close
+							{text("Close")}
 						</Popover.CloseButton>
 					</div>
 				</Popover.Content>
@@ -245,6 +250,7 @@ export function TrackIcon(props: {
 	type?: TimelineTrackType;
 	class?: string;
 }) {
+	const { text } = useI18n();
 	if (!props.type) {
 		return (
 			<div
@@ -258,7 +264,7 @@ export function TrackIcon(props: {
 				{props.icon}
 				<Show when={props.label}>
 					<span class="text-[0.625rem] leading-none font-medium">
-						{props.label}
+						{text(props.label ?? "")}
 					</span>
 				</Show>
 			</div>
@@ -278,7 +284,7 @@ export function TrackIcon(props: {
 			{props.icon}
 			<Show when={props.label}>
 				<span class="text-[0.625rem] leading-none font-medium">
-					{props.label}
+					{text(props.label ?? "")}
 				</span>
 			</Show>
 		</div>

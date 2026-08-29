@@ -1,6 +1,7 @@
 import { Popover } from "@kobalte/core/popover";
 import { createMemo, For, Show } from "solid-js";
 import { Toggle } from "~/components/Toggle";
+import { useI18n } from "~/i18n";
 import IconLucidePencil from "~icons/lucide/pencil";
 import IconLucideTrash from "~icons/lucide/trash-2";
 import { BACKGROUND_COLORS, hexToRgb, RgbInput } from "../ColorPicker";
@@ -8,6 +9,7 @@ import { type Annotation, useScreenshotEditorContext } from "../context";
 import { EditorButton, Slider } from "../ui";
 
 export function AnnotationPopover() {
+	const { text } = useI18n();
 	const {
 		annotations,
 		setAnnotations,
@@ -43,7 +45,7 @@ export function AnnotationPopover() {
 							when={selectedAnnotation()}
 							fallback={
 								<div class="text-center text-gray-11 text-xs font-medium">
-									Select an annotation to edit.
+									{text("Select an annotation to edit.")}
 								</div>
 							}
 						>
@@ -51,7 +53,7 @@ export function AnnotationPopover() {
 								<div class="flex flex-col gap-4 animate-in fade-in slide-in-from-top-2">
 									<div class="flex flex-col gap-2">
 										<span class="text-xs font-medium text-gray-11">
-											Stroke Color
+											{text("Stroke Color")}
 										</span>
 										<RgbInput
 											value={
@@ -91,7 +93,7 @@ export function AnnotationPopover() {
 										<div class="flex flex-col gap-2">
 											<div class="flex flex-row justify-between items-center">
 												<span class="text-xs font-medium text-gray-11">
-													Fill Color
+													{text("Fill Color")}
 												</span>
 												<Toggle
 													size="sm"
@@ -148,7 +150,7 @@ export function AnnotationPopover() {
 
 									<div class="flex flex-col gap-2">
 										<span class="text-xs font-medium text-gray-11">
-											Stroke Width
+											{text("Stroke Width")}
 										</span>
 										<Slider
 											value={[annotation().strokeWidth]}
@@ -161,7 +163,7 @@ export function AnnotationPopover() {
 
 									<div class="flex flex-col gap-2">
 										<span class="text-xs font-medium text-gray-11">
-											Opacity
+											{text("Opacity")}
 										</span>
 										<Slider
 											value={[annotation().opacity * 100]}
@@ -175,7 +177,7 @@ export function AnnotationPopover() {
 									{annotation().type === "text" && (
 										<div class="flex flex-col gap-2">
 											<span class="text-xs font-medium text-gray-11">
-												Font Size
+												{text("Font Size")}
 											</span>
 											<Slider
 												value={[annotation().height || 24]} // Text uses height as font size roughly
@@ -198,7 +200,7 @@ export function AnnotationPopover() {
 												setSelectedAnnotationId(null);
 											}}
 										>
-											Delete Annotation
+											{text("Delete Annotation")}
 										</EditorButton>
 									</div>
 								</div>

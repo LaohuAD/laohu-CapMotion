@@ -2,6 +2,7 @@ import { createEventListenerMap } from "@solid-primitives/event-listener";
 import { cx } from "cva";
 import { createMemo, createRoot, createSignal, For, Show } from "solid-js";
 import { produce } from "solid-js/store";
+import { useI18n } from "~/i18n";
 
 import { cssFontFamily } from "~/utils/fonts";
 import { useEditorContext } from "../context";
@@ -30,6 +31,7 @@ export function TextTrack(props: {
 	onDragStateChanged: (v: TextSegmentDragState) => void;
 	handleUpdatePlayhead: (e: MouseEvent) => void;
 }) {
+	const { text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -307,9 +309,9 @@ export function TextTrack(props: {
 						fallback={<div class="w-full rounded-xl bg-transparent" />}
 					>
 						<div class="text-center text-sm text-(--text-tertiary) flex flex-col justify-center items-center inset-0 w-full bg-gray-3/20 dark:bg-gray-3/10 hover:bg-gray-3/30 dark:hover:bg-gray-3/20 transition-colors rounded-xl pointer-events-none">
-							<div>Click to add text</div>
+							<div>{text("Click to add text")}</div>
 							<div class="text-[10px] text-(--text-tertiary)/40 mt-0.5">
-								(Set a label over your video)
+								{text("(Set a label over your video)")}
 							</div>
 						</div>
 					</Show>
@@ -460,7 +462,7 @@ export function TextTrack(props: {
 									full={() => (
 										<div class="flex flex-col gap-0.5 justify-center items-center text-xs text-gray-1 dark:text-gray-12">
 											<span class="flex gap-1 items-center opacity-70">
-												Text
+												{text("Text")}
 												<Show when={segment.layout === "fullscreen"}>
 													<IconLucidePause class="size-2.5" />
 												</Show>

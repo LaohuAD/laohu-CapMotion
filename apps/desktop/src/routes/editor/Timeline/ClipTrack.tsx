@@ -18,6 +18,7 @@ import {
 } from "solid-js";
 import { produce } from "solid-js/store";
 
+import { useI18n } from "~/i18n";
 import type { ClipSpeedAudioMode, TimelineSegment } from "~/utils/tauri";
 import {
 	clampTransitionDuration,
@@ -362,6 +363,8 @@ function ClipSpeedControl(props: {
 	onSetTimescale: (timescale: number) => void;
 	onSetSpeedAudioMode: (mode: ClipSpeedAudioMode) => void;
 }) {
+	const { text } = useI18n();
+
 	return (
 		<Popover
 			placement="top"
@@ -374,7 +377,7 @@ function ClipSpeedControl(props: {
 					"pointer-events-auto flex items-center gap-0.5 rounded-full bg-black/30 px-1.5 py-0.5 text-[10px] font-medium text-white transition-colors hover:bg-black/50",
 					props.triggerClass,
 				)}
-				aria-label={`Clip speed: ${props.timescale}x`}
+				aria-label={`${text("Clip speed")}: ${props.timescale}x`}
 				onMouseDown={(event) => event.stopPropagation()}
 			>
 				<IconLucideFastForward class="size-2.5" />
@@ -422,7 +425,7 @@ function ClipSpeedControl(props: {
 									)}
 									onClick={() => props.onSetSpeedAudioMode(value)}
 								>
-									{label}
+									{text(label)}
 								</button>
 							))}
 						</div>
@@ -438,6 +441,7 @@ export function ClipTrack(
 		handleUpdatePlayhead: (e: MouseEvent) => void;
 	},
 ) {
+	const { text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -978,7 +982,9 @@ export function ClipTrack(
 													"background-image":
 														"repeating-linear-gradient(-45deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 4px, transparent 4px, transparent 8px)",
 												}}
-												title="Video paused while the fullscreen text is shown"
+												title={text(
+													"Video paused while the fullscreen text is shown",
+												)}
 											>
 												<IconLucidePause
 													class={cx(
@@ -993,7 +999,7 @@ export function ClipTrack(
 															causeSelected() ? "text-blue-9" : "text-white/70",
 														)}
 													>
-														Paused
+														{text("Paused")}
 													</span>
 												</Show>
 											</div>
@@ -1006,7 +1012,7 @@ export function ClipTrack(
 										type="button"
 										data-transition
 										class="absolute inset-y-0 left-0 z-[4] grid w-4 -translate-x-1/2 place-items-center bg-blue-9/40 text-xs text-white opacity-0 transition-opacity hover:bg-blue-9/60 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-blue-9"
-										aria-label={`Add transition before clip ${i() + 1}`}
+										aria-label={`${text("Add transition before clip")} ${i() + 1}`}
 										onClick={(event) => {
 											event.stopPropagation();
 											projectActions.setClipTransition(i(), {
@@ -1054,10 +1060,12 @@ export function ClipTrack(
 													"background-image":
 														"linear-gradient(135deg, transparent 42%, rgb(96 165 250 / 0.7) 43%, rgb(96 165 250 / 0.7) 57%, transparent 58%)",
 												}}
-												title={`${transition().type === "cross-fade" ? "Crossfade" : "Fade through black"} · ${transition().duration.toFixed(2)}s`}
+												title={`${text(transition().type === "cross-fade" ? "Crossfade" : "Fade through black")} · ${transition().duration.toFixed(2)}s`}
 												onMouseDown={(event) => event.stopPropagation()}
 											>
-												<span class="sr-only">Edit clip transition</span>
+												<span class="sr-only">
+													{text("Edit clip transition")}
+												</span>
 											</Popover.Trigger>
 											<Popover.Portal>
 												<Popover.Content
@@ -1066,7 +1074,7 @@ export function ClipTrack(
 												>
 													<div class="flex items-center justify-between">
 														<span class="text-sm font-medium">
-															Clip transition
+															{text("Clip transition")}
 														</span>
 														<span class="text-xs tabular-nums text-gray-10">
 															{transition().duration.toFixed(2)}s
@@ -1095,13 +1103,13 @@ export function ClipTrack(
 																	})
 																}
 															>
-																{label}
+																{text(label)}
 															</button>
 														))}
 													</div>
 													<input
 														type="range"
-														aria-label="Transition duration"
+														aria-label={text("Transition duration")}
 														min={MIN_CLIP_TRANSITION_DURATION}
 														max={maxTransitionDuration(
 															segments()[i() - 1],
@@ -1123,7 +1131,7 @@ export function ClipTrack(
 															projectActions.deleteClipTransition(i())
 														}
 													>
-														Remove transition
+														{text("Remove transition")}
 													</button>
 												</Popover.Content>
 											</Popover.Portal>

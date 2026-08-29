@@ -7,6 +7,7 @@ import {
 	onCleanup,
 	Show,
 } from "solid-js";
+import { useI18n } from "~/i18n";
 import IconCapZoomIn from "~icons/cap/zoom-in";
 import IconCapZoomOut from "~icons/cap/zoom-out";
 import { EditorButton, Slider } from "../editor/ui";
@@ -31,6 +32,7 @@ const gridStyle = {
 };
 
 export function Preview(props: { zoom: number; setZoom: (z: number) => void }) {
+	const { text } = useI18n();
 	const {
 		latestFrame,
 		annotations,
@@ -500,7 +502,9 @@ export function Preview(props: { zoom: number; setZoom: (z: number) => void }) {
 				</div>
 				<Show
 					when={!!latestFrame()}
-					fallback={<div class="text-gray-11">Loading preview...</div>}
+					fallback={
+						<div class="text-gray-11">{text("Loading preview...")}</div>
+					}
 				>
 					{(_) => {
 						createEffect(

@@ -2,6 +2,7 @@ import { createEventListenerMap } from "@solid-primitives/event-listener";
 import { cx } from "cva";
 import { createMemo, createRoot, createSignal, For, Show } from "solid-js";
 import { produce } from "solid-js/store";
+import { useI18n } from "~/i18n";
 
 import { type AudioTrackSegment, MIN_AUDIO_SEGMENT_DURATION } from "../audio";
 import { useEditorContext } from "../context";
@@ -127,6 +128,7 @@ function FadeControl(props: {
 	onMouseDown: (e: MouseEvent) => void;
 	onDblClick: (e: MouseEvent) => void;
 }) {
+	const { text } = useI18n();
 	const hasFade = () => props.frac > 0.001;
 	const showEnvelope = () => hasFade() || props.active;
 	const geometry = () => fadeGeometry(props.frac, props.edge);
@@ -160,9 +162,9 @@ function FadeControl(props: {
 				</Show>
 				<div
 					role="slider"
-					aria-label={
-						props.edge === "in" ? "Fade in duration" : "Fade out duration"
-					}
+					aria-label={text(
+						props.edge === "in" ? "Fade in duration" : "Fade out duration",
+					)}
 					aria-valuenow={Math.round(props.fadeSeconds * 1000)}
 					tabindex={-1}
 					class="timeline-fade-cursor absolute inset-y-0 z-40 w-5 -translate-x-1/2 pointer-events-auto"
@@ -187,9 +189,9 @@ function FadeControl(props: {
 			>
 				<div
 					role="slider"
-					aria-label={
-						props.edge === "in" ? "Fade in corner" : "Fade out corner"
-					}
+					aria-label={text(
+						props.edge === "in" ? "Fade in corner" : "Fade out corner",
+					)}
 					aria-valuenow={Math.round(props.fadeSeconds * 1000)}
 					tabindex={-1}
 					class="timeline-fade-cursor relative p-2 -m-2"
@@ -209,6 +211,7 @@ export function AudioTrack(props: {
 	handleUpdatePlayhead: (e: MouseEvent) => void;
 	onRequestAdd: (laneIndex: number) => void;
 }) {
+	const { text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -422,7 +425,7 @@ export function AudioTrack(props: {
 						>
 							<IconLucidePlus class="size-3.5" />
 						</span>
-						<span class="font-medium">Add audio</span>
+						<span class="font-medium">{text("Add audio")}</span>
 					</button>
 				}
 			>

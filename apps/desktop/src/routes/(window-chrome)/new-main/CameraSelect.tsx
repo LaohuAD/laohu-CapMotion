@@ -8,6 +8,7 @@ import {
 	createSignal,
 	Show,
 } from "solid-js";
+import { useI18n } from "~/i18n";
 import { trackEvent } from "~/utils/analytics";
 import { createCurrentRecordingQuery } from "~/utils/queries";
 import {
@@ -27,8 +28,6 @@ import InfoPill from "./InfoPill";
 import TargetSelectInfoPill from "./TargetSelectInfoPill";
 import useRequestPermission from "./useRequestPermission";
 
-const NO_CAMERA = "No Camera";
-
 export default function CameraSelect(props: {
 	disabled?: boolean;
 	options: CameraInfo[];
@@ -42,6 +41,7 @@ export default function CameraSelect(props: {
 	onOpen?: () => void;
 	onOpenSettings?: () => void;
 }) {
+	const { t } = useI18n();
 	const currentRecording = createCurrentRecordingQuery();
 	const requestPermission = useRequestPermission();
 	const [cameraWindowOpen, setCameraWindowOpen] = createSignal(false);
@@ -101,7 +101,9 @@ export default function CameraSelect(props: {
 	const label = () =>
 		props.value?.display_name ??
 		(hasSelection() ? props.selectedLabel : null) ??
-		(hasSelection() ? "Camera" : NO_CAMERA);
+		(hasSelection()
+			? t("onboarding.permissions.camera.name")
+			: t("capture.noCamera"));
 
 	const showHiddenIndicator = () =>
 		props.value !== null &&
@@ -136,7 +138,7 @@ export default function CameraSelect(props: {
 				<IconCapCamera class={DEVICE_ROW_ICON_CLASS} />
 				<p
 					class={cx(DEVICE_ROW_LABEL_CLASS, notConnected() && "text-gray-10")}
-					title={notConnected() ? "Not connected" : undefined}
+					title={notConnected() ? t("common.notConnected") : undefined}
 				>
 					{label()}
 				</p>
@@ -147,8 +149,8 @@ export default function CameraSelect(props: {
 							onClick={openCameraWindow}
 							onPointerDown={(e) => e.stopPropagation()}
 							class={DEVICE_SHORTCUT_BUTTON_CLASS}
-							title="Show camera preview"
-							aria-label="Show camera preview"
+							title={t("capture.showCameraPreview")}
+							aria-label={t("capture.showCameraPreview")}
 						>
 							<IconLucideEyeOff class="size-3.5" />
 						</button>
@@ -163,8 +165,8 @@ export default function CameraSelect(props: {
 							}}
 							onPointerDown={(e) => e.stopPropagation()}
 							class={DEVICE_SHORTCUT_BUTTON_CLASS}
-							title="Camera settings"
-							aria-label="Camera settings"
+							title={t("capture.cameraSettings")}
+							aria-label={t("capture.cameraSettings")}
 						>
 							<IconLucideSettings class="size-3.5" />
 						</button>
@@ -204,6 +206,7 @@ export function CameraSelectBase(props: {
 	permissions?: OSPermissionsCheck;
 	hidePreviewButton?: boolean;
 }) {
+	const { t } = useI18n();
 	const currentRecording = createCurrentRecordingQuery();
 	const requestPermission = useRequestPermission();
 	const [cameraWindowOpen, setCameraWindowOpen] = createSignal(false);
@@ -287,7 +290,7 @@ export function CameraSelectBase(props: {
 
 					Promise.all([
 						CheckMenuItem.new({
-							text: NO_CAMERA,
+							text: t("capture.noCamera"),
 							checked: props.value === null,
 							action: () => onChange(null),
 						}),
@@ -309,7 +312,7 @@ export function CameraSelectBase(props: {
 			>
 				<IconCapCamera class={props.iconClass} />
 				<p class="flex-1 text-sm text-left truncate">
-					{props.value?.display_name ?? NO_CAMERA}
+					{props.value?.display_name ?? t("capture.noCamera")}
 				</p>
 				<div class="flex items-center gap-1">
 					{showHiddenIndicator() && (
@@ -318,7 +321,7 @@ export function CameraSelectBase(props: {
 							onClick={openCameraWindow}
 							onPointerDown={(e) => e.stopPropagation()}
 							class="flex items-center justify-center px-2 py-1 rounded-full bg-gray-6 text-gray-11 hover:bg-gray-7 transition-colors"
-							title="Show camera preview"
+							title={t("capture.showCameraPreview")}
 						>
 							<IconLucideEyeOff class="size-3.5" />
 						</button>

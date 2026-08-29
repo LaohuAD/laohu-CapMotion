@@ -38,6 +38,7 @@ import {
 	type Ratio,
 } from "~/components/Cropper";
 import { Toggle } from "~/components/Toggle";
+import { useI18n } from "~/i18n";
 import { composeEventHandlers } from "~/utils/composeEventHandlers";
 import { createTauriEventListener } from "~/utils/createEventListener";
 import { commands, events } from "~/utils/tauri";
@@ -299,6 +300,7 @@ function EditorContent(props: { projectPath: string }) {
 }
 
 function Inner() {
+	const { text } = useI18n();
 	const {
 		project,
 		editorInstance,
@@ -317,7 +319,7 @@ function Inner() {
 	});
 
 	const appendRecordedClip = async (recordingPath: string) => {
-		const toastId = toast.loading("Adding clip…");
+		const toastId = toast.loading(text("Adding clip…"));
 		try {
 			if (editorState.playing) {
 				await commands.stopPlayback();
@@ -326,11 +328,11 @@ function Inner() {
 			await commands.setProjectConfig(serializeProjectConfiguration(project));
 			await commands.addExistingRecordingToEditor(recordingPath);
 			await commands.deleteRecordingDirectory(recordingPath).catch(() => {});
-			toast.success("Clip added", { id: toastId });
+			toast.success(text("Clip added"), { id: toastId });
 			window.location.reload();
 		} catch (error) {
 			const message = error instanceof Error ? error.message : String(error);
-			toast.error(`Failed to add clip: ${message}`, { id: toastId });
+			toast.error(`${text("Failed to add clip")}: ${message}`, { id: toastId });
 		}
 	};
 
@@ -709,7 +711,7 @@ function Inner() {
 											"bg-gray-3/55 dark:bg-gray-4/50": isResizingTimeline(),
 										}}
 										onMouseDown={handleTimelineResizeStart}
-										aria-label="Resize timeline height"
+										aria-label={text("Resize timeline height")}
 									>
 										<For each={TIMELINE_RESIZE_GRIP_MARKS}>
 											{() => (
@@ -751,7 +753,7 @@ function Inner() {
 									class="flex-none flex items-center justify-center cursor-col-resize select-none group z-10"
 									style={{ width: "12px" }}
 									onMouseDown={handleSplitResizeStart}
-									aria-label="Resize captions panel"
+									aria-label={text("Resize captions panel")}
 									role="separator"
 									aria-orientation="vertical"
 								>
@@ -796,6 +798,7 @@ function Inner() {
 }
 
 function Dialogs() {
+	const { text } = useI18n();
 	const { dialog, setDialog, presets, project } = useEditorContext();
 
 	const isDialogType = () => isModalDialog(dialog());
@@ -846,7 +849,7 @@ function Dialogs() {
 												disabled={createPreset.isPending}
 												onClick={() => createPreset.mutate()}
 											>
-												Create
+												{text("Create")}
 											</Dialog.ConfirmButton>
 										}
 									>
@@ -854,7 +857,7 @@ function Dialogs() {
 										<Input
 											class="mt-2"
 											value={form.name}
-											placeholder="Enter preset name..."
+											placeholder={text("Enter preset name...")}
 											onInput={(e) => setForm("name", e.currentTarget.value)}
 										/>
 										<Subfield name="Set as default" class="mt-4">
@@ -894,7 +897,7 @@ function Dialogs() {
 												disabled={renamePreset.isPending}
 												onClick={() => renamePreset.mutate()}
 											>
-												Rename
+												{text("Rename")}
 											</Dialog.ConfirmButton>
 										}
 									>
@@ -934,12 +937,12 @@ function Dialogs() {
 												onClick={() => deletePreset.mutate()}
 												disabled={deletePreset.isPending}
 											>
-												Delete
+												{text("Delete")}
 											</Dialog.ConfirmButton>
 										}
 									>
 										<p class="text-gray-11">
-											Are you sure you want to delete this preset?
+											{text("Are you sure you want to delete this preset?")}
 										</p>
 									</DialogContent>
 								);
@@ -1203,7 +1206,7 @@ function Dialogs() {
 										<Dialog.Header>
 											<div class="flex flex-row space-x-8">
 												<div class="flex flex-row items-center space-x-3 text-gray-11">
-													<span>Size</span>
+													<span>{text("Size")}</span>
 													<div class="w-13">
 														<BoundInput field="width" max={display.width} />
 													</div>
@@ -1213,7 +1216,7 @@ function Dialogs() {
 													</div>
 												</div>
 												<div class="flex flex-row items-center space-x-3 text-gray-11">
-													<span>Position</span>
+													<span>{text("Position")}</span>
 													<div class="w-13">
 														<BoundInput field="x" />
 													</div>
@@ -1286,7 +1289,7 @@ function Dialogs() {
 											<div class="flex flex-row gap-3 justify-center items-stretch">
 												<div class="flex flex-col gap-2.5">
 													<span class="px-1 text-[11px] font-medium tracking-wide uppercase text-gray-10">
-														Crop area
+														{text("Crop area")}
 													</span>
 													<div
 														class="overflow-hidden relative rounded-xl border shadow-sm border-gray-3 bg-gray-3"
@@ -1318,7 +1321,7 @@ function Dialogs() {
 															>
 																<img
 																	class="block w-full h-full pointer-events-none select-none"
-																	alt="Current frame"
+																	alt={text("Current frame")}
 																	onError={() => {
 																		const url = frameUrl();
 																		if (url) {
@@ -1362,7 +1365,7 @@ function Dialogs() {
 															<div class="flex absolute inset-0 z-40 flex-col gap-3 justify-center items-center bg-gray-3">
 																<div class="rounded-full border-2 animate-spin size-7 border-gray-5 border-t-blue-9" />
 																<span class="text-xs font-medium text-gray-10">
-																	Loading frame…
+																	{text("Loading frame…")}
 																</span>
 															</div>
 														</Show>
@@ -1389,7 +1392,7 @@ function Dialogs() {
 
 												<div class="flex flex-col gap-2.5">
 													<span class="px-1 text-[11px] font-medium tracking-wide uppercase text-gray-10">
-														Preview
+														{text("Preview")}
 													</span>
 													<div
 														class="flex overflow-hidden relative justify-center items-center rounded-xl border shadow-sm border-gray-3 bg-gray-3"
@@ -1406,7 +1409,7 @@ function Dialogs() {
 															<div class="flex absolute inset-0 z-40 flex-col gap-3 justify-center items-center bg-gray-3">
 																<div class="rounded-full border-2 animate-spin size-7 border-gray-5 border-t-blue-9" />
 																<span class="text-xs font-medium text-gray-10">
-																	Rendering preview…
+																	{text("Rendering preview…")}
 																</span>
 															</div>
 														</Show>
@@ -1431,7 +1434,7 @@ function Dialogs() {
 													setDialog((d) => ({ ...d, open: false }));
 												}}
 											>
-												Save
+												{text("Save")}
 											</Button>
 										</Dialog.Footer>
 									</>

@@ -209,6 +209,13 @@ mod tests {
         );
     }
 
+    #[test]
+    fn camera_preview_only_reports_failure_after_all_retries() {
+        assert!(!camera_preview_attempt_is_final(1, 3));
+        assert!(!camera_preview_attempt_is_final(2, 3));
+        assert!(camera_preview_attempt_is_final(3, 3));
+    }
+
     #[cfg(target_os = "linux")]
     #[test]
     fn wayland_clipboard_fallback_requires_wayland_without_x11() {
@@ -782,6 +789,11 @@ pub struct VideoRecordingMetadata {
 
 const CAMERA_PREVIEW_ERROR_EVENT: &str = "camera-preview-error";
 const CAMERA_PREVIEW_CLEAR_EVENT: &str = "camera-preview-clear";
+const CAMERA_PREVIEW_MAX_ATTEMPTS: usize = 3;
+
+fn camera_preview_attempt_is_final(attempt: usize, max_attempts: usize) -> bool {
+    attempt >= max_attempts
+}
 
 #[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -1472,13 +1484,7 @@ async fn set_camera_input(
                         break Ok(());
                     }
                     Err(e) => {
-                        if attempts == 1 && !skip_camera_window {
-                            emit_camera_preview_error(
-                                &app_handle,
-                                camera_preview_error_message(&e),
-                            );
-                        }
-                        if attempts >= 3 {
+                        if camera_preview_attempt_is_final(attempts, CAMERA_PREVIEW_MAX_ATTEMPTS) {
                             break Err(format!(
                                 "Failed to initialize camera after {attempts} attempts: {e}"
                             ));

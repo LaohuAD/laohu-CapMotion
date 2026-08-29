@@ -2,7 +2,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { type } from "@tauri-apps/plugin-os";
 import { createResource, createSignal, For, onCleanup, Show } from "solid-js";
 import { createStore } from "solid-js/store";
-
+import { useI18n } from "~/i18n";
 import { generalSettingsStore } from "~/store";
 import {
 	deriveGeneralSettings,
@@ -51,6 +51,7 @@ function Inner(props: {
 	initialStore: GeneralSettingsStore | null;
 	osType: ReturnType<typeof type>;
 }) {
+	const { text } = useI18n();
 	const [settings, setSettings] = createStore<GeneralSettingsStore>(
 		deriveGeneralSettings(props.initialStore),
 	);
@@ -222,7 +223,7 @@ function Inner(props: {
 												!!state().error || index() !== state().sentence,
 										}}
 									>
-										{sentence}
+										{text(sentence)}
 									</p>
 								)}
 							</For>
@@ -241,7 +242,7 @@ function Inner(props: {
 							class="rounded-lg border border-white/25 px-4 py-2 text-sm text-white transition-colors hover:bg-white/10"
 							onClick={cancelTakeover}
 						>
-							Cancel
+							{text("Cancel")}
 						</button>
 					</div>
 				)}

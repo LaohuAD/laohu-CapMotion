@@ -13,6 +13,7 @@ import {
 	Show,
 } from "solid-js";
 import { produce } from "solid-js/store";
+import { useI18n } from "~/i18n";
 import { generalSettingsStore } from "~/store";
 import { commands } from "~/utils/tauri";
 import { useEditorContext } from "../context";
@@ -40,6 +41,7 @@ export function ZoomTrack(props: {
 	onDragStateChanged: (v: ZoomSegmentDragState) => void;
 	handleUpdatePlayhead: (e: MouseEvent) => void;
 }) {
+	const { language, text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -178,7 +180,7 @@ export function ZoomTrack(props: {
 					items: [
 						{
 							id: "generateZoomSegments",
-							text: "Generate zoom segments from clicks",
+							text: text("Generate zoom segments from clicks"),
 							action: handleGenerateZoomSegments,
 						},
 					],
@@ -319,14 +321,14 @@ export function ZoomTrack(props: {
 									}}
 								>
 									{isGeneratingAutoZoom()
-										? "Generating..."
-										: "Click to generate zoom segments"}
+										? text("Generating...")
+										: text("Click to generate zoom segments")}
 								</Button>
 								<button
 									type="button"
 									class="flex shrink-0 justify-center items-center rounded-full outline-hidden text-gray-11 hover:text-gray-12 hover:bg-gray-5 focus-visible:ring-2 focus-visible:ring-gray-8 size-8 transition-colors"
 									disabled={isGeneratingAutoZoom()}
-									aria-label="Dismiss for this session"
+									aria-label={text("Dismiss for this session")}
 									onClick={() => setSessionDismissedGenerateZoomPrompt(true)}
 								>
 									<IconLucideX class="size-4" />
@@ -346,7 +348,9 @@ export function ZoomTrack(props: {
 						};
 
 						const zoomModeLabel = () =>
-							segment().mode === "auto" ? "Automatic Zoom" : "Manual Zoom";
+							segment().mode === "auto"
+								? text("Automatic Zoom")
+								: text("Manual Zoom");
 
 						const zoomSegments = () => project.timeline?.zoomSegments ?? [];
 
@@ -572,7 +576,7 @@ export function ZoomTrack(props: {
 										items: [
 											{
 												id: "selectAllZoomSegments",
-												text: "Select all zoom segments",
+												text: text("Select all zoom segments"),
 												enabled: allIndices.length > 1,
 												action: () =>
 													setEditorState("timeline", "selection", {
@@ -584,8 +588,10 @@ export function ZoomTrack(props: {
 												id: "deleteZoomSegments",
 												text:
 													targetIndices.length > 1
-														? `Delete ${targetIndices.length} zoom segments`
-														: "Delete zoom segment",
+														? language() === "zh-CN"
+															? `删除 ${targetIndices.length} 个放大片段`
+															: `Delete ${targetIndices.length} zoom segments`
+														: text("Delete zoom segment"),
 												action: () =>
 													projectActions.deleteZoomSegments(targetIndices),
 											},

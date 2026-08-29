@@ -23,6 +23,7 @@ import {
 	createCropOptionsMenuItems,
 	type Ratio,
 } from "~/components/Cropper";
+import { useI18n } from "~/i18n";
 import { composeEventHandlers } from "~/utils/composeEventHandlers";
 import IconCapCircleX from "~icons/cap/circle-x";
 import IconLucideMaximize from "~icons/lucide/maximize";
@@ -197,6 +198,7 @@ export function Editor() {
 }
 
 function Dialogs() {
+	const { text } = useI18n();
 	const { dialog, setDialog, setProject, editorInstance } =
 		useScreenshotEditorContext();
 
@@ -347,7 +349,7 @@ function Dialogs() {
 										<Dialog.Header>
 											<div class="flex flex-row space-x-8">
 												<div class="flex flex-row items-center space-x-3 text-gray-11">
-													<span>Size</span>
+													<span>{text("Size")}</span>
 													<div class="w-13">
 														<BoundInput field="width" max={originalSize.x} />
 													</div>
@@ -357,7 +359,7 @@ function Dialogs() {
 													</div>
 												</div>
 												<div class="flex flex-row items-center space-x-3 text-gray-11">
-													<span>Position</span>
+													<span>{text("Position")}</span>
 													<div class="w-13">
 														<BoundInput field="x" />
 													</div>
@@ -452,7 +454,7 @@ function Dialogs() {
 														>
 															<img
 																class="w-full h-full pointer-events-none select-none shadow-sm"
-																alt="screenshot"
+																alt={text("screenshot")}
 																src={convertFileSrc(imagePath())}
 															/>
 														</Cropper>
@@ -477,7 +479,7 @@ function Dialogs() {
 													setDialog({ open: false });
 												}}
 											>
-												Save
+												{text("Save")}
 											</Button>
 										</Dialog.Footer>
 									</>

@@ -2,6 +2,7 @@ import { createQuery } from "@tanstack/solid-query";
 import { cx } from "cva";
 import type { Component, ComponentProps, JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
+import { useI18n } from "~/i18n";
 
 import {
 	createCurrentRecordingQuery,
@@ -38,6 +39,7 @@ export function SystemAudioToggleRoot(
 		icon: JSX.Element;
 	},
 ) {
+	const { t } = useI18n();
 	const { rawOptions, setOptions } = useRecordingOptions();
 	const currentRecording = createCurrentRecordingQuery();
 	const systemAudioSupported = createQuery(() => isSystemAudioSupported);
@@ -66,15 +68,15 @@ export function SystemAudioToggleRoot(
 			{props.icon}
 			<p class={DEVICE_ROW_LABEL_CLASS}>
 				{rawOptions.captureSystemAudio
-					? "Record System Audio"
-					: "No System Audio"}
+					? t("capture.recordSystemAudio")
+					: t("capture.noSystemAudio")}
 			</p>
 			<div class={DEVICE_ROW_TRAILING_CLASS}>
 				<Dynamic
 					component={props.PillComponent}
 					variant={rawOptions.captureSystemAudio ? "blue" : "gray"}
 				>
-					{rawOptions.captureSystemAudio ? "On" : "Off"}
+					{rawOptions.captureSystemAudio ? t("common.on") : t("common.off")}
 				</Dynamic>
 			</div>
 		</button>

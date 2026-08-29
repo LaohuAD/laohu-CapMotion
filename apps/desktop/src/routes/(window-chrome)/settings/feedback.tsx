@@ -7,6 +7,7 @@ import { type OsType, type as ostype } from "@tauri-apps/plugin-os";
 import * as shell from "@tauri-apps/plugin-shell";
 import { createResource, createSignal, For, Show } from "solid-js";
 import toast from "solid-toast";
+import { useI18n } from "~/i18n";
 import {
 	commands,
 	type DiagnosticProgress,
@@ -95,6 +96,7 @@ function SelectDiagnosticItem<T extends string | number>(props: {
 	options: { text: string; value: T }[];
 	onChange: (value: T) => void;
 }) {
+	const { text } = useI18n();
 	return (
 		<SettingItem label={props.label} description={props.description}>
 			<button
@@ -104,7 +106,7 @@ function SelectDiagnosticItem<T extends string | number>(props: {
 					const currentValue = props.value;
 					const items = props.options.map((option) =>
 						CheckMenuItem.new({
-							text: option.text,
+							text: text(option.text),
 							checked: currentValue === option.value,
 							action: () => props.onChange(option.value),
 						}),
@@ -114,8 +116,10 @@ function SelectDiagnosticItem<T extends string | number>(props: {
 					await menu.close();
 				}}
 			>
-				{props.options.find((option) => option.value === props.value)?.text ??
-					String(props.value)}
+				{text(
+					props.options.find((option) => option.value === props.value)?.text ??
+						String(props.value),
+				)}
 				<IconCapChevronDown class="size-3.5 text-gray-10" />
 			</button>
 		</SettingItem>
@@ -123,6 +127,7 @@ function SelectDiagnosticItem<T extends string | number>(props: {
 }
 
 export default function FeedbackTab() {
+	const { text, language } = useI18n();
 	const [feedback, setFeedback] = createSignal("");
 	const [uploadingLogs, setUploadingLogs] = createSignal(false);
 	const [diagnostics] = createResource(fetchDiagnostics);
@@ -140,17 +145,23 @@ export default function FeedbackTab() {
 
 	const handleRunDiagnostic = async () => {
 		const confirmed = await confirm(
-			`Cap will take over your screen with a flashing test pattern and play loud beeps for about ${durationSecs()} seconds per pipeline. Take your headphones off, leave the volume audible, and don't use the machine until it finishes.`,
-			{ title: "Run diagnostic?", kind: "warning", okLabel: "Run Diagnostic" },
+			language() === "zh-CN"
+				? `Cap 将使用闪烁测试画面占满屏幕，并在每条录制流程中播放约 ${durationSecs()} 秒的响亮提示音。请摘下耳机、保持扬声器音量可听，并在测试结束前不要操作电脑。`
+				: `Cap will take over your screen with a flashing test pattern and play loud beeps for about ${durationSecs()} seconds per pipeline. Take your headphones off, leave the volume audible, and don't use the machine until it finishes.`,
+			{
+				title: text("Run diagnostic?"),
+				kind: "warning",
+				okLabel: text("Run Diagnostic"),
+			},
 		);
 		if (!confirmed) return;
 
 		setRunning(true);
 		setResult(null);
-		setStatus("Starting...");
+		setStatus(text("Starting..."));
 
 		const unlisten = await events.diagnosticProgress.listen((event) =>
-			setStatus(progressLabel(event.payload)),
+			setStatus(text(progressLabel(event.payload))),
 		);
 
 		try {
@@ -165,7 +176,7 @@ export default function FeedbackTab() {
 				}),
 			);
 		} catch (error) {
-			toast.error("Failed to run diagnostic");
+			toast.error(text("Failed to run diagnostic"));
 			console.error("Failed to run diagnostic:", error);
 		} finally {
 			unlisten();
@@ -181,9 +192,9 @@ export default function FeedbackTab() {
 		setSendingReport(true);
 		try {
 			await commands.uploadDiagnosticReport(report.reportPath);
-			toast.success("Diagnostic report sent to Cap");
+			toast.success(text("Diagnostic report sent to Cap"));
 		} catch (error) {
-			toast.error("Failed to send diagnostic report");
+			toast.error(text("Failed to send diagnostic report"));
 			console.error("Failed to send diagnostic report:", error);
 		} finally {
 			setSendingReport(false);
@@ -197,7 +208,7 @@ export default function FeedbackTab() {
 		try {
 			await commands.revealDiagnosticReport(report.reportPath);
 		} catch (error) {
-			toast.error("Failed to show diagnostic report");
+			toast.error(text("Failed to show diagnostic report"));
 			console.error("Failed to reveal diagnostic report:", error);
 		}
 	};
@@ -206,9 +217,9 @@ export default function FeedbackTab() {
 		setUploadingLogs(true);
 		try {
 			await commands.uploadLogs();
-			toast.success("Logs uploaded successfully");
+			toast.success(text("Logs uploaded successfully"));
 		} catch (error) {
-			toast.error("Failed to upload logs");
+			toast.error(text("Failed to upload logs"));
 			console.error("Failed to upload logs:", error);
 		} finally {
 			setUploadingLogs(false);
@@ -234,7 +245,7 @@ export default function FeedbackTab() {
 								<textarea
 									value={feedback()}
 									onInput={(e) => setFeedback(e.currentTarget.value)}
-									placeholder="Tell us what you think about Cap..."
+									placeholder={text("Tell us what you think about Cap...")}
 									required
 									minLength={10}
 									class="p-2 w-full h-32 text-[13px] rounded-md border transition-colors duration-200 resize-none bg-gray-2 placeholder:text-gray-10 border-gray-3 text-primary focus:outline-hidden focus:ring-1 focus:ring-gray-8 hover:border-gray-6"
@@ -248,7 +259,9 @@ export default function FeedbackTab() {
 							)}
 
 							{submission.result?.success && (
-								<p class="text-sm text-primary">Thank you for your feedback!</p>
+								<p class="text-sm text-primary">
+									{text("Thank you for your feedback!")}
+								</p>
 							)}
 
 							<Button
@@ -258,7 +271,7 @@ export default function FeedbackTab() {
 								disabled={feedback().trim().length < 4}
 								class="mt-2"
 							>
-								{submission.pending ? "Submitting..." : "Submit Feedback"}
+								{text(submission.pending ? "Submitting..." : "Submit Feedback")}
 							</Button>
 						</fieldset>
 					</form>
@@ -273,7 +286,7 @@ export default function FeedbackTab() {
 						size="md"
 						variant="gray"
 					>
-						Join Discord
+						{text("Join Discord")}
 					</Button>
 				</Section>
 
@@ -285,11 +298,9 @@ export default function FeedbackTab() {
 						<div class="flex gap-2.5 items-start px-3 py-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10">
 							<IconLucideAlertTriangle class="mt-0.5 size-3.5 shrink-0 text-amber-400" />
 							<p class="text-xs leading-relaxed text-gray-11">
-								The sync test takes over your screen with a flashing pattern and
-								plays loud beeps for about {durationSecs()} seconds per
-								pipeline. Take your headphones off and leave the volume audible
-								(the microphone test needs to hear the beeps through your
-								speakers), and don't use the machine until it finishes.
+								{language() === "zh-CN"
+									? `同步测试会用闪烁测试画面占满屏幕，并在每条流程中播放约 ${durationSecs()} 秒的响亮提示音。请摘下耳机并保持扬声器音量可听（麦克风测试需要从扬声器听到提示音），在测试结束前不要操作电脑。`
+									: `The sync test takes over your screen with a flashing pattern and plays loud beeps for about ${durationSecs()} seconds per pipeline. Take your headphones off and leave the volume audible (the microphone test needs to hear the beeps through your speakers), and don't use the machine until it finishes.`}
 							</p>
 						</div>
 
@@ -325,7 +336,7 @@ export default function FeedbackTab() {
 								variant="dark"
 								disabled={running()}
 							>
-								{running() ? "Running..." : "Run Diagnostic"}
+								{text(running() ? "Running..." : "Run Diagnostic")}
 							</Button>
 							<Show when={running() && status()}>
 								{(label) => <p class="text-xs text-gray-10">{label()}</p>}
@@ -342,7 +353,9 @@ export default function FeedbackTab() {
 												"bg-gray-4 text-gray-11"
 											}`}
 										>
-											{report().verdict?.toUpperCase() ?? "SYSTEM INFO ONLY"}
+											{text(
+												report().verdict?.toUpperCase() ?? "SYSTEM INFO ONLY",
+											)}
 										</span>
 										<Show when={report().summary}>
 											{(summary) => (
@@ -354,8 +367,9 @@ export default function FeedbackTab() {
 									<Show when={report().syncTestError}>
 										{(error) => (
 											<p class="text-xs leading-relaxed text-amber-400">
-												The sync test couldn't run: {error()}. The report still
-												contains your system information.
+												{language() === "zh-CN"
+													? `同步测试无法运行：${error()}。报告仍包含系统信息。`
+													: `The sync test couldn't run: ${error()}. The report still contains your system information.`}
 											</p>
 										)}
 									</Show>
@@ -367,14 +381,14 @@ export default function FeedbackTab() {
 											variant="dark"
 											disabled={sendingReport()}
 										>
-											{sendingReport() ? "Sending..." : "Send to Cap"}
+											{text(sendingReport() ? "Sending..." : "Send to Cap")}
 										</Button>
 										<Button
 											onClick={handleRevealReport}
 											size="md"
 											variant="gray"
 										>
-											Show File
+											{text("Show File")}
 										</Button>
 									</div>
 								</div>
@@ -393,7 +407,7 @@ export default function FeedbackTab() {
 						variant="gray"
 						disabled={uploadingLogs()}
 					>
-						{uploadingLogs() ? "Uploading..." : "Upload Logs"}
+						{text(uploadingLogs() ? "Uploading..." : "Upload Logs")}
 					</Button>
 				</Section>
 
@@ -402,7 +416,7 @@ export default function FeedbackTab() {
 						when={!diagnostics.loading && diagnostics()}
 						fallback={
 							<p class="text-xs leading-relaxed text-gray-10">
-								Loading system information...
+								{text("Loading system information...")}
 							</p>
 						}
 					>
@@ -427,7 +441,9 @@ export default function FeedbackTab() {
 									<Show when={osVersion}>
 										{(ver) => (
 											<div class="space-y-1">
-												<p class="text-gray-11 font-medium">Operating System</p>
+												<p class="text-gray-11 font-medium">
+													{text("Operating System")}
+												</p>
 												<p class="text-gray-10 bg-gray-2 px-2 py-1.5 rounded-sm font-mono text-xs">
 													{ver().displayName}
 												</p>
@@ -436,7 +452,9 @@ export default function FeedbackTab() {
 									</Show>
 
 									<div class="space-y-1">
-										<p class="text-gray-11 font-medium">Capture Support</p>
+										<p class="text-gray-11 font-medium">
+											{text("Capture Support")}
+										</p>
 										<div class="flex gap-2 flex-wrap">
 											<span
 												class={`px-2 py-1 rounded text-xs ${
@@ -445,15 +463,17 @@ export default function FeedbackTab() {
 														: "bg-red-500/20 text-red-400"
 												}`}
 											>
-												Screen Capture:{" "}
-												{captureSupported ? "Supported" : "Not Supported"}
+												{text("Screen Capture")}:{" "}
+												{text(captureSupported ? "Supported" : "Not Supported")}
 											</span>
 										</div>
 									</div>
 
 									<Show when={(d.availableEncoders as string[])?.length > 0}>
 										<div class="space-y-1">
-											<p class="text-gray-11 font-medium">Available Encoders</p>
+											<p class="text-gray-11 font-medium">
+												{text("Available Encoders")}
+											</p>
 											<div class="flex gap-1.5 flex-wrap">
 												<For each={d.availableEncoders as string[]}>
 													{(encoder) => (

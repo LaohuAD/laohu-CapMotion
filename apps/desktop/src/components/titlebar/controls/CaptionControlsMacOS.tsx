@@ -8,6 +8,7 @@ import {
 	Show,
 	splitProps,
 } from "solid-js";
+import { useI18n } from "~/i18n";
 
 export default function CaptionControlsMacOS(
 	props: ComponentProps<"div"> & {
@@ -88,6 +89,7 @@ interface TrafficLightButtonProps {
 }
 
 function TrafficLightButton(props: TrafficLightButtonProps) {
+	const { text } = useI18n();
 	const colors = {
 		close: {
 			bg: "#FF5F57",
@@ -113,10 +115,10 @@ function TrafficLightButton(props: TrafficLightButtonProps) {
 			type="button"
 			aria-label={
 				props.type === "close"
-					? "Close window"
+					? text("Close window")
 					: props.type === "minimize"
-						? "Minimize window"
-						: "Expand or collapse window"
+						? text("Minimize window")
+						: text("Expand or collapse window")
 			}
 			class={cx(
 				"size-3.5 rounded-full flex items-center justify-center transition-colors duration-100",

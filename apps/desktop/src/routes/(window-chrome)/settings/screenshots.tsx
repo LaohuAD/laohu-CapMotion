@@ -17,6 +17,7 @@ import {
 	Show,
 } from "solid-js";
 import toast from "solid-toast";
+import { useI18n } from "~/i18n";
 import { Input } from "~/routes/editor/ui";
 import {
 	createScreenshotShareLinkFromProjectPath,
@@ -53,6 +54,7 @@ const screenshotsQuery = queryOptions<Screenshot[]>({
 });
 
 export default function Screenshots() {
+	const { text } = useI18n();
 	const [search, setSearch] = createSignal("");
 	const trimmedSearch = createMemo(() => search().trim());
 	const normalizedSearch = createMemo(() => trimmedSearch().toLowerCase());
@@ -140,11 +142,13 @@ export default function Screenshots() {
 					toast.loading(screenshotShareStatusText(status), { id: toastId });
 				}
 			});
-			toast.success("Share link copied to clipboard", { id: toastId });
+			toast.success(text("Share link copied to clipboard"), { id: toastId });
 		} catch (error) {
 			console.error("Failed to create screenshot share link:", error);
 			const message = error instanceof Error ? error.message : String(error);
-			toast.error(message || "Failed to create share link", { id: toastId });
+			toast.error(message || text("Failed to create share link"), {
+				id: toastId,
+			});
 		} finally {
 			setSharingPath(null);
 			setShareStatus("idle");
@@ -174,7 +178,7 @@ export default function Screenshots() {
 							onClick={handleImportImage}
 						>
 							<IconLucideImport class="size-3.5" />
-							<span>Import image</span>
+							<span>{text("Import image")}</span>
 						</Button>
 					}
 				>
@@ -183,7 +187,7 @@ export default function Screenshots() {
 						fallback={
 							<div class="flex flex-1 items-center justify-center">
 								<p class="text-center text-(--text-tertiary)">
-									No screenshots found
+									{text("No screenshots found")}
 								</p>
 							</div>
 						}
@@ -202,12 +206,12 @@ export default function Screenshots() {
 											setSearch("");
 										}
 									}}
-									placeholder="Search"
+									placeholder={text("Search")}
 									autoCapitalize="off"
 									autocorrect="off"
 									autocomplete="off"
 									spellcheck={false}
-									aria-label="Search screenshots"
+									aria-label={text("Search screenshots")}
 								/>
 							</div>
 						</div>
@@ -256,7 +260,7 @@ export default function Screenshots() {
 											)
 										}
 									>
-										Load more
+										{text("Load more")}
 									</Button>
 								</div>
 							</Show>
@@ -278,6 +282,7 @@ function ScreenshotItem(props: {
 	isSharing: boolean;
 	shareTooltipText: string;
 }) {
+	const { text } = useI18n();
 	const [imageExists, setImageExists] = createSignal(true);
 	const queryClient = useQueryClient();
 
@@ -293,7 +298,7 @@ function ScreenshotItem(props: {
 				>
 					<img
 						class="object-cover rounded-sm size-12"
-						alt="Screenshot thumbnail"
+						alt={text("Screenshot thumbnail")}
 						src={convertFileSrc(props.screenshot.path)}
 						onError={() => setImageExists(false)}
 					/>
@@ -304,21 +309,21 @@ function ScreenshotItem(props: {
 			</div>
 			<div class="flex gap-2 items-center">
 				<TooltipIconButton
-					tooltipText="Open folder"
+					tooltipText={text("Open folder")}
 					onClick={props.onOpenFolder}
 				>
 					<IconLucideFolder class="size-4" />
 				</TooltipIconButton>
 
 				<TooltipIconButton
-					tooltipText="Open in editor"
+					tooltipText={text("Open in editor")}
 					onClick={props.onOpenEditor}
 				>
 					<IconLucideEdit class="size-4" />
 				</TooltipIconButton>
 
 				<TooltipIconButton
-					tooltipText="Copy image"
+					tooltipText={text("Copy image")}
 					onClick={props.onCopyImageToClipboard}
 				>
 					<IconLucideCopy class="size-4" />
@@ -333,10 +338,12 @@ function ScreenshotItem(props: {
 				</TooltipIconButton>
 
 				<TooltipIconButton
-					tooltipText="Delete"
+					tooltipText={text("Delete")}
 					onClick={async () => {
 						if (
-							!(await ask("Are you sure you want to delete this screenshot?"))
+							!(await ask(
+								text("Are you sure you want to delete this screenshot?"),
+							))
 						)
 							return;
 						const parent = props.screenshot.path.replace(/[/\\][^/\\]+$/, "");

@@ -66,6 +66,11 @@ export default defineConfig({
 		},
 		optimizeDeps: {
 			include: [
+				// Changelog is lazy-loaded, so Vite does not discover these CommonJS
+				// helpers during startup. The nested include keeps the public markdown
+				// package itself on Solid's normal JSX transform path.
+				"solid-markdown > unified > extend",
+				"debug",
 				"@tauri-apps/plugin-os",
 				"@tanstack/solid-query",
 				"@tauri-apps/api/webviewWindow",

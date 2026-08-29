@@ -19,6 +19,7 @@ import {
 	type ValidComponent,
 } from "solid-js";
 import Tooltip from "~/components/Tooltip";
+import { useI18n } from "~/i18n";
 import { useEditorContext } from "./context";
 import { TextInput } from "./TextInput";
 
@@ -32,6 +33,8 @@ export function Field(
 		disabled?: boolean;
 	}>,
 ) {
+	const { text } = useI18n();
+
 	return (
 		<div class={cx("flex flex-col gap-4", props.class)}>
 			<span
@@ -39,10 +42,10 @@ export function Field(
 				class="flex flex-row items-center gap-1.5 text-gray-12 data-[disabled='true']:text-gray-10 font-medium text-sm"
 			>
 				{props.icon}
-				{props.name}
+				{text(props.name)}
 				{props.badge && (
 					<span class="text-[10px] px-1.5 py-0.5 bg-gray-3 rounded-full text-gray-11 font-medium">
-						{props.badge}
+						{text(props.badge)}
 					</span>
 				)}
 				{props.value && <div class="ml-auto">{props.value}</div>}
@@ -55,10 +58,12 @@ export function Field(
 export function Subfield(
 	props: ParentProps<{ name: string; class?: string; required?: boolean }>,
 ) {
+	const { text } = useI18n();
+
 	return (
 		<div class={cx("flex flex-row justify-between items-center", props.class)}>
 			<span class="font-medium text-gray-12">
-				{props.name}
+				{text(props.name)}
 				{props.required && (
 					<span class="ml-[2px] text-xs text-blue-500">*</span>
 				)}
@@ -196,9 +201,10 @@ export const Dialog = {
 		);
 	},
 	CloseButton() {
+		const { text } = useI18n();
 		return (
 			<KDialog.CloseButton as={Button} variant="gray">
-				Cancel
+				{text("Cancel")}
 			</KDialog.CloseButton>
 		);
 	},
@@ -251,10 +257,12 @@ export function DialogContent(
 		leftFooterContent?: JSX.Element;
 	}>,
 ) {
+	const { text } = useI18n();
+
 	return (
 		<>
 			<Dialog.Header>
-				<KDialog.Title class="text-gray-12">{props.title}</KDialog.Title>
+				<KDialog.Title class="text-gray-12">{text(props.title)}</KDialog.Title>
 			</Dialog.Header>
 			<Dialog.Content class={props.class}>{props.children}</Dialog.Content>
 			<Dialog.Footer
@@ -359,6 +367,7 @@ type EditorButtonProps<T extends ValidComponent = "button"> =
 export function EditorButton<T extends ValidComponent = "button">(
 	props: EditorButtonProps<T>,
 ) {
+	const { text } = useI18n();
 	const [local, cvaProps, others] = splitProps(
 		mergeProps({ variant: "primary" }, props) as unknown as EditorButtonProps,
 		[
@@ -379,7 +388,13 @@ export function EditorButton<T extends ValidComponent = "button">(
 			<span class={editorButtonLeftIconStyles({ variant: cvaProps.variant })}>
 				{local.leftIcon}
 			</span>
-			{local.children && <span>{local.children}</span>}
+			{local.children && (
+				<span>
+					{typeof local.children === "string"
+						? text(local.children)
+						: local.children}
+				</span>
+			)}
 			{local.rightIcon && (
 				<span class={local.rightIconEnd ? "ml-auto" : ""}>
 					{local.rightIcon}
@@ -393,7 +408,11 @@ export function EditorButton<T extends ValidComponent = "button">(
 			{local.tooltipText || local.comingSoon ? (
 				<Tooltip
 					kbd={local.kbd}
-					content={local.comingSoon ? "Coming Soon" : local.tooltipText}
+					content={
+						local.comingSoon
+							? text("Coming Soon")
+							: text(local.tooltipText ?? "")
+					}
 				>
 					<Polymorphic
 						as="button"
@@ -441,6 +460,7 @@ export const topSlideAnimateClasses =
 export function ComingSoonTooltip(
 	props: ComponentProps<typeof KTooltip> & { as?: ValidComponent },
 ) {
+	const { text } = useI18n();
 	const [trigger, root] = splitProps(props, ["children", "as"]);
 	return (
 		<KTooltip placement="top" openDelay={0} closeDelay={0} {...root}>
@@ -449,7 +469,7 @@ export function ComingSoonTooltip(
 			</KTooltip.Trigger>
 			<KTooltip.Portal>
 				<KTooltip.Content class="p-2 font-medium bg-gray-12 text-gray-1 data-expanded:animate-in data-expanded:slide-in-from-bottom-1 data-expanded:fade-in data-closed:animate-out data-closed:slide-out-to-bottom-1 data-closed:fade-out rounded-lg text-xs z-1000">
-					Coming Soon
+					{text("Coming Soon")}
 				</KTooltip.Content>
 			</KTooltip.Portal>
 		</KTooltip>

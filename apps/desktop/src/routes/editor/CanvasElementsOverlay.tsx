@@ -14,6 +14,7 @@ import {
 	on,
 	Show,
 } from "solid-js";
+import { useI18n } from "~/i18n";
 import type { FrameLayoutEvent } from "~/utils/tauri";
 import { FPS, useEditorContext } from "./context";
 import {
@@ -160,6 +161,7 @@ export function SnapGuidesOverlay(props: { size: Size }) {
 }
 
 export function CanvasElementsOverlay(props: { size: Size }) {
+	const { text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -637,7 +639,7 @@ export function CanvasElementsOverlay(props: { size: Size }) {
 						<ElementBox
 							size={props.size}
 							rect={rect()}
-							label="Screen"
+							label={text("Screen")}
 							selected={selection()?.type === "display"}
 							draggable={displayDraggable()}
 							resizable={displayDraggable()}
@@ -645,8 +647,8 @@ export function CanvasElementsOverlay(props: { size: Size }) {
 								displayDraggable()
 									? null
 									: {
-											message: "Screen is locked while a zoom is active",
-											actionLabel: "Edit zoom",
+											message: text("Screen is locked while a zoom is active"),
+											actionLabel: text("Edit zoom"),
 											onAction: selectActiveZoom,
 										}
 							}
@@ -664,7 +666,7 @@ export function CanvasElementsOverlay(props: { size: Size }) {
 						<ElementBox
 							size={props.size}
 							rect={rect()}
-							label="Camera"
+							label={text("Camera")}
 							selected={selection()?.type === "camera"}
 							draggable
 							resizable={cameraResizable()}
@@ -672,8 +674,10 @@ export function CanvasElementsOverlay(props: { size: Size }) {
 								cameraResizable()
 									? null
 									: {
-											message: "Camera size follows the zoom — drag to move",
-											actionLabel: "Edit zoom",
+											message: text(
+												"Camera size follows the zoom — drag to move",
+											),
+											actionLabel: text("Edit zoom"),
 											onAction: selectActiveZoom,
 										}
 							}

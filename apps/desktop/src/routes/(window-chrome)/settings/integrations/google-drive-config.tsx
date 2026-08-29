@@ -1,6 +1,7 @@
 import { Button } from "@cap/ui-solid";
 import { useMutation } from "@tanstack/solid-query";
 import { createResource, createSignal, Show, Suspense } from "solid-js";
+import { useI18n } from "~/i18n";
 import { createSelectedOrganization } from "~/utils/organization-branding";
 import { commands } from "~/utils/tauri";
 import { apiClient, protectedHeaders } from "~/utils/web-api";
@@ -77,6 +78,7 @@ const fetchS3Config = async (orgId: string | null) => {
 };
 
 export default function GoogleDriveConfigPage() {
+	const { text, language } = useI18n();
 	const organizationSelection = createSelectedOrganization();
 	const [isWaitingForConnection, setIsWaitingForConnection] =
 		createSignal(false);
@@ -136,7 +138,13 @@ export default function GoogleDriveConfigPage() {
 		if (!quota || !usage) return null;
 
 		const limit = formatBytes(quota.limit);
-		return limit ? `${usage} of ${limit} used` : `${usage} used`;
+		return language() === "zh-CN"
+			? limit
+				? `已使用 ${usage}，共 ${limit}`
+				: `已使用 ${usage}`
+			: limit
+				? `${usage} of ${limit} used`
+				: `${usage} used`;
 	};
 
 	const quotaUsagePercent = () => {
@@ -158,7 +166,7 @@ export default function GoogleDriveConfigPage() {
 		const timestamp = formatTimestamp(quota.fetchedAt);
 		if (!timestamp) return null;
 
-		return `${quota.stale ? "Cached" : "Updated"} ${timestamp}`;
+		return `${text(quota.stale ? "Cached" : "Updated")} ${timestamp}`;
 	};
 
 	const waitForGoogleDriveConnection = async () => {
@@ -174,7 +182,9 @@ export default function GoogleDriveConfigPage() {
 				}
 			}
 			await commands.globalMessageDialog(
-				"Finish connecting Google Drive in your browser, then return here and refresh.",
+				text(
+					"Finish connecting Google Drive in your browser, then return here and refresh.",
+				),
 			);
 		} finally {
 			setIsWaitingForConnection(false);
@@ -222,8 +232,10 @@ export default function GoogleDriveConfigPage() {
 		onSuccess: async (body) => {
 			await commands.globalMessageDialog(
 				body.email
-					? `Google Drive connection is working for ${body.email}`
-					: "Google Drive connection is working",
+					? language() === "zh-CN"
+						? `Google Drive 连接正常：${body.email}`
+						: `Google Drive connection is working for ${body.email}`
+					: text("Google Drive connection is working"),
 			);
 		},
 	}));
@@ -258,7 +270,7 @@ export default function GoogleDriveConfigPage() {
 		},
 		onSuccess: async () => {
 			await refetch();
-			await commands.globalMessageDialog("Google Drive disconnected");
+			await commands.globalMessageDialog(text("Google Drive disconnected"));
 		},
 	}));
 
@@ -293,7 +305,8 @@ export default function GoogleDriveConfigPage() {
 								<Show when={managedByOrganization()}>
 									{(organization) => (
 										<p class="text-xs leading-relaxed text-gray-10">
-											Managed by your organization: {organization().name}
+											{text("Managed by your organization")}:{" "}
+											{organization().name}
 										</p>
 									)}
 								</Show>
@@ -309,9 +322,9 @@ export default function GoogleDriveConfigPage() {
 											<p class="text-xs leading-snug text-gray-10">
 												{isConnected()
 													? isActive()
-														? "Active for new uploads"
-														: "Connected but not active"
-													: "Not connected"}
+														? text("Active for new uploads")
+														: text("Connected but not active")
+													: text("Not connected")}
 											</p>
 										</div>
 										<Button
@@ -319,7 +332,7 @@ export default function GoogleDriveConfigPage() {
 											disabled={busy()}
 											onClick={() => refetch()}
 										>
-											{isRefreshing() ? "Refreshing..." : "Refresh"}
+											{text(isRefreshing() ? "Refreshing..." : "Refresh")}
 										</Button>
 									</div>
 
@@ -332,10 +345,10 @@ export default function GoogleDriveConfigPage() {
 												onClick={() => connect.mutate()}
 											>
 												{isWaitingForConnection()
-													? "Waiting..."
+													? text("Waiting...")
 													: connect.isPending
-														? "Opening..."
-														: "Connect Google Drive"}
+														? text("Opening...")
+														: text("Connect Google Drive")}
 											</Button>
 										}
 									>
@@ -343,7 +356,9 @@ export default function GoogleDriveConfigPage() {
 											<div class="pt-3 space-y-2 border-t border-gray-3">
 												<div class="flex justify-between items-start gap-4">
 													<div class="flex flex-col gap-0.5 min-w-0">
-														<p class="text-[13px] text-gray-12">Storage</p>
+														<p class="text-[13px] text-gray-12">
+															{text("Storage")}
+														</p>
 														<Show when={quotaUsageLabel()}>
 															{(label) => (
 																<p class="text-xs leading-snug text-gray-10">
@@ -374,7 +389,7 @@ export default function GoogleDriveConfigPage() {
 													<Show when={formatBytes(storageQuota()?.remaining)}>
 														{(remaining) => (
 															<>
-																<p class="text-gray-10">Remaining</p>
+																<p class="text-gray-10">{text("Remaining")}</p>
 																<p class="text-right text-gray-11">
 																	{remaining()}
 																</p>
@@ -386,7 +401,9 @@ export default function GoogleDriveConfigPage() {
 													>
 														{(usageInDrive) => (
 															<>
-																<p class="text-gray-10">Drive files</p>
+																<p class="text-gray-10">
+																	{text("Drive files")}
+																</p>
 																<p class="text-right text-gray-11">
 																	{usageInDrive()}
 																</p>
@@ -400,7 +417,7 @@ export default function GoogleDriveConfigPage() {
 													>
 														{(usageInDriveTrash) => (
 															<>
-																<p class="text-gray-10">Trash</p>
+																<p class="text-gray-10">{text("Trash")}</p>
 																<p class="text-right text-gray-11">
 																	{usageInDriveTrash()}
 																</p>
@@ -416,7 +433,7 @@ export default function GoogleDriveConfigPage() {
 												disabled={busy() || isActive()}
 												onClick={() => setActive.mutate("googleDrive")}
 											>
-												{isActive() ? "Active" : "Use Google Drive"}
+												{text(isActive() ? "Active" : "Use Google Drive")}
 											</Button>
 											<Show when={hasS3Config()}>
 												<Button
@@ -424,7 +441,7 @@ export default function GoogleDriveConfigPage() {
 													disabled={busy() || !isActive()}
 													onClick={() => setActive.mutate("s3")}
 												>
-													Use S3
+													{text("Use S3")}
 												</Button>
 											</Show>
 											<Button
@@ -432,14 +449,14 @@ export default function GoogleDriveConfigPage() {
 												disabled={busy()}
 												onClick={() => testConnection.mutate()}
 											>
-												{testConnection.isPending ? "Testing..." : "Test"}
+												{text(testConnection.isPending ? "Testing..." : "Test")}
 											</Button>
 											<Button
 												variant="destructive"
 												disabled={busy()}
 												onClick={() => disconnect.mutate()}
 											>
-												Disconnect
+												{text("Disconnect")}
 											</Button>
 										</div>
 									</Show>

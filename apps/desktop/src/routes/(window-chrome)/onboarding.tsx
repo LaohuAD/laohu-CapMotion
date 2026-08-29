@@ -1322,6 +1322,7 @@ function StartRecordingClickMock(props: {
 	active: boolean;
 	mode: "instant" | "studio";
 }) {
+	const { text } = useI18n();
 	const [cursorStage, setCursorStage] = createSignal(0);
 
 	const cursorMoveMs = 1450;
@@ -1369,7 +1370,7 @@ function StartRecordingClickMock(props: {
 						</Show>
 						<div class="mr-2 ml-3 flex min-w-0 flex-col">
 							<span class="text-[0.95rem] font-medium text-nowrap text-white">
-								Start Recording
+								{text("Start Recording")}
 							</span>
 							<span class="-mt-0.5 flex items-center gap-1 text-[11px] font-light text-nowrap text-white/90">
 								{modeLabel()}
@@ -1415,6 +1416,7 @@ function RecordingBar(props: {
 	stopped?: boolean;
 	class?: string;
 }) {
+	const { t } = useI18n();
 	const actionIconWrap =
 		"h-8 w-8 flex shrink-0 items-center justify-center rounded-lg p-1 text-gray-11";
 
@@ -1428,7 +1430,9 @@ function RecordingBar(props: {
 							fallback={
 								<div class="flex flex-row items-center gap-1.5 rounded-lg px-2 py-1 text-gray-10">
 									<div class="size-2 shrink-0 rounded-full bg-gray-8" />
-									<span class="text-[0.875rem] font-medium">Stopped</span>
+									<span class="text-[0.875rem] font-medium">
+										{t("onboarding.demo.stopped")}
+									</span>
 								</div>
 							}
 						>
@@ -1487,6 +1491,7 @@ function RecordingBar(props: {
 }
 
 function InstantMockup(props: { active: boolean }) {
+	const { text } = useI18n();
 	const phase = createLoopingPhase(
 		() => props.active,
 		[300, 2350, 3350, 4350, 5350, 6350, 7350, 8350],
@@ -1564,7 +1569,7 @@ function InstantMockup(props: { active: boolean }) {
 									<IconLucideCheck class="size-3 text-green-600" />
 								</div>
 								<span class="text-[12px] font-medium text-gray-12">
-									Link ready to share!
+									{text("Link ready to share!")}
 								</span>
 							</div>
 							<div class="flex items-center gap-2 w-full">
@@ -1586,12 +1591,12 @@ function InstantMockup(props: { active: boolean }) {
 										fallback={
 											<>
 												<IconLucideCopy class="size-3" stroke-width={2} />
-												Copy
+												{text("Copy")}
 											</>
 										}
 									>
 										<IconLucideCheck class="size-3" />
-										Copied!
+										{text("Copied!")}
 									</Show>
 								</div>
 							</div>
@@ -1604,6 +1609,7 @@ function InstantMockup(props: { active: boolean }) {
 }
 
 function StudioMockup(props: { active: boolean }) {
+	const { text } = useI18n();
 	const phase = createLoopingPhase(
 		() => props.active,
 		[300, 2350, 3350, 4350, 5350, 6350, 7350, 8150, 9150, 10150, 11150],
@@ -1709,7 +1715,7 @@ function StudioMockup(props: { active: boolean }) {
 									: "scale-100 ring-0 ring-offset-0",
 							)}
 						>
-							Export
+							{text("Export")}
 						</div>
 					</div>
 
@@ -1747,11 +1753,11 @@ function StudioMockup(props: { active: boolean }) {
 							)}
 						>
 							<div class="text-[8px] text-gray-9 font-medium uppercase tracking-wider">
-								Style
+								{text("Style")}
 							</div>
 							<div class="h-5 rounded-sm border border-gray-3 bg-white dark:bg-gray-2" />
 							<div class="text-[8px] text-gray-9 font-medium uppercase tracking-wider mt-1">
-								Background
+								{text("Background")}
 							</div>
 							<div class="flex gap-1">
 								<div class="size-4 rounded-full bg-linear-to-br from-blue-400 to-purple-500 border border-gray-3" />
@@ -1771,13 +1777,13 @@ function StudioMockup(props: { active: boolean }) {
 													<IconLucideCheck class="size-3.5 text-green-600" />
 												</div>
 												<span class="text-sm font-medium text-gray-12">
-													Export complete!
+													{text("Export complete!")}
 												</span>
 											</div>
 										}
 									>
 										<span class="text-sm font-medium text-gray-12">
-											Exporting...
+											{text("Exporting...")}
 										</span>
 									</Show>
 									<div class="w-full h-2 bg-gray-4 rounded-full overflow-hidden">
@@ -2064,7 +2070,7 @@ function StartupOverlay(props: {
 				>
 					<span>{t("onboarding.getStarted")}</span>
 					<span class="text-[11px] font-normal text-[rgba(22,27,38,0.58)] leading-tight inline-flex items-center justify-center gap-1">
-						<span>Click here, or press</span>
+						<span>{t("onboarding.getStartedHint")}</span>
 						<kbd class="rounded border border-gray-6 bg-white dark:bg-gray-3 px-1 py-px text-[10px] font-medium text-gray-11 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
 							Space
 						</kbd>
@@ -2283,6 +2289,7 @@ function PermissionsStep(props: {
 }
 
 function ScreenshotMockup(props: { active: boolean }) {
+	const { text } = useI18n();
 	const phase = createLoopingPhase(
 		() => props.active,
 		[200, 700, 1400, 2600, 3400, 3900, 4900, 5900, 6700],
@@ -2445,11 +2452,11 @@ function ScreenshotMockup(props: { active: boolean }) {
 							<div class="flex flex-1 flex-row items-center justify-end gap-1.5">
 								<div class="flex items-center gap-1 px-2 py-1 rounded-md bg-white dark:bg-gray-3 border border-gray-4 text-[9px] text-gray-11 font-medium">
 									<IconLucideCopy class="size-3 shrink-0" stroke-width={2} />
-									Copy
+									{text("Copy")}
 								</div>
 								<div class="flex items-center gap-1 px-2 py-1 rounded-md bg-white dark:bg-gray-3 border border-gray-4 text-[9px] text-gray-11 font-medium">
 									<IconLucideSave class="size-3 shrink-0" stroke-width={2} />
-									Save
+									{text("Save")}
 								</div>
 							</div>
 						</div>
@@ -2503,7 +2510,7 @@ function ScreenshotMockup(props: { active: boolean }) {
 						>
 							<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-12 text-gray-1 text-[10px] font-medium">
 								<IconLucideCheck class="size-3" />
-								Copied to clipboard
+								{text("Copied to clipboard")}
 							</div>
 						</div>
 					</div>

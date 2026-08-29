@@ -12,6 +12,7 @@ import {
 	For,
 	Show,
 } from "solid-js";
+import { useI18n } from "~/i18n";
 import type { BackgroundSource } from "~/utils/tauri";
 import IconCapBgBlur from "~icons/cap/bg-blur";
 import IconCapCircleX from "~icons/cap/circle-x";
@@ -144,6 +145,7 @@ const BACKGROUND_THEMES = {
 };
 
 export function BackgroundSettingsPopover() {
+	const { text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -372,7 +374,7 @@ export function BackgroundSettingsPopover() {
 															src={photo.url}
 															loading="eager"
 															class="object-cover w-full h-full"
-															alt="Wallpaper option"
+															alt={text("Wallpaper option")}
 														/>
 													</KRadioGroup.ItemControl>
 												</KRadioGroup.Item>
@@ -395,7 +397,7 @@ export function BackgroundSettingsPopover() {
 											>
 												<IconCapImage class="text-gray-11 size-6" />
 												<span class="text-gray-12">
-													Click to select or drag and drop image
+													{text("Click to select or drag and drop image")}
 												</span>
 											</button>
 										}
@@ -405,7 +407,7 @@ export function BackgroundSettingsPopover() {
 												<img
 													src={convertFileSrc(source())}
 													class="object-cover w-full h-full"
-													alt="Selected background"
+													alt={text("Selected background")}
 												/>
 												<div class="absolute top-2 right-2">
 													<button
@@ -559,8 +561,9 @@ export function BackgroundSettingsPopover() {
 								</KTabs.Content>
 								<KTabs.Content value="animatedGradient">
 									<p class="text-xs text-gray-11">
-										This screenshot uses a still frame of the animated gradient.
-										Choose another background above to replace it.
+										{text(
+											"This screenshot uses a still frame of the animated gradient. Choose another background above to replace it.",
+										)}
 									</p>
 								</KTabs.Content>
 							</KTabs>

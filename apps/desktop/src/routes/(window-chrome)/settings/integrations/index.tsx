@@ -4,6 +4,7 @@ import { createResource, For, onMount } from "solid-js";
 import IconLucideDatabase from "~icons/lucide/database";
 
 import "@total-typescript/ts-reset/filter-boolean";
+import { useI18n } from "~/i18n";
 import { authStore } from "~/store";
 import { createSelectedOrganization } from "~/utils/organization-branding";
 import { commands } from "~/utils/tauri";
@@ -45,6 +46,7 @@ const GoogleDriveIcon = (props: { class?: string }) => (
 );
 
 export default function AppsTab() {
+	const { text } = useI18n();
 	const navigate = useNavigate();
 	const auth = authStore.createQuery();
 	const organizationSelection = createSelectedOrganization();
@@ -126,7 +128,7 @@ export default function AppsTab() {
 									<div class="flex justify-between items-center gap-3">
 										<div class="flex gap-2 items-center min-w-0">
 											<app.icon class="w-4 h-4 shrink-0 text-gray-12" />
-											<p class="text-[13px] text-gray-12">{app.name}</p>
+											<p class="text-[13px] text-gray-12">{text(app.name)}</p>
 										</div>
 										<Button
 											size="sm"
@@ -135,14 +137,14 @@ export default function AppsTab() {
 											onClick={() => handleAppClick(app)}
 										>
 											{managedByOrganization()
-												? "Managed by your organization"
+												? text("Managed by your organization")
 												: app.pro && !isPro()
-													? "Upgrade to Pro"
-													: "Configure"}
+													? text("Upgrade to Pro")
+													: text("Configure")}
 										</Button>
 									</div>
 									<p class="text-xs leading-snug text-gray-10">
-										{app.description}
+										{text(app.description)}
 									</p>
 								</SectionCard>
 							)}

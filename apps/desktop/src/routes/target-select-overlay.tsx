@@ -58,6 +58,7 @@ import {
 } from "~/components/Cropper";
 import ModeSelect from "~/components/ModeSelect";
 import SelectionHint from "~/components/selection-hint";
+import { useI18n } from "~/i18n";
 import {
 	authStore,
 	generalSettingsStore,
@@ -108,10 +109,6 @@ const MIN_SCREENSHOT_SIZE = { width: 1, height: 1 };
 const LOCKED_AREA_COMMIT_DELAY_MS = 180;
 const LIQUID_GLASS_SURFACE_CLASS =
 	"rounded-2xl border border-gray-12/10 bg-gray-1/82 shadow-xl shadow-black/20 backdrop-blur-xl dark:border-white/10 dark:bg-gray-2/82";
-
-const capitalize = (str: string) => {
-	return str.charAt(0).toUpperCase() + str.slice(1);
-};
 
 const findCamera = (cameras: CameraInfo[], id?: DeviceOrModelID | null) => {
 	if (!id) return undefined;
@@ -191,6 +188,7 @@ function useOptions() {
 }
 
 function Inner() {
+	const { t, text, language } = useI18n();
 	const [params] = useSearchParams<{
 		displayId: DisplayId;
 		isHoveredDisplay: string;
@@ -389,9 +387,11 @@ function Inner() {
 				<div class="relative w-screen h-screen flex flex-col items-center justify-center bg-black/70">
 					<div class="absolute inset-0 bg-black/60 -z-10" />
 					<div class="flex flex-col items-center text-white mb-4">
-						<span class="mb-2 text-3xl font-semibold">Camera Only</span>
+						<span class="mb-2 text-3xl font-semibold">
+							{t("capture.cameraOnly")}
+						</span>
 						<span class="text-xs text-gray-11">
-							Record using only your camera and microphone
+							{text("Record using only your camera and microphone")}
 						</span>
 					</div>
 					<div class="flex justify-center w-full px-6 mb-4">
@@ -767,7 +767,7 @@ function Inner() {
 												});
 											}}
 										>
-											Adjust recording area
+											{text("Adjust recording area")}
 										</Button>
 										<ShowCapFreeWarning
 											isInstantMode={options.mode === "instant"}
@@ -1142,7 +1142,7 @@ function Inner() {
 						e.stopPropagation();
 						const items = [
 							{
-								text: "Reset selection",
+								text: t("capture.resetSelection"),
 								action: resetSelection,
 							},
 							await PredefinedMenuItem.new({
@@ -1330,7 +1330,7 @@ function Inner() {
 										<div class="min-w-28 px-2 text-base font-normal leading-none tracking-[-0.01em] tabular-nums">
 											{isValid()
 												? `${Math.round(crop().width)} × ${Math.round(crop().height)}`
-												: "Draw an area"}
+												: t("capture.drawArea")}
 										</div>
 
 										<div class="h-6 w-px bg-gray-5" />
@@ -1348,7 +1348,7 @@ function Inner() {
 												onClick={() => setAspect(null)}
 												aria-pressed={currentAspect() === null}
 											>
-												Free
+												{text("Free")}
 											</button>
 											<For each={QUICK_AREA_RATIOS}>
 												{(ratio) => {
@@ -1376,8 +1376,8 @@ function Inner() {
 											type="button"
 											class="flex size-9 items-center justify-center rounded-xl text-gray-11 transition-colors hover:bg-gray-12/8 hover:text-gray-12"
 											onClick={showCropOptionsMenu}
-											title="More aspect ratios"
-											aria-label="More aspect ratios"
+											title={t("capture.moreAspectRatios")}
+											aria-label={t("capture.moreAspectRatios")}
 										>
 											<IconLucideRatio class="size-4" />
 										</button>
@@ -1388,8 +1388,8 @@ function Inner() {
 											type="button"
 											class="flex size-9 items-center justify-center rounded-xl text-gray-11 transition-colors hover:bg-gray-12/8 hover:text-gray-12"
 											onClick={resetSelection}
-											title="Reset selection"
-											aria-label="Reset selection"
+											title={t("capture.resetSelection")}
+											aria-label={t("capture.resetSelection")}
 										>
 											<IconLucideRotateCcw class="size-4" />
 										</button>
@@ -1397,8 +1397,8 @@ function Inner() {
 											type="button"
 											class="flex size-9 items-center justify-center rounded-xl text-gray-11 transition-colors hover:bg-gray-12/8 hover:text-gray-12"
 											onClick={() => cropperRef?.fill()}
-											title="Fill display"
-											aria-label="Fill display"
+											title={t("capture.fillDisplay")}
+											aria-label={t("capture.fillDisplay")}
 										>
 											<IconLucideMaximize2 class="size-4" />
 										</button>
@@ -1416,12 +1416,14 @@ function Inner() {
 												aria-pressed={isSelectionLocked()}
 												title={
 													isSelectionLocked()
-														? "Stop reusing this area"
-														: "Reuse this area for future recordings"
+														? t("capture.stopReuseArea")
+														: t("capture.reuseArea")
 												}
 											>
 												<IconLucideLock class="size-3.5" />
-												{isSelectionLocked() ? "Locked" : "Lock"}
+												{isSelectionLocked()
+													? t("capture.locked")
+													: t("capture.lock")}
 											</button>
 										</Show>
 									</div>
@@ -1469,13 +1471,16 @@ function Inner() {
 									<Show when={!isValid()}>
 										<div class="flex flex-col gap-1 items-center p-2.5 my-2 rounded-xl border min-w-fit w-fit bg-red-2 shadow-xs border-red-4 text-sm">
 											<p>
-												Minimum size is {minSize().width} x {minSize().height}
+												{language() === "zh-CN"
+													? "最小尺寸为"
+													: "Minimum size is"}{" "}
+												{minSize().width} x {minSize().height}
 											</p>
 											<small>
 												<code>
 													{crop().width} x {crop().height}
 												</code>{" "}
-												is too small
+												{text("is too small")}
 											</small>
 										</div>
 									</Show>
@@ -1527,6 +1532,7 @@ function calculateBackoffWithJitter(
 const WS_STALL_TIMEOUT_MS = 2000;
 
 function CameraPreviewInline() {
+	const { t } = useI18n();
 	const { rawOptions } = useRecordingOptions();
 	const [state, setState] = makePersisted(
 		createStore<CameraWindowState>(getDefaultCameraWindowState()),
@@ -1810,7 +1816,9 @@ function CameraPreviewInline() {
 						fallback={
 							<div class="flex flex-col items-center gap-2 text-center px-4">
 								<IconCapCamera class="size-8 text-gray-9 mb-2" />
-								<div class="text-sm text-gray-11">Please select a camera</div>
+								<div class="text-sm text-gray-11">
+									{t("capture.selectCamera")}
+								</div>
 							</div>
 						}
 					>
@@ -1819,14 +1827,14 @@ function CameraPreviewInline() {
 							fallback={
 								<div class="flex flex-col items-center gap-2 text-center px-4">
 									<div class="text-sm text-red-400">
-										Camera connection failed
+										{t("capture.cameraConnectionFailed")}
 									</div>
 									<button
 										type="button"
 										onClick={handleRetryConnection}
 										class="text-xs text-blue-400 hover:text-blue-300 underline"
 									>
-										Try again
+										{t("capture.tryAgain")}
 									</button>
 								</div>
 							}
@@ -1840,7 +1848,9 @@ function CameraPreviewInline() {
 								style={canvasStyle()}
 							/>
 							<Show when={!hasFrame()}>
-								<div class="text-sm text-gray-11">Loading camera...</div>
+								<div class="text-sm text-gray-11">
+									{t("capture.loadingCamera")}
+								</div>
 							</Show>
 						</Show>
 					</Show>
@@ -1864,6 +1874,7 @@ function RecordingControls(props: {
 	onRecordingStart?: () => void;
 	onClose?: () => void;
 }) {
+	const { t, language } = useI18n();
 	const auth = authStore.createQuery();
 	const { setOptions, rawOptions } = useRecordingOptions();
 
@@ -1940,6 +1951,11 @@ function RecordingControls(props: {
 	const startLoading = () =>
 		devices.isPending || recordingStartSafety.isPending;
 	const startDisabled = () => !!props.disabled || startLoading();
+	const modeLabel = () => {
+		if (rawOptions.mode === "studio") return t("capture.mode.studio");
+		if (rawOptions.mode === "instant") return t("capture.mode.instant");
+		return t("capture.mode.screenshot");
+	};
 
 	const startRecording = async (confirmedWithoutMicrophone = false) => {
 		if (rawOptions.mode === "instant" && !auth.data) {
@@ -2065,7 +2081,7 @@ function RecordingControls(props: {
 		await Menu.new({
 			items: [
 				await CheckMenuItem.new({
-					text: "Studio Mode",
+					text: t("capture.mode.studio"),
 					action: () => {
 						setOptions("mode", "studio");
 						commands.setRecordingMode("studio");
@@ -2073,7 +2089,7 @@ function RecordingControls(props: {
 					checked: rawOptions.mode === "studio",
 				}),
 				await CheckMenuItem.new({
-					text: "Instant Mode",
+					text: t("capture.mode.instant"),
 					action: () => {
 						setOptions("mode", "instant");
 						commands.setRecordingMode("instant");
@@ -2081,7 +2097,7 @@ function RecordingControls(props: {
 					checked: rawOptions.mode === "instant",
 				}),
 				await CheckMenuItem.new({
-					text: "Screenshot Mode",
+					text: t("capture.mode.screenshot"),
 					action: () => {
 						setOptions("mode", "screenshot");
 						commands.setRecordingMode("screenshot");
@@ -2093,7 +2109,7 @@ function RecordingControls(props: {
 
 	const countdownItems = async () => [
 		await CheckMenuItem.new({
-			text: "Off",
+			text: t("common.off"),
 			action: () => generalSettingsStore.set({ recordingCountdown: 0 }),
 			checked:
 				!generalSetings.data?.recordingCountdown ||
@@ -2190,15 +2206,15 @@ function RecordingControls(props: {
 										<span class="text-[0.95rem] font-medium text-white text-nowrap">
 											{(() => {
 												if (rawOptions.mode === "instant" && !auth.data)
-													return "Sign In To Use";
-												if (startLoading()) return "Preparing...";
+													return t("capture.signInToUse");
+												if (startLoading()) return t("capture.preparing");
 												if (rawOptions.mode === "screenshot")
-													return "Take Screenshot";
-												return "Start Recording";
+													return t("capture.takeScreenshot");
+												return t("capture.start");
 											})()}
 										</span>
 										<span class="text-[11px] flex items-center text-nowrap gap-1 transition-opacity duration-200 text-white/90 font-light -mt-0.5">
-											{`${capitalize(rawOptions.mode)} Mode`}
+											{modeLabel()}
 										</span>
 									</div>
 								</div>
@@ -2216,24 +2232,23 @@ function RecordingControls(props: {
 										<IconLucideAlertTriangle class="mt-0.5 size-4 shrink-0 text-amber-10" />
 										<div class="flex flex-col gap-1">
 											<p class="text-sm font-semibold">
-												No microphone detected
+												{t("capture.noMicrophoneDetected")}
 											</p>
 											<p class="text-xs leading-relaxed text-gray-10">
-												This recording will not include your voice. Select a
-												microphone, or continue without one.
+												{t("capture.noMicrophoneWarning")}
 											</p>
 										</div>
 									</div>
 									<div class="flex gap-2 justify-end mt-3">
 										<Popover.CloseButton class="px-3 h-8 text-xs font-medium rounded-lg border border-gray-4 bg-gray-2 text-gray-12 hover:bg-gray-3">
-											Go back
+											{t("capture.goBack")}
 										</Popover.CloseButton>
 										<button
 											type="button"
 											class="px-3 h-8 text-xs font-medium text-white rounded-lg bg-blue-9 hover:bg-blue-10"
 											onClick={() => void startRecording(true)}
 										>
-											Record without microphone
+											{t("capture.recordWithoutMicrophone")}
 										</button>
 									</div>
 								</Popover.Content>
@@ -2302,8 +2317,16 @@ function RecordingControls(props: {
 				>
 					<IconCapInfo class="opacity-70 will-change-transform size-3" />
 					<p class="text-sm text-white drop-shadow-md">
-						<span class="opacity-70">What is </span>
-						<span class="font-medium">{capitalize(rawOptions.mode)} Mode</span>?
+						{language() === "zh-CN" ? (
+							<>
+								什么是 <span class="font-medium">{modeLabel()}</span>？
+							</>
+						) : (
+							<>
+								<span class="opacity-70">What is </span>
+								<span class="font-medium">{modeLabel()}</span>?
+							</>
+						)}
 					</p>
 				</div>
 			</div>
@@ -2312,18 +2335,19 @@ function RecordingControls(props: {
 }
 
 function ShowCapFreeWarning(props: { isInstantMode: boolean }) {
+	const { text } = useI18n();
 	const auth = authStore.createQuery();
 
 	return (
 		<Suspense>
 			<Show when={props.isInstantMode && auth.data?.plan?.upgraded === false}>
 				<p class="text-sm text-center max-w-64 text-gray-3 mt-3">
-					Instant Mode recordings are limited to 5 mins,{" "}
+					{text("Instant Mode recordings are limited to 5 mins,")}{" "}
 					<button
 						class="underline font-bold text-gray-3"
 						onClick={() => commands.showWindow("Upgrade")}
 					>
-						Upgrade to Pro
+						{text("Upgrade to Pro")}
 					</button>
 				</p>
 			</Show>

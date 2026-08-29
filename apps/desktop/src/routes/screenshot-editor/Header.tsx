@@ -8,6 +8,7 @@ import { cx } from "cva";
 import { createEffect, onCleanup, Suspense } from "solid-js";
 import CaptionControlsMacOS from "~/components/titlebar/controls/CaptionControlsMacOS";
 import CaptionControlsWindows11 from "~/components/titlebar/controls/CaptionControlsWindows11";
+import { useI18n } from "~/i18n";
 import IconCapCrop from "~icons/cap/crop";
 import IconCapTrash from "~icons/cap/trash";
 import IconLucideCopy from "~icons/lucide/copy";
@@ -34,6 +35,7 @@ import {
 import { useScreenshotExport } from "./useScreenshotExport";
 
 export function Header() {
+	const { text } = useI18n();
 	const ctx = useScreenshotEditorContext();
 	const {
 		setDialog,
@@ -96,13 +98,13 @@ export function Header() {
 	const shareTooltip = () => {
 		switch (exportStatus()) {
 			case "rendering":
-				return "Rendering screenshot";
+				return text("Rendering screenshot");
 			case "encoding":
-				return "Preparing upload";
+				return text("Preparing upload");
 			case "uploading":
-				return "Uploading screenshot";
+				return text("Uploading screenshot");
 			default:
-				return "Create shareable link";
+				return text("Create shareable link");
 		}
 	};
 
@@ -188,13 +190,15 @@ export function Header() {
 										}}
 									>
 										<IconLucideFolder class="size-4 text-gray-11" />
-										<span>Open Folder</span>
+										<span>{text("Open Folder")}</span>
 									</DropdownItem>
 									<DropdownItem
 										onSelect={async () => {
 											if (
 												await ask(
-													"Are you sure you want to delete this screenshot?",
+													text(
+														"Are you sure you want to delete this screenshot?",
+													),
 												)
 											) {
 												await remove(path());
@@ -203,7 +207,7 @@ export function Header() {
 										}}
 									>
 										<IconCapTrash class="size-4 text-gray-11" />
-										<span>Delete</span>
+										<span>{text("Delete")}</span>
 									</DropdownItem>
 								</MenuItemList>
 							</PopperContent>

@@ -22,6 +22,7 @@ import {
 } from "solid-js";
 import { produce } from "solid-js/store";
 import toast from "solid-toast";
+import { useI18n } from "~/i18n";
 
 import "./styles.css";
 
@@ -170,6 +171,7 @@ export function Timeline(props: {
 		visibleTrackCount: number;
 	}) => void;
 }) {
+	const { text, language } = useI18n();
 	const {
 		project,
 		setProject,
@@ -1099,11 +1101,15 @@ export function Timeline(props: {
 
 			setEditorState("timeline", "tracks", "caption", true);
 			setEditorState("captions", "isStale", false);
-			toast.success("Captions generated successfully!");
+			toast.success(text("Captions generated successfully!"));
 		} catch (error) {
 			console.error("Error generating captions:", error);
 			const errorMessage = getCaptionGenerationErrorMessage(error);
-			toast.error(`Failed to generate captions: ${errorMessage}`);
+			toast.error(
+				language() === "zh-CN"
+					? `字幕生成失败：${errorMessage}`
+					: `Failed to generate captions: ${errorMessage}`,
+			);
 		} finally {
 			setEditorState("captions", "isGenerating", false);
 		}
@@ -1561,6 +1567,7 @@ function TrackRow(props: {
 	deleteTitle?: string;
 	onContextMenu?: (e: MouseEvent) => void;
 }) {
+	const { text } = useI18n();
 	return (
 		<div class="flex items-stretch gap-2" onContextMenu={props.onContextMenu}>
 			<div
@@ -1584,11 +1591,11 @@ function TrackRow(props: {
 							props.onDelete?.();
 						}}
 						onMouseDown={(e) => e.stopPropagation()}
-						title={props.deleteTitle ?? "Delete track"}
+						title={text(props.deleteTitle ?? "Delete track")}
 					>
 						<IconCapTrash class="size-4" />
 						<span class="text-[0.625rem] leading-none font-medium">
-							{props.deleteLabel ?? "Delete"}
+							{text(props.deleteLabel ?? "Delete")}
 						</span>
 					</button>
 				</Show>

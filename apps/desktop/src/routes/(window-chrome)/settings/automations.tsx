@@ -15,6 +15,7 @@ import { createStore, produce } from "solid-js/store";
 import { Dynamic } from "solid-js/web";
 import toast from "solid-toast";
 import { Toggle } from "~/components/Toggle";
+import { useI18n } from "~/i18n";
 import { presetsStore } from "~/store";
 import {
 	ACTION_LABELS,
@@ -341,12 +342,13 @@ function TextInput(props: {
 	placeholder?: string;
 	onInput: (v: string) => void;
 }) {
+	const { text } = useI18n();
 	return (
 		<input
 			type="text"
 			class={inputClass}
 			value={props.value}
-			placeholder={props.placeholder}
+			placeholder={props.placeholder ? text(props.placeholder) : undefined}
 			onInput={(e) => props.onInput(e.currentTarget.value)}
 		/>
 	);
@@ -369,13 +371,14 @@ function SelectInput<T extends string>(props: {
 	onChange: (v: T) => void;
 	class?: string;
 }) {
+	const { text } = useI18n();
 	const current = () => props.options.find((o) => o.value === props.value);
 
 	const openMenu = async () => {
 		const items = await Promise.all(
 			props.options.map((option) =>
 				CheckMenuItem.new({
-					text: option.label,
+					text: text(option.label),
 					checked: option.value === props.value,
 					action: () => props.onChange(option.value),
 				}),
@@ -395,25 +398,31 @@ function SelectInput<T extends string>(props: {
 				props.class,
 			)}
 		>
-			<span class="truncate">{current()?.label ?? props.value}</span>
+			<span class="truncate">{text(current()?.label ?? props.value)}</span>
 			<IconLucideChevronDown class="size-3.5 shrink-0 text-gray-10" />
 		</button>
 	);
 }
 
 function Field(props: { label: string; children: JSX.Element }) {
+	const { text } = useI18n();
 	return (
 		<label class="flex flex-col gap-1 min-w-0 flex-1">
-			<span class="text-[11px] font-medium text-gray-10">{props.label}</span>
+			<span class="text-[11px] font-medium text-gray-10">
+				{text(props.label)}
+			</span>
 			{props.children}
 		</label>
 	);
 }
 
 function GroupLabel(props: { children: JSX.Element }) {
+	const { text } = useI18n();
 	return (
 		<span class="text-[11px] font-medium uppercase tracking-wide text-gray-9">
-			{props.children}
+			{typeof props.children === "string"
+				? text(props.children)
+				: props.children}
 		</span>
 	);
 }
@@ -424,10 +433,11 @@ function RowButton(props: {
 	children: JSX.Element;
 	disabled?: boolean;
 }) {
+	const { text } = useI18n();
 	return (
 		<button
 			type="button"
-			title={props.title}
+			title={text(props.title)}
 			disabled={props.disabled}
 			onClick={props.onClick}
 			class="flex items-center justify-center size-7 rounded-lg text-gray-10 hover:text-gray-12 hover:bg-gray-3 transition-colors disabled:opacity-40 disabled:hover:bg-transparent"
@@ -438,6 +448,7 @@ function RowButton(props: {
 }
 
 export default function AutomationsSettings() {
+	const { text } = useI18n();
 	const [store, setStore] = createStore<AutomationsStore>({
 		version: 1,
 		rules: [],
@@ -466,7 +477,7 @@ export default function AutomationsSettings() {
 			});
 		} catch (e) {
 			console.error("Failed to save automations", e);
-			toast.error("Failed to save automations");
+			toast.error(text("Failed to save automations"));
 		}
 	};
 
@@ -501,7 +512,7 @@ export default function AutomationsSettings() {
 			setTestReports(ruleId, report);
 			const unsupported = report.actionChecks.filter((c) => !c.supported);
 			if (unsupported.length === 0) {
-				toast.success("All actions supported on this device");
+				toast.success(text("All actions supported on this device"));
 			} else {
 				toast(
 					`${unsupported.length} action(s) not supported here: ${unsupported
@@ -511,7 +522,7 @@ export default function AutomationsSettings() {
 			}
 		} catch (e) {
 			console.error("Failed to test automation", e);
-			toast.error("Failed to test automation");
+			toast.error(text("Failed to test automation"));
 		}
 	};
 
@@ -578,16 +589,20 @@ export default function AutomationsSettings() {
 }
 
 function EmptyState(props: { onCreate: () => void }) {
+	const { text } = useI18n();
 	return (
 		<SectionCard padded>
 			<div class="flex flex-col gap-2 items-center py-6 text-center">
 				<div class="flex justify-center items-center mb-1 rounded-full size-11 bg-gray-3 text-gray-10">
 					<IconLucideZap class="size-5" />
 				</div>
-				<p class="text-[13px] font-medium text-gray-12">No automations yet</p>
+				<p class="text-[13px] font-medium text-gray-12">
+					{text("No automations yet")}
+				</p>
 				<p class="max-w-xs text-xs leading-relaxed text-gray-10">
-					Pick a template below to get started in one click, or build your own
-					from scratch.
+					{text(
+						"Pick a template below to get started in one click, or build your own from scratch.",
+					)}
 				</p>
 				<Button
 					variant="gray"
@@ -596,7 +611,7 @@ function EmptyState(props: { onCreate: () => void }) {
 					class="flex gap-1.5 items-center mt-1"
 				>
 					<IconLucidePlus class="size-3.5" />
-					Start from scratch
+					{text("Start from scratch")}
 				</Button>
 			</div>
 		</SectionCard>
@@ -604,6 +619,7 @@ function EmptyState(props: { onCreate: () => void }) {
 }
 
 function AddRuleButton(props: { onClick: () => void }) {
+	const { text } = useI18n();
 	return (
 		<button
 			type="button"
@@ -611,12 +627,13 @@ function AddRuleButton(props: { onClick: () => void }) {
 			class="flex gap-1.5 justify-center items-center py-2.5 w-full text-[13px] rounded-xl border border-dashed transition-colors border-gray-4 text-gray-10 hover:text-gray-12 hover:border-gray-6 hover:bg-gray-2"
 		>
 			<IconLucidePlus class="size-4" />
-			New automation
+			{text("New automation")}
 		</button>
 	);
 }
 
 function TemplateCard(props: { template: Template; onAdd: () => void }) {
+	const { text } = useI18n();
 	return (
 		<button
 			type="button"
@@ -628,10 +645,10 @@ function TemplateCard(props: { template: Template; onAdd: () => void }) {
 			</div>
 			<div class="flex-1 min-w-0">
 				<p class="text-[13px] font-medium text-gray-12">
-					{props.template.name}
+					{text(props.template.name)}
 				</p>
 				<p class="mt-0.5 text-[11px] leading-snug text-gray-10">
-					{props.template.description}
+					{text(props.template.description)}
 				</p>
 			</div>
 		</button>
@@ -647,6 +664,7 @@ function RuleCard(props: {
 	onRemove: () => void;
 	onTest: () => void;
 }) {
+	const { text } = useI18n();
 	return (
 		<SectionCard class="overflow-hidden">
 			<div class="flex gap-3 items-center p-2.5">
@@ -692,7 +710,7 @@ function RuleCard(props: {
 				<button
 					type="button"
 					onClick={props.onToggleExpand}
-					title={props.expanded ? "Collapse" : "Edit"}
+					title={text(props.expanded ? "Collapse" : "Edit")}
 					class="flex justify-center items-center rounded-lg transition-colors size-7 text-gray-10 hover:text-gray-12 hover:bg-gray-3"
 				>
 					<IconLucideChevronDown
@@ -726,6 +744,7 @@ function RuleEditorBody(props: {
 	onRemove: () => void;
 	onTest: () => void;
 }) {
+	const { text } = useI18n();
 	const hasDangerous = () =>
 		props.rule.actions.some((a) => DANGEROUS_ACTIONS.includes(a.type));
 
@@ -797,7 +816,7 @@ function RuleEditorBody(props: {
 							/>
 						</Show>
 						<Button variant="gray" size="xs" onClick={addCondition}>
-							Add condition
+							{text("Add condition")}
 						</Button>
 					</div>
 				</div>
@@ -805,7 +824,8 @@ function RuleEditorBody(props: {
 					when={props.rule.conditions.length > 0}
 					fallback={
 						<p class="text-xs text-gray-9">
-							Runs for every {TRIGGER_PHRASE[props.rule.trigger].toLowerCase()}.
+							{text("Runs for every")}{" "}
+							{text(TRIGGER_PHRASE[props.rule.trigger].toLowerCase())}.
 						</p>
 					}
 				>
@@ -839,7 +859,7 @@ function RuleEditorBody(props: {
 				<div class="flex justify-between items-center">
 					<GroupLabel>Then do this</GroupLabel>
 					<Button variant="gray" size="xs" onClick={addAction}>
-						Add action
+						{text("Add action")}
 					</Button>
 				</div>
 				<div class="space-y-2">
@@ -878,15 +898,20 @@ function RuleEditorBody(props: {
 
 			<Show when={hasDangerous()}>
 				<p class="text-xs leading-relaxed text-amber-600 dark:text-amber-500">
-					This automation runs commands or sends network requests. Only use
-					values you trust — they execute automatically with your permissions.
+					{text(
+						"This automation runs commands or sends network requests. Only use values you trust — they execute automatically with your permissions.",
+					)}
 				</p>
 			</Show>
 
 			<div class="flex justify-between items-center pt-4 border-t border-gray-3 -mx-4 px-4 -mb-4 pb-4 mt-2">
-				<span title="Checks which actions are supported on this device. Does not run the automation.">
+				<span
+					title={text(
+						"Checks which actions are supported on this device. Does not run the automation.",
+					)}
+				>
 					<Button variant="gray" size="xs" onClick={props.onTest}>
-						Check compatibility
+						{text("Check compatibility")}
 					</Button>
 				</span>
 				<button
@@ -895,7 +920,7 @@ function RuleEditorBody(props: {
 					class="flex gap-1.5 items-center px-2 h-6 text-[0.75rem] rounded-lg transition-colors text-gray-10 hover:text-red-500 hover:bg-red-500/10"
 				>
 					<IconLucideTrash2 class="size-3.5" />
-					Delete
+					{text("Delete")}
 				</button>
 			</div>
 		</div>
@@ -909,6 +934,7 @@ function ConditionRow(props: {
 	onReplace: (next: Condition) => void;
 	onRemove: () => void;
 }) {
+	const { text } = useI18n();
 	const applies = () =>
 		conditionAppliesToTrigger(props.condition.type, props.trigger);
 	return (
@@ -934,7 +960,7 @@ function ConditionRow(props: {
 			</div>
 			<Show when={!applies()}>
 				<p class="px-1 text-[11px] text-amber-600 dark:text-amber-500">
-					This condition never matches for the selected trigger.
+					{text("This condition never matches for the selected trigger.")}
 				</p>
 			</Show>
 		</div>
@@ -945,6 +971,7 @@ function ConditionValue(props: {
 	condition: Condition;
 	onChange: (fn: (condition: Condition) => void) => void;
 }) {
+	const { text } = useI18n();
 	const c = props.condition;
 	switch (c.type) {
 		case "captureTargetIs":
@@ -1010,7 +1037,7 @@ function ConditionValue(props: {
 			return (
 				<TextInput
 					value={c.id}
-					placeholder="Organization ID"
+					placeholder={text("Organization ID")}
 					onInput={(v) =>
 						props.onChange((cond) => {
 							if (cond.type === "organizationIs") cond.id = v;
@@ -1032,6 +1059,7 @@ function ActionRow(props: {
 	onRemove: () => void;
 	onMove: (dir: -1 | 1) => void;
 }) {
+	const { text } = useI18n();
 	const applies = () =>
 		actionAppliesToTrigger(props.action.type, props.trigger);
 	return (
@@ -1048,10 +1076,10 @@ function ActionRow(props: {
 				/>
 				<Show when={props.support === false}>
 					<span
-						title="Not supported on this device; will be skipped"
+						title={text("Not supported on this device; will be skipped")}
 						class="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded-md bg-amber-500/15 text-amber-600 dark:text-amber-500"
 					>
-						Skipped here
+						{text("Skipped here")}
 					</span>
 				</Show>
 				<RowButton
@@ -1075,7 +1103,7 @@ function ActionRow(props: {
 			<ActionParams action={props.action} onChange={props.onChange} />
 			<Show when={!applies()}>
 				<p class="text-[11px] text-amber-600 dark:text-amber-500">
-					This action has no effect for the selected trigger.
+					{text("This action has no effect for the selected trigger.")}
 				</p>
 			</Show>
 		</div>
@@ -1086,6 +1114,7 @@ function ActionParams(props: {
 	action: Action;
 	onChange: (fn: (action: Action) => void) => void;
 }) {
+	const { text } = useI18n();
 	const a = props.action;
 	switch (a.type) {
 		case "copyToClipboard":
@@ -1130,7 +1159,7 @@ function ActionParams(props: {
 										});
 								}}
 							>
-								Browse
+								{text("Browse")}
 							</Button>
 						</div>
 					</Field>
@@ -1175,7 +1204,7 @@ function ActionParams(props: {
 									})
 								}
 							/>
-							Copy link to clipboard
+							{text("Copy link to clipboard")}
 						</label>
 						<label class="flex gap-2 items-center text-[13px] text-gray-12">
 							<Toggle
@@ -1187,7 +1216,7 @@ function ActionParams(props: {
 									})
 								}
 							/>
-							Open in browser
+							{text("Open in browser")}
 						</label>
 					</div>
 				</div>
@@ -1229,7 +1258,7 @@ function ActionParams(props: {
 								})
 							}
 						/>
-						Run through shell
+						{text("Run through shell")}
 					</label>
 				</div>
 			);
@@ -1327,6 +1356,7 @@ function PresetSelect(props: {
 	allowNone?: boolean;
 	onChange: (name: string) => void;
 }) {
+	const { text } = useI18n();
 	const presets = presetsStore.createQuery();
 	const names = () => presets.data?.presets.map((p) => p.name) ?? [];
 	const options = () => [
@@ -1339,7 +1369,7 @@ function PresetSelect(props: {
 			when={props.allowNone || names().length > 0}
 			fallback={
 				<p class="px-0.5 py-1.5 text-[11px] text-gray-9">
-					No presets yet — create one in the editor first.
+					{text("No presets yet — create one in the editor first.")}
 				</p>
 			}
 		>
@@ -1356,6 +1386,7 @@ function ExportParams(props: {
 	action: Extract<Action, { type: "export" }>;
 	onChange: (fn: (action: Action) => void) => void;
 }) {
+	const { text } = useI18n();
 	const a = props.action;
 	const updateProfile = (fn: (p: typeof a.profile) => void) =>
 		props.onChange((act) => {
@@ -1467,7 +1498,7 @@ function ExportParams(props: {
 								});
 						}}
 					>
-						Browse
+						{text("Browse")}
 					</Button>
 				</div>
 			</Field>

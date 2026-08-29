@@ -3,6 +3,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { writeText } from "@tauri-apps/plugin-clipboard-manager";
 import { createResource, createSignal, Show } from "solid-js";
 import toast from "solid-toast";
+import { useI18n } from "~/i18n";
 import { Section, SectionCard, SettingsPageContent } from "./Setting";
 
 type CliInstallStatus = {
@@ -31,14 +32,15 @@ function errorMessage(error: unknown, fallback: string) {
 }
 
 export default function CliSettings() {
+	const { text, language } = useI18n();
 	const [status, { refetch, mutate }] = createResource(getCliInstallStatus);
 	const [isInstalling, setIsInstalling] = createSignal(false);
 	const [isUninstalling, setIsUninstalling] = createSignal(false);
 
 	const installButtonLabel = () => {
 		if (isInstalling())
-			return status()?.installed ? "Repairing..." : "Installing...";
-		return status()?.installed ? "Repair" : "Install CLI";
+			return text(status()?.installed ? "Repairing..." : "Installing...");
+		return text(status()?.installed ? "Repair" : "Install CLI");
 	};
 
 	const handleInstall = async () => {
@@ -46,7 +48,7 @@ export default function CliSettings() {
 
 		try {
 			mutate(await installCli());
-			toast.success("Cap CLI installed");
+			toast.success(text("Cap CLI installed"));
 		} catch (error) {
 			toast.error(errorMessage(error, "Failed to install CLI"));
 			await refetch();
@@ -60,7 +62,7 @@ export default function CliSettings() {
 
 		try {
 			mutate(await uninstallCli());
-			toast.success("Cap CLI removed");
+			toast.success(text("Cap CLI removed"));
 		} catch (error) {
 			toast.error(errorMessage(error, "Failed to remove CLI"));
 			await refetch();
@@ -71,7 +73,7 @@ export default function CliSettings() {
 
 	const copyPathCommand = async (command: string) => {
 		await writeText(command);
-		toast.success("Copied to clipboard");
+		toast.success(text("Copied to clipboard"));
 	};
 
 	return (
@@ -93,7 +95,7 @@ export default function CliSettings() {
 								>
 									<div class="flex flex-col gap-2">
 										<p class="text-xs leading-relaxed text-red-11">
-											Couldn't load CLI status:{" "}
+											{text("Couldn't load CLI status")}:{" "}
 											{errorMessage(status.error, "unknown error")}
 										</p>
 										<Button
@@ -102,7 +104,7 @@ export default function CliSettings() {
 											class="self-start"
 											onClick={() => refetch()}
 										>
-											Retry
+											{text("Retry")}
 										</Button>
 									</div>
 								</Show>
@@ -114,13 +116,17 @@ export default function CliSettings() {
 										<div class="flex flex-col gap-1 min-w-0">
 											<p class="text-[13px] text-gray-12">
 												{currentStatus().installed
-													? "Installed"
-													: "Not installed"}
+													? text("Installed")
+													: text("Not installed")}
 											</p>
 											<p class="text-xs leading-snug text-gray-10">
-												The desktop app installs a local{" "}
+												{language() === "zh-CN"
+													? "桌面应用会安装一个本地"
+													: "The desktop app installs a local"}{" "}
 												<code class="font-mono text-gray-12">cap</code> command
-												that points back to the bundled CLI.
+												{language() === "zh-CN"
+													? "命令，它会调用应用内置的 CLI"
+													: "command that points back to the bundled CLI."}
 											</p>
 										</div>
 										<div class="flex shrink-0 gap-2">
@@ -131,7 +137,7 @@ export default function CliSettings() {
 													disabled={isUninstalling()}
 													onClick={handleUninstall}
 												>
-													{isUninstalling() ? "Removing..." : "Remove"}
+													{text(isUninstalling() ? "Removing..." : "Remove")}
 												</Button>
 											</Show>
 											<Button
@@ -170,19 +176,25 @@ export default function CliSettings() {
 													when={currentStatus().pathConfigured}
 													fallback={
 														<>
-															Add{" "}
+															{language() === "zh-CN" ? "把" : "Add"}{" "}
 															<code class="font-mono text-gray-12">
 																{currentStatus().pathEntry}
 															</code>{" "}
-															to your PATH to use{" "}
+															{language() === "zh-CN"
+																? "加入 PATH，即可在新终端中使用"
+																: "to your PATH to use"}{" "}
 															<code class="font-mono text-gray-12">cap</code>{" "}
-															from a new terminal.
+															{language() === "zh-CN"
+																? "命令。"
+																: "from a new terminal."}
 														</>
 													}
 												>
-													Added <code class="font-mono text-gray-12">cap</code>{" "}
-													to your PATH. Restart your terminal to use it, or run
-													this now:
+													{language() === "zh-CN" ? "已把" : "Added"}{" "}
+													<code class="font-mono text-gray-12">cap</code>{" "}
+													{language() === "zh-CN"
+														? "加入 PATH。请重启终端后使用，或立即运行："
+														: "to your PATH. Restart your terminal to use it, or run this now:"}
 												</Show>
 											</p>
 											<div class="flex items-center gap-2">
@@ -196,7 +208,7 @@ export default function CliSettings() {
 														copyPathCommand(currentStatus().shellCommand)
 													}
 												>
-													Copy
+													{text("Copy")}
 												</Button>
 											</div>
 										</div>
@@ -212,9 +224,10 @@ export default function CliSettings() {
 }
 
 function PathRow(props: { label: string; value: string }) {
+	const { text } = useI18n();
 	return (
 		<div class="flex items-center gap-3 min-w-0">
-			<span class="w-16 shrink-0 text-gray-10">{props.label}</span>
+			<span class="w-16 shrink-0 text-gray-10">{text(props.label)}</span>
 			<code class="min-w-0 truncate rounded-md bg-gray-3 px-2 py-1 font-mono text-[11px] text-gray-12">
 				{props.value}
 			</code>

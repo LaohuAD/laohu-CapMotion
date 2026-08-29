@@ -51,6 +51,7 @@ import gradientBg from "~/assets/illustrations/gradient.webp";
 import imageBg from "~/assets/illustrations/image.webp";
 import transparentBg from "~/assets/illustrations/transparent.webp";
 import { Toggle } from "~/components/Toggle";
+import { useI18n } from "~/i18n";
 import { animatedGradientsStore, generalSettingsStore } from "~/store";
 import { listSystemFonts } from "~/utils/fonts";
 import { normalizeOpaqueHexColor } from "~/utils/hex-color";
@@ -509,6 +510,7 @@ const TAB_IDS = {
 } as const;
 
 export function ConfigSidebar() {
+	const { selection: formatSelection, text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -734,7 +736,7 @@ export function ConfigSidebar() {
 											item={props.item}
 										>
 											<KSelect.ItemLabel class="flex-1">
-												{props.item.rawValue.name}
+												{text(props.item.rawValue.name)}
 											</KSelect.ItemLabel>
 										</MenuItem>
 									)}
@@ -744,7 +746,9 @@ export function ConfigSidebar() {
 											name: string;
 											value: StereoMode;
 										}> class="flex-1 text-sm text-left truncate text-(--gray-500) font-normal">
-											{(state) => <span>{state.selectedOption().name}</span>}
+											{(state) => (
+												<span>{text(state.selectedOption().name)}</span>
+											)}
 										</KSelect.Value>
 										<KSelect.Icon<ValidComponent>
 											as={(props) => (
@@ -796,7 +800,9 @@ export function ConfigSidebar() {
 								maxValue={10}
 								step={0.1}
 								formatTooltip={(v) =>
-									v <= -30 ? "Muted" : `${v > 0 ? "+" : ""}${v.toFixed(1)} dB`
+									v <= -30
+										? text("Muted")
+										: `${v > 0 ? "+" : ""}${v.toFixed(1)} dB`
 								}
 							/>
 						</Field>
@@ -814,7 +820,9 @@ export function ConfigSidebar() {
 								maxValue={10}
 								step={0.1}
 								formatTooltip={(v) =>
-									v <= -30 ? "Muted" : `${v > 0 ? "+" : ""}${v.toFixed(1)} dB`
+									v <= -30
+										? text("Muted")
+										: `${v > 0 ? "+" : ""}${v.toFixed(1)} dB`
 								}
 							/>
 						</Field>
@@ -912,10 +920,10 @@ export function ConfigSidebar() {
 											<RadioGroup.ItemControl class="mt-1 size-4 rounded-full border border-gray-7 data-checked:border-blue-9 data-checked:bg-blue-9" />
 											<div class="flex flex-col text-left">
 												<span class="text-sm font-medium text-gray-12">
-													{option.label}
+													{text(option.label)}
 												</span>
 												<span class="text-xs text-gray-11">
-													{option.description}
+													{text(option.description)}
 												</span>
 											</div>
 										</RadioGroup.ItemLabel>
@@ -1172,11 +1180,7 @@ export function ConfigSidebar() {
 													Done
 												</EditorButton>
 												<span class="text-sm text-gray-10">
-													{value().segments.length} caption{" "}
-													{value().segments.length === 1
-														? "segment"
-														: "segments"}{" "}
-													selected
+													{formatSelection(value().segments.length, "caption")}
 												</span>
 											</div>
 											<EditorButton
@@ -1245,11 +1249,7 @@ export function ConfigSidebar() {
 													Done
 												</EditorButton>
 												<span class="text-sm text-gray-10">
-													{value().segments.length} keyboard{" "}
-													{value().segments.length === 1
-														? "segment"
-														: "segments"}{" "}
-													selected
+													{formatSelection(value().segments.length, "keyboard")}
 												</span>
 											</div>
 											<EditorButton
@@ -1312,11 +1312,7 @@ export function ConfigSidebar() {
 													Done
 												</EditorButton>
 												<span class="text-sm text-gray-10">
-													{value().segments.length} text{" "}
-													{value().segments.length === 1
-														? "segment"
-														: "segments"}{" "}
-													selected
+													{formatSelection(value().segments.length, "text")}
 												</span>
 											</div>
 											<EditorButton
@@ -1384,11 +1380,7 @@ export function ConfigSidebar() {
 													Done
 												</EditorButton>
 												<span class="text-sm text-gray-10">
-													{value().segments.length} audio{" "}
-													{value().segments.length === 1
-														? "segment"
-														: "segments"}{" "}
-													selected
+													{formatSelection(value().segments.length, "audio")}
 												</span>
 											</div>
 											<EditorButton
@@ -1451,7 +1443,7 @@ export function ConfigSidebar() {
 													Done
 												</EditorButton>
 												<span class="text-sm text-gray-10">
-													{value().segments.length} motion selected
+													{formatSelection(value().segments.length, "motion")}
 												</span>
 											</div>
 											<EditorButton
@@ -1514,11 +1506,7 @@ export function ConfigSidebar() {
 													Done
 												</EditorButton>
 												<span class="text-sm text-gray-10">
-													{value().segments.length} mask{" "}
-													{value().segments.length === 1
-														? "segment"
-														: "segments"}{" "}
-													selected
+													{formatSelection(value().segments.length, "mask")}
 												</span>
 											</div>
 											<EditorButton
@@ -1578,10 +1566,11 @@ export function ConfigSidebar() {
 									const selectionLabel = () => {
 										const count = value().segments.length;
 										const total = totalZoomSegments();
-										if (total > 1 && count === total)
-											return `All ${total} selected`;
-										if (total > 1) return `${count} of ${total} selected`;
-										return `${count} selected`;
+										return formatSelection(
+											count,
+											"zoom",
+											total > 1 ? total : undefined,
+										);
 									};
 
 									return (
@@ -1615,7 +1604,7 @@ export function ConfigSidebar() {
 																})
 															}
 														>
-															Select all
+															{text("Select all")}
 														</button>
 													</Show>
 												</div>
@@ -1689,11 +1678,7 @@ export function ConfigSidebar() {
 													Done
 												</EditorButton>
 												<span class="text-sm text-gray-10">
-													{value().segments.length} 3D{" "}
-													{value().segments.length === 1
-														? "segment"
-														: "segments"}{" "}
-													selected
+													{formatSelection(value().segments.length, "3D")}
 												</span>
 											</div>
 											<EditorButton
@@ -1768,11 +1753,10 @@ export function ConfigSidebar() {
 																Done
 															</EditorButton>
 															<span class="text-sm text-gray-10">
-																{value().segments.length} scene{" "}
-																{value().segments.length === 1
-																	? "segment"
-																	: "segments"}{" "}
-																selected
+																{formatSelection(
+																	value().segments.length,
+																	"scene",
+																)}
 															</span>
 														</div>
 														<EditorButton
@@ -1810,6 +1794,7 @@ function BackgroundConfig(props: {
 	scrollRef: HTMLDivElement;
 	brandColorSwatches: OrganizationBrandColorSwatch[];
 }) {
+	const { text } = useI18n();
 	const { project, setProject, editorInstance, projectHistory } =
 		useEditorContext();
 	const notchXMax = () => {
@@ -1870,7 +1855,7 @@ function BackgroundConfig(props: {
 		pendingGradientPreference = null;
 		if (!preference) return;
 		void animatedGradientsStore.set(preference).catch(() => {
-			toast.error("Could not remember your animated gradient settings");
+			toast.error(text("Could not remember your animated gradient settings"));
 		});
 	};
 	const gradientPreferenceFingerprint = createMemo(() => {
@@ -2066,7 +2051,7 @@ function BackgroundConfig(props: {
 
 								setWallpaperSource(rawPath);
 							} catch (_err) {
-								toast.error("Failed to set wallpaper");
+								toast.error(text("Failed to set wallpaper"));
 							}
 						};
 
@@ -2162,7 +2147,7 @@ function BackgroundConfig(props: {
 				ensureBackgroundPresentation(addingFromBlankBackground);
 			});
 		} catch (_err) {
-			toast.error("Couldn't import your desktop wallpaper");
+			toast.error(text("Couldn't import your desktop wallpaper"));
 		} finally {
 			setImportingDesktopBackground(false);
 		}
@@ -2251,7 +2236,7 @@ function BackgroundConfig(props: {
 			)}
 		>
 			{renderBackgroundSourceIcon(props.item)}
-			{BACKGROUND_SOURCES[props.item]}
+			{text(BACKGROUND_SOURCES[props.item])}
 		</KTabs.Trigger>
 	);
 
@@ -2433,7 +2418,7 @@ function BackgroundConfig(props: {
 					>
 						<div class="mt-2 flex items-center justify-between gap-2 text-xs">
 							<span role="alert" class="text-red-11">
-								Could not load animated gradients.
+								{text("Could not load animated gradients.")}
 							</span>
 							<button
 								type="button"
@@ -2443,7 +2428,7 @@ function BackgroundConfig(props: {
 									void animatedGradientLibrary.refetch();
 								}}
 							>
-								Retry
+								{text("Retry")}
 							</button>
 						</div>
 					</Show>
@@ -2456,7 +2441,7 @@ function BackgroundConfig(props: {
 								<div class="flex flex-col gap-3 items-center justify-center p-6 w-full rounded-lg border border-dashed bg-gray-2 border-gray-5">
 									<IconLucideMonitor class="size-6 text-gray-11" />
 									<span class="text-[13px] text-center text-gray-12">
-										Use the wallpaper from your desktop
+										{text("Use the wallpaper from your desktop")}
 									</span>
 									<EditorButton
 										onClick={importDesktopBackground}
@@ -2464,8 +2449,8 @@ function BackgroundConfig(props: {
 										leftIcon={<IconLucideMonitor />}
 									>
 										{importingDesktopBackground()
-											? "Importing..."
-											: "Import desktop background"}
+											? text("Importing...")
+											: text("Import desktop background")}
 									</EditorButton>
 								</div>
 							}
@@ -2490,7 +2475,9 @@ function BackgroundConfig(props: {
 											src={photo().url}
 											loading="eager"
 											class="object-cover w-full h-full"
-											alt={photo().label ?? getCurrentDesktopBackgroundLabel()}
+											alt={text(
+												photo().label ?? getCurrentDesktopBackgroundLabel(),
+											)}
 										/>
 										<span class="flex absolute right-2 bottom-2 justify-center items-center w-7 h-7 rounded-full text-white/95 bg-black/55 backdrop-blur-sm">
 											<IconLucideMonitor class="size-4" />
@@ -2503,8 +2490,8 @@ function BackgroundConfig(props: {
 											leftIcon={<IconLucideMonitor />}
 										>
 											{importingDesktopBackground()
-												? "Importing..."
-												: "Re-import"}
+												? text("Importing...")
+												: text("Re-import")}
 										</EditorButton>
 									</div>
 								</div>
@@ -2543,7 +2530,7 @@ function BackgroundConfig(props: {
 												value={key}
 												class="flex relative z-10 flex-1 justify-center items-center px-4 py-2 bg-transparent rounded-lg border transition-colors duration-200 text-gray-11 not-data-selected:hover:border-gray-7 data-selected:bg-gray-3 data-selected:border-gray-3 group data-selected:text-gray-12 disabled:opacity-50 focus:outline-hidden"
 											>
-												{value}
+												{text(value)}
 											</KTabs.Trigger>
 										</>
 									)}
@@ -2570,7 +2557,7 @@ function BackgroundConfig(props: {
 
 									ensureBackgroundPresentation();
 								} catch (_err) {
-									toast.error("Failed to set wallpaper");
+									toast.error(text("Failed to set wallpaper"));
 								}
 							}}
 							class="grid grid-cols-7 gap-2 h-auto"
@@ -2581,7 +2568,7 @@ function BackgroundConfig(props: {
 									<div class="flex col-span-7 justify-center items-center h-32 text-gray-11">
 										<div class="flex flex-col gap-2 items-center">
 											<div class="w-6 h-6 rounded-full border-2 animate-spin border-gray-5 border-t-blue-400" />
-											<span>Loading wallpapers...</span>
+											<span>{text("Loading wallpapers...")}</span>
 										</div>
 									</div>
 								}
@@ -2598,7 +2585,7 @@ function BackgroundConfig(props: {
 													src={photo.url}
 													loading="eager"
 													class="object-cover w-full h-full"
-													alt="Wallpaper option"
+													alt={text("Wallpaper option")}
 												/>
 											</KRadioGroup.ItemControl>
 										</KRadioGroup.Item>
@@ -2617,7 +2604,7 @@ function BackgroundConfig(props: {
 														<KRadioGroup.ItemControl class="overflow-hidden w-full h-full rounded-lg border border-gray-5 data-checked:border-blue-9 data-checked:ring-2 data-checked:ring-blue-9 peer-focus-visible:border-2 peer-focus-visible:border-blue-9">
 															<img
 																src={photo.url}
-																alt="Wallpaper option"
+																alt={text("Wallpaper option")}
 																class="object-cover w-full h-full"
 																loading="lazy"
 															/>
@@ -2645,7 +2632,7 @@ function BackgroundConfig(props: {
 								>
 									<IconCapImage class="text-gray-11 size-6" />
 									<span class="text-gray-12">
-										Click to select or drag and drop image
+										{text("Click to select or drag and drop image")}
 									</span>
 								</button>
 							}
@@ -2655,7 +2642,7 @@ function BackgroundConfig(props: {
 									<img
 										src={convertFileSrc(source())}
 										class="object-cover w-full h-full"
-										alt="Selected background"
+										alt={text("Selected background")}
 									/>
 									<div class="absolute top-2 right-2">
 										<button
@@ -2685,7 +2672,7 @@ function BackgroundConfig(props: {
 
 								const extension = getValidBackgroundImageExtension(file);
 								if (!extension) {
-									toast.error("Invalid image file type");
+									toast.error(text("Invalid image file type"));
 									return;
 								}
 
@@ -2705,7 +2692,7 @@ function BackgroundConfig(props: {
 										path: fullPath,
 									});
 								} catch (_err) {
-									toast.error("Failed to save image");
+									toast.error(text("Failed to save image"));
 								}
 							}}
 						/>
@@ -2826,7 +2813,7 @@ function BackgroundConfig(props: {
 				<Show when={project.background.displayPosition}>
 					<div class="flex justify-between items-center mt-3">
 						<span class="text-xs text-gray-11">
-							Custom screen position (dragged on canvas)
+							{text("Custom screen position (dragged on canvas)")}
 						</span>
 						<EditorButton
 							onClick={() => setProject("background", "displayPosition", null)}
@@ -2998,9 +2985,9 @@ function BackgroundConfig(props: {
 				<KCollapsible.Content class="overflow-hidden opacity-0 transition-opacity animate-collapsible-up data-expanded:animate-collapsible-down data-expanded:opacity-100">
 					<div class="flex flex-col gap-6 pb-6">
 						<p class="text-xs text-gray-11">
-							Draws a MacBook notch over the recording. Recordings made on a Mac
-							with a notch use their own measurements; otherwise start from the
-							size below and adjust to match.
+							{text(
+								"Draws a MacBook notch over the recording. Recordings made on a Mac with a notch use their own measurements; otherwise start from the size below and adjust to match.",
+							)}
 						</p>
 						<For
 							each={
@@ -3146,6 +3133,7 @@ function BackgroundConfig(props: {
 }
 
 function CameraConfig(props: { scrollRef: HTMLDivElement }) {
+	const { text } = useI18n();
 	const { project, setProject } = useEditorContext();
 	// A camera dragged on the preview canvas has a manual position; none of
 	// the preset dots match until it is reset.
@@ -3223,12 +3211,12 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 						<Show when={project.camera.manualPosition}>
 							<div class="flex justify-between items-center mt-3">
 								<span class="text-xs text-gray-11">
-									Custom position (dragged on canvas)
+									{text("Custom position (dragged on canvas)")}
 								</span>
 								<EditorButton
 									onClick={() => setProject("camera", "manualPosition", null)}
 								>
-									Reset
+									{text("Reset")}
 								</EditorButton>
 							</div>
 						</Show>
@@ -3279,7 +3267,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 									item={props.item}
 								>
 									<KSelect.ItemLabel class="flex-1">
-										{props.item.rawValue.name}
+										{text(props.item.rawValue.name)}
 									</KSelect.ItemLabel>
 								</MenuItem>
 							)}
@@ -3289,7 +3277,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 									name: string;
 									value: string;
 								}> class="flex-1 text-sm text-left truncate text-(--gray-500) font-normal">
-									{(state) => <span>{state.selectedOption().name}</span>}
+									{(state) => <span>{text(state.selectedOption().name)}</span>}
 								</KSelect.Value>
 								<KSelect.Icon<ValidComponent>
 									as={(iconProps) => (
@@ -3331,7 +3319,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 									item={props.item}
 								>
 									<KSelect.ItemLabel class="flex-1">
-										{props.item.rawValue.name}
+										{text(props.item.rawValue.name)}
 									</KSelect.ItemLabel>
 								</MenuItem>
 							)}
@@ -3341,7 +3329,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 									name: string;
 									value: StereoMode;
 								}> class="flex-1 text-sm text-left truncate text-(--gray-500) font-normal">
-									{(state) => <span>{state.selectedOption().name}</span>}
+									{(state) => <span>{text(state.selectedOption().name)}</span>}
 								</KSelect.Value>
 								<KSelect.Icon<ValidComponent>
 									as={(props) => (
@@ -3503,12 +3491,13 @@ function CornerStyleSelect(props: {
 	value: CornerRoundingType;
 	onChange: (value: CornerRoundingType) => void;
 }) {
+	const { text } = useI18n();
 	return (
 		<div class="flex flex-col gap-1.5">
 			<Show when={props.label}>
 				{(label) => (
 					<span class="text-[0.65rem] uppercase tracking-wide text-gray-11">
-						{label()}
+						{text(label())}
 					</span>
 				)}
 			</Show>
@@ -3527,7 +3516,7 @@ function CornerStyleSelect(props: {
 						item={itemProps.item}
 					>
 						<KSelect.ItemLabel class="flex-1">
-							{itemProps.item.rawValue.name}
+							{text(itemProps.item.rawValue.name)}
 						</KSelect.ItemLabel>
 					</MenuItem>
 				)}
@@ -3537,7 +3526,7 @@ function CornerStyleSelect(props: {
 						name: string;
 						value: CornerRoundingType;
 					}> class="flex-1 text-sm text-left truncate text-(--gray-500) font-normal">
-						{(state) => <span>{state.selectedOption().name}</span>}
+						{(state) => <span>{text(state.selectedOption().name)}</span>}
 					</KSelect.Value>
 					<KSelect.Icon<ValidComponent>
 						as={(iconProps) => (
@@ -3640,6 +3629,7 @@ function TextStyleSelect<T extends string | number>(props: {
 	onChange: (value: T) => void;
 	fallbackLabel?: (value: T) => string;
 }) {
+	const { text } = useI18n();
 	const selected = () =>
 		props.options.find((option) => option.value === props.value) ?? {
 			label: props.fallbackLabel?.(props.value) ?? String(props.value),
@@ -3661,7 +3651,7 @@ function TextStyleSelect<T extends string | number>(props: {
 					item={selectItemProps.item}
 				>
 					<KSelect.ItemLabel class="flex-1">
-						{selectItemProps.item.rawValue.label}
+						{text(selectItemProps.item.rawValue.label)}
 					</KSelect.ItemLabel>
 					<KSelect.ItemIndicator class="ml-auto text-blue-9">
 						<IconCapCircleCheck />
@@ -3671,7 +3661,7 @@ function TextStyleSelect<T extends string | number>(props: {
 		>
 			<KSelect.Trigger class="flex w-full items-center justify-between rounded-md border border-gray-3 bg-gray-2 px-3 py-2 text-sm text-gray-12 transition-colors hover:border-gray-4 hover:bg-gray-3 focus:border-blue-9 focus:outline-hidden focus:ring-1 focus:ring-blue-9">
 				<KSelect.Value<{ label: string; value: T }> class="truncate">
-					{(state) => state.selectedOption()?.label ?? selected().label}
+					{(state) => text(state.selectedOption()?.label ?? selected().label)}
 				</KSelect.Value>
 				<KSelect.Icon>
 					<IconCapChevronDown class="size-4 shrink-0 transform transition-transform data-expanded:rotate-180 text-(--gray-500)" />
@@ -3706,6 +3696,7 @@ function TextPresetCard(props: {
 	active: boolean;
 	onApply: () => void;
 }) {
+	const { text } = useI18n();
 	const style = () => props.preset.style;
 	const stackCss = () =>
 		style()
@@ -3751,7 +3742,7 @@ function TextPresetCard(props: {
 				{props.preset.sample}
 			</span>
 			<span class="absolute inset-x-0 bottom-1 text-center text-[10px] font-medium text-white/50">
-				{props.preset.name}
+				{text(props.preset.name)}
 			</span>
 		</button>
 	);
@@ -3785,6 +3776,7 @@ function TextSegmentConfig(props: {
 	segment: TextSegment;
 	brandColorSwatches: OrganizationBrandColorSwatch[];
 }) {
+	const { text } = useI18n();
 	const { setProject } = useEditorContext();
 	const [installedFonts] = createResource(listSystemFonts, {
 		initialValue: [],
@@ -3839,7 +3831,7 @@ function TextSegmentConfig(props: {
 						}
 					/>
 					<div class="flex flex-col items-center gap-2">
-						<span class="text-xs text-gray-11">Enabled</span>
+						<span class="text-xs text-gray-11">{text("Enabled")}</span>
 						<Toggle
 							checked={props.segment.enabled}
 							onChange={(value) =>
@@ -3858,7 +3850,7 @@ function TextSegmentConfig(props: {
 							{(option) => (
 								<button
 									type="button"
-									title={option.label}
+									title={text(option.label)}
 									class={cx(
 										"flex flex-col items-center gap-1 rounded-md py-1.5 transition-colors",
 										(props.segment.layout ?? "overlay") === option.value
@@ -3880,7 +3872,7 @@ function TextSegmentConfig(props: {
 								>
 									<Dynamic component={option.icon} class="size-4" />
 									<span class="text-[9px] font-medium leading-none">
-										{option.label}
+										{text(option.label)}
 									</span>
 								</button>
 							)}
@@ -3888,13 +3880,16 @@ function TextSegmentConfig(props: {
 					</div>
 					<Show when={(props.segment.layout ?? "overlay") === "fullscreen"}>
 						<p class="text-xs leading-snug text-gray-10">
-							Pauses the video while the text is shown, then resumes where it
-							left off.
+							{text(
+								"Pauses the video while the text is shown, then resumes where it left off.",
+							)}
 						</p>
 					</Show>
 					<Show when={(props.segment.layout ?? "overlay") !== "overlay"}>
 						<div class="flex flex-col gap-1">
-							<span class="text-xs text-gray-11">Screen transition</span>
+							<span class="text-xs text-gray-11">
+								{text("Screen transition")}
+							</span>
 							<Slider
 								value={[
 									clampNumber(props.segment.layoutTransition ?? 0.5, 0.1, 1.5),
@@ -3955,7 +3950,7 @@ function TextSegmentConfig(props: {
 						</div>
 						<button
 							type="button"
-							title="Italic"
+							title={text("Italic")}
 							class={cx(
 								"flex size-9 shrink-0 items-center justify-center rounded-md border transition-colors",
 								props.segment.italic
@@ -3972,7 +3967,7 @@ function TextSegmentConfig(props: {
 						</button>
 					</div>
 					<div class="flex flex-col gap-1">
-						<span class="text-xs text-gray-11">Size</span>
+						<span class="text-xs text-gray-11">{text("Size")}</span>
 						<Slider
 							value={[
 								clampNumber(
@@ -4037,7 +4032,7 @@ function TextSegmentConfig(props: {
 						</For>
 					</div>
 					<div class="flex flex-col gap-1">
-						<span class="text-xs text-gray-11">Line height</span>
+						<span class="text-xs text-gray-11">{text("Line height")}</span>
 						<Slider
 							value={[clampNumber(props.segment.lineHeight ?? 1.2, 0.8, 2)]}
 							onChange={([value]) =>
@@ -4051,7 +4046,7 @@ function TextSegmentConfig(props: {
 						/>
 					</div>
 					<div class="flex flex-col gap-1">
-						<span class="text-xs text-gray-11">Letter spacing</span>
+						<span class="text-xs text-gray-11">{text("Letter spacing")}</span>
 						<Slider
 							value={[clampNumber(props.segment.letterSpacing ?? 0, -2, 20)]}
 							onChange={([value]) =>
@@ -4079,7 +4074,7 @@ function TextSegmentConfig(props: {
 						}
 					/>
 					<div class="flex flex-col gap-1">
-						<span class="text-xs text-gray-11">Opacity</span>
+						<span class="text-xs text-gray-11">{text("Opacity")}</span>
 						<Slider
 							value={[clampNumber(props.segment.opacity ?? 1, 0, 1)]}
 							onChange={([value]) =>
@@ -4093,7 +4088,7 @@ function TextSegmentConfig(props: {
 						/>
 					</div>
 					<div class="flex flex-col gap-1">
-						<span class="text-xs text-gray-11">Shadow</span>
+						<span class="text-xs text-gray-11">{text("Shadow")}</span>
 						<Slider
 							value={[clampNumber(props.segment.shadow ?? 0, 0, 1)]}
 							onChange={([value]) =>
@@ -4111,7 +4106,7 @@ function TextSegmentConfig(props: {
 			<Field name="Animation" icon={<IconLucideTimer class="size-4" />}>
 				<div class="flex flex-col gap-3">
 					<div class="flex flex-col gap-2">
-						<span class="text-xs text-gray-11">In</span>
+						<span class="text-xs text-gray-11">{text("In")}</span>
 						<TextStyleSelect
 							options={TEXT_ANIMATION_OPTIONS}
 							value={props.segment.animationIn ?? "fade"}
@@ -4137,7 +4132,7 @@ function TextSegmentConfig(props: {
 						</Show>
 					</div>
 					<div class="flex flex-col gap-2">
-						<span class="text-xs text-gray-11">Out</span>
+						<span class="text-xs text-gray-11">{text("Out")}</span>
 						<TextStyleSelect
 							options={TEXT_ANIMATION_OPTIONS}
 							value={props.segment.animationOut ?? "fade"}
@@ -4172,6 +4167,7 @@ function AudioSegmentConfig(props: {
 	segmentIndex: number;
 	segment: AudioTrackSegment;
 }) {
+	const { text } = useI18n();
 	const { setProject, setEditorState } = useEditorContext();
 	const clampNumber = (value: number, min: number, max: number) =>
 		Math.min(Math.max(Number.isFinite(value) ? value : min, min), max);
@@ -4216,18 +4212,20 @@ function AudioSegmentConfig(props: {
 							<span class="text-sm font-medium truncate text-gray-12">
 								{props.segment.name || "Audio"}
 							</span>
-							<span class="text-xs text-gray-10">Tap to change track</span>
+							<span class="text-xs text-gray-10">
+								{text("Tap to change track")}
+							</span>
 						</div>
 						<span class="flex gap-1 items-center px-2 h-7 text-xs font-medium rounded-lg border transition-colors shrink-0 border-gray-3 bg-gray-1 text-gray-11 group-hover:text-gray-12">
 							<IconLucideRefreshCw class="size-3.5" />
-							Change
+							{text("Change")}
 						</span>
 					</button>
 					<div class="flex gap-3 items-center">
 						<input
 							class="flex-1 px-3 py-2 rounded-lg border border-gray-3 bg-gray-2 text-gray-12"
 							value={props.segment.name ?? ""}
-							placeholder="Audio"
+							placeholder={text("Audio")}
 							onInput={(e) =>
 								updateSegment((segment) => {
 									segment.name = e.currentTarget.value;
@@ -4235,7 +4233,7 @@ function AudioSegmentConfig(props: {
 							}
 						/>
 						<div class="flex flex-col gap-2 items-center">
-							<span class="text-xs text-gray-11">Enabled</span>
+							<span class="text-xs text-gray-11">{text("Enabled")}</span>
 							<Toggle
 								checked={props.segment.enabled}
 								onChange={(value) =>
@@ -4304,6 +4302,7 @@ function KeyboardSegmentConfig(props: {
 	segmentIndex: number;
 	segment: KeyboardTrackSegment;
 }) {
+	const { text } = useI18n();
 	const { setProject } = useEditorContext();
 
 	const updateSegment = (fn: (segment: KeyboardTrackSegment) => void) => {
@@ -4339,7 +4338,7 @@ function KeyboardSegmentConfig(props: {
 					<div class="grid grid-cols-[1fr_auto_1fr] gap-2 items-start">
 						<div class="rounded-lg border border-gray-3 bg-gray-1/80 p-2.5 space-y-2">
 							<div class="flex items-center justify-between text-[10px] uppercase tracking-[0.08em] text-gray-10">
-								<span>Start</span>
+								<span>{text("Start")}</span>
 								<span>{formatTime(props.segment.start)}</span>
 							</div>
 							<Input
@@ -4357,7 +4356,7 @@ function KeyboardSegmentConfig(props: {
 						<div class="pt-10 text-xs font-medium text-gray-10">to</div>
 						<div class="rounded-lg border border-gray-3 bg-gray-1/80 p-2.5 space-y-2">
 							<div class="flex items-center justify-between text-[10px] uppercase tracking-[0.08em] text-gray-10">
-								<span>End</span>
+								<span>{text("End")}</span>
 								<span>{formatTime(props.segment.end)}</span>
 							</div>
 							<Input
@@ -4374,7 +4373,7 @@ function KeyboardSegmentConfig(props: {
 						</div>
 					</div>
 					<div class="flex items-center justify-between rounded-lg bg-gray-1/70 px-3 py-2 text-xs text-gray-11">
-						<span>Duration</span>
+						<span>{text("Duration")}</span>
 						<span class="font-medium text-gray-12">
 							{Math.max(0, props.segment.end - props.segment.start).toFixed(2)}s
 						</span>
@@ -4402,6 +4401,7 @@ function CaptionSegmentConfig(props: {
 	segmentIndex: number;
 	segment: CaptionTrackSegment;
 }) {
+	const { text } = useI18n();
 	const { setProject } = useEditorContext();
 
 	const updateSegment = (fn: (segment: CaptionTrackSegment) => void) => {
@@ -4453,7 +4453,7 @@ function CaptionSegmentConfig(props: {
 					<div class="grid grid-cols-[1fr_auto_1fr] gap-2 items-start">
 						<div class="rounded-lg border border-gray-3 bg-gray-1/80 p-2.5 space-y-2">
 							<div class="flex items-center justify-between text-[10px] uppercase tracking-[0.08em] text-gray-10">
-								<span>Start</span>
+								<span>{text("Start")}</span>
 								<span>{formatTime(props.segment.start)}</span>
 							</div>
 							<Input
@@ -4476,7 +4476,7 @@ function CaptionSegmentConfig(props: {
 						<div class="pt-10 text-xs font-medium text-gray-10">to</div>
 						<div class="rounded-lg border border-gray-3 bg-gray-1/80 p-2.5 space-y-2">
 							<div class="flex items-center justify-between text-[10px] uppercase tracking-[0.08em] text-gray-10">
-								<span>End</span>
+								<span>{text("End")}</span>
 								<span>{formatTime(props.segment.end)}</span>
 							</div>
 							<Input
@@ -4498,7 +4498,7 @@ function CaptionSegmentConfig(props: {
 						</div>
 					</div>
 					<div class="flex items-center justify-between rounded-lg bg-gray-1/70 px-3 py-2 text-xs text-gray-11">
-						<span>Duration</span>
+						<span>{text("Duration")}</span>
 						<span class="font-medium text-gray-12">
 							{Math.max(0, props.segment.end - props.segment.start).toFixed(2)}s
 						</span>
@@ -4513,6 +4513,7 @@ function MotionSegmentConfig(props: {
 	segment: MotionSegment;
 	segmentIndex: number;
 }) {
+	const { text } = useI18n();
 	const { project, setProject } = useEditorContext();
 	const [propsText, setPropsText] = createSignal(
 		JSON.stringify(props.segment.props, null, 2),
@@ -4572,7 +4573,7 @@ function MotionSegmentConfig(props: {
 						{props.segment.definitionId}@{props.segment.definitionVersion}
 					</span>
 					<span class="text-gray-9">
-						Artifact: {artifact()?.status ?? "not rendered"}
+						{text("Artifact")}: {text(artifact()?.status ?? "not rendered")}
 					</span>
 				</div>
 			</Field>
@@ -4587,9 +4588,9 @@ function MotionSegmentConfig(props: {
 						})
 					}
 				>
-					<option value="responsive">Responsive</option>
-					<option value="retime">Retime</option>
-					<option value="trim">Trim</option>
+					<option value="responsive">{text("Responsive")}</option>
+					<option value="retime">{text("Retime")}</option>
+					<option value="trim">{text("Trim")}</option>
 				</select>
 			</Field>
 			<Field name="Opacity" icon={<IconLucideEyeOff class="size-4" />}>
@@ -4686,6 +4687,7 @@ function MaskSegmentConfig(props: {
 	segmentIndex: number;
 	segment: MaskSegment;
 }) {
+	const { text } = useI18n();
 	const { setProject } = useEditorContext();
 
 	const updateSegment = (fn: (segment: MaskSegment) => void) => {
@@ -4769,13 +4771,13 @@ function MaskSegmentConfig(props: {
 								<RadioGroup.ItemInput class="sr-only" />
 								<RadioGroup.ItemLabel class="flex items-center gap-2 p-2 text-sm text-gray-12">
 									<RadioGroup.ItemControl class="size-4 rounded-full border border-gray-7 data-checked:border-blue-9 data-checked:bg-blue-9" />
-									{option.label}
+									{text(option.label)}
 								</RadioGroup.ItemLabel>
 							</RadioGroup.Item>
 						))}
 					</RadioGroup>
 					<div class="flex items-center gap-2">
-						<span class="text-xs text-gray-11">Enabled</span>
+						<span class="text-xs text-gray-11">{text("Enabled")}</span>
 						<Toggle
 							checked={props.segment.enabled}
 							onChange={(value) =>
@@ -4805,7 +4807,7 @@ function MaskSegmentConfig(props: {
 								<RadioGroup.ItemInput class="sr-only" />
 								<RadioGroup.ItemLabel class="flex items-center gap-2 p-2 text-sm text-gray-12">
 									<RadioGroup.ItemControl class="size-4 rounded-full border border-gray-7 data-checked:border-blue-9 data-checked:bg-blue-9" />
-									{option.label}
+									{text(option.label)}
 								</RadioGroup.ItemLabel>
 							</RadioGroup.Item>
 						))}
@@ -4948,15 +4950,18 @@ function Camera3DTransitionInput(props: {
 	value: number;
 	onChange: (value: number) => void;
 }) {
-	const [text, setText] = createWritableMemo(() => props.value.toString());
+	const { text } = useI18n();
+	const [inputText, setInputText] = createWritableMemo(() =>
+		props.value.toString(),
+	);
 
 	return (
 		<div class="flex flex-row justify-between items-center">
-			<span class="text-xs text-gray-11">{props.label}</span>
+			<span class="text-xs text-gray-11">{text(props.label)}</span>
 			<div class="flex flex-row gap-1 items-center">
 				<NumberField.Root
-					value={text()}
-					onChange={setText}
+					value={inputText()}
+					onChange={setInputText}
 					rawValue={props.value}
 					onRawValueChange={(value) => {
 						if (Number.isNaN(value)) return;
@@ -4973,8 +4978,8 @@ function Camera3DTransitionInput(props: {
 				>
 					<NumberField.Input
 						onBlur={() => {
-							if (text() === "" || Number.isNaN(props.value)) {
-								setText("0");
+							if (inputText() === "" || Number.isNaN(props.value)) {
+								setInputText("0");
 								props.onChange(0);
 							}
 						}}
@@ -5009,13 +5014,14 @@ function Camera3DSection(
 		onOpenChange: (open: boolean) => void;
 	}>,
 ) {
+	const { text } = useI18n();
 	return (
 		<KCollapsible open={props.open} onOpenChange={props.onOpenChange}>
 			<KCollapsible.Trigger class="flex flex-row gap-1.5 items-center w-full text-sm font-medium group text-gray-12 outline-hidden">
 				{props.icon}
-				{props.name}
+				{text(props.name)}
 				<span class="flex flex-row gap-1.5 items-center ml-auto text-xs font-normal text-gray-10">
-					{props.summary}
+					{props.summary ? text(props.summary) : undefined}
 					<IconCapChevronDown class="transition-transform duration-200 size-3.5 group-data-expanded:rotate-180" />
 				</span>
 			</KCollapsible.Trigger>
@@ -5071,6 +5077,7 @@ function Camera3DSceneCard(props: {
 	selected?: boolean;
 	onClick: () => void;
 }) {
+	const { text } = useI18n();
 	const [hovered, setHovered] = createSignal(false);
 	const shotCount = () => props.shotCount ?? props.scene.shots.length;
 
@@ -5098,7 +5105,7 @@ function Camera3DSceneCard(props: {
 				</span>
 			</div>
 			<span class="text-[10px] leading-tight text-center text-gray-11">
-				{props.scene.name}
+				{text(props.scene.name)}
 			</span>
 		</button>
 	);
@@ -5113,6 +5120,7 @@ function Camera3DSetupPanel(props: {
 	setup: { sceneId: string; shots: number };
 	onClose: () => void;
 }) {
+	const { text } = useI18n();
 	const { projectActions, setEditorState, totalDuration } = useEditorContext();
 
 	const scene = () =>
@@ -5143,13 +5151,13 @@ function Camera3DSetupPanel(props: {
 					onClick={() => props.onClose()}
 					leftIcon={<IconLucideX />}
 				>
-					Close
+					{text("Close")}
 				</EditorButton>
-				<span class="text-sm text-gray-10">New 3D scene</span>
+				<span class="text-sm text-gray-10">{text("New 3D scene")}</span>
 			</div>
 
 			<p class="text-xs text-gray-10">
-				Lay a chain of camera moves over the whole video
+				{text("Lay a chain of camera moves over the whole video")}
 			</p>
 
 			<Field name="Style" icon={<IconLucideRotate3d class="size-4" />}>
@@ -5178,7 +5186,7 @@ function Camera3DSetupPanel(props: {
 									// hovers, so it would never show its own tooltip.
 									<div
 										class="flex-1"
-										title={tooShort() ? "Video too short" : undefined}
+										title={tooShort() ? text("Video too short") : undefined}
 									>
 										<button
 											type="button"
@@ -5200,7 +5208,7 @@ function Camera3DSetupPanel(props: {
 						</For>
 					</div>
 					<p class="text-xs text-gray-10">
-						Shots split the video into separate camera moves.
+						{text("Shots split the video into separate camera moves.")}
 					</p>
 				</div>
 			</Field>
@@ -5212,10 +5220,10 @@ function Camera3DSetupPanel(props: {
 					disabled={totalDuration() <= 0}
 					onClick={() => projectActions.addCamera3DScene(scene().id, shots())}
 				>
-					Add scene
+					{text("Add scene")}
 				</Button>
 				<Button variant="gray" size="md" onClick={() => props.onClose()}>
-					Cancel
+					{text("Cancel")}
 				</Button>
 			</div>
 		</div>
@@ -5226,6 +5234,7 @@ function Camera3DSegmentConfig(props: {
 	segmentIndex: number;
 	segment: Camera3DSegment;
 }) {
+	const { text } = useI18n();
 	const { setProject, setEditorState, projectActions } = useEditorContext();
 
 	const updateSegment = (fn: (segment: Camera3DSegment) => void) => {
@@ -5474,7 +5483,7 @@ function Camera3DSegmentConfig(props: {
 										height={CAMERA3D_ANGLE_PREVIEW_HEIGHT}
 									/>
 									<span class="text-[10px] leading-tight text-center text-gray-11">
-										{preset.name}
+										{text(preset.name)}
 									</span>
 								</button>
 							)}
@@ -5504,7 +5513,7 @@ function Camera3DSegmentConfig(props: {
 										height={CAMERA3D_TEMPLATE_PREVIEW_HEIGHT}
 									/>
 									<span class="text-[10px] leading-tight text-center text-gray-11">
-										{template.name}
+										{text(template.name)}
 									</span>
 								</button>
 							)}
@@ -5538,7 +5547,7 @@ function Camera3DSegmentConfig(props: {
 							when={!isStill()}
 							fallback={
 								<p class="text-[11px] text-gray-10">
-									Pick a template or edit the end pose to add motion
+									{text("Pick a template or edit the end pose to add motion")}
 								</p>
 							}
 						>
@@ -5547,7 +5556,7 @@ function Camera3DSegmentConfig(props: {
 								onClick={makeStill}
 								class="self-start text-[11px] transition-colors outline-hidden text-gray-11 hover:text-gray-12"
 							>
-								Still shot
+								{text("Still shot")}
 							</button>
 						</Show>
 					</div>
@@ -5566,7 +5575,7 @@ function Camera3DSegmentConfig(props: {
 							<div class="flex flex-col gap-1">
 								<span class="flex flex-row gap-1.5 items-center text-xs text-gray-11">
 									{camera3dSliderIcon(slider.key)}
-									{slider.label}
+									{text(slider.label)}
 								</span>
 								<Slider
 									value={[selectedPose()[slider.key]]}
@@ -5583,7 +5592,7 @@ function Camera3DSegmentConfig(props: {
 						leftIcon={<IconLucideRotateCcw />}
 						onClick={resetCamera}
 					>
-						Reset camera
+						{text("Reset camera")}
 					</EditorButton>
 				</div>
 			</Camera3DSection>
@@ -5614,7 +5623,7 @@ function Camera3DSegmentConfig(props: {
 										item={itemProps.item}
 									>
 										<KSelect.ItemLabel class="flex-1">
-											{itemProps.item.rawValue.label}
+											{text(itemProps.item.rawValue.label)}
 										</KSelect.ItemLabel>
 									</MenuItem>
 								)}
@@ -5624,7 +5633,9 @@ function Camera3DSegmentConfig(props: {
 										value: Camera3DBlurMode;
 										label: string;
 									}> class="flex-1 text-sm text-left truncate text-(--gray-500) font-normal">
-										{(state) => <span>{state.selectedOption().label}</span>}
+										{(state) => (
+											<span>{text(state.selectedOption().label)}</span>
+										)}
 									</KSelect.Value>
 									<KSelect.Icon<ValidComponent>
 										as={(iconProps) => (
@@ -5653,7 +5664,7 @@ function Camera3DSegmentConfig(props: {
 						when={blur().mode !== "none"}
 						fallback={
 							<p class="text-xs text-gray-11">
-								Pick a mode to blur everything outside the focus area.
+								{text("Pick a mode to blur everything outside the focus area.")}
 							</p>
 						}
 					>
@@ -5662,7 +5673,9 @@ function Camera3DSegmentConfig(props: {
 								const limit = () => camera3dBlurLimit(slider.key, blur());
 								return (
 									<div class="flex flex-col gap-1">
-										<span class="text-xs text-gray-11">{slider.label}</span>
+										<span class="text-xs text-gray-11">
+											{text(slider.label)}
+										</span>
 										<Slider
 											value={[blur()[slider.key]]}
 											onChange={(v) => setBlurValue(slider.key, v[0])}
@@ -5682,7 +5695,7 @@ function Camera3DSegmentConfig(props: {
 							leftIcon={<IconLucideRotateCcw />}
 							onClick={resetBlur}
 						>
-							Turn blur off
+							{text("Turn blur off")}
 						</EditorButton>
 					</Show>
 				</div>
@@ -5714,14 +5727,16 @@ function Camera3DSegmentConfig(props: {
 										item={itemProps.item}
 									>
 										<KSelect.ItemLabel class="flex-1">
-											{itemProps.item.rawValue.label}
+											{text(itemProps.item.rawValue.label)}
 										</KSelect.ItemLabel>
 									</MenuItem>
 								)}
 							>
 								<KSelect.Trigger class="flex flex-row gap-2 items-center px-2 w-full h-8 rounded-lg transition-colors bg-gray-3 disabled:text-gray-11">
 									<KSelect.Value<Camera3DMotionEasing> class="flex-1 text-sm text-left truncate text-(--gray-500) font-normal">
-										{(state) => <span>{state.selectedOption().label}</span>}
+										{(state) => (
+											<span>{text(state.selectedOption().label)}</span>
+										)}
 									</KSelect.Value>
 									<KSelect.Icon<ValidComponent>
 										as={(iconProps) => (
@@ -5810,6 +5825,7 @@ function ZoomSegmentPreview(props: {
 	segmentIndex: number;
 	segment: ZoomSegment;
 }) {
+	const { text } = useI18n();
 	const { project, editorInstance } = useEditorContext();
 
 	const source = createMemo(
@@ -5892,7 +5908,7 @@ function ZoomSegmentPreview(props: {
 		<>
 			<div class="space-y-1.5">
 				<div class="text-xs font-medium text-center text-gray-12">
-					Zoom {props.segmentIndex + 1}
+					{text("Zoom")} {props.segmentIndex + 1}
 				</div>
 				<div class="overflow-hidden relative rounded-sm border aspect-video border-gray-3 bg-gray-3">
 					<canvas
@@ -5904,7 +5920,7 @@ function ZoomSegmentPreview(props: {
 					/>
 					<Show when={!loaded()}>
 						<p class="flex absolute inset-0 justify-center items-center text-xs text-gray-11">
-							Loading...
+							{text("Loading...")}
 						</p>
 					</Show>
 				</div>
@@ -5921,6 +5937,7 @@ function ZoomSegmentConfig(props: {
 	segmentIndex: number;
 	segment: ZoomSegment;
 }) {
+	const { text } = useI18n();
 	const generalSettings = generalSettingsStore.createQuery();
 	const { project, setProject, editorInstance, projectHistory } =
 		useEditorContext();
@@ -5975,13 +5992,13 @@ function ZoomSegmentConfig(props: {
 							class="z-10 flex-1 py-2.5 text-gray-11 transition-colors duration-100 outline-hidden data-selected:text-gray-12 peer"
 							disabled={!generalSettings.data?.custom_cursor_capture2}
 						>
-							Auto
+							{text("Auto")}
 						</KTabs.Trigger>
 						<KTabs.Trigger
 							value="manual"
 							class="z-10 flex-1 py-2.5 text-gray-11 transition-colors duration-100 outline-hidden data-selected:text-gray-12 peer"
 						>
-							Manual
+							{text("Manual")}
 						</KTabs.Trigger>
 						<KTabs.Indicator class="absolute flex p-px inset-0 transition-transform peer-focus-visible:outline-solid outline-2 outline-blue-9 outline-offset-2 rounded-[0.6rem] overflow-hidden">
 							<div class="flex-1 bg-gray-3" />
@@ -5990,8 +6007,9 @@ function ZoomSegmentConfig(props: {
 					<div class="space-y-3">
 						<Show when={!generalSettings.data?.custom_cursor_capture2}>
 							<p class="text-xs text-gray-11">
-								Auto mode needs cursor capture. Enable "Custom cursor capture
-								(Studio)" in Settings → General.
+								{text(
+									'Auto mode needs cursor capture. Enable "Custom cursor capture (Studio)" in Settings → General.',
+								)}
 							</p>
 						</Show>
 						<ZoomModeHelper
@@ -6203,7 +6221,7 @@ function ZoomSegmentConfig(props: {
 											<Show when={!loaded()}>
 												<div class="flex absolute inset-0 justify-center items-center bg-gray-2">
 													<div class="text-sm text-gray-11">
-														Loading preview...
+														{text("Loading preview...")}
 													</div>
 												</div>
 											</Show>
@@ -6225,6 +6243,7 @@ function ZoomSegmentConfig(props: {
 function ZoomMultiSegmentConfig(props: {
 	segments: { index: number; segment: ZoomSegment }[];
 }) {
+	const { text } = useI18n();
 	const generalSettings = generalSettingsStore.createQuery();
 	const { setProject, setEditorState } = useEditorContext();
 
@@ -6320,7 +6339,7 @@ function ZoomMultiSegmentConfig(props: {
 					value={
 						<Show when={sharedAmount() === null}>
 							<span class="text-[10px] px-1.5 py-0.5 bg-gray-3 rounded-full text-gray-11 font-medium">
-								Mixed
+								{text("Mixed")}
 							</span>
 						</Show>
 					}
@@ -6340,7 +6359,7 @@ function ZoomMultiSegmentConfig(props: {
 					value={
 						<Show when={sharedMode() === "mixed"}>
 							<span class="text-[10px] px-1.5 py-0.5 bg-gray-3 rounded-full text-gray-11 font-medium">
-								Mixed
+								{text("Mixed")}
 							</span>
 						</Show>
 					}
@@ -6353,7 +6372,7 @@ function ZoomMultiSegmentConfig(props: {
 							onClick={() => setAllModes("auto")}
 							class={modeButtonClass}
 						>
-							Auto
+							{text("Auto")}
 						</button>
 						<button
 							type="button"
@@ -6361,13 +6380,14 @@ function ZoomMultiSegmentConfig(props: {
 							onClick={() => setAllModes("manual")}
 							class={modeButtonClass}
 						>
-							Manual
+							{text("Manual")}
 						</button>
 					</div>
 					<Show when={!generalSettings.data?.custom_cursor_capture2}>
 						<p class="text-xs text-gray-11">
-							Auto mode needs cursor capture. Enable "Custom cursor capture
-							(Studio)" in Settings → General.
+							{text(
+								'Auto mode needs cursor capture. Enable "Custom cursor capture (Studio)" in Settings → General.',
+							)}
 						</p>
 					</Show>
 					<Show
@@ -6386,8 +6406,9 @@ function ZoomMultiSegmentConfig(props: {
 							/>
 							<Show when={manualPositionsMixed()}>
 								<p class="text-xs text-gray-10">
-									Segments zoom into different spots. Drag to move them all to
-									the same one.
+									{text(
+										"Segments zoom into different spots. Drag to move them all to the same one.",
+									)}
 								</p>
 							</Show>
 						</div>
@@ -6401,7 +6422,7 @@ function ZoomMultiSegmentConfig(props: {
 							<button
 								type="button"
 								class="hidden absolute top-1.5 right-1.5 z-10 justify-center items-center rounded-full transition-colors group-hover:flex bg-gray-5 hover:bg-gray-6 text-gray-11 hover:text-gray-12 size-5"
-								aria-label="Remove from selection"
+								aria-label={text("Remove from selection")}
 								onClick={() => removeFromSelection(item().index)}
 							>
 								<IconLucideX class="size-3" />
@@ -6422,6 +6443,7 @@ function ZoomMultiSegmentConfig(props: {
 // recording segment index), so they live with the audio settings rather
 // than any one timeline segment.
 function SyncOffsetsConfig() {
+	const { text } = useI18n();
 	const { project, setProject, editorInstance, meta } = useEditorContext();
 
 	const clipConfig = (recordingIndex: number) =>
@@ -6456,10 +6478,11 @@ function SyncOffsetsConfig() {
 		<Show when={hasAnySource()}>
 			<div class="flex flex-col gap-6">
 				<div class="space-y-0.5">
-					<h3 class="font-medium text-gray-12">Sync</h3>
+					<h3 class="font-medium text-gray-12">{text("Sync")}</h3>
 					<p class="text-gray-11">
-						Fine-tune source offsets if audio or camera drifts out of sync with
-						the screen recording.
+						{text(
+							"Fine-tune source offsets if audio or camera drifts out of sync with the screen recording.",
+						)}
 					</p>
 				</div>
 
@@ -6467,12 +6490,15 @@ function SyncOffsetsConfig() {
 					{(_, index) => (
 						<div class="flex flex-col gap-6">
 							<Show when={editorInstance.recordings.segments.length > 1}>
-								<span class="font-medium text-gray-12">Clip {index()}</span>
+								<span class="font-medium text-gray-12">
+									{text("Clip")} {index()}
+								</span>
 							</Show>
 							<Show when={clipConfig(index())?.offsetsAutoCalculated === true}>
 								<p class="text-gray-11">
-									Cap calculated these offsets automatically to keep audio in
-									sync with the video. Adjust them if anything still sounds off.
+									{text(
+										"Cap calculated these offsets automatically to keep audio in sync with the video. Adjust them if anything still sounds off.",
+									)}
 								</p>
 							</Show>
 							{meta().hasSystemAudio && (
@@ -6637,6 +6663,7 @@ function SceneSegmentConfig(props: {
 	segmentIndex: number;
 	segment: SceneSegment;
 }) {
+	const { text } = useI18n();
 	const { setProject, setEditorState, projectActions, editorInstance } =
 		useEditorContext();
 
@@ -6673,7 +6700,7 @@ function SceneSegmentConfig(props: {
 						onClick={() => setEditorState("timeline", "selection", null)}
 						leftIcon={<IconLucideCheck />}
 					>
-						Done
+						{text("Done")}
 					</EditorButton>
 				</div>
 				<EditorButton
@@ -6683,7 +6710,7 @@ function SceneSegmentConfig(props: {
 					}}
 					leftIcon={<IconCapTrash />}
 				>
-					Delete
+					{text("Delete")}
 				</EditorButton>
 			</div>
 			<Field name="Camera Layout" icon={<IconLucideLayout />}>
@@ -6719,15 +6746,15 @@ function SceneSegmentConfig(props: {
 					<KTabs.List class="grid grid-cols-2 gap-2">
 						<KTabs.Trigger value="default" class={SCENE_MODE_TRIGGER_CLASS}>
 							<IconLucideMonitor class="size-3.5" />
-							Default
+							{text("Default")}
 						</KTabs.Trigger>
 						<KTabs.Trigger value="cameraOnly" class={SCENE_MODE_TRIGGER_CLASS}>
 							<IconLucideVideo class="size-3.5" />
-							Camera Only
+							{text("Camera Only")}
 						</KTabs.Trigger>
 						<KTabs.Trigger value="hideCamera" class={SCENE_MODE_TRIGGER_CLASS}>
 							<IconLucideEyeOff class="size-3.5" />
-							Hide Camera
+							{text("Hide Camera")}
 						</KTabs.Trigger>
 						<KTabs.Trigger
 							value="splitScreen"
@@ -6735,7 +6762,7 @@ function SceneSegmentConfig(props: {
 							class={SCENE_MODE_TRIGGER_CLASS}
 						>
 							<IconLucideColumns2 class="size-3.5" />
-							Split Screen
+							{text("Split Screen")}
 						</KTabs.Trigger>
 						<KTabs.Trigger
 							value="floating"
@@ -6743,11 +6770,13 @@ function SceneSegmentConfig(props: {
 							class={SCENE_MODE_TRIGGER_CLASS}
 						>
 							<IconLucidePanelRight class="size-3.5" />
-							Floating
+							{text("Floating")}
 						</KTabs.Trigger>
 					</KTabs.List>
 					<div class="p-2.5 rounded-md bg-gray-2 border border-gray-3">
-						<div class="text-xs text-center text-gray-11">{description()}</div>
+						<div class="text-xs text-center text-gray-11">
+							{text(description())}
+						</div>
 					</div>
 				</KTabs>
 			</Field>

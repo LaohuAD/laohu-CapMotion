@@ -1,6 +1,7 @@
 import { Combobox as KCombobox } from "@kobalte/core/combobox";
 import { cx } from "cva";
 import { createMemo, createResource } from "solid-js";
+import { useI18n } from "~/i18n";
 import {
 	cssFontFamily,
 	fontFamilyLabel,
@@ -20,6 +21,7 @@ export function FontPicker(props: {
 	value: string;
 	onChange: (family: string) => void;
 }) {
+	const { text } = useI18n();
 	const [installedFonts] = createResource(listSystemFonts);
 
 	const options = createMemo<FontOption[]>(() => [
@@ -46,7 +48,7 @@ export function FontPicker(props: {
 				if (option) props.onChange(option.value);
 			}}
 			defaultFilter="contains"
-			placeholder="Search fonts…"
+			placeholder={text("Search fonts…")}
 			itemComponent={(itemProps) => (
 				<MenuItem<typeof KCombobox.Item>
 					as={KCombobox.Item}

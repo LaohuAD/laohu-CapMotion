@@ -4,6 +4,7 @@ import { type as ostype } from "@tauri-apps/plugin-os";
 import { createMemo, For, Show } from "solid-js";
 import { Toggle } from "~/components/Toggle";
 import Tooltip from "~/components/Tooltip";
+import { useI18n } from "~/i18n";
 import type { CursorRippleConfig, CursorType } from "~/utils/tauri";
 import IconLucideMousePointerClick from "~icons/lucide/mouse-pointer-click";
 import macArrow from "../../../../../crates/cursor-info/assets/mac/arrow.svg?raw";
@@ -80,6 +81,7 @@ function CircleCursor() {
 }
 
 function CursorStyleCard(props: { style: CursorStyle; recorded: boolean }) {
+	const { text } = useI18n();
 	const label = () =>
 		props.style === "circle" ? "Circle" : CURSOR_FAMILIES[props.style].label;
 
@@ -99,12 +101,15 @@ function CursorStyleCard(props: { style: CursorStyle; recorded: boolean }) {
 			<KRadioGroup.ItemInput class="sr-only" />
 			<KRadioGroup.ItemLabel class="flex cursor-pointer flex-col items-center gap-1.5">
 				<Show when={props.recorded} fallback={tile()}>
-					<Tooltip content="Recorded with this cursor" childClass="w-full">
+					<Tooltip
+						content={text("Recorded with this cursor")}
+						childClass="w-full"
+					>
 						{tile()}
 					</Tooltip>
 				</Show>
 				<span class="max-w-full truncate text-[11px] font-medium leading-none text-gray-11 transition-colors group-hover:text-gray-12 group-data-checked:text-gray-12">
-					{label()}
+					{text(label())}
 				</span>
 			</KRadioGroup.ItemLabel>
 		</KRadioGroup.Item>

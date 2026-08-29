@@ -10,6 +10,7 @@ import {
 	Show,
 } from "solid-js";
 import { produce } from "solid-js/store";
+import { useI18n } from "~/i18n";
 import { useEditorContext } from "../context";
 import {
 	CAMERA3D_SCENES,
@@ -72,6 +73,7 @@ export function ThreeDTrack(props: {
 	onDragStateChanged: (v: ThreeDSegmentDragState) => void;
 	handleUpdatePlayhead: (e: MouseEvent) => void;
 }) {
+	const { text } = useI18n();
 	const {
 		project,
 		setProject,
@@ -333,7 +335,7 @@ export function ThreeDTrack(props: {
 								<span class="flex justify-center items-center rounded-full transition-colors size-6 bg-gray-4/40 text-gray-11 group-hover/empty:bg-[var(--accent)] group-hover/empty:text-white">
 									<IconLucidePlus class="size-3.5" />
 								</span>
-								<span class="font-medium">Add 3D scene</span>
+								<span class="font-medium">{text("Add 3D scene")}</span>
 							</button>
 						}
 					>
