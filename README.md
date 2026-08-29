@@ -95,7 +95,7 @@ pnpm dev:desktop
 pnpm tauri:build
 ```
 
-Agent 执行时遵守仓库规则，不自行启动已经运行的开发服务器。
+Agent 默认只执行无界面的编译和自动测试，例如 `cargo check/test`、TypeScript 类型检查与 Vitest。未经用户明确要求“打开让我测试”，不得运行会打开 Cap 窗口的 `pnpm dev:desktop`、打包后的应用或其他 GUI 启动命令，也不得用热重载反复抢占前台焦点。需要人工验收时，先停止代码改动和自动重启，再只启动一次测试窗口；验收结束后立即退出。Agent 也不得自行启动已经运行的开发服务器。
 
 ## 口播工作流
 

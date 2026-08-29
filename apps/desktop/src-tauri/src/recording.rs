@@ -46,10 +46,7 @@ use std::{
     sync::Arc,
     time::Duration,
 };
-use tauri::{
-    AppHandle, Manager, PhysicalPosition, PhysicalSize, WebviewUrl, WebviewWindow,
-    path::BaseDirectory,
-};
+use tauri::{AppHandle, Manager, Position, Size, WebviewUrl, WebviewWindow, path::BaseDirectory};
 use tauri_plugin_dialog::{DialogExt, MessageDialogBuilder};
 use tauri_plugin_global_shortcut::GlobalShortcutExt;
 use tauri_plugin_store::StoreExt;
@@ -103,21 +100,50 @@ fn close_manual_zoom_overlay(app: &AppHandle) {
     }
 }
 
-fn capture_target_physical_bounds(
-    target: &ScreenCaptureTarget,
-) -> Option<(PhysicalPosition<i32>, PhysicalSize<u32>)> {
+#[cfg(target_os = "macos")]
+fn capture_overlay_bounds_from_logical(
+    bounds: scap_targets::bounds::LogicalBounds,
+) -> (Position, Size) {
+    (
+        Position::Logical(tauri::LogicalPosition::new(
+            bounds.position().x(),
+            bounds.position().y(),
+        )),
+        Size::Logical(tauri::LogicalSize::new(
+            bounds.size().width().max(1.0),
+            bounds.size().height().max(1.0),
+        )),
+    )
+}
+
+#[cfg(target_os = "macos")]
+fn capture_target_overlay_bounds(target: &ScreenCaptureTarget) -> Option<(Position, Size)> {
+    use scap_targets::Window;
+
+    let bounds = match target {
+        ScreenCaptureTarget::Display { .. } => target.display()?.raw_handle().logical_bounds()?,
+        ScreenCaptureTarget::Window { id } => Window::from_id(id)?.raw_handle().logical_bounds()?,
+        ScreenCaptureTarget::Area { bounds, .. } => *bounds,
+        ScreenCaptureTarget::CameraOnly => return None,
+    };
+
+    Some(capture_overlay_bounds_from_logical(bounds))
+}
+
+#[cfg(not(target_os = "macos"))]
+fn capture_target_overlay_bounds(target: &ScreenCaptureTarget) -> Option<(Position, Size)> {
     use scap_targets::Window;
 
     let convert = |bounds: scap_targets::bounds::PhysicalBounds| {
         Some((
-            PhysicalPosition::new(
+            Position::Physical(tauri::PhysicalPosition::new(
                 bounds.position().x().round() as i32,
                 bounds.position().y().round() as i32,
-            ),
-            PhysicalSize::new(
+            )),
+            Size::Physical(tauri::PhysicalSize::new(
                 bounds.size().width().round().max(1.0) as u32,
                 bounds.size().height().round().max(1.0) as u32,
-            ),
+            )),
         ))
     };
 
@@ -135,14 +161,14 @@ fn capture_target_physical_bounds(
             let scale_x = physical.size().width() / logical.size().width();
             let scale_y = physical.size().height() / logical.size().height();
             Some((
-                PhysicalPosition::new(
+                Position::Physical(tauri::PhysicalPosition::new(
                     (physical.position().x() + bounds.position().x() * scale_x).round() as i32,
                     (physical.position().y() + bounds.position().y() * scale_y).round() as i32,
-                ),
-                PhysicalSize::new(
+                )),
+                Size::Physical(tauri::PhysicalSize::new(
                     (bounds.size().width() * scale_x).round().max(1.0) as u32,
                     (bounds.size().height() * scale_y).round().max(1.0) as u32,
-                ),
+                )),
             ))
         }
         ScreenCaptureTarget::CameraOnly => None,
@@ -157,7 +183,7 @@ fn show_manual_zoom_overlay(
     amount: f64,
 ) -> Result<(), String> {
     close_manual_zoom_overlay(app);
-    let (position, size) = capture_target_physical_bounds(target)
+    let (position, size) = capture_target_overlay_bounds(target)
         .ok_or_else(|| "Unable to determine the capture target bounds".to_string())?;
     let url = format!("/manual-zoom-overlay?x={x}&y={y}&amount={amount}");
     let window =
@@ -4461,6 +4487,26 @@ async fn emit_recording_started_telemetry(app: &AppHandle, state_mtx: &MutableSt
 mod tests {
     use super::*;
     use tempfile::tempdir;
+
+    #[cfg(target_os = "macos")]
+    #[test]
+    fn manual_zoom_overlay_uses_macos_logical_coordinates() {
+        let bounds = scap_targets::bounds::LogicalBounds::new(
+            scap_targets::bounds::LogicalPosition::new(-320.5, 48.25),
+            scap_targets::bounds::LogicalSize::new(1440.0, 900.0),
+        );
+
+        let (position, size) = capture_overlay_bounds_from_logical(bounds);
+
+        let tauri::Position::Logical(position) = position else {
+            panic!("macOS overlay position must use logical coordinates");
+        };
+        let tauri::Size::Logical(size) = size else {
+            panic!("macOS overlay size must use logical coordinates");
+        };
+        assert_eq!((position.x, position.y), (-320.5, 48.25));
+        assert_eq!((size.width, size.height), (1440.0, 900.0));
+    }
 
     #[test]
     fn animated_gradient_default_is_remembered_without_overwriting_explicit_presets() {

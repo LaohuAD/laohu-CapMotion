@@ -4551,7 +4551,7 @@ function MotionSegmentConfig(props: {
 				throw new Error("Props must be a JSON object");
 			}
 			updateSegment((segment) => {
-				segment.props = value as Record<string, unknown>;
+				segment.props = value as MotionSegment["props"];
 			});
 			setPropsText(JSON.stringify(value, null, 2));
 		} catch (error) {

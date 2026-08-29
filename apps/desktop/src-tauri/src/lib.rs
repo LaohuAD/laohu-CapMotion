@@ -2604,18 +2604,18 @@ impl ClipboardContext {
 type SingleTuple<T> = (T,);
 
 #[derive(Serialize, Type)]
-struct JsonValue<T>(
+struct TypedJsonValue<T>(
     #[serde(skip)] PhantomData<T>,
     #[specta(type = SingleTuple<T>)] serde_json::Value,
 );
 
-impl<T> Clone for JsonValue<T> {
+impl<T> Clone for TypedJsonValue<T> {
     fn clone(&self) -> Self {
         Self(PhantomData, self.1.clone())
     }
 }
 
-impl<T: Serialize> JsonValue<T> {
+impl<T: Serialize> TypedJsonValue<T> {
     fn new(value: &T) -> Self {
         Self(PhantomData, json!(value))
     }
@@ -2664,12 +2664,12 @@ struct CurrentRecording {
 #[instrument(skip(state))]
 async fn get_current_recording(
     state: MutableState<'_, App>,
-) -> Result<JsonValue<Option<CurrentRecording>>, ()> {
+) -> Result<TypedJsonValue<Option<CurrentRecording>>, ()> {
     let state = state.read().await;
 
     let (mode, capture_target, status) = match &state.recording_state {
         RecordingState::None => {
-            return Ok(JsonValue::new(&None));
+            return Ok(TypedJsonValue::new(&None));
         }
         RecordingState::Pending { mode, target } => (*mode, target, RecordingStatus::Pending),
         RecordingState::Active(inner) => (
@@ -2696,7 +2696,7 @@ async fn get_current_recording(
         ScreenCaptureTarget::CameraOnly => CurrentRecordingTarget::Camera,
     };
 
-    Ok(JsonValue::new(&Some(CurrentRecording {
+    Ok(TypedJsonValue::new(&Some(CurrentRecording {
         target,
         mode,
         status,
@@ -5242,6 +5242,23 @@ fn specta_builder() -> tauri_specta::Builder {
         .typ::<cap_automation::ExportDestination>()
 }
 
+fn format_typescript_bindings(path: &std::path::Path) -> std::io::Result<()> {
+    let bindings = std::fs::read_to_string(path)?;
+    let mut formatted = bindings
+        .lines()
+        .map(str::trim_end)
+        .collect::<Vec<_>>()
+        .join("\n");
+    formatted.push('\n');
+    std::fs::write(path, formatted)
+}
+
+fn typescript_exporter() -> specta_typescript::Typescript {
+    specta_typescript::Typescript::default()
+        .bigint(specta_typescript::BigIntExportBehavior::Number)
+        .formatter(format_typescript_bindings)
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
     // Arm the unexpected-termination sentinel before anything else can crash, and
@@ -5286,9 +5303,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
     {
         let bindings_path = std::path::Path::new("../src/utils/tauri.ts");
         if bindings_path.parent().is_some_and(|parent| parent.exists()) {
-            if let Err(err) =
-                specta_builder.export(specta_typescript::Typescript::default(), bindings_path)
-            {
+            if let Err(err) = specta_builder.export(typescript_exporter(), bindings_path) {
                 warn!(error = %err, "Failed to export TypeScript bindings");
             }
         } else {
@@ -7201,8 +7216,16 @@ mod typescript_bindings_tests {
         let bindings_path = std::path::Path::new("../src/utils/tauri.ts");
         if bindings_path.parent().is_some_and(|parent| parent.exists()) {
             super::specta_builder()
-                .export(specta_typescript::Typescript::default(), bindings_path)
+                .export(super::typescript_exporter(), bindings_path)
                 .expect("failed to export TypeScript bindings");
+            let bindings = std::fs::read_to_string(bindings_path)
+                .expect("failed to read exported TypeScript bindings");
+            assert_eq!(bindings.matches("export type JsonValue =").count(), 1);
+            assert!(bindings.contains("export type TypedJsonValue<T>"));
+            assert!(
+                bindings.lines().all(|line| line.trim_end() == line),
+                "generated TypeScript bindings must not contain trailing whitespace"
+            );
         }
     }
 }

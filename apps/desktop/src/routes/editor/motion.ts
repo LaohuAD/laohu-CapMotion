@@ -1,3 +1,5 @@
+import type { JsonValue } from "~/utils/tauri";
+
 export type MotionRenderer = "remotion";
 export type MotionDurationPolicy = "responsive" | "retime" | "trim";
 export type MotionDefinitionStatus =
@@ -29,7 +31,7 @@ export type MotionDefinition = {
 	defaultPolicy: MotionDurationPolicy;
 	introDuration: number;
 	outroDuration: number;
-	defaultProps: Record<string, unknown>;
+	defaultProps: Record<string, JsonValue>;
 };
 
 export type MotionSegment = {
@@ -43,8 +45,8 @@ export type MotionSegment = {
 	transform: MotionTransform;
 	opacity: number;
 	durationPolicy: MotionDurationPolicy;
-	props: Record<string, unknown>;
-	artifactId?: string | null;
+	props: Record<string, JsonValue>;
+	artifactId: string | null;
 };
 
 export type MotionArtifact = {
@@ -59,7 +61,7 @@ export type MotionArtifact = {
 	fps: number;
 	hasAlpha: boolean;
 	duration: number;
-	error?: string | null;
+	error: string | null;
 };
 
 export type MotionConfiguration = {

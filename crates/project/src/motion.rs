@@ -85,6 +85,7 @@ pub struct MotionDefinition {
     pub default_policy: MotionDurationPolicy,
     pub intro_duration: f64,
     pub outro_duration: f64,
+    #[specta(type = std::collections::BTreeMap<String, serde_json::Value>)]
     pub default_props: Value,
 }
 
@@ -121,6 +122,7 @@ pub struct MotionSegment {
     pub transform: MotionTransform,
     pub opacity: f64,
     pub duration_policy: MotionDurationPolicy,
+    #[specta(type = std::collections::BTreeMap<String, serde_json::Value>)]
     pub props: Value,
     pub artifact_id: Option<String>,
 }
