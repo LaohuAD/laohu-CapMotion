@@ -3,9 +3,52 @@ use std::path::Path;
 use serde_json::Value;
 
 use crate::{
-    MotionArtifactStatus, MotionDefinition, MotionSegment, ProjectConfiguration,
+    MotionArtifact, MotionArtifactStatus, MotionDefinition, MotionSegment, ProjectConfiguration,
     ProjectTransactionError, mutate_project,
 };
+
+pub fn record_motion_artifact(
+    project_path: impl AsRef<Path>,
+    expected_revision: u64,
+    artifact: MotionArtifact,
+) -> Result<ProjectConfiguration, ProjectTransactionError> {
+    mutate_project(project_path, expected_revision, |project| {
+        if artifact.id.is_empty() || artifact.path.is_empty() || artifact.content_hash.is_empty() {
+            return Err("motion artifact id, path, and content hash are required".into());
+        }
+        if artifact.width == 0
+            || artifact.height == 0
+            || !artifact.fps.is_finite()
+            || artifact.fps <= 0.0
+            || !artifact.duration.is_finite()
+            || artifact.duration <= 0.0
+        {
+            return Err("motion artifact media metadata is invalid".into());
+        }
+        let segment = project
+            .motion
+            .segment_mut(&artifact.segment_id)
+            .ok_or_else(|| {
+                format!(
+                    "motion segment {} does not exist for artifact {}",
+                    artifact.segment_id, artifact.id
+                )
+            })?;
+        segment.artifact_id = Some(artifact.id.clone());
+
+        if let Some(existing) = project
+            .motion
+            .artifacts
+            .iter_mut()
+            .find(|existing| existing.id == artifact.id)
+        {
+            *existing = artifact;
+        } else {
+            project.motion.artifacts.push(artifact);
+        }
+        Ok(())
+    })
+}
 
 pub fn register_motion_definition(
     project_path: impl AsRef<Path>,

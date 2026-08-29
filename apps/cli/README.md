@@ -130,6 +130,17 @@ cap motion resize /path/to/demo.cap \
 cap motion props set /path/to/demo.cap \
   --expected-revision 4 --segment motion-1 \
   --props-json '{"title":"更新后的案例"}' --format json
+
+cap motion render /path/to/demo.cap \
+  --expected-revision 5 --segment motion-1 --quality preview \
+  --workspace workflows/laohu-video/模板/remotion-assets/workspace \
+  --format json
 ```
 
-This phase records animation definitions and instances but does not render Remotion artifacts yet. Preview/final rendering and Cap's MotionTrack UI are subsequent phases.
+`motion render` merges the definition defaults with instance props, renders only the selected
+segment, stores the result under the `.cap` project's content-addressed `motion/cache/` directory,
+and links the artifact in the same revision-checked transaction. Preview uses transparent WebM;
+final uses ProRes 4444 MOV. The workspace dependencies must already be installed so the command
+never performs an implicit network install. The cache key includes the Remotion `src/`, `public/`,
+configuration, and dependency lock content, so editing animation source cannot silently reuse an
+older render.

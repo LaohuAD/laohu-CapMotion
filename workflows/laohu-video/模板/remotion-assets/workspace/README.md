@@ -27,6 +27,8 @@ npm run studio
 
 当前已经安装并锁定共享依赖。`node_modules` 只存在于本 workspace，并由顶层 `.gitignore` 排除。
 
+Cap 的局部渲染命令会直接调用本地 `node_modules/.bin/remotion`，不会隐式下载依赖。预览缓存为带 Alpha 的 VP8 WebM，最终缓存为 ProRes 4444 MOV；产物按输入内容哈希保存在 `.cap/motion/cache/`。缓存键包含定义、参数、时长、质量档，以及 `src/`、`public/`、配置和依赖锁文件的内容指纹；只有这些输入都没变时才复用缓存。
+
 视觉组件默认通过 `remotion.config.ts` 禁用音轨，避免导出无意义的静音 AAC。需要把配音一起交付的独立作品应在该次渲染中显式覆盖。
 
 ## 目录

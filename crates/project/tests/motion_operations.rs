@@ -1,7 +1,7 @@
 use cap_project::{
-    MotionArtifactStatus, MotionDefinition, MotionSegment, ProjectConfiguration,
-    add_motion_segment, move_motion_segment, register_motion_definition, resize_motion_segment,
-    set_motion_segment_props,
+    MotionArtifact, MotionArtifactStatus, MotionDefinition, MotionSegment, ProjectConfiguration,
+    add_motion_segment, move_motion_segment, record_motion_artifact, register_motion_definition,
+    resize_motion_segment, set_motion_segment_props,
 };
 
 fn create_project() -> tempfile::TempDir {
@@ -134,4 +134,45 @@ fn props_must_be_a_json_object() {
             .project_revision,
         2
     );
+}
+
+#[test]
+fn rendered_artifact_is_upserted_and_linked_in_one_revision() {
+    let directory = create_project();
+    register_motion_definition(directory.path(), 0, definition()).unwrap();
+    add_motion_segment(directory.path(), 1, segment()).unwrap();
+    let artifact: MotionArtifact = serde_json::from_value(serde_json::json!({
+        "id": "artifact-preview",
+        "segmentId": "motion-1",
+        "contentHash": "abc123",
+        "quality": "preview",
+        "status": "ready",
+        "path": "motion/cache/abc123/preview.webm",
+        "width": 960,
+        "height": 540,
+        "fps": 30.0,
+        "hasAlpha": true,
+        "duration": 5.0
+    }))
+    .unwrap();
+
+    let recorded = record_motion_artifact(directory.path(), 2, artifact.clone()).unwrap();
+    assert_eq!(recorded.project_revision, 3);
+    assert_eq!(
+        recorded
+            .motion
+            .segment("motion-1")
+            .unwrap()
+            .artifact_id
+            .as_deref(),
+        Some("artifact-preview")
+    );
+    assert_eq!(recorded.motion.artifacts, vec![artifact.clone()]);
+
+    let updated = MotionArtifact {
+        status: MotionArtifactStatus::Stale,
+        ..artifact
+    };
+    let recorded = record_motion_artifact(directory.path(), 3, updated.clone()).unwrap();
+    assert_eq!(recorded.motion.artifacts, vec![updated]);
 }

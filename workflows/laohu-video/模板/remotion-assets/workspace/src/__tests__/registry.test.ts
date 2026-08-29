@@ -37,7 +37,9 @@ describe("component registry", () => {
       expect(item.emotionalTones.length).toBeGreaterThan(0);
       expect(item.minDurationSeconds).toBeGreaterThan(0);
       expect(item.maxItems).toBeGreaterThan(0);
-      expect(item.specPath).toMatch(/^模板\/components\/.+\.md$/);
+      expect(item.specPath).toMatch(
+        /^workflows\/laohu-video\/模板\/components\/.+\.md$/,
+      );
       expect(item.defaultProps.component).toBe(item.id);
       expect(() => item.schema.parse(item.defaultProps)).not.toThrow();
     }

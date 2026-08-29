@@ -211,10 +211,10 @@ cap motion add <project> --expected-revision <n> --definition-id <id> --start <s
 cap motion move <project> --expected-revision <n> --segment <id> --start <seconds>
 cap motion resize <project> --expected-revision <n> --segment <id> --duration <seconds>
 cap motion props set <project> --expected-revision <n> --segment <id> --props-json <json>
-cap motion render <project> --segment <id> --quality preview|final
+cap motion render <project> --expected-revision <n> --segment <id> --quality preview|final
 ```
 
-首个纵向切片把工程规则放在 `cap-project`，把可独立测试的命令协议放在 `cap-motion-cli`，现有 `cap` 二进制只负责挂载子命令和输出。`motion render` 属于后续 Remotion 编排与媒体桥阶段，当前尚未实现。
+工程规则放在 `cap-project`，可独立测试的命令协议放在 `cap-motion-cli`，现有 `cap` 二进制只负责挂载子命令和输出。`motion render` 已实现选中实例的局部渲染、内容哈希缓存、preview/final 产物和 revision-safe 工程回写；命中缓存时不重复启动 Remotion。缓存键同时包含 `src/`、`public/`、Remotion 配置和依赖锁文件的实际内容指纹，源码变更不会错误复用旧缓存。
 
 ## 10. Remotion 预览与渲染
 
@@ -228,6 +228,8 @@ cap motion render <project> --segment <id> --quality preview|final
 - 最终缓存：全分辨率高质量透明媒体。
 - 无透明背景动画或 B-roll：使用适合硬件解码的 H.264/HEVC。
 - macOS 透明中间件：首选 ProRes 4444 MOV；实际预览格式在实现阶段通过随机定位、解码延迟、体积和渲染时间基准确定。
+
+当前已验收的编码是：预览使用 960×540 VP8 WebM（`alpha_mode=1`），最终缓存使用 1920×1080 ProRes 4444 MOV。二者都由同一个 Composition 和 props 生成，只改变质量档位。
 
 最终导出只发生一次有损成片编码：Remotion 动画使用高质量或近无损中间件，Cap 解码并与屏幕、摄像头、字幕和音频统一合成，最终通过 Cap 的原生导出管线编码。
 
@@ -346,7 +348,7 @@ cap motion render <project> --segment <id> --quality preview|final
 - 建立工程 revision、事务和兼容迁移。
 - 扩展 CLI 的安全检查和局部修改基础。
 
-当前已完成：Cap 根基底、Motion 工程模型、单文件 revision、写锁、冲突拒绝、Motion 命令协议、MotionTrack、属性面板和 revision 冲突提示。完整 `cap` 二进制在当前机器上仍需安装完整 Xcode，并把本机 FFmpeg 8 切换为项目兼容的 FFmpeg 7 后做原生媒体依赖验收。
+当前已完成：Cap 根基底、Motion 工程模型、单文件 revision、写锁、冲突拒绝、Motion 命令协议、MotionTrack、属性面板、revision 冲突提示、Remotion 局部渲染与缓存回写。完整 `cap` 二进制在当前机器上仍需安装完整 Xcode，并把本机 FFmpeg 8 切换为项目兼容的 FFmpeg 7 后做原生媒体依赖验收。
 
 ### 阶段二：MotionTrack 纵向切片
 
@@ -364,9 +366,9 @@ cap motion render <project> --segment <id> --quality preview|final
 
 ### 阶段四：Remotion 编排器
 
-- 定义动画包、参数 Schema 和内容哈希。
-- 增加 preview/final 局部渲染命令。
-- 连接当前项目 Remotion workspace 和动画导演规则。
+- 定义动画包、参数 Schema 和内容哈希。已完成。
+- 增加 preview/final 局部渲染命令。已完成。
+- 连接当前项目 Remotion workspace 和动画导演规则。命令端 workspace 已连接，自动导演编排属于后续增量。
 - 增加缓存回收和失败恢复。
 
 ### 阶段五：录屏与剪辑工作流接入

@@ -9,6 +9,9 @@ use clap::{Args, Parser, Subcommand, ValueEnum};
 use serde::Serialize;
 use serde_json::Value;
 
+mod render;
+pub use render::*;
+
 #[derive(Parser)]
 #[command(name = "motion")]
 pub struct MotionCommandLine {
@@ -19,6 +22,13 @@ pub struct MotionCommandLine {
 impl MotionCommandLine {
     pub fn run(self) -> Result<MotionOutput, String> {
         self.motion.run()
+    }
+
+    pub fn run_with_renderer(
+        self,
+        renderer: &dyn MotionRenderRunner,
+    ) -> Result<MotionOutput, String> {
+        self.motion.run_with_renderer(renderer)
     }
 }
 
@@ -36,12 +46,20 @@ impl MotionArgs {
     }
 
     pub fn run(self) -> Result<MotionOutput, String> {
+        self.run_with_renderer(&RemotionCliRunner)
+    }
+
+    pub fn run_with_renderer(
+        self,
+        renderer: &dyn MotionRenderRunner,
+    ) -> Result<MotionOutput, String> {
         match self.command {
             MotionCommands::Definition(args) => args.run(),
             MotionCommands::Add(args) => args.run(),
             MotionCommands::Move(args) => args.run(),
             MotionCommands::Resize(args) => args.run(),
             MotionCommands::Props(args) => args.run(),
+            MotionCommands::Render(args) => args.run(renderer),
         }
     }
 }
@@ -60,6 +78,51 @@ enum MotionCommands {
     Move(MotionMoveArgs),
     Resize(MotionResizeArgs),
     Props(MotionPropsArgs),
+    Render(MotionRenderArgs),
+}
+
+#[derive(Clone, Copy, Debug, ValueEnum)]
+enum RenderQualityArg {
+    Preview,
+    Final,
+}
+
+impl From<RenderQualityArg> for cap_project::MotionArtifactQuality {
+    fn from(value: RenderQualityArg) -> Self {
+        match value {
+            RenderQualityArg::Preview => Self::Preview,
+            RenderQualityArg::Final => Self::Final,
+        }
+    }
+}
+
+#[derive(Args)]
+struct MotionRenderArgs {
+    #[arg(long)]
+    expected_revision: u64,
+    #[arg(long)]
+    segment: String,
+    #[arg(long, value_enum, default_value_t = RenderQualityArg::Preview)]
+    quality: RenderQualityArg,
+    #[arg(long)]
+    workspace: Option<PathBuf>,
+    project_path: PathBuf,
+}
+
+impl MotionRenderArgs {
+    fn run(self, renderer: &dyn MotionRenderRunner) -> Result<MotionOutput, String> {
+        let (project, artifact) = render_motion_segment(
+            RenderMotionOptions {
+                project_path: &self.project_path,
+                expected_revision: self.expected_revision,
+                segment_id: &self.segment,
+                quality: self.quality.into(),
+                workspace: self.workspace.as_deref(),
+            },
+            renderer,
+        )?;
+        Ok(MotionOutput::artifact(project, artifact))
+    }
 }
 
 #[derive(Args)]
@@ -336,6 +399,8 @@ pub struct MotionOutput {
     pub definition: Option<MotionDefinition>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub segment: Option<MotionSegment>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub artifact: Option<cap_project::MotionArtifact>,
 }
 
 impl MotionOutput {
@@ -345,6 +410,7 @@ impl MotionOutput {
             revision: project.project_revision,
             definition,
             segment: None,
+            artifact: None,
         }
     }
 
@@ -354,6 +420,17 @@ impl MotionOutput {
             revision: project.project_revision,
             definition: None,
             segment,
+            artifact: None,
+        }
+    }
+
+    fn artifact(project: ProjectConfiguration, artifact: cap_project::MotionArtifact) -> Self {
+        Self {
+            ok: true,
+            revision: project.project_revision,
+            definition: None,
+            segment: project.motion.segment(&artifact.segment_id).cloned(),
+            artifact: Some(artifact),
         }
     }
 }
