@@ -7,7 +7,7 @@ description: Use when choosing, configuring, or reviewing Remotion or HyperFrame
 
 ## Required Context
 
-Read `README.md`, `规范/组件设计方法论.md`, and `规范/组件规则.md`. If the user's workspace has its own `AGENTS.md` or control document, read it as an additional local policy. Read only the selected component specs from `模板/components/`.
+Read `workflows/laohu-video/README.md`, `workflows/laohu-video/规范/组件设计方法论.md`, and `workflows/laohu-video/规范/组件规则.md`. If the user's workspace has its own `AGENTS.md` or control document, read it as an additional local policy. Read only the selected component specs from `workflows/laohu-video/模板/components/`.
 
 For Remotion implementation, **REQUIRED SUB-SKILL:** Use the official `remotion-best-practices`; also load `remotion-markup`, `remotion-interactivity`, or `remotion-render` when relevant. These upstream skills are not vendored in this repository.
 
@@ -27,7 +27,7 @@ motionIntensity
 
 ## Recommend
 
-Select candidates from `规范/组件规则.md` in this order: information-shape fit, communication goal, duration/capacity, emotional tone, maturity.
+Select candidates from `workflows/laohu-video/规范/组件规则.md` in this order: information-shape fit, communication goal, duration/capacity, emotional tone, maturity.
 
 If the user named a compatible component, or one candidate clearly dominates, proceed to configuration. Otherwise return one primary recommendation and up to two alternatives:
 
@@ -47,7 +47,7 @@ Do not recommend a component merely because it is recent or visually impressive.
 
 ## Configure And Render
 
-Generate a `ComponentConfig` matching the Zod schema under `模板/remotion-assets/workspace/src/schemas/`. Keep absolute ASR time in `sourceTimeRange`; drive component animation with relative frames.
+Generate a `ComponentConfig` matching the Zod schema under `workflows/laohu-video/模板/remotion-assets/workspace/src/schemas/`. Keep absolute ASR time in `sourceTimeRange`; drive component animation with relative frames.
 
 Choose `standalone`, `asset`, or `both`. Remotion does not require HyperFrames. When combining engines, assign Remotion one explicit replacement region; never overlay duplicate explanations.
 

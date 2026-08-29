@@ -1,0 +1,1939 @@
+use cap_project::{
+    ClipOffsets, ClipTransitionType, ProjectConfiguration, TimelineFrameMapping, XY,
+};
+use cap_rendering::{
+    DecodedFrame, DecodedSegmentFrames, PrecomputedCursorTimeline, ProjectUniforms,
+    RecordingSegmentDecoders, RenderVideoConstants, ZoomTransformTimeline,
+    spring_mass_damper::SpringMassDamperSimulationConfig,
+};
+use futures::stream::{FuturesUnordered, StreamExt};
+use lru::LruCache;
+use std::{
+    collections::{HashSet, VecDeque},
+    num::NonZeroUsize,
+    sync::{
+        Arc, RwLock,
+        atomic::{AtomicU64, AtomicUsize, Ordering},
+        mpsc as std_mpsc,
+    },
+    time::{Duration, Instant},
+};
+use tokio::sync::watch;
+use tracing::{info, warn};
+
+use crate::{
+    audio_output::{AudioOutput, PlaySpec},
+    editor,
+    editor_instance::SegmentMedia,
+    segments::get_audio_segments,
+    telemetry::{
+        PlaybackFrameSource, PlaybackSkipReason, PlaybackTelemetry, PlaybackTelemetryEvent,
+    },
+};
+
+const INITIAL_PREFETCH_BUFFER_SIZE: usize = 10;
+const MAX_PREFETCH_BUFFER_SIZE: usize = 90;
+const PREFETCH_CHANNEL_SIZE: usize = 4;
+const MAX_PREFETCH_BUFFER_BYTES: usize = 128 * 1024 * 1024;
+// Starvation boost: when the playback loop skips because decode fell behind,
+// the runway temporarily widens (2x frames, byte budget below) and decays back
+// after BOOST_CLEAN_WINDOW without another starvation skip. Steady-state
+// memory is unchanged; the boost only spends memory while it is earning
+// smoothness back.
+const BOOSTED_PREFETCH_BUFFER_BYTES: usize = 192 * 1024 * 1024;
+const BOOST_CLEAN_WINDOW: Duration = Duration::from_secs(6);
+const PARALLEL_DECODE_TASKS: usize = 4;
+const INITIAL_PARALLEL_DECODE_TASKS: usize = 4;
+const FRAME_CACHE_SIZE: usize = 4;
+const MAX_FRAME_CACHE_BYTES: usize = 64 * 1024 * 1024;
+const RAMP_UP_FRAME_COUNT: u32 = 15;
+
+#[cfg(target_os = "windows")]
+struct WindowsTimerResolution;
+
+#[cfg(target_os = "windows")]
+impl WindowsTimerResolution {
+    fn set_high_precision() -> Self {
+        unsafe {
+            windows::Win32::Media::timeBeginPeriod(1);
+        }
+        Self
+    }
+}
+
+#[cfg(target_os = "windows")]
+impl Drop for WindowsTimerResolution {
+    fn drop(&mut self) {
+        unsafe {
+            windows::Win32::Media::timeEndPeriod(1);
+        }
+    }
+}
+
+fn precision_sleep_sync(deadline: Instant) {
+    let now = Instant::now();
+    if now >= deadline {
+        return;
+    }
+
+    let remaining = deadline.saturating_duration_since(now);
+
+    #[cfg(target_os = "windows")]
+    {
+        let spin_threshold = Duration::from_millis(2);
+        if remaining > spin_threshold {
+            std::thread::sleep(remaining.saturating_sub(spin_threshold));
+        }
+        while Instant::now() < deadline {
+            std::hint::spin_loop();
+        }
+    }
+
+    #[cfg(not(target_os = "windows"))]
+    {
+        std::thread::sleep(remaining);
+    }
+}
+
+fn valid_playback_duration(duration: f64) -> Option<f64> {
+    (duration.is_finite() && duration > 0.0).then_some(duration)
+}
+
+fn has_playback_audio(audio_segments: &[crate::audio::AudioSegment], has_music: bool) -> bool {
+    has_music
+        || audio_segments
+            .iter()
+            .any(|segment| !segment.tracks.is_empty())
+}
+
+#[derive(Debug)]
+pub enum PlaybackStartError {
+    InvalidFps,
+}
+
+pub struct Playback {
+    pub renderer: Arc<editor::RendererHandle>,
+    pub render_constants: Arc<RenderVideoConstants>,
+    pub start_frame_number: u32,
+    pub project: watch::Receiver<ProjectConfiguration>,
+    pub segment_medias: Arc<Vec<SegmentMedia>>,
+    pub music: crate::audio::MusicTracks,
+    pub audio_output: Arc<AudioOutput>,
+    pub telemetry: Option<PlaybackTelemetry>,
+}
+
+#[derive(Clone, Copy)]
+pub enum PlaybackEvent {
+    Start,
+    Frame(u32),
+    Stop,
+}
+
+#[derive(Clone)]
+pub struct PlaybackHandle {
+    stop_tx: watch::Sender<bool>,
+    event_rx: watch::Receiver<PlaybackEvent>,
+    seek_tx: Arc<watch::Sender<(u64, u32)>>,
+    seek_generation: Arc<AtomicU64>,
+}
+
+struct PrefetchedFrame {
+    seek_generation: u64,
+    frame_number: u32,
+    segment_frames: DecodedSegmentFrames,
+    segment_index: u32,
+    transition: Option<PrefetchedTransition>,
+}
+
+struct PrefetchedTransition {
+    segment_frames: DecodedSegmentFrames,
+    segment_index: u32,
+    kind: ClipTransitionType,
+    progress: f32,
+}
+
+impl PrefetchedFrame {
+    fn byte_len(&self) -> usize {
+        decoded_segment_frames_byte_len(&self.segment_frames).saturating_add(
+            self.transition
+                .as_ref()
+                .map(|transition| decoded_segment_frames_byte_len(&transition.segment_frames))
+                .unwrap_or(0),
+        )
+    }
+
+    fn into_cached(self) -> CachedFrame {
+        (
+            Arc::new(self.segment_frames),
+            self.segment_index,
+            self.transition.map(|transition| {
+                (
+                    Arc::new(transition.segment_frames),
+                    transition.segment_index,
+                    transition.kind,
+                    transition.progress,
+                )
+            }),
+        )
+    }
+}
+
+fn receive_prefetched_frame(
+    receiver: &std_mpsc::Receiver<PrefetchedFrame>,
+    seek_generation: u64,
+    timeout: Duration,
+) -> Result<PrefetchedFrame, std_mpsc::RecvTimeoutError> {
+    let deadline = Instant::now() + timeout;
+    loop {
+        let frame = receiver.recv_timeout(deadline.saturating_duration_since(Instant::now()))?;
+        // A completed decode can already be queued when the producer observes a seek.
+        if frame.seek_generation == seek_generation {
+            return Ok(frame);
+        }
+    }
+}
+
+fn should_reset_prefetch(
+    seek_generation: u64,
+    next_frame: u32,
+    requested_generation: u64,
+    requested_frame: u32,
+    has_in_flight: bool,
+) -> bool {
+    requested_generation != seek_generation
+        || requested_frame > next_frame
+        || (requested_frame < next_frame && !has_in_flight)
+}
+
+type CachedTransition = (Arc<DecodedSegmentFrames>, u32, ClipTransitionType, f32);
+type CachedFrame = (Arc<DecodedSegmentFrames>, u32, Option<CachedTransition>);
+
+fn decoded_frame_byte_len(frame: &DecodedFrame) -> usize {
+    frame.byte_len()
+}
+
+fn decoded_segment_frames_byte_len(frames: &DecodedSegmentFrames) -> usize {
+    frames
+        .screen_frame
+        .as_ref()
+        .map(decoded_frame_byte_len)
+        .unwrap_or(0)
+        .saturating_add(
+            frames
+                .camera_frame
+                .as_ref()
+                .map(decoded_frame_byte_len)
+                .unwrap_or(0),
+        )
+}
+
+fn cached_frame_byte_len(frame: &CachedFrame) -> usize {
+    decoded_segment_frames_byte_len(&frame.0).saturating_add(
+        frame
+            .2
+            .as_ref()
+            .map(|transition| decoded_segment_frames_byte_len(&transition.0))
+            .unwrap_or(0),
+    )
+}
+
+fn prefetch_frame_limit(frame_bytes: usize) -> usize {
+    if frame_bytes == 0 {
+        return MAX_PREFETCH_BUFFER_SIZE;
+    }
+
+    (MAX_PREFETCH_BUFFER_BYTES / frame_bytes)
+        .clamp(INITIAL_PREFETCH_BUFFER_SIZE, MAX_PREFETCH_BUFFER_SIZE)
+}
+
+// The boosted limit is capped both by 2x the base and by the boosted byte
+// budget, but never drops below base: on Retina-sized frames the byte quotient
+// alone would land under the base floor and silently disable the boost.
+fn boosted_prefetch_frame_limit(frame_bytes: usize) -> usize {
+    let base = prefetch_frame_limit(frame_bytes);
+    if frame_bytes == 0 {
+        return base;
+    }
+
+    (base * 2)
+        .min((BOOSTED_PREFETCH_BUFFER_BYTES / frame_bytes).max(base + 6))
+        .clamp(base, MAX_PREFETCH_BUFFER_SIZE)
+}
+
+fn effective_prefetch_limit(frame_bytes: usize, boosted: bool) -> usize {
+    if boosted {
+        boosted_prefetch_frame_limit(frame_bytes)
+    } else {
+        prefetch_frame_limit(frame_bytes)
+    }
+}
+
+fn observe_prefetched_frame(frame: &PrefetchedFrame, largest_frame_bytes: &mut usize) {
+    let frame_bytes = frame.byte_len();
+    if frame_bytes > *largest_frame_bytes {
+        *largest_frame_bytes = frame_bytes;
+    }
+}
+
+// Until a frame has been observed the atomic keeps its INITIAL value; storing
+// the zero-bytes result here would open the runway to MAX before the first
+// frame's size is known.
+fn refresh_prefetch_limit(
+    limit: &AtomicUsize,
+    largest_frame_bytes: usize,
+    boost_until: Option<Instant>,
+) -> usize {
+    if largest_frame_bytes == 0 {
+        return limit.load(Ordering::Relaxed);
+    }
+    let boosted = boost_until.is_some_and(|until| Instant::now() < until);
+    let value = effective_prefetch_limit(largest_frame_bytes, boosted);
+    limit.store(value, Ordering::Relaxed);
+    value
+}
+
+struct FrameCache {
+    cache: LruCache<u32, CachedFrame>,
+    cache_bytes: usize,
+    max_bytes: usize,
+}
+
+impl FrameCache {
+    fn new(capacity: usize, max_bytes: usize) -> Self {
+        Self {
+            cache: LruCache::new(NonZeroUsize::new(capacity).unwrap()),
+            cache_bytes: 0,
+            max_bytes,
+        }
+    }
+
+    fn get(&mut self, frame_number: u32) -> Option<CachedFrame> {
+        self.cache
+            .get(&frame_number)
+            .map(|(frames, segment_index, transition)| {
+                (
+                    Arc::clone(frames),
+                    *segment_index,
+                    transition.as_ref().map(
+                        |(transition_frames, transition_index, kind, progress)| {
+                            (
+                                Arc::clone(transition_frames),
+                                *transition_index,
+                                *kind,
+                                *progress,
+                            )
+                        },
+                    ),
+                )
+            })
+    }
+
+    fn insert(
+        &mut self,
+        frame_number: u32,
+        segment_frames: Arc<DecodedSegmentFrames>,
+        segment_index: u32,
+        transition: Option<CachedTransition>,
+    ) {
+        let frame = (segment_frames, segment_index, transition);
+        let frame_bytes = cached_frame_byte_len(&frame);
+
+        if let Some((_, replaced)) = self.cache.push(frame_number, frame) {
+            self.cache_bytes = self
+                .cache_bytes
+                .saturating_sub(cached_frame_byte_len(&replaced));
+        }
+        self.cache_bytes = self.cache_bytes.saturating_add(frame_bytes);
+
+        while self.cache.len() > 1 && self.cache_bytes > self.max_bytes {
+            let Some((_, evicted)) = self.cache.pop_lru() else {
+                break;
+            };
+            self.cache_bytes = self
+                .cache_bytes
+                .saturating_sub(cached_frame_byte_len(&evicted));
+        }
+    }
+
+    fn evict_far_from(&mut self, current_frame: u32, max_distance: u32) {
+        let keys_to_remove: Vec<u32> = self
+            .cache
+            .iter()
+            .filter_map(|(k, _)| {
+                if (*k).abs_diff(current_frame) > max_distance {
+                    Some(*k)
+                } else {
+                    None
+                }
+            })
+            .collect();
+
+        for key in keys_to_remove {
+            if let Some(evicted) = self.cache.pop(&key) {
+                self.cache_bytes = self
+                    .cache_bytes
+                    .saturating_sub(cached_frame_byte_len(&evicted));
+            }
+        }
+    }
+}
+
+struct TransitionDecodeRequest {
+    decoders: RecordingSegmentDecoders,
+    segment_time: f64,
+    segment_index: u32,
+    offsets: ClipOffsets,
+    kind: ClipTransitionType,
+    progress: f32,
+}
+
+struct PrefetchDecodeRequest {
+    seek_generation: u64,
+    frame_number: u32,
+    decoders: RecordingSegmentDecoders,
+    segment_time: f64,
+    segment_index: u32,
+    offsets: ClipOffsets,
+    hide_camera: bool,
+    is_initial: bool,
+    transition: Option<TransitionDecodeRequest>,
+}
+
+type PrefetchDecodeResult = (
+    u64,
+    u32,
+    u32,
+    Option<DecodedSegmentFrames>,
+    Option<PrefetchedTransition>,
+);
+
+async fn decode_prefetched_frame(request: PrefetchDecodeRequest) -> PrefetchDecodeResult {
+    let PrefetchDecodeRequest {
+        seek_generation,
+        frame_number,
+        decoders,
+        segment_time,
+        segment_index,
+        offsets,
+        hide_camera,
+        is_initial,
+        transition,
+    } = request;
+    let primary = async {
+        if is_initial {
+            decoders
+                .get_frames_initial(segment_time as f32, !hide_camera, true, offsets)
+                .await
+        } else {
+            decoders
+                .get_frames(segment_time as f32, !hide_camera, true, offsets)
+                .await
+        }
+    };
+    let transition = async {
+        let transition = transition?;
+        let segment_frames = if is_initial {
+            transition
+                .decoders
+                .get_frames_initial(
+                    transition.segment_time as f32,
+                    !hide_camera,
+                    true,
+                    transition.offsets,
+                )
+                .await
+        } else {
+            transition
+                .decoders
+                .get_frames(
+                    transition.segment_time as f32,
+                    !hide_camera,
+                    true,
+                    transition.offsets,
+                )
+                .await
+        }?;
+        Some(PrefetchedTransition {
+            segment_frames,
+            segment_index: transition.segment_index,
+            kind: transition.kind,
+            progress: transition.progress,
+        })
+    };
+    let (segment_frames, transition) = tokio::join!(primary, transition);
+
+    (
+        seek_generation,
+        frame_number,
+        segment_index,
+        segment_frames,
+        transition,
+    )
+}
+
+fn transition_decode_request(
+    project: &ProjectConfiguration,
+    segment_medias: &[SegmentMedia],
+    frame_time: f64,
+) -> Option<TransitionDecodeRequest> {
+    let timeline = project.timeline.as_ref()?;
+    if timeline.transitions.is_empty() {
+        return None;
+    }
+    let TimelineFrameMapping::Transition {
+        outgoing,
+        kind,
+        progress,
+        ..
+    } = timeline.get_frame_mapping(frame_time)?
+    else {
+        return None;
+    };
+    let segment_media = segment_medias.get(outgoing.segment.recording_clip as usize)?;
+    let offsets = project
+        .clips
+        .iter()
+        .find(|clip| clip.index == outgoing.segment.recording_clip)
+        .map(|clip| clip.offsets)
+        .unwrap_or_default();
+
+    Some(TransitionDecodeRequest {
+        decoders: segment_media.decoders.clone(),
+        segment_time: outgoing.source_time,
+        segment_index: outgoing.segment.recording_clip,
+        offsets,
+        kind,
+        progress: progress as f32,
+    })
+}
+
+impl Playback {
+    pub async fn start(
+        mut self,
+        fps: u32,
+        resolution_base: XY<u32>,
+    ) -> Result<PlaybackHandle, PlaybackStartError> {
+        let start_call = Instant::now();
+        let fps_f64 = fps as f64;
+
+        if !(fps_f64.is_finite() && fps_f64 > 0.0) {
+            warn!(fps, "Invalid FPS provided for playback start");
+            return Err(PlaybackStartError::InvalidFps);
+        }
+
+        let (stop_tx, mut stop_rx) = watch::channel(false);
+        stop_rx.borrow_and_update();
+
+        let (event_tx, mut event_rx) = watch::channel(PlaybackEvent::Start);
+        event_rx.borrow_and_update();
+
+        let (seek_tx, mut seek_rx) = watch::channel((0u64, self.start_frame_number));
+        seek_rx.borrow_and_update();
+
+        let handle = PlaybackHandle {
+            stop_tx: stop_tx.clone(),
+            event_rx,
+            seek_tx: Arc::new(seek_tx),
+            seek_generation: Arc::new(AtomicU64::new(0)),
+        };
+
+        let (prefetch_tx, prefetch_rx) =
+            std_mpsc::sync_channel::<PrefetchedFrame>(PREFETCH_CHANNEL_SIZE);
+        let (frame_request_tx, mut frame_request_rx) =
+            watch::channel((0u64, self.start_frame_number));
+        let (playback_position_tx, playback_position_rx) = watch::channel(self.start_frame_number);
+        let prefetch_frame_limit = Arc::new(AtomicUsize::new(INITIAL_PREFETCH_BUFFER_SIZE));
+
+        let output_size = ProjectUniforms::get_output_size(
+            &self.render_constants.options,
+            &self.project.borrow(),
+            resolution_base,
+        );
+        self.renderer
+            .prepare_output_size(output_size.0, output_size.1);
+
+        let in_flight_frames: Arc<RwLock<HashSet<u32>>> = Arc::new(RwLock::new(HashSet::new()));
+        let prefetch_in_flight = in_flight_frames.clone();
+        let producer_prefetch_frame_limit = Arc::clone(&prefetch_frame_limit);
+        let _main_in_flight = in_flight_frames;
+
+        let mut prefetch_stop_rx = stop_rx.clone();
+        let mut prefetch_project = self.project.clone();
+        let prefetch_segment_medias = self.segment_medias.clone();
+        let (prefetch_duration, has_timeline) = self
+            .project
+            .borrow()
+            .timeline
+            .as_ref()
+            .and_then(|timeline| valid_playback_duration(timeline.duration()))
+            .map(|duration| (duration, true))
+            .unwrap_or((0.0, false));
+        let segment_media_count = self.segment_medias.len();
+
+        tokio::spawn(async move {
+            if !has_timeline {
+                warn!("Prefetch: No valid timeline duration found");
+            }
+            if segment_media_count == 0 {
+                warn!("Prefetch: No segment media available");
+            }
+            type PrefetchFuture =
+                std::pin::Pin<Box<dyn std::future::Future<Output = PrefetchDecodeResult> + Send>>;
+            let (mut seek_generation, mut next_prefetch_frame) =
+                *frame_request_rx.borrow_and_update();
+            let mut request_changed = false;
+            let mut in_flight: FuturesUnordered<PrefetchFuture> = FuturesUnordered::new();
+            let mut frames_decoded: u32 = 0;
+            let mut cached_project = prefetch_project.borrow().clone();
+            let mut pending_frame: Option<PrefetchedFrame> = None;
+
+            loop {
+                if *prefetch_stop_rx.borrow() {
+                    break;
+                }
+
+                if prefetch_project.has_changed().unwrap_or(false) {
+                    cached_project = prefetch_project.borrow_and_update().clone();
+                }
+
+                if request_changed || frame_request_rx.has_changed().unwrap_or(false) {
+                    request_changed = false;
+                    let (requested_generation, requested) = *frame_request_rx.borrow_and_update();
+                    let generation_changed = requested_generation != seek_generation;
+                    let reset = should_reset_prefetch(
+                        seek_generation,
+                        next_prefetch_frame,
+                        requested_generation,
+                        requested,
+                        !in_flight.is_empty(),
+                    );
+                    seek_generation = requested_generation;
+                    if reset {
+                        let old_frame = next_prefetch_frame;
+                        let is_backward_seek = requested < old_frame;
+                        let seek_distance = if is_backward_seek {
+                            old_frame - requested
+                        } else {
+                            requested - old_frame
+                        };
+
+                        next_prefetch_frame = requested;
+                        frames_decoded = 0;
+
+                        if let Ok(mut in_flight_guard) = prefetch_in_flight.write() {
+                            in_flight_guard.clear();
+                        }
+
+                        let reset_distance =
+                            producer_prefetch_frame_limit.load(Ordering::Relaxed).max(2) as u32 / 2;
+                        if generation_changed || is_backward_seek || seek_distance > reset_distance
+                        {
+                            in_flight = FuturesUnordered::new();
+                        }
+                        if generation_changed {
+                            pending_frame = None;
+                        }
+                    }
+                }
+
+                if let Some(frame) = pending_frame.take() {
+                    match prefetch_tx.try_send(frame) {
+                        Ok(()) => {}
+                        Err(std_mpsc::TrySendError::Full(frame)) => {
+                            pending_frame = Some(frame);
+                            tokio::select! {
+                                result = prefetch_stop_rx.changed() => {
+                                    if result.is_err() {
+                                        break;
+                                    }
+                                }
+                                result = frame_request_rx.changed() => {
+                                    if result.is_err() {
+                                        break;
+                                    }
+                                    request_changed = true;
+                                }
+                                _ = tokio::time::sleep(Duration::from_millis(1)) => {}
+                            }
+                            continue;
+                        }
+                        Err(std_mpsc::TrySendError::Disconnected(_)) => break,
+                    }
+                }
+
+                let current_playback_frame = *playback_position_rx.borrow();
+                let max_prefetch_ahead = producer_prefetch_frame_limit
+                    .load(Ordering::Relaxed)
+                    .clamp(INITIAL_PREFETCH_BUFFER_SIZE, MAX_PREFETCH_BUFFER_SIZE)
+                    as u32;
+                let max_prefetch_frame = current_playback_frame + max_prefetch_ahead;
+
+                let initial_parallel_decode_tasks = INITIAL_PARALLEL_DECODE_TASKS;
+                let parallel_decode_tasks = PARALLEL_DECODE_TASKS;
+
+                let effective_parallel = if frames_decoded < RAMP_UP_FRAME_COUNT {
+                    initial_parallel_decode_tasks
+                } else {
+                    parallel_decode_tasks
+                };
+
+                while in_flight.len() < effective_parallel {
+                    let frame_num = next_prefetch_frame;
+
+                    if frame_num > max_prefetch_frame {
+                        break;
+                    }
+
+                    let prefetch_time = frame_num as f64 / fps_f64;
+
+                    if prefetch_time >= prefetch_duration {
+                        next_prefetch_frame = next_prefetch_frame.saturating_add(1);
+                        break;
+                    }
+
+                    let already_in_flight = prefetch_in_flight
+                        .read()
+                        .map(|guard| guard.contains(&frame_num))
+                        .unwrap_or(false);
+                    if already_in_flight {
+                        next_prefetch_frame += 1;
+                        continue;
+                    }
+
+                    if let Some((segment_time, segment)) =
+                        cached_project.get_segment_time(prefetch_time)
+                        && let Some(segment_media) =
+                            prefetch_segment_medias.get(segment.recording_clip as usize)
+                    {
+                        let clip_offsets = cached_project
+                            .clips
+                            .iter()
+                            .find(|v| v.index == segment.recording_clip)
+                            .map(|v| v.offsets)
+                            .unwrap_or_default();
+
+                        let decoders = segment_media.decoders.clone();
+                        let hide_camera = cached_project.camera.hide;
+                        let segment_index = segment.recording_clip;
+                        let is_initial = frames_decoded < 10;
+                        let transition = transition_decode_request(
+                            &cached_project,
+                            &prefetch_segment_medias,
+                            prefetch_time,
+                        );
+
+                        if let Ok(mut in_flight_guard) = prefetch_in_flight.write() {
+                            in_flight_guard.insert(frame_num);
+                        }
+
+                        in_flight.push(Box::pin(decode_prefetched_frame(PrefetchDecodeRequest {
+                            seek_generation,
+                            frame_number: frame_num,
+                            decoders,
+                            segment_time,
+                            segment_index,
+                            offsets: clip_offsets,
+                            hide_camera,
+                            is_initial,
+                            transition,
+                        })));
+                    }
+
+                    next_prefetch_frame += 1;
+                }
+
+                tokio::select! {
+                    biased;
+
+                    result = prefetch_stop_rx.changed() => {
+                        if result.is_err() {
+                            break;
+                        }
+                    }
+                    result = frame_request_rx.changed() => {
+                        if result.is_err() {
+                            break;
+                        }
+                        request_changed = true;
+                    }
+
+                    Some((generation, frame_num, segment_index, result, transition)) = in_flight.next() => {
+                        if let Ok(mut in_flight_guard) = prefetch_in_flight.write() {
+                            in_flight_guard.remove(&frame_num);
+                        }
+                        frames_decoded = frames_decoded.saturating_add(1);
+
+                        if let Some(segment_frames) = result {
+                            let frame = PrefetchedFrame {
+                                seek_generation: generation,
+                                frame_number: frame_num,
+                                segment_frames,
+                                segment_index,
+                                transition,
+                            };
+                            match prefetch_tx.try_send(frame) {
+                                Ok(()) => {}
+                                Err(std_mpsc::TrySendError::Full(frame)) => {
+                                    pending_frame = Some(frame);
+                                }
+                                Err(std_mpsc::TrySendError::Disconnected(_)) => break,
+                            }
+                        } else if frames_decoded <= 5 {
+                            warn!(
+                                frame = frame_num,
+                                segment = segment_index,
+                                "Prefetch: decoder returned no frames"
+                            );
+                        }
+                    }
+
+                    _ = tokio::time::sleep(Duration::from_millis(1)), if in_flight.is_empty() => {}
+                }
+            }
+        });
+
+        // Resolve the background audio decodes before entering the sync
+        // playback thread. This only waits when playback starts before the
+        // decode kicked off at editor open has finished.
+        let audio_wait_start = Instant::now();
+        let audio_segments = get_audio_segments(&self.segment_medias).await;
+        if let Some(telemetry) = &self.telemetry {
+            telemetry.emit(PlaybackTelemetryEvent::AudioSegmentsResolved {
+                elapsed: audio_wait_start.elapsed(),
+            });
+        }
+
+        let playback_body = move || {
+            let duration = self
+                .project
+                .borrow()
+                .timeline
+                .as_ref()
+                .and_then(|timeline| valid_playback_duration(timeline.duration()));
+            let Some(duration) = duration else {
+                warn!("Playback: No valid timeline duration found");
+                stop_tx.send(true).ok();
+                event_tx.send(PlaybackEvent::Stop).ok();
+                return;
+            };
+
+            let (audio_playhead_tx, audio_playhead_rx) =
+                watch::channel(self.start_frame_number as f64 / fps as f64);
+
+            let frame_duration = Duration::from_secs_f64(1.0 / fps_f64);
+            let mut frame_number = self.start_frame_number;
+            let mut seek_generation = 0;
+            let mut prefetch_buffer: VecDeque<PrefetchedFrame> =
+                VecDeque::with_capacity(MAX_PREFETCH_BUFFER_SIZE + PREFETCH_CHANNEL_SIZE);
+            let mut frame_cache = FrameCache::new(FRAME_CACHE_SIZE, MAX_FRAME_CACHE_BYTES);
+            let mut largest_prefetched_frame_bytes = 0usize;
+
+            let mut total_frames_rendered = 0u64;
+            let mut total_frames_skipped = 0u64;
+            let mut cache_hits = 0u64;
+            let mut prefetch_hits = 0u64;
+            let sync_decodes = 0u64;
+            let mut last_stats_time = Instant::now();
+            let mut frames_at_last_stats = 0u64;
+            let stats_interval = Duration::from_secs(2);
+
+            let is_mid_start = self.start_frame_number > 0;
+            let warmup_target_frames = if is_mid_start { 30 } else { 10 };
+            let warmup_after_first_timeout = if is_mid_start {
+                Duration::from_millis(800)
+            } else {
+                Duration::from_millis(500)
+            };
+            let warmup_no_frames_timeout = Duration::from_secs(5);
+            let mut warmup_start = Instant::now();
+            let mut first_frame_time: Option<Instant> = None;
+            let mut boost_until: Option<Instant> = None;
+            let mut starvation_skips = 0u64;
+
+            while !*stop_rx.borrow() {
+                refresh_prefetch_limit(
+                    &prefetch_frame_limit,
+                    largest_prefetched_frame_bytes,
+                    boost_until,
+                );
+
+                if seek_rx.has_changed().unwrap_or(false) {
+                    (seek_generation, frame_number) = *seek_rx.borrow_and_update();
+                    prefetch_buffer.clear();
+                    first_frame_time = None;
+                    warmup_start = Instant::now();
+                    let _ = frame_request_tx.send((seek_generation, frame_number));
+                    let _ = playback_position_tx.send(frame_number);
+                    event_tx.send(PlaybackEvent::Frame(frame_number)).ok();
+                }
+
+                let should_start = if let Some(first_time) = first_frame_time {
+                    prefetch_buffer
+                        .iter()
+                        .any(|p| p.frame_number == frame_number)
+                        || prefetch_buffer.len()
+                            >= warmup_target_frames
+                                .min(prefetch_frame_limit.load(Ordering::Relaxed))
+                        || first_time.elapsed() > warmup_after_first_timeout
+                } else {
+                    false
+                };
+
+                if should_start {
+                    break;
+                }
+
+                if first_frame_time.is_none() && warmup_start.elapsed() > warmup_no_frames_timeout {
+                    warn!(
+                        "Playback warmup timed out waiting for first frame after {:?}",
+                        warmup_start.elapsed()
+                    );
+                    // Without the stop signal the prefetch producer task keeps
+                    // decoding forever after an aborted warmup.
+                    stop_tx.send(true).ok();
+                    let _ = event_tx.send(PlaybackEvent::Stop);
+                    return;
+                }
+
+                match receive_prefetched_frame(
+                    &prefetch_rx,
+                    seek_generation,
+                    Duration::from_millis(50),
+                ) {
+                    Ok(prefetched) => {
+                        if prefetched.frame_number >= frame_number {
+                            observe_prefetched_frame(
+                                &prefetched,
+                                &mut largest_prefetched_frame_bytes,
+                            );
+                            prefetch_buffer.push_back(prefetched);
+                            if first_frame_time.is_none() {
+                                first_frame_time = Some(Instant::now());
+                            }
+                        }
+                        while prefetch_buffer.len()
+                            < warmup_target_frames.min(prefetch_frame_limit.load(Ordering::Relaxed))
+                        {
+                            match receive_prefetched_frame(
+                                &prefetch_rx,
+                                seek_generation,
+                                Duration::ZERO,
+                            ) {
+                                Ok(p) => {
+                                    if p.frame_number >= frame_number {
+                                        observe_prefetched_frame(
+                                            &p,
+                                            &mut largest_prefetched_frame_bytes,
+                                        );
+                                        prefetch_buffer.push_back(p);
+                                    }
+                                }
+                                Err(_) => break,
+                            }
+                        }
+                    }
+                    Err(std_mpsc::RecvTimeoutError::Timeout) => {}
+                    Err(std_mpsc::RecvTimeoutError::Disconnected) => break,
+                }
+            }
+
+            prefetch_buffer
+                .make_contiguous()
+                .sort_by_key(|p| p.frame_number);
+
+            let playback_start_frame = frame_number;
+            let mut cached_project = self.project.borrow().clone();
+
+            let build_cursor_timelines =
+                |project: &ProjectConfiguration| -> Vec<Arc<PrecomputedCursorTimeline>> {
+                    let cursor_smoothing =
+                        (!project.cursor.raw).then_some(SpringMassDamperSimulationConfig {
+                            tension: project.cursor.tension,
+                            mass: project.cursor.mass,
+                            friction: project.cursor.friction,
+                        });
+                    let click_spring = project.cursor.click_spring_config();
+                    self.segment_medias
+                        .iter()
+                        .map(|seg| {
+                            Arc::new(PrecomputedCursorTimeline::new(
+                                &seg.cursor,
+                                cursor_smoothing,
+                                Some(click_spring),
+                            ))
+                        })
+                        .collect()
+                };
+
+            let build_zoom_timelines =
+                |project: &ProjectConfiguration| -> Vec<ZoomTransformTimeline> {
+                    self.segment_medias
+                        .iter()
+                        .enumerate()
+                        .map(|(recording_clip, seg)| {
+                            ZoomTransformTimeline::from_project_for_clip(
+                                project,
+                                &seg.cursor,
+                                duration,
+                                self.render_constants.options.screen_size,
+                                recording_clip as u32,
+                            )
+                        })
+                        .collect()
+                };
+            let build_outgoing_zoom_timelines =
+                |project: &ProjectConfiguration| -> Vec<ZoomTransformTimeline> {
+                    if project
+                        .timeline
+                        .as_ref()
+                        .is_none_or(|timeline| timeline.transitions.is_empty())
+                    {
+                        return Vec::new();
+                    }
+                    self.segment_medias
+                        .iter()
+                        .enumerate()
+                        .map(|(recording_clip, segment)| {
+                            ZoomTransformTimeline::from_project_for_outgoing_clip(
+                                project,
+                                &segment.cursor,
+                                duration,
+                                self.render_constants.options.screen_size,
+                                recording_clip as u32,
+                            )
+                        })
+                        .collect()
+                };
+
+            let mut cursor_timelines = build_cursor_timelines(&cached_project);
+            let mut zoom_timelines = build_zoom_timelines(&cached_project);
+            let mut outgoing_zoom_timelines = build_outgoing_zoom_timelines(&cached_project);
+
+            if !*stop_rx.borrow()
+                && let Some(prefetched_idx) = prefetch_buffer
+                    .iter()
+                    .position(|p| p.frame_number == frame_number)
+            {
+                let frame_acquire_start = Instant::now();
+                let prefetched = prefetch_buffer.remove(prefetched_idx).unwrap();
+                let frame_acquire_duration = frame_acquire_start.elapsed();
+                let (segment_frames, segment_index, transition) = prefetched.into_cached();
+
+                if let Some(segment_media) = self.segment_medias.get(segment_index as usize) {
+                    let zoom_until = (frame_number as f32 + 1.0) / fps as f32;
+                    if let Some(timeline) = zoom_timelines.get_mut(segment_index as usize) {
+                        timeline.ensure_precomputed_until(zoom_until);
+                    }
+                    if let Some(timeline) = outgoing_zoom_timelines.get_mut(segment_index as usize)
+                    {
+                        timeline.ensure_precomputed_until(zoom_until);
+                    }
+                    let zoom_timeline = zoom_timelines.get(segment_index as usize);
+
+                    let empty_timeline;
+                    let zoom_ref = match zoom_timeline {
+                        Some(timeline) => timeline,
+                        None => {
+                            empty_timeline = ZoomTransformTimeline::new(
+                                &[],
+                                None,
+                                &segment_media.cursor,
+                                cached_project.screen_movement_spring,
+                                duration,
+                                None,
+                            );
+                            &empty_timeline
+                        }
+                    };
+
+                    let precomputed_cursor = &cursor_timelines[segment_index as usize];
+                    let uniforms_start = Instant::now();
+                    let uniforms = ProjectUniforms::new_with_precomputed_cursor(
+                        &self.render_constants,
+                        &cached_project,
+                        frame_number,
+                        fps,
+                        resolution_base,
+                        &segment_media.cursor,
+                        &segment_frames,
+                        duration,
+                        zoom_ref,
+                        precomputed_cursor,
+                    );
+                    let uniforms_duration = uniforms_start.elapsed();
+                    let submit_start = Instant::now();
+                    let submitted_frame_number = frame_number;
+                    let rendered = if let Some((outgoing_frames, outgoing_index, kind, progress)) =
+                        transition
+                    {
+                        let outgoing_media = &self.segment_medias[outgoing_index as usize];
+                        if let Some(timeline) =
+                            outgoing_zoom_timelines.get_mut(outgoing_index as usize)
+                        {
+                            timeline.ensure_precomputed_until(zoom_until);
+                        }
+                        let outgoing_zoom = &outgoing_zoom_timelines[outgoing_index as usize];
+                        let outgoing_uniforms = ProjectUniforms::new_with_precomputed_cursor(
+                            &self.render_constants,
+                            &cached_project,
+                            frame_number,
+                            fps,
+                            resolution_base,
+                            &outgoing_media.cursor,
+                            &outgoing_frames,
+                            duration,
+                            outgoing_zoom,
+                            &cursor_timelines[outgoing_index as usize],
+                        );
+                        self.renderer.render_transition_frame_wait(
+                            editor::RendererTransitionInput {
+                                segment_frames: Arc::unwrap_or_clone(outgoing_frames),
+                                uniforms: outgoing_uniforms,
+                                cursor: outgoing_media.cursor.clone(),
+                            },
+                            editor::RendererTransitionInput {
+                                segment_frames: Arc::unwrap_or_clone(segment_frames),
+                                uniforms,
+                                cursor: segment_media.cursor.clone(),
+                            },
+                            kind,
+                            progress,
+                        )
+                    } else {
+                        self.renderer.render_frame_wait(
+                            Arc::unwrap_or_clone(segment_frames),
+                            uniforms,
+                            segment_media.cursor.clone(),
+                        )
+                    };
+                    let submit_duration = submit_start.elapsed();
+
+                    if rendered {
+                        if let Some(telemetry) = &self.telemetry {
+                            telemetry.emit(PlaybackTelemetryEvent::FrameSubmitted {
+                                frame_number: submitted_frame_number,
+                                source: PlaybackFrameSource::InitialPrerender,
+                                schedule_overshoot: Duration::ZERO,
+                                frame_acquire_duration,
+                                uniforms_duration,
+                                submit_duration,
+                                prefetch_buffer_len: prefetch_buffer.len(),
+                                total_frames_skipped,
+                            });
+                        }
+
+                        total_frames_rendered += 1;
+                        event_tx.send(PlaybackEvent::Frame(frame_number)).ok();
+                        frame_number = frame_number.saturating_add(1);
+                        let _ = playback_position_tx.send(frame_number);
+                    }
+                }
+            }
+
+            while prefetch_buffer.len()
+                < warmup_target_frames.min(prefetch_frame_limit.load(Ordering::Relaxed))
+            {
+                match receive_prefetched_frame(&prefetch_rx, seek_generation, Duration::ZERO) {
+                    Ok(prefetched) => {
+                        if prefetched.frame_number >= frame_number {
+                            observe_prefetched_frame(
+                                &prefetched,
+                                &mut largest_prefetched_frame_bytes,
+                            );
+                            prefetch_buffer.push_back(prefetched);
+                        }
+                    }
+                    Err(_) => break,
+                }
+            }
+            prefetch_buffer
+                .make_contiguous()
+                .sort_by_key(|p| p.frame_number);
+
+            if let Some(telemetry) = &self.telemetry {
+                telemetry.emit(PlaybackTelemetryEvent::WarmupComplete {
+                    elapsed: warmup_start.elapsed(),
+                    buffered_frames: prefetch_buffer.len(),
+                    target_frames: warmup_target_frames,
+                    start_frame_number: playback_start_frame,
+                });
+            }
+
+            #[cfg(target_os = "windows")]
+            let _timer_guard = WindowsTimerResolution::set_high_precision();
+
+            // Attach this playback's audio to the session's persistent output
+            // stream. Blocks until the live callback is consuming the source,
+            // so the clock below never runs ahead of audible audio.
+            let audio_spawn_start = Instant::now();
+            let _ = audio_playhead_tx.send(playback_start_frame as f64 / fps_f64);
+            let audio_generation = if !has_playback_audio(&audio_segments, !self.music.is_empty()) {
+                info!("No audio segments found, skipping audio playback.");
+                None
+            } else {
+                self.audio_output.play(PlaySpec {
+                    segments: audio_segments,
+                    music: self.music.clone(),
+                    project: self.project.borrow().clone(),
+                    duration_secs: duration,
+                    start_playhead_secs: playback_start_frame as f64 / fps_f64,
+                    playhead_rx: audio_playhead_rx,
+                })
+            };
+            let has_audio = audio_generation.is_some();
+            if let Some(telemetry) = &self.telemetry {
+                telemetry.emit(PlaybackTelemetryEvent::AudioPipelineReady {
+                    elapsed: audio_spawn_start.elapsed(),
+                    has_audio,
+                });
+                telemetry.emit(PlaybackTelemetryEvent::ClockStarted {
+                    elapsed: start_call.elapsed(),
+                });
+            }
+            let mut start = Instant::now();
+            let mut clock_anchor_frame = playback_start_frame;
+
+            'playback: loop {
+                let limit_now = refresh_prefetch_limit(
+                    &prefetch_frame_limit,
+                    largest_prefetched_frame_bytes,
+                    boost_until,
+                );
+
+                if seek_rx.has_changed().unwrap_or(false) {
+                    let (generation, target) = *seek_rx.borrow_and_update();
+                    tracing::debug!(from = frame_number, to = target, "playback live seek");
+                    seek_generation = generation;
+                    frame_number = target;
+                    clock_anchor_frame = target;
+                    start = Instant::now();
+                    prefetch_buffer.clear();
+                    frame_cache.evict_far_from(target, limit_now as u32);
+                    let _ = frame_request_tx.send((seek_generation, target));
+                    let _ = playback_position_tx.send(target);
+                    event_tx.send(PlaybackEvent::Frame(target)).ok();
+                    if has_audio && audio_playhead_tx.send(target as f64 / fps_f64).is_err() {
+                        break 'playback;
+                    }
+                    continue;
+                }
+
+                if self.project.has_changed().unwrap_or(false) {
+                    cached_project = self.project.borrow_and_update().clone();
+                    cursor_timelines = build_cursor_timelines(&cached_project);
+                    zoom_timelines = build_zoom_timelines(&cached_project);
+                    outgoing_zoom_timelines = build_outgoing_zoom_timelines(&cached_project);
+                }
+
+                let frame_offset = frame_number.saturating_sub(clock_anchor_frame) as f64;
+                let next_deadline = start + frame_duration.mul_f64(frame_offset);
+
+                precision_sleep_sync(next_deadline);
+
+                if *stop_rx.borrow() {
+                    break;
+                }
+
+                let overshoot = Instant::now().saturating_duration_since(next_deadline);
+                if overshoot > frame_duration + frame_duration / 2 {
+                    let frames_behind = (overshoot.as_secs_f64() * fps_f64).floor() as u32;
+                    let skip = frames_behind.max(1);
+                    let skipped_from = frame_number;
+                    frame_number += skip;
+                    total_frames_skipped += skip as u64;
+                    while prefetch_buffer
+                        .front()
+                        .is_some_and(|f| f.frame_number < frame_number)
+                    {
+                        prefetch_buffer.pop_front();
+                    }
+                    frame_cache.evict_far_from(
+                        frame_number,
+                        prefetch_frame_limit.load(Ordering::Relaxed) as u32,
+                    );
+                    let _ = frame_request_tx.send((seek_generation, frame_number));
+                    let _ = playback_position_tx.send(frame_number);
+                    if let Some(telemetry) = &self.telemetry {
+                        telemetry.emit(PlaybackTelemetryEvent::FrameSkipped {
+                            frame_number: skipped_from,
+                            skipped: skip,
+                            reason: PlaybackSkipReason::ScheduleOvershoot,
+                            prefetch_buffer_len: prefetch_buffer.len(),
+                        });
+                    }
+                    if has_audio
+                        && audio_playhead_tx
+                            .send(frame_number as f64 / fps_f64)
+                            .is_err()
+                    {
+                        break 'playback;
+                    }
+                    continue;
+                }
+
+                prefetch_buffer.retain(|p| p.frame_number >= frame_number);
+                let drain_budget = 16usize;
+                let mut drained = 0usize;
+                while prefetch_buffer.len() < prefetch_frame_limit.load(Ordering::Relaxed)
+                    && drained < drain_budget
+                {
+                    match receive_prefetched_frame(&prefetch_rx, seek_generation, Duration::ZERO) {
+                        Ok(prefetched) => {
+                            drained += 1;
+                            if prefetched.frame_number >= frame_number {
+                                observe_prefetched_frame(
+                                    &prefetched,
+                                    &mut largest_prefetched_frame_bytes,
+                                );
+                                prefetch_buffer.push_back(prefetched);
+                            }
+                        }
+                        Err(_) => break,
+                    }
+                }
+
+                let playback_time = frame_number as f64 / fps_f64;
+                if playback_time >= duration {
+                    break;
+                }
+
+                let mut was_cached = false;
+                let frame_acquire_start = Instant::now();
+                let mut frame_source = PlaybackFrameSource::Cache;
+
+                let segment_frames_opt = if let Some(cached) = frame_cache.get(frame_number) {
+                    was_cached = true;
+                    cache_hits += 1;
+                    Some(cached)
+                } else if prefetch_buffer
+                    .front()
+                    .is_some_and(|f| f.frame_number == frame_number)
+                {
+                    frame_source = PlaybackFrameSource::PrefetchFront;
+                    let prefetched = prefetch_buffer.pop_front().unwrap();
+                    prefetch_hits += 1;
+                    Some(prefetched.into_cached())
+                } else {
+                    let prefetched_idx = prefetch_buffer
+                        .iter()
+                        .position(|p| p.frame_number == frame_number);
+
+                    if let Some(idx) = prefetched_idx {
+                        frame_source = PlaybackFrameSource::PrefetchSearch;
+                        let prefetched = prefetch_buffer.remove(idx).unwrap();
+                        prefetch_hits += 1;
+                        Some(prefetched.into_cached())
+                    } else if prefetch_buffer.is_empty() {
+                        let _ = frame_request_tx.send((seek_generation, frame_number));
+
+                        let wait_ms = if total_frames_rendered < 15 { 20 } else { 8 };
+                        let prefetched_opt = match receive_prefetched_frame(
+                            &prefetch_rx,
+                            seek_generation,
+                            Duration::from_millis(wait_ms),
+                        ) {
+                            Ok(p) => Some(p),
+                            Err(std_mpsc::RecvTimeoutError::Timeout) => receive_prefetched_frame(
+                                &prefetch_rx,
+                                seek_generation,
+                                Duration::ZERO,
+                            )
+                            .ok(),
+                            Err(std_mpsc::RecvTimeoutError::Disconnected) => {
+                                break 'playback;
+                            }
+                        };
+
+                        match prefetched_opt {
+                            Some(prefetched) => {
+                                observe_prefetched_frame(
+                                    &prefetched,
+                                    &mut largest_prefetched_frame_bytes,
+                                );
+                                if prefetched.frame_number == frame_number {
+                                    frame_source = PlaybackFrameSource::PrefetchWaitExact;
+                                    Some(prefetched.into_cached())
+                                } else if prefetched.frame_number > frame_number {
+                                    frame_source = PlaybackFrameSource::PrefetchWaitFuture;
+                                    let skipped_from = frame_number;
+                                    frame_number = prefetched.frame_number;
+                                    total_frames_skipped += 1;
+                                    starvation_skips += 1;
+                                    boost_until = Some(Instant::now() + BOOST_CLEAN_WINDOW);
+                                    if let Some(telemetry) = &self.telemetry {
+                                        telemetry.emit(PlaybackTelemetryEvent::FrameSkipped {
+                                            frame_number: skipped_from,
+                                            skipped: 1,
+                                            reason: PlaybackSkipReason::PrefetchGap,
+                                            prefetch_buffer_len: prefetch_buffer.len(),
+                                        });
+                                    }
+                                    Some(prefetched.into_cached())
+                                } else {
+                                    prefetch_buffer.push_back(prefetched);
+                                    let skipped_from = frame_number;
+                                    frame_number = frame_number.saturating_add(1);
+                                    total_frames_skipped += 1;
+                                    starvation_skips += 1;
+                                    boost_until = Some(Instant::now() + BOOST_CLEAN_WINDOW);
+                                    if let Some(telemetry) = &self.telemetry {
+                                        telemetry.emit(PlaybackTelemetryEvent::FrameSkipped {
+                                            frame_number: skipped_from,
+                                            skipped: 1,
+                                            reason: PlaybackSkipReason::PrefetchBehind,
+                                            prefetch_buffer_len: prefetch_buffer.len(),
+                                        });
+                                    }
+                                    continue;
+                                }
+                            }
+                            None => {
+                                let skipped_from = frame_number;
+                                frame_number = frame_number.saturating_add(1);
+                                total_frames_skipped += 1;
+                                starvation_skips += 1;
+                                boost_until = Some(Instant::now() + BOOST_CLEAN_WINDOW);
+                                let _ = frame_request_tx.send((seek_generation, frame_number));
+                                let _ = playback_position_tx.send(frame_number);
+                                if let Some(telemetry) = &self.telemetry {
+                                    telemetry.emit(PlaybackTelemetryEvent::FrameSkipped {
+                                        frame_number: skipped_from,
+                                        skipped: 1,
+                                        reason: PlaybackSkipReason::PrefetchTimeout,
+                                        prefetch_buffer_len: prefetch_buffer.len(),
+                                    });
+                                }
+                                if has_audio
+                                    && audio_playhead_tx
+                                        .send(frame_number as f64 / fps_f64)
+                                        .is_err()
+                                {
+                                    break 'playback;
+                                }
+                                continue;
+                            }
+                        }
+                    } else {
+                        // IMPORTANT: Do NOT send frame_request_tx from these skip paths.
+                        // frame_request_tx resets the prefetch pipeline's next_prefetch_frame
+                        // via a watch channel. Since the prefetch is already decoding well ahead
+                        // (e.g. next_prefetch_frame=119), sending a lower frame number here
+                        // (e.g. 63) is interpreted as a backward seek, which clears ALL in-flight
+                        // decode tasks via `in_flight = FuturesUnordered::new()`. This creates a
+                        // cascading failure: dropped decode tasks create more gaps → more skips
+                        // → more resets → progressively worse playback. The prefetch already
+                        // tracks playback position via playback_position_tx/rx.
+                        //
+                        // Note: the overshoot skip (above) and clock-drift skip (below) DO still
+                        // send frame_request_tx because those advance frame_number forward from
+                        // the playback clock, which the prefetch correctly treats as demand for
+                        // higher frames. These buffer-gap skips are different — the frame_number
+                        // we'd send is always BEHIND the prefetch's next_prefetch_frame.
+                        //
+                        // Before jumping, drain all available frames from the rx channel. The
+                        // regular drain budget of 16 per iteration can miss frames that arrived
+                        // between the drain and the buffer check. This protects both the
+                        // jump-to-min path and the +1 fallback path below.
+                        let late_drain_limit = prefetch_frame_limit
+                            .load(Ordering::Relaxed)
+                            .saturating_add(PREFETCH_CHANNEL_SIZE);
+                        while prefetch_buffer.len() < late_drain_limit {
+                            match receive_prefetched_frame(
+                                &prefetch_rx,
+                                seek_generation,
+                                Duration::ZERO,
+                            ) {
+                                Ok(p) => {
+                                    if p.frame_number >= frame_number {
+                                        observe_prefetched_frame(
+                                            &p,
+                                            &mut largest_prefetched_frame_bytes,
+                                        );
+                                        prefetch_buffer.push_back(p);
+                                    }
+                                }
+                                Err(_) => break,
+                            }
+                        }
+
+                        if let Some(late_idx) = prefetch_buffer
+                            .iter()
+                            .position(|p| p.frame_number == frame_number)
+                        {
+                            frame_source = PlaybackFrameSource::LateDrain;
+                            let prefetched = prefetch_buffer.remove(late_idx).unwrap();
+                            prefetch_hits += 1;
+                            Some(prefetched.into_cached())
+                        } else {
+                            let min_buffered = prefetch_buffer.iter().map(|p| p.frame_number).min();
+                            if let Some(next_available_frame) = min_buffered
+                                && next_available_frame > frame_number
+                            {
+                                let jumped = next_available_frame - frame_number;
+                                let skipped_from = frame_number;
+                                frame_number = next_available_frame;
+                                total_frames_skipped += jumped as u64;
+                                starvation_skips += jumped as u64;
+                                boost_until = Some(Instant::now() + BOOST_CLEAN_WINDOW);
+                                let _ = playback_position_tx.send(frame_number);
+                                if let Some(telemetry) = &self.telemetry {
+                                    telemetry.emit(PlaybackTelemetryEvent::FrameSkipped {
+                                        frame_number: skipped_from,
+                                        skipped: jumped,
+                                        reason: PlaybackSkipReason::PrefetchGap,
+                                        prefetch_buffer_len: prefetch_buffer.len(),
+                                    });
+                                }
+                                if has_audio
+                                    && audio_playhead_tx
+                                        .send(frame_number as f64 / fps_f64)
+                                        .is_err()
+                                {
+                                    break 'playback;
+                                }
+                                continue;
+                            }
+                            let skipped_from = frame_number;
+                            frame_number = frame_number.saturating_add(1);
+                            total_frames_skipped += 1;
+                            starvation_skips += 1;
+                            boost_until = Some(Instant::now() + BOOST_CLEAN_WINDOW);
+                            let _ = playback_position_tx.send(frame_number);
+                            if let Some(telemetry) = &self.telemetry {
+                                telemetry.emit(PlaybackTelemetryEvent::FrameSkipped {
+                                    frame_number: skipped_from,
+                                    skipped: 1,
+                                    reason: PlaybackSkipReason::PrefetchGap,
+                                    prefetch_buffer_len: prefetch_buffer.len(),
+                                });
+                            }
+                            if has_audio
+                                && audio_playhead_tx
+                                    .send(frame_number as f64 / fps_f64)
+                                    .is_err()
+                            {
+                                break 'playback;
+                            }
+                            continue;
+                        }
+                    }
+                };
+                let frame_acquire_duration = frame_acquire_start.elapsed();
+
+                if let Some((segment_frames, segment_index, transition)) = segment_frames_opt {
+                    let Some(segment_media) = self.segment_medias.get(segment_index as usize)
+                    else {
+                        frame_number = frame_number.saturating_add(1);
+                        continue;
+                    };
+
+                    if !was_cached {
+                        frame_cache.insert(
+                            frame_number,
+                            Arc::clone(&segment_frames),
+                            segment_index,
+                            transition.as_ref().map(
+                                |(frames, transition_index, kind, progress)| {
+                                    (Arc::clone(frames), *transition_index, *kind, *progress)
+                                },
+                            ),
+                        );
+                    }
+
+                    let zoom_until = (frame_number as f32 + 1.0) / fps as f32;
+                    if let Some(timeline) = zoom_timelines.get_mut(segment_index as usize) {
+                        timeline.ensure_precomputed_until(zoom_until);
+                    }
+                    if let Some(timeline) = outgoing_zoom_timelines.get_mut(segment_index as usize)
+                    {
+                        timeline.ensure_precomputed_until(zoom_until);
+                    }
+                    let zoom_timeline = zoom_timelines.get(segment_index as usize);
+
+                    let empty_timeline;
+                    let zoom_ref = match zoom_timeline {
+                        Some(timeline) => timeline,
+                        None => {
+                            empty_timeline = ZoomTransformTimeline::new(
+                                &[],
+                                None,
+                                &segment_media.cursor,
+                                cached_project.screen_movement_spring,
+                                duration,
+                                None,
+                            );
+                            &empty_timeline
+                        }
+                    };
+
+                    let precomputed_cursor = &cursor_timelines[segment_index as usize];
+
+                    let uniforms_start = Instant::now();
+                    let uniforms = ProjectUniforms::new_with_precomputed_cursor(
+                        &self.render_constants,
+                        &cached_project,
+                        frame_number,
+                        fps,
+                        resolution_base,
+                        &segment_media.cursor,
+                        &segment_frames,
+                        duration,
+                        zoom_ref,
+                        precomputed_cursor,
+                    );
+                    let uniforms_duration = uniforms_start.elapsed();
+                    let submit_start = Instant::now();
+                    let submitted_frame_number = frame_number;
+                    if let Some((outgoing_frames, outgoing_index, kind, progress)) = transition {
+                        let outgoing_media = &self.segment_medias[outgoing_index as usize];
+                        if let Some(timeline) =
+                            outgoing_zoom_timelines.get_mut(outgoing_index as usize)
+                        {
+                            timeline.ensure_precomputed_until(zoom_until);
+                        }
+                        let outgoing_uniforms = ProjectUniforms::new_with_precomputed_cursor(
+                            &self.render_constants,
+                            &cached_project,
+                            frame_number,
+                            fps,
+                            resolution_base,
+                            &outgoing_media.cursor,
+                            &outgoing_frames,
+                            duration,
+                            &outgoing_zoom_timelines[outgoing_index as usize],
+                            &cursor_timelines[outgoing_index as usize],
+                        );
+                        self.renderer.render_transition_frame(
+                            editor::RendererTransitionInput {
+                                segment_frames: Arc::unwrap_or_clone(outgoing_frames),
+                                uniforms: outgoing_uniforms,
+                                cursor: outgoing_media.cursor.clone(),
+                            },
+                            editor::RendererTransitionInput {
+                                segment_frames: Arc::unwrap_or_clone(segment_frames),
+                                uniforms,
+                                cursor: segment_media.cursor.clone(),
+                            },
+                            kind,
+                            progress,
+                        );
+                    } else {
+                        self.renderer.render_frame(
+                            Arc::unwrap_or_clone(segment_frames),
+                            uniforms,
+                            segment_media.cursor.clone(),
+                        );
+                    }
+                    let submit_duration = submit_start.elapsed();
+
+                    if let Some(telemetry) = &self.telemetry {
+                        telemetry.emit(PlaybackTelemetryEvent::FrameSubmitted {
+                            frame_number: submitted_frame_number,
+                            source: frame_source,
+                            schedule_overshoot: overshoot,
+                            frame_acquire_duration,
+                            uniforms_duration,
+                            submit_duration,
+                            prefetch_buffer_len: prefetch_buffer.len(),
+                            total_frames_skipped,
+                        });
+                    }
+
+                    total_frames_rendered += 1;
+                }
+
+                if last_stats_time.elapsed() >= stats_interval {
+                    // Rate over the reporting window, not since `start`: a live
+                    // seek re-anchors `start`, so a lifetime average would read
+                    // thousands of fps right after a scrub.
+                    let window_secs = last_stats_time.elapsed().as_secs_f64().max(0.001);
+                    let effective_fps = total_frames_rendered.saturating_sub(frames_at_last_stats)
+                        as f64
+                        / window_secs;
+                    frames_at_last_stats = total_frames_rendered;
+                    let buffer_len = prefetch_buffer.len();
+                    info!(
+                        effective_fps = format!("{:.1}", effective_fps),
+                        total_rendered = total_frames_rendered,
+                        total_skipped = total_frames_skipped,
+                        starved = starvation_skips,
+                        cache_hits = cache_hits,
+                        prefetch_hits = prefetch_hits,
+                        sync_decodes = sync_decodes,
+                        prefetch_buffer = buffer_len,
+                        prefetch_limit = prefetch_frame_limit.load(Ordering::Relaxed),
+                        "Playback stats"
+                    );
+                    last_stats_time = Instant::now();
+                }
+
+                event_tx.send(PlaybackEvent::Frame(frame_number)).ok();
+
+                frame_number = frame_number.saturating_add(1);
+                let _ = playback_position_tx.send(frame_number);
+                if has_audio
+                    && audio_playhead_tx
+                        .send(frame_number as f64 / fps_f64)
+                        .is_err()
+                {
+                    break 'playback;
+                }
+
+                let expected_frame =
+                    clock_anchor_frame + (start.elapsed().as_secs_f64() * fps_f64).floor() as u32;
+
+                if frame_number < expected_frame {
+                    let frames_behind = expected_frame - frame_number;
+
+                    if frames_behind <= 2 {
+                        continue;
+                    }
+
+                    let skipped = frames_behind;
+                    let skipped_from = frame_number;
+                    frame_number += skipped;
+                    total_frames_skipped += skipped as u64;
+
+                    while prefetch_buffer
+                        .front()
+                        .is_some_and(|f| f.frame_number < frame_number)
+                    {
+                        prefetch_buffer.pop_front();
+                    }
+                    frame_cache.evict_far_from(
+                        frame_number,
+                        prefetch_frame_limit.load(Ordering::Relaxed) as u32,
+                    );
+                    let _ = frame_request_tx.send((seek_generation, frame_number));
+                    let _ = playback_position_tx.send(frame_number);
+                    if let Some(telemetry) = &self.telemetry {
+                        telemetry.emit(PlaybackTelemetryEvent::FrameSkipped {
+                            frame_number: skipped_from,
+                            skipped,
+                            reason: PlaybackSkipReason::ClockDrift,
+                            prefetch_buffer_len: prefetch_buffer.len(),
+                        });
+                    }
+                    if has_audio
+                        && audio_playhead_tx
+                            .send(frame_number as f64 / fps_f64)
+                            .is_err()
+                    {
+                        break 'playback;
+                    }
+                }
+            }
+
+            if let Some(generation) = audio_generation {
+                self.audio_output.stop_playback(generation);
+            }
+
+            stop_tx.send(true).ok();
+
+            event_tx.send(PlaybackEvent::Stop).ok();
+        };
+
+        std::thread::Builder::new()
+            .name("cap-playback".into())
+            .spawn(playback_body)
+            .expect("failed to spawn playback thread");
+
+        Ok(handle)
+    }
+}
+
+impl PlaybackHandle {
+    pub fn stop(&self) {
+        self.stop_tx.send(true).ok();
+    }
+
+    /// Seek the running playback in place: no teardown, no warmup, no audio
+    /// re-attach. Returns false once the playback thread is gone, which is the
+    /// caller's cue to fall back to a full restart.
+    pub fn seek(&self, frame: u32) -> bool {
+        let generation = self.seek_generation.fetch_add(1, Ordering::Relaxed) + 1;
+        self.seek_tx.send((generation, frame)).is_ok()
+    }
+
+    pub async fn receive_event(&mut self) -> watch::Ref<'_, PlaybackEvent> {
+        self.event_rx.changed().await.ok();
+        self.event_rx.borrow_and_update()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn decoded_frames(bytes: usize) -> DecodedSegmentFrames {
+        DecodedSegmentFrames {
+            screen_frame: Some(DecodedFrame::new(vec![0; bytes], 1, 1)),
+            camera_frame: None,
+            segment_time: 0.0,
+            recording_time: 0.0,
+            segment_has_camera: false,
+        }
+    }
+
+    fn prefetched_frame(seek_generation: u64, frame_number: u32) -> PrefetchedFrame {
+        PrefetchedFrame {
+            seek_generation,
+            frame_number,
+            segment_frames: decoded_frames(4),
+            segment_index: 0,
+            transition: None,
+        }
+    }
+
+    #[test]
+    fn backward_seek_discards_queued_frames_from_the_previous_generation() {
+        let (sender, receiver) = std_mpsc::sync_channel(4);
+        for (generation, frame) in [(1, 3000), (1, 480), (2, 480), (2, 481)] {
+            assert!(sender.send(prefetched_frame(generation, frame)).is_ok());
+        }
+
+        let target = receive_prefetched_frame(&receiver, 2, Duration::ZERO).unwrap();
+        assert_eq!(target.frame_number, 480);
+        assert_eq!(target.seek_generation, 2);
+        let next = receive_prefetched_frame(&receiver, 2, Duration::ZERO).unwrap();
+        assert_eq!(next.frame_number, 481);
+    }
+
+    #[test]
+    fn repeated_seeks_to_the_same_frame_require_the_latest_generation() {
+        let (sender, receiver) = std_mpsc::sync_channel(3);
+        for generation in 0..3 {
+            assert!(sender.send(prefetched_frame(generation, 480)).is_ok());
+        }
+
+        let target = receive_prefetched_frame(&receiver, 2, Duration::ZERO).unwrap();
+        assert_eq!(target.seek_generation, 2);
+        assert_eq!(target.frame_number, 480);
+    }
+
+    #[test]
+    fn stale_prefetch_frames_do_not_hide_timeout_or_disconnection() {
+        let (sender, receiver) = std_mpsc::sync_channel(1);
+        assert!(sender.send(prefetched_frame(1, 3000)).is_ok());
+        assert!(matches!(
+            receive_prefetched_frame(&receiver, 2, Duration::ZERO),
+            Err(std_mpsc::RecvTimeoutError::Timeout)
+        ));
+
+        assert!(sender.send(prefetched_frame(1, 3001)).is_ok());
+        drop(sender);
+        assert!(matches!(
+            receive_prefetched_frame(&receiver, 2, Duration::ZERO),
+            Err(std_mpsc::RecvTimeoutError::Disconnected)
+        ));
+    }
+
+    #[tokio::test]
+    async fn buffering_retries_preserve_in_flight_decodes() {
+        let (sender, receiver) = tokio::sync::oneshot::channel();
+        let mut in_flight = FuturesUnordered::new();
+        in_flight.push(async move { receiver.await.unwrap() });
+
+        for requested in [480, 481, 482] {
+            if should_reset_prefetch(2, 484, 2, requested, !in_flight.is_empty()) {
+                in_flight = FuturesUnordered::new();
+            }
+        }
+
+        assert!(sender.send(483).is_ok());
+        assert_eq!(in_flight.next().await, Some(483));
+    }
+
+    #[test]
+    fn prefetch_retries_recover_when_idle_and_new_seeks_always_reset() {
+        assert!(should_reset_prefetch(2, 484, 2, 480, false));
+        assert!(should_reset_prefetch(2, 484, 2, 600, true));
+        assert!(!should_reset_prefetch(2, 484, 2, 484, false));
+        for requested in [480, 484, 600] {
+            assert!(should_reset_prefetch(2, 484, 3, requested, true));
+        }
+    }
+
+    #[test]
+    fn timeline_music_enables_audio_playback_without_recorded_audio() {
+        assert!(has_playback_audio(&[], true));
+        assert!(!has_playback_audio(&[], false));
+    }
+
+    #[test]
+    fn prefetch_limit_tracks_decoded_frame_memory() {
+        assert_eq!(prefetch_frame_limit(0), MAX_PREFETCH_BUFFER_SIZE);
+        assert_eq!(
+            prefetch_frame_limit(4 * 1024 * 1024),
+            MAX_PREFETCH_BUFFER_BYTES / (4 * 1024 * 1024)
+        );
+        assert_eq!(
+            prefetch_frame_limit(MAX_PREFETCH_BUFFER_BYTES),
+            INITIAL_PREFETCH_BUFFER_SIZE
+        );
+    }
+
+    #[test]
+    fn frame_cache_evicts_oldest_frames_to_stay_within_byte_budget() {
+        let mut cache = FrameCache::new(10, 15);
+        cache.insert(1, Arc::new(decoded_frames(10)), 0, None);
+        cache.insert(2, Arc::new(decoded_frames(10)), 0, None);
+
+        assert_eq!(cache.cache.len(), 1);
+        assert_eq!(cache.cache_bytes, 10);
+        assert!(cache.get(1).is_none());
+        assert!(cache.get(2).is_some());
+    }
+
+    #[test]
+    fn frame_cache_keeps_one_oversized_frame() {
+        let mut cache = FrameCache::new(10, 4);
+        cache.insert(1, Arc::new(decoded_frames(10)), 0, None);
+
+        assert_eq!(cache.cache.len(), 1);
+        assert_eq!(cache.cache_bytes, 10);
+        assert!(cache.get(1).is_some());
+    }
+
+    #[test]
+    fn frame_cache_holds_multiple_frames_within_byte_budget() {
+        let retina_frame = 24 * 1024 * 1024;
+        let mut cache = FrameCache::new(FRAME_CACHE_SIZE, MAX_FRAME_CACHE_BYTES);
+        cache.insert(1, Arc::new(decoded_frames(retina_frame)), 0, None);
+        cache.insert(2, Arc::new(decoded_frames(retina_frame)), 0, None);
+        assert!(cache.get(1).is_some());
+        assert!(cache.get(2).is_some());
+
+        cache.insert(3, Arc::new(decoded_frames(retina_frame)), 0, None);
+        assert_eq!(cache.cache.len(), 2);
+        assert!(cache.cache_bytes <= MAX_FRAME_CACHE_BYTES);
+        assert!(cache.get(3).is_some());
+    }
+
+    #[test]
+    fn boosted_limit_widens_and_never_shrinks_below_base() {
+        let retina_frame = 24 * 1024 * 1024;
+        let base = prefetch_frame_limit(retina_frame);
+        let boosted = boosted_prefetch_frame_limit(retina_frame);
+        assert_eq!(base, INITIAL_PREFETCH_BUFFER_SIZE);
+        assert!(boosted > base);
+        assert!(boosted <= base * 2);
+
+        let small_frame = 2 * 1024 * 1024;
+        assert!(boosted_prefetch_frame_limit(small_frame) >= prefetch_frame_limit(small_frame));
+        assert!(boosted_prefetch_frame_limit(small_frame) <= MAX_PREFETCH_BUFFER_SIZE);
+        assert_eq!(boosted_prefetch_frame_limit(0), prefetch_frame_limit(0));
+    }
+
+    #[test]
+    fn frame_cache_accounts_for_count_based_eviction() {
+        let mut cache = FrameCache::new(2, usize::MAX);
+        cache.insert(1, Arc::new(decoded_frames(10)), 0, None);
+        cache.insert(2, Arc::new(decoded_frames(10)), 0, None);
+        cache.insert(3, Arc::new(decoded_frames(10)), 0, None);
+
+        assert_eq!(cache.cache.len(), 2);
+        assert_eq!(cache.cache_bytes, 20);
+        assert!(cache.get(1).is_none());
+    }
+}

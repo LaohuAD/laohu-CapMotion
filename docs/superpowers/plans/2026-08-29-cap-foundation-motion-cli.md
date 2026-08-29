@@ -394,7 +394,7 @@ assert_eq!(json["segment"]["start"], 12.5);
 Run:
 
 ```bash
-cargo test -p cap-cli --test cli motion_ -- --nocapture
+cargo test -p cap --test cli motion_ -- --nocapture
 ```
 
 Expected: FAIL because the `motion` command does not exist.
@@ -437,8 +437,8 @@ Run:
 
 ```bash
 cargo fmt --all
-cargo test -p cap-cli --test cli motion_ -- --nocapture
-cargo check -p cap-cli
+cargo test -p cap --test cli motion_ -- --nocapture
+cargo check -p cap
 git add apps/cli
 git commit -m "feat: add revision safe motion CLI"
 ```
@@ -473,8 +473,8 @@ Run:
 ```bash
 cargo fmt --all -- --check
 cargo test -p cap-project
-cargo test -p cap-cli --test cli
-cargo check -p cap-cli
+cargo test -p cap --test cli
+cargo check -p cap
 git diff --check
 ```
 

@@ -1,27 +1,64 @@
-# Contributing
+# Cap Contributor Guide
 
-感谢你改进 laohu-Voice2MotionFrameCut。本项目优先接受能够提升口播内容完整度、剪辑可追溯性、字幕准确性和动画解释力的改动。
+## Introduction
 
-## 提交前
+### What is Cap?
 
-1. 先说明问题发生在哪个阶段：ASR、粗剪、精剪、字幕、Remotion 或 HyperFrames。
-2. 对剪辑逻辑改动，提供不含隐私媒体的最小 EDL / JSON 示例。
-3. 对动画组件改动，说明观众问题、信息结构、输入 schema 和适用边界。
-4. 不要提交真实视频、音频、字幕、API 凭据、用户工程或第三方私有素材。
+Cap is an open source and privacy focused alternative to Loom. It's a video messaging tool that allows you to record, edit and share videos in seconds.
 
-## 本地检查
+The development of Cap is still in its early stages, so please bare with us as we build out this guide.
 
-```bash
-find .agents 模板/video-editing -name '*.mjs' -print0 | xargs -0 -n1 node --check
-cd 模板/remotion-assets/workspace
-npm ci
-npm run typecheck
-npm test
-```
+### What is this guide?
 
-## Pull Request
+This guide is for anyone who wants to contribute to Cap. It's a work in progress, and will be updated regularly.
 
-- 一个 PR 只解决一个清晰问题。
-- 写清行为变化、验证方式和兼容风险。
-- 修复剪辑问题时，优先增加可复现的测试或 EDL 示例。
-- 新增组件家族前，先证明它的信息结构无法由现有家族的 mode 或 preset 表达。
+### How can I contribute?
+
+There are many ways to contribute to Cap. You can:
+
+- [Report a bug](https://github.com/CapSoftware/cap/issues/new)
+- [Suggest a feature (via Discord)](https://discord.com/invite/y8gdQ3WRN3)
+- Submit a PR
+
+## Running Cap
+
+### Development Requirements
+
+Before anything else, make sure you have the following installed:
+
+- Node Version 20+
+- Rust 1.88.0+
+- pnpm 10.5.2
+- Docker ([OrbStack](https://orbstack.dev/) recommended)
+
+### General Setup
+
+Run `pnpm install`, then run `pnpm env-setup` to generate a `.env` file configured for your environment.
+It will ask you which apps you intend to run, whether you'd like to use Docker to run S3 (MinIO) and MySQL locally,
+and allow you to provide overrides as needed.
+
+Then run `pnpm cap-setup` to install native dependencies such as FFmpeg.
+
+On Windows, llvm, clang, and VCPKG must be installed.
+On MacOS, cmake must be installed.
+`pnpm cap-setup` does not yet install these dependencies for you.
+
+To run both `@cap/desktop` and `@cap/web` together, use `pnpm dev`.
+To run only one of them, use `pnpm dev:desktop` or `pnpm dev:web` respectively.
+
+### `@cap/desktop` (desktop app)
+
+When running `@cap/desktop` from a terminal on macOS,
+you will need to grant permissions (screen recording, microphone, etc.) to the terminal, not the Cap app.
+For example, if you run `pnpm dev:desktop` in the macOS `Terminal.app`,
+you will need to grant permissions to it instead of `Cap - Development.app`.
+
+#### Where are my recordings stored?
+
+You can find your recordings at `~/Library/Application Support/so.cap.desktop.dev/recordings` on macOS,
+and `%programfiles%/so.cap.desktop.dev/recordings` on Windows.
+
+### `@cap/web` (cap.so website)
+
+When running `pnpm dev` or `pnpm dev:web`, a MySQL database and MinIO S3 server will also be using Docker.
+If you want to _only_ run the `@cap/web` NextJS app, `cd` into `./apps/web` and run `pnpm dev`.

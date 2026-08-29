@@ -66,5 +66,5 @@ description: 执行项目固定流程“字幕的烧录”：把已确认的校�
 2. 全程或样片完整解码，确认没有坏帧、时间戳错误和意外字幕流。
 3. 抽取有字幕的静帧，检查字体、描边、阴影、上下层级、字幕安全区、中文断行和英文宽度；标准 16:9 素材还要确认没有被错误缩小或新增黑边。
 4. 检查字幕时码不越界、单调递增，并抽查开头、中段、结尾及全部专名修改点。
-5. 将展示 SRT 与原始词级时间轴做全量覆盖率检查：运行 `node 模板/video-editing/validate-word-coverage.mjs --raw 成片.raw.json --srt 展示字幕.srt`，要求 `uncoveredWordCount` 为 `0`。发现“有词级人声、无任何展示字幕覆盖”的区间，必须回到时间映射修正，不能只抽查字幕文本。
+5. 将展示 SRT 与原始词级时间轴做全量覆盖率检查：运行 `node workflows/laohu-video/模板/video-editing/validate-word-coverage.mjs --raw 成片.raw.json --srt 展示字幕.srt`，要求 `uncoveredWordCount` 为 `0`。发现“有词级人声、无任何展示字幕覆盖”的区间，必须回到时间映射修正，不能只抽查字幕文本。
 6. 只有验证通过后才能报告完成；如果仍在等待用户确认样式，要明确说明尚未渲染全片。

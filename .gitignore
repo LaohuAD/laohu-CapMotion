@@ -1,44 +1,96 @@
-.DS_Store
-Thumbs.db
+# Logs
+logs
+*.log
 .worktrees/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.deepsec
 
-# Local credentials and environment files
+node_modules
+apps/cli/skill/cap-demo/node_modules/
+dist
+dist-ssr
+*.local
 .env
-.env.*
-!.env.example
-*.pem
-*.key
+.env.production
+.env.development
+.env.test
+target
+target-agent
+target-phase8
+outputs
+.cursorrules
+.github/hooks
 
-# Private workspace material
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.turbo
+bun.lock
+pnpm-lock.yaml
+.zed
+.output
+.vinxi
+native-deps*
+apps/storybook/storybook-static
+.tinyb
+
+**/.tinyb
+
+*.tsbuildinfo
+.cargo/config.toml
+tauri.windows.conf.json
+tauri.macos.conf.json
+tauri.linux.conf.json
+.vercel
+
+# sst
+.sst
+
+# Cursor
+.cursor
+.env*.local
+.docs/
+.claude/
+.claude/settings.local.json
+
+# Release backfill scripts (one-time use)
+scripts/backfill-releases.sh
+scripts/update-github-releases.sh
+scripts/releases-backfill-data.txt
+
+# SEO agent state (machine-local, contains sensitive ranking data)
+/seo/
+scripts/seo/
+/.growth-agent/
+
+# OpenCode commands (local)
+.opencode/
+analysis/
+analysis/plans/
+.ralphy
+tmp/
+
+# Local Laohu workflow state and private media
 AGENTS.md
 LOG.md
 skills-lock.json
-作品/
-知识沉淀/
-参考项目/
-归档/
 workflows/laohu-video/作品/
 workflows/laohu-video/知识沉淀/
 workflows/laohu-video/参考资料/
 workflows/laohu-video/归档/
 
-# Vendored skills are installed from their upstream repositories
-.agents/skills/remotion-*/
-
-# Node / Remotion generated files
-node_modules/
-**/node_modules/
-**/.cache/
-**/.remotion/
-**/dist/
-**/out/
-**/renders/
-**/.thumbnails/
-
-# Local-only Remotion notes; the reusable workspace is public
-模板/remotion-assets/README.md
-
-# Media, transcripts, edit decisions, and render outputs
 *.mp4
 *.mov
 *.mkv
@@ -54,10 +106,3 @@ node_modules/
 *.vtt
 *.edl.json
 *.raw.json
-
-# Editor and OS files
-.idea/
-.vscode/
-*.swp
-*.tmp
-*.log
