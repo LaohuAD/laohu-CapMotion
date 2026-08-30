@@ -889,11 +889,24 @@ impl ZoomTransformTimeline {
                         } else {
                             default_horizon
                         };
-                        let framing_cursor =
+                        let future_cursor =
                             map_cursor(recording_secs as f32 + horizon).unwrap_or(cursor);
+                        let default_max_lead =
+                            cap_project::ManualFollowConfig::default().max_lead_ratio;
+                        let max_lead_ratio =
+                            if config.max_lead_ratio.is_finite() && config.max_lead_ratio >= 0.0 {
+                                config.max_lead_ratio
+                            } else {
+                                default_max_lead
+                            };
+                        let max_lead = (1.0 / amount.max(1.0)) * f64::from(max_lead_ratio);
+                        let framing_cursor = (
+                            cursor.0 + (future_cursor.0 - cursor.0).clamp(-max_lead, max_lead),
+                            cursor.1 + (future_cursor.1 - cursor.1).clamp(-max_lead, max_lead),
+                        );
                         let cursor_speed = if horizon > f32::EPSILON {
-                            let dx = framing_cursor.0 - cursor.0;
-                            let dy = framing_cursor.1 - cursor.1;
+                            let dx = future_cursor.0 - cursor.0;
+                            let dy = future_cursor.1 - cursor.1;
                             ((dx * dx + dy * dy).sqrt() / f64::from(horizon)) as f32
                         } else {
                             0.0
@@ -1111,6 +1124,37 @@ mod tests {
 
         assert!(targets.center.x.is_finite());
         assert!(targets.center.x > 0.5);
+    }
+
+    #[test]
+    fn manual_follow_future_cursor_lead_is_bounded() {
+        let cursor = CursorEvents {
+            moves: vec![
+                move_event(0.0, 0.5, 0.5),
+                move_event(900.0, 0.5, 0.5),
+                move_event(1_000.0, 1.0, 0.5),
+            ],
+            clicks: vec![],
+        };
+        let segments = vec![manual_follow_segment(0.0, 2.0, 2.0, 0.5, 0.5)];
+        let timeline = timeline_for(&segments, &cursor, 2.0);
+        let mut manual_follow = None;
+
+        let targets = timeline.targets_at(0.9, XY::new(0.5, 0.5), &mut manual_follow);
+        let config = cap_project::ManualFollowConfig::default();
+        let bounded_future_x = 0.5 + (1.0 / 2.0) * config.max_lead_ratio;
+        let expected_source_center = advance_manual_follow(
+            (0.5, 0.5),
+            (0.5, 0.5),
+            (bounded_future_x, 0.5),
+            5.0,
+            2.0,
+            (STEP_MS / 1000.0) as f32,
+            config,
+        );
+        let expected_travel_x = manual_follow_center_to_travel(expected_source_center.0, 2.0);
+
+        assert!((targets.center.x - expected_travel_x).abs() < 1e-6);
     }
 
     /// Max |value delta| and |slope delta| between adjacent 8ms sample
