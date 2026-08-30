@@ -3,6 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "pnpm -w cap-setup && pnpm build:sidecar && pnpm build:gpui:dev && dotenv -e ../../.env -- pnpm run preparescript && dotenv -e ../../.env -- node ../../scripts/dev-desktop.mjs",
+		"dev:tauri": "pnpm -w cap-setup && pnpm build:sidecar && dotenv -e ../../.env -- pnpm run preparescript && dotenv -e ../../.env -- pnpm tauri dev",
 		"build:tauri": "pnpm build:sidecar && pnpm build:gpui && dotenv -e ../../.env -- pnpm run preparescript --release && node ../../scripts/verify-gpui-release-inputs.mjs && dotenv -e ../../.env -- pnpm tauri build",
 		"build:sidecar": "node ../../scripts/build-desktop-binaries.mjs",
 		"build:gpui": "node ../../scripts/run-gpui-build.mjs release",
