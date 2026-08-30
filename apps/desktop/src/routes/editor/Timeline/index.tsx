@@ -1729,11 +1729,11 @@ function TrackRow(props: {
 							props.onCollapse?.();
 						}}
 						onMouseDown={(event) => event.stopPropagation()}
-						title={text("Collapse track")}
+						title={text("Collapse Track")}
 					>
 						<IconCapChevronDown class="size-3.5 rotate-180" />
 						<span class="text-[0.625rem] leading-none font-medium">
-							{text("Collapse track")}
+							{text("Collapse Track")}
 						</span>
 					</button>
 				</Show>

@@ -13,6 +13,25 @@ describe("legacy user-interface localization", () => {
 		expect(translateLiteral("en", "Crop Video")).toBe("Crop Video");
 	});
 
+	it("translates recording source audio controls", () => {
+		expect(translateLiteral("zh-CN", "Microphone")).toBe("麦克风");
+		expect(translateLiteral("zh-CN", "System Audio")).toBe("系统声音");
+		expect(translateLiteral("zh-CN", "Collapse Track")).toBe("收起轨道");
+		expect(
+			translateLiteral(
+				"zh-CN",
+				"Expand the recorded microphone audio from Video.",
+			),
+		).toBe("从视频轨道中展开已录制的麦克风声音");
+		expect(
+			translateLiteral("zh-CN", "Expand the recorded system audio from Video."),
+		).toBe("从视频轨道中展开已录制的系统声音");
+		expect(translateLiteral("zh-CN", "Mute microphone")).toBe("将麦克风静音");
+		expect(translateLiteral("zh-CN", "Unmute microphone")).toBe(
+			"取消麦克风静音",
+		);
+	});
+
 	it("preserves technical and user-authored values that are not UI copy", () => {
 		expect(translateLiteral("zh-CN", "macOS")).toBe("macOS");
 		expect(translateLiteral("zh-CN", "pnpm tauri dev")).toBe("pnpm tauri dev");

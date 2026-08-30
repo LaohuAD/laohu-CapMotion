@@ -76,6 +76,9 @@ const zhCN: Record<string, string> = {
 	"Layer captions, audio, zooms and more onto your timeline.":
 		"在时间线上添加字幕、音频、放大等轨道",
 	Clip: "视频片段",
+	Microphone: "麦克风",
+	"System Audio": "系统声音",
+	"Collapse Track": "收起轨道",
 	Motion: "动画",
 	Zoom: "放大",
 	Keyboard: "键盘",
@@ -84,6 +87,14 @@ const zhCN: Record<string, string> = {
 	Audio: "音频",
 	Scene: "场景",
 	"Your recorded screen footage.": "录制的屏幕画面",
+	"Expand the recorded microphone audio from Video.":
+		"从视频轨道中展开已录制的麦克风声音",
+	"Expand the recorded system audio from Video.":
+		"从视频轨道中展开已录制的系统声音",
+	"No microphone audio is available or it is already expanded.":
+		"没有可用的麦克风声音，或该轨道已经展开",
+	"No system audio is available or it is already expanded.":
+		"没有可用的系统声音，或该轨道已经展开",
 	"Agent-authored animation layers and reusable templates.":
 		"由 Agent 制作的动画层和可复用模板",
 	"Smooth zoom-ins that follow the action.": "跟随操作的平滑放大效果",
