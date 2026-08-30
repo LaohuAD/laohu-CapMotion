@@ -1,7 +1,7 @@
 use std::{collections::HashMap, path::Path, sync::Arc};
 
 use cap_audio::AudioData;
-use cap_project::ProjectConfiguration;
+use cap_project::{ProjectConfiguration, SourceAudioKind};
 use tracing::warn;
 
 use crate::{
@@ -135,6 +135,7 @@ pub async fn get_audio_segments(segments: &[SegmentMedia]) -> Vec<AudioSegment> 
                         },
                         |o| o.mic,
                     )
+                    .with_source_kind(SourceAudioKind::Microphone)
                     .with_timing_offset_secs(s.audio_timing_repair.mic_offset_secs)
                 }),
                 system_audio.map(|a| -> AudioSegmentTrack {
@@ -144,6 +145,7 @@ pub async fn get_audio_segments(segments: &[SegmentMedia]) -> Vec<AudioSegment> 
                         |_| cap_audio::StereoMode::Stereo,
                         |o| o.system_audio,
                     )
+                    .with_source_kind(SourceAudioKind::SystemAudio)
                     .with_timing_offset_secs(s.audio_timing_repair.system_audio_offset_secs)
                 }),
             ]

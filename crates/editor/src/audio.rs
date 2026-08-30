@@ -6,7 +6,7 @@ use cap_media::MediaError;
 use cap_media_info::AudioInfo;
 use cap_project::{
     AudioConfiguration, ClipOffsets, ClipSpeedAudioMode, ClipTransitionType, ProjectConfiguration,
-    TimelineConfiguration, TimelineFrameMapping, TimelineSource,
+    SourceAudioKind, TimelineConfiguration, TimelineFrameMapping, TimelineSource,
 };
 use ffmpeg::{
     ChannelLayout, Dictionary, filter, format as avformat, frame::Audio as FFAudio,
@@ -18,6 +18,7 @@ use ringbuf::{
 };
 use std::{
     collections::{HashMap, VecDeque},
+    hash::{DefaultHasher, Hash, Hasher},
     sync::{
         Arc,
         atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering},
@@ -60,6 +61,7 @@ pub struct AudioSegment {
 #[derive(Clone)]
 pub struct AudioSegmentTrack {
     data: Arc<AudioData>,
+    source_kind: SourceAudioKind,
     get_gain: fn(&AudioConfiguration) -> f32,
     get_stereo_mode: fn(&AudioConfiguration) -> StereoMode,
     get_offset: fn(&ClipOffsets) -> f32,
@@ -75,6 +77,7 @@ impl AudioSegmentTrack {
     ) -> Self {
         Self {
             data,
+            source_kind: SourceAudioKind::Microphone,
             get_gain,
             get_stereo_mode,
             get_offset,
@@ -87,8 +90,17 @@ impl AudioSegmentTrack {
         self
     }
 
+    pub fn with_source_kind(mut self, source_kind: SourceAudioKind) -> Self {
+        self.source_kind = source_kind;
+        self
+    }
+
     pub fn data(&self) -> &Arc<AudioData> {
         &self.data
+    }
+
+    pub fn source_kind(&self) -> SourceAudioKind {
+        self.source_kind
     }
 
     pub fn gain(&self, config: &AudioConfiguration) -> f32 {
@@ -124,6 +136,7 @@ struct SpeedAudioProcessorKey {
     mic_stereo_mode: u8,
     mic_offset_bits: u32,
     system_offset_bits: u32,
+    source_audio_mute_hash: u64,
 }
 
 struct SpeedAudioProcessorSlot {
@@ -549,6 +562,7 @@ impl AudioRenderer {
             mic_stereo_mode: project_stereo_mode_key(&project.audio.mic_stereo_mode),
             mic_offset_bits: offsets.mic.to_bits(),
             system_offset_bits: offsets.system_audio.to_bits(),
+            source_audio_mute_hash: source_audio_mute_hash(&project.audio),
         };
         let requested_source_sample = source.source_time * Self::SAMPLE_RATE as f64;
         self.speed_audio_use_counter = self.speed_audio_use_counter.saturating_add(1);
@@ -675,9 +689,11 @@ fn render_audio_data_chunk(
     }
 
     let samples = samples.min(max_samples - cursor.samples);
-    let track_datas = tracks
-        .iter()
-        .map(|track| AudioRendererTrack {
+    let mut rendered = 0;
+    let mut track_output = vec![0.0; samples * 2];
+    for track in tracks {
+        track_output.fill(0.0);
+        let track_data = AudioRendererTrack {
             data: track.data().as_ref(),
             gain: if project.audio.mute {
                 f32::NEG_INFINITY
@@ -691,10 +707,36 @@ fn render_audio_data_chunk(
             },
             stereo_mode: track.stereo_mode(&project.audio),
             offset: (track.offset(&offsets) * AudioRenderer::SAMPLE_RATE as f32).round() as isize,
-        })
-        .collect::<Vec<_>>();
+        };
+        let track_rendered = cap_audio::render_audio(
+            std::slice::from_ref(&track_data),
+            cursor.samples,
+            samples,
+            0,
+            &mut track_output,
+        );
+        rendered = rendered.max(track_rendered);
 
-    cap_audio::render_audio(&track_datas, cursor.samples, samples, out_offset, out)
+        for frame in 0..track_rendered {
+            let source_time = (cursor.samples + frame) as f64 / AudioRenderer::SAMPLE_RATE as f64;
+            if project
+                .audio
+                .source_is_muted(track.source_kind(), cursor.clip_index, source_time)
+            {
+                continue;
+            }
+
+            let target = out_offset + frame * 2;
+            out[target] += track_output[frame * 2];
+            out[target + 1] += track_output[frame * 2 + 1];
+        }
+    }
+
+    for sample in &mut out[out_offset..out_offset + rendered * 2] {
+        *sample = sample.clamp(-1.0, 1.0);
+    }
+
+    rendered
 }
 
 const SPEED_AUDIO_INPUT_BLOCK_SAMPLES: usize = 4_096;
@@ -706,6 +748,23 @@ fn project_stereo_mode_key(mode: &cap_project::StereoMode) -> u8 {
         cap_project::StereoMode::MonoL => 1,
         cap_project::StereoMode::MonoR => 2,
     }
+}
+
+fn source_audio_mute_hash(audio: &AudioConfiguration) -> u64 {
+    let mut hasher = DefaultHasher::new();
+    for kind in [SourceAudioKind::Microphone, SourceAudioKind::SystemAudio] {
+        match kind {
+            SourceAudioKind::Microphone => 0u8,
+            SourceAudioKind::SystemAudio => 1u8,
+        }
+        .hash(&mut hasher);
+        for range in &audio.source_track(kind).muted_ranges {
+            range.recording_clip.hash(&mut hasher);
+            range.start.to_bits().hash(&mut hasher);
+            range.end.to_bits().hash(&mut hasher);
+        }
+    }
+    hasher.finish()
 }
 
 fn speed_audio_processor_state(
@@ -1759,8 +1818,8 @@ fn spawn_progressive_render(
 mod tests {
     use super::*;
     use cap_project::{
-        ClipConfiguration, ClipTransition, ProjectConfiguration, TimelineConfiguration,
-        TimelineSegment,
+        ClipConfiguration, ClipTransition, ProjectConfiguration, SourceAudioKind,
+        TimelineConfiguration, TimelineSegment,
     };
     use std::{path::Path, sync::Arc};
     use tempfile::TempDir;
@@ -2280,6 +2339,57 @@ mod tests {
         (dir, AudioRenderer::new(data), project)
     }
 
+    fn dual_source_fixture() -> (TempDir, AudioRenderer, ProjectConfiguration) {
+        let _ = ffmpeg::init();
+
+        let dir = tempfile::tempdir().unwrap();
+        let microphone_path = dir.path().join("microphone.wav");
+        let system_audio_path = dir.path().join("system-audio.wav");
+        write_step_wav(&microphone_path, &[4000, 4000, 4000]);
+        write_step_wav(&system_audio_path, &[8000, 8000, 8000]);
+
+        let data = vec![AudioSegment {
+            tracks: vec![
+                AudioSegmentTrack::new(
+                    Arc::new(AudioData::from_file(&microphone_path).unwrap()),
+                    gain,
+                    stereo,
+                    no_offset,
+                )
+                .with_source_kind(SourceAudioKind::Microphone),
+                AudioSegmentTrack::new(
+                    Arc::new(AudioData::from_file(&system_audio_path).unwrap()),
+                    gain,
+                    stereo,
+                    no_offset,
+                )
+                .with_source_kind(SourceAudioKind::SystemAudio),
+            ],
+        }];
+
+        let project = ProjectConfiguration {
+            timeline: Some(TimelineConfiguration {
+                segments: vec![segment(0, 0.0, 3.0, 1.0)],
+                transitions: Vec::new(),
+                zoom_segments: Vec::new(),
+                scene_segments: Vec::new(),
+                mask_segments: Vec::new(),
+                text_segments: Vec::new(),
+                caption_segments: Vec::new(),
+                keyboard_segments: Vec::new(),
+                audio_segments: Vec::new(),
+                camera3d_segments: Vec::new(),
+            }),
+            clips: vec![ClipConfiguration {
+                index: 0,
+                ..Default::default()
+            }],
+            ..Default::default()
+        };
+
+        (dir, AudioRenderer::new(data), project)
+    }
+
     fn segment(recording_clip: u32, start: f64, end: f64, timescale: f64) -> TimelineSegment {
         TimelineSegment {
             recording_clip,
@@ -2336,6 +2446,34 @@ mod tests {
 
     fn expected(value: i16) -> f32 {
         value as f32 / 32768.0
+    }
+
+    #[test]
+    fn source_audio_microphone_range_mutes_only_microphone() {
+        let (_dir, mut renderer, mut project) = dual_source_fixture();
+        project
+            .audio
+            .mute_source_range(SourceAudioKind::Microphone, 0, 1.0, 2.0);
+
+        let stream = render_export_audio(&mut renderer, &project, 30, 90);
+
+        assert!((left_at_second(&stream, 0) - expected(12000)).abs() < 0.001);
+        assert!((left_at_second(&stream, 1) - expected(8000)).abs() < 0.001);
+        assert!((left_at_second(&stream, 2) - expected(12000)).abs() < 0.001);
+    }
+
+    #[test]
+    fn source_audio_system_range_mutes_only_system_audio() {
+        let (_dir, mut renderer, mut project) = dual_source_fixture();
+        project
+            .audio
+            .mute_source_range(SourceAudioKind::SystemAudio, 0, 1.0, 2.0);
+
+        let stream = render_export_audio(&mut renderer, &project, 30, 90);
+
+        assert!((left_at_second(&stream, 0) - expected(12000)).abs() < 0.001);
+        assert!((left_at_second(&stream, 1) - expected(4000)).abs() < 0.001);
+        assert!((left_at_second(&stream, 2) - expected(12000)).abs() < 0.001);
     }
 
     fn transition_fixture(
