@@ -100,6 +100,7 @@ import {
 	setMotion,
 } from "./three-d";
 import {
+	splitOverlaySegmentAtTime,
 	type TimelineEditCommand,
 	trimOverlaySegmentAtTime,
 } from "./timeline-commands";
@@ -492,30 +493,6 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 			);
 		};
 
-		const splitOverlayAtTime = <T extends { start: number; end: number }>(
-			segments: T[] | null | undefined,
-			index: number,
-			time: number,
-			minimumDuration: number,
-			createRight?: (segment: T) => T,
-		) => {
-			const segment = segments?.[index];
-			if (!segment) return false;
-			if (
-				time - segment.start < minimumDuration ||
-				segment.end - time < minimumDuration
-			)
-				return false;
-
-			const originalEnd = segment.end;
-			const right = createRight ? createRight(segment) : ({ ...segment } as T);
-			segment.end = time;
-			right.start = time;
-			right.end = originalEnd;
-			segments?.splice(index + 1, 0, right);
-			return true;
-		};
-
 		const projectActions = {
 			setClipTransition,
 			executeTimelineEditCommand: (
@@ -626,7 +603,7 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 									continue;
 								if (command === "splitAtCursor") {
 									didEdit =
-										splitOverlayAtTime(
+										splitOverlaySegmentAtTime(
 											segments,
 											index,
 											outputTime,

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
 	intersectingSelectedIndices,
 	resolveTimelineCommandTime,
+	splitOverlaySegmentAtTime,
 	trimOverlaySegmentAtTime,
 } from "./timeline-commands";
 
@@ -64,5 +65,25 @@ describe("timeline command resolution", () => {
 			false,
 		);
 		expect(segment).toEqual({ start: 1, end: 5 });
+	});
+
+	it("splits an overlay into adjacent left and right segments", () => {
+		const segments = [{ id: "left", start: 1, end: 7 }];
+		expect(
+			splitOverlaySegmentAtTime(segments, 0, 4, 0.5, (segment) => ({
+				...segment,
+				id: "right",
+			})),
+		).toBe(true);
+		expect(segments).toEqual([
+			{ id: "left", start: 1, end: 4 },
+			{ id: "right", start: 4, end: 7 },
+		]);
+	});
+
+	it("rejects a split that leaves either side below the minimum duration", () => {
+		const segments = [{ start: 1, end: 7 }];
+		expect(splitOverlaySegmentAtTime(segments, 0, 1.4, 0.5)).toBe(false);
+		expect(segments).toEqual([{ start: 1, end: 7 }]);
 	});
 });

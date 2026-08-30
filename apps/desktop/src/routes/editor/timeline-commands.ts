@@ -57,3 +57,29 @@ export function trimOverlaySegmentAtTime<T extends TrimmableOverlaySegment>(
 	if (typeof segment.fadeOut === "number") segment.fadeOut = 0;
 	return true;
 }
+
+export function splitOverlaySegmentAtTime<
+	T extends { start: number; end: number },
+>(
+	segments: T[] | null | undefined,
+	index: number,
+	time: number,
+	minimumDuration: number,
+	createRight?: (segment: T) => T,
+) {
+	const segment = segments?.[index];
+	if (!segment) return false;
+	if (
+		time - segment.start < minimumDuration ||
+		segment.end - time < minimumDuration
+	)
+		return false;
+
+	const originalEnd = segment.end;
+	const right = createRight ? createRight(segment) : ({ ...segment } as T);
+	segment.end = time;
+	right.start = time;
+	right.end = originalEnd;
+	segments?.splice(index + 1, 0, right);
+	return true;
+}
