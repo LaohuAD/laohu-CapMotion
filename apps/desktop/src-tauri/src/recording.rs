@@ -4080,26 +4080,6 @@ fn generate_zoom_segments_from_clicks_impl(
         .collect()
 }
 
-/// Generates zoom segments based on mouse click events during recording.
-/// Used during the recording completion process.
-pub fn generate_zoom_segments_from_clicks(
-    recording: &studio_recording::CompletedRecording,
-    recordings: &ProjectRecordingsMeta,
-    zoom_amount: f64,
-) -> Vec<ZoomSegment> {
-    // Build a temporary RecordingMeta so we can use the common implementation
-    let recording_meta = RecordingMeta {
-        platform: None,
-        project_path: recording.project_path.clone(),
-        pretty_name: String::new(),
-        sharing: None,
-        inner: RecordingMetaInner::Studio(Box::new(recording.meta.clone())),
-        upload: None,
-    };
-
-    generate_zoom_segments_for_project(&recording_meta, recordings, zoom_amount)
-}
-
 /// Generates zoom segments from clicks for an existing project.
 /// Used in the editor context where we have RecordingMeta.
 pub fn generate_zoom_segments_for_project(
@@ -4144,6 +4124,10 @@ pub fn generate_zoom_segments_for_project(
         recordings.duration(),
         zoom_amount,
     )
+}
+
+fn initial_recording_zoom_segments(manual_segments: &[ZoomSegment]) -> Vec<ZoomSegment> {
+    manual_segments.to_vec()
 }
 
 fn project_config_from_recording(
@@ -4218,21 +4202,8 @@ fn project_config_from_recording(
         })
         .collect::<Vec<_>>();
 
-    let auto_zoom_segments = if settings.auto_zoom_on_clicks {
-        generate_zoom_segments_from_clicks(
-            completed_recording,
-            recordings,
-            settings
-                .default_zoom_amount
-                .unwrap_or(DEFAULT_AUTO_ZOOM_AMOUNT),
-        )
-    } else {
-        Vec::new()
-    };
-    let zoom_segments = cap_project::merge_manual_zoom_segments(
-        auto_zoom_segments,
-        completed_recording.manual_zoom_segments.clone(),
-    );
+    let zoom_segments =
+        initial_recording_zoom_segments(&completed_recording.manual_zoom_segments);
 
     if should_enable_notch_overlay(
         capture_target,
@@ -4571,6 +4542,31 @@ async fn emit_recording_started_telemetry(app: &AppHandle, state_mtx: &MutableSt
 mod tests {
     use super::*;
     use tempfile::tempdir;
+
+    #[test]
+    fn recording_finalization_keeps_only_explicit_manual_zoom_segments() {
+        let manual = ZoomSegment {
+            start: 1.0,
+            end: 3.0,
+            amount: 2.0,
+            mode: ZoomMode::ManualFollow {
+                x: 0.5,
+                y: 0.5,
+                config: cap_project::ManualFollowConfig::default(),
+            },
+            glide_direction: GlideDirection::None,
+            glide_speed: 0.5,
+            instant_animation: false,
+            edge_snap_ratio: 0.25,
+        };
+
+        let result = initial_recording_zoom_segments(std::slice::from_ref(&manual));
+
+        assert_eq!(result.len(), 1);
+        assert_eq!(result[0].start, manual.start);
+        assert_eq!(result[0].end, manual.end);
+        assert!(matches!(result[0].mode, ZoomMode::ManualFollow { .. }));
+    }
 
     #[test]
     fn recording_session_clock_excludes_paused_time() {

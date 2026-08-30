@@ -180,7 +180,7 @@ export function ZoomTrack(props: {
 					items: [
 						{
 							id: "generateZoomSegments",
-							text: text("Generate zoom segments from clicks"),
+							text: text("Auto Zoom"),
 							action: handleGenerateZoomSegments,
 						},
 					],
@@ -306,24 +306,29 @@ export function ZoomTrack(props: {
 							}
 						>
 							<div
-								class="relative z-10 flex items-center gap-1"
+								class="relative z-10 flex items-center gap-2"
 								onMouseEnter={() => setIsHoveringGenerateZoomButton(true)}
 								onMouseLeave={() => setIsHoveringGenerateZoomButton(false)}
 								onMouseDown={(e) => e.stopPropagation()}
 							>
-								<Button
-									variant="gray"
-									size="md"
-									class="shadow-md border-gray-7 dark:border-gray-8 font-medium"
-									disabled={isGeneratingAutoZoom()}
-									onClick={() => {
-										void handleGenerateZoomSegments();
-									}}
-								>
-									{isGeneratingAutoZoom()
-										? text("Generating...")
-										: text("Click to generate zoom segments")}
-								</Button>
+								<div class="flex flex-col gap-0.5 items-start">
+									<Button
+										variant="gray"
+										size="md"
+										class="shadow-md border-gray-7 dark:border-gray-8 font-medium"
+										disabled={isGeneratingAutoZoom()}
+										onClick={() => {
+											void handleGenerateZoomSegments();
+										}}
+									>
+										{isGeneratingAutoZoom()
+											? text("Generating...")
+											: text("Auto Zoom")}
+									</Button>
+									<span class="text-xs text-gray-10">
+										{text("Generate editable zoom segments from recorded clicks")}
+									</span>
+								</div>
 								<button
 									type="button"
 									class="flex shrink-0 justify-center items-center rounded-full outline-hidden text-gray-11 hover:text-gray-12 hover:bg-gray-5 focus-visible:ring-2 focus-visible:ring-gray-8 size-8 transition-colors"

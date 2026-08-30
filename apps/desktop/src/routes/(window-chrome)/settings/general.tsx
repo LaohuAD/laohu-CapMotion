@@ -700,12 +700,6 @@ function Inner(props: {
 								handleChange("custom_cursor_capture2", value)
 							}
 						/>
-						<ToggleSettingItem
-							label={i18n.t("settings.recording.autoZoom")}
-							description={i18n.t("settings.recording.autoZoomDescription")}
-							value={!!settings.autoZoomOnClicks}
-							onChange={(value) => handleChange("autoZoomOnClicks", value)}
-						/>
 						<SettingItem
 							label={i18n.t("settings.recording.defaultZoom")}
 							description={i18n.t("settings.recording.defaultZoomDescription")}

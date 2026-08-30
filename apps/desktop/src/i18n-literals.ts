@@ -131,6 +131,9 @@ const zhCN: Record<string, string> = {
 	Copy: "复制",
 	Loading: "正在加载…",
 	"Generate zoom segments from clicks": "根据点击生成放大片段",
+	"Auto Zoom": "自动放大",
+	"Generate editable zoom segments from recorded clicks":
+		"根据已录制的点击生成可编辑放大片段",
 	"Generating...": "正在生成…",
 	"Click to generate zoom segments": "点击生成放大片段",
 	"Dismiss for this session": "本次使用期间不再提示",
