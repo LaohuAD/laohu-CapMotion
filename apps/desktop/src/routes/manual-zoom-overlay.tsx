@@ -4,6 +4,7 @@ import { createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import {
 	advanceManualZoomFollow,
 	manualZoomViewport,
+	predictManualZoomCursor,
 } from "~/utils/manual-zoom-overlay";
 
 export default function ManualZoomOverlay() {
@@ -23,6 +24,9 @@ export default function ManualZoomOverlay() {
 		let sampleInFlight = false;
 		let lastRequestedAt = performance.now();
 		let lastAppliedAt = lastRequestedAt;
+		let predictionState: ReturnType<
+			typeof predictManualZoomCursor
+		>["state"] | null = null;
 		let bounds:
 			| { x: number; y: number; width: number; height: number }
 			| undefined;
@@ -44,7 +48,7 @@ export default function ManualZoomOverlay() {
 		const tick = (now: number) => {
 			if (disposed) return;
 			frame = requestAnimationFrame(tick);
-			if (!bounds || sampleInFlight || now - lastRequestedAt < 1000 / 30) {
+			if (!bounds || sampleInFlight || now - lastRequestedAt < 1000 / 60) {
 				return;
 			}
 			lastRequestedAt = now;
@@ -53,15 +57,26 @@ export default function ManualZoomOverlay() {
 				.then((cursor) => {
 					if (disposed || !bounds) return;
 					const currentBounds = bounds;
-					const dt = Math.max(0, (now - lastAppliedAt) / 1000);
-					lastAppliedAt = now;
+					const sampledAt = performance.now();
+					const dt = Math.max(0, (sampledAt - lastAppliedAt) / 1000);
+					lastAppliedAt = sampledAt;
+					const actualCursor = {
+						x: (cursor.x - currentBounds.x) / currentBounds.width,
+						y: (cursor.y - currentBounds.y) / currentBounds.height,
+					};
+					const prediction = predictManualZoomCursor(
+						predictionState,
+						actualCursor,
+						sampledAt,
+						amount(),
+					);
+					predictionState = prediction.state;
 					setCenter((current) =>
 						advanceManualZoomFollow(
 							current,
-							{
-								x: (cursor.x - currentBounds.x) / currentBounds.width,
-								y: (cursor.y - currentBounds.y) / currentBounds.height,
-							},
+							actualCursor,
+							prediction.framingCursor,
+							prediction.speed,
 							amount(),
 							dt,
 						),
