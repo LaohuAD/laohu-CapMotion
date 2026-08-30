@@ -191,7 +191,14 @@ struct DriveQuota {
 
 /// hotkeys.tsx's `listening` signal: which action is armed, and the binding
 /// to restore when the capture is abandoned.
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum HotkeyScope {
+    Global,
+    Editor,
+}
+
 struct ListeningHotkey {
+    scope: HotkeyScope,
     action: usize,
     prev: Option<Value>,
 }
@@ -284,7 +291,9 @@ enum AutoField {
 pub(crate) struct PagesState {
     // Shortcuts (hotkeys.tsx)
     hotkeys: Map<String, Value>,
+    editor_hotkeys: Map<String, Value>,
     listening: Option<ListeningHotkey>,
+    shortcut_error: Option<String>,
 
     // CLI (cli.tsx). `None` while the status fetch is in flight.
     cli_status: Option<Result<cli_install::CliInstallStatus, String>>,
@@ -409,7 +418,9 @@ impl PagesState {
 
         Self {
             hotkeys: store::hotkeys_raw(),
+            editor_hotkeys: store::editor_shortcuts_raw(),
             listening: None,
+            shortcut_error: None,
             cli_status: None,
             cli_installing: false,
             cli_uninstalling: false,
@@ -489,7 +500,9 @@ impl SettingsWindow {
         match self.page {
             Page::Shortcuts => {
                 self.pages.hotkeys = store::hotkeys_raw();
+                self.pages.editor_hotkeys = store::editor_shortcuts_raw();
                 self.pages.listening = None;
+                self.pages.shortcut_error = None;
             }
             Page::Cli => self.cli_refresh(window, cx),
             Page::Transcription => {
@@ -932,10 +945,43 @@ const HOTKEY_ACTIONS: [(&str, &str); 11] = [
     ("openRecordingPickerArea", "Record area"),
 ];
 
+const HOTKEY_ACTIONS_ZH: [(&str, &str); 11] = [
+    ("screenshotDisplay", "截取当前显示器"),
+    ("screenshotWindow", "截取当前窗口"),
+    ("screenshotArea", "选择区域截图"),
+    ("openRecordingPicker", "打开录制目标选择器"),
+    ("stopRecording", "停止录制"),
+    ("restartRecording", "重新开始录制"),
+    ("togglePauseRecording", "暂停或继续录制"),
+    ("cycleRecordingMode", "切换录制模式"),
+    ("openRecordingPickerDisplay", "录制显示器"),
+    ("openRecordingPickerWindow", "录制窗口"),
+    ("openRecordingPickerArea", "录制区域"),
+];
+
+const EDITOR_HOTKEY_ACTIONS: [(&str, &str); 3] = [
+    ("trimPrevious", "Trim and remove before the playhead"),
+    ("splitAtCursor", "Split at the playhead"),
+    ("trimNext", "Trim and remove after the playhead"),
+];
+
+const EDITOR_HOTKEY_ACTIONS_ZH: [(&str, &str); 3] = [
+    ("trimPrevious", "分割并删除播放头之前的内容"),
+    ("splitAtCursor", "在播放头处分割"),
+    ("trimNext", "分割并删除播放头之后的内容"),
+];
+
+fn shortcut_action(scope: HotkeyScope, index: usize) -> &'static str {
+    match scope {
+        HotkeyScope::Global => HOTKEY_ACTIONS[index].0,
+        HotkeyScope::Editor => EDITOR_HOTKEY_ACTIONS[index].0,
+    }
+}
+
 /// The gpui keystroke name for a key, as the W3C `KeyboardEvent.code` string
 /// the Tauri app stores (`e.code` in hotkeys.tsx, `global_hotkey::Code` in
 /// hotkeys.rs). `None` for keys neither side can bind.
-fn hotkey_code_for_key(key: &str) -> Option<String> {
+pub(crate) fn hotkey_code_for_key(key: &str) -> Option<String> {
     if let Some(rest) = key.strip_prefix('f')
         && !rest.is_empty()
         && rest.len() <= 2
@@ -1024,17 +1070,19 @@ impl SettingsWindow {
         let Some(code) = hotkey_code_for_key(&keystroke.key) else {
             return true;
         };
-        // A code the Tauri app cannot parse must never reach the store: its
-        // `HotkeysStore` deserializes the whole `hotkeys` map strictly
-        // (`serde_json::from_value` in `HotkeysStore::get`), so one bad entry
-        // would silently drop every binding over there.
-        if global_hotkey::hotkey::Code::from_str(&code).is_err() {
-            return true;
-        }
-        let Some(listening) = self.pages.listening.as_ref() else {
+        let Some((scope, action_index)) = self
+            .pages
+            .listening
+            .as_ref()
+            .map(|listening| (listening.scope, listening.action))
+        else {
             return true;
         };
-        let action = HOTKEY_ACTIONS[listening.action].0;
+        // Only system-wide bindings have to satisfy global-hotkey's parser.
+        if scope == HotkeyScope::Global && global_hotkey::hotkey::Code::from_str(&code).is_err() {
+            return true;
+        }
+        let action = shortcut_action(scope, action_index);
         let hotkey = Hotkey {
             code,
             meta: keystroke.modifiers.platform,
@@ -1043,30 +1091,63 @@ impl SettingsWindow {
             shift: keystroke.modifiers.shift,
         };
         let value = serde_json::to_value(&hotkey).unwrap_or(Value::Null);
-        self.pages.hotkeys.insert(action.to_string(), value);
+        if scope == HotkeyScope::Editor {
+            let conflict = self.pages.editor_hotkeys.iter().any(|(other, candidate)| {
+                other != action
+                    && store::hotkey_from_value(candidate).is_some_and(|candidate| {
+                        candidate.code == hotkey.code
+                            && candidate.meta == hotkey.meta
+                            && candidate.ctrl == hotkey.ctrl
+                            && candidate.alt == hotkey.alt
+                            && candidate.shift == hotkey.shift
+                    })
+            });
+            if conflict {
+                let chinese =
+                    store::GeneralSettings::load().ui_language.as_deref() == Some("zh-CN");
+                self.pages.shortcut_error = Some(if chinese {
+                    "这个快捷键已经用于另一个编辑器操作，请先清除或更换原快捷键"
+                } else {
+                    "This shortcut is already used by another editor action. Clear or change that binding first."
+                }
+                .to_string());
+                cx.notify();
+                return true;
+            }
+            self.pages.shortcut_error = None;
+            self.pages.editor_hotkeys.insert(action.to_string(), value);
+        } else {
+            self.pages.hotkeys.insert(action.to_string(), value);
+        }
         // `createEffect` persists on every store change, captures included --
         // but the OS registration waits for the confirm, exactly as
         // `commands.setHotkey` only runs from the buttons over there. Pressing
         // the candidate combo again keeps re-capturing it instead of firing
         // the action.
-        self.shortcuts_save();
+        self.shortcuts_save(scope);
         cx.notify();
         true
     }
 
     /// The `createEffect` half: write the map to the shared store, touch
     /// nothing at the OS.
-    fn shortcuts_save(&self) {
-        if !store::set_hotkeys_raw(&self.pages.hotkeys) {
-            tracing::warn!("saving the hotkeys store failed");
+    fn shortcuts_save(&self, scope: HotkeyScope) {
+        let saved = match scope {
+            HotkeyScope::Global => store::set_hotkeys_raw(&self.pages.hotkeys),
+            HotkeyScope::Editor => store::set_editor_shortcuts_raw(&self.pages.editor_hotkeys),
+        };
+        if !saved {
+            tracing::warn!("saving the shortcut store failed");
         }
     }
 
     /// The `commands.setHotkey` half: persist and swap the OS registrations.
     /// Deferred because the registry swap reads the store this just wrote.
-    fn shortcuts_commit(&self, cx: &mut Context<Self>) {
-        self.shortcuts_save();
-        cx.defer(crate::hotkeys::reload);
+    fn shortcuts_commit(&self, scope: HotkeyScope, cx: &mut Context<Self>) {
+        self.shortcuts_save(scope);
+        if scope == HotkeyScope::Global {
+            cx.defer(crate::hotkeys::reload);
+        }
     }
 
     /// The window click listener: an abandoned capture puts the previous
@@ -1077,46 +1158,140 @@ impl SettingsWindow {
         let Some(listening) = self.pages.listening.take() else {
             return;
         };
-        let action = HOTKEY_ACTIONS[listening.action].0;
+        let action = shortcut_action(listening.scope, listening.action);
+        let map = match listening.scope {
+            HotkeyScope::Global => &mut self.pages.hotkeys,
+            HotkeyScope::Editor => &mut self.pages.editor_hotkeys,
+        };
         match listening.prev {
             Some(prev) => {
-                self.pages.hotkeys.insert(action.to_string(), prev);
+                map.insert(action.to_string(), prev);
             }
             None => {
-                self.pages.hotkeys.remove(action);
+                if listening.scope == HotkeyScope::Editor {
+                    map.insert(action.to_string(), Value::Null);
+                } else {
+                    map.remove(action);
+                }
             }
         }
-        self.shortcuts_save();
+        self.pages.shortcut_error = None;
+        self.shortcuts_save(listening.scope);
         cx.notify();
     }
 
     pub(crate) fn render_shortcuts(&self, cx: &mut Context<Self>) -> Vec<gpui::AnyElement> {
-        let theme = self.theme;
-        let listening_any = self.pages.listening.is_some();
+        let chinese = store::GeneralSettings::load().ui_language.as_deref() == Some("zh-CN");
+        let global_actions = if chinese {
+            &HOTKEY_ACTIONS_ZH[..]
+        } else {
+            &HOTKEY_ACTIONS[..]
+        };
+        let editor_actions = if chinese {
+            &EDITOR_HOTKEY_ACTIONS_ZH[..]
+        } else {
+            &EDITOR_HOTKEY_ACTIONS[..]
+        };
+        let global = self.shortcut_card("shortcuts-card", HotkeyScope::Global, global_actions, cx);
+        let editor = self.shortcut_card(
+            "editor-shortcuts-card",
+            HotkeyScope::Editor,
+            editor_actions,
+            cx,
+        );
+        let mut editor_children = vec![editor];
+        if let Some(error) = self.pages.shortcut_error.as_ref() {
+            editor_children.push(
+                div()
+                    .text_size(px(12.))
+                    .text_color(Hsla::from(rgb(0xef4444)))
+                    .child(SharedString::from(error.clone()))
+                    .into_any_element(),
+            );
+        }
+        let reset_editor = div()
+            .id("reset-editor-shortcuts")
+            .cursor_pointer()
+            .px(px(10.))
+            .py(px(6.))
+            .rounded(px(8.))
+            .bg(self.theme.settings_fill())
+            .text_size(px(12.))
+            .child(if chinese {
+                "恢复默认值"
+            } else {
+                "Restore defaults"
+            })
+            .on_click(cx.listener(|this, _, _window, cx| {
+                for action in store::EDITOR_SHORTCUT_ACTIONS {
+                    if let Some(default) = store::default_editor_shortcut(action) {
+                        this.pages.editor_hotkeys.insert(
+                            action.to_string(),
+                            serde_json::to_value(default).unwrap_or(Value::Null),
+                        );
+                    }
+                }
+                this.pages.listening = None;
+                this.pages.shortcut_error = None;
+                this.shortcuts_save(HotkeyScope::Editor);
+                cx.notify();
+            }))
+            .into_any_element();
 
-        let mut rows: Vec<gpui::AnyElement> = Vec::new();
-        for (index, (action, label)) in HOTKEY_ACTIONS.iter().enumerate() {
-            let binding = self
-                .pages
-                .hotkeys
-                .get(*action)
-                .and_then(store::hotkey_from_value);
+        vec![
+            self.section(
+                if chinese { "快捷键" } else { "Shortcuts" },
+                Some(if chinese {
+                    "设置用于录制和截图的系统级快捷键"
+                } else {
+                    "Configure system-wide keyboard shortcuts to control Cap."
+                }),
+                None,
+                vec![global],
+            )
+            .into_any_element(),
+            self.section(
+                if chinese { "编辑器快捷键" } else { "Editor shortcuts" },
+                Some(if chinese {
+                    "设置只在编辑器内生效的时间线快捷键，可重新绑定或清除"
+                } else {
+                    "Local timeline shortcuts. Rebind or clear them without changing macOS global hotkeys."
+                }),
+                Some(reset_editor),
+                editor_children,
+            )
+            .into_any_element(),
+        ]
+    }
+
+    fn shortcut_card(
+        &self,
+        id: &'static str,
+        scope: HotkeyScope,
+        actions: &[(&'static str, &'static str)],
+        cx: &mut Context<Self>,
+    ) -> gpui::AnyElement {
+        let theme = self.theme;
+        let mut rows = Vec::new();
+        let map = match scope {
+            HotkeyScope::Global => &self.pages.hotkeys,
+            HotkeyScope::Editor => &self.pages.editor_hotkeys,
+        };
+        for (index, (action, label)) in actions.iter().enumerate() {
+            let binding = map.get(*action).and_then(store::hotkey_from_value);
             let listening = self
                 .pages
                 .listening
                 .as_ref()
-                .is_some_and(|listening| listening.action == index);
-
-            let right: gpui::AnyElement = if listening {
-                self.render_shortcut_listening(index, binding.as_ref(), cx)
+                .is_some_and(|listening| listening.scope == scope && listening.action == index);
+            let right = if listening {
+                self.render_shortcut_listening(scope, index, binding.as_ref(), cx)
                     .into_any_element()
             } else {
-                self.render_shortcut_idle(index, binding.as_ref(), cx)
+                self.render_shortcut_idle(scope, index, binding.as_ref(), cx)
                     .into_any_element()
             };
-
             rows.push(
-                // `flex flex-row justify-between items-center w-full h-8`.
                 div()
                     .flex()
                     .flex_row()
@@ -1128,8 +1303,7 @@ impl SettingsWindow {
                     .child(right)
                     .into_any_element(),
             );
-            if index + 1 != HOTKEY_ACTIONS.len() {
-                // `w-full h-px bg-gray-3`.
+            if index + 1 != actions.len() {
                 rows.push(
                     div()
                         .w_full()
@@ -1140,42 +1314,36 @@ impl SettingsWindow {
             }
         }
 
-        let card = self
-            .card(false)
-            .id("shortcuts-card")
+        self.card(false)
+            .id(id)
             .flex()
             .flex_col()
             .gap(px(12.))
             .p(px(16.))
-            // The window click listener: any press that reaches the card while
-            // a capture is armed abandons it and restores the old binding.
-            .when(listening_any, |this| {
+            .when(self.pages.listening.is_some(), |this| {
                 this.on_mouse_down(
                     MouseButton::Left,
                     cx.listener(|this, _, _window, cx| this.shortcuts_restore_prev(cx)),
                 )
             })
-            .children(rows);
-
-        vec![
-            self.section(
-                "Shortcuts",
-                Some("Configure system-wide keyboard shortcuts to control Cap."),
-                None,
-                vec![card.into_any_element()],
-            )
-            .into_any_element(),
-        ]
+            .children(rows)
+            .into_any_element()
     }
 
     /// The resting state: the binding as keycap chips, or the `None` pill.
     fn render_shortcut_idle(
         &self,
+        scope: HotkeyScope,
         index: usize,
         binding: Option<&Hotkey>,
         cx: &mut Context<Self>,
     ) -> impl IntoElement {
         let theme = self.theme;
+        let chinese = store::GeneralSettings::load().ui_language.as_deref() == Some("zh-CN");
+        let id_prefix = match scope {
+            HotkeyScope::Global => "global-hotkey",
+            HotkeyScope::Editor => "editor-hotkey",
+        };
         let content: gpui::AnyElement = match binding {
             Some(hotkey) => div()
                 .flex()
@@ -1201,20 +1369,26 @@ impl SettingsWindow {
                 .border_color(theme.settings_border())
                 .text_size(px(11.))
                 .text_color(theme.settings_muted())
-                .child("NONE")
+                .child(if chinese { "无" } else { "NONE" })
                 .into_any_element(),
         };
 
         div()
-            .id(("hotkey", index))
+            .id((id_prefix, index))
             .cursor_pointer()
             .child(content)
             .on_click(cx.listener(move |this, _, window, cx| {
-                let prev = this.pages.hotkeys.get(HOTKEY_ACTIONS[index].0).cloned();
+                let action = shortcut_action(scope, index);
+                let prev = match scope {
+                    HotkeyScope::Global => this.pages.hotkeys.get(action).cloned(),
+                    HotkeyScope::Editor => this.pages.editor_hotkeys.get(action).cloned(),
+                };
                 this.pages.listening = Some(ListeningHotkey {
+                    scope,
                     action: index,
                     prev,
                 });
+                this.pages.shortcut_error = None;
                 // Keys must reach the root's on_key_down, not a focused field.
                 this.focus_root(window, cx);
                 cx.notify();
@@ -1225,19 +1399,29 @@ impl SettingsWindow {
     /// (or "Set hotkeys...") on the right -- `flex-row-reverse` in the TSX.
     fn render_shortcut_listening(
         &self,
+        scope: HotkeyScope,
         index: usize,
         binding: Option<&Hotkey>,
         cx: &mut Context<Self>,
     ) -> impl IntoElement {
         let theme = self.theme;
         let has_binding = binding.is_some();
+        let chinese = store::GeneralSettings::load().ui_language.as_deref() == Some("zh-CN");
+        let confirm_id = match scope {
+            HotkeyScope::Global => "global-hotkey-confirm",
+            HotkeyScope::Editor => "editor-hotkey-confirm",
+        };
+        let clear_id = match scope {
+            HotkeyScope::Global => "global-hotkey-clear",
+            HotkeyScope::Editor => "editor-hotkey-clear",
+        };
 
         let mut buttons = div().flex().flex_row().items_center().gap(px(2.));
         if has_binding {
             // IconCapCircleCheck: commit and stop listening.
             buttons = buttons.child(
                 div()
-                    .id(("hotkey-confirm", index))
+                    .id((confirm_id, index))
                     .cursor_pointer()
                     .child(
                         svg()
@@ -1249,7 +1433,8 @@ impl SettingsWindow {
                     .on_mouse_down(MouseButton::Left, |_, _, cx| cx.stop_propagation())
                     .on_click(cx.listener(move |this, _, _window, cx| {
                         this.pages.listening = None;
-                        this.shortcuts_commit(cx);
+                        this.pages.shortcut_error = None;
+                        this.shortcuts_commit(scope, cx);
                         cx.notify();
                     })),
             );
@@ -1257,7 +1442,7 @@ impl SettingsWindow {
         // IconCapCircleX: clear the binding entirely.
         buttons = buttons.child(
             div()
-                .id(("hotkey-clear", index))
+                .id((clear_id, index))
                 .cursor_pointer()
                 .child(
                     svg()
@@ -1269,8 +1454,16 @@ impl SettingsWindow {
                 .on_mouse_down(MouseButton::Left, |_, _, cx| cx.stop_propagation())
                 .on_click(cx.listener(move |this, _, _window, cx| {
                     this.pages.listening = None;
-                    this.pages.hotkeys.remove(HOTKEY_ACTIONS[index].0);
-                    this.shortcuts_commit(cx);
+                    this.pages.shortcut_error = None;
+                    let action = shortcut_action(scope, index);
+                    if scope == HotkeyScope::Editor {
+                        this.pages
+                            .editor_hotkeys
+                            .insert(action.to_string(), Value::Null);
+                    } else {
+                        this.pages.hotkeys.remove(action);
+                    }
+                    this.shortcuts_commit(scope, cx);
                     cx.notify();
                 })),
         );
@@ -1290,7 +1483,11 @@ impl SettingsWindow {
             None => div()
                 .text_size(px(13.))
                 .text_color(theme.settings_muted())
-                .child("Set hotkeys...")
+                .child(if chinese {
+                    "请按快捷键…"
+                } else {
+                    "Set hotkeys..."
+                })
                 .into_any_element(),
         };
 

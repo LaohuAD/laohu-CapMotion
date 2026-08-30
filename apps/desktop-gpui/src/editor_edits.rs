@@ -32,7 +32,10 @@ use cap_project::{
     TimelineSegment, XY, ZoomMode, ZoomSegment, mask_effect_contract,
 };
 
-use crate::editor_timeline::{self, Segment, TrackKind};
+use crate::{
+    editor_panels,
+    editor_timeline::{self, Segment, TrackKind},
+};
 
 // ---------------------------------------------------------------------------
 // Selection
@@ -493,6 +496,16 @@ pub trait TrackSegmentOps: Clone {
 
     /// Anything the left-hand half needs beyond its new `end`.
     fn split_head(&mut self) {}
+
+    /// Move the visible start onto a newly-created cut boundary. Audio also
+    /// advances its source offset; every other track only moves in time.
+    fn remove_leading(&mut self, duration: f64, new_start: f64) {
+        let _ = duration;
+        self.set_start(new_start);
+    }
+
+    fn clear_start_fade(&mut self) {}
+    fn clear_end_fade(&mut self) {}
 }
 
 macro_rules! impl_track_segment {
@@ -584,6 +597,16 @@ impl TrackSegmentOps for AudioTrackSegment {
         tail
     }
     fn split_head(&mut self) {
+        self.fade_out = 0.;
+    }
+    fn remove_leading(&mut self, duration: f64, new_start: f64) {
+        self.trim_start += duration;
+        self.start = new_start;
+    }
+    fn clear_start_fade(&mut self) {
+        self.fade_in = 0.;
+    }
+    fn clear_end_fade(&mut self) {
         self.fade_out = 0.;
     }
 }
@@ -941,6 +964,306 @@ pub fn split_segment(
     let min = min_split_duration(kind);
     with_track!(timeline, kind, |segments| split_at(
         segments, index, at, min
+    ))
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum TimelineCommand {
+    TrimPrevious,
+    SplitAtCursor,
+    TrimNext,
+}
+
+fn command_on_track<T: TrackSegmentOps>(
+    segments: &mut Vec<T>,
+    indices: &[usize],
+    time: f64,
+    command: TimelineCommand,
+    min: f64,
+) -> bool {
+    let mut changed = false;
+    for index in descending_indices(indices, segments.len()) {
+        let Some(segment) = segments.get(index) else {
+            continue;
+        };
+        let start = segment.start();
+        let end = segment.end();
+        if time <= start || time >= end {
+            continue;
+        }
+        match command {
+            TimelineCommand::SplitAtCursor => {
+                changed |= split_at(segments, index, time - start, min);
+            }
+            TimelineCommand::TrimPrevious if end - time >= min => {
+                let segment = &mut segments[index];
+                segment.remove_leading(time - start, time);
+                segment.clear_start_fade();
+                changed = true;
+            }
+            TimelineCommand::TrimNext if time - start >= min => {
+                let segment = &mut segments[index];
+                segment.set_end(time);
+                segment.clear_end_fade();
+                changed = true;
+            }
+            _ => {}
+        }
+    }
+    if changed {
+        sort_track(segments);
+    }
+    changed
+}
+
+fn command_on_camera3d(
+    segments: &mut Vec<Camera3DSegment>,
+    indices: &[usize],
+    time: f64,
+    command: TimelineCommand,
+) -> bool {
+    let mut changed = false;
+    for index in descending_indices(indices, segments.len()) {
+        let Some(original) = segments.get(index).cloned() else {
+            continue;
+        };
+        if time <= original.start || time >= original.end {
+            continue;
+        }
+        let left_duration = time - original.start;
+        let right_duration = original.end - time;
+        let valid = match command {
+            TimelineCommand::SplitAtCursor => left_duration >= 1. && right_duration >= 1.,
+            TimelineCommand::TrimPrevious => right_duration >= 1.,
+            TimelineCommand::TrimNext => left_duration >= 1.,
+        };
+        if !valid {
+            continue;
+        }
+
+        let start = editor_panels::start_pose(&original);
+        let middle = editor_panels::evaluate_pose(&original, left_duration);
+        let end = editor_panels::end_pose(&original);
+        let easing = editor_panels::MOTION_EASINGS[editor_panels::motion_easing(&original)];
+        match command {
+            TimelineCommand::SplitAtCursor => {
+                let mut right = original.clone();
+                right.start = time;
+                right.tracks = Default::default();
+                editor_panels::set_motion(&mut right, &middle, &end, (easing.2, easing.3));
+                segments.insert(index + 1, right);
+
+                let left = &mut segments[index];
+                left.end = time;
+                left.tracks = Default::default();
+                editor_panels::set_motion(left, &start, &middle, (easing.2, easing.3));
+            }
+            TimelineCommand::TrimPrevious => {
+                let segment = &mut segments[index];
+                segment.start = time;
+                segment.tracks = Default::default();
+                editor_panels::set_motion(segment, &middle, &end, (easing.2, easing.3));
+            }
+            TimelineCommand::TrimNext => {
+                let segment = &mut segments[index];
+                segment.end = time;
+                segment.tracks = Default::default();
+                editor_panels::set_motion(segment, &start, &middle, (easing.2, easing.3));
+            }
+        }
+        changed = true;
+    }
+    if changed {
+        sort_track(segments);
+    }
+    changed
+}
+
+fn effective_to_output(holds: &[(f64, f64)], effective: f64, include_equal: bool) -> f64 {
+    let mut output = effective;
+    for (start, end) in holds {
+        if output > *start || (include_equal && output >= *start) {
+            output += end - start;
+        } else {
+            break;
+        }
+    }
+    output
+}
+
+fn ripple_track<T: TrackSegmentOps>(
+    segments: &mut Vec<T>,
+    cut_start: f64,
+    cut_end: f64,
+    shift: f64,
+) {
+    for index in (0..segments.len()).rev() {
+        let start = segments[index].start();
+        let end = segments[index].end();
+        if end <= cut_start {
+            continue;
+        }
+        if start >= cut_end {
+            segments[index].set_start(start - shift);
+            segments[index].set_end(end - shift);
+        } else if start >= cut_start && end <= cut_end {
+            segments.remove(index);
+        } else if start < cut_start && end > cut_end {
+            segments[index].set_end(end - shift);
+        } else if start < cut_start {
+            segments[index].set_end(cut_start);
+            segments[index].clear_end_fade();
+        } else {
+            let removed_leading = cut_end - start;
+            segments[index].remove_leading(removed_leading, cut_start);
+            segments[index].set_end((end - shift).max(cut_start));
+            segments[index].clear_start_fade();
+        }
+    }
+    sort_track(segments);
+}
+
+fn ripple_camera3d_track(
+    segments: &mut Vec<Camera3DSegment>,
+    cut_start: f64,
+    cut_end: f64,
+    shift: f64,
+) {
+    for index in (0..segments.len()).rev() {
+        let start = segments[index].start;
+        let end = segments[index].end;
+        let old_duration = end - start;
+        if end <= cut_start {
+            continue;
+        }
+        if start >= cut_end {
+            segments[index].start = start - shift;
+            segments[index].end = end - shift;
+            continue;
+        }
+        if start >= cut_start && end <= cut_end {
+            segments.remove(index);
+            continue;
+        }
+        if start < cut_start && end > cut_end {
+            segments[index].end = end - shift;
+        } else if start < cut_start {
+            segments[index].end = cut_start;
+        } else {
+            segments[index].start = cut_start;
+            segments[index].end = (end - shift).max(cut_start);
+        }
+
+        let next_duration = segments[index].end - segments[index].start;
+        if old_duration > 0.
+            && next_duration > 0.
+            && (next_duration - old_duration).abs() > f64::EPSILON
+        {
+            scale_keyframe_times(&mut segments[index].tracks, next_duration / old_duration);
+        }
+    }
+    sort_track(segments);
+}
+
+fn ripple_overlay_tracks(timeline: &mut TimelineConfiguration, cut_start: f64, cut_end: f64) {
+    let shift = cut_end - cut_start;
+    ripple_track(&mut timeline.zoom_segments, cut_start, cut_end, shift);
+    ripple_track(&mut timeline.scene_segments, cut_start, cut_end, shift);
+    ripple_track(&mut timeline.mask_segments, cut_start, cut_end, shift);
+    ripple_track(&mut timeline.text_segments, cut_start, cut_end, shift);
+    ripple_track(&mut timeline.caption_segments, cut_start, cut_end, shift);
+    ripple_track(&mut timeline.keyboard_segments, cut_start, cut_end, shift);
+    ripple_track(&mut timeline.audio_segments, cut_start, cut_end, shift);
+
+    ripple_camera3d_track(&mut timeline.camera3d_segments, cut_start, cut_end, shift);
+}
+
+fn command_on_clip(
+    timeline: &mut TimelineConfiguration,
+    indices: &[usize],
+    output_time: f64,
+    command: TimelineCommand,
+) -> bool {
+    if command == TimelineCommand::SplitAtCursor {
+        let holds = timeline.hold_windows();
+        let effective = output_time - held_time_before(&holds, output_time);
+        let offsets = editor_timeline::clip_timeline_offsets(timeline);
+        let index = indices.iter().copied().find(|index| {
+            timeline.segments.get(*index).is_some_and(|segment| {
+                effective > offsets[*index] && effective < offsets[*index] + segment.duration()
+            })
+        });
+        return index.is_some_and(|index| split_clip_segment(timeline, output_time, Some(index)));
+    }
+
+    let holds = timeline.hold_windows();
+    let effective = output_time - held_time_before(&holds, output_time);
+    let offsets = editor_timeline::clip_timeline_offsets(timeline);
+    let Some(index) = indices.iter().copied().find(|index| {
+        timeline.segments.get(*index).is_some_and(|segment| {
+            effective > offsets[*index] && effective < offsets[*index] + segment.duration()
+        })
+    }) else {
+        return false;
+    };
+    let start = offsets[index];
+    let end = start + timeline.segments[index].duration();
+    let (cut_effective_start, cut_effective_end) = match command {
+        TimelineCommand::TrimPrevious => (start, effective),
+        TimelineCommand::TrimNext => (effective, end),
+        TimelineCommand::SplitAtCursor => unreachable!(),
+    };
+    if cut_effective_end - cut_effective_start <= 0.001 {
+        return false;
+    }
+
+    let cut_start = effective_to_output(&holds, cut_effective_start, true);
+    let cut_end = effective_to_output(&holds, cut_effective_end, false);
+    let segment = &mut timeline.segments[index];
+    match command {
+        TimelineCommand::TrimPrevious => {
+            segment.start += (effective - start) * segment.timescale;
+        }
+        TimelineCommand::TrimNext => {
+            segment.end -= (end - effective) * segment.timescale;
+        }
+        TimelineCommand::SplitAtCursor => unreachable!(),
+    }
+    normalize_clip_transitions(timeline);
+    ripple_overlay_tracks(timeline, cut_start, cut_end);
+    true
+}
+
+/// Q/W/E's shared model action. It edits only selected segments that the
+/// hover/playhead time crosses; clips ripple-close the timeline, overlays do
+/// not move unrelated tracks.
+pub fn execute_timeline_command(
+    timeline: &mut TimelineConfiguration,
+    selection: &Selection,
+    time: f64,
+    command: TimelineCommand,
+) -> bool {
+    if !time.is_finite() || selection.indices.is_empty() {
+        return false;
+    }
+    if selection.track == TrackKind::Clip {
+        return command_on_clip(timeline, &selection.indices, time, command);
+    }
+    if selection.track == TrackKind::ThreeD {
+        return command_on_camera3d(
+            &mut timeline.camera3d_segments,
+            &selection.indices,
+            time,
+            command,
+        );
+    }
+    let min = min_split_duration(selection.track);
+    with_track!(timeline, selection.track, |segments| command_on_track(
+        segments,
+        &selection.indices,
+        time,
+        command,
+        min
     ))
 }
 
@@ -2578,6 +2901,123 @@ mod tests {
         assert_eq!(tail.trim_start, 5.0, "the source offset moves with the cut");
         assert_eq!(tail.fade_in, 0.0);
         assert_eq!(tail.fade_out, 0.6);
+    }
+
+    #[test]
+    fn timeline_commands_only_edit_selected_segments_crossed_by_the_time() {
+        let mut config = zoom_fixture();
+        let timeline = config.timeline.as_mut().unwrap();
+        let selection = Selection {
+            track: TrackKind::Zoom,
+            indices: vec![0, 1],
+        };
+        assert!(execute_timeline_command(
+            timeline,
+            &selection,
+            3.5,
+            TimelineCommand::SplitAtCursor,
+        ));
+        assert_eq!(timeline.zoom_segments.len(), 3);
+        assert_eq!(
+            timeline
+                .zoom_segments
+                .iter()
+                .map(|segment| (segment.start, segment.end))
+                .collect::<Vec<_>>(),
+            vec![(2., 3.5), (3.5, 5.), (20., 24.)]
+        );
+    }
+
+    #[test]
+    fn trim_previous_on_audio_advances_the_source_and_clears_the_new_fade() {
+        let mut config = config(serde_json::json!({
+            "timeline": {
+                "segments": [{ "recordingSegment": 0, "timescale": 1.0, "start": 0.0, "end": 30.0 }],
+                "zoomSegments": [],
+                "audioSegments": [{
+                    "start": 2.0, "end": 12.0, "track": 0, "path": "/tmp/a.mp3",
+                    "trimStart": 1.0, "fadeIn": 0.4, "fadeOut": 0.6
+                }]
+            }
+        }));
+        let timeline = config.timeline.as_mut().unwrap();
+        assert!(execute_timeline_command(
+            timeline,
+            &Selection::single(TrackKind::Audio, 0),
+            6.,
+            TimelineCommand::TrimPrevious,
+        ));
+        let audio = &timeline.audio_segments[0];
+        assert_eq!((audio.start, audio.end, audio.trim_start), (6., 12., 5.));
+        assert_eq!((audio.fade_in, audio.fade_out), (0., 0.6));
+    }
+
+    #[test]
+    fn trimming_a_clip_prefix_ripple_closes_every_overlay_track() {
+        let mut config = config(serde_json::json!({
+            "timeline": {
+                "segments": [
+                    { "recordingSegment": 0, "timescale": 1.0, "start": 0.0, "end": 10.0 },
+                    { "recordingSegment": 1, "timescale": 1.0, "start": 0.0, "end": 8.0 }
+                ],
+                "zoomSegments": [{ "start": 12.0, "end": 14.0, "amount": 1.5, "mode": "auto" }]
+            }
+        }));
+        let timeline = config.timeline.as_mut().unwrap();
+        assert!(execute_timeline_command(
+            timeline,
+            &Selection::single(TrackKind::Clip, 0),
+            3.,
+            TimelineCommand::TrimPrevious,
+        ));
+        assert_eq!(
+            (timeline.segments[0].start, timeline.segments[0].end),
+            (3., 10.)
+        );
+        assert_eq!(
+            (
+                timeline.zoom_segments[0].start,
+                timeline.zoom_segments[0].end
+            ),
+            (9., 11.)
+        );
+    }
+
+    #[test]
+    fn trimming_a_clip_rescales_a_straddling_camera3d_track() {
+        let mut config = config(serde_json::json!({
+            "timeline": {
+                "segments": [{ "recordingSegment": 0, "timescale": 1.0, "start": 0.0, "end": 10.0 }],
+                "zoomSegments": []
+            }
+        }));
+        let timeline = config.timeline.as_mut().unwrap();
+        let mut camera = default_camera3d_segment(1., 8.);
+        camera.tracks.zoom = vec![
+            cap_project::Camera3DKeyframe {
+                time: 0.,
+                value: 1.,
+                out_easing: None,
+                in_easing: None,
+            },
+            cap_project::Camera3DKeyframe {
+                time: 7.,
+                value: 2.,
+                out_easing: None,
+                in_easing: None,
+            },
+        ];
+        timeline.camera3d_segments.push(camera);
+
+        assert!(execute_timeline_command(
+            timeline,
+            &Selection::single(TrackKind::Clip, 0),
+            3.,
+            TimelineCommand::TrimPrevious,
+        ));
+        let camera = &timeline.camera3d_segments[0];
+        assert_eq!((camera.start, camera.end), (0., 5.));
+        assert_eq!(camera.tracks.zoom[1].time, 5.);
     }
 
     // -- Split snapping -----------------------------------------------------

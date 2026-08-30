@@ -3,15 +3,15 @@ import { Store } from "@tauri-apps/plugin-store";
 import { onCleanup } from "solid-js";
 import type { AutomationsStore } from "~/utils/automations";
 import {
+	DEFAULT_EDITOR_SHORTCUTS,
+	type EditorShortcutsStore,
+} from "~/utils/editor-shortcuts";
+import {
 	type GeneralSettingsStore,
 	RECORDING_START_SAFETY_DEFAULTS,
 	type RecordingStartSafetySettings,
 } from "~/utils/general-settings";
 import { createSerializedStore } from "~/utils/serialized-store";
-import {
-	DEFAULT_EDITOR_SHORTCUTS,
-	type EditorShortcutsStore,
-} from "~/utils/editor-shortcuts";
 import type {
 	AnimatedGradientLibrary,
 	AuthStore,

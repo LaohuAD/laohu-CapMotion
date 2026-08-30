@@ -67,9 +67,12 @@ use gpui::{
 };
 
 use crate::{
-    editor_edits::{self as edits, DragBounds, Hit, ProjectHistory, SPLIT_SNAP_PX, Selection},
+    editor_edits::{
+        self as edits, DragBounds, Hit, ProjectHistory, SPLIT_SNAP_PX, Selection, TimelineCommand,
+    },
     editor_export::ExportUi,
-    store::SettingsEnum,
+    settings_pages::hotkey_code_for_key,
+    store::{self, SettingsEnum},
     theme::Theme,
     ui,
 };
@@ -2386,11 +2389,9 @@ impl EditorWindow {
         }
     }
 
-    /// The editor's key bindings live in `useEditorShortcuts`
-    /// (`Player.tsx:236-286`): `Space` play/pause, `S` split (E4's) and
-    /// `Mod+=` / `Mod+-` zoom. `Mod` is Cmd-or-Ctrl
-    /// (`useEditorShortcuts.ts:10`) and `e.repeat` is ignored there
-    /// (`:42`) as `is_held` is here.
+    /// Editor-local shortcuts include configurable immediate Q/W/E timeline
+    /// commands, Space play/pause, and Mod+= / Mod+- zoom. Mod is Cmd-or-Ctrl,
+    /// and held key events are ignored here.
     fn on_key(&mut self, event: &gpui::KeyDownEvent, window: &mut Window, cx: &mut Context<Self>) {
         if self.frame_controls.is_open() && event.keystroke.key == "escape" {
             self.close_frame_controls(window, cx);
@@ -2399,11 +2400,11 @@ impl EditorWindow {
         }
         // Crop mode first. It takes Escape and the four arrows and lets
         // **everything else through**, which is what the source does: the
-        // dialog is a Kobalte modal but `useEditorShortcuts` and the
-        // timeline's own listener are both bound on `document`, and Kobalte
-        // does not stop key events reaching them. So Space still plays, `S`
-        // still toggles the scissors and Backspace still deletes the timeline
-        // selection with the cropper open. See the README.
+        // dialog is a Kobalte modal but editor shortcuts and the timeline's
+        // own listener are both bound on `document`, and Kobalte does not stop
+        // key events reaching them. So Space and Q/W/E still work, and
+        // Backspace still deletes the timeline selection with the cropper
+        // open. See the README.
         if self.crop.is_some() {
             // gpui delivers AppKit's key repeat; the cropper's own rAF ticker
             // owns repetition (`Cropper.tsx:1019-1022`), so a repeat must not
@@ -2466,7 +2467,7 @@ impl EditorWindow {
         // and a matched binding consumes the keystroke before any
         // `on_key_down` listener on the dispatch path runs
         // (`gpui/src/window.rs:5280-5296`), so they never reach here at all.
-        // `s`, `c`, `space`, `delete` and `escape` cannot be bound that way:
+        // printable editor keys, `space`, `delete` and `escape` cannot be bound that way:
         // a binding is matched *before* AppKit hands the event to the input
         // context (`gpui_macos/src/window.rs:2217-2250`), so binding a
         // printable key would mean it could never be typed. Hence the gate.
@@ -2522,6 +2523,28 @@ impl EditorWindow {
         }
         let keystroke = &event.keystroke;
         let modifier = keystroke.modifiers.platform || keystroke.modifiers.control;
+
+        let editor_command = [
+            ("trimPrevious", TimelineCommand::TrimPrevious),
+            ("splitAtCursor", TimelineCommand::SplitAtCursor),
+            ("trimNext", TimelineCommand::TrimNext),
+        ]
+        .into_iter()
+        .find_map(|(action, command)| {
+            let binding = store::editor_shortcut(action)?;
+            let code = hotkey_code_for_key(&keystroke.key)?;
+            (binding.code == code
+                && binding.meta == keystroke.modifiers.platform
+                && binding.ctrl == keystroke.modifiers.control
+                && binding.alt == keystroke.modifiers.alt
+                && binding.shift == keystroke.modifiers.shift)
+                .then_some(command)
+        });
+        if let Some(command) = editor_command {
+            cx.stop_propagation();
+            self.execute_timeline_command(command, window, cx);
+            return;
+        }
 
         // `if (e.code === "Backspace" || (e.code === "Delete" &&
         // hasNoModifiers))` (`TL/index.tsx:963`) -- note the asymmetry:
@@ -2599,18 +2622,6 @@ impl EditorWindow {
                 cx.stop_propagation();
                 self.delete_selection(window, cx);
             }
-            // `S` toggles the scissors (`Player.tsx:246-254`) and `C` performs
-            // the cut (`TL/index.tsx:1007-1013`) -- two different keys, and
-            // two different listeners in the source.
-            "s" => {
-                cx.stop_propagation();
-                self.toggle_split_mode(cx);
-                window.refresh();
-            }
-            "c" => {
-                cx.stop_propagation();
-                self.split_at_playhead(window, cx);
-            }
             "escape" => {
                 cx.stop_propagation();
                 if self.audio_picker.is_some() {
@@ -2677,25 +2688,27 @@ impl EditorWindow {
         let delta_y = -f32::from(pixels.y) as f64;
         let total = self.total_duration();
 
-        let horizontal = delta_x.abs() > delta_y.abs() * 0.5 || event.modifiers.shift;
-        if event.modifiers.control || horizontal {
-            let offset = self.timeline_scroll.offset();
-            let editor = cx.entity().downgrade();
-            cx.defer(move |cx| {
-                if let Some(editor) = editor.upgrade() {
-                    editor.update(cx, |this, _| {
-                        this.timeline_scroll.set_offset(offset);
-                    });
-                }
-            });
+        // Command+wheel belongs to the vertical row scroller. Everything else
+        // is handled here and must not also move the native scroll container.
+        if event.modifiers.platform && !event.modifiers.control {
+            return;
         }
+        let offset = self.timeline_scroll.offset();
+        let editor = cx.entity().downgrade();
+        cx.defer(move |cx| {
+            if let Some(editor) = editor.upgrade() {
+                editor.update(cx, |this, _| {
+                    this.timeline_scroll.set_offset(offset);
+                });
+            }
+        });
 
         if event.modifiers.control {
             let origin = self.view.preview_time.unwrap_or(self.playhead);
             let delta = timeline::wheel_zoom_delta(delta_y, self.view.transform.zoom);
             let zoom = self.view.transform.zoom;
             self.view.transform.update_zoom(zoom + delta, origin, total);
-        } else if horizontal {
+        } else {
             let delta = if delta_x.abs() > 0.5 {
                 delta_x
             } else {
@@ -2708,8 +2721,6 @@ impl EditorWindow {
                 .secs_per_pixel(timeline::content_width(viewport_width));
             let position = self.view.transform.position + secs_per_pixel * delta;
             self.view.transform.set_position(position, total);
-        } else {
-            return;
         }
         self.note_transform("wheel", None);
         cx.notify();
@@ -4764,18 +4775,34 @@ impl EditorWindow {
         }
     }
 
-    /// The `C` binding (`TL/index.tsx:1007-1013`): cut the clip under
-    /// `previewTime ?? playbackTime`. Works while playing, which is why it
-    /// falls back to the playhead.
-    fn split_at_playhead(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+    /// Q/W/E share one immediate edit path. The hover preview wins over the
+    /// playhead, and no selection means no edit.
+    fn execute_timeline_command(
+        &mut self,
+        command: TimelineCommand,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        let Some(selection) = self.selection.clone() else {
+            return;
+        };
         let time = self.view.preview_time.unwrap_or(self.playhead);
         if self.edit(
-            |timeline| edits::split_clip_segment(timeline, time, None),
+            |timeline| edits::execute_timeline_command(timeline, &selection, time, command),
             window,
             cx,
         ) {
             self.set_selection(None, cx);
-            self.note_edit("split", Some(TrackKind::Clip));
+            self.view.preview_time = None;
+            self.note_edit(
+                match command {
+                    TimelineCommand::TrimPrevious => "trim-previous",
+                    TimelineCommand::SplitAtCursor => "split",
+                    TimelineCommand::TrimNext => "trim-next",
+                },
+                Some(selection.track),
+            );
+            window.refresh();
         }
     }
 
@@ -4793,18 +4820,6 @@ impl EditorWindow {
             self.set_selection(next, cx);
             self.note_edit("select-all", self.selection.as_ref().map(|s| s.track));
         }
-    }
-
-    /// The scissors toggle -- `S` and the transport button
-    /// (`Player.tsx:246-254, 409-427`).
-    fn toggle_split_mode(&mut self, cx: &mut Context<Self>) {
-        self.split_mode = !self.split_mode;
-        if !self.split_mode {
-            // `createEffect(() => { if (!split()) setSplitPreview(null) })`
-            // (`TL/ClipTrack.tsx:566-568`).
-            self.split_preview = None;
-        }
-        cx.notify();
     }
 
     /// A frame off the pump. `refresh` as well as `notify`: this window may be
@@ -7530,6 +7545,36 @@ impl EditorWindow {
             }))
     }
 
+    fn timeline_command_button(
+        &self,
+        id: &'static str,
+        icon: &'static str,
+        command: TimelineCommand,
+        cx: &mut Context<Self>,
+    ) -> impl IntoElement {
+        let theme = self.theme;
+        div()
+            .id(id)
+            .tab_index(0)
+            .flex()
+            .items_center()
+            .justify_center()
+            .w(px(32.))
+            .h(px(32.))
+            .rounded(px(8.))
+            .cursor_pointer()
+            .hover(|this| this.bg(Hsla::from(theme.gray_3)))
+            .child(
+                svg()
+                    .path(icon)
+                    .size(px(18.))
+                    .text_color(Hsla::from(theme.gray_12)),
+            )
+            .on_click(cx.listener(move |this, _, window, cx| {
+                this.execute_timeline_command(command, window, cx);
+            }))
+    }
+
     /// The zoom slider's pointer maths, shared by the press and the drag.
     fn apply_zoom_slider(
         &mut self,
@@ -7674,35 +7719,30 @@ impl EditorWindow {
                     .gap(px(16.))
                     .justify_end()
                     .items_center()
-                    // The split toggle (`Player.tsx:409-427`): an
-                    // `EditorButton variant="danger"` whose pressed state is
-                    // `data-pressed:bg-red-300 data-pressed:text-gray-1`.
                     .child(
                         div()
-                            .id("transport-split")
-                            .tab_index(0)
                             .flex()
                             .flex_row()
                             .items_center()
-                            .px(px(6.))
-                            .h(px(32.))
-                            .rounded(px(8.))
-                            .cursor_pointer()
-                            .when(self.split_mode, |this| this.bg(Hsla::from(theme.red_300)))
-                            .when(!self.split_mode, |this| {
-                                this.hover(|this| this.bg(Hsla::from(theme.gray_3)))
-                            })
-                            .child(svg().path("icons/scissors.svg").size(px(20.)).text_color(
-                                if self.split_mode {
-                                    Hsla::from(theme.gray_1)
-                                } else {
-                                    Hsla::from(theme.gray_12)
-                                },
+                            .gap(px(4.))
+                            .child(self.timeline_command_button(
+                                "transport-trim-previous",
+                                "icons/panel-right.svg",
+                                TimelineCommand::TrimPrevious,
+                                cx,
                             ))
-                            .on_click(cx.listener(|this, _, window, cx| {
-                                this.toggle_split_mode(cx);
-                                window.refresh();
-                            })),
+                            .child(self.timeline_command_button(
+                                "transport-split",
+                                "icons/scissors.svg",
+                                TimelineCommand::SplitAtCursor,
+                                cx,
+                            ))
+                            .child(self.timeline_command_button(
+                                "transport-trim-next",
+                                "icons/film-cut.svg",
+                                TimelineCommand::TrimNext,
+                                cx,
+                            )),
                     )
                     // `w-px h-8 rounded-full bg-gray-4`.
                     .child(
@@ -8290,14 +8330,8 @@ impl EditorWindow {
                     .track_scroll(&self.timeline_scroll)
                     .pr(px(SCROLL_BODY_PADDING_RIGHT))
                     .on_scroll_wheel(cx.listener(
-                        |_this, event: &gpui::ScrollWheelEvent, window, cx| {
-                            let pixels = event.delta.pixel_delta(window.line_height());
-                            let delta_x = f32::from(pixels.x).abs();
-                            let delta_y = f32::from(pixels.y).abs();
-                            if !event.modifiers.control
-                                && !event.modifiers.shift
-                                && delta_x <= delta_y * 0.5
-                            {
+                        |_this, event: &gpui::ScrollWheelEvent, _window, cx| {
+                            if event.modifiers.platform && !event.modifiers.control {
                                 cx.stop_propagation();
                             }
                         },

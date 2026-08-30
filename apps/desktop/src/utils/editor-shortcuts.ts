@@ -66,7 +66,9 @@ export function normalizeEditorShortcuts(
 			const binding = raw[action];
 			return [
 				action,
-				isBinding(binding) ? { ...binding } : { ...DEFAULT_EDITOR_SHORTCUTS[action] },
+				isBinding(binding)
+					? { ...binding }
+					: { ...DEFAULT_EDITOR_SHORTCUTS[action] },
 			];
 		}),
 	) as EditorShortcutBindings;
