@@ -620,6 +620,36 @@ pub enum StereoMode {
     MonoR,
 }
 
+#[derive(Type, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub enum SourceAudioKind {
+    Microphone,
+    SystemAudio,
+}
+
+#[derive(Type, Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SourceAudioRange {
+    pub recording_clip: u32,
+    pub start: f64,
+    pub end: f64,
+}
+
+#[derive(Type, Serialize, Deserialize, Clone, Copy, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SourceAudioCut {
+    pub recording_clip: u32,
+    pub time: f64,
+}
+
+#[derive(Type, Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
+#[serde(rename_all = "camelCase", default)]
+pub struct SourceAudioTrackConfiguration {
+    pub expanded: bool,
+    pub muted_ranges: Vec<SourceAudioRange>,
+    pub cuts: Vec<SourceAudioCut>,
+}
+
 #[derive(Type, Serialize, Deserialize, Clone, Debug, PartialEq)]
 #[serde(rename_all = "camelCase", default)]
 pub struct AudioConfiguration {
@@ -628,6 +658,8 @@ pub struct AudioConfiguration {
     pub mic_volume_db: f32,
     pub mic_stereo_mode: StereoMode,
     pub system_volume_db: f32,
+    pub microphone_track: SourceAudioTrackConfiguration,
+    pub system_audio_track: SourceAudioTrackConfiguration,
 }
 
 impl Default for AudioConfiguration {
@@ -638,8 +670,114 @@ impl Default for AudioConfiguration {
             mic_volume_db: 0.0,
             mic_stereo_mode: StereoMode::default(),
             system_volume_db: 0.0,
+            microphone_track: SourceAudioTrackConfiguration::default(),
+            system_audio_track: SourceAudioTrackConfiguration::default(),
         }
     }
+}
+
+impl AudioConfiguration {
+    const SOURCE_AUDIO_SAMPLE_EPSILON: f64 = 1.0 / 48_000.0;
+
+    pub fn source_track(&self, kind: SourceAudioKind) -> &SourceAudioTrackConfiguration {
+        match kind {
+            SourceAudioKind::Microphone => &self.microphone_track,
+            SourceAudioKind::SystemAudio => &self.system_audio_track,
+        }
+    }
+
+    pub fn source_track_mut(
+        &mut self,
+        kind: SourceAudioKind,
+    ) -> &mut SourceAudioTrackConfiguration {
+        match kind {
+            SourceAudioKind::Microphone => &mut self.microphone_track,
+            SourceAudioKind::SystemAudio => &mut self.system_audio_track,
+        }
+    }
+
+    pub fn mute_source_range(
+        &mut self,
+        kind: SourceAudioKind,
+        recording_clip: u32,
+        start: f64,
+        end: f64,
+    ) {
+        if !start.is_finite()
+            || !end.is_finite()
+            || end - start <= Self::SOURCE_AUDIO_SAMPLE_EPSILON
+        {
+            return;
+        }
+
+        let track = self.source_track_mut(kind);
+        track.muted_ranges.push(SourceAudioRange {
+            recording_clip,
+            start,
+            end,
+        });
+        normalize_source_audio_ranges(&mut track.muted_ranges);
+    }
+
+    pub fn add_source_cut(&mut self, kind: SourceAudioKind, recording_clip: u32, time: f64) {
+        if !time.is_finite() {
+            return;
+        }
+
+        let track = self.source_track_mut(kind);
+        track.cuts.push(SourceAudioCut {
+            recording_clip,
+            time,
+        });
+        normalize_source_audio_cuts(&mut track.cuts);
+    }
+
+    pub fn source_is_muted(&self, kind: SourceAudioKind, recording_clip: u32, time: f64) -> bool {
+        time.is_finite()
+            && self.source_track(kind).muted_ranges.iter().any(|range| {
+                range.recording_clip == recording_clip && time >= range.start && time < range.end
+            })
+    }
+}
+
+fn normalize_source_audio_ranges(ranges: &mut Vec<SourceAudioRange>) {
+    ranges.retain(|range| {
+        range.start.is_finite()
+            && range.end.is_finite()
+            && range.end - range.start > AudioConfiguration::SOURCE_AUDIO_SAMPLE_EPSILON
+    });
+    ranges.sort_by(|left, right| {
+        left.recording_clip
+            .cmp(&right.recording_clip)
+            .then_with(|| left.start.total_cmp(&right.start))
+            .then_with(|| left.end.total_cmp(&right.end))
+    });
+
+    let mut normalized: Vec<SourceAudioRange> = Vec::with_capacity(ranges.len());
+    for range in ranges.drain(..) {
+        if let Some(last) = normalized.last_mut()
+            && last.recording_clip == range.recording_clip
+            && range.start <= last.end + AudioConfiguration::SOURCE_AUDIO_SAMPLE_EPSILON
+        {
+            last.end = last.end.max(range.end);
+        } else {
+            normalized.push(range);
+        }
+    }
+    *ranges = normalized;
+}
+
+fn normalize_source_audio_cuts(cuts: &mut Vec<SourceAudioCut>) {
+    cuts.retain(|cut| cut.time.is_finite());
+    cuts.sort_by(|left, right| {
+        left.recording_clip
+            .cmp(&right.recording_clip)
+            .then_with(|| left.time.total_cmp(&right.time))
+    });
+    cuts.dedup_by(|right, left| {
+        left.recording_clip == right.recording_clip
+            && (left.time - right.time).abs() <= AudioConfiguration::SOURCE_AUDIO_SAMPLE_EPSILON
+    });
 }
 
 #[derive(Type, Serialize, Deserialize, Clone, Debug, Default, PartialEq, Eq)]
@@ -2660,6 +2798,64 @@ mod notch_tests {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn legacy_audio_configuration_defaults_source_tracks() {
+        let audio: AudioConfiguration = serde_json::from_str(
+            r#"{"mute":false,"improve":false,"micVolumeDb":0.0,"micStereoMode":"stereo","systemVolumeDb":0.0}"#,
+        )
+        .unwrap();
+
+        assert!(!audio.microphone_track.expanded);
+        assert!(audio.microphone_track.muted_ranges.is_empty());
+        assert!(audio.microphone_track.cuts.is_empty());
+        assert!(!audio.system_audio_track.expanded);
+        assert!(audio.system_audio_track.muted_ranges.is_empty());
+        assert!(audio.system_audio_track.cuts.is_empty());
+    }
+
+    #[test]
+    fn source_audio_mute_ranges_are_source_specific_and_normalized() {
+        let mut audio = AudioConfiguration::default();
+
+        audio.mute_source_range(SourceAudioKind::Microphone, 2, 1.0, 2.0);
+        audio.mute_source_range(SourceAudioKind::Microphone, 2, 1.5, 3.0);
+
+        assert!(audio.source_is_muted(SourceAudioKind::Microphone, 2, 2.5));
+        assert!(!audio.source_is_muted(SourceAudioKind::SystemAudio, 2, 2.5));
+        assert_eq!(
+            audio.microphone_track.muted_ranges,
+            vec![SourceAudioRange {
+                recording_clip: 2,
+                start: 1.0,
+                end: 3.0,
+            }]
+        );
+    }
+
+    #[test]
+    fn source_audio_cuts_deduplicate_within_one_sample() {
+        let mut audio = AudioConfiguration::default();
+        let sample = 1.0 / 48_000.0;
+
+        audio.add_source_cut(SourceAudioKind::SystemAudio, 1, 2.0);
+        audio.add_source_cut(SourceAudioKind::SystemAudio, 1, 2.0 + sample / 2.0);
+        audio.add_source_cut(SourceAudioKind::SystemAudio, 1, 2.0 + sample * 2.0);
+
+        assert_eq!(audio.system_audio_track.cuts.len(), 2);
+    }
+
+    #[test]
+    fn source_audio_edits_reject_invalid_ranges_and_times() {
+        let mut audio = AudioConfiguration::default();
+
+        audio.mute_source_range(SourceAudioKind::Microphone, 0, 1.0, 1.0);
+        audio.mute_source_range(SourceAudioKind::Microphone, 0, f64::NAN, 2.0);
+        audio.add_source_cut(SourceAudioKind::Microphone, 0, f64::INFINITY);
+
+        assert!(audio.microphone_track.muted_ranges.is_empty());
+        assert!(audio.microphone_track.cuts.is_empty());
+    }
 
     fn timeline_with_transitions(transitions: Vec<ClipTransition>) -> TimelineConfiguration {
         TimelineConfiguration {
