@@ -1,7 +1,6 @@
 import { Button } from "@cap/ui-solid";
 import { Popover } from "@kobalte/core/popover";
 import { createEventListener } from "@solid-primitives/event-listener";
-import { createElementSize } from "@solid-primitives/resize-observer";
 import { makePersisted } from "@solid-primitives/storage";
 import { useSearchParams } from "@solidjs/router";
 import { createMutation, useQuery } from "@tanstack/solid-query";
@@ -103,6 +102,7 @@ import {
 	RecordingOptionsProvider,
 	useRecordingOptions,
 } from "./(window-chrome)/OptionsContext";
+import { CenterUpperRecordingControls } from "./pre-recording-controls";
 
 const MIN_SIZE = { width: 150, height: 150 };
 const MIN_SCREENSHOT_SIZE = { width: 1, height: 1 };
@@ -397,18 +397,20 @@ function Inner() {
 					<div class="flex justify-center w-full px-6 mb-4">
 						<CameraPreviewInline />
 					</div>
-					<RecordingControls
-						target={{ variant: "cameraOnly" } as ScreenCaptureTarget}
-						showBackground
-						onRecordingStart={dismissPickerForRecordingStart}
-						onClose={() => {
-							setOptions({
-								targetMode: null,
-								targetModeDismissal: "cancelled",
-							});
-							commands.closeTargetSelectOverlays();
-						}}
-					/>
+					<CenterUpperRecordingControls>
+						<RecordingControls
+							target={{ variant: "cameraOnly" } as ScreenCaptureTarget}
+							showBackground
+							onRecordingStart={dismissPickerForRecordingStart}
+							onClose={() => {
+								setOptions({
+									targetMode: null,
+									targetModeDismissal: "cancelled",
+								});
+								commands.closeTargetSelectOverlays();
+							}}
+						/>
+					</CenterUpperRecordingControls>
 				</div>
 			</Match>
 			<Match when={options.targetMode === "display" && params.displayId}>
@@ -451,18 +453,20 @@ function Inner() {
 							/>
 						</Show>
 
-						<RecordingControls
-							setToggleModeSelect={setToggleModeSelect}
-							target={{ variant: "display", id: displayId() }}
-							onRecordingStart={dismissPickerForRecordingStart}
-							onClose={() => {
-								setOptions({
-									targetMode: null,
-									targetModeDismissal: "cancelled",
-								});
-								commands.closeTargetSelectOverlays();
-							}}
-						/>
+						<CenterUpperRecordingControls>
+							<RecordingControls
+								setToggleModeSelect={setToggleModeSelect}
+								target={{ variant: "display", id: displayId() }}
+								onRecordingStart={dismissPickerForRecordingStart}
+								onClose={() => {
+									setOptions({
+										targetMode: null,
+										targetModeDismissal: "cancelled",
+									});
+									commands.closeTargetSelectOverlays();
+								}}
+							/>
+						</CenterUpperRecordingControls>
 						<ShowCapFreeWarning isInstantMode={options.mode === "instant"} />
 					</div>
 				)}
@@ -686,46 +690,48 @@ function Inner() {
 											</span>
 										</div>
 										<div onClick={(e) => e.stopPropagation()}>
-											<RecordingControls
-												target={{
-													variant: "window",
-													id: windowUnderCursor.id,
-												}}
-												onRecordingStart={() => {
-													setOriginalCameraBounds(null);
-													if (options.mode === "screenshot") {
-														// Only mark the dismissal here. takeScreenshot is
-														// invoked from THIS webview right after, and closing
-														// destroys the webview before the invoke is dispatched,
-														// so the screenshot silently never happens. The start
-														// handler hides these windows and closes them once the
-														// capture is done.
-														if (options.targetModeSource === "editor") {
-															setOptions({
-																targetMode: null,
-																targetModeSource: "editorRecording",
-																targetModeDismissal: "screenshot",
-															});
+											<CenterUpperRecordingControls>
+												<RecordingControls
+													target={{
+														variant: "window",
+														id: windowUnderCursor.id,
+													}}
+													onRecordingStart={() => {
+														setOriginalCameraBounds(null);
+														if (options.mode === "screenshot") {
+															// Only mark the dismissal here. takeScreenshot is
+															// invoked from THIS webview right after, and closing
+															// destroys the webview before the invoke is dispatched,
+															// so the screenshot silently never happens. The start
+															// handler hides these windows and closes them once the
+															// capture is done.
+															if (options.targetModeSource === "editor") {
+																setOptions({
+																	targetMode: null,
+																	targetModeSource: "editorRecording",
+																	targetModeDismissal: "screenshot",
+																});
+															} else {
+																setOptions({
+																	targetMode: null,
+																	targetModeDismissal: "screenshot",
+																});
+															}
 														} else {
-															setOptions({
-																targetMode: null,
-																targetModeDismissal: "screenshot",
-															});
+															dismissPickerForRecordingStart();
 														}
-													} else {
-														dismissPickerForRecordingStart();
-													}
-												}}
-												onClose={() => {
-													setSelectedWindow(null);
-													setLockedIcon(null);
-													setOptions({
-														targetMode: null,
-														targetModeDismissal: "cancelled",
-													});
-													commands.closeTargetSelectOverlays();
-												}}
-											/>
+													}}
+													onClose={() => {
+														setSelectedWindow(null);
+														setLockedIcon(null);
+														setOptions({
+															targetMode: null,
+															targetModeDismissal: "cancelled",
+														});
+														commands.closeTargetSelectOverlays();
+													}}
+												/>
+											</CenterUpperRecordingControls>
 										</div>
 
 										<Button
@@ -781,7 +787,6 @@ function Inner() {
 			</Match>
 			<Match when={options.targetMode === "area" && params.displayId}>
 				{(displayId) => {
-					let controlsEl: HTMLDivElement | undefined;
 					let cropperRef: CropperRef | undefined;
 
 					const [cameraWindow, setCameraWindow] =
@@ -1159,74 +1164,6 @@ function Inner() {
 						await menu.popup();
 					}
 
-					// Spacing rules:
-					// Prefer below the crop (smaller margin)
-					// If no space below, place above the crop (larger top margin)
-					// Otherwise, place inside at the top of the crop (small inner margin)
-					const macos = ostype() === "macos";
-					const SIDE_MARGIN = 16;
-					const MARGIN_BELOW = 16;
-					const MARGIN_TOP_OUTSIDE = 16;
-					const MARGIN_TOP_INSIDE = macos ? 40 : 28;
-					const TOP_SAFE_MARGIN = macos ? 40 : 10; // keep clear of notch on MacBooks
-
-					const controlsSize = createElementSize(() => controlsEl);
-					const [controllerInside, _setControllerInside] = createSignal(false);
-
-					// This is required due to the use of a ResizeObserver within the createElementSize function
-					// Otherwise there will be an infinite loop: ResizeObserver loop completed with undelivered notifications.
-					let raf: number | null = null;
-					function setControllerInside(value: boolean) {
-						if (raf) cancelAnimationFrame(raf);
-						raf = requestAnimationFrame(() => _setControllerInside(value));
-					}
-					onCleanup(() => {
-						if (raf) cancelAnimationFrame(raf);
-					});
-
-					const controlsStyle = createMemo(() => {
-						const bounds = crop();
-						const size = controlsSize;
-						if (!size?.width || !size?.height) return undefined;
-
-						if (size.width === 0 || bounds.width === 0) {
-							return { transform: "translate(-1000px, -1000px)" }; // Hide off-screen initially
-						}
-
-						const centerX = bounds.x + bounds.width / 2;
-						let finalY: number;
-
-						// Try below the crop
-						const belowY = bounds.y + bounds.height + MARGIN_BELOW;
-						if (belowY + size.height <= window.innerHeight) {
-							finalY = belowY;
-							setControllerInside(false);
-						} else {
-							// Try above the crop with a larger top margin
-							const aboveY = bounds.y - size.height - MARGIN_TOP_OUTSIDE;
-							if (aboveY >= TOP_SAFE_MARGIN) {
-								finalY = aboveY;
-								setControllerInside(false);
-							} else {
-								// Default to inside
-								finalY = bounds.y + MARGIN_TOP_INSIDE;
-								setControllerInside(true);
-							}
-						}
-
-						const finalX = Math.max(
-							SIDE_MARGIN,
-							Math.min(
-								centerX - size.width / 2,
-								window.innerWidth - size.width - SIDE_MARGIN,
-							),
-						);
-
-						return {
-							transform: `translate(${finalX}px, ${finalY}px)`,
-						};
-					});
-
 					createEffect(() => {
 						if (isInteracting()) return;
 						if (!isValid()) return;
@@ -1308,6 +1245,8 @@ function Inner() {
 							}
 						}
 					});
+
+					const macos = ostype() === "macos";
 
 					return (
 						<div
@@ -1430,11 +1369,7 @@ function Inner() {
 								</div>
 							</Show>
 
-							<div
-								ref={controlsEl}
-								class="fixed z-50 transition-opacity"
-								style={controlsStyle()}
-							>
+							<CenterUpperRecordingControls>
 								<div class="flex flex-col items-center">
 									<Show when={options.mode !== "screenshot"}>
 										<RecordingControls
@@ -1453,7 +1388,6 @@ function Inner() {
 												},
 											}}
 											disabled={!isValid()}
-											showBackground={controllerInside()}
 											onRecordingStart={() => {
 												persistLockedSelection();
 												setOriginalCameraBounds(null);
@@ -1490,7 +1424,7 @@ function Inner() {
 										/>
 									</Show>
 								</div>
-							</div>
+							</CenterUpperRecordingControls>
 
 							<SelectionHint show={shouldShowSelectionHint()} />
 
