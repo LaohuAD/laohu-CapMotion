@@ -26,8 +26,14 @@ import { useI18n } from "~/i18n";
 
 import "./styles.css";
 
+import { editorShortcutsStore } from "~/store";
 import { defaultCaptionSettings } from "~/store/captions";
 import { defaultKeyboardSettings } from "~/store/keyboard";
+import {
+	EDITOR_SHORTCUT_ACTIONS,
+	editorShortcutMatches,
+	normalizeEditorShortcuts,
+} from "~/utils/editor-shortcuts";
 import { commands } from "~/utils/tauri";
 import type { AudioTrackSegment } from "../audio";
 import {
@@ -39,6 +45,8 @@ import {
 import { FPS, type TimelineTrackType, useEditorContext } from "../context";
 import { defaultMaskSegment, type MaskSegment } from "../masks";
 import { autoTextColorAt, defaultTextSegment, type TextSegment } from "../text";
+import { resolveTimelineCommandTime } from "../timeline-commands";
+import { resolveTimelineWheelIntent } from "../timeline-wheel";
 import {
 	getSegmentTrack,
 	getTrackRowsWithCount,
@@ -188,6 +196,9 @@ export function Timeline(props: {
 
 	const duration = () => editorInstance.recordingDuration;
 	const transform = () => editorState.timeline.transform;
+	const editorShortcuts = editorShortcutsStore.createQuery();
+	const shortcutBindings = () =>
+		normalizeEditorShortcuts(editorShortcuts.data ?? undefined);
 
 	const [timelineContainerRef, setTimelineContainerRef] =
 		createSignal<HTMLDivElement>();
@@ -1023,48 +1034,63 @@ export function Timeline(props: {
 						projectActions.deleteSceneSegment(idx);
 					});
 			}
-		} else if (e.code === "KeyC" && hasNoModifiers) {
-			// Allow cutting while playing: use playbackTime when previewTime is null
-			const time = editorState.previewTime ?? editorState.playbackTime;
-			if (time === null || time === undefined) return;
+		} else {
+			const command = EDITOR_SHORTCUT_ACTIONS.find((action) =>
+				editorShortcutMatches(shortcutBindings()[action], e),
+			);
+			if (command) {
+				const selection = editorState.timeline.selection;
+				if (!selection || selection.type === "transition") return;
+				e.preventDefault();
+				projectActions.executeTimelineEditCommand(
+					selection.type,
+					selection.indices,
+					resolveTimelineCommandTime(
+						editorState.previewTime,
+						editorState.playbackTime,
+					),
+					command,
+				);
+				return;
+			}
 
-			projectActions.splitClipSegment(time);
-		} else if (e.code === "Escape" && hasNoModifiers) {
-			// Deselect all selected segments
-			setEditorState("timeline", "selection", null);
-			setEditorState("timeline", "audioPicker", null);
-			setEditorState("timeline", "camera3dSetup", null);
-		} else if (
-			e.code === "KeyA" &&
-			(e.metaKey || e.ctrlKey) &&
-			!e.shiftKey &&
-			!e.altKey
-		) {
-			// Cmd/Ctrl+A expands the current selection to every segment on the
-			// same track.
-			const selection = editorState.timeline.selection;
-			if (!selection || selection.type === "transition") return;
+			if (e.code === "Escape" && hasNoModifiers) {
+				// Deselect all selected segments
+				setEditorState("timeline", "selection", null);
+				setEditorState("timeline", "audioPicker", null);
+				setEditorState("timeline", "camera3dSetup", null);
+			} else if (
+				e.code === "KeyA" &&
+				(e.metaKey || e.ctrlKey) &&
+				!e.shiftKey &&
+				!e.altKey
+			) {
+				// Cmd/Ctrl+A expands the current selection to every segment on the
+				// same track.
+				const selection = editorState.timeline.selection;
+				if (!selection || selection.type === "transition") return;
 
-			const timeline = project.timeline;
-			const segmentCount = {
-				clip: timeline?.segments.length ?? 0,
-				motion: project.motion.segments.length,
-				zoom: timeline?.zoomSegments?.length ?? 0,
-				scene: timeline?.sceneSegments?.length ?? 0,
-				mask: timeline?.maskSegments?.length ?? 0,
-				caption: timeline?.captionSegments?.length ?? 0,
-				keyboard: timeline?.keyboardSegments?.length ?? 0,
-				text: timeline?.textSegments?.length ?? 0,
-				audio: timeline?.audioSegments?.length ?? 0,
-				"3d": timeline?.camera3dSegments?.length ?? 0,
-			}[selection.type];
-			if (!segmentCount) return;
+				const timeline = project.timeline;
+				const segmentCount = {
+					clip: timeline?.segments.length ?? 0,
+					motion: project.motion.segments.length,
+					zoom: timeline?.zoomSegments?.length ?? 0,
+					scene: timeline?.sceneSegments?.length ?? 0,
+					mask: timeline?.maskSegments?.length ?? 0,
+					caption: timeline?.captionSegments?.length ?? 0,
+					keyboard: timeline?.keyboardSegments?.length ?? 0,
+					text: timeline?.textSegments?.length ?? 0,
+					audio: timeline?.audioSegments?.length ?? 0,
+					"3d": timeline?.camera3dSegments?.length ?? 0,
+				}[selection.type];
+				if (!segmentCount) return;
 
-			e.preventDefault();
-			setEditorState("timeline", "selection", {
-				type: selection.type,
-				indices: Array.from({ length: segmentCount }, (_, i) => i),
-			});
+				e.preventDefault();
+				setEditorState("timeline", "selection", {
+					type: selection.type,
+					indices: Array.from({ length: segmentCount }, (_, i) => i),
+				});
+			}
 		}
 	});
 
@@ -1210,22 +1236,25 @@ export function Timeline(props: {
 					setEditorState("previewTime", null);
 				}}
 				onWheel={(e) => {
-					if (e.ctrlKey) {
-						const zoomDelta = (e.deltaY * Math.sqrt(transform().zoom)) / 30;
+					e.preventDefault();
+					const intent = resolveTimelineWheelIntent({
+						deltaX: e.deltaX,
+						deltaY: e.deltaY,
+						ctrlKey: e.ctrlKey,
+						metaKey: e.metaKey,
+						shiftKey: e.shiftKey,
+						platform: platform(),
+					});
+
+					if (intent.type === "zoom") {
+						const zoomDelta = (intent.delta * Math.sqrt(transform().zoom)) / 30;
 						const origin = editorState.previewTime ?? editorState.playbackTime;
 						scheduleZoomUpdate(zoomDelta, origin);
+					} else if (intent.type === "vertical") {
+						const scroll = timelineScrollRef();
+						if (scroll) scroll.scrollTop += intent.delta;
 					} else {
-						let delta: number = 0;
-
-						if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.5) {
-							delta = e.deltaX;
-						} else if (platform() === "macos") {
-							delta = e.shiftKey ? e.deltaX : e.deltaY;
-						} else {
-							delta = e.deltaY;
-						}
-
-						scheduleScrollUpdate(secsPerPixel() * delta);
+						scheduleScrollUpdate(secsPerPixel() * intent.delta);
 					}
 				}}
 			>
@@ -1347,11 +1376,6 @@ export function Timeline(props: {
 					<div
 						ref={setTimelineScrollRef}
 						class="absolute inset-0 overflow-y-auto overflow-x-hidden pr-1"
-						onWheel={(e) => {
-							if (!e.ctrlKey && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-								e.stopPropagation();
-							}
-						}}
 					>
 						<div class="flex flex-col gap-2 min-h-full">
 							<TrackRow icon={trackIcons.clip} label="Video" type="clip">

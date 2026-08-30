@@ -12,8 +12,18 @@ import {
 	Switch,
 } from "solid-js";
 import { createStore } from "solid-js/store";
+import toast from "solid-toast";
 import { type TranslationKey, useI18n } from "~/i18n";
-import { hotkeysStore } from "~/store";
+import { editorShortcutsStore, hotkeysStore } from "~/store";
+import {
+	DEFAULT_EDITOR_SHORTCUTS,
+	EDITOR_SHORTCUT_ACTIONS,
+	type EditorShortcutAction,
+	type EditorShortcutBinding,
+	type EditorShortcutsStore,
+	editorShortcutConflict,
+	normalizeEditorShortcuts,
+} from "~/utils/editor-shortcuts";
 
 import {
 	commands,
@@ -38,18 +48,34 @@ const ACTION_TEXT = {
 	screenshotArea: "shortcuts.action.screenshotArea",
 } satisfies { [K in HotkeyAction]?: TranslationKey };
 
+const EDITOR_ACTION_TEXT: Record<EditorShortcutAction, TranslationKey> = {
+	trimPrevious: "shortcuts.editor.trimPrevious",
+	splitAtCursor: "shortcuts.editor.splitAtCursor",
+	trimNext: "shortcuts.editor.trimNext",
+};
+
 export default function () {
-	const [store] = createResource(() => hotkeysStore.get());
+	const [stores] = createResource(async () =>
+		Promise.all([hotkeysStore.get(), editorShortcutsStore.get()]),
+	);
 
 	return (
-		<Show when={store.state === "ready" && ([store()] as const)}>
-			{(store) => <Inner initialStore={store()[0] ?? null} />}
+		<Show when={stores.state === "ready" && ([stores()] as const)}>
+			{(stores) => (
+				<Inner
+					initialStore={stores()[0]?.[0] ?? null}
+					initialEditorStore={stores()[0]?.[1] ?? null}
+				/>
+			)}
 		</Show>
 	);
 }
 
 const MODIFIER_KEYS = new Set(["Meta", "Shift", "Control", "Alt"]);
-function Inner(props: { initialStore: HotkeysStore | null }) {
+function Inner(props: {
+	initialStore: HotkeysStore | null;
+	initialEditorStore: EditorShortcutsStore | null;
+}) {
 	const { t } = useI18n();
 	const [hotkeys, setHotkeys] = createStore<{
 		[K in HotkeyAction]?: Hotkey;
@@ -58,11 +84,21 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 	createEffect(() => {
 		hotkeysStore.set({ hotkeys: { ...hotkeys } as HotkeysStore["hotkeys"] });
 	});
+	const [editorHotkeys, setEditorHotkeys] = createStore(
+		normalizeEditorShortcuts(props.initialEditorStore),
+	);
+	createEffect(() => {
+		editorShortcutsStore.set({ version: 1, bindings: { ...editorHotkeys } });
+	});
 
-	const [listening, setListening] = createSignal<{
-		action: HotkeyAction;
-		prev?: Hotkey;
-	}>();
+	const [listening, setListening] = createSignal<
+		| { scope: "global"; action: HotkeyAction; prev?: Hotkey }
+		| {
+				scope: "editor";
+				action: EditorShortcutAction;
+				prev: EditorShortcutBinding | null;
+		  }
+	>();
 
 	createEventListener(window, "keydown", (e) => {
 		if (MODIFIER_KEYS.has(e.key)) return;
@@ -78,8 +114,21 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 		const l = listening();
 		if (l) {
 			e.preventDefault();
-
-			setHotkeys(l.action, data);
+			if (l.scope === "global") {
+				setHotkeys(l.action, data);
+			} else {
+				const conflict = editorShortcutConflict(editorHotkeys, l.action, data);
+				if (conflict) {
+					toast.error(
+						t("shortcuts.editor.conflict").replace(
+							"{action}",
+							t(EDITOR_ACTION_TEXT[conflict]),
+						),
+					);
+					return;
+				}
+				setEditorHotkeys(l.action, data);
+			}
 		}
 	});
 
@@ -110,10 +159,12 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 						<Index each={actions()}>
 							{(item, idx) => {
 								createEventListener(window, "click", () => {
-									if (listening()?.action !== item()) return;
+									const current = listening();
+									if (current?.scope !== "global" || current.action !== item())
+										return;
 
 									batch(() => {
-										setHotkeys(item(), listening()?.prev);
+										setHotkeys(item(), current.prev);
 										setListening();
 									});
 								});
@@ -125,7 +176,12 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 												{t(ACTION_TEXT[item()])}
 											</p>
 											<Switch>
-												<Match when={listening()?.action === item()}>
+												<Match
+													when={
+														listening()?.scope === "global" &&
+														listening()?.action === item()
+													}
+												>
 													<div class="flex flex-row-reverse gap-2 justify-between items-center h-full text-sm rounded-lg w-fit">
 														<Show
 															when={hotkeys[item()]}
@@ -173,7 +229,12 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 														</div>
 													</div>
 												</Match>
-												<Match when={listening()?.action !== item()}>
+												<Match
+													when={
+														listening()?.scope !== "global" ||
+														listening()?.action !== item()
+													}
+												>
 													<button
 														type="button"
 														class="text-sm bg-transparent rounded-lg"
@@ -181,6 +242,7 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 															// ensures that previously selected hotkey is cleared by letting the event propagate before listening to the new hotkey
 															setTimeout(() => {
 																setListening({
+																	scope: "global",
 																	action: item(),
 																	prev: hotkeys[item()],
 																});
@@ -205,6 +267,125 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 											</Switch>
 										</div>
 										{idx !== actions().length - 1 && (
+											<div class="w-full h-px bg-gray-3" />
+										)}
+									</>
+								);
+							}}
+						</Index>
+					</SectionCard>
+				</Section>
+				<Section
+					title={t("shortcuts.editor.title")}
+					description={t("shortcuts.editor.description")}
+				>
+					<div class="flex justify-end mb-2">
+						<button
+							type="button"
+							class="px-3 h-8 text-[12px] rounded-lg border border-gray-5 bg-gray-3 text-gray-11 hover:text-gray-12 hover:bg-gray-4"
+							onClick={() => {
+								batch(() => {
+									for (const action of EDITOR_SHORTCUT_ACTIONS) {
+										setEditorHotkeys(action, {
+											...DEFAULT_EDITOR_SHORTCUTS[action],
+										});
+									}
+									setListening();
+								});
+							}}
+						>
+							{t("shortcuts.editor.reset")}
+						</button>
+					</div>
+					<SectionCard class="flex flex-col gap-3 p-4">
+						<Index each={EDITOR_SHORTCUT_ACTIONS}>
+							{(item, idx) => {
+								createEventListener(window, "click", () => {
+									const current = listening();
+									if (current?.scope !== "editor" || current.action !== item())
+										return;
+									batch(() => {
+										setEditorHotkeys(item(), current.prev);
+										setListening();
+									});
+								});
+
+								return (
+									<>
+										<div class="flex flex-row justify-between items-center w-full h-8">
+											<p class="text-[13px] text-gray-12">
+												{t(EDITOR_ACTION_TEXT[item()])}
+											</p>
+											<Show
+												when={
+													listening()?.scope === "editor" &&
+													listening()?.action === item()
+												}
+												fallback={
+													<button
+														type="button"
+														class="text-sm bg-transparent rounded-lg"
+														onClick={() =>
+															setTimeout(
+																() =>
+																	setListening({
+																		scope: "editor",
+																		action: item(),
+																		prev: editorHotkeys[item()],
+																	}),
+																1,
+															)
+														}
+													>
+														<Show
+															when={editorHotkeys[item()]}
+															fallback={
+																<p class="flex items-center text-[11px] uppercase py-3 px-2.5 h-5 bg-gray-4 border border-gray-5 rounded-lg text-gray-11 hover:text-gray-12">
+																	{t("shortcuts.none")}
+																</p>
+															}
+														>
+															{(binding) => <HotkeyText binding={binding()} />}
+														</Show>
+													</button>
+												}
+											>
+												<div class="flex flex-row-reverse gap-2 items-center h-full">
+													<Show
+														when={editorHotkeys[item()]}
+														fallback={
+															<p class="text-[13px] text-gray-11">
+																{t("shortcuts.setPrompt")}
+															</p>
+														}
+													>
+														{(binding) => <HotkeyText binding={binding()} />}
+													</Show>
+													<button
+														type="button"
+														onClick={(e) => {
+															e.stopPropagation();
+															setListening();
+														}}
+													>
+														<IconCapCircleCheck class="size-5 text-gray-12" />
+													</button>
+													<button
+														type="button"
+														onClick={(e) => {
+															e.stopPropagation();
+															batch(() => {
+																setEditorHotkeys(item(), null);
+																setListening();
+															});
+														}}
+													>
+														<IconCapCircleX class="size-5 text-red-500" />
+													</button>
+												</div>
+											</Show>
+										</div>
+										{idx !== EDITOR_SHORTCUT_ACTIONS.length - 1 && (
 											<div class="w-full h-px bg-gray-3" />
 										)}
 									</>

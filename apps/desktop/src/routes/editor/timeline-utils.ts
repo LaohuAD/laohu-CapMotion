@@ -5,6 +5,7 @@ import {
 	transitionsAfterClipDelete,
 	transitionsAfterClipSplit,
 } from "./clip-transitions";
+import { type Camera3DSegment, scaleKeyframeTimes } from "./three-d";
 import {
 	effectiveToOutput,
 	effectiveToOutputEnd,
@@ -161,6 +162,7 @@ export function rippleDeleteAllTracks(
 		captionSegments?: Array<{ start: number; end: number }> | null;
 		keyboardSegments?: Array<{ start: number; end: number }> | null;
 		audioSegments?: Array<{ start: number; end: number }> | null;
+		camera3dSegments?: Camera3DSegment[] | null;
 	},
 	cutStart: number,
 	cutEnd: number,
@@ -243,6 +245,31 @@ export function rippleDeleteAllTracks(
 			overlayCutEnd,
 			overlayShift,
 		);
+	if (timeline.camera3dSegments) {
+		const previousDurations = new Map(
+			timeline.camera3dSegments.map((segment) => [
+				segment,
+				segment.end - segment.start,
+			]),
+		);
+		rippleDeleteFromTrack(
+			timeline.camera3dSegments,
+			overlayCutStart,
+			overlayCutEnd,
+			overlayShift,
+		);
+		for (const segment of timeline.camera3dSegments) {
+			const previousDuration = previousDurations.get(segment);
+			const nextDuration = segment.end - segment.start;
+			if (
+				!previousDuration ||
+				nextDuration <= 0 ||
+				nextDuration === previousDuration
+			)
+				continue;
+			scaleKeyframeTimes(segment.tracks, nextDuration / previousDuration);
+		}
+	}
 	if (motionSegments)
 		rippleDeleteFromTrack(
 			motionSegments,

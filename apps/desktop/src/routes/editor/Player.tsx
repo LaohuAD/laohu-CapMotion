@@ -1,5 +1,4 @@
 import { Select as KSelect } from "@kobalte/core/select";
-import { ToggleButton as KToggleButton } from "@kobalte/core/toggle-button";
 import { createElementBounds } from "@solid-primitives/bounds";
 import { debounce } from "@solid-primitives/scheduled";
 import { Menu } from "@tauri-apps/api/menu";
@@ -9,7 +8,12 @@ import { createEffect, createSignal, onMount, Show } from "solid-js";
 
 import Tooltip from "~/components/Tooltip";
 import { useI18n } from "~/i18n";
+import { editorShortcutsStore } from "~/store";
 import { captionsStore } from "~/store/captions";
+import {
+	editorShortcutDisplayKeys,
+	normalizeEditorShortcuts,
+} from "~/utils/editor-shortcuts";
 import { commands } from "~/utils/tauri";
 import AspectRatioSelect from "./AspectRatioSelect";
 import {
@@ -55,7 +59,29 @@ export function PlayerContent() {
 		previewResolutionBase,
 		previewQuality,
 		setPreviewQuality,
+		projectActions,
 	} = useEditorContext();
+	const editorShortcuts = editorShortcutsStore.createQuery();
+	const shortcutBindings = () =>
+		normalizeEditorShortcuts(editorShortcuts.data ?? undefined);
+	const shortcutKeys = (
+		action: "trimPrevious" | "splitAtCursor" | "trimNext",
+	) => {
+		const binding = shortcutBindings()[action];
+		return binding ? editorShortcutDisplayKeys(binding) : [];
+	};
+	const runTimelineCommand = (
+		command: "trimPrevious" | "splitAtCursor" | "trimNext",
+	) => {
+		const selection = editorState.timeline.selection;
+		if (!selection || selection.type === "transition") return;
+		projectActions.executeTimelineEditCommand(
+			selection.type,
+			selection.indices,
+			editorState.previewTime ?? editorState.playbackTime,
+			command,
+		);
+	};
 
 	const previewOptions = [
 		{ label: "Full", value: "full" as EditorPreviewQuality },
@@ -247,15 +273,6 @@ export function PlayerContent() {
 		);
 	}, [
 		{
-			combo: "S",
-			handler: () =>
-				setEditorState(
-					"timeline",
-					"interactMode",
-					editorState.timeline.interactMode === "split" ? "seek" : "split",
-				),
-		},
-		{
 			combo: "Mod+=",
 			handler: () =>
 				editorState.timeline.transform.updateZoom(
@@ -412,25 +429,26 @@ export function PlayerContent() {
 				</div>
 				<div class="flex flex-row flex-1 gap-4 justify-end items-center">
 					<div class="flex-1" />
-					<EditorButton<typeof KToggleButton>
-						tooltipText={text("Toggle Split")}
-						kbd={["S"]}
-						pressed={editorState.timeline.interactMode === "split"}
-						onChange={(v: boolean) =>
-							setEditorState("timeline", "interactMode", v ? "split" : "seek")
-						}
-						as={KToggleButton}
-						variant="danger"
-						leftIcon={
-							<IconCapScissors
-								class={cx(
-									editorState.timeline.interactMode === "split"
-										? "text-white"
-										: "text-gray-12",
-								)}
-							/>
-						}
-					/>
+					<div class="flex items-center gap-1">
+						<EditorButton
+							tooltipText={text("Trim before playhead")}
+							kbd={shortcutKeys("trimPrevious")}
+							onClick={() => runTimelineCommand("trimPrevious")}
+							leftIcon={<IconLucidePanelRight class="size-4 rotate-180" />}
+						/>
+						<EditorButton
+							tooltipText={text("Split at playhead")}
+							kbd={shortcutKeys("splitAtCursor")}
+							onClick={() => runTimelineCommand("splitAtCursor")}
+							leftIcon={<IconCapScissors class="size-4" />}
+						/>
+						<EditorButton
+							tooltipText={text("Trim after playhead")}
+							kbd={shortcutKeys("trimNext")}
+							onClick={() => runTimelineCommand("trimNext")}
+							leftIcon={<IconLucidePanelRight class="size-4" />}
+						/>
+					</div>
 					<div class="w-px h-8 rounded-full bg-gray-4" />
 					<Tooltip kbd={["meta", "-"]} content={text("Zoom out")}>
 						<IconCapZoomOut

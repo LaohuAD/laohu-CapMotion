@@ -78,7 +78,11 @@ import {
 } from "./clip-transitions";
 import { normalizeColorCorrection } from "./colorCorrection";
 import type { MaskSegment } from "./masks";
-import { type MotionProjectFields, normalizeMotionFields } from "./motion";
+import {
+	type MotionProjectFields,
+	normalizeMotionFields,
+	staleLinkedArtifact,
+} from "./motion";
 import type { SnapGuide } from "./snapping";
 import type { TextSegment } from "./text";
 import {
@@ -96,10 +100,15 @@ import {
 	setMotion,
 } from "./three-d";
 import {
+	type TimelineEditCommand,
+	trimOverlaySegmentAtTime,
+} from "./timeline-commands";
+import {
 	heldTimeBefore,
 	holdWindows,
 	totalHeldDuration,
 } from "./timeline-holds";
+import { rippleDeleteAllTracks } from "./timeline-utils";
 import {
 	getUsedTrackCount,
 	normalizeTrackSegments,
@@ -483,8 +492,271 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 			);
 		};
 
+		const splitOverlayAtTime = <T extends { start: number; end: number }>(
+			segments: T[] | null | undefined,
+			index: number,
+			time: number,
+			minimumDuration: number,
+			createRight?: (segment: T) => T,
+		) => {
+			const segment = segments?.[index];
+			if (!segment) return false;
+			if (
+				time - segment.start < minimumDuration ||
+				segment.end - time < minimumDuration
+			)
+				return false;
+
+			const originalEnd = segment.end;
+			const right = createRight ? createRight(segment) : ({ ...segment } as T);
+			segment.end = time;
+			right.start = time;
+			right.end = originalEnd;
+			segments?.splice(index + 1, 0, right);
+			return true;
+		};
+
 		const projectActions = {
 			setClipTransition,
+			executeTimelineEditCommand: (
+				type: TimelineTrackType,
+				selectedIndices: number[],
+				outputTime: number,
+				command: TimelineEditCommand,
+			) => {
+				if (!Number.isFinite(outputTime) || selectedIndices.length === 0) {
+					return false;
+				}
+
+				let didEdit = false;
+				setProject(
+					produce((project) => {
+						const timeline = project.timeline;
+						if (!timeline) return;
+						const indices = [...new Set(selectedIndices)]
+							.filter((index) => Number.isInteger(index) && index >= 0)
+							.sort((a, b) => b - a);
+
+						if (type === "clip") {
+							const effectiveTime =
+								outputTime -
+								heldTimeBefore(holdWindows(timeline.textSegments), outputTime);
+							const offsets = clipTimelineOffsets(
+								timeline.segments,
+								timeline.transitions ?? [],
+							);
+							const index = indices.find((candidate) => {
+								const segment = timeline.segments[candidate];
+								if (!segment) return false;
+								const start = offsets[candidate];
+								const end = start + clipDuration(segment);
+								return effectiveTime > start && effectiveTime < end;
+							});
+							if (index === undefined) return;
+
+							const segment = timeline.segments[index];
+							const segmentStart = offsets[index];
+							const segmentEnd = segmentStart + clipDuration(segment);
+							if (command === "splitAtCursor") {
+								const localTime = effectiveTime - segmentStart;
+								const incomingDuration =
+									getClipTransition(
+										timeline.segments,
+										timeline.transitions ?? [],
+										index,
+									)?.duration ?? 0;
+								const outgoingDuration =
+									getClipTransition(
+										timeline.segments,
+										timeline.transitions ?? [],
+										index + 1,
+									)?.duration ?? 0;
+								if (
+									localTime < incomingDuration * 2 ||
+									segmentEnd - effectiveTime < outgoingDuration * 2
+								)
+									return;
+								const recordingCut = localTime * segment.timescale;
+								timeline.segments.splice(index + 1, 0, {
+									...segment,
+									start: segment.start + recordingCut,
+									end: segment.end,
+								});
+								timeline.segments[index].end = segment.start + recordingCut;
+								timeline.transitions = transitionsAfterClipSplit(
+									timeline.transitions ?? [],
+									index,
+								);
+								didEdit = true;
+								return;
+							}
+
+							const cutStart =
+								command === "trimPrevious" ? segmentStart : effectiveTime;
+							const cutEnd =
+								command === "trimPrevious" ? effectiveTime : segmentEnd;
+							if (cutEnd - cutStart <= 0.001) return;
+							rippleDeleteAllTracks(
+								timeline,
+								cutStart,
+								cutEnd,
+								index,
+								project.motion.segments,
+							);
+							timeline.transitions = normalizeClipTransitions(
+								timeline.segments,
+								timeline.transitions ?? [],
+							);
+							didEdit = true;
+							return;
+						}
+
+						const editGenericTrack = <T extends { start: number; end: number }>(
+							segments: T[] | null | undefined,
+							minimumDuration: number,
+							createRight?: (segment: T) => T,
+						) => {
+							for (const index of indices) {
+								const segment = segments?.[index];
+								if (
+									!segment ||
+									outputTime <= segment.start ||
+									outputTime >= segment.end
+								)
+									continue;
+								if (command === "splitAtCursor") {
+									didEdit =
+										splitOverlayAtTime(
+											segments,
+											index,
+											outputTime,
+											minimumDuration,
+											createRight,
+										) || didEdit;
+								} else {
+									didEdit =
+										trimOverlaySegmentAtTime(
+											segment,
+											outputTime,
+											command,
+											minimumDuration,
+										) || didEdit;
+								}
+							}
+							if (segments) sortTrackSegments(segments);
+						};
+
+						switch (type) {
+							case "zoom":
+								editGenericTrack(timeline.zoomSegments, 1);
+								break;
+							case "scene":
+								editGenericTrack(timeline.sceneSegments, 1);
+								break;
+							case "mask":
+								editGenericTrack(timeline.maskSegments, 1);
+								break;
+							case "text":
+								editGenericTrack(timeline.textSegments, 1);
+								break;
+							case "caption":
+								editGenericTrack(timeline.captionSegments, 0.5, (segment) => ({
+									...segment,
+									id: `cap-split-${crypto.randomUUID()}`,
+								}));
+								break;
+							case "keyboard":
+								editGenericTrack(timeline.keyboardSegments, 0.3, (segment) => ({
+									...segment,
+									id: `kb-split-${crypto.randomUUID()}`,
+								}));
+								break;
+							case "audio":
+								editGenericTrack(
+									timeline.audioSegments,
+									MIN_AUDIO_SEGMENT_DURATION,
+									(segment) => {
+										segment.fadeOut = 0;
+										return {
+											...segment,
+											trimStart:
+												segment.trimStart + (outputTime - segment.start),
+											fadeIn: 0,
+										};
+									},
+								);
+								break;
+							case "motion":
+								editGenericTrack(project.motion.segments, 0.1, (segment) => ({
+									...segment,
+									id: `motion-${crypto.randomUUID()}`,
+									artifactId: null,
+								}));
+								for (const index of indices) {
+									const segment = project.motion.segments[index];
+									if (segment) staleLinkedArtifact(project.motion, segment);
+								}
+								break;
+							case "3d":
+								for (const index of indices) {
+									const segment = timeline.camera3dSegments?.[index];
+									if (
+										!segment ||
+										outputTime <= segment.start ||
+										outputTime >= segment.end
+									)
+										continue;
+									const leftDuration = outputTime - segment.start;
+									const rightDuration = segment.end - outputTime;
+									if (
+										(command === "splitAtCursor" &&
+											(leftDuration < 1 || rightDuration < 1)) ||
+										(command === "trimPrevious" && rightDuration < 1) ||
+										(command === "trimNext" && leftDuration < 1)
+									)
+										continue;
+									const startPose = getStartPose(segment);
+									const midPose = evaluatePose(segment, leftDuration);
+									const endPose = getEndPose(segment);
+									const easing = getMotionEasing(segment);
+									if (command === "splitAtCursor") {
+										const right: Camera3DSegment = {
+											...segment,
+											start: outputTime,
+											end: segment.end,
+											properties: { ...segment.properties },
+											blur: { ...segment.blur },
+											tracks: defaultCamera3DTracks(),
+										};
+										setMotion(right, midPose, endPose, easing);
+										timeline.camera3dSegments?.splice(index + 1, 0, right);
+										segment.end = outputTime;
+										segment.tracks = defaultCamera3DTracks();
+										setMotion(segment, startPose, midPose, easing);
+									} else if (command === "trimPrevious") {
+										segment.start = outputTime;
+										segment.tracks = defaultCamera3DTracks();
+										setMotion(segment, midPose, endPose, easing);
+									} else {
+										segment.end = outputTime;
+										segment.tracks = defaultCamera3DTracks();
+										setMotion(segment, startPose, midPose, easing);
+									}
+									didEdit = true;
+								}
+								if (timeline.camera3dSegments)
+									sortTrackSegments(timeline.camera3dSegments);
+								break;
+						}
+					}),
+				);
+
+				if (didEdit) {
+					setEditorState("timeline", "selection", null);
+					setEditorState("previewTime", null);
+				}
+				return didEdit;
+			},
 			normalizeClipTransitions: () => {
 				setProject(
 					produce((project) => {
