@@ -880,8 +880,8 @@ impl ZoomTransformTimeline {
                         };
                         let cursor = map_cursor(recording_secs as f32)
                             .unwrap_or((f64::from(x), f64::from(y)));
-                        let default_horizon = cap_project::ManualFollowConfig::default()
-                            .prediction_horizon_secs;
+                        let default_horizon =
+                            cap_project::ManualFollowConfig::default().prediction_horizon_secs;
                         let horizon = if config.prediction_horizon_secs.is_finite()
                             && config.prediction_horizon_secs >= 0.0
                         {
@@ -889,8 +889,8 @@ impl ZoomTransformTimeline {
                         } else {
                             default_horizon
                         };
-                        let framing_cursor = map_cursor(recording_secs as f32 + horizon)
-                            .unwrap_or(cursor);
+                        let framing_cursor =
+                            map_cursor(recording_secs as f32 + horizon).unwrap_or(cursor);
                         let cursor_speed = if horizon > f32::EPSILON {
                             let dx = framing_cursor.0 - cursor.0;
                             let dy = framing_cursor.1 - cursor.1;

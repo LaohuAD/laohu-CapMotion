@@ -47,15 +47,13 @@ pub fn advance_manual_follow(
         defaults.comfort_zone_ratio
     };
     let outer_guard_ratio = if config.outer_guard_ratio.is_finite() {
-        config
-            .outer_guard_ratio
-            .clamp(comfort_zone_ratio, 1.0)
+        config.outer_guard_ratio.clamp(comfort_zone_ratio, 1.0)
     } else {
         defaults.outer_guard_ratio
     };
     let slow_response = positive_or(config.slow_response, defaults.slow_response);
-    let fast_response = positive_or(config.fast_response, defaults.fast_response)
-        .max(slow_response);
+    let fast_response =
+        positive_or(config.fast_response, defaults.fast_response).max(slow_response);
     let prediction_horizon_secs = non_negative_or(
         config.prediction_horizon_secs,
         defaults.prediction_horizon_secs,

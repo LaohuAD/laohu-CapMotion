@@ -4202,8 +4202,7 @@ fn project_config_from_recording(
         })
         .collect::<Vec<_>>();
 
-    let zoom_segments =
-        initial_recording_zoom_segments(&completed_recording.manual_zoom_segments);
+    let zoom_segments = initial_recording_zoom_segments(&completed_recording.manual_zoom_segments);
 
     if should_enable_notch_overlay(
         capture_target,
