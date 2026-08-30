@@ -46,6 +46,7 @@ import type {
 	RecordingInputKind,
 } from "~/utils/tauri";
 import { commands, events } from "~/utils/tauri";
+import { canToggleRecordingMic } from "./recording-mic-mute";
 
 type State =
 	| { variant: "initializing" }
@@ -509,18 +510,6 @@ function InProgressRecordingInner() {
 		},
 	}));
 
-	// Muting zeroes the mic samples backend-side while the stream keeps its
-	// normal cadence, so the recording timeline is unaffected. Only exposed for
-	// instant mode: studio records the mic as an editable track, where muted
-	// spans would silently bake zeros into it.
-	const canToggleMicMute = createMemo(
-		() =>
-			recordingMode() === "instant" &&
-			optionsQuery.rawOptions.micName != null &&
-			!disconnectedInputs.microphone &&
-			(state().variant === "recording" || state().variant === "paused"),
-	);
-
 	const toggleMicMute = createMutation(() => ({
 		mutationFn: async () => {
 			const next = !micMuted();
@@ -533,6 +522,15 @@ function InProgressRecordingInner() {
 			}
 		},
 	}));
+	const canToggleMicMute = createMemo(() =>
+		canToggleRecordingMic({
+			recordingMode: recordingMode(),
+			microphoneSelected: optionsQuery.rawOptions.micName != null,
+			microphoneDisconnected: disconnectedInputs.microphone,
+			sessionState: state().variant,
+			mutationPending: toggleMicMute.isPending,
+		}),
+	);
 
 	const restartRecording = createMutation(() => ({
 		mutationFn: async () => {

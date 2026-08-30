@@ -2683,6 +2683,10 @@ pub async fn resume_recording(app: AppHandle, state: MutableState<'_, App>) -> R
     Ok(())
 }
 
+fn recording_mic_mute_supported(mode: RecordingMode) -> bool {
+    matches!(mode, RecordingMode::Studio | RecordingMode::Instant)
+}
+
 #[tauri::command]
 #[specta::specta]
 #[instrument(skip(state))]
@@ -2696,15 +2700,13 @@ pub async fn set_mic_recording_muted(
         return Err("No recording in progress".to_string());
     };
 
+    if !recording_mic_mute_supported(recording.mode()) {
+        return Err("Mic mute is not available for this recording mode".to_string());
+    }
+
     let mic_feed = match recording {
-        InProgressRecording::Instant { mic_feed, .. } => mic_feed.as_ref(),
-        // Studio records the mic as an editable track; muting would silently
-        // bake zeros into it. The bar only offers mute for instant mode —
-        // enforce the same contract here so no future caller can corrupt a
-        // studio track.
-        InProgressRecording::Studio { .. } => {
-            return Err("Mic mute is only available for instant recordings".to_string());
-        }
+        InProgressRecording::Instant { mic_feed, .. }
+        | InProgressRecording::Studio { mic_feed, .. } => mic_feed.as_ref(),
     };
 
     let Some(mic_feed) = mic_feed else {
@@ -4541,6 +4543,13 @@ async fn emit_recording_started_telemetry(app: &AppHandle, state_mtx: &MutableSt
 mod tests {
     use super::*;
     use tempfile::tempdir;
+
+    #[test]
+    fn recording_mic_mute_policy_allows_studio_and_instant() {
+        assert!(recording_mic_mute_supported(RecordingMode::Studio));
+        assert!(recording_mic_mute_supported(RecordingMode::Instant));
+        assert!(!recording_mic_mute_supported(RecordingMode::Screenshot));
+    }
 
     #[test]
     fn recording_finalization_keeps_only_explicit_manual_zoom_segments() {
