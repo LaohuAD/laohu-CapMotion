@@ -8,6 +8,10 @@ import {
 	type RecordingStartSafetySettings,
 } from "~/utils/general-settings";
 import { createSerializedStore } from "~/utils/serialized-store";
+import {
+	DEFAULT_EDITOR_SHORTCUTS,
+	type EditorShortcutsStore,
+} from "~/utils/editor-shortcuts";
 import type {
 	AnimatedGradientLibrary,
 	AuthStore,
@@ -127,6 +131,13 @@ export const mainWindowUIStore = declareStore<MainWindowUIStore>(
 	{ expanded: false },
 );
 export const hotkeysStore = declareStore<HotkeysStore>("hotkeys");
+export const editorShortcutsStore = declareStore<EditorShortcutsStore>(
+	"editor_shortcuts",
+	{
+		version: 1,
+		bindings: DEFAULT_EDITOR_SHORTCUTS,
+	},
+);
 export const generalSettingsStore =
 	declareStore<GeneralSettingsStore>("general_settings");
 export const recordingStartSafetyStore =

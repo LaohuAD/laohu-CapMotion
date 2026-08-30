@@ -1197,6 +1197,66 @@ pub fn hotkey_from_value(value: &Value) -> Option<Hotkey> {
     serde_json::from_value(value.clone()).ok()
 }
 
+// -- Editor-local shortcuts --------------------------------------------------
+
+/// Editor bindings intentionally live outside the global-hotkey map. Bare
+/// Q/W/E must only be consumed while an editor window owns keyboard focus.
+pub const EDITOR_SHORTCUTS: &str = "editor_shortcuts";
+pub const EDITOR_SHORTCUT_ACTIONS: [&str; 3] = ["trimPrevious", "splitAtCursor", "trimNext"];
+
+pub fn default_editor_shortcut(action: &str) -> Option<Hotkey> {
+    let code = match action {
+        "trimPrevious" => "KeyQ",
+        "splitAtCursor" => "KeyW",
+        "trimNext" => "KeyE",
+        _ => return None,
+    };
+    Some(Hotkey {
+        code: code.into(),
+        meta: false,
+        ctrl: false,
+        alt: false,
+        shift: false,
+    })
+}
+
+/// Normalized editor bindings. Missing or malformed known actions receive
+/// defaults; an explicit JSON null remains unbound. Unknown actions and fields
+/// stay in the raw map when it is written back.
+pub fn editor_shortcuts_raw() -> Map<String, Value> {
+    let mut bindings = store_section(EDITOR_SHORTCUTS)
+        .remove("bindings")
+        .and_then(|value| value.as_object().cloned())
+        .unwrap_or_default();
+    for action in EDITOR_SHORTCUT_ACTIONS {
+        let valid = bindings
+            .get(action)
+            .is_some_and(|value| value.is_null() || hotkey_from_value(value).is_some());
+        if !valid {
+            bindings.insert(
+                action.into(),
+                serde_json::to_value(default_editor_shortcut(action).expect("known action"))
+                    .expect("hotkey serializes"),
+            );
+        }
+    }
+    bindings
+}
+
+pub fn editor_shortcut(action: &str) -> Option<Hotkey> {
+    editor_shortcuts_raw()
+        .get(action)
+        .and_then(hotkey_from_value)
+}
+
+pub fn set_editor_shortcuts_raw(bindings: &Map<String, Value>) -> bool {
+    set_store_setting(
+        EDITOR_SHORTCUTS,
+        "bindings",
+        Value::Object(bindings.clone()),
+    )
+}
+
 // -- Transcription hints --------------------------------------------------------
 
 /// `DEFAULT_TRANSCRIPTION_HINTS` (`apps/desktop/src/utils/general-settings.ts`).
@@ -2159,6 +2219,48 @@ mod tests {
         // The unknown action's binding -- including the field this build does
         // not model -- is still there.
         assert_eq!(after["hotkeys"]["hotkeys"]["someFutureAction"]["extra"], 1);
+    }
+
+    #[test]
+    fn editor_shortcuts_default_clear_and_preserve_future_actions() {
+        let store = TempStore::new(
+            "editor-shortcuts",
+            Some(
+                r#"{ "editor_shortcuts": { "version": 1, "future": true, "bindings": {
+  "trimPrevious": null,
+  "someFutureAction": { "code": "F13", "meta": false, "ctrl": false, "alt": false, "shift": false, "extra": 1 }
+} } }"#,
+            ),
+        );
+
+        let mut bindings = editor_shortcuts_raw();
+        assert!(bindings["trimPrevious"].is_null());
+        assert_eq!(editor_shortcut("splitAtCursor").unwrap().code, "KeyW");
+        assert_eq!(editor_shortcut("trimNext").unwrap().code, "KeyE");
+
+        bindings.insert(
+            "splitAtCursor".into(),
+            serde_json::to_value(Hotkey {
+                code: "KeyK".into(),
+                meta: false,
+                ctrl: false,
+                alt: false,
+                shift: false,
+            })
+            .unwrap(),
+        );
+        assert!(set_editor_shortcuts_raw(&bindings));
+
+        let after = store.read();
+        assert_eq!(
+            after["editor_shortcuts"]["bindings"]["splitAtCursor"]["code"],
+            "KeyK"
+        );
+        assert_eq!(
+            after["editor_shortcuts"]["bindings"]["someFutureAction"]["extra"],
+            1
+        );
+        assert_eq!(after["editor_shortcuts"]["future"], true);
     }
 
     /// The automations model against the JSON `crates/automation/src/types.rs`
