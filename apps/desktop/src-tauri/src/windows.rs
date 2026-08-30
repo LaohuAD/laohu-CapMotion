@@ -29,7 +29,8 @@ use crate::panel_manager::{PanelManager, PanelState, PanelWindowType, is_window_
 
 use crate::{
     App, ArcLock, CameraWindowCloseGate, CameraWindowPositionGuard, MainWindowReadyState,
-    NewNotification, RequestSetTargetMode, camera_preview_error_message,
+    NewNotification, RequestSetTargetMode, camera_device_name, camera_preview_issue_should_retry,
+    camera_preview_notification_message, classify_camera_preview_error,
     editor_window::PendingEditorInstances,
     emit_camera_preview_clear, emit_camera_preview_error, fake_window,
     general_settings::{self, AppTheme, GeneralSettingsStore},
@@ -462,13 +463,17 @@ pub(crate) async fn restore_main_window_inputs(app: &AppHandle) {
                         break Ok(());
                     }
                     Err(e) => {
+                        let diagnostic = e.to_string();
+                        let kind = classify_camera_preview_error(&diagnostic);
                         if attempts == 1 {
                             emit_camera_preview_error(
                                 app,
-                                camera_preview_error_message(&e.to_string()),
+                                kind,
+                                camera_device_name(&camera_id),
+                                diagnostic.clone(),
                             );
                         }
-                        if attempts >= 3 {
+                        if !camera_preview_issue_should_retry(kind) || attempts >= 3 {
                             break Err(format!(
                                 "Failed to restore camera after {attempts} attempts: {e}"
                             ));
@@ -478,7 +483,8 @@ pub(crate) async fn restore_main_window_inputs(app: &AppHandle) {
                     }
                 },
                 Err(e) => {
-                    if attempts >= 3 {
+                    let kind = classify_camera_preview_error(&e);
+                    if !camera_preview_issue_should_retry(kind) || attempts >= 3 {
                         break Err(e);
                     }
                     warn!("Camera restore attempt {attempts} failed: {e}. Retrying...");
@@ -492,7 +498,8 @@ pub(crate) async fn restore_main_window_inputs(app: &AppHandle) {
         match init_result {
             Ok(()) => crate::restore_camera_window(app),
             Err(error) => {
-                let message = camera_preview_error_message(&error);
+                let kind = classify_camera_preview_error(&error);
+                let message = camera_preview_notification_message(kind).to_string();
                 warn!("Failed to restore camera input for main window: {error}");
                 let _ = camera_feed.ask(feeds::camera::RemoveInput).await;
                 let emit_input_lost = {
@@ -510,7 +517,7 @@ pub(crate) async fn restore_main_window_inputs(app: &AppHandle) {
                     }
                     .emit(app);
                 }
-                emit_camera_preview_error(app, message.clone());
+                emit_camera_preview_error(app, kind, camera_device_name(&camera_id), error.clone());
                 let _ = NewNotification {
                     title: "Camera unavailable".to_string(),
                     body: message,

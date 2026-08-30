@@ -287,6 +287,19 @@ const en = {
 	"capture.selectCamera": "Please select a camera",
 	"capture.loadingCamera": "Loading camera...",
 	"capture.cameraConnectionFailed": "Camera connection failed",
+	"camera.issue.title": "Camera unavailable",
+	"camera.issue.permissionDenied":
+		"Camera permission is not granted. Allow Cap to use the camera in System Settings.",
+	"camera.issue.inUse":
+		"The camera is being used by another app. Close that app and try again.",
+	"camera.issue.disconnected":
+		"The camera is disconnected. Reconnect it or choose another camera.",
+	"camera.issue.noFrames":
+		"The camera started but returned no video. Check its connection, lens cover, and device state.",
+	"camera.issue.unsupportedFormat":
+		"This camera did not report a video format supported by Cap. Try another camera.",
+	"camera.issue.initialisationFailed":
+		"The camera failed to start. Reconnect it and try again, or choose another camera.",
 	"capture.tryAgain": "Try again",
 	"capture.search": "Search...",
 	"capture.recordingModes": "Recording Modes",
@@ -700,6 +713,17 @@ const zhCN: Record<keyof typeof en, string> = {
 	"capture.selectCamera": "请选择摄像头",
 	"capture.loadingCamera": "正在加载摄像头…",
 	"capture.cameraConnectionFailed": "摄像头连接失败",
+	"camera.issue.title": "摄像头不可用",
+	"camera.issue.permissionDenied":
+		"尚未获得摄像头权限，请在系统设置中允许 Cap 使用摄像头",
+	"camera.issue.inUse": "摄像头正被其他软件占用，请关闭占用摄像头的软件后重试",
+	"camera.issue.disconnected": "摄像头已断开，请重新连接或选择其他摄像头",
+	"camera.issue.noFrames":
+		"摄像头已启动但没有返回画面，请检查连接、镜头遮挡或设备状态",
+	"camera.issue.unsupportedFormat":
+		"该摄像头没有提供 Cap 支持的画面格式，请尝试其他摄像头",
+	"camera.issue.initialisationFailed":
+		"摄像头启动失败，请重新连接后重试或选择其他摄像头",
 	"capture.tryAgain": "重试",
 	"capture.search": "搜索…",
 	"capture.recordingModes": "录制模式",

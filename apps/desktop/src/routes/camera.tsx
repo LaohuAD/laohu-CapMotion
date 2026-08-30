@@ -37,7 +37,7 @@ import {
 	getDefaultCameraWindowState,
 	normalizeBackgroundBlurMode,
 } from "~/components/CameraPreviewChrome";
-import { useI18n } from "~/i18n";
+import { type TranslationKey, useI18n } from "~/i18n";
 import { generalSettingsStore } from "~/store";
 import { createTauriEventListener } from "~/utils/createEventListener";
 import {
@@ -52,16 +52,37 @@ import {
 import { commands, events } from "~/utils/tauri";
 import { RecordingOptionsProvider } from "./(window-chrome)/OptionsContext";
 
+type CameraPreviewIssueKind =
+	| "permissionDenied"
+	| "inUse"
+	| "disconnected"
+	| "noFrames"
+	| "unsupportedFormat"
+	| "initialisationFailed";
+
 type CameraPreviewIssue = {
-	title: string;
-	message: string;
+	kind: CameraPreviewIssueKind;
+	deviceName?: string | null;
+	diagnostic: string;
+};
+
+const CAMERA_ISSUE_MESSAGE_KEYS: Record<
+	CameraPreviewIssueKind,
+	TranslationKey
+> = {
+	permissionDenied: "camera.issue.permissionDenied",
+	inUse: "camera.issue.inUse",
+	disconnected: "camera.issue.disconnected",
+	noFrames: "camera.issue.noFrames",
+	unsupportedFormat: "camera.issue.unsupportedFormat",
+	initialisationFailed: "camera.issue.initialisationFailed",
 };
 
 const CAMERA_PREVIEW_ERROR_EVENT = "camera-preview-error";
 const CAMERA_PREVIEW_CLEAR_EVENT = "camera-preview-clear";
 const CAMERA_DISCONNECTED_ISSUE: CameraPreviewIssue = {
-	title: "Camera disconnected",
-	message: "The selected camera stopped sending video.",
+	kind: "disconnected",
+	diagnostic: "InputLost",
 };
 
 const getCameraOnlyMode = () => {
@@ -918,6 +939,7 @@ function CameraIssueOverlay(props: {
 	top?: number;
 	borderRadius?: string;
 }) {
+	const { t } = useI18n();
 	const textMetrics = () => cameraOverlayTextMetrics(props.size);
 	const style = () => {
 		const base = { "border-radius": props.borderRadius ?? "inherit" };
@@ -941,7 +963,7 @@ function CameraIssueOverlay(props: {
 					class="font-semibold text-white"
 					style={{ "font-size": textMetrics().titleSize }}
 				>
-					{props.issue.title}
+					{t("camera.issue.title")}
 				</p>
 				<p
 					class="text-white/75"
@@ -950,7 +972,7 @@ function CameraIssueOverlay(props: {
 						"line-height": textMetrics().messageLineHeight,
 					}}
 				>
-					{props.issue.message}
+					{t(CAMERA_ISSUE_MESSAGE_KEYS[props.issue.kind])}
 				</p>
 			</div>
 		</div>

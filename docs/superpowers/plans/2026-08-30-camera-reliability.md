@@ -25,7 +25,7 @@
 - Modify: `crates/recording/src/feeds/camera.rs:120-310,1117-1205`
 - Test: `crates/recording/src/feeds/camera.rs`
 
-- [ ] **Step 1: Write failing request-planning tests**
+- [x] **Step 1: Write failing request-planning tests**
 
 Add a pure planner independent of real hardware:
 
@@ -55,17 +55,17 @@ fn changed_device_or_format_restarts_capture() {
 }
 ```
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 Run: `cargo test -p cap-recording camera_set_input --lib`
 
 Expected: planner and phase types are missing.
 
-- [ ] **Step 3: Store settings with connecting and attached state**
+- [x] **Step 3: Store settings with connecting and attached state**
 
 Add `settings: Option<CameraDeviceSettings>` to `ConnectingState` and `AttachedState`, carrying it through `InputConnected`. This lets equality include the selected format rather than assuming every same-device request is identical.
 
-- [ ] **Step 4: Reuse in-flight or attached input**
+- [x] **Step 4: Reuse in-flight or attached input**
 
 Before cancelling `done_tx` or incrementing the generation:
 
@@ -75,13 +75,13 @@ Before cancelling `done_tx` or incrementing the generation:
 
 Do not make permission or externally occupied failures loop forever; failed setup clears the matching generation exactly as today.
 
-- [ ] **Step 5: Run camera-feed tests**
+- [x] **Step 5: Run camera-feed tests**
 
 Run: `cargo test -p cap-recording camera_set_input --lib`
 
 Expected: reuse, await, and restart tests pass without accessing a physical camera.
 
-- [ ] **Step 6: Commit idempotent ownership**
+- [x] **Step 6: Commit idempotent ownership**
 
 ```bash
 git add crates/recording/src/feeds/camera.rs
@@ -94,7 +94,7 @@ git commit -m "fix: reuse identical camera capture requests"
 - Modify: `apps/desktop/src-tauri/src/lib.rs:790-835`
 - Test: `apps/desktop/src-tauri/src/lib.rs:195-235`
 
-- [ ] **Step 1: Write failing classification tests**
+- [x] **Step 1: Write failing classification tests**
 
 ```rust
 #[test]
@@ -106,13 +106,13 @@ fn camera_errors_are_not_all_reported_as_permissions() {
 }
 ```
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 Run: `cargo test -p cap-desktop camera_errors_are_not --lib`
 
 Expected: typed issue enum/classifier does not exist.
 
-- [ ] **Step 3: Add the typed event payload**
+- [x] **Step 3: Add the typed event payload**
 
 Define a Specta/Serde enum:
 
@@ -131,11 +131,11 @@ enum CameraPreviewIssueKind {
 
 Change `CameraPreviewErrorPayload` to `{ kind, device_name: Option<String>, diagnostic: String }`. `diagnostic` is for logs/diagnostics and must not be rendered as the primary localized UI message. Permission status comes from the existing OS permission check; do not infer permission denial merely from `StartCapturing`.
 
-- [ ] **Step 4: Keep retries bounded by category**
+- [x] **Step 4: Keep retries bounded by category**
 
 Disconnected, permission-denied, and externally-in-use errors should not repeat three full capture attempts. `NoFrames` may use the existing native → compatibility retry and bounded outer retry. Preserve one user notification after the final decision rather than one notification per attempt.
 
-- [ ] **Step 5: Run classification tests and regenerate bindings**
+- [x] **Step 5: Run classification tests and regenerate bindings**
 
 Run: `cargo test -p cap-desktop camera_ --lib`
 
@@ -143,7 +143,7 @@ Run: `pnpm --dir apps/desktop run preparescript`
 
 Expected: tests pass and the generated payload contains the typed kind.
 
-- [ ] **Step 6: Commit typed issues**
+- [x] **Step 6: Commit typed issues**
 
 ```bash
 git add apps/desktop/src-tauri/src/lib.rs apps/desktop/src/utils/tauri.ts apps/src/utils/tauri.ts
@@ -158,7 +158,7 @@ git commit -m "feat: classify camera preview failures"
 - Modify: `apps/desktop/src/i18n.tsx`
 - Modify: `apps/desktop/src/i18n.test.ts`
 
-- [ ] **Step 1: Write failing translation tests**
+- [x] **Step 1: Write failing translation tests**
 
 Add required keys to the existing parity test expectations:
 
@@ -176,13 +176,13 @@ for (const key of [
 }
 ```
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 Run: `pnpm --dir apps/desktop exec vitest run src/i18n.test.ts`
 
 Expected: the new keys are missing.
 
-- [ ] **Step 3: Add user-facing translations**
+- [x] **Step 3: Add user-facing translations**
 
 Chinese messages must explain the next action, for example:
 
@@ -193,11 +193,11 @@ Chinese messages must explain the next action, for example:
 
 Add equivalent natural English strings. Keep `Insta360 Link 2 Pro`, USB IDs, model IDs, and raw error codes untranslated.
 
-- [ ] **Step 4: Render typed issues**
+- [x] **Step 4: Render typed issues**
 
 Map `CameraPreviewIssueKind` to i18n keys in `camera.tsx`. Only show an authorization action when the permission API reports denied/not-determined. Map the same categories in GPUI so the startup window and Webview camera bubble do not disagree.
 
-- [ ] **Step 5: Run frontend and GPUI checks**
+- [x] **Step 5: Run frontend and GPUI checks**
 
 Run: `pnpm --dir apps/desktop exec vitest run src/i18n.test.ts src/i18n-literals.test.ts`
 
@@ -207,7 +207,7 @@ Run: `pnpm exec tsc -b`
 
 Expected: translation tests and both desktop frontends compile.
 
-- [ ] **Step 6: Commit localized errors**
+- [x] **Step 6: Commit localized errors**
 
 ```bash
 git add apps/desktop/src/routes/camera.tsx apps/desktop-gpui/src/camera_window.rs apps/desktop/src/i18n.tsx apps/desktop/src/i18n.test.ts
@@ -219,7 +219,7 @@ git commit -m "fix: show actionable camera failure states"
 **Files:**
 - No source changes expected.
 
-- [ ] **Step 1: Run deterministic checks**
+- [x] **Step 1: Run deterministic checks**
 
 ```bash
 cargo test -p cap-recording camera_set_input --lib

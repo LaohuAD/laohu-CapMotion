@@ -47,6 +47,24 @@ describe("i18n", () => {
 		expect(translate("zh-CN", "capture.mode.instant")).toBe("快速录制");
 	});
 
+	it("localizes each camera failure category instead of reporting every failure as permission", () => {
+		expect(translate("zh-CN", "camera.issue.title")).toBe("摄像头不可用");
+		expect(translate("zh-CN", "camera.issue.permissionDenied")).toContain(
+			"权限",
+		);
+		expect(translate("zh-CN", "camera.issue.inUse")).toContain("占用");
+		expect(translate("zh-CN", "camera.issue.disconnected")).toContain("断开");
+		expect(translate("zh-CN", "camera.issue.noFrames")).toContain(
+			"没有返回画面",
+		);
+		expect(translate("zh-CN", "camera.issue.unsupportedFormat")).toContain(
+			"支持的画面格式",
+		);
+		expect(translate("zh-CN", "camera.issue.initialisationFailed")).toContain(
+			"启动失败",
+		);
+	});
+
 	it("formats editor selection summaries in the active language", () => {
 		expect(formatEditorSelection("zh-CN", 2, "caption")).toBe(
 			"已选择 2 个字幕片段",

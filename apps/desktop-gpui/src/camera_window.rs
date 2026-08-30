@@ -349,22 +349,78 @@ fn overlay_metrics(size: f32) -> OverlayMetrics {
     }
 }
 
-/// `camera_preview_error_message` (`lib.rs:755-774`) plus the fixed title
-/// from `emit_camera_preview_error` (`lib.rs:776-784`). The error strings
-/// come from the same `cap-recording` camera errors the Tauri app matches on.
-fn camera_issue(error: &str) -> (&'static str, &'static str) {
-    let message = if error.contains("DeviceNotFound") {
-        "This camera is no longer available. Check that it is connected and allowed by system permissions."
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum CameraIssueKind {
+    PermissionDenied,
+    InUse,
+    Disconnected,
+    NoFrames,
+    UnsupportedFormat,
+    InitialisationFailed,
+}
+
+fn classify_camera_issue(error: &str) -> CameraIssueKind {
+    if error.contains("CameraPermissionDenied") {
+        CameraIssueKind::PermissionDenied
+    } else if error.contains("DeviceNotFound") {
+        CameraIssueKind::Disconnected
     } else if error.contains("CameraTimeout") {
-        "No frames were received from this camera. It may be closed, disconnected, covered, or in use by another app."
+        CameraIssueKind::NoFrames
     } else if error.contains("StartCapturing") {
-        "The system could not start this camera. It may be unavailable or in use by another app."
+        CameraIssueKind::InUse
     } else if error.contains("InvalidFormat") {
-        "This camera did not report a usable capture format."
+        CameraIssueKind::UnsupportedFormat
     } else {
-        "The selected camera could not be started. Choose another camera or reconnect this one."
-    };
-    ("Camera unavailable", message)
+        CameraIssueKind::InitialisationFailed
+    }
+}
+
+/// Mirrors the Tauri preview's typed camera failures. Only user-facing
+/// explanations are localized; camera model names and diagnostics stay
+/// untouched so they remain useful when troubleshooting.
+fn camera_issue(error: &str, chinese: bool) -> (&'static str, &'static str) {
+    let kind = classify_camera_issue(error);
+    if chinese {
+        let message = match kind {
+            CameraIssueKind::PermissionDenied => {
+                "尚未获得摄像头权限，请在系统设置中允许 Cap 使用摄像头"
+            }
+            CameraIssueKind::InUse => "摄像头正被其他软件占用，请关闭占用摄像头的软件后重试",
+            CameraIssueKind::Disconnected => "摄像头已断开，请重新连接或选择其他摄像头",
+            CameraIssueKind::NoFrames => {
+                "摄像头已启动但没有返回画面，请检查连接、镜头遮挡或设备状态"
+            }
+            CameraIssueKind::UnsupportedFormat => {
+                "该摄像头没有提供 Cap 支持的画面格式，请尝试其他摄像头"
+            }
+            CameraIssueKind::InitialisationFailed => {
+                "摄像头启动失败，请重新连接后重试或选择其他摄像头"
+            }
+        };
+        ("摄像头不可用", message)
+    } else {
+        let message = match kind {
+            CameraIssueKind::PermissionDenied => {
+                "Camera permission is not granted. Allow Cap to use the camera in System Settings."
+            }
+            CameraIssueKind::InUse => {
+                "The camera is being used by another app. Close that app and try again."
+            }
+            CameraIssueKind::Disconnected => {
+                "The camera is disconnected. Reconnect it or choose another camera."
+            }
+            CameraIssueKind::NoFrames => {
+                "The camera started but returned no video. Check its connection, lens cover, and device state."
+            }
+            CameraIssueKind::UnsupportedFormat => {
+                "This camera did not report a video format supported by Cap. Try another camera."
+            }
+            CameraIssueKind::InitialisationFailed => {
+                "The camera failed to start. Reconnect it and try again, or choose another camera."
+            }
+        };
+        ("Camera unavailable", message)
+    }
 }
 
 /// The per-frame half of the window: owns the latest converted (or blurred)
@@ -373,6 +429,7 @@ fn camera_issue(error: &str) -> (&'static str, &'static str) {
 /// the cached toolbar subtree.
 struct CameraPreviewView {
     theme: Theme,
+    chinese: bool,
     radius: f32,
     /// Clamped bubble size, for the issue overlay's scaled text metrics.
     size: f32,
@@ -395,6 +452,7 @@ struct CameraPreviewView {
 impl CameraPreviewView {
     fn new(
         theme: Theme,
+        chinese: bool,
         radius: f32,
         size: f32,
         paints: Arc<AtomicU32>,
@@ -411,6 +469,7 @@ impl CameraPreviewView {
         });
         Self {
             theme,
+            chinese,
             radius,
             size,
             #[cfg(target_os = "macos")]
@@ -526,7 +585,11 @@ impl Render for CameraPreviewView {
                     .justify_center()
                     .text_size(px(16.))
                     .text_color(theme.gray_11)
-                    .child("Loading camera..."),
+                    .child(if self.chinese {
+                        "正在加载摄像头…"
+                    } else {
+                        "Loading camera..."
+                    }),
             );
         }
 
@@ -535,7 +598,7 @@ impl Render for CameraPreviewView {
         // `backdrop-blur-xs` behind it has no per-element hook in this gpui
         // rev (the recording overlay documents the same gap).
         if let Some(error) = self.camera_error.clone() {
-            let (title, message) = camera_issue(&error);
+            let (title, message) = camera_issue(&error, self.chinese);
             let metrics = overlay_metrics(self.size);
             container = container.child(
                 div()
@@ -670,6 +733,7 @@ impl CameraWindow {
         #[cfg(not(target_os = "windows"))]
         platform::apply_window_theme(window, platform::ForcedAppearance::Dark);
         let theme = Theme::dark();
+        let chinese = store::GeneralSettings::load().ui_language.as_deref() == Some("zh-CN");
         let state = store::load().camera_window.unwrap_or_default();
         #[cfg(not(target_os = "macos"))]
         Feeds::global(cx).update(cx, |feeds, _| {
@@ -680,7 +744,7 @@ impl CameraWindow {
             let paints = paints.clone();
             let radius = preview_radius(&state);
             let size = clamp_size(state.size);
-            move |cx| CameraPreviewView::new(theme, radius, size, paints, cx)
+            move |cx| CameraPreviewView::new(theme, chinese, radius, size, paints, cx)
         });
         let camera = cx.entity();
         let toolbar = cx.new(|cx| CameraToolbarView::new(&camera, cx));
@@ -1631,5 +1695,42 @@ fn persist_camera_position(x: f64, y: f64) {
             "cameraWindowPositionsByMonitorName",
             Value::Object(map),
         );
+    }
+}
+
+#[cfg(test)]
+mod camera_issue_tests {
+    use super::{CameraIssueKind, camera_issue, classify_camera_issue};
+
+    #[test]
+    fn camera_failures_are_classified_by_cause() {
+        assert_eq!(
+            classify_camera_issue("CameraPermissionDenied"),
+            CameraIssueKind::PermissionDenied
+        );
+        assert_eq!(
+            classify_camera_issue("StartCapturing/Cannot use camera"),
+            CameraIssueKind::InUse
+        );
+        assert_eq!(
+            classify_camera_issue("DeviceNotFound"),
+            CameraIssueKind::Disconnected
+        );
+        assert_eq!(
+            classify_camera_issue("CameraTimeout"),
+            CameraIssueKind::NoFrames
+        );
+        assert_eq!(
+            classify_camera_issue("InvalidFormat"),
+            CameraIssueKind::UnsupportedFormat
+        );
+    }
+
+    #[test]
+    fn camera_explanations_follow_the_selected_ui_language() {
+        let (_, chinese) = camera_issue("StartCapturing", true);
+        let (_, english) = camera_issue("StartCapturing", false);
+        assert!(chinese.contains("占用"));
+        assert!(english.contains("another app"));
     }
 }

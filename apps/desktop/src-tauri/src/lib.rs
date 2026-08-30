@@ -217,14 +217,48 @@ mod tests {
     }
 
     #[test]
-    fn active_recording_snapshot_contains_recoverable_clock_fields() {
-        let fields = current_recording_clock_fields(Some(
-            recording::RecordingSessionSnapshot {
-                session_id: "session-one".to_string(),
-                elapsed_ms: 12_345,
-                paused: true,
-            },
+    fn camera_errors_are_not_all_reported_as_permissions() {
+        assert_eq!(
+            classify_camera_preview_error("DeviceNotFound"),
+            CameraPreviewIssueKind::Disconnected
+        );
+        assert_eq!(
+            classify_camera_preview_error("StartCapturing/Cannot use Camera"),
+            CameraPreviewIssueKind::InUse
+        );
+        assert_eq!(
+            classify_camera_preview_error("CameraTimeout"),
+            CameraPreviewIssueKind::NoFrames
+        );
+        assert_eq!(
+            classify_camera_preview_error("InvalidFormat"),
+            CameraPreviewIssueKind::UnsupportedFormat
+        );
+    }
+
+    #[test]
+    fn camera_preview_retries_only_transient_categories() {
+        assert!(camera_preview_issue_should_retry(
+            CameraPreviewIssueKind::NoFrames
         ));
+        assert!(camera_preview_issue_should_retry(
+            CameraPreviewIssueKind::InitialisationFailed
+        ));
+        assert!(!camera_preview_issue_should_retry(
+            CameraPreviewIssueKind::InUse
+        ));
+        assert!(!camera_preview_issue_should_retry(
+            CameraPreviewIssueKind::Disconnected
+        ));
+    }
+
+    #[test]
+    fn active_recording_snapshot_contains_recoverable_clock_fields() {
+        let fields = current_recording_clock_fields(Some(recording::RecordingSessionSnapshot {
+            session_id: "session-one".to_string(),
+            elapsed_ms: 12_345,
+            paused: true,
+        }));
 
         assert_eq!(fields.session_id, Some("session-one".to_string()));
         assert_eq!(fields.elapsed_ms, 12_345);
@@ -819,42 +853,97 @@ fn camera_preview_attempt_is_final(attempt: usize, max_attempts: usize) -> bool 
     attempt >= max_attempts
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Type)]
+#[serde(rename_all = "camelCase")]
+enum CameraPreviewIssueKind {
+    PermissionDenied,
+    InUse,
+    Disconnected,
+    NoFrames,
+    UnsupportedFormat,
+    InitialisationFailed,
+}
+
 #[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct CameraPreviewErrorPayload {
-    title: String,
-    message: String,
+    kind: CameraPreviewIssueKind,
+    device_name: Option<String>,
+    diagnostic: String,
 }
 
-fn camera_preview_error_message(err: &str) -> String {
+fn classify_camera_preview_error(err: &str) -> CameraPreviewIssueKind {
+    if err.contains("CameraPermissionDenied") {
+        return CameraPreviewIssueKind::PermissionDenied;
+    }
     if err.contains("DeviceNotFound") {
-        return "This camera is no longer available. Check that it is connected and allowed by system permissions.".to_string();
+        return CameraPreviewIssueKind::Disconnected;
     }
-
     if err.contains("CameraTimeout") {
-        return "No frames were received from this camera. It may be closed, disconnected, covered, or in use by another app.".to_string();
+        return CameraPreviewIssueKind::NoFrames;
     }
-
     if err.contains("StartCapturing") {
-        return "The system could not start this camera. It may be unavailable or in use by another app.".to_string();
+        return CameraPreviewIssueKind::InUse;
     }
-
     if err.contains("InvalidFormat") {
-        return "This camera did not report a usable capture format.".to_string();
+        return CameraPreviewIssueKind::UnsupportedFormat;
     }
-
-    "The selected camera could not be started. Choose another camera or reconnect this one."
-        .to_string()
+    CameraPreviewIssueKind::InitialisationFailed
 }
 
-fn emit_camera_preview_error(app_handle: &AppHandle, message: String) {
+fn camera_preview_issue_should_retry(kind: CameraPreviewIssueKind) -> bool {
+    matches!(
+        kind,
+        CameraPreviewIssueKind::NoFrames | CameraPreviewIssueKind::InitialisationFailed
+    )
+}
+
+fn camera_preview_notification_message(kind: CameraPreviewIssueKind) -> &'static str {
+    match kind {
+        CameraPreviewIssueKind::PermissionDenied => {
+            "Camera permission is not granted. Allow Cap to use the camera in System Settings."
+        }
+        CameraPreviewIssueKind::InUse => {
+            "The camera is being used by another app. Close that app and try again."
+        }
+        CameraPreviewIssueKind::Disconnected => {
+            "The camera is disconnected. Reconnect it or choose another camera."
+        }
+        CameraPreviewIssueKind::NoFrames => {
+            "The camera started but returned no video. Check its connection and device state."
+        }
+        CameraPreviewIssueKind::UnsupportedFormat => {
+            "The camera did not report a supported capture format."
+        }
+        CameraPreviewIssueKind::InitialisationFailed => {
+            "The selected camera could not be initialized. Choose another camera or reconnect it."
+        }
+    }
+}
+
+fn emit_camera_preview_error(
+    app_handle: &AppHandle,
+    kind: CameraPreviewIssueKind,
+    device_name: Option<String>,
+    diagnostic: String,
+) {
     let _ = app_handle.emit(
         CAMERA_PREVIEW_ERROR_EVENT,
         CameraPreviewErrorPayload {
-            title: "Camera unavailable".to_string(),
-            message,
+            kind,
+            device_name,
+            diagnostic,
         },
     );
+}
+
+fn camera_device_name(id: &DeviceOrModelID) -> Option<String> {
+    cap_camera::list_cameras()
+        .find(|camera| match id {
+            DeviceOrModelID::DeviceID(device_id) => camera.device_id() == device_id,
+            DeviceOrModelID::ModelID(model_id) => camera.model_id() == Some(model_id),
+        })
+        .map(|camera| camera.display_name().to_string())
 }
 
 fn emit_camera_preview_clear(app_handle: &AppHandle) {
@@ -1479,13 +1568,18 @@ async fn set_camera_input(
             let init_result: Result<(), String> = loop {
                 attempts += 1;
 
-                let request = camera_feed
-                    .ask(feeds::camera::SetInput {
-                        id: id.clone(),
-                        settings,
-                    })
-                    .await
-                    .map_err(|e| e.to_string());
+                let camera_permitted = permissions::do_permissions_check(false).camera.permitted();
+                let request = if camera_permitted {
+                    camera_feed
+                        .ask(feeds::camera::SetInput {
+                            id: id.clone(),
+                            settings,
+                        })
+                        .await
+                        .map_err(|e| e.to_string())
+                } else {
+                    Err("CameraPermissionDenied".to_string())
+                };
 
                 if !showed_camera_window {
                     showed_camera_window = true;
@@ -1508,7 +1602,13 @@ async fn set_camera_input(
                         break Ok(());
                     }
                     Err(e) => {
-                        if camera_preview_attempt_is_final(attempts, CAMERA_PREVIEW_MAX_ATTEMPTS) {
+                        let kind = classify_camera_preview_error(&e);
+                        if !camera_preview_issue_should_retry(kind)
+                            || camera_preview_attempt_is_final(
+                                attempts,
+                                CAMERA_PREVIEW_MAX_ATTEMPTS,
+                            )
+                        {
                             break Err(format!(
                                 "Failed to initialize camera after {attempts} attempts: {e}"
                             ));
@@ -1523,7 +1623,9 @@ async fn set_camera_input(
             };
 
             if let Err(e) = init_result {
-                let message = camera_preview_error_message(&e);
+                let kind = classify_camera_preview_error(&e);
+                let device_name = camera_device_name(id);
+                let message = camera_preview_notification_message(kind).to_string();
                 let _ = camera_feed.ask(feeds::camera::RemoveInput).await;
                 let emit_input_lost = {
                     let app = &mut *state.write().await;
@@ -1536,7 +1638,7 @@ async fn set_camera_input(
                     }
                     .emit(&app_handle);
                 }
-                emit_camera_preview_error(&app_handle, message.clone());
+                emit_camera_preview_error(&app_handle, kind, device_name, e.clone());
                 let _ = NewNotification {
                     title: "Camera unavailable".to_string(),
                     body: message,

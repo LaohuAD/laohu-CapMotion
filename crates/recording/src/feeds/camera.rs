@@ -122,14 +122,16 @@ impl OpenState {
 
 struct ConnectingState {
     id: DeviceOrModelID,
+    settings: Option<CameraDeviceSettings>,
     generation: u64,
-    ready: BoxFuture<'static, Result<InputConnected, SetInputError>>,
+    ready: ReadyFuture,
     done_tx: SyncSender<()>,
 }
 
 struct AttachedState {
     #[allow(dead_code)]
     id: DeviceOrModelID,
+    settings: Option<CameraDeviceSettings>,
     camera_info: cap_camera::CameraInfo,
     video_info: VideoInfo,
     done_tx: mpsc::SyncSender<()>,
@@ -140,6 +142,7 @@ impl AttachedState {
     fn new(id: DeviceOrModelID, data: InputConnected) -> Self {
         let InputConnected {
             done_tx,
+            settings,
             camera_info,
             video_info,
             ..
@@ -147,6 +150,7 @@ impl AttachedState {
 
         Self {
             id,
+            settings,
             camera_info,
             video_info,
             done_tx,
@@ -157,12 +161,14 @@ impl AttachedState {
     fn overwrite(&mut self, id: DeviceOrModelID, data: InputConnected) {
         let InputConnected {
             done_tx,
+            settings,
             camera_info,
             video_info,
             ..
         } = data;
 
         self.id = id;
+        self.settings = settings;
         self.camera_info = camera_info;
         self.video_info = video_info;
         self.done_tx = done_tx;
@@ -269,6 +275,40 @@ pub struct CameraDeviceSettings {
     pub frame_rate: Option<f32>,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum CameraInputPhase {
+    Connecting,
+    Attached,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum CameraSetInputPlan {
+    ReuseAttached,
+    AwaitConnecting,
+    Restart,
+}
+
+fn plan_camera_set_input(
+    current: Option<(
+        &DeviceOrModelID,
+        Option<CameraDeviceSettings>,
+        CameraInputPhase,
+    )>,
+    requested_id: &DeviceOrModelID,
+    requested_settings: Option<CameraDeviceSettings>,
+) -> CameraSetInputPlan {
+    let Some((current_id, current_settings, phase)) = current else {
+        return CameraSetInputPlan::Restart;
+    };
+    if current_id != requested_id || current_settings != requested_settings {
+        return CameraSetInputPlan::Restart;
+    }
+    match phase {
+        CameraInputPhase::Connecting => CameraSetInputPlan::AwaitConnecting,
+        CameraInputPhase::Attached => CameraSetInputPlan::ReuseAttached,
+    }
+}
+
 // Public Requests
 
 pub struct SetInput {
@@ -298,6 +338,7 @@ pub struct Lock;
 struct InputConnected {
     generation: u64,
     id: DeviceOrModelID,
+    settings: Option<CameraDeviceSettings>,
     done_tx: SyncSender<()>,
     camera_info: cap_camera::CameraInfo,
     video_info: VideoInfo,
@@ -318,6 +359,7 @@ struct InputConnectFailed {
 
 struct LockedCameraInputReconnected {
     id: DeviceOrModelID,
+    settings: Option<CameraDeviceSettings>,
     camera_info: cap_camera::CameraInfo,
     video_info: VideoInfo,
     done_tx: SyncSender<()>,
@@ -425,6 +467,7 @@ fn spawn_camera_setup(
                         let ready_payload = InputConnected {
                             generation,
                             id: id.clone(),
+                            settings,
                             camera_info: camera_info.clone(),
                             video_info,
                             done_tx: done_tx_thread.clone(),
@@ -439,6 +482,7 @@ fn spawn_camera_setup(
                                 let reconnect_result = actor_ref
                                     .ask(LockedCameraInputReconnected {
                                         id: id.clone(),
+                                        settings,
                                         camera_info,
                                         video_info,
                                         done_tx: done_tx_thread.clone(),
@@ -557,6 +601,13 @@ fn camera_ready_future(
         }
     }
     .boxed()
+}
+
+fn attached_camera_ready(
+    camera_info: CameraInfo,
+    video_info: VideoInfo,
+) -> BoxFuture<'static, Result<(CameraInfo, VideoInfo), SetInputError>> {
+    async move { Ok((camera_info, video_info)) }.boxed()
 }
 
 // Impls
@@ -1126,6 +1177,52 @@ impl Message<SetInput> for CameraFeed {
             SetInputError::Initialisation
         );
 
+        if let State::Open(state) = &self.state {
+            if let Some(connecting) = &state.connecting
+                && plan_camera_set_input(
+                    Some((
+                        &connecting.id,
+                        connecting.settings,
+                        CameraInputPhase::Connecting,
+                    )),
+                    &msg.id,
+                    msg.settings,
+                ) == CameraSetInputPlan::AwaitConnecting
+            {
+                return Ok(camera_ready_future(
+                    connecting.ready.clone(),
+                    ctx.actor_ref(),
+                    connecting.id.clone(),
+                    connecting.generation,
+                    CameraSetupFlow::Open,
+                ));
+            }
+            if let Some(attached) = &state.attached
+                && plan_camera_set_input(
+                    Some((&attached.id, attached.settings, CameraInputPhase::Attached)),
+                    &msg.id,
+                    msg.settings,
+                ) == CameraSetInputPlan::ReuseAttached
+            {
+                return Ok(attached_camera_ready(
+                    attached.camera_info.clone(),
+                    attached.video_info,
+                ));
+            }
+        }
+        if let State::Locked { inner, .. } = &self.state
+            && plan_camera_set_input(
+                Some((&inner.id, inner.settings, CameraInputPhase::Attached)),
+                &msg.id,
+                msg.settings,
+            ) == CameraSetInputPlan::ReuseAttached
+        {
+            return Ok(attached_camera_ready(
+                inner.camera_info.clone(),
+                inner.video_info,
+            ));
+        }
+
         match &self.state {
             State::Open(state) => {
                 if let Some(connecting) = &state.connecting {
@@ -1169,8 +1266,9 @@ impl Message<SetInput> for CameraFeed {
 
                 state.connecting = Some(ConnectingState {
                     id: id.clone(),
+                    settings: msg.settings,
                     generation,
-                    ready: ready.clone().boxed(),
+                    ready: ready.clone(),
                     done_tx,
                 });
 
@@ -1636,6 +1734,7 @@ impl Message<LockedCameraInputReconnected> for CameraFeed {
                 InputConnected {
                     generation: 0,
                     id,
+                    settings: msg.settings,
                     done_tx: msg.done_tx,
                     camera_info: msg.camera_info,
                     video_info: msg.video_info,
@@ -1697,5 +1796,77 @@ impl Message<Unlock> for CameraFeed {
                 state
             }
         });
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn camera_id(value: &str) -> DeviceOrModelID {
+        DeviceOrModelID::DeviceID(value.to_string())
+    }
+
+    fn settings(width: u32, height: u32, frame_rate: f32) -> Option<CameraDeviceSettings> {
+        Some(CameraDeviceSettings {
+            width: Some(width),
+            height: Some(height),
+            frame_rate: Some(frame_rate),
+        })
+    }
+
+    #[test]
+    fn camera_set_input_reuses_same_attached_camera_and_settings() {
+        let current_id = camera_id("cam");
+        assert_eq!(
+            plan_camera_set_input(
+                Some((
+                    &current_id,
+                    settings(1280, 720, 30.0),
+                    CameraInputPhase::Attached,
+                )),
+                &camera_id("cam"),
+                settings(1280, 720, 30.0),
+            ),
+            CameraSetInputPlan::ReuseAttached,
+        );
+    }
+
+    #[test]
+    fn camera_set_input_waits_for_same_connecting_camera() {
+        let current_id = camera_id("cam");
+        assert_eq!(
+            plan_camera_set_input(
+                Some((&current_id, None, CameraInputPhase::Connecting)),
+                &camera_id("cam"),
+                None,
+            ),
+            CameraSetInputPlan::AwaitConnecting,
+        );
+    }
+
+    #[test]
+    fn camera_set_input_restarts_for_changed_device_or_format() {
+        let current_id = camera_id("cam-a");
+        assert_eq!(
+            plan_camera_set_input(
+                Some((&current_id, None, CameraInputPhase::Attached)),
+                &camera_id("cam-b"),
+                None,
+            ),
+            CameraSetInputPlan::Restart,
+        );
+        assert_eq!(
+            plan_camera_set_input(
+                Some((
+                    &camera_id("cam-b"),
+                    settings(1280, 720, 30.0),
+                    CameraInputPhase::Attached,
+                )),
+                &camera_id("cam-b"),
+                settings(1920, 1080, 30.0),
+            ),
+            CameraSetInputPlan::Restart,
+        );
     }
 }
