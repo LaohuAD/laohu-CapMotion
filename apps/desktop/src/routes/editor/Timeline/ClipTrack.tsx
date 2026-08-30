@@ -144,10 +144,10 @@ function formatTime(totalSeconds: number): string {
 const MAX_CANVAS_WIDTH = 2000;
 const SAMPLES_PER_PIXEL = 2;
 
-function WaveformCanvas(props: {
+export function WaveformCanvas(props: {
 	systemWaveform?: number[];
 	micWaveform?: number[];
-	segment: { start: number; end: number };
+	segment: { start: number; end: number; timescale?: number };
 	segmentOffset: number;
 	holds: ReadonlyArray<[number, number]>;
 }) {
@@ -175,8 +175,9 @@ function WaveformCanvas(props: {
 			(sum, [start, end]) => sum + end - start,
 			0,
 		);
+		const timescale = props.segment.timescale ?? 1;
 		const outputDuration =
-			props.segment.end - props.segment.start + heldDuration;
+			(props.segment.end - props.segment.start) / timescale + heldDuration;
 		const fullSegmentWidth = width();
 
 		if (fullSegmentWidth < 1 || outputDuration <= 0) {
@@ -190,7 +191,7 @@ function WaveformCanvas(props: {
 				else if (outputTime > start) return null;
 				else break;
 			}
-			return props.segment.start + outputTime - held;
+			return props.segment.start + (outputTime - held) * timescale;
 		};
 
 		const useVirtualization = fullSegmentWidth > MAX_CANVAS_WIDTH;
@@ -310,6 +311,7 @@ function WaveformCanvas(props: {
 		editorState.timeline.transform.zoom;
 		props.segment.start;
 		props.segment.end;
+		props.segment.timescale;
 		props.segmentOffset;
 		props.holds;
 		props.micWaveform;
@@ -715,6 +717,7 @@ export function ClipTrack(
 					});
 
 					const micWaveform = () => {
+						if (project.audio.microphoneTrack.expanded) return;
 						if (project.audio.micVolumeDb && project.audio.micVolumeDb < -30)
 							return;
 
@@ -723,6 +726,7 @@ export function ClipTrack(
 					};
 
 					const systemAudioWaveform = () => {
+						if (project.audio.systemAudioTrack.expanded) return;
 						if (
 							project.audio.systemVolumeDb &&
 							project.audio.systemVolumeDb < -30

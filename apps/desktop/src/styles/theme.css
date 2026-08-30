@@ -23,6 +23,8 @@
  * segments and the "Add track" picker read these, so they always match. */
 :root {
 	--track-clip: #3f8ae0; /* blue */
+	--track-microphone: #3976c8;
+	--track-systemAudio: #c8782f;
 	--track-motion: #c044d8; /* magenta */
 	--track-zoom: #4a4f5c; /* slate */
 	--track-caption: #6f747d;

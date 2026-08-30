@@ -26,6 +26,15 @@ const TRACK_META: Record<TimelineTrackType, TrackMeta> = {
 		description: "Your recorded screen footage.",
 		unavailableHint: "",
 	},
+	microphone: {
+		description: "Expand the recorded microphone audio from Video.",
+		unavailableHint:
+			"No microphone audio is available or it is already expanded.",
+	},
+	systemAudio: {
+		description: "Expand the recorded system audio from Video.",
+		unavailableHint: "No system audio is available or it is already expanded.",
+	},
 	motion: {
 		description: "Agent-authored animation layers and reusable templates.",
 		unavailableHint: "",

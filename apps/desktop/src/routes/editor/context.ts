@@ -541,7 +541,17 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 								outputTime -
 								heldTimeBefore(holdWindows(timeline.textSegments), outputTime);
 							const track = sourceAudioTrack(project.audio, type);
-							const spans = deriveSourceAudioSpans(timeline.segments, track);
+							const offsets = clipTimelineOffsets(
+								timeline.segments,
+								timeline.transitions ?? [],
+							);
+							const spans = deriveSourceAudioSpans(
+								timeline.segments.map((segment, index) => ({
+									...segment,
+									outputStart: offsets[index],
+								})),
+								track,
+							);
 							const index = indices.find((candidate) => {
 								const span = spans[candidate];
 								return (
@@ -795,7 +805,17 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 						const timeline = project.timeline;
 						if (!timeline) return;
 						const track = sourceAudioTrack(project.audio, type);
-						const spans = deriveSourceAudioSpans(timeline.segments, track);
+						const offsets = clipTimelineOffsets(
+							timeline.segments,
+							timeline.transitions ?? [],
+						);
+						const spans = deriveSourceAudioSpans(
+							timeline.segments.map((segment, index) => ({
+								...segment,
+								outputStart: offsets[index],
+							})),
+							track,
+						);
 						if (!selectedIndices.some((index) => spans[index])) return;
 						const next = deleteSourceAudioSpans(track, spans, selectedIndices);
 						track.mutedRanges = next.mutedRanges;

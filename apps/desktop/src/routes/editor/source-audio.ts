@@ -22,6 +22,7 @@ export type SourceAudioTimelineSegment = {
 	start: number;
 	end: number;
 	timescale: number;
+	outputStart?: number;
 };
 
 export type DerivedSourceAudioSpan = {
@@ -45,6 +46,23 @@ export type SourceAudioEditResult = {
 };
 
 const SAMPLE_EPSILON = 1 / 48_000;
+
+export function sourceAudioWaveformPlacement(expanded: {
+	microphone: boolean;
+	systemAudio: boolean;
+}) {
+	const sources: SourceAudioTrackKind[] = ["microphone", "systemAudio"];
+	return {
+		video: sources.filter((source) => !expanded[source]),
+		children: sources.filter((source) => expanded[source]),
+	};
+}
+
+export function collapseSourceAudioTrack(
+	track: SourceAudioTrackConfiguration,
+): SourceAudioTrackConfiguration {
+	return { ...cloneTrack(track), expanded: false };
+}
 
 export function deriveSourceAudioSpans(
 	segments: SourceAudioTimelineSegment[],
@@ -70,6 +88,7 @@ export function deriveSourceAudioSpans(
 		}
 
 		const recordingClip = segment.recordingSegment ?? 0;
+		const segmentOutputStart = segment.outputStart ?? outputCursor;
 		const mutedRanges = track.mutedRanges.filter(
 			(range) =>
 				range.recordingClip === recordingClip &&
@@ -118,14 +137,15 @@ export function deriveSourceAudioSpans(
 				sourceStart,
 				sourceEnd,
 				outputStart:
-					outputCursor + (sourceStart - segment.start) / segment.timescale,
+					segmentOutputStart +
+					(sourceStart - segment.start) / segment.timescale,
 				outputEnd:
-					outputCursor + (sourceEnd - segment.start) / segment.timescale,
+					segmentOutputStart + (sourceEnd - segment.start) / segment.timescale,
 				timescale: segment.timescale,
 			});
 		}
 
-		outputCursor += duration;
+		outputCursor = segmentOutputStart + duration;
 	});
 
 	return spans;

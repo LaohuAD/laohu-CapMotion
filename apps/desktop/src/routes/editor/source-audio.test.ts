@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
+	collapseSourceAudioTrack,
 	deleteSourceAudioSpans,
 	deriveSourceAudioSpans,
 	editSourceAudioAtTime,
 	type SourceAudioTrackConfiguration,
+	sourceAudioWaveformPlacement,
 } from "./source-audio";
 
 const collapsedTrack: SourceAudioTrackConfiguration = {
@@ -174,5 +176,28 @@ describe("source audio child spans", () => {
 			{ recordingClip: 0, start: 0, end: 5 },
 		]);
 		expect(result.cuts).toEqual([{ recordingClip: 0, time: 2 }]);
+	});
+
+	it("moves only expanded source waveforms out of Video", () => {
+		expect(
+			sourceAudioWaveformPlacement({ microphone: true, systemAudio: false }),
+		).toEqual({
+			video: ["systemAudio"],
+			children: ["microphone"],
+		});
+	});
+
+	it("collapses a child row without deleting its source edits", () => {
+		const track: SourceAudioTrackConfiguration = {
+			expanded: true,
+			cuts: [{ recordingClip: 0, time: 2 }],
+			mutedRanges: [{ recordingClip: 0, start: 1, end: 2 }],
+		};
+
+		expect(collapseSourceAudioTrack(track)).toEqual({
+			expanded: false,
+			cuts: track.cuts,
+			mutedRanges: track.mutedRanges,
+		});
 	});
 });

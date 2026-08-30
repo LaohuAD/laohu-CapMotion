@@ -129,6 +129,8 @@ const DEFAULT_AUDIO: AudioConfiguration = {
 	micVolumeDb: 0,
 	micStereoMode: "stereo",
 	systemVolumeDb: 0,
+	microphoneTrack: { expanded: false, mutedRanges: [], cuts: [] },
+	systemAudioTrack: { expanded: false, mutedRanges: [], cuts: [] },
 };
 
 const DEFAULT_CURSOR: CursorConfiguration = {

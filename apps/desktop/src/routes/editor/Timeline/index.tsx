@@ -65,6 +65,7 @@ import { type MaskSegmentDragState, MaskTrack } from "./MaskTrack";
 import { Minimap } from "./Minimap";
 import { type MotionSegmentDragState, MotionTrack } from "./MotionTrack";
 import { type SceneSegmentDragState, SceneTrack } from "./SceneTrack";
+import { SourceAudioTrack } from "./SourceAudioTrack";
 import { type TextSegmentDragState, TextTrack } from "./TextTrack";
 import { type ThreeDSegmentDragState, ThreeDTrack } from "./ThreeDTrack";
 import { TrackIcon, TrackManager } from "./TrackManager";
@@ -80,6 +81,8 @@ const START_SNAP_PX = 10;
 
 const trackIcons: Record<TimelineTrackType, () => JSX.Element> = {
 	clip: () => <IconLucideClapperboard class="size-4" />,
+	microphone: () => <IconCapMicrophone class="size-4" />,
+	systemAudio: () => <IconLucideMonitor class="size-4" />,
 	motion: () => <IconLucideSparkles class="size-4" />,
 	caption: () => <IconCapCaptions class="size-4" />,
 	keyboard: () => <IconLucideKeyboard class="size-4" />,
@@ -104,6 +107,18 @@ const trackDefinitions: TrackDefinition[] = [
 		label: "Clip",
 		icon: trackIcons.clip,
 		locked: true,
+	},
+	{
+		type: "microphone",
+		label: "Microphone",
+		icon: trackIcons.microphone,
+		locked: false,
+	},
+	{
+		type: "systemAudio",
+		label: "System Audio",
+		icon: trackIcons.systemAudio,
+		locked: false,
 	},
 	{
 		type: "motion",
@@ -220,6 +235,13 @@ export function Timeline(props: {
 
 	const trackState = () => editorState.timeline.tracks;
 	const sceneAvailable = () => meta().hasCamera && !project.camera.hide;
+	const sourceTrackExpanded = (type: "microphone" | "systemAudio") =>
+		type === "microphone"
+			? project.audio.microphoneTrack.expanded
+			: project.audio.systemAudioTrack.expanded;
+	const sourceTrackAvailable = (type: "microphone" | "systemAudio") =>
+		(type === "microphone" ? meta().hasMicrophone : meta().hasSystemAudio) &&
+		!sourceTrackExpanded(type);
 	const captionTrackVisible = () => trackState().caption;
 	const keyboardTrackVisible = () => trackState().keyboard;
 	const threeDTrackVisible = () => trackState()["3d"];
@@ -227,22 +249,29 @@ export function Timeline(props: {
 		trackDefinitions.map((definition) => ({
 			...definition,
 			active:
-				definition.type === "caption"
-					? trackState().caption
-					: definition.type === "keyboard"
-						? trackState().keyboard
-						: definition.type === "scene"
-							? trackState().scene
-							: definition.type === "3d"
-								? trackState()["3d"]
-								: definition.type === "mask"
-									? trackState().mask > 0
-									: definition.type === "text"
-										? trackState().text > 0
-										: definition.type === "audio"
-											? trackState().audio > 0
-											: true,
-			available: definition.type === "scene" ? sceneAvailable() : true,
+				definition.type === "microphone" || definition.type === "systemAudio"
+					? sourceTrackExpanded(definition.type)
+					: definition.type === "caption"
+						? trackState().caption
+						: definition.type === "keyboard"
+							? trackState().keyboard
+							: definition.type === "scene"
+								? trackState().scene
+								: definition.type === "3d"
+									? trackState()["3d"]
+									: definition.type === "mask"
+										? trackState().mask > 0
+										: definition.type === "text"
+											? trackState().text > 0
+											: definition.type === "audio"
+												? trackState().audio > 0
+												: true,
+			available:
+				definition.type === "microphone" || definition.type === "systemAudio"
+					? sourceTrackAvailable(definition.type)
+					: definition.type === "scene"
+						? sceneAvailable()
+						: true,
 			supportsMultiple:
 				definition.type === "mask" ||
 				definition.type === "text" ||
@@ -282,6 +311,8 @@ export function Timeline(props: {
 	const visibleTrackCount = createMemo(
 		() =>
 			2 +
+			(project.audio.microphoneTrack.expanded ? 1 : 0) +
+			(project.audio.systemAudioTrack.expanded ? 1 : 0) +
 			(captionTrackVisible() ? 1 : 0) +
 			(keyboardTrackVisible() ? 1 : 0) +
 			textTrackRows().length +
@@ -319,6 +350,22 @@ export function Timeline(props: {
 	});
 
 	function handleToggleTrack(type: TimelineTrackType, next: boolean) {
+		if (type === "microphone" || type === "systemAudio") {
+			setProject(
+				produce((project) => {
+					const track =
+						type === "microphone"
+							? project.audio.microphoneTrack
+							: project.audio.systemAudioTrack;
+					track.expanded = next;
+				}),
+			);
+			if (!next && editorState.timeline.selection?.type === type) {
+				setEditorState("timeline", "selection", null);
+			}
+			return;
+		}
+
 		if (type === "caption") {
 			batch(() => {
 				if (!project.captions) {
@@ -1401,6 +1448,32 @@ export function Timeline(props: {
 									handleUpdatePlayhead={handleUpdatePlayhead}
 								/>
 							</TrackRow>
+							<Show when={project.audio.microphoneTrack.expanded}>
+								<TrackRow
+									icon={trackIcons.microphone}
+									label="Microphone"
+									type="microphone"
+									onCollapse={() => handleToggleTrack("microphone", false)}
+								>
+									<SourceAudioTrack
+										kind="microphone"
+										handleUpdatePlayhead={handleUpdatePlayhead}
+									/>
+								</TrackRow>
+							</Show>
+							<Show when={project.audio.systemAudioTrack.expanded}>
+								<TrackRow
+									icon={trackIcons.systemAudio}
+									label="System Audio"
+									type="systemAudio"
+									onCollapse={() => handleToggleTrack("systemAudio", false)}
+								>
+									<SourceAudioTrack
+										kind="systemAudio"
+										handleUpdatePlayhead={handleUpdatePlayhead}
+									/>
+								</TrackRow>
+							</Show>
 							<Show when={captionTrackVisible()}>
 								<TrackRow
 									icon={trackIcons.caption}
@@ -1604,6 +1677,7 @@ function TrackRow(props: {
 	type: TimelineTrackType;
 	children: JSX.Element;
 	onDelete?: () => void;
+	onCollapse?: () => void;
 	deleteLabel?: string;
 	deleteTitle?: string;
 	onContextMenu?: (e: MouseEvent) => void;
@@ -1637,6 +1711,29 @@ function TrackRow(props: {
 						<IconCapTrash class="size-4" />
 						<span class="text-[0.625rem] leading-none font-medium">
 							{text(props.deleteLabel ?? "Delete")}
+						</span>
+					</button>
+				</Show>
+				<Show when={props.onCollapse}>
+					<button
+						type="button"
+						class={cx(
+							"absolute inset-x-0 top-0 z-20 flex h-13 flex-col items-center justify-center gap-0.5 rounded-xl",
+							"border border-gray-5 bg-gray-3 text-gray-12 shadow-sm",
+							"pointer-events-none opacity-0 transition-opacity duration-150",
+							"group-hover/icon:pointer-events-auto group-hover/icon:opacity-100",
+							"hover:bg-gray-4 active:bg-gray-5",
+						)}
+						onClick={(event) => {
+							event.stopPropagation();
+							props.onCollapse?.();
+						}}
+						onMouseDown={(event) => event.stopPropagation()}
+						title={text("Collapse track")}
+					>
+						<IconCapChevronDown class="size-3.5 rotate-180" />
+						<span class="text-[0.625rem] leading-none font-medium">
+							{text("Collapse track")}
 						</span>
 					</button>
 				</Show>
