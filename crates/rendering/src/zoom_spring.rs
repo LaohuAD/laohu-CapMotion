@@ -872,16 +872,37 @@ impl ZoomTransformTimeline {
                             self.recording_clip,
                             self.prefer_outgoing,
                         );
-                        let cursor =
-                            interpolate_cursor(&self.cursor_events, recording_secs as f32, None)
-                                .map(|cursor| {
-                                    let raw = (cursor.position.coord.x, cursor.position.coord.y);
-                                    self.crop.map_or(raw, |crop| crop.map(raw.0, raw.1))
-                                })
-                                .unwrap_or((f64::from(x), f64::from(y)));
+                        let map_cursor = |time_secs: f32| {
+                            interpolate_cursor(&self.cursor_events, time_secs, None).map(|cursor| {
+                                let raw = (cursor.position.coord.x, cursor.position.coord.y);
+                                self.crop.map_or(raw, |crop| crop.map(raw.0, raw.1))
+                            })
+                        };
+                        let cursor = map_cursor(recording_secs as f32)
+                            .unwrap_or((f64::from(x), f64::from(y)));
+                        let default_horizon = cap_project::ManualFollowConfig::default()
+                            .prediction_horizon_secs;
+                        let horizon = if config.prediction_horizon_secs.is_finite()
+                            && config.prediction_horizon_secs >= 0.0
+                        {
+                            config.prediction_horizon_secs
+                        } else {
+                            default_horizon
+                        };
+                        let framing_cursor = map_cursor(recording_secs as f32 + horizon)
+                            .unwrap_or(cursor);
+                        let cursor_speed = if horizon > f32::EPSILON {
+                            let dx = framing_cursor.0 - cursor.0;
+                            let dy = framing_cursor.1 - cursor.1;
+                            ((dx * dx + dy * dy).sqrt() / f64::from(horizon)) as f32
+                        } else {
+                            0.0
+                        };
                         let source_center = advance_manual_follow(
                             source_center,
                             (cursor.0 as f32, cursor.1 as f32),
+                            (framing_cursor.0 as f32, framing_cursor.1 as f32),
+                            cursor_speed,
                             amount as f32,
                             (STEP_MS / 1000.0) as f32,
                             config,
@@ -1052,6 +1073,44 @@ mod tests {
         let followed = timeline.sample(2.0).bounds;
         assert!((stable.top_left.x + 0.5).abs() < 0.03);
         assert!(followed.top_left.x < stable.top_left.x - 0.02);
+    }
+
+    #[test]
+    fn manual_follow_uses_real_future_cursor_before_it_arrives() {
+        let cursor = CursorEvents {
+            moves: vec![
+                move_event(0.0, 0.5, 0.5),
+                move_event(900.0, 0.5, 0.5),
+                move_event(1_000.0, 0.9, 0.5),
+            ],
+            clicks: vec![],
+        };
+        let segments = vec![manual_follow_segment(0.0, 2.0, 2.0, 0.5, 0.5)];
+        let timeline = timeline_for(&segments, &cursor, 2.0);
+        let mut manual_follow = None;
+
+        let targets = timeline.targets_at(0.9, XY::new(0.5, 0.5), &mut manual_follow);
+
+        assert!(
+            targets.center.x > 0.5,
+            "the camera should start moving before the current cursor leaves center"
+        );
+    }
+
+    #[test]
+    fn manual_follow_lookahead_clamps_to_the_last_cursor_sample() {
+        let cursor = CursorEvents {
+            moves: vec![move_event(0.0, 0.5, 0.5), move_event(900.0, 0.9, 0.5)],
+            clicks: vec![],
+        };
+        let segments = vec![manual_follow_segment(0.0, 2.0, 2.0, 0.5, 0.5)];
+        let timeline = timeline_for(&segments, &cursor, 2.0);
+        let mut manual_follow = None;
+
+        let targets = timeline.targets_at(0.95, XY::new(0.5, 0.5), &mut manual_follow);
+
+        assert!(targets.center.x.is_finite());
+        assert!(targets.center.x > 0.5);
     }
 
     /// Max |value delta| and |slope delta| between adjacent 8ms sample
