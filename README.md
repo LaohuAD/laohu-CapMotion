@@ -29,6 +29,12 @@ Cap 与 Codex 保持独立。用户在 Codex 中通过自然语言提出要求�
 - Cap 与 CLI 使用 revision 防止人工修改和 Agent 修改互相覆盖。
 - 最终长视频继续由 Cap 的原生媒体管线统一导出。
 
+### 桌面界面所有权
+
+当前日常使用、功能验收和自定义界面开发统一以 Tauri `apps/desktop` 为准。`apps/desktop-gpui` 是随上游保留的可选原生迁移实现，在达到项目迁移门槛前不作为默认启动入口，也不接受只落在 GPUI 的用户功能。
+
+工程模型、录制、时间线变换、Motion/Remotion、渲染和 Agent/CLI 协议优先放在共享 Rust crate；Tauri 只负责当前界面和输入适配。完整边界见 [`docs/superpowers/specs/2026-08-30-tauri-primary-gpui-migration-design.md`](docs/superpowers/specs/2026-08-30-tauri-primary-gpui-migration-design.md)。
+
 当前已落地向后兼容的 Motion 定义/实例/缓存模型、`projectRevision` 原子事务与并发写锁、MotionTrack 及属性面板、Remotion 局部渲染与内容寻址缓存，以及 Cap 预览/导出共用的原生 MotionLayer 合成路径。录制时手动放大已接入 Studio 录制：用户可在“设置 → 快捷键”自行绑定，录制时显示不进入成片的取景提示，录制后作为可编辑 ZoomTrack 片段保存。
 
 桌面端已加入持久化的中英文语言状态和统一翻译入口。首次启动先选择简体中文或 English，然后再进入权限和功能引导；之后可在“设置 → 通用 → 语言”即时切换。新增界面文案应通过 `apps/desktop/src/i18n.tsx` 接入，不得在页面内另建一套语言状态。翻译边界以“用户是否在读这段文字来理解或操作界面”为准：标题、按钮、说明、错误提示和窗口文字可本地化；代码、CLI 命令、配置键、占位符、路径、URL、协议值、枚举值及设备和品牌名称必须保持技术原文，不得为了“界面全中文”破坏可复制、可执行或可识别性。
@@ -88,12 +94,13 @@ cargo check -p cap-project
 cargo check -p cap
 ```
 
-桌面开发和完整构建命令沿用 Cap：
+日常桌面开发使用仓库根目录脚本：
 
 ```bash
-pnpm dev:desktop
-pnpm tauri:build
+./scripts/start-cap.sh
 ```
+
+这个脚本只启动 Tauri，不构建也不监管 GPUI。上游双应用开发命令只在明确进行 GPUI 对齐或迁移时使用；正式打包仍使用 `pnpm tauri:build`。
 
 Agent 可以执行后台编译、自动测试和热更新。未经用户明确要求“打开让我测试”，不得首次启动 Cap；用户进入测试阶段后，可以让应用保持打开，Agent 也可以同时继续修改代码，不要求冻结开发。首次启动或偶尔一次原生重启激活窗口可以接受；前端 HMR 一般应让 Cap 保持在后台，Rust / Tauri 改动确需重启验证时应控制频率，不得形成保存一次、抢一次焦点的连续循环。Agent 也不得自行启动已经运行的开发服务器。
 
