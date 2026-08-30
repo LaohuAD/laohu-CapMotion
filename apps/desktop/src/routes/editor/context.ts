@@ -38,6 +38,7 @@ import {
 	type FrameData,
 } from "~/utils/socket";
 import {
+	type AudioConfiguration,
 	type ClipSpeedAudioMode,
 	type ColorCorrectionConfiguration,
 	commands,
@@ -84,6 +85,12 @@ import {
 	staleLinkedArtifact,
 } from "./motion";
 import type { SnapGuide } from "./snapping";
+import {
+	deleteSourceAudioSpans,
+	deriveSourceAudioSpans,
+	editSourceAudioAtTime,
+	type SourceAudioTrackKind,
+} from "./source-audio";
 import type { TextSegment } from "./text";
 import {
 	applySceneToRange,
@@ -184,6 +191,8 @@ export const getPreviewResolution = (
 
 export type TimelineTrackType =
 	| "clip"
+	| "microphone"
+	| "systemAudio"
 	| "motion"
 	| "caption"
 	| "keyboard"
@@ -193,6 +202,19 @@ export type TimelineTrackType =
 	| "mask"
 	| "audio"
 	| "3d";
+
+export function isSourceAudioTrackType(
+	type: TimelineTrackType,
+): type is SourceAudioTrackKind {
+	return type === "microphone" || type === "systemAudio";
+}
+
+function sourceAudioTrack(
+	audio: AudioConfiguration,
+	type: SourceAudioTrackKind,
+) {
+	return type === "microphone" ? audio.microphoneTrack : audio.systemAudioTrack;
+}
 
 export const MAX_ZOOM_IN = 3;
 const PROJECT_SAVE_DEBOUNCE_MS = 250;
@@ -514,6 +536,34 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 							.filter((index) => Number.isInteger(index) && index >= 0)
 							.sort((a, b) => b - a);
 
+						if (isSourceAudioTrackType(type)) {
+							const effectiveTime =
+								outputTime -
+								heldTimeBefore(holdWindows(timeline.textSegments), outputTime);
+							const track = sourceAudioTrack(project.audio, type);
+							const spans = deriveSourceAudioSpans(timeline.segments, track);
+							const index = indices.find((candidate) => {
+								const span = spans[candidate];
+								return (
+									span &&
+									effectiveTime > span.outputStart &&
+									effectiveTime < span.outputEnd
+								);
+							});
+							if (index === undefined) return;
+
+							const result = editSourceAudioAtTime(
+								track,
+								spans[index],
+								effectiveTime,
+								command,
+							);
+							track.mutedRanges = result.track.mutedRanges;
+							track.cuts = result.track.cuts;
+							didEdit = true;
+							return;
+						}
+
 						if (type === "clip") {
 							const effectiveTime =
 								outputTime -
@@ -732,6 +782,28 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 					setEditorState("timeline", "selection", null);
 					setEditorState("previewTime", null);
 				}
+				return didEdit;
+			},
+			deleteSourceAudioSegments: (
+				type: SourceAudioTrackKind,
+				selectedIndices: number[],
+			) => {
+				if (selectedIndices.length === 0) return false;
+				let didEdit = false;
+				setProject(
+					produce((project) => {
+						const timeline = project.timeline;
+						if (!timeline) return;
+						const track = sourceAudioTrack(project.audio, type);
+						const spans = deriveSourceAudioSpans(timeline.segments, track);
+						if (!selectedIndices.some((index) => spans[index])) return;
+						const next = deleteSourceAudioSpans(track, spans, selectedIndices);
+						track.mutedRanges = next.mutedRanges;
+						track.cuts = next.cuts;
+						didEdit = true;
+					}),
+				);
+				if (didEdit) setEditorState("timeline", "selection", null);
 				return didEdit;
 			},
 			normalizeClipTransitions: () => {
@@ -1736,6 +1808,8 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 					| { type: "motion"; indices: number[] }
 					| { type: "zoom"; indices: number[] }
 					| { type: "clip"; indices: number[] }
+					| { type: "microphone"; indices: number[] }
+					| { type: "systemAudio"; indices: number[] }
 					| { type: "transition"; index: number }
 					| { type: "scene"; indices: number[] }
 					| { type: "mask"; indices: number[] }

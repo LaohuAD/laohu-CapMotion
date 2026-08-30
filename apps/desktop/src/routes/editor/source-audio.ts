@@ -165,6 +165,21 @@ export function muteSourceAudioSpan(
 	});
 }
 
+export function deleteSourceAudioSpans(
+	track: SourceAudioTrackConfiguration,
+	spans: DerivedSourceAudioSpan[],
+	selectedIndices: number[],
+): SourceAudioTrackConfiguration {
+	let next = cloneTrack(track);
+	for (const index of [...new Set(selectedIndices)].sort(
+		(left, right) => left - right,
+	)) {
+		const span = spans[index];
+		if (span) next = muteSourceAudioSpan(next, span);
+	}
+	return next;
+}
+
 export function editSourceAudioAtTime(
 	track: SourceAudioTrackConfiguration,
 	span: DerivedSourceAudioSpan,

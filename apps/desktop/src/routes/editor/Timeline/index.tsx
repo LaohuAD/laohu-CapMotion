@@ -44,6 +44,7 @@ import {
 } from "../captions";
 import { FPS, type TimelineTrackType, useEditorContext } from "../context";
 import { defaultMaskSegment, type MaskSegment } from "../masks";
+import { deriveSourceAudioSpans } from "../source-audio";
 import { autoTextColorAt, defaultTextSegment, type TextSegment } from "../text";
 import { resolveTimelineCommandTime } from "../timeline-commands";
 import { resolveTimelineWheelIntent } from "../timeline-wheel";
@@ -1015,6 +1016,14 @@ export function Timeline(props: {
 				projectActions.deleteTextSegments(selection.indices);
 			} else if (selection.type === "audio") {
 				projectActions.deleteAudioSegments(selection.indices);
+			} else if (
+				selection.type === "microphone" ||
+				selection.type === "systemAudio"
+			) {
+				projectActions.deleteSourceAudioSegments(
+					selection.type,
+					selection.indices,
+				);
 			} else if (selection.type === "3d") {
 				projectActions.deleteCamera3DSegments(selection.indices);
 			} else if (selection.type === "transition") {
@@ -1073,6 +1082,14 @@ export function Timeline(props: {
 				const timeline = project.timeline;
 				const segmentCount = {
 					clip: timeline?.segments.length ?? 0,
+					microphone: deriveSourceAudioSpans(
+						timeline?.segments ?? [],
+						project.audio.microphoneTrack,
+					).length,
+					systemAudio: deriveSourceAudioSpans(
+						timeline?.segments ?? [],
+						project.audio.systemAudioTrack,
+					).length,
 					motion: project.motion.segments.length,
 					zoom: timeline?.zoomSegments?.length ?? 0,
 					scene: timeline?.sceneSegments?.length ?? 0,

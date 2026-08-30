@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+	deleteSourceAudioSpans,
 	deriveSourceAudioSpans,
 	editSourceAudioAtTime,
 	type SourceAudioTrackConfiguration,
@@ -132,5 +133,46 @@ describe("source audio child spans", () => {
 		]);
 		expect(result.videoSegments).toBeUndefined();
 		expect(track.mutedRanges).toEqual([]);
+	});
+
+	it("maps W Q and E to source-time edits without rippling Video", () => {
+		const track: SourceAudioTrackConfiguration = {
+			expanded: true,
+			cuts: [],
+			mutedRanges: [],
+		};
+		const span = deriveSourceAudioSpans(
+			[{ recordingSegment: 3, start: 10, end: 18, timescale: 2 }],
+			track,
+		)[0];
+
+		expect(
+			editSourceAudioAtTime(track, span, 2, "splitAtCursor").track.cuts,
+		).toEqual([{ recordingClip: 3, time: 14 }]);
+		expect(
+			editSourceAudioAtTime(track, span, 2, "trimPrevious").track.mutedRanges,
+		).toEqual([{ recordingClip: 3, start: 10, end: 14 }]);
+		expect(
+			editSourceAudioAtTime(track, span, 2, "trimNext").track.mutedRanges,
+		).toEqual([{ recordingClip: 3, start: 14, end: 18 }]);
+	});
+
+	it("deletes selected source spans by merging mute ranges only", () => {
+		const track: SourceAudioTrackConfiguration = {
+			expanded: true,
+			cuts: [{ recordingClip: 0, time: 2 }],
+			mutedRanges: [],
+		};
+		const spans = deriveSourceAudioSpans(
+			[{ recordingSegment: 0, start: 0, end: 5, timescale: 1 }],
+			track,
+		);
+
+		const result = deleteSourceAudioSpans(track, spans, [0, 1, 1]);
+
+		expect(result.mutedRanges).toEqual([
+			{ recordingClip: 0, start: 0, end: 5 },
+		]);
+		expect(result.cuts).toEqual([{ recordingClip: 0, time: 2 }]);
 	});
 });
