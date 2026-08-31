@@ -2,7 +2,7 @@
 
 一套以 [Cap](https://github.com/CapSoftware/Cap) 为桌面产品基底、由 Codex 驱动内容剪辑与动画制作的口播视频工作台。
 
-这个仓库不是把 Cap 当作旁路参考，而是直接在 Cap 的录屏、时间线、预览和原生导出能力上继续开发。现有的 ASR、SRT、EDL、字幕、Remotion、HyperFrames 和内容导演规则集中保存在 `workflows/laohu-video/`，作为产品的 Agent 工作流层。
+这个仓库不是把 Cap 当作旁路参考，而是直接在 Cap 的录屏、时间线、预览和原生导出能力上继续开发。现有的 ASR、SRT、EDL、字幕、Remotion 和内容导演规则集中保存在 `workflows/laohu-video/`，作为产品的 Agent 工作流层。
 
 ## 产品分工
 
@@ -13,7 +13,7 @@ Cap
 Codex
   内容理解 · 粗剪/精剪决策 · 字幕修正 · 工程修改 · 动画生成
 
-Remotion / HyperFrames
+Remotion
   短动画 · 参数化模板 · 复杂图解 · 可复用视觉资产
 ```
 

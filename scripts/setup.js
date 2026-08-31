@@ -7,7 +7,9 @@ import * as path from "node:path";
 import { env } from "node:process";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
+import { downloadFile } from "./download-file.mjs";
 import { createLinuxBundleConfig } from "./linux-bundle-config.mjs";
+import { setupCaptionFonts } from "./setup-caption-fonts.mjs";
 
 const exec = promisify(execCb);
 const execFile = promisify(execFileCb);
@@ -32,6 +34,7 @@ function cargoConfigPath(value) {
 
 async function main() {
 	await fs.mkdir(targetDir, { recursive: true });
+	await setupCaptionFonts(__root);
 
 	let cargoConfigContents = "";
 	let cargoBuildContents = "";
@@ -67,12 +70,11 @@ async function main() {
 		let downloadedNativeDeps = false;
 
 		if (!(await fileExists(nativeDepsTarPath))) {
-			console.log(`Downloading ${nativeDepsTar}`);
-			const nativeDepsBytes = await fetch(`${NATIVE_DEPS_URL}/${nativeDepsTar}`)
-				.then((r) => r.blob())
-				.then((b) => b.arrayBuffer());
-			await fs.writeFile(nativeDepsTarPath, Buffer.from(nativeDepsBytes));
-			console.log("Downloaded native deps");
+			await downloadFile(
+				`${NATIVE_DEPS_URL}/${nativeDepsTar}`,
+				nativeDepsTarPath,
+				{ label: nativeDepsTar },
+			);
 			downloadedNativeDeps = true;
 		} else console.log(`Using cached ${nativeDepsTar}`);
 
@@ -437,12 +439,7 @@ async function setupMacOSOnnxRuntime() {
 		.catch(() => null);
 
 	if (!(await fileExists(archivePath))) {
-		console.log(`Downloading ${asset.name}`);
-		const bytes = await fetch(url)
-			.then((r) => r.blob())
-			.then((b) => b.arrayBuffer());
-		await fs.writeFile(archivePath, Buffer.from(bytes));
-		console.log(`Downloaded ${asset.name}`);
+		await downloadFile(url, archivePath, { label: asset.name });
 	} else console.log(`Using cached ${asset.name}`);
 
 	if (!(await fileExists(outputPath)) || marker !== asset.name) {

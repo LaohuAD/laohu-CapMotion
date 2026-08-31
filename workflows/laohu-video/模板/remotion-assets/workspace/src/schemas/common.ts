@@ -14,9 +14,9 @@ export type TimeRange = {
 };
 
 export type ComponentImplementation = {
-  engine: "Remotion" | "HyperFrames" | "双引擎";
-  output: "png" | "png-sequence" | "webm" | "mp4" | "html";
-  mountInHyperFrames: boolean;
+  engine: "Remotion";
+  output: "png" | "png-sequence" | "webm" | "mp4";
+  integration: "standalone" | "cap-motion-overlay";
 };
 
 export type ComponentQa = {

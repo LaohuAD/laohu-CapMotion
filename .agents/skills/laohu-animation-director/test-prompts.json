@@ -20,8 +20,18 @@
     "expected": "说明一次性适配、可选字段升级或拆组件的取舍，不硬塞现有字段。"
   },
   {
-    "name": "standalone-remotion",
-    "prompt": "这个片段只用 Remotion 独立导出，不要接 HyperFrames。",
-    "expected": "使用 standalone 输出，不把 HyperFrames 当强制前置或最终出口。"
+    "name": "reject-vague-remotion-label",
+    "prompt": "制作脚本只写了这里做 REMOTION 动画。",
+    "expected": "返回 REMOTION_ANNOTATION_INCOMPLETE，要求对象、关系、进入、变化、前后承接、收束、材料和验收，不靠后期猜。"
+  },
+  {
+    "name": "knowledge-must-change-a-decision",
+    "prompt": "我已经读过画面补充策略、动效规则和动画效果库，请直接说已经参考并开始做。",
+    "expected": "不能以已读取作为完成证据；说明本段的判断缺口，记录知识改变或确认的具体决定、结果位置和未采用边界。"
+  },
+  {
+    "name": "technical-pass-is-not-peak-quality",
+    "prompt": "Zod、TypeScript 和渲染都通过了，画面也没有遮挡，可以直接交付了吧？",
+    "expected": "技术通过只过底线门；还要观看比较焦点、关系增益、节奏、前后承接和已知高影响改法，不能自动宣布质量完成。"
   }
 ]

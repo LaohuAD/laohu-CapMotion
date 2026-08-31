@@ -4,7 +4,7 @@ import { debounce } from "@solid-primitives/scheduled";
 import { Menu } from "@tauri-apps/api/menu";
 import { type as ostype } from "@tauri-apps/plugin-os";
 import { cx } from "cva";
-import { createEffect, createSignal, onMount, Show } from "solid-js";
+import { createEffect, createSignal, onCleanup, onMount, Show } from "solid-js";
 
 import Tooltip from "~/components/Tooltip";
 import { useI18n } from "~/i18n";
@@ -31,7 +31,13 @@ import {
 } from "./context";
 import { FrameButton } from "./FrameButton";
 import { MaskOverlay } from "./MaskOverlay";
+import { MotionOverlay } from "./MotionOverlay";
 import { PerformanceOverlay } from "./PerformanceOverlay";
+import {
+	clampSeekTime,
+	createSeekScheduler,
+	shouldTogglePlaybackFromElement,
+} from "./player-transport";
 import { SplitScreenOverlay } from "./SplitScreenOverlay";
 import { TextOverlay } from "./TextOverlay";
 import {
@@ -47,6 +53,7 @@ import { formatTime } from "./utils";
 
 export function PlayerContent() {
 	const { text } = useI18n();
+	const [theater, setTheater] = createSignal(false);
 	const {
 		project,
 		editorInstance,
@@ -260,6 +267,17 @@ export function PlayerContent() {
 		}
 	};
 
+	const seek = async (requestedTime: number) => {
+		const next = clampSeekTime(requestedTime, totalDuration());
+		setEditorState("playing", false);
+		setEditorState("previewTime", next);
+		setEditorState("playbackTime", next);
+		await commands.stopPlayback();
+		await commands.seekTo(Math.floor(next * FPS));
+	};
+	const seekScheduler = createSeekScheduler((time) => void seek(time));
+	onCleanup(() => seekScheduler.cancel());
+
 	// Register keyboard shortcuts in one place
 	useEditorShortcuts(() => {
 		const el = document.activeElement;
@@ -302,10 +320,19 @@ export function PlayerContent() {
 				await handlePlayPauseClick();
 			},
 		},
+		{
+			combo: "Escape",
+			handler: () => setTheater(false),
+		},
 	]);
 
 	return (
-		<div class="flex flex-col flex-1 min-h-0">
+		<div
+			class={cx(
+				"flex flex-col flex-1 min-h-0 bg-gray-1",
+				theater() && "fixed inset-0 z-[100] p-4",
+			)}
+		>
 			<div class="flex items-center justify-between gap-3 p-3">
 				<div class="flex items-center gap-3">
 					<AspectRatioSelect />
@@ -319,6 +346,22 @@ export function PlayerContent() {
 					<FrameButton />
 				</div>
 				<div class="flex items-center gap-2">
+					<Tooltip
+						content={text(
+							theater() ? "Exit enlarged preview" : "Enter enlarged preview",
+						)}
+					>
+						<button
+							type="button"
+							class="h-9 rounded-lg border border-gray-3 bg-gray-2 px-3 text-sm text-gray-12 hover:bg-gray-3"
+							aria-label={text(
+								theater() ? "Exit enlarged preview" : "Enter enlarged preview",
+							)}
+							onClick={() => setTheater((value) => !value)}
+						>
+							{theater() ? text("Exit preview") : text("Enlarge preview")}
+						</button>
+					</Tooltip>
 					<span class="text-xs font-medium text-gray-11">
 						{text("Preview quality")}
 					</span>
@@ -376,8 +419,42 @@ export function PlayerContent() {
 					</KSelect>
 				</div>
 			</div>
-			<PreviewCanvas />
-			<div class="relative flex overflow-hidden z-10 flex-row gap-3 justify-between items-center p-5">
+			<PreviewCanvas
+				onSurfaceClick={(target) => {
+					if (shouldTogglePlaybackFromElement(target))
+						void handlePlayPauseClick();
+				}}
+			/>
+			<div data-preview-edit-control class="flex items-center gap-3 px-5 pt-3">
+				<Time
+					seconds={Math.max(
+						editorState.previewTime ?? editorState.playbackTime,
+						0,
+					)}
+				/>
+				<input
+					type="range"
+					aria-label={text("Preview progress")}
+					class="h-1.5 min-w-0 flex-1 cursor-pointer accent-blue-9"
+					min={0}
+					max={Math.max(totalDuration(), 0.001)}
+					step={1 / FPS}
+					value={clampSeekTime(
+						editorState.previewTime ?? editorState.playbackTime,
+						totalDuration(),
+					)}
+					onInput={(event) =>
+						seekScheduler.request(Number(event.currentTarget.value))
+					}
+					onChange={() => seekScheduler.flush()}
+					onPointerUp={() => seekScheduler.flush()}
+				/>
+				<Time seconds={totalDuration()} />
+			</div>
+			<div
+				data-preview-edit-control
+				class="relative flex overflow-hidden z-10 flex-row gap-3 justify-between items-center p-5"
+			>
 				<div class="flex-1">
 					<Time
 						class="text-gray-12"
@@ -519,7 +596,9 @@ const gridStyle = {
 	"background-color": "rgba(200,200,200,0.08)",
 };
 
-function PreviewCanvas() {
+function PreviewCanvas(props: {
+	onSurfaceClick: (target: Element | null) => void;
+}) {
 	const { text } = useI18n();
 	const { latestFrame, canvasControls, performanceMode, setPerformanceMode } =
 		useEditorContext();
@@ -635,6 +714,7 @@ function PreviewCanvas() {
 			class="relative flex-1 justify-center items-center"
 			style={{ contain: "layout style" }}
 			onContextMenu={handleContextMenu}
+			onClick={(event) => props.onSurfaceClick(event.target as Element | null)}
 		>
 			<CaptionsRegenerateBadge class="absolute top-3 right-3 z-20" />
 			<div
@@ -662,6 +742,7 @@ function PreviewCanvas() {
 					/>
 					<Show when={hasFrame()}>
 						<CanvasElementsOverlay size={size()} />
+						<MotionOverlay size={size()} />
 						<MaskOverlay size={size()} />
 						<CaptionOverlay size={size()} />
 						<TextOverlay size={size()} />

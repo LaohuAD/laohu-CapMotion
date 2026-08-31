@@ -67,6 +67,7 @@ async function main() {
 				path.join(repoRoot, "crates", "export"),
 				path.join(repoRoot, "crates", "media"),
 				path.join(repoRoot, "crates", "media-info"),
+				path.join(repoRoot, "crates", "motion-cli"),
 				path.join(repoRoot, "crates", "project"),
 				path.join(repoRoot, "crates", "rendering"),
 				path.join(repoRoot, "Cargo.lock"),

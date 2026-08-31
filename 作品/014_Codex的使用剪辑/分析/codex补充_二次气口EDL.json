@@ -1,0 +1,88 @@
+{
+  "source": "/tmp/codex-supplement-rebuild.hbiaIn/supplement_cut.mp4",
+  "output": "/tmp/codex-supplement-rebuild.hbiaIn/supplement_cut_tight.mp4",
+  "fps": 30,
+  "sampleRate": 48000,
+  "samplesPerFrame": 1600,
+  "videoCodec": "libx264",
+  "videoPreset": "medium",
+  "videoCrf": 18,
+  "audioBitrate": "192k",
+  "reason": "根据新成片逐字 ASR 二次复查，仅删除条目之间确认无文字的气口；所有覆盖逐字时间戳的弱声区保留，93.43-96.55 秒的架构演示静音段完整保留。",
+  "sequence": [
+    {
+      "startFrame": 0,
+      "endFrame": 103,
+      "reason": "正文"
+    },
+    {
+      "startFrame": 105,
+      "endFrame": 367,
+      "reason": "正文"
+    },
+    {
+      "startFrame": 372,
+      "endFrame": 990,
+      "reason": "正文"
+    },
+    {
+      "startFrame": 992,
+      "endFrame": 1283,
+      "reason": "正文"
+    },
+    {
+      "startFrame": 1286,
+      "endFrame": 1346,
+      "reason": "正文"
+    },
+    {
+      "startFrame": 1349,
+      "endFrame": 1422,
+      "reason": "正文"
+    },
+    {
+      "startFrame": 1432,
+      "endFrame": 1859,
+      "reason": "正文"
+    },
+    {
+      "startFrame": 1864,
+      "endFrame": 2950,
+      "reason": "正文及明确保留的架构演示"
+    }
+  ],
+  "expectedFrames": 2920,
+  "expectedDurationSeconds": 97.33333333333333,
+  "outputProbe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_type": "video",
+        "width": 1920,
+        "height": 948,
+        "r_frame_rate": "30/1",
+        "start_time": "0.000000",
+        "duration": "97.333333",
+        "nb_frames": "2920"
+      },
+      {
+        "index": 1,
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "start_time": "0.000000",
+        "duration": "97.333000",
+        "nb_frames": "4564"
+      }
+    ],
+    "format": {
+      "start_time": "0.000000",
+      "duration": "97.333333",
+      "size": "23891588"
+    }
+  },
+  "renderedAt": "2026-08-28T23:47:33.157Z"
+}

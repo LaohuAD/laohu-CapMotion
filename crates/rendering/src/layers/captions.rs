@@ -2,13 +2,14 @@ use bytemuck::{Pod, Zeroable};
 use cap_project::XY;
 use glyphon::cosmic_text::LayoutRunIter;
 use glyphon::{
-    Attrs, Buffer, Cache, Color, Family, FontSystem, Metrics, Resolution, Shaping, SwashCache,
+    Attrs, Buffer, Cache, Color, FontSystem, Metrics, Resolution, Shaping, SwashCache,
     TextArea, TextAtlas, TextBounds, TextRenderer, Viewport, Weight,
 };
 use log::warn;
 use wgpu::{Device, Queue, include_wgsl, util::DeviceExt};
 
 use crate::{DecodedSegmentFrames, ProjectUniforms, RenderVideoConstants, parse_color_component};
+use super::caption_style::{caption_family, outline_offsets, shadow_offset};
 
 #[derive(Debug, Clone)]
 pub struct CaptionWord {
@@ -626,19 +627,9 @@ impl CaptionsLayer {
         updated_buffer.set_size(&mut self.font_system, Some(wrap_width), None);
         updated_buffer.set_wrap(&mut self.font_system, glyphon::Wrap::None);
 
-        let font_family = match caption_data.settings.font.as_str() {
-            "System Serif" => Family::Serif,
-            "System Monospace" => Family::Monospace,
-            _ => Family::SansSerif,
-        };
-
-        let weight = if caption_data.settings.font_weight >= 700 {
-            Weight::BOLD
-        } else if caption_data.settings.font_weight >= 500 {
-            Weight::MEDIUM
-        } else {
-            Weight::NORMAL
-        };
+        let font_family = caption_family(&caption_data.settings.font);
+        let weight = Weight(caption_data.settings.font_weight.clamp(100, 900) as u16);
+        let letter_spacing = caption_data.settings.letter_spacing;
 
         let base_alpha = (fade_opacity * BASE_TEXT_OPACITY).clamp(0.0, 1.0);
         let highlight_alpha = fade_opacity.clamp(0.0, 1.0);
@@ -664,6 +655,7 @@ impl CaptionsLayer {
                             Attrs::new()
                                 .family(font_family)
                                 .weight(weight)
+                                .letter_spacing(letter_spacing)
                                 .color(Color::rgba(
                                     (base_color[0] * 255.0) as u8,
                                     (base_color[1] * 255.0) as u8,
@@ -696,6 +688,7 @@ impl CaptionsLayer {
                         Attrs::new()
                             .family(font_family)
                             .weight(weight)
+                            .letter_spacing(letter_spacing)
                             .color(Color::rgba(
                                 (blended_color[0] * 255.0) as u8,
                                 (blended_color[1] * 255.0) as u8,
@@ -713,6 +706,7 @@ impl CaptionsLayer {
                     Attrs::new()
                         .family(font_family)
                         .weight(weight)
+                        .letter_spacing(letter_spacing)
                         .color(Color::rgba(
                             (base_color[0] * 255.0) as u8,
                             (base_color[1] * 255.0) as u8,
@@ -725,7 +719,10 @@ impl CaptionsLayer {
             updated_buffer.set_rich_text(
                 &mut self.font_system,
                 rich_text,
-                &Attrs::new().family(font_family).weight(weight),
+                &Attrs::new()
+                    .family(font_family)
+                    .weight(weight)
+                    .letter_spacing(letter_spacing),
                 Shaping::Advanced,
                 None,
             );
@@ -736,7 +733,11 @@ impl CaptionsLayer {
                 (base_color[2] * 255.0) as u8,
                 (highlight_alpha * 255.0) as u8,
             );
-            let attrs = Attrs::new().family(font_family).weight(weight).color(color);
+            let attrs = Attrs::new()
+                .family(font_family)
+                .weight(weight)
+                .letter_spacing(letter_spacing)
+                .color(color);
             updated_buffer.set_text(
                 &mut self.font_system,
                 caption_text.as_str(),
@@ -870,24 +871,56 @@ impl CaptionsLayer {
             (fade_opacity * 255.0) as u8,
         );
 
-        if caption_data.settings.outline {
-            let outline_thickness = 1.2 * render_scale;
-            let outline_offsets = [
-                (-outline_thickness, -outline_thickness),
-                (0.0, -outline_thickness),
-                (outline_thickness, -outline_thickness),
-                (-outline_thickness, 0.0),
-                (outline_thickness, 0.0),
-                (-outline_thickness, outline_thickness),
-                (0.0, outline_thickness),
-                (outline_thickness, outline_thickness),
-                (-outline_thickness * 0.7, -outline_thickness * 0.7),
-                (outline_thickness * 0.7, -outline_thickness * 0.7),
-                (-outline_thickness * 0.7, outline_thickness * 0.7),
-                (outline_thickness * 0.7, outline_thickness * 0.7),
+        if caption_data.settings.shadow {
+            let shadow_color_rgb = [
+                parse_color_component(&caption_data.settings.shadow_color, 0),
+                parse_color_component(&caption_data.settings.shadow_color, 1),
+                parse_color_component(&caption_data.settings.shadow_color, 2),
             ];
+            let [shadow_x, shadow_y] = shadow_offset(
+                caption_data.settings.shadow_distance * render_scale,
+                caption_data.settings.shadow_angle,
+            );
+            let shadow_alpha = (caption_data.settings.shadow_opacity / 100.0)
+                .clamp(0.0, 1.0)
+                * fade_opacity;
+            let blur_radius = caption_data.settings.shadow_blur.max(0.0) * render_scale * 0.15;
+            let samples = outline_offsets(blur_radius);
+            let sample_count = samples.len().max(1) as f32;
+            let shadow_color = Color::rgba(
+                (shadow_color_rgb[0] * 255.0) as u8,
+                (shadow_color_rgb[1] * 255.0) as u8,
+                (shadow_color_rgb[2] * 255.0) as u8,
+                ((shadow_alpha / sample_count.sqrt()).clamp(0.0, 1.0) * 255.0) as u8,
+            );
+            if samples.is_empty() {
+                text_areas.push(TextArea {
+                    buffer: &self.text_buffer,
+                    left: text_left + shadow_x,
+                    top: text_top + shadow_y,
+                    scale: render_scale,
+                    bounds,
+                    default_color: shadow_color,
+                    custom_glyphs: &[],
+                });
+            } else {
+                for [blur_x, blur_y] in samples {
+                    text_areas.push(TextArea {
+                        buffer: &self.text_buffer,
+                        left: text_left + shadow_x + blur_x,
+                        top: text_top + shadow_y + blur_y,
+                        scale: render_scale,
+                        bounds,
+                        default_color: shadow_color,
+                        custom_glyphs: &[],
+                    });
+                }
+            }
+        }
 
-            for (offset_x, offset_y) in outline_offsets.iter() {
+        if caption_data.settings.outline {
+            let outline_thickness = caption_data.settings.outline_width.max(0.0) * render_scale;
+            for [offset_x, offset_y] in outline_offsets(outline_thickness) {
                 text_areas.push(TextArea {
                     buffer: &self.text_buffer,
                     left: text_left + offset_x,

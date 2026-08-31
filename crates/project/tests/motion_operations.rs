@@ -45,6 +45,22 @@ fn segment() -> MotionSegment {
     .unwrap()
 }
 
+fn segment_with(id: &str, start: f64, end: f64, role: &str) -> MotionSegment {
+    serde_json::from_value(serde_json::json!({
+        "id": id,
+        "definitionId": "case-cards",
+        "definitionVersion": 1,
+        "start": start,
+        "end": end,
+        "track": 0,
+        "zIndex": 20,
+        "role": role,
+        "durationPolicy": "responsive",
+        "props": {}
+    }))
+    .unwrap()
+}
+
 #[test]
 fn register_add_move_and_resize_are_revision_checked_domain_operations() {
     let directory = create_project();
@@ -66,6 +82,34 @@ fn register_add_move_and_resize_are_revision_checked_domain_operations() {
     assert_eq!(resized_segment.start, 20.0);
     assert_eq!(resized_segment.end, 28.0);
     assert_eq!(resized.project_revision, 4);
+}
+
+#[test]
+fn same_role_motion_segments_cannot_overlap_but_cross_role_overlays_can() {
+    let directory = create_project();
+    register_motion_definition(directory.path(), 0, definition()).unwrap();
+    add_motion_segment(
+        directory.path(),
+        1,
+        segment_with("animation-1", 2.0, 7.0, "animation"),
+    )
+    .unwrap();
+
+    let error = add_motion_segment(
+        directory.path(),
+        2,
+        segment_with("animation-2", 6.0, 9.0, "animation"),
+    )
+    .unwrap_err();
+    assert!(error.to_string().contains("SameRoleOverlap"));
+
+    let project = add_motion_segment(
+        directory.path(),
+        2,
+        segment_with("avatar-1", 6.0, 9.0, "avatar"),
+    )
+    .unwrap();
+    assert_eq!(project.motion.segments.len(), 2);
 }
 
 #[test]

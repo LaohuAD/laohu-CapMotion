@@ -2,6 +2,12 @@ import type { JsonValue } from "~/utils/tauri";
 
 export type MotionRenderer = "remotion";
 export type MotionDurationPolicy = "responsive" | "retime" | "trim";
+export type MotionOverlayRole =
+	| "animation"
+	| "avatar"
+	| "aiVideo"
+	| "screenRecording"
+	| "evidence";
 export type MotionDefinitionStatus =
 	| "draft"
 	| "approved"
@@ -42,6 +48,7 @@ export type MotionSegment = {
 	end: number;
 	track: number;
 	zIndex: number;
+	role: MotionOverlayRole;
 	transform: MotionTransform;
 	opacity: number;
 	durationPolicy: MotionDurationPolicy;
@@ -81,10 +88,29 @@ export function normalizeMotionFields(value: unknown): MotionProjectFields {
 		projectRevision: project.projectRevision ?? 0,
 		motion: {
 			definitions: project.motion?.definitions ?? [],
-			segments: project.motion?.segments ?? [],
+			segments: (project.motion?.segments ?? []).map((segment) => ({
+				...segment,
+				role: segment.role ?? "animation",
+			})),
 			artifacts: project.motion?.artifacts ?? [],
 		},
 	};
+}
+
+function motionRole(segment: MotionSegment): MotionOverlayRole {
+	return segment.role ?? "animation";
+}
+
+export function motionSegmentsOverlap(
+	first: Pick<MotionSegment, "start" | "end" | "role">,
+	second: Pick<MotionSegment, "start" | "end" | "role">,
+) {
+	return (
+		motionRole(first as MotionSegment) ===
+			motionRole(second as MotionSegment) &&
+		first.start < second.end &&
+		second.start < first.end
+	);
 }
 
 export function moveMotionSegment(
@@ -92,19 +118,51 @@ export function moveMotionSegment(
 	requestedStart: number,
 	totalDuration: number,
 	track = segment.track,
+	segments: MotionSegment[] = [],
 ): MotionSegment {
 	const duration = segment.end - segment.start;
-	const start = Math.min(
+	let start = Math.min(
 		Math.max(0, requestedStart),
 		Math.max(0, totalDuration - duration),
 	);
-	return { ...segment, start, end: start + duration, track };
+	const peers = segments.filter(
+		(candidate) =>
+			candidate.id !== segment.id &&
+			motionRole(candidate) === motionRole(segment),
+	);
+
+	for (let attempt = 0; attempt <= peers.length; attempt++) {
+		const moved = { ...segment, start, end: start + duration, track };
+		const conflict = peers.find((candidate) =>
+			motionSegmentsOverlap(moved, candidate),
+		);
+		if (!conflict) return moved;
+
+		if (segment.end <= conflict.start) {
+			start = conflict.start - duration;
+		} else if (segment.start >= conflict.end) {
+			start = conflict.end;
+		} else {
+			const leftEdge = conflict.start - duration;
+			const rightEdge = conflict.end;
+			start =
+				Math.abs(start - leftEdge) <= Math.abs(start - rightEdge)
+					? leftEdge
+					: rightEdge;
+		}
+		if (start < 0 || start + duration > totalDuration) {
+			return { ...segment, track };
+		}
+	}
+
+	return { ...segment, track };
 }
 
 export function resizeMotionSegment(
 	segment: MotionSegment,
 	requestedDuration: number,
 	definition?: MotionDefinition,
+	segments: MotionSegment[] = [],
 ): MotionSegment {
 	let duration = Math.max(Number.EPSILON, requestedDuration);
 	if (segment.durationPolicy === "responsive" && definition) {
@@ -113,7 +171,46 @@ export function resizeMotionSegment(
 			definition.maxDuration,
 		);
 	}
-	return { ...segment, end: segment.start + duration };
+	let end = segment.start + duration;
+	const nearestConflict = segments
+		.filter(
+			(candidate) =>
+				candidate.id !== segment.id &&
+				motionRole(candidate) === motionRole(segment) &&
+				candidate.start >= segment.start &&
+				candidate.start < end,
+		)
+		.sort((a, b) => a.start - b.start)[0];
+	if (nearestConflict) end = nearestConflict.start;
+	if (definition && end - segment.start < definition.minDuration)
+		return segment;
+	return { ...segment, end };
+}
+
+export function resizeMotionSegmentStart(
+	segment: MotionSegment,
+	requestedStart: number,
+	definition?: MotionDefinition,
+	segments: MotionSegment[] = [],
+): MotionSegment {
+	const minimum = definition?.minDuration ?? Number.EPSILON;
+	const maximum = definition?.maxDuration ?? Number.POSITIVE_INFINITY;
+	let start = Math.min(
+		segment.end - minimum,
+		Math.max(0, segment.end - maximum, requestedStart),
+	);
+	const previousBoundary = segments
+		.filter(
+			(candidate) =>
+				candidate.id !== segment.id &&
+				motionRole(candidate) === motionRole(segment) &&
+				candidate.start < segment.start &&
+				candidate.end > start,
+		)
+		.reduce((boundary, candidate) => Math.max(boundary, candidate.end), start);
+	start = previousBoundary;
+	if (segment.end - start < minimum) return segment;
+	return { ...segment, start };
 }
 
 export function staleLinkedArtifact(

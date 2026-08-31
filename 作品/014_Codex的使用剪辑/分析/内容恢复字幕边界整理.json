@@ -1,0 +1,27 @@
+{
+  "purpose": "修复跨 ASR 段落的拆词、孤立短字幕和口吃文字；只改字幕展示，不改变音频，也不制造说话期间的字幕空白",
+  "operations": [
+    {"startId": 24, "endId": 26, "text": "AI 时代 AI 是最好的老师"},
+    {"startId": 98, "endId": 101, "text": "我给它划分出灵魂 筋骨 血肉 表皮"},
+    {"startId": 111, "endId": 112, "text": "它是一个集合了思考 决策"},
+    {"startId": 166, "endId": 167, "text": "只不过我在用这个老胡文稿是去解决我这个"},
+    {"startId": 193, "endId": 194, "text": "使用一种卡通的风格"},
+    {"startId": 197, "endId": 198, "text": "然后我们就发这样的一个提示词给我的老胡文稿"},
+    {"startId": 199, "endId": 200, "text": "然后我们简单分析一下我这个提示词的内容"},
+    {"startId": 219, "endId": 220, "text": "下面我们看一下这个回答"},
+    {"startId": 251, "endId": 252, "text": "首先我们要明白常规的输入"},
+    {"startId": 255, "endId": 258, "text": "一个是文本 图片 视频 还有音频"},
+    {"startId": 291, "endId": 292, "text": "比如说我把栋哥的这个丢进来"},
+    {"startId": 324, "endId": 325, "text": "当然正常的办法"},
+    {"startId": 327, "endId": 328, "text": "然后去导入识别文字"},
+    {"startId": 334, "endId": 335, "text": "这是第一种方式"},
+    {"startId": 377, "endId": 378, "text": "之后直接发送给 AI"},
+    {"startId": 380, "endId": 381, "text": "不过你如果说本地有一个 Agent"},
+    {"startId": 458, "endId": 460, "text": "第五步是区分选题本体 生成 传播和实现"},
+    {"startId": 537, "endId": 538, "text": "看看这个地方就是 dbskill 里面的 constraints"},
+    {"startId": 577, "endId": 578, "text": "你看他们最大的争论其实是一场伪争论"},
+    {"startId": 627, "endId": 628, "text": "这里有很多不同的定义"},
+    {"startId": 655, "endId": 656, "text": "然后刚才我给大家演示的这两种方式"},
+    {"startId": 733, "endId": 735, "text": "拜拜 咱们下次见"}
+  ]
+}

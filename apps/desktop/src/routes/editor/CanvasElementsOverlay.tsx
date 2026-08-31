@@ -17,6 +17,7 @@ import {
 import { useI18n } from "~/i18n";
 import type { FrameLayoutEvent } from "~/utils/tauri";
 import { FPS, useEditorContext } from "./context";
+import { usableMotionArtifact } from "./motion-canvas";
 import {
 	buildSnapTargets,
 	type NormRect,
@@ -61,6 +62,7 @@ type SnapExclude =
 	| "camera"
 	| { text: number }
 	| { mask: number }
+	| { motion: number }
 	| null;
 
 /**
@@ -69,7 +71,8 @@ type SnapExclude =
  * excluding whichever element is being dragged.
  */
 export function useCanvasSnapTargets() {
-	const { project, editorState, latestFrameLayout } = useEditorContext();
+	const { project, editorState, latestFrame, latestFrameLayout } =
+		useEditorContext();
 	const time = () => editorState.previewTime ?? editorState.playbackTime ?? 0;
 
 	return (exclude: SnapExclude): SnapTargets => {
@@ -116,6 +119,32 @@ export function useCanvasSnapTargets() {
 				y: segment.center.y - segment.size.y / 2,
 				w: segment.size.x,
 				h: segment.size.y,
+			});
+		});
+		const outputWidth = latestFrame()?.width ?? layout?.output_width ?? 1;
+		const outputHeight = latestFrame()?.height ?? layout?.output_height ?? 1;
+		project.motion?.segments?.forEach((segment, index) => {
+			if (
+				typeof exclude === "object" &&
+				exclude !== null &&
+				"motion" in exclude &&
+				exclude.motion === index
+			)
+				return;
+			if (!(t >= segment.start && t < segment.end)) return;
+			if (!usableMotionArtifact(segment, project.motion?.artifacts ?? []))
+				return;
+			rects.push({
+				x:
+					0.5 +
+					segment.transform.x / outputWidth -
+					segment.transform.scaleX / 2,
+				y:
+					0.5 +
+					segment.transform.y / outputHeight -
+					segment.transform.scaleY / 2,
+				w: segment.transform.scaleX,
+				h: segment.transform.scaleY,
 			});
 		});
 

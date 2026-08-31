@@ -235,6 +235,9 @@ async setPlayheadPosition(frameNumber: number) : Promise<null> {
 async setProjectConfig(config: ProjectConfiguration) : Promise<number> {
     return await TAURI_INVOKE("set_project_config", { config });
 },
+async loadProjectConfigFromDisk() : Promise<ProjectConfiguration> {
+    return await TAURI_INVOKE("load_project_config_from_disk");
+},
 async updateProjectConfigInMemory(config: ProjectConfiguration, frameNumber: number | null, fps: number | null, resolutionBase: XY<number> | null) : Promise<null> {
     return await TAURI_INVOKE("update_project_config_in_memory", { config, frameNumber, fps, resolutionBase });
 },
@@ -816,7 +819,7 @@ export type CameraXPosition = "left" | "center" | "right"
 export type CameraYPosition = "top" | "bottom"
 export type CaptionData = { segments: CaptionSegment[]; settings: CaptionSettings | null }
 export type CaptionSegment = { id: string; start: number; end: number; text: string; words?: CaptionWord[] }
-export type CaptionSettings = { enabled: boolean; font: string; size: number; color: string; backgroundColor: string; backgroundOpacity: number; position: string; italic: boolean; fontWeight: number; outline: boolean; outlineColor: string; exportWithSubtitles: boolean; highlightColor: string; fadeDuration: number; lingerDuration: number; wordTransitionDuration: number; activeWordHighlight: boolean; manualPosition: XY<number> | null; preset: string; animation: string; highlightStyle: string; uppercase: boolean }
+export type CaptionSettings = { enabled: boolean; font: string; size: number; color: string; backgroundColor: string; backgroundOpacity: number; position: string; italic: boolean; fontWeight: number; letterSpacing: number; outline: boolean; outlineColor: string; outlineWidth: number; shadow: boolean; shadowColor: string; shadowOpacity: number; shadowBlur: number; shadowDistance: number; shadowAngle: number; exportWithSubtitles: boolean; highlightColor: string; fadeDuration: number; lingerDuration: number; wordTransitionDuration: number; activeWordHighlight: boolean; manualPosition: XY<number> | null; preset: string; animation: string; highlightStyle: string; uppercase: boolean }
 export type CaptionTrackSegment = { id: string; start: number; end: number; text: string; words?: CaptionWord[]; fadeDurationOverride?: number | null; lingerDurationOverride?: number | null; positionOverride?: string | null; colorOverride?: string | null; backgroundColorOverride?: string | null; fontSizeOverride?: number | null }
 export type CaptionWord = { text: string; start: number; end: number }
 export type CaptionsData = { segments: CaptionSegment[]; settings: CaptionSettings;
@@ -1098,8 +1101,13 @@ export type MotionConfiguration = { definitions: MotionDefinition[]; segments: M
 export type MotionDefinition = { id: string; version: number; renderer: MotionRenderer; source: string; compositionId: string; status: MotionDefinitionStatus; minDuration: number; defaultDuration: number; maxDuration: number; defaultPolicy: MotionDurationPolicy; introDuration: number; outroDuration: number; defaultProps: { [key in string]: JsonValue } }
 export type MotionDefinitionStatus = "draft" | "approved" | "published" | "deprecated"
 export type MotionDurationPolicy = "responsive" | "retime" | "trim"
+/**
+ * Semantic responsibility of an upper overlay. Segments with the same role
+ * are exclusive in time; different roles may be composed together.
+ */
+export type MotionOverlayRole = "animation" | "avatar" | "aiVideo" | "screenRecording" | "evidence"
 export type MotionRenderer = "remotion"
-export type MotionSegment = { id: string; definitionId: string; definitionVersion: number; start: number; end: number; track: number; zIndex: number; transform: MotionTransform; opacity: number; durationPolicy: MotionDurationPolicy; props: { [key in string]: JsonValue }; artifactId: string | null }
+export type MotionSegment = { id: string; definitionId: string; definitionVersion: number; start: number; end: number; track: number; zIndex: number; role: MotionOverlayRole; transform: MotionTransform; opacity: number; durationPolicy: MotionDurationPolicy; props: { [key in string]: JsonValue }; artifactId: string | null }
 export type MotionTransform = { x: number; y: number; scaleX: number; scaleY: number; rotation: number }
 export type MovExportSettings = { fps: number; resolution_base: XY<number>; cursor_only?: boolean }
 export type Mp4ExportSettings = { fps: number; resolution_base: XY<number>; compression: ExportCompression; custom_bpp: number | null; force_ffmpeg_decoder?: boolean; optimize_filesize?: boolean }

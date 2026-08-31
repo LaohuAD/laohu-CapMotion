@@ -7,6 +7,7 @@ import { trackStore } from "@solid-primitives/deep";
 import { createEventListener } from "@solid-primitives/event-listener";
 import { createUndoHistory } from "@solid-primitives/history";
 import { createQuery, skipToken } from "@tanstack/solid-query";
+import { watch } from "@tauri-apps/plugin-fs";
 import {
 	type Accessor,
 	batch,
@@ -21,7 +22,7 @@ import {
 } from "solid-js";
 import { createStore, produce, reconcile, unwrap } from "solid-js/store";
 import toast from "solid-toast";
-
+import { useI18n } from "~/i18n";
 import { generalSettingsStore } from "~/store";
 import {
 	type EditorCaptionSettings,
@@ -84,6 +85,7 @@ import {
 	normalizeMotionFields,
 	staleLinkedArtifact,
 } from "./motion";
+import { decideExternalProjectUpdate } from "./project-hot-reload";
 import type { SnapGuide } from "./snapping";
 import {
 	deleteSourceAudioSpans,
@@ -395,6 +397,7 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 		editorInstance: SerializedEditorInstance;
 		refetchMeta(): Promise<void>;
 	}) => {
+		const { text } = useI18n();
 		const editorInstanceContext = useEditorInstanceContext();
 		const [project, setProject] = createStore<EditorProjectConfiguration>(
 			normalizeProject(props.editorInstance.savedProjectConfig),
@@ -1576,7 +1579,10 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 		let saveInFlight = false;
 		let shouldResave = false;
 		let hasPendingProjectSave = false;
+		let suppressNextProjectSave = false;
 		let persistedProjectRevision = project.projectRevision;
+		const [externalProjectUpdate, setExternalProjectUpdate] =
+			createSignal<ProjectConfiguration | null>(null);
 
 		const flushProjectConfig = async () => {
 			if (!hasPendingProjectSave && !saveInFlight) return;
@@ -1597,6 +1603,11 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 				persistedProjectRevision = (await commands.setProjectConfig(
 					config,
 				)) as unknown as number;
+				setExternalProjectUpdate((incoming) =>
+					incoming && incoming.projectRevision > persistedProjectRevision
+						? incoming
+						: null,
+				);
 			} catch (error) {
 				console.error("Failed to persist project config", error);
 				if (String(error).includes("revision conflict")) {
@@ -1638,6 +1649,10 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 					trackStore(project);
 				},
 				() => {
+					if (suppressNextProjectSave) {
+						suppressNextProjectSave = false;
+						return;
+					}
 					scheduleProjectConfigSave();
 				},
 				{ defer: true },
@@ -1905,6 +1920,97 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 		// by whichever overlay owns the drag, rendered once above the canvas.
 		const [snapGuides, setSnapGuides] = createSignal<SnapGuide[]>([]);
 
+		const applyExternalProjectConfig = async (
+			incoming = externalProjectUpdate(),
+		) => {
+			if (!incoming) return false;
+			if (saveInFlight) {
+				toast.error(
+					text("Cap is still saving. Try loading the external update again."),
+				);
+				return false;
+			}
+
+			if (projectSaveTimeout) {
+				clearTimeout(projectSaveTimeout);
+				projectSaveTimeout = undefined;
+			}
+			hasPendingProjectSave = false;
+			shouldResave = false;
+			suppressNextProjectSave = true;
+			persistedProjectRevision = incoming.projectRevision;
+			setProject(reconcile(normalizeProject(incoming)));
+			await commands.updateProjectConfigInMemory(
+				incoming,
+				editorState.playing
+					? null
+					: Math.max(Math.floor(editorState.playbackTime * FPS), 0),
+				editorState.playing ? null : FPS,
+				editorState.playing ? null : previewResolutionBase(),
+			);
+			setExternalProjectUpdate(null);
+			return true;
+		};
+
+		onMount(() => {
+			let disposed = false;
+			let unwatch: (() => void) | undefined;
+			let eventGeneration = 0;
+			const normalizePath = (path: string) =>
+				path.replaceAll("\\", "/").replace(/\/+$/, "");
+			const projectPath = normalizePath(props.editorInstance.path);
+			const configPath = `${projectPath}/project-config.json`;
+
+			void watch(
+				props.editorInstance.path,
+				(event) => {
+					if (!event.paths.some((path) => normalizePath(path) === configPath))
+						return;
+					const generation = ++eventGeneration;
+					void commands
+						.loadProjectConfigFromDisk()
+						.then(async (incoming) => {
+							if (disposed || generation !== eventGeneration) return;
+							const decision = decideExternalProjectUpdate({
+								persistedRevision: persistedProjectRevision,
+								incomingRevision: incoming.projectRevision,
+								hasPendingSave: hasPendingProjectSave,
+								saveInFlight,
+							});
+							if (decision === "ignore") {
+								setExternalProjectUpdate((pending) =>
+									pending && pending.projectRevision > persistedProjectRevision
+										? pending
+										: null,
+								);
+								return;
+							}
+							if (decision === "prompt") {
+								setExternalProjectUpdate(incoming);
+								return;
+							}
+							await applyExternalProjectConfig(incoming);
+						})
+						.catch((error) =>
+							console.error("Failed to load external project update", error),
+						);
+				},
+				{ recursive: false, delayMs: 200 },
+			)
+				.then((disposeWatch) => {
+					if (disposed) disposeWatch();
+					else unwatch = disposeWatch;
+				})
+				.catch((error) =>
+					console.error("Failed to watch project config", error),
+				);
+
+			onCleanup(() => {
+				disposed = true;
+				unwatch?.();
+			});
+		});
+
 		// Plain signals, not resources: audio decodes in the background after
 		// the editor opens, so these can resolve late — they must never suspend
 		// the editor UI back to the skeleton. Waveforms simply appear once
@@ -2109,6 +2215,8 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 			project,
 			setProject,
 			projectActions,
+			externalProjectUpdate,
+			applyExternalProjectConfig,
 			camera3DScenePreview,
 			projectHistory: createStoreHistory(project, setProject),
 			editorState,

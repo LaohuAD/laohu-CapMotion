@@ -8,6 +8,8 @@ import {
 	type MotionDefinition,
 	type MotionSegment,
 	moveMotionSegment,
+	resizeMotionSegment,
+	resizeMotionSegmentStart,
 	staleLinkedArtifact,
 } from "../motion";
 import { useTimelineContext } from "./context";
@@ -173,23 +175,22 @@ export function MotionTrack(props: {
 								onMouseDown={createMouseDownDrag(
 									item.index,
 									() => ({
-										start: segment().start,
-										end: segment().end,
+										segment: { ...segment() },
 										definition: definition(),
 									}),
 									(event, value, initialMouseX) => {
 										const delta =
 											(event.clientX - initialMouseX) * secsPerPixel();
-										const minimum = value.definition?.minDuration ?? 0.1;
-										const maximum = value.definition?.maxDuration ?? value.end;
-										const next = Math.min(
-											value.end - minimum,
-											Math.max(0, value.end - maximum, value.start + delta),
+										const resized = resizeMotionSegmentStart(
+											value.segment,
+											value.segment.start + delta,
+											value.definition,
+											project.motion.segments,
 										);
 										setSegment(
 											item.index,
 											(segment) => {
-												segment.start = next;
+												segment.start = resized.start;
 											},
 											true,
 										);
@@ -209,6 +210,7 @@ export function MotionTrack(props: {
 											original.start + delta,
 											totalDuration(),
 											props.laneIndex,
+											project.motion.segments,
 										);
 										setSegment(
 											item.index,
@@ -237,8 +239,7 @@ export function MotionTrack(props: {
 								onMouseDown={createMouseDownDrag(
 									item.index,
 									() => ({
-										start: segment().start,
-										end: segment().end,
+										segment: { ...segment() },
 										definition: definition(),
 									}),
 									(event, value, initialMouseX) => {
@@ -248,17 +249,23 @@ export function MotionTrack(props: {
 										const maximum =
 											value.definition?.maxDuration ?? totalDuration();
 										const next = Math.max(
-											value.start + minimum,
+											value.segment.start + minimum,
 											Math.min(
-												value.start + maximum,
+												value.segment.start + maximum,
 												totalDuration(),
-												value.end + delta,
+												value.segment.end + delta,
 											),
+										);
+										const resized = resizeMotionSegment(
+											value.segment,
+											next - value.segment.start,
+											value.definition,
+											project.motion.segments,
 										);
 										setSegment(
 											item.index,
 											(segment) => {
-												segment.end = next;
+												segment.end = resized.end;
 											},
 											true,
 										);

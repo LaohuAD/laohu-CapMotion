@@ -4,6 +4,7 @@ import {mkdtemp, readFile, rm, writeFile} from "node:fs/promises";
 import {join} from "node:path";
 import {tmpdir} from "node:os";
 import {spawnSync} from "node:child_process";
+import {ffmpegBin, ffprobeBin} from "./media-binaries.mjs";
 
 const [edlPath, ...flags] = process.argv.slice(2);
 if (!edlPath) {
@@ -59,7 +60,7 @@ try {
       `[0:a]aselect='${audioTerms.join("+")}',asetpts=N/SR/TB,aresample=48000[a]`,
       `[v][a]concat=n=1:v=1:a=1[vout][aout]`,
     ].join(";\n") + "\n", "utf8");
-    run("ffmpeg", [
+    run(ffmpegBin, [
       "-hide_banner", "-y", "-ss", (batchStartMs / 1000).toFixed(3), "-t", ((batchEndMs - batchStartMs) / 1000).toFixed(3), "-i", source.path,
       "-filter_complex_script", filterPath,
       "-map", "[vout]", "-map", "[aout]",
@@ -71,8 +72,8 @@ try {
   }
   const concatPath = join(workDir, "concat.txt");
   await writeFile(concatPath, chunks.map((chunk) => `file '${chunk}'`).join("\n") + "\n", "utf8");
-  run("ffmpeg", ["-hide_banner", "-y", "-f", "concat", "-safe", "0", "-i", concatPath, "-c", "copy", "-movflags", "+faststart", edl.output], {stdio: "inherit", encoding: undefined});
-  const probe = JSON.parse(run("ffprobe", ["-v", "error", "-show_entries", "format=duration,size:stream=index,codec_type,start_time,duration,width,height,r_frame_rate,sample_rate,channels", "-of", "json", edl.output]));
+  run(ffmpegBin, ["-hide_banner", "-y", "-f", "concat", "-safe", "0", "-i", concatPath, "-c", "copy", "-movflags", "+faststart", edl.output], {stdio: "inherit", encoding: undefined});
+  const probe = JSON.parse(run(ffprobeBin, ["-v", "error", "-show_entries", "format=duration,size:stream=index,codec_type,start_time,duration,width,height,r_frame_rate,sample_rate,channels", "-of", "json", edl.output]));
   edl.expectedDurationMs = expectedDurationMs;
   edl.outputProbe = probe;
   edl.renderedAt = new Date().toISOString();

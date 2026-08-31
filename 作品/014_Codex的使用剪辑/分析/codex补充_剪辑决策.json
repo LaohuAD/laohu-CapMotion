@@ -1,0 +1,679 @@
+{
+  "source": "/Users/a1/Movies/codex补充.mp4",
+  "sourceDuration": 202.866667,
+  "fps": 30,
+  "sampleRate": 48000,
+  "samplesPerFrame": 1600,
+  "workflow": [
+    "粗剪",
+    "精剪",
+    "修正SRT字幕",
+    "字幕的烧录",
+    "拼接到现有成片结尾"
+  ],
+  "brief": {
+    "role": "作为 Codex 教程正文后的补充章节",
+    "mainline": [
+      "补回解释一下与辩证看待两个命令",
+      "搜索理论支撑并让 AI 佐证",
+      "命令可以组合与嵌套",
+      "AI 剪辑与项目更新",
+      "展示老胡文稿架构"
+    ],
+    "mustKeep": [
+      "命令的组合方法",
+      "搜索理论支撑",
+      "项目已更新可使用",
+      "按个人习惯调整",
+      "文稿架构展示"
+    ],
+    "remove": [
+      "开头卡壳与重复说明",
+      "无讲话等待",
+      "无关的导航到大湾公园",
+      "重复起头和独立语气词",
+      "不承载信息的操作等待"
+    ]
+  },
+  "roughStage": {
+    "result": "只建立虚拟 EDL，不渲染粗剪媒体",
+    "protectedVisualRanges": [
+      [
+        112.82,
+        157.48
+      ],
+      [
+        178.07,
+        195.35
+      ]
+    ],
+    "rule": "无字幕不等于无内容；项目页面切换和架构展示按画面变化保护"
+  },
+  "preciseStage": {
+    "result": "在粗剪素材池上压缩为一条顺序补充主线，不重排连续操作",
+    "sourceDurationSeconds": 202.866667,
+    "targetDurationSeconds": 85.433333,
+    "segmentCount": 49
+  },
+  "notableExclusions": [
+    {
+      "range": [
+        6.1,
+        10.45
+      ],
+      "reason": "删除“前面我卡壳了、思维卡壳了、然后嗯”的过程性说明"
+    },
+    {
+      "range": [
+        22.13,
+        24.57
+      ],
+      "reason": "删除独立语气词和对第一个命令效果的重复回顾"
+    },
+    {
+      "range": [
+        27.56,
+        30.03
+      ],
+      "reason": "删除悬空“就是”和停顿"
+    },
+    {
+      "range": [
+        65.68,
+        72.08
+      ],
+      "reason": "压缩“理论逻辑或者是……理论支撑”中间的长思考停顿"
+    },
+    {
+      "range": [
+        75.72,
+        81.28
+      ],
+      "reason": "压缩“佐证它的这个……理由”中间的长思考停顿"
+    },
+    {
+      "range": [
+        89.75,
+        98.32
+      ],
+      "reason": "删除无关的“帮我导航到大湾公园”和其后等待"
+    },
+    {
+      "range": [
+        124.08,
+        133.33
+      ],
+      "reason": "删除“这个项目其实就是”的重复起头和页面等待"
+    },
+    {
+      "range": [
+        157.48,
+        178.07
+      ],
+      "reason": "删除独立“还有”及后续过长导航等待"
+    },
+    {
+      "range": [
+        192.35,
+        195.35
+      ],
+      "reason": "这是保留区间：给观众约3秒查看文稿架构"
+    },
+    {
+      "range": [
+        32.12,
+        41.85
+      ],
+      "reason": "删除“不希望它把观点默认成正确指令”的卡顿绕述，直接保留“想跟它讨论、找出漏洞”的清晰表达"
+    },
+    {
+      "range": [
+        4.03,
+        4.77
+      ],
+      "reason": "删除“补充一个”中的冗余量词，使开头成为“补充之前漏掉的一个内容”"
+    }
+  ],
+  "sequence": [
+    {
+      "index": 1,
+      "chapter": "补回常用命令",
+      "startFrame": 78,
+      "endFrame": 137,
+      "sourceStart": 2.6,
+      "sourceEnd": 4.566667,
+      "targetStart": 0,
+      "targetEnd": 1.966667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 2,
+      "chapter": "补回常用命令",
+      "startFrame": 143,
+      "endFrame": 183,
+      "sourceStart": 4.766667,
+      "sourceEnd": 6.1,
+      "targetStart": 1.966667,
+      "targetEnd": 3.3,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 3,
+      "chapter": "补回常用命令",
+      "startFrame": 314,
+      "endFrame": 377,
+      "sourceStart": 10.466667,
+      "sourceEnd": 12.566667,
+      "targetStart": 3.3,
+      "targetEnd": 5.4,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 4,
+      "chapter": "补回常用命令",
+      "startFrame": 490,
+      "endFrame": 593,
+      "sourceStart": 16.333333,
+      "sourceEnd": 19.766667,
+      "targetStart": 5.4,
+      "targetEnd": 8.833333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 5,
+      "chapter": "补回常用命令",
+      "startFrame": 608,
+      "endFrame": 653,
+      "sourceStart": 20.266667,
+      "sourceEnd": 21.766667,
+      "targetStart": 8.833333,
+      "targetEnd": 10.333333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 6,
+      "chapter": "补回常用命令",
+      "startFrame": 737,
+      "endFrame": 759,
+      "sourceStart": 24.566667,
+      "sourceEnd": 25.3,
+      "targetStart": 10.333333,
+      "targetEnd": 11.066667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 7,
+      "chapter": "补回常用命令",
+      "startFrame": 763,
+      "endFrame": 779,
+      "sourceStart": 25.433333,
+      "sourceEnd": 25.966667,
+      "targetStart": 11.066667,
+      "targetEnd": 11.6,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 8,
+      "chapter": "补回常用命令",
+      "startFrame": 783,
+      "endFrame": 827,
+      "sourceStart": 26.1,
+      "sourceEnd": 27.566667,
+      "targetStart": 11.6,
+      "targetEnd": 13.066667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 9,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 901,
+      "endFrame": 964,
+      "sourceStart": 30.033333,
+      "sourceEnd": 32.133333,
+      "targetStart": 13.066667,
+      "targetEnd": 15.166667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 10,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 1256,
+      "endFrame": 1300,
+      "sourceStart": 41.866667,
+      "sourceEnd": 43.333333,
+      "targetStart": 15.166667,
+      "targetEnd": 16.633333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 11,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 1300,
+      "endFrame": 1330,
+      "sourceStart": 43.333333,
+      "sourceEnd": 44.333333,
+      "targetStart": 16.633333,
+      "targetEnd": 17.633333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 12,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 1349,
+      "endFrame": 1457,
+      "sourceStart": 44.966667,
+      "sourceEnd": 48.566667,
+      "targetStart": 17.633333,
+      "targetEnd": 21.233333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 13,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 1469,
+      "endFrame": 1508,
+      "sourceStart": 48.966667,
+      "sourceEnd": 50.266667,
+      "targetStart": 21.233333,
+      "targetEnd": 22.533333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 14,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 1538,
+      "endFrame": 1619,
+      "sourceStart": 51.266667,
+      "sourceEnd": 53.966667,
+      "targetStart": 22.533333,
+      "targetEnd": 25.233333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 15,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 1679,
+      "endFrame": 1699,
+      "sourceStart": 55.966667,
+      "sourceEnd": 56.633333,
+      "targetStart": 25.233333,
+      "targetEnd": 25.9,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 16,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 1729,
+      "endFrame": 1798,
+      "sourceStart": 57.633333,
+      "sourceEnd": 59.933333,
+      "targetStart": 25.9,
+      "targetEnd": 28.2,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 17,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 1805,
+      "endFrame": 1970,
+      "sourceStart": 60.166667,
+      "sourceEnd": 65.666667,
+      "targetStart": 28.2,
+      "targetEnd": 33.7,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 18,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 2162,
+      "endFrame": 2200,
+      "sourceStart": 72.066667,
+      "sourceEnd": 73.333333,
+      "targetStart": 33.7,
+      "targetEnd": 34.966667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 19,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 2208,
+      "endFrame": 2257,
+      "sourceStart": 73.6,
+      "sourceEnd": 75.233333,
+      "targetStart": 34.966667,
+      "targetEnd": 36.6,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 20,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 2424,
+      "endFrame": 2450,
+      "sourceStart": 80.8,
+      "sourceEnd": 81.666667,
+      "targetStart": 36.6,
+      "targetEnd": 37.466667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 21,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 2465,
+      "endFrame": 2533,
+      "sourceStart": 82.166667,
+      "sourceEnd": 84.433333,
+      "targetStart": 37.466667,
+      "targetEnd": 39.733333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 22,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 2545,
+      "endFrame": 2612,
+      "sourceStart": 84.833333,
+      "sourceEnd": 87.066667,
+      "targetStart": 39.733333,
+      "targetEnd": 41.966667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 23,
+      "chapter": "为什么要辩证看待并搜索依据",
+      "startFrame": 2660,
+      "endFrame": 2693,
+      "sourceStart": 88.666667,
+      "sourceEnd": 89.766667,
+      "targetStart": 41.966667,
+      "targetEnd": 43.066667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 24,
+      "chapter": "命令可以组合与嵌套",
+      "startFrame": 2946,
+      "endFrame": 3002,
+      "sourceStart": 98.2,
+      "sourceEnd": 100.066667,
+      "targetStart": 43.066667,
+      "targetEnd": 44.933333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 25,
+      "chapter": "命令可以组合与嵌套",
+      "startFrame": 3028,
+      "endFrame": 3062,
+      "sourceStart": 100.933333,
+      "sourceEnd": 102.066667,
+      "targetStart": 44.933333,
+      "targetEnd": 46.066667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 26,
+      "chapter": "命令可以组合与嵌套",
+      "startFrame": 3099,
+      "endFrame": 3134,
+      "sourceStart": 103.3,
+      "sourceEnd": 104.466667,
+      "targetStart": 46.066667,
+      "targetEnd": 47.233333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 27,
+      "chapter": "命令可以组合与嵌套",
+      "startFrame": 3152,
+      "endFrame": 3230,
+      "sourceStart": 105.066667,
+      "sourceEnd": 107.666667,
+      "targetStart": 47.233333,
+      "targetEnd": 49.833333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 28,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 3393,
+      "endFrame": 3445,
+      "sourceStart": 113.1,
+      "sourceEnd": 114.833333,
+      "targetStart": 49.833333,
+      "targetEnd": 51.566667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 29,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 3473,
+      "endFrame": 3559,
+      "sourceStart": 115.766667,
+      "sourceEnd": 118.633333,
+      "targetStart": 51.566667,
+      "targetEnd": 54.433333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 30,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 3561,
+      "endFrame": 3611,
+      "sourceStart": 118.7,
+      "sourceEnd": 120.366667,
+      "targetStart": 54.433333,
+      "targetEnd": 56.1,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 31,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 3633,
+      "endFrame": 3722,
+      "sourceStart": 121.1,
+      "sourceEnd": 124.066667,
+      "targetStart": 56.1,
+      "targetEnd": 59.066667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 32,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4000,
+      "endFrame": 4028,
+      "sourceStart": 133.333333,
+      "sourceEnd": 134.266667,
+      "targetStart": 59.066667,
+      "targetEnd": 60,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 33,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4056,
+      "endFrame": 4100,
+      "sourceStart": 135.2,
+      "sourceEnd": 136.666667,
+      "targetStart": 60,
+      "targetEnd": 61.466667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 34,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4109,
+      "endFrame": 4138,
+      "sourceStart": 136.966667,
+      "sourceEnd": 137.933333,
+      "targetStart": 61.466667,
+      "targetEnd": 62.433333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 35,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4144,
+      "endFrame": 4186,
+      "sourceStart": 138.133333,
+      "sourceEnd": 139.533333,
+      "targetStart": 62.433333,
+      "targetEnd": 63.833333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 36,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4303,
+      "endFrame": 4436,
+      "sourceStart": 143.433333,
+      "sourceEnd": 147.866667,
+      "targetStart": 63.833333,
+      "targetEnd": 68.266667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 37,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4434,
+      "endFrame": 4462,
+      "sourceStart": 147.8,
+      "sourceEnd": 148.733333,
+      "targetStart": 68.266667,
+      "targetEnd": 69.2,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 38,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4468,
+      "endFrame": 4495,
+      "sourceStart": 148.933333,
+      "sourceEnd": 149.833333,
+      "targetStart": 69.2,
+      "targetEnd": 70.1,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 39,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4630,
+      "endFrame": 4652,
+      "sourceStart": 154.333333,
+      "sourceEnd": 155.066667,
+      "targetStart": 70.1,
+      "targetEnd": 70.833333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 40,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4672,
+      "endFrame": 4691,
+      "sourceStart": 155.733333,
+      "sourceEnd": 156.366667,
+      "targetStart": 70.833333,
+      "targetEnd": 71.466667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 41,
+      "chapter": "AI剪辑与项目更新",
+      "startFrame": 4697,
+      "endFrame": 4724,
+      "sourceStart": 156.566667,
+      "sourceEnd": 157.466667,
+      "targetStart": 71.466667,
+      "targetEnd": 72.366667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 42,
+      "chapter": "文稿架构展示与告别",
+      "startFrame": 5342,
+      "endFrame": 5359,
+      "sourceStart": 178.066667,
+      "sourceEnd": 178.633333,
+      "targetStart": 72.366667,
+      "targetEnd": 72.933333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 43,
+      "chapter": "文稿架构展示与告别",
+      "startFrame": 5468,
+      "endFrame": 5522,
+      "sourceStart": 182.266667,
+      "sourceEnd": 184.066667,
+      "targetStart": 72.933333,
+      "targetEnd": 74.733333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 44,
+      "chapter": "文稿架构展示与告别",
+      "startFrame": 5543,
+      "endFrame": 5580,
+      "sourceStart": 184.766667,
+      "sourceEnd": 186,
+      "targetStart": 74.733333,
+      "targetEnd": 75.966667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 45,
+      "chapter": "文稿架构展示与告别",
+      "startFrame": 5594,
+      "endFrame": 5623,
+      "sourceStart": 186.466667,
+      "sourceEnd": 187.433333,
+      "targetStart": 75.966667,
+      "targetEnd": 76.933333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 46,
+      "chapter": "文稿架构展示与告别",
+      "startFrame": 5655,
+      "endFrame": 5705,
+      "sourceStart": 188.5,
+      "sourceEnd": 190.166667,
+      "targetStart": 76.933333,
+      "targetEnd": 78.6,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 47,
+      "chapter": "文稿架构展示与告别",
+      "startFrame": 5721,
+      "endFrame": 5771,
+      "sourceStart": 190.7,
+      "sourceEnd": 192.366667,
+      "targetStart": 78.6,
+      "targetEnd": 80.266667,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    },
+    {
+      "index": 48,
+      "chapter": "文稿架构展示与告别",
+      "startFrame": 5771,
+      "endFrame": 5861,
+      "sourceStart": 192.366667,
+      "sourceEnd": 195.366667,
+      "targetStart": 80.266667,
+      "targetEnd": 83.266667,
+      "reason": "保留约3秒无讲话画面，让观众查看文稿架构"
+    },
+    {
+      "index": 49,
+      "chapter": "文稿架构展示与告别",
+      "startFrame": 5969,
+      "endFrame": 6034,
+      "sourceStart": 198.966667,
+      "sourceEnd": 201.133333,
+      "targetStart": 83.266667,
+      "targetEnd": 85.433333,
+      "reason": "保留主线内容并在低音量或词边界剪接"
+    }
+  ],
+  "preciseStage剪口复核": "最终策略：无法无损分离的轻微量词重复保留在音频、在展示字幕中整理；孤立“理由”前保留起音空间。最终成片再次 ASR 校验。"
+}

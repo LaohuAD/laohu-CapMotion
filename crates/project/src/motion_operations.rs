@@ -3,9 +3,81 @@ use std::path::Path;
 use serde_json::Value;
 
 use crate::{
-    MotionArtifact, MotionArtifactStatus, MotionDefinition, MotionSegment, ProjectConfiguration,
-    ProjectTransactionError, mutate_project,
+    MotionArtifact, MotionArtifactStatus, MotionDefinition, MotionDefinitionStatus,
+    MotionDurationPolicy, MotionSegment, ProjectConfiguration, ProjectTransactionError,
+    mutate_project,
 };
+
+pub const EXTERNAL_VIDEO_DEFINITION_ID: &str = "external-video-artifact";
+
+/// Adds an already-generated video as an upper Motion track in one revision-safe
+/// transaction. The base Cap timeline and original recording metadata are untouched.
+pub fn import_external_motion_artifact(
+    project_path: impl AsRef<Path>,
+    expected_revision: u64,
+    segment: MotionSegment,
+    artifact: MotionArtifact,
+) -> Result<ProjectConfiguration, ProjectTransactionError> {
+    mutate_project(project_path, expected_revision, |project| {
+        if segment.id.is_empty() || project.motion.segment(&segment.id).is_some() {
+            return Err(format!(
+                "motion segment {} is empty or already exists",
+                segment.id
+            ));
+        }
+        if artifact.segment_id != segment.id {
+            return Err("external artifact segment id does not match motion segment".into());
+        }
+        if artifact.id.is_empty() || artifact.path.is_empty() || artifact.content_hash.is_empty() {
+            return Err("motion artifact id, path, and content hash are required".into());
+        }
+        if artifact.width == 0
+            || artifact.height == 0
+            || !artifact.fps.is_finite()
+            || artifact.fps <= 0.0
+            || !artifact.duration.is_finite()
+            || artifact.duration <= 0.0
+        {
+            return Err("motion artifact media metadata is invalid".into());
+        }
+
+        if project
+            .motion
+            .definition(EXTERNAL_VIDEO_DEFINITION_ID, 1)
+            .is_none()
+        {
+            project.motion.definitions.push(MotionDefinition {
+                id: EXTERNAL_VIDEO_DEFINITION_ID.into(),
+                version: 1,
+                source: "external-video".into(),
+                composition_id: "ExternalVideoArtifact".into(),
+                status: MotionDefinitionStatus::Published,
+                min_duration: 0.001,
+                default_duration: segment.duration(),
+                max_duration: f64::MAX,
+                default_policy: MotionDurationPolicy::Trim,
+                ..Default::default()
+            });
+        }
+        let definition = project
+            .motion
+            .definition(EXTERNAL_VIDEO_DEFINITION_ID, 1)
+            .expect("external video definition was inserted");
+        segment
+            .validate_against(definition)
+            .map_err(|error| error.to_string())?;
+
+        let mut linked_segment = segment;
+        linked_segment.artifact_id = Some(artifact.id.clone());
+        project.motion.segments.push(linked_segment);
+        project.motion.artifacts.push(artifact);
+        project
+            .motion
+            .validate()
+            .map_err(|error| error.to_string())?;
+        Ok(())
+    })
+}
 
 pub fn record_motion_artifact(
     project_path: impl AsRef<Path>,
@@ -93,6 +165,10 @@ pub fn add_motion_segment(
         }
 
         project.motion.segments.push(segment);
+        project
+            .motion
+            .validate()
+            .map_err(|error| error.to_string())?;
         Ok(())
     })
 }
@@ -109,16 +185,22 @@ pub fn move_motion_segment(
             return Err("motion segment start must be a finite non-negative number".into());
         }
 
-        let segment = project
-            .motion
-            .segment_mut(segment_id)
-            .ok_or_else(|| format!("motion segment {segment_id} does not exist"))?;
-        let duration = segment.duration();
-        segment.start = start;
-        segment.end = start + duration;
-        if let Some(track) = track {
-            segment.track = track;
+        {
+            let segment = project
+                .motion
+                .segment_mut(segment_id)
+                .ok_or_else(|| format!("motion segment {segment_id} does not exist"))?;
+            let duration = segment.duration();
+            segment.start = start;
+            segment.end = start + duration;
+            if let Some(track) = track {
+                segment.track = track;
+            }
         }
+        project
+            .motion
+            .validate()
+            .map_err(|error| error.to_string())?;
         Ok(())
     })
 }
@@ -142,6 +224,10 @@ pub fn resize_motion_segment(
             segment.end = segment.start + duration;
             segment.artifact_id.clone()
         };
+        project
+            .motion
+            .validate()
+            .map_err(|error| error.to_string())?;
         mark_artifact_stale(project, artifact_id.as_deref());
         Ok(())
     })

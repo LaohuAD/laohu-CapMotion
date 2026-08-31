@@ -11,7 +11,7 @@
   "implementation": {
     "engine": "Remotion",
     "output": "png",
-    "mountInHyperFrames": true
+    "integration": "cap-motion-overlay"
   },
   "qa": {
     "mobileReadable": true,

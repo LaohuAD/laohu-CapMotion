@@ -4,6 +4,7 @@ import {spawn} from "node:child_process";
 import {mkdtemp, readFile, rm, writeFile} from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import {ffmpegBin, ffprobeBin} from "./media-binaries.mjs";
 
 const edlPath = process.argv[2];
 if (!edlPath) throw new Error("Usage: render-frame-edl-segmented.mjs EDL.json");
@@ -48,7 +49,7 @@ try {
       if (index >= edl.sequence.length) return;
       const range = edl.sequence[index];
       const frameCount = range.endFrame - range.startFrame;
-      await run("ffmpeg", [
+      await run(ffmpegBin, [
         "-y", "-v", "error",
         "-ss", (range.startFrame / fps).toFixed(9), "-i", edl.source,
         "-map", "0:v:0", "-map", "0:a:0",
@@ -72,14 +73,14 @@ try {
   const concatPath = path.join(directory, "concat.txt");
   const escape = (value) => value.replaceAll("'", "'\\''");
   await writeFile(concatPath, `${segmentPaths.map((value) => `file '${escape(value)}'`).join("\n")}\n`, "utf8");
-  await run("ffmpeg", [
+  await run(ffmpegBin, [
     "-y", "-v", "warning", "-f", "concat", "-safe", "0", "-i", concatPath,
     "-map", "0:v:0", "-map", "0:a:0",
     "-c:v", "copy", "-c:a", "aac", "-b:a", edl.audioBitrate ?? "192k", "-ar", String(sampleRate),
     "-video_track_timescale", "15360", "-movflags", "+faststart", edl.output,
   ]);
 
-  const probe = JSON.parse(await run("ffprobe", ["-v", "error", "-count_frames", "-show_entries", "stream=index,codec_type,start_time,duration,nb_read_frames,width,height,r_frame_rate,sample_rate,channels", "-show_entries", "format=start_time,duration,size", "-of", "json", edl.output]));
+  const probe = JSON.parse(await run(ffprobeBin, ["-v", "error", "-count_frames", "-show_entries", "stream=index,codec_type,start_time,duration,nb_read_frames,width,height,r_frame_rate,sample_rate,channels", "-show_entries", "format=start_time,duration,size", "-of", "json", edl.output]));
   edl.expectedFrames = expectedFrames;
   edl.expectedDurationSeconds = expectedFrames / fps;
   edl.outputProbe = probe;

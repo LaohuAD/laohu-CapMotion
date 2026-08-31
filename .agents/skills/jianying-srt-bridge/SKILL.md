@@ -5,6 +5,8 @@ description: Use Jianying Pro (剪映专业版) as a black-box ASR engine to rec
 
 # Jianying SRT Bridge
 
+**只借识别，不借代价。** GUI 只作为用户明确授权的黑盒识别器；保护用户正式草稿和原始媒体，比自动化完成得快更重要。
+
 Use the installed Jianying Pro application through the `computer-use` skill. Do not copy its model files or reverse-engineer its private recognition service.
 
 ## Installation discovery

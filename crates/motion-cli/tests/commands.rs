@@ -1,7 +1,7 @@
 use std::sync::Mutex;
 
 use cap_motion_cli::{MotionCommandLine, MotionOutput, MotionRenderRequest, MotionRenderRunner};
-use cap_project::ProjectConfiguration;
+use cap_project::{MotionOverlayRole, ProjectConfiguration};
 use clap::Parser;
 
 fn create_project() -> tempfile::TempDir {
@@ -172,6 +172,63 @@ fn stale_revision_is_a_structured_non_success_result() {
     let error = command.run().unwrap_err();
 
     assert!(error.contains("expected 0, found 1"));
+}
+
+#[test]
+fn external_artifact_import_is_one_revision_safe_upper_track_transaction() {
+    let directory = create_project();
+    let media = directory.path().join("avatar.mp4");
+    std::fs::write(&media, b"external video bytes").unwrap();
+    let output = run(
+        &directory,
+        &[
+            "artifact",
+            "import",
+            "--expected-revision",
+            "0",
+            "--segment-id",
+            "avatar-001",
+            "--artifact-id",
+            "avatar-001-final",
+            "--path",
+            media.to_str().unwrap(),
+            "--start",
+            "30",
+            "--duration",
+            "25",
+            "--width",
+            "1280",
+            "--height",
+            "720",
+            "--fps",
+            "30",
+            "--track",
+            "4",
+            "--z-index",
+            "40",
+            "--role",
+            "avatar",
+        ],
+    );
+
+    assert_eq!(output.revision, 1);
+    let segment = output.segment.unwrap();
+    let artifact = output.artifact.unwrap();
+    assert_eq!(segment.start, 30.0);
+    assert_eq!(segment.end, 55.0);
+    assert_eq!(segment.track, 4);
+    assert_eq!(segment.role, MotionOverlayRole::Avatar);
+    assert_eq!(segment.artifact_id.as_deref(), Some("avatar-001-final"));
+    assert_eq!(artifact.path, media.to_str().unwrap());
+    assert_eq!(artifact.width, 1280);
+    assert_eq!(artifact.height, 720);
+    assert!(!artifact.content_hash.is_empty());
+
+    let project = ProjectConfiguration::load(directory.path()).unwrap();
+    assert!(
+        project.timeline.is_none(),
+        "base timeline must remain untouched"
+    );
 }
 
 #[derive(Default)]

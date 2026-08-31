@@ -1,6 +1,6 @@
 # Composition 模板
 
-本目录用于沉淀可复用的 HyperFrames 子合成模板。
+本目录是历史占位，不再接收新模板。可复用程序动画统一进入 `../remotion-assets/workspace/` 的 Remotion composition。
 
 计划沉淀：
 

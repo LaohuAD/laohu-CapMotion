@@ -1540,86 +1540,7 @@ pub async fn save_captions(
 
     json_obj.insert("segments".to_string(), segments_array);
 
-    let mut settings_obj = serde_json::Map::new();
-    settings_obj.insert(
-        "enabled".to_string(),
-        serde_json::Value::Bool(settings.enabled),
-    );
-    settings_obj.insert(
-        "font".to_string(),
-        serde_json::Value::String(settings.font.clone()),
-    );
-    settings_obj.insert(
-        "size".to_string(),
-        serde_json::Value::Number(serde_json::Number::from(settings.size)),
-    );
-    settings_obj.insert(
-        "color".to_string(),
-        serde_json::Value::String(settings.color.clone()),
-    );
-    settings_obj.insert(
-        "backgroundColor".to_string(),
-        serde_json::Value::String(settings.background_color.clone()),
-    );
-    settings_obj.insert(
-        "backgroundOpacity".to_string(),
-        serde_json::Value::Number(serde_json::Number::from(settings.background_opacity)),
-    );
-    settings_obj.insert(
-        "position".to_string(),
-        serde_json::Value::String(settings.position.clone()),
-    );
-    settings_obj.insert(
-        "italic".to_string(),
-        serde_json::Value::Bool(settings.italic),
-    );
-    settings_obj.insert(
-        "fontWeight".to_string(),
-        serde_json::Value::Number(serde_json::Number::from(settings.font_weight)),
-    );
-    settings_obj.insert(
-        "outline".to_string(),
-        serde_json::Value::Bool(settings.outline),
-    );
-    settings_obj.insert(
-        "outlineColor".to_string(),
-        serde_json::Value::String(settings.outline_color.clone()),
-    );
-    settings_obj.insert(
-        "exportWithSubtitles".to_string(),
-        serde_json::Value::Bool(settings.export_with_subtitles),
-    );
-    settings_obj.insert(
-        "highlightColor".to_string(),
-        serde_json::Value::String(settings.highlight_color.clone()),
-    );
-    settings_obj.insert(
-        "fadeDuration".to_string(),
-        serde_json::Value::Number(
-            serde_json::Number::from_f64(settings.fade_duration as f64).unwrap(),
-        ),
-    );
-    settings_obj.insert(
-        "lingerDuration".to_string(),
-        serde_json::Value::Number(
-            serde_json::Number::from_f64(settings.linger_duration as f64).unwrap(),
-        ),
-    );
-    settings_obj.insert(
-        "wordTransitionDuration".to_string(),
-        serde_json::Value::Number(
-            serde_json::Number::from_f64(settings.word_transition_duration as f64).unwrap(),
-        ),
-    );
-    settings_obj.insert(
-        "activeWordHighlight".to_string(),
-        serde_json::Value::Bool(settings.active_word_highlight),
-    );
-
-    json_obj.insert(
-        "settings".to_string(),
-        serde_json::Value::Object(settings_obj),
-    );
+    json_obj.insert("settings".to_string(), caption_settings_json(&settings)?);
 
     let json = serde_json::to_string_pretty(&json_obj).map_err(|e| {
         tracing::error!("Failed to serialize captions: {}", e);
@@ -1634,6 +1555,11 @@ pub async fn save_captions(
     tracing::info!("Successfully saved captions");
     tracing::info!("=== SAVE CAPTIONS END ===");
     Ok(())
+}
+
+fn caption_settings_json(settings: &CaptionSettings) -> Result<serde_json::Value, String> {
+    serde_json::to_value(settings)
+        .map_err(|error| format!("Failed to serialize caption settings: {error}"))
 }
 
 pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, String> {
@@ -1734,6 +1660,54 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         .unwrap_or("#000000")
                         .to_string();
 
+                    let letter_spacing = settings_obj
+                        .get("letterSpacing")
+                        .or_else(|| settings_obj.get("letter_spacing"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(0.0) as f32;
+
+                    let outline_width = settings_obj
+                        .get("outlineWidth")
+                        .or_else(|| settings_obj.get("outline_width"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(1.2) as f32;
+
+                    let shadow = settings_obj
+                        .get("shadow")
+                        .and_then(|v| v.as_bool())
+                        .unwrap_or(false);
+
+                    let shadow_color = settings_obj
+                        .get("shadowColor")
+                        .or_else(|| settings_obj.get("shadow_color"))
+                        .and_then(|v| v.as_str())
+                        .unwrap_or("#000000")
+                        .to_string();
+
+                    let shadow_opacity = settings_obj
+                        .get("shadowOpacity")
+                        .or_else(|| settings_obj.get("shadow_opacity"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(75.0) as f32;
+
+                    let shadow_blur = settings_obj
+                        .get("shadowBlur")
+                        .or_else(|| settings_obj.get("shadow_blur"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(15.0) as f32;
+
+                    let shadow_distance = settings_obj
+                        .get("shadowDistance")
+                        .or_else(|| settings_obj.get("shadow_distance"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(5.0) as f32;
+
+                    let shadow_angle = settings_obj
+                        .get("shadowAngle")
+                        .or_else(|| settings_obj.get("shadow_angle"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(-45.0) as f32;
+
                     let export_with_subtitles = settings_obj
                         .get("exportWithSubtitles")
                         .or_else(|| settings_obj.get("export_with_subtitles"))
@@ -1817,6 +1791,14 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         font_weight,
                         outline,
                         outline_color,
+                        letter_spacing,
+                        outline_width,
+                        shadow,
+                        shadow_color,
+                        shadow_opacity,
+                        shadow_blur,
+                        shadow_distance,
+                        shadow_angle,
                         export_with_subtitles,
                         highlight_color,
                         fade_duration,
@@ -2734,7 +2716,8 @@ fn mix_samples(dest: &mut [f32], source: &[f32]) -> usize {
 mod tests {
     use super::{
         AudioExtractionSource, CaptionWord, caption_text_from_words, caption_word_chunks,
-        normalize_caption_words, resolve_audio_extraction_source, resolve_path_with_base,
+        caption_settings_json, normalize_caption_words, parse_captions_json,
+        resolve_audio_extraction_source, resolve_path_with_base,
     };
     use tempfile::tempdir;
 
@@ -2874,6 +2857,61 @@ mod tests {
             "This is where we record I want"
         );
         assert_eq!(caption_text_from_words(chunks[1]), "clean captions");
+    }
+
+    #[test]
+    fn parse_captions_json_preserves_extended_style_settings() {
+        let captions = parse_captions_json(
+            r##"{
+                "segments": [],
+                "settings": {
+                    "letterSpacing": 2.5,
+                    "outlineWidth": 4.0,
+                    "shadow": true,
+                    "shadowColor": "#112233",
+                    "shadowOpacity": 65.0,
+                    "shadowBlur": 12.0,
+                    "shadowDistance": 7.0,
+                    "shadowAngle": 30.0
+                }
+            }"##,
+        )
+        .unwrap();
+
+        assert_eq!(captions.settings.letter_spacing, 2.5);
+        assert_eq!(captions.settings.outline_width, 4.0);
+        assert!(captions.settings.shadow);
+        assert_eq!(captions.settings.shadow_color, "#112233");
+        assert_eq!(captions.settings.shadow_opacity, 65.0);
+        assert_eq!(captions.settings.shadow_blur, 12.0);
+        assert_eq!(captions.settings.shadow_distance, 7.0);
+        assert_eq!(captions.settings.shadow_angle, 30.0);
+    }
+
+    #[test]
+    fn caption_settings_json_writes_extended_style_settings() {
+        let settings = super::CaptionSettings {
+            letter_spacing: 1.5,
+            outline_width: 3.0,
+            shadow: true,
+            shadow_color: "#112233".to_string(),
+            shadow_opacity: 60.0,
+            shadow_blur: 10.0,
+            shadow_distance: 8.0,
+            shadow_angle: -30.0,
+            ..Default::default()
+        };
+
+        let value = caption_settings_json(&settings).unwrap();
+
+        assert_eq!(value["letterSpacing"], 1.5);
+        assert_eq!(value["outlineWidth"], 3.0);
+        assert_eq!(value["shadow"], true);
+        assert_eq!(value["shadowColor"], "#112233");
+        assert_eq!(value["shadowOpacity"], 60.0);
+        assert_eq!(value["shadowBlur"], 10.0);
+        assert_eq!(value["shadowDistance"], 8.0);
+        assert_eq!(value["shadowAngle"], -30.0);
     }
 
     #[cfg(not(all(target_os = "macos", target_arch = "x86_64")))]

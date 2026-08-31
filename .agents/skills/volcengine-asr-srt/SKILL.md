@@ -5,7 +5,23 @@ description: Call Volcengine large-model recording-file ASR in flash Base64 or s
 
 # Volcengine ASR SRT
 
+**声音先留证，文字后成稿。** 原始词级时码和录制段顺序比一份“看起来通顺”的文本更重要；识别负责忠实定位，不负责替内容导演删词。
+
 Use the official flash API for eligible local audio and keep the asynchronous standard API as a fallback. Do not operate Jianying, install a local ASR engine, or print credentials.
+
+## Cap Project Entry
+
+第一遍 Cap 工程由上游“老胡文稿”在原任务直接调用，不创建后期任务：
+
+```bash
+node scripts/cap-project-asr.mjs \
+  --project /absolute/recording.cap \
+  --output-dir /absolute/asr-records
+```
+
+该入口按 `recording-meta.json.segments[]` 的真实录制顺序索引 `mic.path`，保留每段源时码和全局偏移，分别识别后产出 `source-index.json`、逐段 raw JSON/SRT、合并 `cap-asr.raw.json`、`cap-asr.srt`、`cap-asr.txt` 与 `run.json`。系统声音不静默混入麦克风 ASR；找不到麦克风轨时明确失败。
+
+第二遍也先从 Cap 新识别，但其结果进入 `laohu-video-postproduction` 的 S2→T2 链路；第一遍结果不能替代第二遍时间轴。
 
 ## Configuration
 
@@ -93,6 +109,10 @@ node .agents/skills/volcengine-asr-srt/scripts/build-srt.mjs \
 - Compare a representative sample against the user's Jianying baseline before promoting this API to the project-wide primary transcript.
 - Preserve word and utterance timestamps in raw JSON even when SRT uses utterance timestamps.
 - Flash mode is a technical default selected by the user, not proof that its transcript is more accurate than Jianying. Complete a representative human-reviewed comparison before promoting it to the publishing-text baseline.
+
+## Material And Quality Judgment
+
+作用对象是实际麦克风音轨；目标是让后续内容重建或剪口能回到原声。源材料包括 Cap 段索引、音轨、录制偏移和原始 API JSON。多段从各自源时间开始，合并时只增加可追溯全局偏移；不得按文件名猜顺序。规格通过后仍要抽听专名、数字、英文和段边界，不能用 JSON/SRT 格式有效证明识别质量已验收。
 
 ## Failure Handling
 

@@ -2154,9 +2154,24 @@ pub struct CaptionSettings {
     pub italic: bool,
     #[serde(alias = "fontWeight")]
     pub font_weight: u32,
+    #[serde(alias = "letterSpacing")]
+    pub letter_spacing: f32,
     pub outline: bool,
     #[serde(alias = "outlineColor")]
     pub outline_color: String,
+    #[serde(alias = "outlineWidth")]
+    pub outline_width: f32,
+    pub shadow: bool,
+    #[serde(alias = "shadowColor")]
+    pub shadow_color: String,
+    #[serde(alias = "shadowOpacity")]
+    pub shadow_opacity: f32,
+    #[serde(alias = "shadowBlur")]
+    pub shadow_blur: f32,
+    #[serde(alias = "shadowDistance")]
+    pub shadow_distance: f32,
+    #[serde(alias = "shadowAngle")]
+    pub shadow_angle: f32,
     #[serde(alias = "exportWithSubtitles")]
     pub export_with_subtitles: bool,
     #[serde(alias = "highlightColor")]
@@ -2228,8 +2243,16 @@ impl Default for CaptionSettings {
             position: "bottom-center".to_string(),
             italic: false,
             font_weight: Self::default_font_weight(),
+            letter_spacing: 0.0,
             outline: false,
             outline_color: "#000000".to_string(),
+            outline_width: 1.2,
+            shadow: false,
+            shadow_color: "#000000".to_string(),
+            shadow_opacity: 75.0,
+            shadow_blur: 15.0,
+            shadow_distance: 5.0,
+            shadow_angle: -45.0,
             export_with_subtitles: false,
             highlight_color: Self::default_highlight_color(),
             fade_duration: Self::default_fade_duration(),

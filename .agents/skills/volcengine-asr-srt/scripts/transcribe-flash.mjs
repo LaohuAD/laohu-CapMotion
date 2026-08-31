@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import {mkdir, readFile, stat, writeFile} from "node:fs/promises";
+import {existsSync} from "node:fs";
 import {extname, dirname} from "node:path";
 import {spawnSync} from "node:child_process";
 import {fileURLToPath} from "node:url";
@@ -18,6 +19,8 @@ const MAX_DURATION_SECONDS = 2 * 60 * 60;
 const MAX_AUDIO_BYTES = 100 * 1024 * 1024;
 const RECOMMENDED_DIRECT_BYTES = 20 * 1024 * 1024;
 const supportedFormats = new Set(["wav", "mp3", "ogg"]);
+const ffprobeBin = process.env.FFPROBE_BIN
+  ?? (existsSync("/opt/homebrew/opt/ffmpeg@7/bin/ffprobe") ? "/opt/homebrew/opt/ffmpeg@7/bin/ffprobe" : "ffprobe");
 
 const options = parseArgs(process.argv.slice(2));
 if (!options.file || !options.json || !options.srt) {
@@ -38,7 +41,7 @@ try {
     throw new Error(`Audio exceeds the flash API 100MB limit: ${fileStat.size} bytes`);
   }
 
-  const probe = spawnSync("ffprobe", [
+  const probe = spawnSync(ffprobeBin, [
     "-v", "error",
     "-show_entries", "format=duration",
     "-of", "default=noprint_wrappers=1:nokey=1",

@@ -158,6 +158,14 @@ const STYLE_PRESET_KEYS = new Set<keyof EditorCaptionSettings>([
 	"backgroundOpacity",
 	"outline",
 	"outlineColor",
+	"outlineWidth",
+	"shadow",
+	"shadowColor",
+	"shadowOpacity",
+	"shadowBlur",
+	"shadowDistance",
+	"shadowAngle",
+	"letterSpacing",
 	"highlightColor",
 	"activeWordHighlight",
 	"highlightStyle",
@@ -1066,7 +1074,7 @@ export function CaptionsTab(props: {
 										>
 											<CaptionPresetPreview preset={preset} />
 											<span class="px-0.5 text-xs font-medium text-gray-12">
-												{preset.label}
+												{text(preset.label)}
 											</span>
 										</button>
 									)}
@@ -1104,11 +1112,11 @@ export function CaptionsTab(props: {
 												item={props.item}
 											>
 												<KSelect.ItemLabel class="flex-1">
-													{
+													{text(
 														FONT_OPTIONS.find(
 															(f) => f.value === props.item.rawValue,
-														)?.label
-													}
+														)?.label ?? props.item.rawValue,
+													)}
 												</KSelect.ItemLabel>
 											</MenuItem>
 										)}
@@ -1116,9 +1124,11 @@ export function CaptionsTab(props: {
 										<KSelect.Trigger class="w-full flex items-center justify-between rounded-lg px-3 py-2 bg-gray-2 border border-gray-3 text-gray-12 hover:border-gray-4 hover:bg-gray-3 focus:border-blue-9 focus:ring-1 focus:ring-blue-9 transition-colors">
 											<KSelect.Value<string>>
 												{(state) =>
-													FONT_OPTIONS.find(
-														(f) => f.value === state.selectedOption(),
-													)?.label
+													text(
+														FONT_OPTIONS.find(
+															(f) => f.value === state.selectedOption(),
+														)?.label ?? state.selectedOption(),
+													)
 												}
 											</KSelect.Value>
 											<KSelect.Icon>
@@ -1206,11 +1216,11 @@ export function CaptionsTab(props: {
 													item={itemProps.item}
 												>
 													<KSelect.ItemLabel class="flex-1">
-														{
+														{text(
 															CAPTION_HIGHLIGHT_STYLE_OPTIONS.find(
 																(o) => o.value === itemProps.item.rawValue,
-															)?.label
-														}
+															)?.label ?? itemProps.item.rawValue,
+														)}
 													</KSelect.ItemLabel>
 												</MenuItem>
 											)}
@@ -1218,9 +1228,11 @@ export function CaptionsTab(props: {
 											<KSelect.Trigger class="w-full flex items-center justify-between rounded-lg px-3 py-2 bg-gray-2 border border-gray-3 text-gray-12 hover:border-gray-4 hover:bg-gray-3 focus:border-blue-9 focus:ring-1 focus:ring-blue-9 transition-colors">
 												<KSelect.Value<string>>
 													{(state) =>
-														CAPTION_HIGHLIGHT_STYLE_OPTIONS.find(
-															(o) => o.value === state.selectedOption(),
-														)?.label
+														text(
+															CAPTION_HIGHLIGHT_STYLE_OPTIONS.find(
+																(o) => o.value === state.selectedOption(),
+															)?.label ?? state.selectedOption(),
+														)
 													}
 												</KSelect.Value>
 												<KSelect.Icon>
@@ -1300,11 +1312,11 @@ export function CaptionsTab(props: {
 										item={props.item}
 									>
 										<KSelect.ItemLabel class="flex-1">
-											{
+											{text(
 												CAPTION_POSITION_OPTIONS.find(
 													(p) => p.value === props.item.rawValue,
-												)?.label
-											}
+												)?.label ?? props.item.rawValue,
+											)}
 										</KSelect.ItemLabel>
 									</MenuItem>
 								)}
@@ -1313,11 +1325,11 @@ export function CaptionsTab(props: {
 									<KSelect.Value<string>>
 										{(state) => (
 											<span>
-												{
+												{text(
 													CAPTION_POSITION_OPTIONS.find(
 														(p) => p.value === state.selectedOption(),
-													)?.label
-												}
+													)?.label ?? state.selectedOption(),
+												)}
 											</span>
 										)}
 									</KSelect.Value>
@@ -1361,11 +1373,11 @@ export function CaptionsTab(props: {
 												item={itemProps.item}
 											>
 												<KSelect.ItemLabel class="flex-1">
-													{
+													{text(
 														CAPTION_ANIMATION_OPTIONS.find(
 															(o) => o.value === itemProps.item.rawValue,
-														)?.label
-													}
+														)?.label ?? itemProps.item.rawValue,
+													)}
 												</KSelect.ItemLabel>
 											</MenuItem>
 										)}
@@ -1373,9 +1385,11 @@ export function CaptionsTab(props: {
 										<KSelect.Trigger class="w-full flex items-center justify-between rounded-lg px-3 py-2 bg-gray-2 border border-gray-3 text-gray-12 hover:border-gray-4 hover:bg-gray-3 focus:border-blue-9 focus:ring-1 focus:ring-blue-9 transition-colors">
 											<KSelect.Value<string>>
 												{(state) =>
-													CAPTION_ANIMATION_OPTIONS.find(
-														(o) => o.value === state.selectedOption(),
-													)?.label
+													text(
+														CAPTION_ANIMATION_OPTIONS.find(
+															(o) => o.value === state.selectedOption(),
+														)?.label ?? state.selectedOption(),
+													)
 												}
 											</KSelect.Value>
 											<KSelect.Icon>
@@ -1447,7 +1461,7 @@ export function CaptionsTab(props: {
 										item={selectItemProps.item}
 									>
 										<KSelect.ItemLabel class="flex-1">
-											{selectItemProps.item.rawValue.label}
+											{text(selectItemProps.item.rawValue.label)}
 										</KSelect.ItemLabel>
 										<KSelect.ItemIndicator class="ml-auto text-blue-9">
 											<IconCapCircleCheck />
@@ -1461,8 +1475,10 @@ export function CaptionsTab(props: {
 										value: number;
 									}> class="truncate">
 										{(state) =>
-											state.selectedOption()?.label ??
-											getTextWeightLabel(getSetting("fontWeight"))
+											text(
+												state.selectedOption()?.label ??
+													getTextWeightLabel(getSetting("fontWeight")),
+											)
 										}
 									</KSelect.Value>
 									<KSelect.Icon>
@@ -1481,6 +1497,123 @@ export function CaptionsTab(props: {
 									</PopperContent>
 								</KSelect.Portal>
 							</KSelect>
+						</Field>
+
+						<Field name="Text Effects" icon={<IconCapMessageBubble />}>
+							<div class="space-y-4">
+								<div class="flex flex-col gap-2">
+									<div class="flex items-center justify-between text-sm text-gray-11">
+										<span>{text("Letter Spacing")}</span>
+										<span>{getSetting("letterSpacing").toFixed(1)} px</span>
+									</div>
+									<Slider
+										value={[getSetting("letterSpacing")]}
+										onChange={(value) =>
+											updateCaptionSetting("letterSpacing", value[0])
+										}
+										minValue={-2}
+										maxValue={12}
+										step={0.1}
+										disabled={!hasCaptions()}
+									/>
+								</div>
+
+								<div class="flex items-center justify-between">
+									<span class="text-sm text-gray-11">{text("Outline")}</span>
+									<Toggle
+										checked={getSetting("outline")}
+										onChange={(checked) =>
+											updateCaptionSetting("outline", checked)
+										}
+										disabled={!hasCaptions()}
+									/>
+								</div>
+								<Show when={getSetting("outline")}>
+									<div class="grid grid-cols-2 gap-3">
+										<div class="flex flex-col gap-2">
+											<span class="text-sm text-gray-11">
+												{text("Outline Color")}
+											</span>
+											<HexColorInput
+												value={getSetting("outlineColor")}
+												brandColorSwatches={props.brandColorSwatches}
+												onChange={(value) =>
+													updateCaptionSetting("outlineColor", value)
+												}
+											/>
+										</div>
+										<div class="flex flex-col gap-2">
+											<span class="text-sm text-gray-11">
+												{text("Outline Width")} ·{" "}
+												{getSetting("outlineWidth").toFixed(1)} px
+											</span>
+											<Slider
+												value={[getSetting("outlineWidth")]}
+												onChange={(value) =>
+													updateCaptionSetting("outlineWidth", value[0])
+												}
+												minValue={0}
+												maxValue={10}
+												step={0.1}
+											/>
+										</div>
+									</div>
+								</Show>
+
+								<div class="flex items-center justify-between">
+									<span class="text-sm text-gray-11">{text("Shadow")}</span>
+									<Toggle
+										checked={getSetting("shadow")}
+										onChange={(checked) =>
+											updateCaptionSetting("shadow", checked)
+										}
+										disabled={!hasCaptions()}
+									/>
+								</div>
+								<Show when={getSetting("shadow")}>
+									<div class="space-y-3">
+										<div class="flex flex-col gap-2">
+											<span class="text-sm text-gray-11">
+												{text("Shadow Color")}
+											</span>
+											<HexColorInput
+												value={getSetting("shadowColor")}
+												brandColorSwatches={props.brandColorSwatches}
+												onChange={(value) =>
+													updateCaptionSetting("shadowColor", value)
+												}
+											/>
+										</div>
+										{(
+											[
+												["Shadow Opacity", "shadowOpacity", 0, 100, 1, "%"],
+												["Shadow Blur", "shadowBlur", 0, 40, 1, "px"],
+												["Shadow Distance", "shadowDistance", 0, 30, 1, "px"],
+												["Shadow Angle", "shadowAngle", -180, 180, 1, "°"],
+											] as const
+										).map(([label, key, min, max, step, suffix]) => (
+											<div class="flex flex-col gap-2">
+												<div class="flex items-center justify-between text-sm text-gray-11">
+													<span>{text(label)}</span>
+													<span>
+														{getSetting(key).toFixed(0)}
+														{suffix}
+													</span>
+												</div>
+												<Slider
+													value={[getSetting(key)]}
+													onChange={(value) =>
+														updateCaptionSetting(key, value[0])
+													}
+													minValue={min}
+													maxValue={max}
+													step={step}
+												/>
+											</div>
+										))}
+									</div>
+								</Show>
+							</div>
 						</Field>
 
 						<Field name="Export Options" icon={<IconCapMessageBubble />}>

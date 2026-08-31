@@ -1,0 +1,628 @@
+{
+  "cues": {
+    "3": {
+      "zh": "刚好这里我们开展了第二期免费的 30 天 AI 训练营",
+      "en": "We are currently running our second free 30-day AI bootcamp"
+    },
+    "4": {
+      "zh": "然后这里给大家介绍了这个 Agent 的安装",
+      "en": "This guide explains how to install the Agent"
+    },
+    "5": {
+      "zh": "这里面的话",
+      "en": "In this guide"
+    },
+    "6": {
+      "zh": "你会遇到的任何相关问题",
+      "en": "For any related problem you may encounter"
+    },
+    "7": {
+      "zh": "都能够在这里找到一些答案",
+      "en": "you can find an answer here"
+    },
+    "8": {
+      "zh": "然后 Codex 的安装",
+      "en": "Then the Codex installation"
+    },
+    "9": {
+      "zh": "其实会有一些问题",
+      "en": "In fact, there will be some problems"
+    },
+    "14": {
+      "zh": "在安装的过程当中",
+      "en": "During installation"
+    },
+    "15": {
+      "zh": "你可能会遇到",
+      "en": "You may encounter"
+    },
+    "16": {
+      "zh": "包括在我接下来的这些讲解当中",
+      "en": "Included in my next presentations"
+    },
+    "17": {
+      "zh": "你都可能会遇到一些专业的一些名词",
+      "en": "You may encounter some professional nouns"
+    },
+    "18": {
+      "zh": "你可能不太懂",
+      "en": "You probably don't quite get it."
+    },
+    "24": {
+      "zh": "AI 时代 AI 是最好的老师",
+      "en": "In the AI era AI is the best teacher"
+    },
+    "25": {
+      "zh": "这个资料",
+      "en": "This resource"
+    },
+    "26": {
+      "zh": "需要的同学可以戳我头像",
+      "en": "Tap my profile if you need it"
+    },
+    "29": {
+      "zh": "然后第一步",
+      "en": "And then the first step"
+    },
+    "32": {
+      "zh": "就是能够帮助你专属的去干",
+      "en": "is to be able to help you do it exclusively."
+    },
+    "33": {
+      "zh": "一个你特定的你的需求的一个内容",
+      "en": "A piece of content that is specific to you and your needs"
+    },
+    "36": {
+      "zh": "它专门帮我进行文字",
+      "en": "It specializes in texting for me."
+    },
+    "37": {
+      "zh": "选题",
+      "en": "topic selection"
+    },
+    "38": {
+      "zh": "还有标题等等方面的创作",
+      "en": "There are also creations in terms of titles and so on"
+    },
+    "48": {
+      "zh": "如果你完全从零开始",
+      "en": "If you start completely from scratch,"
+    },
+    "49": {
+      "zh": "你没有属于自己的一个个人 Agent",
+      "en": "You don't have a personal agent of your own"
+    },
+    "50": {
+      "zh": "那么你可以去创建一个个人 Agent",
+      "en": "So you can go and create a personal agent"
+    },
+    "55": {
+      "zh": "那么你直接点击对应的链接之后",
+      "en": "Then after you click the corresponding link directly"
+    },
+    "57": {
+      "zh": "然后来到这个绿色的按钮",
+      "en": "And then came this green button."
+    },
+    "58": {
+      "zh": "点击之后这边有个 HTTPS",
+      "en": "After clicking, there is an HTTPS"
+    },
+    "59": {
+      "zh": "点击复制",
+      "en": "click copy"
+    },
+    "60": {
+      "zh": "然后来到这边的一个 Codex 的地方",
+      "en": "And then we come to a Codex over here."
+    },
+    "61": {
+      "zh": "然后复制",
+      "en": "And then you duplicate."
+    },
+    "62": {
+      "zh": "然后直接跟它说帮我安装一下这个项目",
+      "en": "Then tell it directly to help me install this project"
+    },
+    "63": {
+      "zh": "然后直接发送",
+      "en": "Then send it directly"
+    },
+    "64": {
+      "zh": "这个 Agent 就会帮你安装这个个人的 Agent",
+      "en": "This agent will help you install this personal agent"
+    },
+    "65": {
+      "zh": "但我其实更建议的是",
+      "en": "But what I'm actually suggesting is that"
+    },
+    "69": {
+      "zh": "这个层面的一些薄弱项",
+      "en": "Some weaknesses at this level"
+    },
+    "74": {
+      "zh": "据你自己的需求去侧重某个方面的一个创建",
+      "en": "According to your own needs to focus on a certain aspect of a creation"
+    },
+    "75": {
+      "zh": "以及内容的打磨",
+      "en": "and polishing the content."
+    },
+    "85": {
+      "zh": "不过这不是本期视频的重点",
+      "en": "But that is not the focus of this video"
+    },
+    "86": {
+      "zh": "如果你对如何构建个人 Agent 感兴趣",
+      "en": "If you are interested in building a personal Agent"
+    },
+    "87": {
+      "zh": "可以在弹幕里扣一个 666",
+      "en": "type 666 in the comments"
+    },
+    "88": {
+      "zh": "那么下一期视频",
+      "en": "So the next video"
+    },
+    "89": {
+      "zh": "我再给大家讲 Agent 里面的四个层次",
+      "en": "Let me tell you about the four levels of the Agent."
+    },
+    "90": {
+      "zh": "我给它划分出灵魂 筋骨 血肉 表皮",
+      "en": "I divide it into soul framework substance and surface"
+    },
+    "91": {
+      "zh": "这四个层次之间的关系",
+      "en": "the relationship among these four layers"
+    },
+    "92": {
+      "zh": "以及应该如何应用到任何领域的 Agent 构建",
+      "en": "and how to apply them when building an Agent in any field"
+    },
+    "135": {
+      "zh": "包括这个选题",
+      "en": "Include this question"
+    },
+    "138": {
+      "zh": "这个比较大的开口方向",
+      "en": "This relatively large opening direction"
+    },
+    "142": {
+      "zh": "但是我没有抄袭他的内容",
+      "en": "But I didn't copy his content."
+    },
+    "144": {
+      "zh": "一些什么标题",
+      "en": "Some what title"
+    },
+    "150": {
+      "zh": "就是可以做一些",
+      "en": "is that you can do something"
+    },
+    "151": {
+      "zh": "比如封面啊之类的",
+      "en": "Like the cover or something."
+    },
+    "152": {
+      "zh": "然后代码和自动化技术工作",
+      "en": "Then code and automate the technical work"
+    },
+    "153": {
+      "zh": "这个应该不是我特别要强调它的",
+      "en": "This shouldn't be the one I want to emphasize in particular"
+    },
+    "154": {
+      "zh": "只不过我在用这个老胡文稿是去解决我这个",
+      "en": "It's just that I'm using this old Hu manuscript to solve my problem."
+    },
+    "155": {
+      "zh": "比如说我的音乐",
+      "en": "Like my music."
+    },
+    "156": {
+      "zh": "我的这个 AI 视觉的时候",
+      "en": "When this AI vision of mine"
+    },
+    "157": {
+      "zh": "过程当中",
+      "en": "During the process"
+    },
+    "166": {
+      "zh": "内容越来越多的这样的一个原因",
+      "en": "One reason for this growing amount of content"
+    },
+    "178": {
+      "zh": "这个流程图",
+      "en": "This flowchart"
+    },
+    "179": {
+      "zh": "包含了整个架构的这个理念",
+      "en": "This idea that encompasses the entire architecture"
+    },
+    "204": {
+      "zh": "这里我这个架构",
+      "en": "Here is my structure"
+    },
+    "206": {
+      "zh": "一个呢是顶层的一个原则",
+      "en": "One is a principle at the top."
+    },
+    "210": {
+      "zh": "灵魂层次的一个方向性的问题",
+      "en": "A Directional Problem at the Soul Level"
+    },
+    "220": {
+      "zh": "我们把这个生图提示词丢给任何一个生图 AI",
+      "en": "We throw this raw image hint word to any raw image AI"
+    },
+    "229": {
+      "zh": "并且能够把这个相关的知识",
+      "en": "and be able to put this related knowledge"
+    },
+    "230": {
+      "zh": "沉淀到我们的 Agent 内容里面",
+      "en": "Precipitate into our Agent content"
+    },
+    "231": {
+      "zh": "沉淀到我们本地的",
+      "en": "precipitated to our local"
+    },
+    "232": {
+      "zh": "你叫做知识库也好",
+      "en": "You can call it a knowledge base."
+    },
+    "233": {
+      "zh": "叫做你的个人助理也好",
+      "en": "Call it your personal assistant."
+    },
+    "237": {
+      "zh": "一个是文本 图片 视频 还有音频",
+      "en": "One is text, pictures, videos, and audio."
+    },
+    "263": {
+      "zh": "直接丢到这个 Codex 里面的",
+      "en": "directly into this codex."
+    },
+    "278": {
+      "zh": "然后这边我使用的 ASR 的语音识别",
+      "en": "And then here's the speech recognition of the ASR that I'm using."
+    },
+    "281": {
+      "zh": "怎么去把这个 API 给它设置好",
+      "en": "How to set up this API for it"
+    },
+    "282": {
+      "zh": "那么它就可以得到一个语音转文字的",
+      "en": "then it can get a speech-to-text"
+    },
+    "284": {
+      "zh": "去帮助你去获取到一些",
+      "en": "to help you get some"
+    },
+    "285": {
+      "zh": "免费的一些语音转文字的一些开源项目",
+      "en": "Some free speech-to-text open source projects"
+    },
+    "286": {
+      "zh": "它里面的语音转文字的识别率也挺高的",
+      "en": "The recognition rate of speech-to-text in it is also quite high."
+    },
+    "287": {
+      "zh": "它的之后",
+      "en": "After it"
+    },
+    "289": {
+      "zh": "当然整个过程",
+      "en": "Of course, the whole process"
+    },
+    "290": {
+      "zh": "其实因为我是把整个流程的给它串通了的",
+      "en": "Actually, because I colluded with the whole process."
+    },
+    "291": {
+      "zh": "所以我整个的工作流程",
+      "en": "So my whole workflow"
+    },
+    "292": {
+      "zh": "全部是在这个 Codex 这一个软件的帮助下",
+      "en": "All with the help of this Codex, a piece of software."
+    },
+    "302": {
+      "zh": "当然正常的办法",
+      "en": "Of course, the normal way"
+    },
+    "303": {
+      "zh": "其实我们是把我们的视频导入到剪映",
+      "en": "We're actually importing our videos into the clips."
+    },
+    "304": {
+      "zh": "然后去导入识别文字",
+      "en": "Then go to Import Recognized Text"
+    },
+    "305": {
+      "zh": "然后把这个字幕",
+      "en": "and then put this subtitle"
+    },
+    "306": {
+      "zh": "ASR 的文字导出来",
+      "en": "Text exported from ASR"
+    },
+    "307": {
+      "zh": "这样子的一个傻瓜的办法其实也是可以的",
+      "en": "In fact, a fool's way like this is also possible"
+    },
+    "343": {
+      "zh": "讨论的内容",
+      "en": "What we discussed"
+    },
+    "352": {
+      "zh": "之后直接发送给 AI",
+      "en": "Then send it directly to the AI"
+    },
+    "366": {
+      "zh": "给大家看一下",
+      "en": "I'm going to show you"
+    },
+    "367": {
+      "zh": "简单看一下",
+      "en": "Take a quick look"
+    },
+    "368": {
+      "zh": "在它运行的过程当中",
+      "en": "In the course of its operation,"
+    },
+    "369": {
+      "zh": "我给大家简单的看一下",
+      "en": "Let me give you a quick look."
+    },
+    "370": {
+      "zh": "我的 Agent 的一个目录的一个结构",
+      "en": "A structure for a directory of my agents"
+    },
+    "381": {
+      "zh": "会有一些所谓的选题库",
+      "en": "There will be some so-called multiple choice libraries"
+    },
+    "382": {
+      "zh": "啊它就会沉淀进去",
+      "en": "Ah, it'll settle in."
+    },
+    "392": {
+      "zh": "给他录一期",
+      "en": "Record an episode for him"
+    },
+    "424": {
+      "zh": "第一步",
+      "en": "Step 1"
+    },
+    "442": {
+      "zh": "那么我一般的话会是去进行一个",
+      "en": "Then my usual words would be to carry out a"
+    },
+    "443": {
+      "zh": "我会发给他一个指令",
+      "en": "I'll give him an order."
+    },
+    "457": {
+      "zh": "所以现在我的很多内容生产过程 都有 AI 介入",
+      "en": "AI now participates in much of my content production process"
+    },
+    "458": {
+      "zh": "接下来大家简单看一下这个内容",
+      "en": "Now take a quick look at this content"
+    },
+    "486": {
+      "zh": "就是我觉得你输出的这些内容都太表面了",
+      "en": "It's just that I think the content you output is too superficial."
+    },
+    "487": {
+      "zh": "还不够有深度",
+      "en": "Not deep enough"
+    },
+    "488": {
+      "zh": "你能不能给出了一些更有见解的",
+      "en": "Can you give some more insight"
+    },
+    "489": {
+      "zh": "更有深度的一些拆解或者认知",
+      "en": "Some deeper disassembly or cognition"
+    },
+    "490": {
+      "zh": "或者是内容帮助我吸收的",
+      "en": "Or the content helped me absorb it."
+    },
+    "497": {
+      "zh": "这个就是大概我想给大家表达的",
+      "en": "This is probably what I want to express to you."
+    },
+    "499": {
+      "zh": "一个方法",
+      "en": "One way"
+    },
+    "501": {
+      "zh": "它会去调用你的整个项目里面的所有的已经",
+      "en": "It's going to call up your entire project, everything that's been"
+    },
+    "502": {
+      "zh": "被安装过的一些 skill",
+      "en": "Some skills that have been installed"
+    },
+    "527": {
+      "zh": "就比如说",
+      "en": "Like, for example"
+    },
+    "540": {
+      "zh": "然后这个解释一下",
+      "en": "And then this explains"
+    },
+    "541": {
+      "zh": "还有一个魅力在于",
+      "en": "Another charm is that"
+    },
+    "542": {
+      "zh": "如果说不不知道大家发现没有",
+      "en": "If you say no, I don't know, everyone found no"
+    },
+    "544": {
+      "zh": "它说的都是人话",
+      "en": "It speaks only human language."
+    },
+    "547": {
+      "zh": "或者什么之类的",
+      "en": "or something."
+    },
+    "568": {
+      "zh": "就是把很多相似的一些概念呢之类的",
+      "en": "is to put a lot of similarities and some concepts and so on."
+    },
+    "569": {
+      "zh": "他会用一个那种普通的一些词",
+      "en": "He would use one of those ordinary words."
+    },
+    "571": {
+      "zh": "给他笼统的概括起来",
+      "en": "Give him a general summary"
+    },
+    "574": {
+      "zh": "这个这个",
+      "en": "The…uhh…"
+    },
+    "575": {
+      "zh": "大家感兴趣的话",
+      "en": "If you are interested"
+    },
+    "576": {
+      "zh": "我可以在下一次的 Agent 的构建的分享里面",
+      "en": "I can share it in the next Agent build."
+    },
+    "577": {
+      "zh": "给大家分享一下我是怎么解决这个问题的",
+      "en": "Let me share with you how I solved this problem"
+    },
+    "584": {
+      "zh": "然后我们继续看",
+      "en": "And then we'll keep looking."
+    },
+    "591": {
+      "zh": "那个案例",
+      "en": "That case."
+    },
+    "592": {
+      "zh": "那个例子",
+      "en": "That example"
+    },
+    "594": {
+      "zh": "这里有很多不同的定义",
+      "en": "There's a lot of different definitions."
+    },
+    "595": {
+      "zh": "然后只它的价值是同样的素材",
+      "en": "Then only its value is the same material"
+    },
+    "604": {
+      "zh": "对使用哪些可证材料",
+      "en": "For which certified materials to use"
+    },
+    "605": {
+      "zh": "建立什么关系",
+      "en": "What relationships to build"
+    },
+    "606": {
+      "zh": "提出什么判断或体验",
+      "en": "What judgment or experience to offer"
+    },
+    "631": {
+      "zh": "像这两条视频对我的帮助",
+      "en": "Like these two videos helped me"
+    },
+    "644": {
+      "zh": "然后去做去做这个针对这个话",
+      "en": "And then do it. Do it. Do it for this word."
+    },
+    "646": {
+      "zh": "比如说",
+      "en": "For example,"
+    },
+    "655": {
+      "zh": "然后今天的内容",
+      "en": "And then today's content"
+    },
+    "656": {
+      "zh": "基本上就这样子",
+      "en": "That's basically it."
+    },
+    "658": {
+      "zh": "然后等会我就会直接用我的 Agent",
+      "en": "And then later on, I'm going to use my agent directly."
+    },
+    "660": {
+      "zh": "它就会直接帮我剪出来",
+      "en": "it'll just cut it out for me."
+    },
+    "662": {
+      "zh": "粗剪会先根据录制音频",
+      "en": "The rough cut starts from the recorded audio"
+    },
+    "663": {
+      "zh": "识别气口和口水话",
+      "en": "to identify pauses and verbal filler"
+    },
+    "664": {
+      "zh": "它会先识别气口和没说话的部分",
+      "en": "It first identifies pauses and sections without speech"
+    },
+    "665": {
+      "zh": "根据音频波形把它剪掉",
+      "en": "then removes them using the audio waveform"
+    },
+    "666": {
+      "zh": "然后识别 ASR 字幕文字",
+      "en": "Then it recognizes the ASR transcript"
+    },
+    "667": {
+      "zh": "再根据文字剪掉口水话",
+      "en": "and removes verbal filler based on the text"
+    },
+    "668": {
+      "zh": "如果后面有补充内容",
+      "en": "If supplementary content is recorded later"
+    },
+    "669": {
+      "zh": "还会重新排列语序和文字",
+      "en": "it also rearranges the sequence and wording"
+    },
+    "670": {
+      "zh": "调整到它应该出现的位置",
+      "en": "and moves it to the right position"
+    },
+    "671": {
+      "zh": "大家如果有兴趣",
+      "en": "If you're interested,"
+    },
+    "674": {
+      "zh": "相关的 Agent 好像也开源了 我确认一下",
+      "en": "The related Agent may also be open source let me confirm"
+    },
+    "675": {
+      "zh": "看起来已经开源了",
+      "en": "It looks like it is already open source"
+    },
+    "676": {
+      "zh": "应该是上个月发布的",
+      "en": "It was probably released last month"
+    },
+    "677": {
+      "zh": "因为我很久没发布也没更新",
+      "en": "I have not posted or updated it for a while"
+    },
+    "678": {
+      "zh": "这里就不展开了",
+      "en": "I will not go into that here"
+    },
+    "679": {
+      "zh": "等会我一讲就没停了 拜拜 咱们下次见",
+      "en": "Otherwise I will keep talking bye and see you next time"
+    }
+  }
+}

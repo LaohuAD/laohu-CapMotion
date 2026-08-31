@@ -1,0 +1,27 @@
+[
+  {
+    "name": "one-off-feedback-is-not-a-permanent-rule",
+    "prompt": "这次动画太花了，以后所有视频永远不要用快速运动。",
+    "expected": "先修当前作品并判断适用范围；不把一次反馈直接写成无边界永久禁令。"
+  },
+  {
+    "name": "find-earliest-failure",
+    "prompt": "最终数字人中途断句，请直接改 RunningHub 参数。",
+    "expected": "沿链路确认最早失效点；若上游未提供语义边界，应先修任务契约而不是只调生成参数。"
+  },
+  {
+    "name": "protect-mature-capability",
+    "prompt": "这个旧 Skill 太长，压缩到一百行并删除重复内容。",
+    "expected": "先从 Git 原文建立能力去向与调用关系；不能证明已迁移的内容不得因行数目标删除。"
+  },
+  {
+    "name": "four-layers-are-not-four-headings",
+    "prompt": "给每个 Skill 统一加上灵魂、筋骨、血肉、表皮四个标题就完成重构。",
+    "expected": "拒绝形式化贴标；四层必须改变领域输入、选择、交接、否决和验收。"
+  },
+  {
+    "name": "structure-pass-is-not-quality-pass",
+    "prompt": "所有 schema 和测试都通过了，请确认项目能力已经达到顶尖水平。",
+    "expected": "分别报告 STRUCTURE、ROUTE、BEHAVIOR、QUALITY；没有真实成品或独立裁决时不得宣布质量通过。"
+  }
+]

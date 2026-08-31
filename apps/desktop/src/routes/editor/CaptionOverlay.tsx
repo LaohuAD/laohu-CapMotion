@@ -27,7 +27,8 @@ function clamp(value: number, min: number, max: number) {
 function fontFamily(font: string) {
 	if (font === "System Serif") return "serif";
 	if (font === "System Monospace") return "monospace";
-	return "system-ui, sans-serif";
+	if (font === "System Sans-Serif") return "system-ui, sans-serif";
+	return `"${font.replaceAll('"', "")}", system-ui, sans-serif`;
 }
 
 function positionYFactor(position: string) {
@@ -104,6 +105,7 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 					availableWidth(),
 					settings().font,
 					settings().fontWeight,
+					settings().letterSpacing,
 					fitScale(),
 				] as const,
 			() => {
@@ -304,7 +306,7 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 	};
 
 	return (
-		<div class="absolute inset-0 pointer-events-none">
+		<div class="absolute inset-0 pointer-events-none" data-preview-edit-control>
 			<div
 				ref={hiddenMeasureRef}
 				class="absolute invisible pointer-events-none"
@@ -314,6 +316,7 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 					"font-family": fontFamily(settings().font),
 					"font-size": `${scaledFontSize()}px`,
 					"font-weight": settings().fontWeight,
+					"letter-spacing": `${settings().letterSpacing}px`,
 					"line-height": 1.2,
 					"max-width": `${availableWidth()}px`,
 					width: "fit-content",

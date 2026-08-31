@@ -3654,6 +3654,16 @@ async fn set_project_config(
 #[tauri::command]
 #[specta::specta]
 #[instrument(skip(editor_instance))]
+async fn load_project_config_from_disk(
+    editor_instance: WindowEditorInstance,
+) -> Result<ProjectConfiguration, String> {
+    ProjectConfiguration::load(&editor_instance.project_path)
+        .map_err(|error| format!("Failed to reload project config: {error}"))
+}
+
+#[tauri::command]
+#[specta::specta]
+#[instrument(skip(editor_instance))]
 async fn update_project_config_in_memory(
     editor_instance: WindowEditorInstance,
     config: ProjectConfiguration,
@@ -5255,6 +5265,7 @@ fn specta_builder() -> tauri_specta::Builder {
             stop_playback,
             set_playhead_position,
             set_project_config,
+            load_project_config_from_disk,
             update_project_config_in_memory,
             generate_zoom_segments_from_clicks,
             generate_keyboard_segments,

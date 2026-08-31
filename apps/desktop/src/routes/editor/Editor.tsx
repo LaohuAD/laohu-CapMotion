@@ -309,6 +309,8 @@ function Inner() {
 		previewResolutionBase,
 		dialog,
 		exportState,
+		externalProjectUpdate,
+		applyExternalProjectConfig,
 	} = useEditorContext();
 
 	createTauriEventListener(events.editorRecordingAdded, (payload) => {
@@ -674,6 +676,30 @@ function Inner() {
 		>
 			<div class="flex flex-col flex-1 min-h-0">
 				<Header />
+				<Show when={externalProjectUpdate()}>
+					{(incoming) => (
+						<div class="mx-2 mb-2 flex items-center justify-between gap-3 rounded-lg border border-amber-7 bg-amber-3 px-3 py-2 text-sm text-amber-12">
+							<div class="min-w-0">
+								<p class="font-medium">
+									{text("External project update detected")}
+								</p>
+								<p class="text-xs text-amber-11">
+									{text(
+										"Cap paused automatic reload because this editor has unsaved changes.",
+									)}{" "}
+									{text("Loading revision")} {incoming().projectRevision}{" "}
+									{text("will replace those unsaved changes.")}
+								</p>
+							</div>
+							<Button
+								class="shrink-0"
+								onClick={() => void applyExternalProjectConfig(incoming())}
+							>
+								{text("Load external update")}
+							</Button>
+						</div>
+					)}
+				</Show>
 				<div
 					class="flex overflow-y-hidden flex-col flex-1 gap-2 w-full min-h-0 leading-5"
 					data-tauri-drag-region

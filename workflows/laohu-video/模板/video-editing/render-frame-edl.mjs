@@ -4,6 +4,7 @@ import {spawnSync} from "node:child_process";
 import {mkdtemp, readFile, rm, writeFile} from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import {ffmpegBin, ffprobeBin} from "./media-binaries.mjs";
 
 const edlPath = process.argv[2];
 if (!edlPath) throw new Error("Usage: render-frame-edl.mjs EDL.json");
@@ -40,7 +41,7 @@ try {
   filters.push(`${inputs.join("")}concat=n=${edl.sequence.length}:v=1:a=1[vout][aout]`);
   await writeFile(filterPath, `${filters.join(";\n")}\n`, "utf8");
 
-  run("ffmpeg", [
+  run(ffmpegBin, [
     "-y", "-v", "warning", "-i", edl.source,
     "-filter_complex_script", filterPath,
     "-map", "[vout]", "-map", "[aout]",
@@ -50,7 +51,7 @@ try {
     "-movflags", "+faststart", edl.output,
   ], {stdio: "inherit", encoding: undefined});
 
-  const probe = JSON.parse(run("ffprobe", ["-v", "error", "-show_entries", "stream=index,codec_type,start_time,duration,nb_frames,width,height,r_frame_rate,sample_rate,channels", "-show_entries", "format=start_time,duration,size", "-of", "json", edl.output]));
+  const probe = JSON.parse(run(ffprobeBin, ["-v", "error", "-show_entries", "stream=index,codec_type,start_time,duration,nb_frames,width,height,r_frame_rate,sample_rate,channels", "-show_entries", "format=start_time,duration,size", "-of", "json", edl.output]));
   edl.expectedFrames = expectedFrames;
   edl.expectedDurationSeconds = expectedFrames / fps;
   edl.outputProbe = probe;

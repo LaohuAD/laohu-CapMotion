@@ -1,6 +1,6 @@
 # Voice2Motion Remotion 组件库
 
-本目录是项目级 Remotion workspace。它用于长期沉淀 12 个可复用动画组件家族，并支持独立成片、透明资产和外部调用，不为每条作品重复创建 Remotion 工程。
+本目录是项目级唯一程序动画 workspace。它用于长期沉淀 12 个可复用 Remotion 组件家族，并支持独立成片和 Cap Motion 上层覆盖，不为每条作品重复创建工程。
 
 ## 定位
 
@@ -54,7 +54,7 @@ public/                    Remotion 静态素材
 5. 生成当前作品的组件配置。
 6. 用本 workspace 渲染独立片段或资产。
 7. 只有需要长期保留的作品输出才进入当前作品目录。
-8. 若采用组合工作流，再由 HyperFrames 调用并按 ASR 对齐。
+8. 用冻结后的 T2 时间和 revision-safe `cap motion` 命令写入上层覆盖轨。
 ```
 
 ## 规则

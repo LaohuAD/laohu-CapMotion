@@ -1,0 +1,40 @@
+{
+  "source": "/Users/a1/Movies/codex补充.mp4",
+  "output": "/tmp/codex-supplement-rebuild.hbiaIn/supplement_cut.mp4",
+  "fps": 30,
+  "sampleRate": 48000,
+  "maxGapMs": 150,
+  "handleMs": 50,
+  "ranges": [
+    {"startMs": 2600, "endMs": 6100, "chapter": "补回常用命令", "reason": "补充之前漏掉的内容"},
+    {"startMs": 7066, "endMs": 7520, "chapter": "补回常用命令", "reason": "保留补录原因中的前半句"},
+    {"startMs": 8290, "endMs": 9130, "chapter": "补回常用命令", "reason": "恢复思维卡壳导致补录的原因"},
+    {"startMs": 10466, "endMs": 12566, "chapter": "补回常用命令", "reason": "承接常用命令主题"},
+    {"startMs": 16333, "endMs": 21766, "chapter": "补回常用命令", "reason": "解释一下命令"},
+    {"startMs": 24566, "endMs": 27566, "chapter": "补回常用命令", "reason": "辩证地看待命令入口"},
+    {"startMs": 30033, "endMs": 35033, "chapter": "为什么要辩证看待并搜索依据", "reason": "提出观点并说明不应默认观点正确"},
+    {"startMs": 36066, "endMs": 38033, "chapter": "为什么要辩证看待并搜索依据", "reason": "恢复观点不应被默认当成指令的核心边界"},
+    {"startMs": 41166, "endMs": 44333, "chapter": "为什么要辩证看待并搜索依据", "reason": "恢复正确与讨论的因果承接"},
+    {"startMs": 44966, "endMs": 50266, "chapter": "为什么要辩证看待并搜索依据", "reason": "让 AI 找出观点漏洞"},
+    {"startMs": 51266, "endMs": 53966, "chapter": "为什么要辩证看待并搜索依据", "reason": "辩证看待口播内容"},
+    {"startMs": 55966, "endMs": 56633, "chapter": "为什么要辩证看待并搜索依据", "reason": "组合命令起句"},
+    {"startMs": 57633, "endMs": 65666, "chapter": "为什么要辩证看待并搜索依据", "reason": "搜索理论逻辑"},
+    {"startMs": 72066, "endMs": 75233, "chapter": "为什么要辩证看待并搜索依据", "reason": "理论支撑"},
+    {"startMs": 81066, "endMs": 87066, "chapter": "为什么要辩证看待并搜索依据", "reason": "佐证理由与实操建议"},
+    {"startMs": 88666, "endMs": 89633, "chapter": "为什么要辩证看待并搜索依据", "reason": "实操收束"},
+    {"startMs": 98200, "endMs": 100066, "chapter": "命令可以组合与嵌套", "reason": "命令组合"},
+    {"startMs": 100933, "endMs": 102066, "chapter": "命令可以组合与嵌套", "reason": "命令嵌套"},
+    {"startMs": 103300, "endMs": 104466, "chapter": "命令可以组合与嵌套", "reason": "任何场景"},
+    {"startMs": 105066, "endMs": 107666, "chapter": "命令可以组合与嵌套", "reason": "命令都能用得上"},
+    {"startMs": 113100, "endMs": 124066, "chapter": "AI剪辑与项目更新", "reason": "AI 剪辑与项目优化"},
+    {"startMs": 133333, "endMs": 139533, "chapter": "AI剪辑与项目更新", "reason": "项目更新与重新上传"},
+    {"startMs": 143433, "endMs": 149833, "chapter": "AI剪辑与项目更新", "reason": "按个人习惯定制"},
+    {"startMs": 154333, "endMs": 157466, "chapter": "AI剪辑与项目更新", "reason": "需要按个人情况调整"},
+    {"startMs": 178066, "endMs": 184066, "chapter": "文稿架构展示与告别", "reason": "恢复发布时想起补充内容的动机"},
+    {"startMs": 184766, "endMs": 192366, "chapter": "文稿架构展示与告别", "reason": "老胡文稿整体架构"},
+    {"startMs": 198966, "endMs": 201133, "chapter": "文稿架构展示与告别", "reason": "告别"}
+  ],
+  "protectedRanges": [
+    {"startMs": 192367, "endMs": 195366, "chapter": "文稿架构展示与告别", "reason": "保护约三秒文稿架构阅读时间"}
+  ]
+}

@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
 import {readFile} from "node:fs/promises";
+import {existsSync} from "node:fs";
 import {spawnSync} from "node:child_process";
 
 const [srtPath, mediaPath] = process.argv.slice(2);
+const ffprobeBin = process.env.FFPROBE_BIN
+  ?? (existsSync("/opt/homebrew/opt/ffmpeg@7/bin/ffprobe") ? "/opt/homebrew/opt/ffmpeg@7/bin/ffprobe" : "ffprobe");
 if (!srtPath) {
   console.error("Usage: validate-srt.mjs <subtitle.srt> [media]");
   process.exit(2);
@@ -49,7 +52,7 @@ for (let index = 1; index < cues.length; index += 1) {
 
 let mediaDurationMs = null;
 if (mediaPath) {
-  const probe = spawnSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", mediaPath], {encoding: "utf8"});
+  const probe = spawnSync(ffprobeBin, ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", mediaPath], {encoding: "utf8"});
   if (probe.status !== 0) errors.push(`Unable to probe media: ${probe.stderr.trim() || "ffprobe failed"}`);
   else {
     mediaDurationMs = Math.round(Number(probe.stdout.trim()) * 1000);

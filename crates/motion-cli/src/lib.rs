@@ -1,13 +1,16 @@
-use std::path::PathBuf;
+use std::{fs::File, io::Read, path::PathBuf};
 
 use cap_project::{
-    MotionDefinition, MotionDefinitionStatus, MotionDurationPolicy, MotionSegment,
-    ProjectConfiguration, add_motion_segment, move_motion_segment, register_motion_definition,
-    resize_motion_segment, set_motion_segment_props,
+    EXTERNAL_VIDEO_DEFINITION_ID, MotionArtifact, MotionArtifactQuality, MotionArtifactStatus,
+    MotionDefinition, MotionDefinitionStatus, MotionDurationPolicy, MotionOverlayRole,
+    MotionSegment, ProjectConfiguration, add_motion_segment, import_external_motion_artifact,
+    move_motion_segment, register_motion_definition, resize_motion_segment,
+    set_motion_segment_props,
 };
 use clap::{Args, Parser, Subcommand, ValueEnum};
 use serde::Serialize;
 use serde_json::Value;
+use sha2::{Digest, Sha256};
 
 mod render;
 pub use render::*;
@@ -55,6 +58,7 @@ impl MotionArgs {
     ) -> Result<MotionOutput, String> {
         match self.command {
             MotionCommands::Definition(args) => args.run(),
+            MotionCommands::Artifact(args) => args.run(),
             MotionCommands::Add(args) => args.run(),
             MotionCommands::Move(args) => args.run(),
             MotionCommands::Resize(args) => args.run(),
@@ -74,11 +78,118 @@ pub enum MotionOutputFormat {
 #[derive(Subcommand)]
 enum MotionCommands {
     Definition(MotionDefinitionArgs),
+    Artifact(MotionArtifactArgs),
     Add(MotionAddArgs),
     Move(MotionMoveArgs),
     Resize(MotionResizeArgs),
     Props(MotionPropsArgs),
     Render(MotionRenderArgs),
+}
+
+#[derive(Args)]
+struct MotionArtifactArgs {
+    #[command(subcommand)]
+    command: MotionArtifactCommands,
+}
+
+impl MotionArtifactArgs {
+    fn run(self) -> Result<MotionOutput, String> {
+        match self.command {
+            MotionArtifactCommands::Import(args) => args.run(),
+        }
+    }
+}
+
+#[derive(Subcommand)]
+enum MotionArtifactCommands {
+    Import(MotionArtifactImportArgs),
+}
+
+#[derive(Args)]
+struct MotionArtifactImportArgs {
+    #[arg(long)]
+    expected_revision: u64,
+    #[arg(long)]
+    segment_id: String,
+    #[arg(long)]
+    artifact_id: String,
+    #[arg(long)]
+    path: PathBuf,
+    #[arg(long)]
+    start: f64,
+    #[arg(long)]
+    duration: f64,
+    #[arg(long)]
+    width: u32,
+    #[arg(long)]
+    height: u32,
+    #[arg(long)]
+    fps: f64,
+    #[arg(long, default_value_t = 0)]
+    track: u32,
+    #[arg(long, default_value_t = 0)]
+    z_index: i32,
+    #[arg(long, value_enum, default_value_t = OverlayRoleArg::Animation)]
+    role: OverlayRoleArg,
+    #[arg(long, default_value_t = false)]
+    has_alpha: bool,
+    project_path: PathBuf,
+}
+
+impl MotionArtifactImportArgs {
+    fn run(self) -> Result<MotionOutput, String> {
+        if !self.path.is_absolute() {
+            return Err("external artifact path must be absolute".into());
+        }
+        let mut file = File::open(&self.path)
+            .map_err(|error| format!("external artifact cannot be opened: {error}"))?;
+        let mut hasher = Sha256::new();
+        let mut buffer = [0_u8; 64 * 1024];
+        loop {
+            let count = file
+                .read(&mut buffer)
+                .map_err(|error| format!("external artifact cannot be hashed: {error}"))?;
+            if count == 0 {
+                break;
+            }
+            hasher.update(&buffer[..count]);
+        }
+        let content_hash = format!("{:x}", hasher.finalize());
+        let segment = MotionSegment {
+            id: self.segment_id.clone(),
+            definition_id: EXTERNAL_VIDEO_DEFINITION_ID.into(),
+            definition_version: 1,
+            start: self.start,
+            end: self.start + self.duration,
+            track: self.track,
+            z_index: self.z_index,
+            role: self.role.into(),
+            duration_policy: MotionDurationPolicy::Trim,
+            ..Default::default()
+        };
+        let artifact = MotionArtifact {
+            id: self.artifact_id.clone(),
+            segment_id: self.segment_id,
+            content_hash,
+            quality: MotionArtifactQuality::Final,
+            status: MotionArtifactStatus::Ready,
+            path: self.path.to_string_lossy().into_owned(),
+            width: self.width,
+            height: self.height,
+            fps: self.fps,
+            has_alpha: self.has_alpha,
+            duration: self.duration,
+            error: None,
+        };
+        let project = import_external_motion_artifact(
+            self.project_path,
+            self.expected_revision,
+            segment,
+            artifact.clone(),
+        )
+        .map_err(|error| error.to_string())?;
+        Ok(MotionOutput::artifact(project, artifact))
+    }
 }
 
 #[derive(Clone, Copy, Debug, ValueEnum)]
@@ -219,6 +330,8 @@ struct MotionAddArgs {
     track: u32,
     #[arg(long, default_value_t = 0)]
     z_index: i32,
+    #[arg(long, value_enum, default_value_t = OverlayRoleArg::Animation)]
+    role: OverlayRoleArg,
     #[arg(long, value_enum, default_value_t = DurationPolicyArg::Responsive)]
     duration_policy: DurationPolicyArg,
     #[arg(long, default_value = "{}")]
@@ -236,6 +349,7 @@ impl MotionAddArgs {
             end: self.start + self.duration,
             track: self.track,
             z_index: self.z_index,
+            role: self.role.into(),
             duration_policy: self.duration_policy.into(),
             props: parse_props(&self.props_json)?,
             ..Default::default()
@@ -358,6 +472,27 @@ impl From<DurationPolicyArg> for MotionDurationPolicy {
             DurationPolicyArg::Responsive => Self::Responsive,
             DurationPolicyArg::Retime => Self::Retime,
             DurationPolicyArg::Trim => Self::Trim,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, ValueEnum)]
+enum OverlayRoleArg {
+    Animation,
+    Avatar,
+    AiVideo,
+    ScreenRecording,
+    Evidence,
+}
+
+impl From<OverlayRoleArg> for MotionOverlayRole {
+    fn from(value: OverlayRoleArg) -> Self {
+        match value {
+            OverlayRoleArg::Animation => Self::Animation,
+            OverlayRoleArg::Avatar => Self::Avatar,
+            OverlayRoleArg::AiVideo => Self::AiVideo,
+            OverlayRoleArg::ScreenRecording => Self::ScreenRecording,
+            OverlayRoleArg::Evidence => Self::Evidence,
         }
     }
 }

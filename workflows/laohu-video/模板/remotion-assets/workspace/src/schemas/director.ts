@@ -65,6 +65,23 @@ export const animationBriefSchema = z.object({
   outputMode: z.enum(["standalone", "asset", "both"]),
   referenceDocs: z.array(z.string().min(1)).default([]),
   preferredComponent: z.string().min(1).optional(),
+  narrative: z.object({
+    purpose: z.enum(["UNDERSTAND", "TRUST", "ACT", "FEEL", "TRANSITION"]),
+    viewerBefore: z.string().min(1),
+    viewerAfter: z.string().min(1),
+    whyThisMedium: z.string().min(1),
+    handoffIn: z.string().min(1),
+    handoffOut: z.string().min(1),
+  }),
+  annotation: z.object({
+    object: z.string().min(1),
+    relationship: z.string().min(1),
+    entrance: z.string().min(1),
+    change: z.string().min(1),
+    resolutionFrame: z.string().min(1),
+    materials: z.array(z.string().min(1)).min(1),
+    acceptance: z.array(z.string().min(1)).min(1),
+  }),
 });
 
 export const narrativeBeatSchema = z

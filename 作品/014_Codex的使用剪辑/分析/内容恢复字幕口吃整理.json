@@ -1,0 +1,30 @@
+{
+  "purpose": "对恢复音频中保留的卡壳和重复只整理字幕文字，完整覆盖原说话时间，不删除对应音频",
+  "operations": [
+    {"startId": 85, "endId": 86, "text": "不过这不是本期视频的重点"},
+    {"startId": 87, "endId": 89, "text": "如果你对如何构建个人 Agent 感兴趣"},
+    {"startId": 90, "endId": 93, "text": "可以在弹幕里扣一个 666"},
+    {"startId": 463, "endId": 464, "text": "所以现在我的很多内容生产过程 都有 AI 介入"},
+    {"startId": 465, "endId": 466, "text": "接下来大家简单看一下这个内容"},
+    {"startId": 661, "endId": 662, "text": "然后这里我就快速过一下"},
+    {"startId": 671, "endId": 672, "text": "粗剪会先根据录制音频"},
+    {"startId": 673, "endId": 674, "text": "识别气口和口水话"},
+    {"startId": 675, "endId": 676, "text": "它会先识别气口和没说话的部分"},
+    {"startId": 677, "endId": 678, "text": "根据音频波形把它剪掉"},
+    {"startId": 679, "endId": 680, "text": "然后识别 ASR 字幕文字"},
+    {"startId": 681, "endId": 681, "text": "再根据文字剪掉口水话"},
+    {"startId": 682, "endId": 683, "text": "如果后面有补充内容"},
+    {"startId": 684, "endId": 686, "text": "还会重新排列语序和文字"},
+    {"startId": 687, "endId": 688, "text": "调整到它应该出现的位置"},
+    {"startId": 692, "endId": 694, "text": "相关的 Agent 好像也开源了 我确认一下"},
+    {"startId": 695, "endId": 697, "text": "看起来已经开源了"},
+    {"startId": 698, "endId": 699, "text": "应该是上个月发布的"},
+    {"startId": 700, "endId": 702, "text": "因为我很久没发布也没更新"},
+    {"startId": 703, "endId": 704, "text": "这里就不展开了"},
+    {"startId": 705, "endId": 706, "text": "等会我一讲就没停了 拜拜 咱们下次见"}
+  ],
+  "directTextAdjustments": [
+    {"id": 99, "text": "然后这里给大家介绍一下我自己的"},
+    {"id": 100, "text": "老胡文稿 Agent 我们可以直接问它"}
+  ]
+}

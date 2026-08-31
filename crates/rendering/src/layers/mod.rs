@@ -3,6 +3,7 @@ mod background;
 mod blur;
 mod camera;
 mod camera3d;
+mod caption_style;
 mod captions;
 mod click_ripple;
 mod color_grade;
@@ -16,6 +17,21 @@ mod notch;
 mod text;
 
 use std::sync::OnceLock;
+
+const BUNDLED_CAPTION_FONTS: &[&[u8]] = &[
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/SourceHanSansCN-VF.ttf"
+    )),
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/SourceHanSerifCN-VF.ttf"
+    )),
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/LXGWWenKai-Regular.ttf"
+    )),
+];
 
 /// Building a `glyphon::FontSystem` scans and parses every installed system font,
 /// which costs hundreds of milliseconds to over a second on macOS. cosmic-text
@@ -33,6 +49,9 @@ pub(crate) fn new_font_system() -> glyphon::FontSystem {
     let (locale, db) = FONT_TEMPLATE.get_or_init(|| {
         let font_system = glyphon::FontSystem::new();
         let mut db = font_system.db().clone();
+        for bytes in BUNDLED_CAPTION_FONTS {
+            db.load_font_data(bytes.to_vec());
+        }
         // Pin the generic families to the fonts the editor webview resolves
         // them to. fontdb's stock defaults (e.g. "Arial") often don't match
         // any installed face, in which case cosmic-text silently shapes with
@@ -114,6 +133,26 @@ mod font_tests {
                     families.is_some(),
                     "{family:?} (weight {weight}) resolved to no font"
                 );
+            }
+        }
+    }
+
+    #[test]
+    fn bundled_caption_families_resolve() {
+        let font_system = new_font_system();
+        for name in [
+            "Source Han Sans CN VF",
+            "Source Han Serif CN VF",
+            "LXGW WenKai",
+        ] {
+            for weight in [400u16, 700] {
+                let query = glyphon::fontdb::Query {
+                    families: &[glyphon::fontdb::Family::Name(name)],
+                    weight: glyphon::fontdb::Weight(weight),
+                    ..Default::default()
+                };
+                let id = font_system.db().query(&query);
+                assert!(id.is_some(), "{name} weight {weight} did not resolve");
             }
         }
     }

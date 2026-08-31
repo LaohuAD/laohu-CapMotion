@@ -1,4 +1,5 @@
 mod animated_gradient;
+mod caption_operations;
 mod configuration;
 pub mod cursor;
 pub mod keyboard;
@@ -10,6 +11,7 @@ mod motion_operations;
 mod transaction;
 
 pub use animated_gradient::*;
+pub use caption_operations::*;
 pub use configuration::*;
 pub use cursor::*;
 pub use keyboard::*;

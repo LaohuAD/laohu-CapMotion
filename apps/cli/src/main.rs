@@ -344,6 +344,8 @@ enum ProjectCommands {
     Validate(ProjectTarget),
     /// Read or write a project's editor configuration (project-config.json)
     Config(ProjectConfigArgs),
+    /// Import or inspect project captions
+    Captions(ProjectCaptionsArgs),
 }
 
 #[derive(Args)]
@@ -373,6 +375,31 @@ struct ProjectConfigSet {
     /// Full ProjectConfiguration as a JSON string (camelCase keys); omitted fields reset to defaults
     #[arg(long)]
     settings_json: String,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Args)]
+struct ProjectCaptionsArgs {
+    #[command(subcommand)]
+    command: ProjectCaptionsCommands,
+}
+
+#[derive(Subcommand)]
+enum ProjectCaptionsCommands {
+    /// Import source-timed ASR caption segments without replacing other tracks
+    Import(ProjectCaptionsImport),
+}
+
+#[derive(Args)]
+struct ProjectCaptionsImport {
+    project_path: PathBuf,
+    /// Current project revision; stale writers are rejected
+    #[arg(long)]
+    expected_revision: u64,
+    /// JSON file containing {sourceTimed, segments}
+    #[arg(long)]
+    captions_json: PathBuf,
     #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
     format: OutputFormat,
 }
@@ -753,6 +780,20 @@ impl ProjectArgs {
                     finish_json(
                         format,
                         project::config_set(args.project_path, &args.settings_json, format),
+                    )
+                }
+            },
+            ProjectCommands::Captions(ProjectCaptionsArgs { command }) => match command {
+                ProjectCaptionsCommands::Import(args) => {
+                    let format = resolve_format(json, args.format);
+                    finish_json(
+                        format,
+                        project::captions_import(
+                            args.project_path,
+                            args.expected_revision,
+                            &args.captions_json,
+                            format,
+                        ),
                     )
                 }
             },

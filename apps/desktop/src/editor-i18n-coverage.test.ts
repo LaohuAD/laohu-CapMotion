@@ -21,7 +21,13 @@ describe("editor localization coverage", () => {
 	});
 
 	it("routes player and track-manager copy through the active language", () => {
-		expect(readEditorSource("Player.tsx")).toContain('text("Crop Video")');
+		const player = readEditorSource("Player.tsx");
+		expect(player).toContain('text("Crop Video")');
+		expect(player).toContain('"Enter enlarged preview"');
+		expect(player).toContain('"Exit enlarged preview"');
+		expect(player.match(/<PreviewCanvas/g)).toHaveLength(1);
+		expect(player).toContain('import { MotionOverlay } from "./MotionOverlay"');
+		expect(player.match(/<MotionOverlay size=\{size\(\)\}/g)).toHaveLength(1);
 		expect(readEditorSource("Timeline/TrackManager.tsx")).toContain(
 			'text("Add a track")',
 		);

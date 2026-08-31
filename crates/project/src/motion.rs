@@ -20,6 +20,19 @@ pub enum MotionDurationPolicy {
     Trim,
 }
 
+/// Semantic responsibility of an upper overlay. Segments with the same role
+/// are exclusive in time; different roles may be composed together.
+#[derive(Type, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub enum MotionOverlayRole {
+    #[default]
+    Animation,
+    Avatar,
+    AiVideo,
+    ScreenRecording,
+    Evidence,
+}
+
 #[derive(Type, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub enum MotionDefinitionStatus {
@@ -119,6 +132,7 @@ pub struct MotionSegment {
     pub end: f64,
     pub track: u32,
     pub z_index: i32,
+    pub role: MotionOverlayRole,
     pub transform: MotionTransform,
     pub opacity: f64,
     pub duration_policy: MotionDurationPolicy,
@@ -137,6 +151,7 @@ impl Default for MotionSegment {
             end: 0.0,
             track: 0,
             z_index: 0,
+            role: MotionOverlayRole::default(),
             transform: MotionTransform::default(),
             opacity: 1.0,
             duration_policy: MotionDurationPolicy::default(),
@@ -381,6 +396,21 @@ impl MotionConfiguration {
             segment.validate_against(definition)?;
         }
 
+        for (index, segment) in self.segments.iter().enumerate() {
+            for candidate in self.segments.iter().skip(index + 1) {
+                if segment.role == candidate.role
+                    && segment.start < candidate.end
+                    && candidate.start < segment.end
+                {
+                    return Err(MotionValidationError::SameRoleOverlap {
+                        first_segment_id: segment.id.clone(),
+                        second_segment_id: candidate.id.clone(),
+                        role: segment.role,
+                    });
+                }
+            }
+        }
+
         let mut artifact_ids = BTreeSet::new();
         for artifact in &self.artifacts {
             if !artifact_ids.insert(artifact.id.as_str()) {
@@ -439,6 +469,11 @@ pub enum MotionValidationError {
         duration: f64,
         min: f64,
         max: f64,
+    },
+    SameRoleOverlap {
+        first_segment_id: String,
+        second_segment_id: String,
+        role: MotionOverlayRole,
     },
 }
 

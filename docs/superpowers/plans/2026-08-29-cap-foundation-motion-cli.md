@@ -106,7 +106,7 @@ The README must state:
 ```text
 - This repository is a Cap fork and desktop product base.
 - Cap remains a separate app from Codex.
-- Existing ASR, EDL, subtitle, Remotion, and HyperFrames assets are supporting workflows.
+- Existing ASR, EDL, subtitle, and Remotion assets are supporting workflows.
 - macOS is the first implementation target.
 - upstream sync uses the CapSoftware/Cap remote.
 ```

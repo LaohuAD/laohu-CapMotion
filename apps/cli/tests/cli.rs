@@ -520,6 +520,56 @@ fn project_config_get_without_file_returns_default() {
 }
 
 #[test]
+fn project_captions_import_writes_source_timed_segments_revision_safely() {
+    let dir = tempfile::tempdir().unwrap();
+    let project = dir.path().join("recording.cap");
+    write_single_segment_meta(&project);
+    cap_project::ProjectConfiguration::default()
+        .write(&project)
+        .unwrap();
+    let captions_path = dir.path().join("captions.json");
+    std::fs::write(
+        &captions_path,
+        serde_json::to_vec(&serde_json::json!({
+            "sourceTimed": true,
+            "segments": [{
+                "id": "asr-1",
+                "start": 1.0,
+                "end": 2.0,
+                "text": "你好",
+                "words": [{"text": "你好", "start": 1.0, "end": 2.0}]
+            }]
+        }))
+        .unwrap(),
+    )
+    .unwrap();
+
+    let output = run(&[
+        "project",
+        "captions",
+        "import",
+        project.to_str().unwrap(),
+        "--expected-revision",
+        "0",
+        "--captions-json",
+        captions_path.to_str().unwrap(),
+        "--format",
+        "json",
+    ]);
+    assert!(output.status.success(), "stderr: {}", stderr(&output));
+    let json = parse_json(&output);
+    assert_eq!(json["ok"], true);
+    assert_eq!(json["revision"], 1);
+    assert_eq!(json["captionCount"], 1);
+
+    let stored = cap_project::ProjectConfiguration::load(&project).unwrap();
+    let captions = stored.captions.unwrap();
+    assert!(captions.source_timed);
+    assert!(captions.settings.enabled);
+    assert_eq!(captions.segments[0].text, "你好");
+}
+
+#[test]
 fn export_missing_project_emits_json_error_event() {
     let output = run(&["export", "/this/path/does/not/exist.cap", "--progress-json"]);
     assert!(!output.status.success());

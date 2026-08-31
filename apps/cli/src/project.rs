@@ -4,7 +4,7 @@ use cap_project::{
     InstantRecordingMeta, RecordingMeta, RecordingMetaInner, StudioRecordingMeta,
     StudioRecordingStatus,
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::{OutputFormat, write_json};
 
@@ -19,6 +19,48 @@ pub struct ProjectInspection {
     pub recording_type: &'static str,
     pub meta: RecordingMeta,
     pub config: cap_project::ProjectConfiguration,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct CaptionImportDocument {
+    segments: Vec<cap_project::CaptionSegment>,
+    #[serde(default)]
+    source_timed: bool,
+}
+
+pub fn captions_import(
+    project_path: PathBuf,
+    expected_revision: u64,
+    captions_json: &Path,
+    format: OutputFormat,
+) -> Result<(), String> {
+    let input = std::fs::read_to_string(captions_json)
+        .map_err(|e| format!("Failed to read caption JSON: {e}"))?;
+    let document: CaptionImportDocument =
+        serde_json::from_str(&input).map_err(|e| format!("Invalid caption import JSON: {e}"))?;
+    let caption_count = document.segments.len();
+    let updated = cap_project::import_caption_segments(
+        project_path,
+        expected_revision,
+        document.segments,
+        document.source_timed,
+    )
+    .map_err(|e| format!("Failed to import captions: {e}"))?;
+
+    match format {
+        OutputFormat::Text => {
+            println!("Imported {caption_count} caption segments");
+            println!("revision: {}", updated.project_revision);
+        }
+        OutputFormat::Json => crate::write_json(&serde_json::json!({
+            "ok": true,
+            "revision": updated.project_revision,
+            "captionCount": caption_count,
+            "sourceTimed": document.source_timed,
+        }))?,
+    }
+    Ok(())
 }
 
 pub fn config_get(project_path: PathBuf) -> Result<(), String> {

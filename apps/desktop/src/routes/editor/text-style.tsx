@@ -13,6 +13,9 @@ export const FONT_OPTIONS = [
 	{ value: "System Sans-Serif", label: "System Sans-Serif" },
 	{ value: "System Serif", label: "System Serif" },
 	{ value: "System Monospace", label: "System Monospace" },
+	{ value: "Source Han Sans CN VF", label: "Source Han Sans CN VF" },
+	{ value: "Source Han Serif CN VF", label: "Source Han Serif CN VF" },
+	{ value: "LXGW WenKai", label: "LXGW WenKai" },
 ];
 
 export const CAPTION_POSITION_OPTIONS = [

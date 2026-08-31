@@ -4,6 +4,7 @@ import {mkdtemp, readFile, rm, writeFile} from "node:fs/promises";
 import {dirname, join} from "node:path";
 import {tmpdir} from "node:os";
 import {spawnSync} from "node:child_process";
+import {ffmpegBin, ffprobeBin} from "./media-binaries.mjs";
 
 const [edlPath, ...flags] = process.argv.slice(2);
 if (!edlPath) {
@@ -37,7 +38,7 @@ if (!Array.isArray(utterances) || utterances.length === 0) {
   throw new Error("Raw ASR JSON contains no utterances");
 }
 
-const probe = JSON.parse(run("ffprobe", [
+const probe = JSON.parse(run(ffprobeBin, [
   "-v", "error",
   "-show_entries", "format=duration:stream=index,codec_type,start_time,duration,width,height,r_frame_rate,sample_rate,channels",
   "-of", "json",
@@ -148,9 +149,9 @@ try {
     "-movflags", "+faststart",
     edl.output,
   ];
-  run("ffmpeg", ffmpegArgs, {stdio: "inherit", encoding: undefined});
+  run(ffmpegBin, ffmpegArgs, {stdio: "inherit", encoding: undefined});
 
-  const outputProbe = JSON.parse(run("ffprobe", [
+  const outputProbe = JSON.parse(run(ffprobeBin, [
     "-v", "error",
     "-show_entries", "format=duration,size:stream=index,codec_type,start_time,duration,width,height,r_frame_rate,sample_rate,channels",
     "-of", "json",

@@ -1,0 +1,6844 @@
+{
+  "purpose": "主体内容恢复：以用户认可的最初粗剪为唯一内容基线，不再继承后续精剪的整段误删",
+  "source": "/Users/a1/Movies/codex的使用.mp4",
+  "output": "/tmp/codex-regenerate.3Ret6i/codex_main_rough_restored.mp4",
+  "fps": 30,
+  "sampleRate": 48000,
+  "samplesPerFrame": 1600,
+  "videoCodec": "libx264",
+  "videoPreset": "medium",
+  "videoCrf": 18,
+  "audioBitrate": "192k",
+  "sequence": [
+    {
+      "startFrame": 43,
+      "endFrame": 141,
+      "cueIds": [
+        1
+      ],
+      "sourceText": "在开始讲解我们的 CodeX 这种 Agent 之前呢，大家需要先安装一个 CodeX。"
+    },
+    {
+      "startFrame": 149,
+      "endFrame": 208,
+      "cueIds": [
+        1
+      ],
+      "sourceText": "在开始讲解我们的 CodeX 这种 Agent 之前呢，大家需要先安装一个 CodeX。"
+    },
+    {
+      "startFrame": 220,
+      "endFrame": 409,
+      "cueIds": [
+        2
+      ],
+      "sourceText": "刚好呢这里我们开展了一，第二期免费的，哎，30天 AI 训练营，然后呢这里给大家已经介绍了这个 Agent 的这个安装"
+    },
+    {
+      "startFrame": 423,
+      "endFrame": 479,
+      "cueIds": [
+        2
+      ],
+      "sourceText": "刚好呢这里我们开展了一，第二期免费的，哎，30天 AI 训练营，然后呢这里给大家已经介绍了这个 Agent 的这个安装"
+    },
+    {
+      "startFrame": 523,
+      "endFrame": 561,
+      "cueIds": [
+        3
+      ],
+      "sourceText": "然后这里面的话"
+    },
+    {
+      "startFrame": 614,
+      "endFrame": 747,
+      "cueIds": [
+        4
+      ],
+      "sourceText": "你会遇到的任何的相关的一些问题呢，都能够在这里找到一些答案吗？"
+    },
+    {
+      "startFrame": 888,
+      "endFrame": 991,
+      "cueIds": [
+        5
+      ],
+      "sourceText": "然后 codex 的安装的话，其实它会有一些问题啊，大大多数同学都会遇到。"
+    },
+    {
+      "startFrame": 995,
+      "endFrame": 997,
+      "cueIds": [
+        5
+      ],
+      "sourceText": "然后 codex 的安装的话，其实它会有一些问题啊，大大多数同学都会遇到。"
+    },
+    {
+      "startFrame": 1008,
+      "endFrame": 1042,
+      "cueIds": [
+        5
+      ],
+      "sourceText": "然后 codex 的安装的话，其实它会有一些问题啊，大大多数同学都会遇到。"
+    },
+    {
+      "startFrame": 1051,
+      "endFrame": 1067,
+      "cueIds": [
+        6
+      ],
+      "sourceText": "那么会有一些平替的一些选择，比如说用 Deepseek 的 Hareness。"
+    },
+    {
+      "startFrame": 1088,
+      "endFrame": 1203,
+      "cueIds": [
+        6
+      ],
+      "sourceText": "那么会有一些平替的一些选择，比如说用 Deepseek 的 Hareness。"
+    },
+    {
+      "startFrame": 1217,
+      "endFrame": 1248,
+      "cueIds": [
+        7
+      ],
+      "sourceText": "以及 Workbody 还可以去使用豆包的一个工作台。"
+    },
+    {
+      "startFrame": 1259,
+      "endFrame": 1339,
+      "cueIds": [
+        7
+      ],
+      "sourceText": "以及 Workbody 还可以去使用豆包的一个工作台。"
+    },
+    {
+      "startFrame": 1461,
+      "endFrame": 1470,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 1519,
+      "endFrame": 1568,
+      "cueIds": [
+        9
+      ],
+      "sourceText": "在安装的过程当中呢，你可能会遇到。"
+    },
+    {
+      "startFrame": 1584,
+      "endFrame": 1618,
+      "cueIds": [
+        9
+      ],
+      "sourceText": "在安装的过程当中呢，你可能会遇到。"
+    },
+    {
+      "startFrame": 1644,
+      "endFrame": 1649,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 1821,
+      "endFrame": 1969,
+      "cueIds": [
+        10
+      ],
+      "sourceText": "包括在我接下来的这些讲解当中呢，你都可能会遇到一些专业的一些名词，你可能不太懂，那么你可以去把对应的这个名词，你把这个字幕"
+    },
+    {
+      "startFrame": 1979,
+      "endFrame": 2017,
+      "cueIds": [
+        10
+      ],
+      "sourceText": "包括在我接下来的这些讲解当中呢，你都可能会遇到一些专业的一些名词，你可能不太懂，那么你可以去把对应的这个名词，你把这个字幕"
+    },
+    {
+      "startFrame": 2023,
+      "endFrame": 2059,
+      "cueIds": [
+        10
+      ],
+      "sourceText": "包括在我接下来的这些讲解当中呢，你都可能会遇到一些专业的一些名词，你可能不太懂，那么你可以去把对应的这个名词，你把这个字幕"
+    },
+    {
+      "startFrame": 2085,
+      "endFrame": 2147,
+      "cueIds": [
+        10
+      ],
+      "sourceText": "包括在我接下来的这些讲解当中呢，你都可能会遇到一些专业的一些名词，你可能不太懂，那么你可以去把对应的这个名词，你把这个字幕"
+    },
+    {
+      "startFrame": 2382,
+      "endFrame": 2500,
+      "cueIds": [
+        11
+      ],
+      "sourceText": "上的文字，然后复制给豆包，然后问它这是什么意思，应该怎么做？"
+    },
+    {
+      "startFrame": 2517,
+      "endFrame": 2539,
+      "cueIds": [
+        11
+      ],
+      "sourceText": "上的文字，然后复制给豆包，然后问它这是什么意思，应该怎么做？"
+    },
+    {
+      "startFrame": 2629,
+      "endFrame": 2692,
+      "cueIds": [
+        12
+      ],
+      "sourceText": "AI 时代，AI 是最好的老师。"
+    },
+    {
+      "startFrame": 3068,
+      "endFrame": 3095,
+      "cueIds": [
+        13
+      ],
+      "sourceText": "这个资料呢？"
+    },
+    {
+      "startFrame": 3186,
+      "endFrame": 3233,
+      "cueIds": [
+        14
+      ],
+      "sourceText": "需要的同学可以戳我头像。"
+    },
+    {
+      "startFrame": 4009,
+      "endFrame": 4119,
+      "cueIds": [
+        15
+      ],
+      "sourceText": "当我们安装好了一个 Agent 也就是 Codex 我这里拿 Codex 来举例。"
+    },
+    {
+      "startFrame": 4123,
+      "endFrame": 4173,
+      "cueIds": [
+        15
+      ],
+      "sourceText": "当我们安装好了一个 Agent 也就是 Codex 我这里拿 Codex 来举例。"
+    },
+    {
+      "startFrame": 4320,
+      "endFrame": 4443,
+      "cueIds": [
+        16
+      ],
+      "sourceText": "然后第一步你需要去创建一个属于你自己的一个个人的 Agent。"
+    },
+    {
+      "startFrame": 4933,
+      "endFrame": 4999,
+      "cueIds": [
+        17
+      ],
+      "sourceText": "所谓的 Agent 是什么意思呢？就是"
+    },
+    {
+      "startFrame": 5043,
+      "endFrame": 5144,
+      "cueIds": [
+        18
+      ],
+      "sourceText": "能够帮助你专属的去干一个你特定的，你的需求的一个"
+    },
+    {
+      "startFrame": 5155,
+      "endFrame": 5191,
+      "cueIds": [
+        18
+      ],
+      "sourceText": "能够帮助你专属的去干一个你特定的，你的需求的一个"
+    },
+    {
+      "startFrame": 5223,
+      "endFrame": 5235,
+      "cueIds": [
+        19
+      ],
+      "sourceText": "内容，你就差就，你可以理解成你就是雇佣了一个员工。"
+    },
+    {
+      "startFrame": 5239,
+      "endFrame": 5241,
+      "cueIds": [
+        19
+      ],
+      "sourceText": "内容，你就差就，你可以理解成你就是雇佣了一个员工。"
+    },
+    {
+      "startFrame": 5286,
+      "endFrame": 5352,
+      "cueIds": [
+        19
+      ],
+      "sourceText": "内容，你就差就，你可以理解成你就是雇佣了一个员工。"
+    },
+    {
+      "startFrame": 5387,
+      "endFrame": 5390,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 5395,
+      "endFrame": 5464,
+      "cueIds": [
+        20
+      ],
+      "sourceText": "比如说我这边的一个老胡文稿，他帮，专门帮我进行文字或选题，还有标题等等方面的一个创作。"
+    },
+    {
+      "startFrame": 5477,
+      "endFrame": 5556,
+      "cueIds": [
+        20
+      ],
+      "sourceText": "比如说我这边的一个老胡文稿，他帮，专门帮我进行文字或选题，还有标题等等方面的一个创作。"
+    },
+    {
+      "startFrame": 5567,
+      "endFrame": 5646,
+      "cueIds": [
+        20
+      ],
+      "sourceText": "比如说我这边的一个老胡文稿，他帮，专门帮我进行文字或选题，还有标题等等方面的一个创作。"
+    },
+    {
+      "startFrame": 5667,
+      "endFrame": 5729,
+      "cueIds": [
+        21
+      ],
+      "sourceText": "然后呢，这里也包括了我的一个"
+    },
+    {
+      "startFrame": 5752,
+      "endFrame": 5780,
+      "cueIds": [
+        22
+      ],
+      "sourceText": "老婆的音乐啊，以及我的 AI 视觉。"
+    },
+    {
+      "startFrame": 5785,
+      "endFrame": 5828,
+      "cueIds": [
+        22
+      ],
+      "sourceText": "老婆的音乐啊，以及我的 AI 视觉。"
+    },
+    {
+      "startFrame": 5852,
+      "endFrame": 5927,
+      "cueIds": [
+        23
+      ],
+      "sourceText": "这个呢在前面几期视频都已经给大家介绍过。"
+    },
+    {
+      "startFrame": 6390,
+      "endFrame": 6495,
+      "cueIds": [
+        24
+      ],
+      "sourceText": "首先呢，你需要在这个地方选择一个新建项目，然后去输入你的项目名称。"
+    },
+    {
+      "startFrame": 6509,
+      "endFrame": 6558,
+      "cueIds": [
+        24
+      ],
+      "sourceText": "首先呢，你需要在这个地方选择一个新建项目，然后去输入你的项目名称。"
+    },
+    {
+      "startFrame": 6648,
+      "endFrame": 6762,
+      "cueIds": [
+        25
+      ],
+      "sourceText": "这个地方呢，因为我已经创建好了，所以我就直接打开我的项目啊，这个地方就已经加载好了。"
+    },
+    {
+      "startFrame": 6766,
+      "endFrame": 6806,
+      "cueIds": [
+        25
+      ],
+      "sourceText": "这个地方呢，因为我已经创建好了，所以我就直接打开我的项目啊，这个地方就已经加载好了。"
+    },
+    {
+      "startFrame": 7032,
+      "endFrame": 7035,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 7113,
+      "endFrame": 7116,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 7875,
+      "endFrame": 7997,
+      "cueIds": [
+        28
+      ],
+      "sourceText": "如果你完全从零开始，你没有属于自己的一个个人 Agent。"
+    },
+    {
+      "startFrame": 8089,
+      "endFrame": 8174,
+      "cueIds": [
+        29
+      ],
+      "sourceText": "那么你可以去创建一个 General Agent 也可以去"
+    },
+    {
+      "startFrame": 8223,
+      "endFrame": 8321,
+      "cueIds": [
+        30
+      ],
+      "sourceText": "使用别人已经创建好的一个个人 Agent 比如说动哥的 DBE scale。"
+    },
+    {
+      "startFrame": 8351,
+      "endFrame": 8394,
+      "cueIds": [
+        30
+      ],
+      "sourceText": "使用别人已经创建好的一个个人 Agent 比如说动哥的 DBE scale。"
+    },
+    {
+      "startFrame": 8503,
+      "endFrame": 8558,
+      "cueIds": [
+        31
+      ],
+      "sourceText": "下载安装的方式呢是"
+    },
+    {
+      "startFrame": 8614,
+      "endFrame": 8691,
+      "cueIds": [
+        32
+      ],
+      "sourceText": "比如说我这边已经开源了三个 Agent 啊，比如说我的 AI 视觉，那么你直接点，点击对应的一个链接之后，进到这边的一个。 GitHub 的地址，然后来到"
+    },
+    {
+      "startFrame": 8703,
+      "endFrame": 8771,
+      "cueIds": [
+        32
+      ],
+      "sourceText": "比如说我这边已经开源了三个 Agent 啊，比如说我的 AI 视觉，那么你直接点，点击对应的一个链接之后，进到这边的一个。 GitHub 的地址，然后来到"
+    },
+    {
+      "startFrame": 8796,
+      "endFrame": 8893,
+      "cueIds": [
+        32
+      ],
+      "sourceText": "比如说我这边已经开源了三个 Agent 啊，比如说我的 AI 视觉，那么你直接点，点击对应的一个链接之后，进到这边的一个。 GitHub 的地址，然后来到"
+    },
+    {
+      "startFrame": 8910,
+      "endFrame": 8951,
+      "cueIds": [
+        32
+      ],
+      "sourceText": "比如说我这边已经开源了三个 Agent 啊，比如说我的 AI 视觉，那么你直接点，点击对应的一个链接之后，进到这边的一个。 GitHub 的地址，然后来到"
+    },
+    {
+      "startFrame": 9052,
+      "endFrame": 9074,
+      "cueIds": [
+        33
+      ],
+      "sourceText": "这个绿色的"
+    },
+    {
+      "startFrame": 9108,
+      "endFrame": 9142,
+      "cueIds": [
+        34
+      ],
+      "sourceText": "按钮点击之后，这边有个 http 啊，点击复制，然后来到这边的一个 codex 的地方。"
+    },
+    {
+      "startFrame": 9145,
+      "endFrame": 9175,
+      "cueIds": [
+        34
+      ],
+      "sourceText": "按钮点击之后，这边有个 http 啊，点击复制，然后来到这边的一个 codex 的地方。"
+    },
+    {
+      "startFrame": 9189,
+      "endFrame": 9202,
+      "cueIds": [
+        34
+      ],
+      "sourceText": "按钮点击之后，这边有个 http 啊，点击复制，然后来到这边的一个 codex 的地方。"
+    },
+    {
+      "startFrame": 9231,
+      "endFrame": 9253,
+      "cueIds": [
+        34
+      ],
+      "sourceText": "按钮点击之后，这边有个 http 啊，点击复制，然后来到这边的一个 codex 的地方。"
+    },
+    {
+      "startFrame": 9283,
+      "endFrame": 9340,
+      "cueIds": [
+        34
+      ],
+      "sourceText": "按钮点击之后，这边有个 http 啊，点击复制，然后来到这边的一个 codex 的地方。"
+    },
+    {
+      "startFrame": 9360,
+      "endFrame": 9395,
+      "cueIds": [
+        34
+      ],
+      "sourceText": "按钮点击之后，这边有个 http 啊，点击复制，然后来到这边的一个 codex 的地方。"
+    },
+    {
+      "startFrame": 9410,
+      "endFrame": 9430,
+      "cueIds": [
+        35
+      ],
+      "sourceText": "然后复制，然后直接跟他说。"
+    },
+    {
+      "startFrame": 9453,
+      "endFrame": 9487,
+      "cueIds": [
+        35
+      ],
+      "sourceText": "然后复制，然后直接跟他说。"
+    },
+    {
+      "startFrame": 9549,
+      "endFrame": 9592,
+      "cueIds": [
+        36
+      ],
+      "sourceText": "帮我安装一下这个项目。"
+    },
+    {
+      "startFrame": 9637,
+      "endFrame": 9666,
+      "cueIds": [
+        37
+      ],
+      "sourceText": "然后直接发送。"
+    },
+    {
+      "startFrame": 9723,
+      "endFrame": 9773,
+      "cueIds": [
+        38
+      ],
+      "sourceText": "这个 Agent 就会帮你安装这个个人的 Agent。"
+    },
+    {
+      "startFrame": 9804,
+      "endFrame": 9831,
+      "cueIds": [
+        38
+      ],
+      "sourceText": "这个 Agent 就会帮你安装这个个人的 Agent。"
+    },
+    {
+      "startFrame": 9841,
+      "endFrame": 9879,
+      "cueIds": [
+        38
+      ],
+      "sourceText": "这个 Agent 就会帮你安装这个个人的 Agent。"
+    },
+    {
+      "startFrame": 9965,
+      "endFrame": 10020,
+      "cueIds": [
+        39
+      ],
+      "sourceText": "但我其实更建议的是，你能够创建一个属于你自己的个人 agent。"
+    },
+    {
+      "startFrame": 10041,
+      "endFrame": 10120,
+      "cueIds": [
+        39
+      ],
+      "sourceText": "但我其实更建议的是，你能够创建一个属于你自己的个人 agent。"
+    },
+    {
+      "startFrame": 10997,
+      "endFrame": 11106,
+      "cueIds": [
+        41
+      ],
+      "sourceText": "在你创建你属于你，在在你创建属于你自己的个人的 Agent 的过程当中呢？"
+    },
+    {
+      "startFrame": 11214,
+      "endFrame": 11260,
+      "cueIds": [
+        42
+      ],
+      "sourceText": "你会逐渐的发现到"
+    },
+    {
+      "startFrame": 11302,
+      "endFrame": 11379,
+      "cueIds": [
+        43
+      ],
+      "sourceText": "你自己的一个认知的一个层面的一些薄弱的项。"
+    },
+    {
+      "startFrame": 11389,
+      "endFrame": 11410,
+      "cueIds": [
+        43
+      ],
+      "sourceText": "你自己的一个认知的一个层面的一些薄弱的项。"
+    },
+    {
+      "startFrame": 11949,
+      "endFrame": 12042,
+      "cueIds": [
+        44
+      ],
+      "sourceText": "我不知道大家有没有一种感觉，就是别人创建的 agent。"
+    },
+    {
+      "startFrame": 12077,
+      "endFrame": 12180,
+      "cueIds": [
+        45
+      ],
+      "sourceText": "总感觉发挥不出来它应有的一个价值。"
+    },
+    {
+      "startFrame": 12240,
+      "endFrame": 12241,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 13367,
+      "endFrame": 13461,
+      "cueIds": [
+        46
+      ],
+      "sourceText": "并且在创建你个人的 agent 的过程当中呢，你可以增"
+    },
+    {
+      "startFrame": 13469,
+      "endFrame": 13470,
+      "cueIds": [
+        46
+      ],
+      "sourceText": "并且在创建你个人的 agent 的过程当中呢，你可以增"
+    },
+    {
+      "startFrame": 13521,
+      "endFrame": 13532,
+      "cueIds": [
+        47
+      ],
+      "sourceText": "根据你自己的需求去侧重某个方面的一个"
+    },
+    {
+      "startFrame": 13538,
+      "endFrame": 13583,
+      "cueIds": [
+        47
+      ],
+      "sourceText": "根据你自己的需求去侧重某个方面的一个"
+    },
+    {
+      "startFrame": 13596,
+      "endFrame": 13648,
+      "cueIds": [
+        47
+      ],
+      "sourceText": "根据你自己的需求去侧重某个方面的一个"
+    },
+    {
+      "startFrame": 13680,
+      "endFrame": 13682,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 13731,
+      "endFrame": 13746,
+      "cueIds": [
+        48
+      ],
+      "sourceText": "创建"
+    },
+    {
+      "startFrame": 13802,
+      "endFrame": 13939,
+      "cueIds": [
+        49
+      ],
+      "sourceText": "以及内容的打磨，更符合你自己对于输出结果的一个要求。"
+    },
+    {
+      "startFrame": 14192,
+      "endFrame": 14326,
+      "cueIds": [
+        50
+      ],
+      "sourceText": "并且在这个过程当中呢，会逐渐的锻炼你跟 AI 的一个沟通的一个能力。"
+    },
+    {
+      "startFrame": 14578,
+      "endFrame": 14683,
+      "cueIds": [
+        51
+      ],
+      "sourceText": "当然在刚开始创建的时候，你会觉得这个 agent 好傻呀，完全"
+    },
+    {
+      "startFrame": 14702,
+      "endFrame": 14721,
+      "cueIds": [
+        51
+      ],
+      "sourceText": "当然在刚开始创建的时候，你会觉得这个 agent 好傻呀，完全"
+    },
+    {
+      "startFrame": 14850,
+      "endFrame": 14905,
+      "cueIds": [
+        52
+      ],
+      "sourceText": "get 不到你到底说什么内容。所以呢？"
+    },
+    {
+      "startFrame": 14914,
+      "endFrame": 14932,
+      "cueIds": [
+        52
+      ],
+      "sourceText": "get 不到你到底说什么内容。所以呢？"
+    },
+    {
+      "startFrame": 14965,
+      "endFrame": 15086,
+      "cueIds": [
+        53
+      ],
+      "sourceText": "这就是你们创建个人 agent 的时候会遇到的第一个问题，就是"
+    },
+    {
+      "startFrame": 15100,
+      "endFrame": 15114,
+      "cueIds": [
+        53
+      ],
+      "sourceText": "这就是你们创建个人 agent 的时候会遇到的第一个问题，就是"
+    },
+    {
+      "startFrame": 15249,
+      "endFrame": 15271,
+      "cueIds": [
+        54
+      ],
+      "sourceText": "所谓的"
+    },
+    {
+      "startFrame": 15311,
+      "endFrame": 15403,
+      "cueIds": [
+        55
+      ],
+      "sourceText": "碳基语言和硅基语言这两个之间的一个冲突。"
+    },
+    {
+      "startFrame": 15441,
+      "endFrame": 15472,
+      "cueIds": [
+        56
+      ],
+      "sourceText": "当然这一次视频，当然这不是本期视频的一个重点啊。"
+    },
+    {
+      "startFrame": 15476,
+      "endFrame": 15547,
+      "cueIds": [
+        56,
+        57
+      ],
+      "sourceText": "当然这一次视频，当然这不是本期视频的一个重点啊。 如果说你对构建，当然当然说如，当然说你对如何构建一个"
+    },
+    {
+      "startFrame": 15558,
+      "endFrame": 15584,
+      "cueIds": [
+        57
+      ],
+      "sourceText": "如果说你对构建，当然当然说如，当然说你对如何构建一个"
+    },
+    {
+      "startFrame": 15618,
+      "endFrame": 15632,
+      "cueIds": [
+        57
+      ],
+      "sourceText": "如果说你对构建，当然当然说如，当然说你对如何构建一个"
+    },
+    {
+      "startFrame": 15657,
+      "endFrame": 15679,
+      "cueIds": [
+        57
+      ],
+      "sourceText": "如果说你对构建，当然当然说如，当然说你对如何构建一个"
+    },
+    {
+      "startFrame": 15686,
+      "endFrame": 15750,
+      "cueIds": [
+        57
+      ],
+      "sourceText": "如果说你对构建，当然当然说如，当然说你对如何构建一个"
+    },
+    {
+      "startFrame": 15791,
+      "endFrame": 15852,
+      "cueIds": [
+        58
+      ],
+      "sourceText": "感兴趣的话，那么你可以扣一波赞，扣一。"
+    },
+    {
+      "startFrame": 15864,
+      "endFrame": 15875,
+      "cueIds": [
+        58
+      ],
+      "sourceText": "感兴趣的话，那么你可以扣一波赞，扣一。"
+    },
+    {
+      "startFrame": 15911,
+      "endFrame": 15941,
+      "cueIds": [
+        59
+      ],
+      "sourceText": "那么你可以扣一个"
+    },
+    {
+      "startFrame": 16007,
+      "endFrame": 16055,
+      "cueIds": [
+        60
+      ],
+      "sourceText": "那么你弹幕可以扣一个六六六。那么"
+    },
+    {
+      "startFrame": 16073,
+      "endFrame": 16085,
+      "cueIds": [
+        60
+      ],
+      "sourceText": "那么你弹幕可以扣一个六六六。那么"
+    },
+    {
+      "startFrame": 16166,
+      "endFrame": 16207,
+      "cueIds": [
+        61
+      ],
+      "sourceText": "下一期视频我再给大家讲关于 Agent 的里面的四个层次，我给它划分出来的灵魂、筋骨、血肉、表皮这四个层次之间的个关系，以及应该如何去应用到。"
+    },
+    {
+      "startFrame": 16223,
+      "endFrame": 16290,
+      "cueIds": [
+        61
+      ],
+      "sourceText": "下一期视频我再给大家讲关于 Agent 的里面的四个层次，我给它划分出来的灵魂、筋骨、血肉、表皮这四个层次之间的个关系，以及应该如何去应用到。"
+    },
+    {
+      "startFrame": 16299,
+      "endFrame": 16385,
+      "cueIds": [
+        61
+      ],
+      "sourceText": "下一期视频我再给大家讲关于 Agent 的里面的四个层次，我给它划分出来的灵魂、筋骨、血肉、表皮这四个层次之间的个关系，以及应该如何去应用到。"
+    },
+    {
+      "startFrame": 16390,
+      "endFrame": 16461,
+      "cueIds": [
+        61
+      ],
+      "sourceText": "下一期视频我再给大家讲关于 Agent 的里面的四个层次，我给它划分出来的灵魂、筋骨、血肉、表皮这四个层次之间的个关系，以及应该如何去应用到。"
+    },
+    {
+      "startFrame": 16467,
+      "endFrame": 16521,
+      "cueIds": [
+        61
+      ],
+      "sourceText": "下一期视频我再给大家讲关于 Agent 的里面的四个层次，我给它划分出来的灵魂、筋骨、血肉、表皮这四个层次之间的个关系，以及应该如何去应用到。"
+    },
+    {
+      "startFrame": 16536,
+      "endFrame": 16606,
+      "cueIds": [
+        62
+      ],
+      "sourceText": "任何领域里面的一个 agent 的一个构建。"
+    },
+    {
+      "startFrame": 16793,
+      "endFrame": 16874,
+      "cueIds": [
+        63
+      ],
+      "sourceText": "然后这里给大家介绍一下我自己的一个老胡文稿的一个 Agent。"
+    },
+    {
+      "startFrame": 16888,
+      "endFrame": 16931,
+      "cueIds": [
+        63
+      ],
+      "sourceText": "然后这里给大家介绍一下我自己的一个老胡文稿的一个 Agent。"
+    },
+    {
+      "startFrame": 16963,
+      "endFrame": 16995,
+      "cueIds": [
+        64
+      ],
+      "sourceText": "我们可以直接问他。"
+    },
+    {
+      "startFrame": 17454,
+      "endFrame": 17491,
+      "cueIds": [
+        65
+      ],
+      "sourceText": "你能够帮我做什么？"
+    },
+    {
+      "startFrame": 17496,
+      "endFrame": 17550,
+      "cueIds": [
+        66
+      ],
+      "sourceText": "请详细的给我罗列一下，用表格的形式呈现。"
+    },
+    {
+      "startFrame": 17553,
+      "endFrame": 17569,
+      "cueIds": [
+        66
+      ],
+      "sourceText": "请详细的给我罗列一下，用表格的形式呈现。"
+    },
+    {
+      "startFrame": 17573,
+      "endFrame": 17617,
+      "cueIds": [
+        66
+      ],
+      "sourceText": "请详细的给我罗列一下，用表格的形式呈现。"
+    },
+    {
+      "startFrame": 17700,
+      "endFrame": 17758,
+      "cueIds": [
+        67
+      ],
+      "sourceText": "那么他就会去直接"
+    },
+    {
+      "startFrame": 17813,
+      "endFrame": 17855,
+      "cueIds": [
+        68
+      ],
+      "sourceText": "列出来它应该有的一些功能。"
+    },
+    {
+      "startFrame": 17862,
+      "endFrame": 17888,
+      "cueIds": [
+        68
+      ],
+      "sourceText": "列出来它应该有的一些功能。"
+    },
+    {
+      "startFrame": 17894,
+      "endFrame": 17906,
+      "cueIds": [
+        68
+      ],
+      "sourceText": "列出来它应该有的一些功能。"
+    },
+    {
+      "startFrame": 18039,
+      "endFrame": 18103,
+      "cueIds": [
+        69
+      ],
+      "sourceText": "然后在我的这个老公告里面的话。"
+    },
+    {
+      "startFrame": 18155,
+      "endFrame": 18307,
+      "cueIds": [
+        70
+      ],
+      "sourceText": "它是一个集合了思考决策商业与内容表达协作的一个中枢的一个内容。"
+    },
+    {
+      "startFrame": 18447,
+      "endFrame": 18502,
+      "cueIds": [
+        71
+      ],
+      "sourceText": "我这个 Agent 里面的话比较多的就集合了很多很多的一些内容啊。"
+    },
+    {
+      "startFrame": 18509,
+      "endFrame": 18536,
+      "cueIds": [
+        71
+      ],
+      "sourceText": "我这个 Agent 里面的话比较多的就集合了很多很多的一些内容啊。"
+    },
+    {
+      "startFrame": 18550,
+      "endFrame": 18611,
+      "cueIds": [
+        71
+      ],
+      "sourceText": "我这个 Agent 里面的话比较多的就集合了很多很多的一些内容啊。"
+    },
+    {
+      "startFrame": 18833,
+      "endFrame": 18954,
+      "cueIds": [
+        72
+      ],
+      "sourceText": "看这个地方呢，它主要给我分归了三块，一个是思考、判断与决策。"
+    },
+    {
+      "startFrame": 19028,
+      "endFrame": 19030,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 19041,
+      "endFrame": 19140,
+      "cueIds": [
+        73
+      ],
+      "sourceText": "然后拆解，比如说这个地方有一个拆解复杂概念。"
+    },
+    {
+      "startFrame": 19617,
+      "endFrame": 19619,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 19716,
+      "endFrame": 19718,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 20214,
+      "endFrame": 20310,
+      "cueIds": [
+        75
+      ],
+      "sourceText": "然后呢，包括一些商业与个人的一些业务。"
+    },
+    {
+      "startFrame": 20520,
+      "endFrame": 20620,
+      "cueIds": [
+        76
+      ],
+      "sourceText": "比如做一些商业的定位呀，一些产品的设计呀，啊，一些竞争分析啊，等等相关的一些内容，服务的流程，合作的判断。"
+    },
+    {
+      "startFrame": 20638,
+      "endFrame": 20640,
+      "cueIds": [
+        76
+      ],
+      "sourceText": "比如做一些商业的定位呀，一些产品的设计呀，啊，一些竞争分析啊，等等相关的一些内容，服务的流程，合作的判断。"
+    },
+    {
+      "startFrame": 20645,
+      "endFrame": 20685,
+      "cueIds": [
+        76
+      ],
+      "sourceText": "比如做一些商业的定位呀，一些产品的设计呀，啊，一些竞争分析啊，等等相关的一些内容，服务的流程，合作的判断。"
+    },
+    {
+      "startFrame": 20693,
+      "endFrame": 20695,
+      "cueIds": [
+        76
+      ],
+      "sourceText": "比如做一些商业的定位呀，一些产品的设计呀，啊，一些竞争分析啊，等等相关的一些内容，服务的流程，合作的判断。"
+    },
+    {
+      "startFrame": 20700,
+      "endFrame": 20803,
+      "cueIds": [
+        76
+      ],
+      "sourceText": "比如做一些商业的定位呀，一些产品的设计呀，啊，一些竞争分析啊，等等相关的一些内容，服务的流程，合作的判断。"
+    },
+    {
+      "startFrame": 20841,
+      "endFrame": 20913,
+      "cueIds": [
+        77
+      ],
+      "sourceText": "还有一些内容与方向的一些选题。"
+    },
+    {
+      "startFrame": 21096,
+      "endFrame": 21153,
+      "cueIds": [
+        78
+      ],
+      "sourceText": "包括建立一些选题库啊，设计内容"
+    },
+    {
+      "startFrame": 21178,
+      "endFrame": 21179,
+      "cueIds": [
+        78
+      ],
+      "sourceText": "包括建立一些选题库啊，设计内容"
+    },
+    {
+      "startFrame": 21183,
+      "endFrame": 21216,
+      "cueIds": [
+        78
+      ],
+      "sourceText": "包括建立一些选题库啊，设计内容"
+    },
+    {
+      "startFrame": 21258,
+      "endFrame": 21261,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 21266,
+      "endFrame": 21286,
+      "cueIds": [
+        79
+      ],
+      "sourceText": "当然，这方面呢，其实我以前的风格呢，都是想到什么说什么。"
+    },
+    {
+      "startFrame": 21292,
+      "endFrame": 21396,
+      "cueIds": [
+        79
+      ],
+      "sourceText": "当然，这方面呢，其实我以前的风格呢，都是想到什么说什么。"
+    },
+    {
+      "startFrame": 21414,
+      "endFrame": 21430,
+      "cueIds": [
+        79
+      ],
+      "sourceText": "当然，这方面呢，其实我以前的风格呢，都是想到什么说什么。"
+    },
+    {
+      "startFrame": 21529,
+      "endFrame": 21584,
+      "cueIds": [
+        80
+      ],
+      "sourceText": "我没有说是为了迎合"
+    },
+    {
+      "startFrame": 21618,
+      "endFrame": 21638,
+      "cueIds": [
+        81
+      ],
+      "sourceText": "粉丝"
+    },
+    {
+      "startFrame": 21955,
+      "endFrame": 22051,
+      "cueIds": [
+        82
+      ],
+      "sourceText": "我基本上都是解决自己的一个痛点，然后呢我觉得它可以被分享出来，然后我就做对应的这种教学视频。"
+    },
+    {
+      "startFrame": 22063,
+      "endFrame": 22102,
+      "cueIds": [
+        82
+      ],
+      "sourceText": "我基本上都是解决自己的一个痛点，然后呢我觉得它可以被分享出来，然后我就做对应的这种教学视频。"
+    },
+    {
+      "startFrame": 22119,
+      "endFrame": 22148,
+      "cueIds": [
+        82
+      ],
+      "sourceText": "我基本上都是解决自己的一个痛点，然后呢我觉得它可以被分享出来，然后我就做对应的这种教学视频。"
+    },
+    {
+      "startFrame": 22152,
+      "endFrame": 22195,
+      "cueIds": [
+        82
+      ],
+      "sourceText": "我基本上都是解决自己的一个痛点，然后呢我觉得它可以被分享出来，然后我就做对应的这种教学视频。"
+    },
+    {
+      "startFrame": 22256,
+      "endFrame": 22367,
+      "cueIds": [
+        83
+      ],
+      "sourceText": "然后呢还包括一些写作的一些以及内容的创作包括"
+    },
+    {
+      "startFrame": 22419,
+      "endFrame": 22549,
+      "cueIds": [
+        84
+      ],
+      "sourceText": "我的公众号内容我都可以直接用这个去产出但目前的话"
+    },
+    {
+      "startFrame": 22611,
+      "endFrame": 22633,
+      "cueIds": [
+        85
+      ],
+      "sourceText": "我还没有"
+    },
+    {
+      "startFrame": 22762,
+      "endFrame": 22788,
+      "cueIds": [
+        86
+      ],
+      "sourceText": "把这种流水线的一个生产给它完成啊。"
+    },
+    {
+      "startFrame": 22805,
+      "endFrame": 22840,
+      "cueIds": [
+        86
+      ],
+      "sourceText": "把这种流水线的一个生产给它完成啊。"
+    },
+    {
+      "startFrame": 22845,
+      "endFrame": 22888,
+      "cueIds": [
+        86
+      ],
+      "sourceText": "把这种流水线的一个生产给它完成啊。"
+    },
+    {
+      "startFrame": 22928,
+      "endFrame": 22997,
+      "cueIds": [
+        87
+      ],
+      "sourceText": "只是现在把工具打磨的差不多了，然后呢包括一些视频的脚本，包括本期视频的"
+    },
+    {
+      "startFrame": 23027,
+      "endFrame": 23074,
+      "cueIds": [
+        87
+      ],
+      "sourceText": "只是现在把工具打磨的差不多了，然后呢包括一些视频的脚本，包括本期视频的"
+    },
+    {
+      "startFrame": 23077,
+      "endFrame": 23120,
+      "cueIds": [
+        87
+      ],
+      "sourceText": "只是现在把工具打磨的差不多了，然后呢包括一些视频的脚本，包括本期视频的"
+    },
+    {
+      "startFrame": 23174,
+      "endFrame": 23218,
+      "cueIds": [
+        88
+      ],
+      "sourceText": "整个构架都是我的这个脑补文稿去产出来的，包括这个选题，我是怎么从一个"
+    },
+    {
+      "startFrame": 23238,
+      "endFrame": 23293,
+      "cueIds": [
+        88
+      ],
+      "sourceText": "整个构架都是我的这个脑补文稿去产出来的，包括这个选题，我是怎么从一个"
+    },
+    {
+      "startFrame": 23319,
+      "endFrame": 23349,
+      "cueIds": [
+        88
+      ],
+      "sourceText": "整个构架都是我的这个脑补文稿去产出来的，包括这个选题，我是怎么从一个"
+    },
+    {
+      "startFrame": 23360,
+      "endFrame": 23402,
+      "cueIds": [
+        88
+      ],
+      "sourceText": "整个构架都是我的这个脑补文稿去产出来的，包括这个选题，我是怎么从一个"
+    },
+    {
+      "startFrame": 23474,
+      "endFrame": 23567,
+      "cueIds": [
+        89
+      ],
+      "sourceText": "原本我只是想去讲一下这个 codex 怎么去使用。"
+    },
+    {
+      "startFrame": 23715,
+      "endFrame": 23745,
+      "cueIds": [
+        90
+      ],
+      "sourceText": "然后隐身到"
+    },
+    {
+      "startFrame": 23848,
+      "endFrame": 23850,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 23874,
+      "endFrame": 23959,
+      "cueIds": [
+        91
+      ],
+      "sourceText": "普通人也能够用 AI 学会 AI 的这个比较大的一个开口的一个"
+    },
+    {
+      "startFrame": 23969,
+      "endFrame": 24015,
+      "cueIds": [
+        91
+      ],
+      "sourceText": "普通人也能够用 AI 学会 AI 的这个比较大的一个开口的一个"
+    },
+    {
+      "startFrame": 24252,
+      "endFrame": 24266,
+      "cueIds": [
+        92
+      ],
+      "sourceText": "方向啊，这里面其实就是吸收了栋哥的那两期视频的"
+    },
+    {
+      "startFrame": 24271,
+      "endFrame": 24323,
+      "cueIds": [
+        92
+      ],
+      "sourceText": "方向啊，这里面其实就是吸收了栋哥的那两期视频的"
+    },
+    {
+      "startFrame": 24327,
+      "endFrame": 24346,
+      "cueIds": [
+        92
+      ],
+      "sourceText": "方向啊，这里面其实就是吸收了栋哥的那两期视频的"
+    },
+    {
+      "startFrame": 24363,
+      "endFrame": 24399,
+      "cueIds": [
+        92
+      ],
+      "sourceText": "方向啊，这里面其实就是吸收了栋哥的那两期视频的"
+    },
+    {
+      "startFrame": 24439,
+      "endFrame": 24459,
+      "cueIds": [
+        93
+      ],
+      "sourceText": "核心内容"
+    },
+    {
+      "startFrame": 24518,
+      "endFrame": 24521,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 24609,
+      "endFrame": 24611,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 24626,
+      "endFrame": 24700,
+      "cueIds": [
+        95
+      ],
+      "sourceText": "也就是东哥所说的，我抄袭了他的方法论。"
+    },
+    {
+      "startFrame": 24781,
+      "endFrame": 24832,
+      "cueIds": [
+        96
+      ],
+      "sourceText": "但是我没有抄袭他的内容"
+    },
+    {
+      "startFrame": 25003,
+      "endFrame": 25085,
+      "cueIds": [
+        97
+      ],
+      "sourceText": "啊，然后还包括一些什么修改审稿啊，啊，一些什么标题，传播入口，事实资料与研究，还有发布与复盘啊。"
+    },
+    {
+      "startFrame": 25101,
+      "endFrame": 25103,
+      "cueIds": [
+        97
+      ],
+      "sourceText": "啊，然后还包括一些什么修改审稿啊，啊，一些什么标题，传播入口，事实资料与研究，还有发布与复盘啊。"
+    },
+    {
+      "startFrame": 25105,
+      "endFrame": 25148,
+      "cueIds": [
+        97
+      ],
+      "sourceText": "啊，然后还包括一些什么修改审稿啊，啊，一些什么标题，传播入口，事实资料与研究，还有发布与复盘啊。"
+    },
+    {
+      "startFrame": 25157,
+      "endFrame": 25238,
+      "cueIds": [
+        97
+      ],
+      "sourceText": "啊，然后还包括一些什么修改审稿啊，啊，一些什么标题，传播入口，事实资料与研究，还有发布与复盘啊。"
+    },
+    {
+      "startFrame": 25256,
+      "endFrame": 25296,
+      "cueIds": [
+        97
+      ],
+      "sourceText": "啊，然后还包括一些什么修改审稿啊，啊，一些什么标题，传播入口，事实资料与研究，还有发布与复盘啊。"
+    },
+    {
+      "startFrame": 25299,
+      "endFrame": 25301,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 25311,
+      "endFrame": 25374,
+      "cueIds": [
+        98
+      ],
+      "sourceText": "啊，文件与知识库的管理，啊，以及文档、表格、视觉内容，就是可以做一些，比如封面啊之类的。"
+    },
+    {
+      "startFrame": 25386,
+      "endFrame": 25388,
+      "cueIds": [
+        98
+      ],
+      "sourceText": "啊，文件与知识库的管理，啊，以及文档、表格、视觉内容，就是可以做一些，比如封面啊之类的。"
+    },
+    {
+      "startFrame": 25391,
+      "endFrame": 25409,
+      "cueIds": [
+        98
+      ],
+      "sourceText": "啊，文件与知识库的管理，啊，以及文档、表格、视觉内容，就是可以做一些，比如封面啊之类的。"
+    },
+    {
+      "startFrame": 25441,
+      "endFrame": 25563,
+      "cueIds": [
+        98
+      ],
+      "sourceText": "啊，文件与知识库的管理，啊，以及文档、表格、视觉内容，就是可以做一些，比如封面啊之类的。"
+    },
+    {
+      "startFrame": 25646,
+      "endFrame": 25653,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 25702,
+      "endFrame": 25751,
+      "cueIds": [
+        99
+      ],
+      "sourceText": "然后代码和自动化技术工作，这个应该不是我特别要强调它的，只不过呢我在用这个老胡文稿是去解决我这个，比如说我的音乐呀，我的这个 AI 视觉的时候，过程当中呢。"
+    },
+    {
+      "startFrame": 25757,
+      "endFrame": 25798,
+      "cueIds": [
+        99
+      ],
+      "sourceText": "然后代码和自动化技术工作，这个应该不是我特别要强调它的，只不过呢我在用这个老胡文稿是去解决我这个，比如说我的音乐呀，我的这个 AI 视觉的时候，过程当中呢。"
+    },
+    {
+      "startFrame": 25802,
+      "endFrame": 25827,
+      "cueIds": [
+        99
+      ],
+      "sourceText": "然后代码和自动化技术工作，这个应该不是我特别要强调它的，只不过呢我在用这个老胡文稿是去解决我这个，比如说我的音乐呀，我的这个 AI 视觉的时候，过程当中呢。"
+    },
+    {
+      "startFrame": 25833,
+      "endFrame": 25909,
+      "cueIds": [
+        99
+      ],
+      "sourceText": "然后代码和自动化技术工作，这个应该不是我特别要强调它的，只不过呢我在用这个老胡文稿是去解决我这个，比如说我的音乐呀，我的这个 AI 视觉的时候，过程当中呢。"
+    },
+    {
+      "startFrame": 25922,
+      "endFrame": 26029,
+      "cueIds": [
+        99
+      ],
+      "sourceText": "然后代码和自动化技术工作，这个应该不是我特别要强调它的，只不过呢我在用这个老胡文稿是去解决我这个，比如说我的音乐呀，我的这个 AI 视觉的时候，过程当中呢。"
+    },
+    {
+      "startFrame": 26037,
+      "endFrame": 26133,
+      "cueIds": [
+        99
+      ],
+      "sourceText": "然后代码和自动化技术工作，这个应该不是我特别要强调它的，只不过呢我在用这个老胡文稿是去解决我这个，比如说我的音乐呀，我的这个 AI 视觉的时候，过程当中呢。"
+    },
+    {
+      "startFrame": 26142,
+      "endFrame": 26156,
+      "cueIds": [
+        100
+      ],
+      "sourceText": "它自己去学习到了一些内容，因为我对我的 agent 有一个自进化的一个机制。"
+    },
+    {
+      "startFrame": 26170,
+      "endFrame": 26191,
+      "cueIds": [
+        100
+      ],
+      "sourceText": "它自己去学习到了一些内容，因为我对我的 agent 有一个自进化的一个机制。"
+    },
+    {
+      "startFrame": 26198,
+      "endFrame": 26247,
+      "cueIds": [
+        100
+      ],
+      "sourceText": "它自己去学习到了一些内容，因为我对我的 agent 有一个自进化的一个机制。"
+    },
+    {
+      "startFrame": 26251,
+      "endFrame": 26291,
+      "cueIds": [
+        100
+      ],
+      "sourceText": "它自己去学习到了一些内容，因为我对我的 agent 有一个自进化的一个机制。"
+    },
+    {
+      "startFrame": 26306,
+      "endFrame": 26370,
+      "cueIds": [
+        100
+      ],
+      "sourceText": "它自己去学习到了一些内容，因为我对我的 agent 有一个自进化的一个机制。"
+    },
+    {
+      "startFrame": 26387,
+      "endFrame": 26468,
+      "cueIds": [
+        101
+      ],
+      "sourceText": "就是我对他的所有的反馈的话，如果说他认为这个东西是值得被记录下来的，他会写一个对应的这种经验。"
+    },
+    {
+      "startFrame": 26479,
+      "endFrame": 26584,
+      "cueIds": [
+        101
+      ],
+      "sourceText": "就是我对他的所有的反馈的话，如果说他认为这个东西是值得被记录下来的，他会写一个对应的这种经验。"
+    },
+    {
+      "startFrame": 26604,
+      "endFrame": 26663,
+      "cueIds": [
+        101
+      ],
+      "sourceText": "就是我对他的所有的反馈的话，如果说他认为这个东西是值得被记录下来的，他会写一个对应的这种经验。"
+    },
+    {
+      "startFrame": 26684,
+      "endFrame": 26797,
+      "cueIds": [
+        102
+      ],
+      "sourceText": "或者是对应的这种反馈记录到本地的这个文件里面，那么下一次它就不会去犯错误。"
+    },
+    {
+      "startFrame": 26828,
+      "endFrame": 26884,
+      "cueIds": [
+        102
+      ],
+      "sourceText": "或者是对应的这种反馈记录到本地的这个文件里面，那么下一次它就不会去犯错误。"
+    },
+    {
+      "startFrame": 26910,
+      "endFrame": 26955,
+      "cueIds": [
+        103
+      ],
+      "sourceText": "这也是它会越用越内容越来越多的这样的一个原因啊，因为我完全是把它当成了一个个人的助理去使用。"
+    },
+    {
+      "startFrame": 26964,
+      "endFrame": 26983,
+      "cueIds": [
+        103
+      ],
+      "sourceText": "这也是它会越用越内容越来越多的这样的一个原因啊，因为我完全是把它当成了一个个人的助理去使用。"
+    },
+    {
+      "startFrame": 26997,
+      "endFrame": 27144,
+      "cueIds": [
+        103
+      ],
+      "sourceText": "这也是它会越用越内容越来越多的这样的一个原因啊，因为我完全是把它当成了一个个人的助理去使用。"
+    },
+    {
+      "startFrame": 27207,
+      "endFrame": 27278,
+      "cueIds": [
+        104
+      ],
+      "sourceText": "然后呢里面还包括一些外部的一些工具啊。"
+    },
+    {
+      "startFrame": 27320,
+      "endFrame": 27388,
+      "cueIds": [
+        105
+      ],
+      "sourceText": "然后呢这里就简单的给大家看一下吧。"
+    },
+    {
+      "startFrame": 27739,
+      "endFrame": 27762,
+      "cueIds": [
+        106
+      ],
+      "sourceText": "也可以给他，你可以让我这个 agent 给大家看一下它的整体的一个架构。"
+    },
+    {
+      "startFrame": 27768,
+      "endFrame": 27835,
+      "cueIds": [
+        106
+      ],
+      "sourceText": "也可以给他，你可以让我这个 agent 给大家看一下它的整体的一个架构。"
+    },
+    {
+      "startFrame": 27844,
+      "endFrame": 27883,
+      "cueIds": [
+        106
+      ],
+      "sourceText": "也可以给他，你可以让我这个 agent 给大家看一下它的整体的一个架构。"
+    },
+    {
+      "startFrame": 28006,
+      "endFrame": 28040,
+      "cueIds": [
+        107
+      ],
+      "sourceText": "请总结一下"
+    },
+    {
+      "startFrame": 28123,
+      "endFrame": 28250,
+      "cueIds": [
+        108
+      ],
+      "sourceText": "当前脑图文稿的整个设计的架构的理念和架构的内容。"
+    },
+    {
+      "startFrame": 28257,
+      "endFrame": 28295,
+      "cueIds": [
+        108
+      ],
+      "sourceText": "当前脑图文稿的整个设计的架构的理念和架构的内容。"
+    },
+    {
+      "startFrame": 28444,
+      "endFrame": 28503,
+      "cueIds": [
+        109
+      ],
+      "sourceText": "我要给我的粉丝看。"
+    },
+    {
+      "startFrame": 29037,
+      "endFrame": 29122,
+      "cueIds": [
+        110
+      ],
+      "sourceText": "并且呢，输出一个图片的展示的提示词给我，我拿去生成一个对应的流程图。"
+    },
+    {
+      "startFrame": 29143,
+      "endFrame": 29176,
+      "cueIds": [
+        110
+      ],
+      "sourceText": "并且呢，输出一个图片的展示的提示词给我，我拿去生成一个对应的流程图。"
+    },
+    {
+      "startFrame": 29201,
+      "endFrame": 29226,
+      "cueIds": [
+        110
+      ],
+      "sourceText": "并且呢，输出一个图片的展示的提示词给我，我拿去生成一个对应的流程图。"
+    },
+    {
+      "startFrame": 29234,
+      "endFrame": 29292,
+      "cueIds": [
+        110
+      ],
+      "sourceText": "并且呢，输出一个图片的展示的提示词给我，我拿去生成一个对应的流程图。"
+    },
+    {
+      "startFrame": 29307,
+      "endFrame": 29328,
+      "cueIds": [
+        110
+      ],
+      "sourceText": "并且呢，输出一个图片的展示的提示词给我，我拿去生成一个对应的流程图。"
+    },
+    {
+      "startFrame": 29508,
+      "endFrame": 29675,
+      "cueIds": [
+        111
+      ],
+      "sourceText": "这个流程图呢包含了整个架构的这个理念，要用，使用一种卡通的风格。"
+    },
+    {
+      "startFrame": 29722,
+      "endFrame": 29782,
+      "cueIds": [
+        112
+      ],
+      "sourceText": "要求内容要详细"
+    },
+    {
+      "startFrame": 29858,
+      "endFrame": 29884,
+      "cueIds": [
+        113
+      ],
+      "sourceText": "通俗易懂"
+    },
+    {
+      "startFrame": 30005,
+      "endFrame": 30091,
+      "cueIds": [
+        114
+      ],
+      "sourceText": "好，然后呢我们就发这样的一个提示词给我的老公搞。"
+    },
+    {
+      "startFrame": 30096,
+      "endFrame": 30122,
+      "cueIds": [
+        114
+      ],
+      "sourceText": "好，然后呢我们就发这样的一个提示词给我的老公搞。"
+    },
+    {
+      "startFrame": 30138,
+      "endFrame": 30154,
+      "cueIds": [
+        115
+      ],
+      "sourceText": "然后我，我们简单分析一下我这个提示词的内容哈。"
+    },
+    {
+      "startFrame": 30160,
+      "endFrame": 30225,
+      "cueIds": [
+        115
+      ],
+      "sourceText": "然后我，我们简单分析一下我这个提示词的内容哈。"
+    },
+    {
+      "startFrame": 30235,
+      "endFrame": 30271,
+      "cueIds": [
+        116
+      ],
+      "sourceText": "首先呢，它会给出来一个关于我整个老公搞的这个 agent 的这个构建的架构。"
+    },
+    {
+      "startFrame": 30274,
+      "endFrame": 30403,
+      "cueIds": [
+        116
+      ],
+      "sourceText": "首先呢，它会给出来一个关于我整个老公搞的这个 agent 的这个构建的架构。"
+    },
+    {
+      "startFrame": 30406,
+      "endFrame": 30433,
+      "cueIds": [
+        117
+      ],
+      "sourceText": "它是一个什么样子的？"
+    },
+    {
+      "startFrame": 30448,
+      "endFrame": 30560,
+      "cueIds": [
+        118
+      ],
+      "sourceText": "然后呢我这个地方我给了他一个目的啊，就是我要给我的粉丝看，所以呢他输出的内容呢就要很详细。"
+    },
+    {
+      "startFrame": 30572,
+      "endFrame": 30601,
+      "cueIds": [
+        118
+      ],
+      "sourceText": "然后呢我这个地方我给了他一个目的啊，就是我要给我的粉丝看，所以呢他输出的内容呢就要很详细。"
+    },
+    {
+      "startFrame": 30613,
+      "endFrame": 30663,
+      "cueIds": [
+        118
+      ],
+      "sourceText": "然后呢我这个地方我给了他一个目的啊，就是我要给我的粉丝看，所以呢他输出的内容呢就要很详细。"
+    },
+    {
+      "startFrame": 30667,
+      "endFrame": 30687,
+      "cueIds": [
+        118
+      ],
+      "sourceText": "然后呢我这个地方我给了他一个目的啊，就是我要给我的粉丝看，所以呢他输出的内容呢就要很详细。"
+    },
+    {
+      "startFrame": 30715,
+      "endFrame": 30767,
+      "cueIds": [
+        119
+      ],
+      "sourceText": "然后呢这里我让它给了我一个图片的一个提示词给我，那么我就去生成对应的一个流程图。"
+    },
+    {
+      "startFrame": 30775,
+      "endFrame": 30817,
+      "cueIds": [
+        119
+      ],
+      "sourceText": "然后呢这里我让它给了我一个图片的一个提示词给我，那么我就去生成对应的一个流程图。"
+    },
+    {
+      "startFrame": 30827,
+      "endFrame": 30894,
+      "cueIds": [
+        119
+      ],
+      "sourceText": "然后呢这里我让它给了我一个图片的一个提示词给我，那么我就去生成对应的一个流程图。"
+    },
+    {
+      "startFrame": 30940,
+      "endFrame": 31001,
+      "cueIds": [
+        120
+      ],
+      "sourceText": "并且呢我规定了这个图的这个风格啊，一个卡通的风格，内容要详细，通俗易懂。"
+    },
+    {
+      "startFrame": 31016,
+      "endFrame": 31034,
+      "cueIds": [
+        120
+      ],
+      "sourceText": "并且呢我规定了这个图的这个风格啊，一个卡通的风格，内容要详细，通俗易懂。"
+    },
+    {
+      "startFrame": 31037,
+      "endFrame": 31133,
+      "cueIds": [
+        120
+      ],
+      "sourceText": "并且呢我规定了这个图的这个风格啊，一个卡通的风格，内容要详细，通俗易懂。"
+    },
+    {
+      "startFrame": 31287,
+      "endFrame": 31358,
+      "cueIds": [
+        121
+      ],
+      "sourceText": "那么等会的话，我们看完文字之后呢，那么这个图片"
+    },
+    {
+      "startFrame": 31363,
+      "endFrame": 31393,
+      "cueIds": [
+        121
+      ],
+      "sourceText": "那么等会的话，我们看完文字之后呢，那么这个图片"
+    },
+    {
+      "startFrame": 31426,
+      "endFrame": 31491,
+      "cueIds": [
+        122
+      ],
+      "sourceText": "其实相比于文字的这种内容来说，其实是更方便理解的。"
+    },
+    {
+      "startFrame": 31512,
+      "endFrame": 31583,
+      "cueIds": [
+        122
+      ],
+      "sourceText": "其实相比于文字的这种内容来说，其实是更方便理解的。"
+    },
+    {
+      "startFrame": 31737,
+      "endFrame": 31739,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 31821,
+      "endFrame": 31975,
+      "cueIds": [
+        123
+      ],
+      "sourceText": "这也是小红书上很多的博主去做这种知识卡片的一个。"
+    },
+    {
+      "startFrame": 32245,
+      "endFrame": 32271,
+      "cueIds": [
+        124
+      ],
+      "sourceText": "应用的方式啊。"
+    },
+    {
+      "startFrame": 33375,
+      "endFrame": 33449,
+      "cueIds": [
+        125,
+        126
+      ],
+      "sourceText": "好，下面我们看一下这个回答哈。 这里我这个架构呢，其实是有六个部分，一个呢是顶层的一个原则啊，解决了一个为什么做，为谁做。"
+    },
+    {
+      "startFrame": 33466,
+      "endFrame": 33537,
+      "cueIds": [
+        126
+      ],
+      "sourceText": "这里我这个架构呢，其实是有六个部分，一个呢是顶层的一个原则啊，解决了一个为什么做，为谁做。"
+    },
+    {
+      "startFrame": 33549,
+      "endFrame": 33607,
+      "cueIds": [
+        126
+      ],
+      "sourceText": "这里我这个架构呢，其实是有六个部分，一个呢是顶层的一个原则啊，解决了一个为什么做，为谁做。"
+    },
+    {
+      "startFrame": 33617,
+      "endFrame": 33684,
+      "cueIds": [
+        126
+      ],
+      "sourceText": "这里我这个架构呢，其实是有六个部分，一个呢是顶层的一个原则啊，解决了一个为什么做，为谁做。"
+    },
+    {
+      "startFrame": 33708,
+      "endFrame": 33750,
+      "cueIds": [
+        127
+      ],
+      "sourceText": "什么比什么更重要的一个"
+    },
+    {
+      "startFrame": 33755,
+      "endFrame": 33780,
+      "cueIds": [
+        127
+      ],
+      "sourceText": "什么比什么更重要的一个"
+    },
+    {
+      "startFrame": 33832,
+      "endFrame": 33912,
+      "cueIds": [
+        128
+      ],
+      "sourceText": "所谓的灵魂层次的一个方向性的问题。"
+    },
+    {
+      "startFrame": 33991,
+      "endFrame": 34005,
+      "cueIds": [
+        129
+      ],
+      "sourceText": "然后呢进行一个任务的路由，因为每个路由下面呢都有对应的这个 skill。"
+    },
+    {
+      "startFrame": 34013,
+      "endFrame": 34128,
+      "cueIds": [
+        129
+      ],
+      "sourceText": "然后呢进行一个任务的路由，因为每个路由下面呢都有对应的这个 skill。"
+    },
+    {
+      "startFrame": 34385,
+      "endFrame": 34415,
+      "cueIds": [
+        130
+      ],
+      "sourceText": "也就是所谓的渐进式加载的一个理念。"
+    },
+    {
+      "startFrame": 34445,
+      "endFrame": 34516,
+      "cueIds": [
+        130
+      ],
+      "sourceText": "也就是所谓的渐进式加载的一个理念。"
+    },
+    {
+      "startFrame": 34783,
+      "endFrame": 34792,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 35519,
+      "endFrame": 35588,
+      "cueIds": [
+        131
+      ],
+      "sourceText": "然后呢这个里面的话有这样的12个专业的岗位啊，就是这么多的一些岗位的内容啊。"
+    },
+    {
+      "startFrame": 35598,
+      "endFrame": 35708,
+      "cueIds": [
+        131
+      ],
+      "sourceText": "然后呢这个里面的话有这样的12个专业的岗位啊，就是这么多的一些岗位的内容啊。"
+    },
+    {
+      "startFrame": 35718,
+      "endFrame": 35739,
+      "cueIds": [
+        131
+      ],
+      "sourceText": "然后呢这个里面的话有这样的12个专业的岗位啊，就是这么多的一些岗位的内容啊。"
+    },
+    {
+      "startFrame": 35756,
+      "endFrame": 35758,
+      "cueIds": [
+        131
+      ],
+      "sourceText": "然后呢这个里面的话有这样的12个专业的岗位啊，就是这么多的一些岗位的内容啊。"
+    },
+    {
+      "startFrame": 35885,
+      "endFrame": 35959,
+      "cueIds": [
+        132
+      ],
+      "sourceText": "他每一个岗位呢，每一个都是一个 skill 他分责负责不同的内容。"
+    },
+    {
+      "startFrame": 35985,
+      "endFrame": 36041,
+      "cueIds": [
+        132
+      ],
+      "sourceText": "他每一个岗位呢，每一个都是一个 skill 他分责负责不同的内容。"
+    },
+    {
+      "startFrame": 36591,
+      "endFrame": 36715,
+      "cueIds": [
+        133
+      ],
+      "sourceText": "然后呢这个地方生成出来一个生图提示词，我们把这个生图提示词丢给任何一个生图的一个 AI。"
+    },
+    {
+      "startFrame": 36733,
+      "endFrame": 36767,
+      "cueIds": [
+        133
+      ],
+      "sourceText": "然后呢这个地方生成出来一个生图提示词，我们把这个生图提示词丢给任何一个生图的一个 AI。"
+    },
+    {
+      "startFrame": 36771,
+      "endFrame": 36803,
+      "cueIds": [
+        133
+      ],
+      "sourceText": "然后呢这个地方生成出来一个生图提示词，我们把这个生图提示词丢给任何一个生图的一个 AI。"
+    },
+    {
+      "startFrame": 37146,
+      "endFrame": 37149,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 37159,
+      "endFrame": 37190,
+      "cueIds": [
+        134
+      ],
+      "sourceText": "然后我这边用我最常用的，running up 的一个。"
+    },
+    {
+      "startFrame": 37206,
+      "endFrame": 37274,
+      "cueIds": [
+        134
+      ],
+      "sourceText": "然后我这边用我最常用的，running up 的一个。"
+    },
+    {
+      "startFrame": 37325,
+      "endFrame": 37380,
+      "cueIds": [
+        135
+      ],
+      "sourceText": "模型，然后我把它丢到"
+    },
+    {
+      "startFrame": 37392,
+      "endFrame": 37406,
+      "cueIds": [
+        135
+      ],
+      "sourceText": "模型，然后我把它丢到"
+    },
+    {
+      "startFrame": 37617,
+      "endFrame": 37709,
+      "cueIds": [
+        136
+      ],
+      "sourceText": "我的生图模型里面，然后等会我们看一下它的效果如何。"
+    },
+    {
+      "startFrame": 37869,
+      "endFrame": 37871,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 38240,
+      "endFrame": 38271,
+      "cueIds": [
+        137
+      ],
+      "sourceText": "那么接下来就是来到了我们本期视频的一个"
+    },
+    {
+      "startFrame": 38274,
+      "endFrame": 38355,
+      "cueIds": [
+        137
+      ],
+      "sourceText": "那么接下来就是来到了我们本期视频的一个"
+    },
+    {
+      "startFrame": 38578,
+      "endFrame": 38679,
+      "cueIds": [
+        138
+      ],
+      "sourceText": "最重要的部分就是我们从怎么从外部的输入。"
+    },
+    {
+      "startFrame": 38902,
+      "endFrame": 38924,
+      "cueIds": [
+        139
+      ],
+      "sourceText": "与 AI 进行探讨之后得到一个输出，然后去进行吸收，并且能够把这个相关的知识沉淀到我们的 Agent。"
+    },
+    {
+      "startFrame": 38929,
+      "endFrame": 39146,
+      "cueIds": [
+        139
+      ],
+      "sourceText": "与 AI 进行探讨之后得到一个输出，然后去进行吸收，并且能够把这个相关的知识沉淀到我们的 Agent。"
+    },
+    {
+      "startFrame": 39179,
+      "endFrame": 39240,
+      "cueIds": [
+        140
+      ],
+      "sourceText": "内容里面沉淀到我们本地的，你叫做知识库也好啊，叫做你的个人助理也好。"
+    },
+    {
+      "startFrame": 39261,
+      "endFrame": 39302,
+      "cueIds": [
+        140
+      ],
+      "sourceText": "内容里面沉淀到我们本地的，你叫做知识库也好啊，叫做你的个人助理也好。"
+    },
+    {
+      "startFrame": 39305,
+      "endFrame": 39350,
+      "cueIds": [
+        140
+      ],
+      "sourceText": "内容里面沉淀到我们本地的，你叫做知识库也好啊，叫做你的个人助理也好。"
+    },
+    {
+      "startFrame": 39460,
+      "endFrame": 39462,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 39472,
+      "endFrame": 39508,
+      "cueIds": [
+        141
+      ],
+      "sourceText": "首先呢，我们要明白常规的输入的话，其实是有四个层次，四个内容。"
+    },
+    {
+      "startFrame": 39520,
+      "endFrame": 39607,
+      "cueIds": [
+        141
+      ],
+      "sourceText": "首先呢，我们要明白常规的输入的话，其实是有四个层次，四个内容。"
+    },
+    {
+      "startFrame": 39624,
+      "endFrame": 39675,
+      "cueIds": [
+        141,
+        142
+      ],
+      "sourceText": "首先呢，我们要明白常规的输入的话，其实是有四个层次，四个内容。 一个是文本、图片、视频，还有音频。"
+    },
+    {
+      "startFrame": 39686,
+      "endFrame": 39700,
+      "cueIds": [
+        142
+      ],
+      "sourceText": "一个是文本、图片、视频，还有音频。"
+    },
+    {
+      "startFrame": 39706,
+      "endFrame": 39725,
+      "cueIds": [
+        142
+      ],
+      "sourceText": "一个是文本、图片、视频，还有音频。"
+    },
+    {
+      "startFrame": 39748,
+      "endFrame": 39770,
+      "cueIds": [
+        142
+      ],
+      "sourceText": "一个是文本、图片、视频，还有音频。"
+    },
+    {
+      "startFrame": 39804,
+      "endFrame": 39883,
+      "cueIds": [
+        143
+      ],
+      "sourceText": "以及存在这四个内容的一个链接。"
+    },
+    {
+      "startFrame": 39972,
+      "endFrame": 39974,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 40150,
+      "endFrame": 40154,
+      "cueIds": [
+        145
+      ],
+      "sourceText": "我们就拿栋哥的这两，我们就拿栋哥的这两条视频的，来举例啊。"
+    },
+    {
+      "startFrame": 40222,
+      "endFrame": 40269,
+      "cueIds": [
+        145
+      ],
+      "sourceText": "我们就拿栋哥的这两，我们就拿栋哥的这两条视频的，来举例啊。"
+    },
+    {
+      "startFrame": 40275,
+      "endFrame": 40309,
+      "cueIds": [
+        145
+      ],
+      "sourceText": "我们就拿栋哥的这两，我们就拿栋哥的这两条视频的，来举例啊。"
+    },
+    {
+      "startFrame": 40333,
+      "endFrame": 40351,
+      "cueIds": [
+        145
+      ],
+      "sourceText": "我们就拿栋哥的这两，我们就拿栋哥的这两条视频的，来举例啊。"
+    },
+    {
+      "startFrame": 40461,
+      "endFrame": 40469,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 40477,
+      "endFrame": 40479,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 40516,
+      "endFrame": 40592,
+      "cueIds": [
+        146
+      ],
+      "sourceText": "你可以把这个视频的链接直接丢给 Agent 然后让它直接去。"
+    },
+    {
+      "startFrame": 40607,
+      "endFrame": 40652,
+      "cueIds": [
+        146
+      ],
+      "sourceText": "你可以把这个视频的链接直接丢给 Agent 然后让它直接去。"
+    },
+    {
+      "startFrame": 40769,
+      "endFrame": 40824,
+      "cueIds": [
+        147
+      ],
+      "sourceText": "获取这两条 agent 的内容。"
+    },
+    {
+      "startFrame": 40831,
+      "endFrame": 40904,
+      "cueIds": [
+        148
+      ],
+      "sourceText": "但是呢这样子用法呢非常的粗糙，它不够高效。"
+    },
+    {
+      "startFrame": 40929,
+      "endFrame": 40956,
+      "cueIds": [
+        148
+      ],
+      "sourceText": "但是呢这样子用法呢非常的粗糙，它不够高效。"
+    },
+    {
+      "startFrame": 41017,
+      "endFrame": 41064,
+      "cueIds": [
+        149
+      ],
+      "sourceText": "我们需要把它拆成几个部分。"
+    },
+    {
+      "startFrame": 41071,
+      "endFrame": 41090,
+      "cueIds": [
+        149
+      ],
+      "sourceText": "我们需要把它拆成几个部分。"
+    },
+    {
+      "startFrame": 41178,
+      "endFrame": 41293,
+      "cueIds": [
+        150
+      ],
+      "sourceText": "就是我对于这种内容的整理的话，我其实是会"
+    },
+    {
+      "startFrame": 41529,
+      "endFrame": 41574,
+      "cueIds": [
+        151
+      ],
+      "sourceText": "把视频里面的音频拆出来，以及把音频导出一个。"
+    },
+    {
+      "startFrame": 41579,
+      "endFrame": 41667,
+      "cueIds": [
+        151
+      ],
+      "sourceText": "把视频里面的音频拆出来，以及把音频导出一个。"
+    },
+    {
+      "startFrame": 41727,
+      "endFrame": 41813,
+      "cueIds": [
+        152
+      ],
+      "sourceText": "使用 ASR 的一个技术方式把它这个这个字幕"
+    },
+    {
+      "startFrame": 41820,
+      "endFrame": 41846,
+      "cueIds": [
+        152
+      ],
+      "sourceText": "使用 ASR 的一个技术方式把它这个这个字幕"
+    },
+    {
+      "startFrame": 41883,
+      "endFrame": 42046,
+      "cueIds": [
+        153
+      ],
+      "sourceText": "也就是所谓的语音转文字的方式给它导出来，然后我就直接把这个文字信息丢给 AI 那么它在这个过程当中，它就不会去浪费很多的一些 token。去随机地去"
+    },
+    {
+      "startFrame": 42052,
+      "endFrame": 42095,
+      "cueIds": [
+        153
+      ],
+      "sourceText": "也就是所谓的语音转文字的方式给它导出来，然后我就直接把这个文字信息丢给 AI 那么它在这个过程当中，它就不会去浪费很多的一些 token。去随机地去"
+    },
+    {
+      "startFrame": 42099,
+      "endFrame": 42147,
+      "cueIds": [
+        153
+      ],
+      "sourceText": "也就是所谓的语音转文字的方式给它导出来，然后我就直接把这个文字信息丢给 AI 那么它在这个过程当中，它就不会去浪费很多的一些 token。去随机地去"
+    },
+    {
+      "startFrame": 42158,
+      "endFrame": 42231,
+      "cueIds": [
+        153
+      ],
+      "sourceText": "也就是所谓的语音转文字的方式给它导出来，然后我就直接把这个文字信息丢给 AI 那么它在这个过程当中，它就不会去浪费很多的一些 token。去随机地去"
+    },
+    {
+      "startFrame": 42244,
+      "endFrame": 42293,
+      "cueIds": [
+        153
+      ],
+      "sourceText": "也就是所谓的语音转文字的方式给它导出来，然后我就直接把这个文字信息丢给 AI 那么它在这个过程当中，它就不会去浪费很多的一些 token。去随机地去"
+    },
+    {
+      "startFrame": 42611,
+      "endFrame": 42655,
+      "cueIds": [
+        155
+      ],
+      "sourceText": "寻找各种的方式方法，然后把得到你想要的结果。"
+    },
+    {
+      "startFrame": 42672,
+      "endFrame": 42685,
+      "cueIds": [
+        155
+      ],
+      "sourceText": "寻找各种的方式方法，然后把得到你想要的结果。"
+    },
+    {
+      "startFrame": 42690,
+      "endFrame": 42757,
+      "cueIds": [
+        155
+      ],
+      "sourceText": "寻找各种的方式方法，然后把得到你想要的结果。"
+    },
+    {
+      "startFrame": 42790,
+      "endFrame": 42863,
+      "cueIds": [
+        156
+      ],
+      "sourceText": "对这些东西呢，我都已经很熟悉了。"
+    },
+    {
+      "startFrame": 42870,
+      "endFrame": 42938,
+      "cueIds": [
+        157
+      ],
+      "sourceText": "所以呢，我就直接可以去通过这些我已经固定好的一些 skill 之类的去把这些东西导出来。"
+    },
+    {
+      "startFrame": 42948,
+      "endFrame": 42967,
+      "cueIds": [
+        157
+      ],
+      "sourceText": "所以呢，我就直接可以去通过这些我已经固定好的一些 skill 之类的去把这些东西导出来。"
+    },
+    {
+      "startFrame": 42976,
+      "endFrame": 43078,
+      "cueIds": [
+        157
+      ],
+      "sourceText": "所以呢，我就直接可以去通过这些我已经固定好的一些 skill 之类的去把这些东西导出来。"
+    },
+    {
+      "startFrame": 43151,
+      "endFrame": 43153,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 43913,
+      "endFrame": 44027,
+      "cueIds": [
+        159
+      ],
+      "sourceText": "通过它的链接，我们怎么去下载它这个视频的本体呢？"
+    },
+    {
+      "startFrame": 44079,
+      "endFrame": 44173,
+      "cueIds": [
+        160
+      ],
+      "sourceText": "因为我们毕竟是要把一个视频直接丢到这个 codex 里面的，对吧？"
+    },
+    {
+      "startFrame": 44180,
+      "endFrame": 44188,
+      "cueIds": [
+        160
+      ],
+      "sourceText": "因为我们毕竟是要把一个视频直接丢到这个 codex 里面的，对吧？"
+    },
+    {
+      "startFrame": 44308,
+      "endFrame": 44347,
+      "cueIds": [
+        161
+      ],
+      "sourceText": "然后呢，在我的个人网站的这个工具库里面啊，有一个实用的网站。"
+    },
+    {
+      "startFrame": 44354,
+      "endFrame": 44414,
+      "cueIds": [
+        161
+      ],
+      "sourceText": "然后呢，在我的个人网站的这个工具库里面啊，有一个实用的网站。"
+    },
+    {
+      "startFrame": 44418,
+      "endFrame": 44421,
+      "cueIds": [
+        161
+      ],
+      "sourceText": "然后呢，在我的个人网站的这个工具库里面啊，有一个实用的网站。"
+    },
+    {
+      "startFrame": 44425,
+      "endFrame": 44451,
+      "cueIds": [
+        161
+      ],
+      "sourceText": "然后呢，在我的个人网站的这个工具库里面啊，有一个实用的网站。"
+    },
+    {
+      "startFrame": 44455,
+      "endFrame": 44480,
+      "cueIds": [
+        161
+      ],
+      "sourceText": "然后呢，在我的个人网站的这个工具库里面啊，有一个实用的网站。"
+    },
+    {
+      "startFrame": 44493,
+      "endFrame": 44565,
+      "cueIds": [
+        162
+      ],
+      "sourceText": "在里面实用网站里面有一个综合网站。"
+    },
+    {
+      "startFrame": 44635,
+      "endFrame": 44639,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 44644,
+      "endFrame": 44646,
+      "cueIds": [
+        163
+      ],
+      "sourceText": "啊，这里面有一个，十个，这里面有一个十八平台无水印解析啊，然后呢，我们把链接丢进来就行了。"
+    },
+    {
+      "startFrame": 44730,
+      "endFrame": 44812,
+      "cueIds": [
+        163
+      ],
+      "sourceText": "啊，这里面有一个，十个，这里面有一个十八平台无水印解析啊，然后呢，我们把链接丢进来就行了。"
+    },
+    {
+      "startFrame": 44820,
+      "endFrame": 44873,
+      "cueIds": [
+        163
+      ],
+      "sourceText": "啊，这里面有一个，十个，这里面有一个十八平台无水印解析啊，然后呢，我们把链接丢进来就行了。"
+    },
+    {
+      "startFrame": 44927,
+      "endFrame": 44929,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 44951,
+      "endFrame": 44967,
+      "cueIds": [
+        164
+      ],
+      "sourceText": "做自媒体这两年涨了100万的粉丝，今天我们"
+    },
+    {
+      "startFrame": 44971,
+      "endFrame": 45029,
+      "cueIds": [
+        164
+      ],
+      "sourceText": "做自媒体这两年涨了100万的粉丝，今天我们"
+    },
+    {
+      "startFrame": 45505,
+      "endFrame": 45529,
+      "cueIds": [
+        165
+      ],
+      "sourceText": "比如说我把东哥的这个丢进来，然后呢直接提取，它就会去解析这个链接。"
+    },
+    {
+      "startFrame": 45532,
+      "endFrame": 45571,
+      "cueIds": [
+        165
+      ],
+      "sourceText": "比如说我把东哥的这个丢进来，然后呢直接提取，它就会去解析这个链接。"
+    },
+    {
+      "startFrame": 45574,
+      "endFrame": 45622,
+      "cueIds": [
+        165
+      ],
+      "sourceText": "比如说我把东哥的这个丢进来，然后呢直接提取，它就会去解析这个链接。"
+    },
+    {
+      "startFrame": 45631,
+      "endFrame": 45685,
+      "cueIds": [
+        165
+      ],
+      "sourceText": "比如说我把东哥的这个丢进来，然后呢直接提取，它就会去解析这个链接。"
+    },
+    {
+      "startFrame": 45800,
+      "endFrame": 45864,
+      "cueIds": [
+        166
+      ],
+      "sourceText": "然后呢我们这地方直接点击下载就行了，不管任何的平台啊，这里总共"
+    },
+    {
+      "startFrame": 45867,
+      "endFrame": 45909,
+      "cueIds": [
+        166
+      ],
+      "sourceText": "然后呢我们这地方直接点击下载就行了，不管任何的平台啊，这里总共"
+    },
+    {
+      "startFrame": 45914,
+      "endFrame": 45933,
+      "cueIds": [
+        166
+      ],
+      "sourceText": "然后呢我们这地方直接点击下载就行了，不管任何的平台啊，这里总共"
+    },
+    {
+      "startFrame": 45951,
+      "endFrame": 45968,
+      "cueIds": [
+        166
+      ],
+      "sourceText": "然后呢我们这地方直接点击下载就行了，不管任何的平台啊，这里总共"
+    },
+    {
+      "startFrame": 46029,
+      "endFrame": 46064,
+      "cueIds": [
+        167
+      ],
+      "sourceText": "有18个平台呀。"
+    },
+    {
+      "startFrame": 46118,
+      "endFrame": 46121,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 46140,
+      "endFrame": 46209,
+      "cueIds": [
+        168
+      ],
+      "sourceText": "然后呢我们获取了一个视频之后"
+    },
+    {
+      "startFrame": 46346,
+      "endFrame": 46377,
+      "cueIds": [
+        169
+      ],
+      "sourceText": "我们就可以把这个视频丢给 CodecX 直接拖进来就行。"
+    },
+    {
+      "startFrame": 46407,
+      "endFrame": 46485,
+      "cueIds": [
+        169
+      ],
+      "sourceText": "我们就可以把这个视频丢给 CodecX 直接拖进来就行。"
+    },
+    {
+      "startFrame": 47318,
+      "endFrame": 47320,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 47589,
+      "endFrame": 47721,
+      "cueIds": [
+        171
+      ],
+      "sourceText": "然后这边我使用的 ASR 的语音识别呢，我是使用的字节的火山引擎里面有一个 API 你可以去问 AI 问 Codex 怎么去。"
+    },
+    {
+      "startFrame": 47730,
+      "endFrame": 47801,
+      "cueIds": [
+        171
+      ],
+      "sourceText": "然后这边我使用的 ASR 的语音识别呢，我是使用的字节的火山引擎里面有一个 API 你可以去问 AI 问 Codex 怎么去。"
+    },
+    {
+      "startFrame": 47812,
+      "endFrame": 47867,
+      "cueIds": [
+        171
+      ],
+      "sourceText": "然后这边我使用的 ASR 的语音识别呢，我是使用的字节的火山引擎里面有一个 API 你可以去问 AI 问 Codex 怎么去。"
+    },
+    {
+      "startFrame": 47874,
+      "endFrame": 47886,
+      "cueIds": [
+        171
+      ],
+      "sourceText": "然后这边我使用的 ASR 的语音识别呢，我是使用的字节的火山引擎里面有一个 API 你可以去问 AI 问 Codex 怎么去。"
+    },
+    {
+      "startFrame": 47892,
+      "endFrame": 47930,
+      "cueIds": [
+        171
+      ],
+      "sourceText": "然后这边我使用的 ASR 的语音识别呢，我是使用的字节的火山引擎里面有一个 API 你可以去问 AI 问 Codex 怎么去。"
+    },
+    {
+      "startFrame": 48119,
+      "endFrame": 48180,
+      "cueIds": [
+        172
+      ],
+      "sourceText": "把这个 api 给它设置好，那么它就可以得到一个语音转文字的。"
+    },
+    {
+      "startFrame": 48185,
+      "endFrame": 48249,
+      "cueIds": [
+        172
+      ],
+      "sourceText": "把这个 api 给它设置好，那么它就可以得到一个语音转文字的。"
+    },
+    {
+      "startFrame": 48262,
+      "endFrame": 48303,
+      "cueIds": [
+        173
+      ],
+      "sourceText": "当然你也可以去让 agent 让 codex 去帮助你去获取到一些。"
+    },
+    {
+      "startFrame": 48311,
+      "endFrame": 48343,
+      "cueIds": [
+        173
+      ],
+      "sourceText": "当然你也可以去让 agent 让 codex 去帮助你去获取到一些。"
+    },
+    {
+      "startFrame": 48350,
+      "endFrame": 48379,
+      "cueIds": [
+        173
+      ],
+      "sourceText": "当然你也可以去让 agent 让 codex 去帮助你去获取到一些。"
+    },
+    {
+      "startFrame": 48390,
+      "endFrame": 48459,
+      "cueIds": [
+        173
+      ],
+      "sourceText": "当然你也可以去让 agent 让 codex 去帮助你去获取到一些。"
+    },
+    {
+      "startFrame": 48481,
+      "endFrame": 48546,
+      "cueIds": [
+        174
+      ],
+      "sourceText": "免费的一些语音转文字的一些开源项目，它里面的语音转文字的识别率也挺高的。"
+    },
+    {
+      "startFrame": 48555,
+      "endFrame": 48577,
+      "cueIds": [
+        174
+      ],
+      "sourceText": "免费的一些语音转文字的一些开源项目，它里面的语音转文字的识别率也挺高的。"
+    },
+    {
+      "startFrame": 48588,
+      "endFrame": 48623,
+      "cueIds": [
+        174
+      ],
+      "sourceText": "免费的一些语音转文字的一些开源项目，它里面的语音转文字的识别率也挺高的。"
+    },
+    {
+      "startFrame": 48627,
+      "endFrame": 48670,
+      "cueIds": [
+        174
+      ],
+      "sourceText": "免费的一些语音转文字的一些开源项目，它里面的语音转文字的识别率也挺高的。"
+    },
+    {
+      "startFrame": 48681,
+      "endFrame": 48698,
+      "cueIds": [
+        174
+      ],
+      "sourceText": "免费的一些语音转文字的一些开源项目，它里面的语音转文字的识别率也挺高的。"
+    },
+    {
+      "startFrame": 48858,
+      "endFrame": 48864,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 49684,
+      "endFrame": 49799,
+      "cueIds": [
+        176
+      ],
+      "sourceText": "之后呢，我们就可以得到一个 ASR 的一个字幕文件。"
+    },
+    {
+      "startFrame": 50108,
+      "endFrame": 50200,
+      "cueIds": [
+        178
+      ],
+      "sourceText": "当然整个过程呢，其实因为我是把整个流程的给它串通了的。"
+    },
+    {
+      "startFrame": 50206,
+      "endFrame": 50231,
+      "cueIds": [
+        178
+      ],
+      "sourceText": "当然整个过程呢，其实因为我是把整个流程的给它串通了的。"
+    },
+    {
+      "startFrame": 50253,
+      "endFrame": 50276,
+      "cueIds": [
+        179
+      ],
+      "sourceText": "所以呢，你你，我我整个的工作流程呢，全部是在这个 codex 这一个软件的帮助下，其他的全部是交给 AI 去指挥的，我只是把整个流程给它打通了。"
+    },
+    {
+      "startFrame": 50337,
+      "endFrame": 50448,
+      "cueIds": [
+        179
+      ],
+      "sourceText": "所以呢，你你，我我整个的工作流程呢，全部是在这个 codex 这一个软件的帮助下，其他的全部是交给 AI 去指挥的，我只是把整个流程给它打通了。"
+    },
+    {
+      "startFrame": 50459,
+      "endFrame": 50595,
+      "cueIds": [
+        179
+      ],
+      "sourceText": "所以呢，你你，我我整个的工作流程呢，全部是在这个 codex 这一个软件的帮助下，其他的全部是交给 AI 去指挥的，我只是把整个流程给它打通了。"
+    },
+    {
+      "startFrame": 50660,
+      "endFrame": 50731,
+      "cueIds": [
+        180
+      ],
+      "sourceText": "并且形成了一个固定的一些文件或者是"
+    },
+    {
+      "startFrame": 50738,
+      "endFrame": 50757,
+      "cueIds": [
+        180
+      ],
+      "sourceText": "并且形成了一个固定的一些文件或者是"
+    },
+    {
+      "startFrame": 50825,
+      "endFrame": 50867,
+      "cueIds": [
+        181
+      ],
+      "sourceText": "内容固定下来之后，那么下一次 AI 去执行类似的任务的时候，它就不会去靠猜，不会说再去摸索一遍。"
+    },
+    {
+      "startFrame": 50899,
+      "endFrame": 51030,
+      "cueIds": [
+        181
+      ],
+      "sourceText": "内容固定下来之后，那么下一次 AI 去执行类似的任务的时候，它就不会去靠猜，不会说再去摸索一遍。"
+    },
+    {
+      "startFrame": 51061,
+      "endFrame": 51116,
+      "cueIds": [
+        181
+      ],
+      "sourceText": "内容固定下来之后，那么下一次 AI 去执行类似的任务的时候，它就不会去靠猜，不会说再去摸索一遍。"
+    },
+    {
+      "startFrame": 51182,
+      "endFrame": 51295,
+      "cueIds": [
+        182
+      ],
+      "sourceText": "就类似于人类学习的过程当中呢沉淀了一个对应的经验。"
+    },
+    {
+      "startFrame": 51400,
+      "endFrame": 51418,
+      "cueIds": [
+        183
+      ],
+      "sourceText": "当然呢，正常的办法呢，其实我们是把我们的视频导入到剪映，然后去导，去识别文字，然后把这个字幕，ASR 的文文字导出来。"
+    },
+    {
+      "startFrame": 51427,
+      "endFrame": 51474,
+      "cueIds": [
+        183
+      ],
+      "sourceText": "当然呢，正常的办法呢，其实我们是把我们的视频导入到剪映，然后去导，去识别文字，然后把这个字幕，ASR 的文文字导出来。"
+    },
+    {
+      "startFrame": 51480,
+      "endFrame": 51554,
+      "cueIds": [
+        183
+      ],
+      "sourceText": "当然呢，正常的办法呢，其实我们是把我们的视频导入到剪映，然后去导，去识别文字，然后把这个字幕，ASR 的文文字导出来。"
+    },
+    {
+      "startFrame": 51557,
+      "endFrame": 51569,
+      "cueIds": [
+        183
+      ],
+      "sourceText": "当然呢，正常的办法呢，其实我们是把我们的视频导入到剪映，然后去导，去识别文字，然后把这个字幕，ASR 的文文字导出来。"
+    },
+    {
+      "startFrame": 51578,
+      "endFrame": 51604,
+      "cueIds": [
+        183
+      ],
+      "sourceText": "当然呢，正常的办法呢，其实我们是把我们的视频导入到剪映，然后去导，去识别文字，然后把这个字幕，ASR 的文文字导出来。"
+    },
+    {
+      "startFrame": 51616,
+      "endFrame": 51659,
+      "cueIds": [
+        183
+      ],
+      "sourceText": "当然呢，正常的办法呢，其实我们是把我们的视频导入到剪映，然后去导，去识别文字，然后把这个字幕，ASR 的文文字导出来。"
+    },
+    {
+      "startFrame": 51674,
+      "endFrame": 51727,
+      "cueIds": [
+        183
+      ],
+      "sourceText": "当然呢，正常的办法呢，其实我们是把我们的视频导入到剪映，然后去导，去识别文字，然后把这个字幕，ASR 的文文字导出来。"
+    },
+    {
+      "startFrame": 51738,
+      "endFrame": 51812,
+      "cueIds": [
+        184
+      ],
+      "sourceText": "啊，这样子的一个傻瓜的办法其实也是可以的，但是我认为这不够高效。"
+    },
+    {
+      "startFrame": 51822,
+      "endFrame": 51863,
+      "cueIds": [
+        184
+      ],
+      "sourceText": "啊，这样子的一个傻瓜的办法其实也是可以的，但是我认为这不够高效。"
+    },
+    {
+      "startFrame": 51872,
+      "endFrame": 51892,
+      "cueIds": [
+        184
+      ],
+      "sourceText": "啊，这样子的一个傻瓜的办法其实也是可以的，但是我认为这不够高效。"
+    },
+    {
+      "startFrame": 51934,
+      "endFrame": 51992,
+      "cueIds": [
+        185
+      ],
+      "sourceText": "就是你人为参与的这个过程，内容比较多。"
+    },
+    {
+      "startFrame": 52012,
+      "endFrame": 52034,
+      "cueIds": [
+        185
+      ],
+      "sourceText": "就是你人为参与的这个过程，内容比较多。"
+    },
+    {
+      "startFrame": 52256,
+      "endFrame": 52344,
+      "cueIds": [
+        186
+      ],
+      "sourceText": "好，这是第一种方式，就是语音转文字的 a api 链接，直接识别。"
+    },
+    {
+      "startFrame": 52348,
+      "endFrame": 52362,
+      "cueIds": [
+        186
+      ],
+      "sourceText": "好，这是第一种方式，就是语音转文字的 a api 链接，直接识别。"
+    },
+    {
+      "startFrame": 52365,
+      "endFrame": 52394,
+      "cueIds": [
+        186
+      ],
+      "sourceText": "好，这是第一种方式，就是语音转文字的 a api 链接，直接识别。"
+    },
+    {
+      "startFrame": 52409,
+      "endFrame": 52429,
+      "cueIds": [
+        186
+      ],
+      "sourceText": "好，这是第一种方式，就是语音转文字的 a api 链接，直接识别。"
+    },
+    {
+      "startFrame": 52441,
+      "endFrame": 52526,
+      "cueIds": [
+        187
+      ],
+      "sourceText": "但是呢，我其实更多的呢是使用的。"
+    },
+    {
+      "startFrame": 52552,
+      "endFrame": 52554,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 52662,
+      "endFrame": 52666,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 52670,
+      "endFrame": 52724,
+      "cueIds": [
+        189
+      ],
+      "sourceText": "豆豆包输入法，也就是我现在在做的这个内容。"
+    },
+    {
+      "startFrame": 52732,
+      "endFrame": 52798,
+      "cueIds": [
+        189,
+        190
+      ],
+      "sourceText": "豆豆包输入法，也就是我现在在做的这个内容。 看我现在只是干了一个按钮，然后呢，我现在说出来的任何的这种语音，它都能够识别出来对应的文字。"
+    },
+    {
+      "startFrame": 52812,
+      "endFrame": 52853,
+      "cueIds": [
+        190
+      ],
+      "sourceText": "看我现在只是干了一个按钮，然后呢，我现在说出来的任何的这种语音，它都能够识别出来对应的文字。"
+    },
+    {
+      "startFrame": 52857,
+      "endFrame": 52875,
+      "cueIds": [
+        190
+      ],
+      "sourceText": "看我现在只是干了一个按钮，然后呢，我现在说出来的任何的这种语音，它都能够识别出来对应的文字。"
+    },
+    {
+      "startFrame": 52880,
+      "endFrame": 53010,
+      "cueIds": [
+        190
+      ],
+      "sourceText": "看我现在只是干了一个按钮，然后呢，我现在说出来的任何的这种语音，它都能够识别出来对应的文字。"
+    },
+    {
+      "startFrame": 53043,
+      "endFrame": 53147,
+      "cueIds": [
+        191
+      ],
+      "sourceText": "然后呢我就使用这样的方式呢，我就直接是用我的手机去打开我想要听的一个。"
+    },
+    {
+      "startFrame": 53159,
+      "endFrame": 53230,
+      "cueIds": [
+        191
+      ],
+      "sourceText": "然后呢我就使用这样的方式呢，我就直接是用我的手机去打开我想要听的一个。"
+    },
+    {
+      "startFrame": 53370,
+      "endFrame": 53435,
+      "cueIds": [
+        192
+      ],
+      "sourceText": "视频，然后呢我把它的音量开大一点，然后呢直接进行语音转文字。"
+    },
+    {
+      "startFrame": 53442,
+      "endFrame": 53454,
+      "cueIds": [
+        192
+      ],
+      "sourceText": "视频，然后呢我把它的音量开大一点，然后呢直接进行语音转文字。"
+    },
+    {
+      "startFrame": 53468,
+      "endFrame": 53558,
+      "cueIds": [
+        192,
+        193
+      ],
+      "sourceText": "视频，然后呢我把它的音量开大一点，然后呢直接进行语音转文字。 那么我在我把这个视频看完之后，我的这个语音转文字也已经完成了。"
+    },
+    {
+      "startFrame": 53565,
+      "endFrame": 53598,
+      "cueIds": [
+        193
+      ],
+      "sourceText": "那么我在我把这个视频看完之后，我的这个语音转文字也已经完成了。"
+    },
+    {
+      "startFrame": 53602,
+      "endFrame": 53666,
+      "cueIds": [
+        193
+      ],
+      "sourceText": "那么我在我把这个视频看完之后，我的这个语音转文字也已经完成了。"
+    },
+    {
+      "startFrame": 53711,
+      "endFrame": 53765,
+      "cueIds": [
+        194
+      ],
+      "sourceText": "我也就是这样子去把东哥的这两条视频给他录制下来的。"
+    },
+    {
+      "startFrame": 53779,
+      "endFrame": 53840,
+      "cueIds": [
+        194
+      ],
+      "sourceText": "我也就是这样子去把东哥的这两条视频给他录制下来的。"
+    },
+    {
+      "startFrame": 54299,
+      "endFrame": 54348,
+      "cueIds": [
+        195
+      ],
+      "sourceText": "在你说完之后啊，它会进行一个 AI 的处理。"
+    },
+    {
+      "startFrame": 54355,
+      "endFrame": 54380,
+      "cueIds": [
+        195
+      ],
+      "sourceText": "在你说完之后啊，它会进行一个 AI 的处理。"
+    },
+    {
+      "startFrame": 54389,
+      "endFrame": 54426,
+      "cueIds": [
+        195
+      ],
+      "sourceText": "在你说完之后啊，它会进行一个 AI 的处理。"
+    },
+    {
+      "startFrame": 54439,
+      "endFrame": 54500,
+      "cueIds": [
+        196
+      ],
+      "sourceText": "你可以看到它整个的字幕的语音转文字的这个正确性是非常高的。"
+    },
+    {
+      "startFrame": 54528,
+      "endFrame": 54599,
+      "cueIds": [
+        196
+      ],
+      "sourceText": "你可以看到它整个的字幕的语音转文字的这个正确性是非常高的。"
+    },
+    {
+      "startFrame": 54711,
+      "endFrame": 54756,
+      "cueIds": [
+        197
+      ],
+      "sourceText": "然后呢我这里就已经"
+    },
+    {
+      "startFrame": 54764,
+      "endFrame": 54782,
+      "cueIds": [
+        197
+      ],
+      "sourceText": "然后呢我这里就已经"
+    },
+    {
+      "startFrame": 54834,
+      "endFrame": 54873,
+      "cueIds": [
+        198
+      ],
+      "sourceText": "做好了一个"
+    },
+    {
+      "startFrame": 55010,
+      "endFrame": 55110,
+      "cueIds": [
+        199
+      ],
+      "sourceText": "动哥之前做出来的这两篇文章的一个字幕啊，这个全部都是语音转文字识别出来的。"
+    },
+    {
+      "startFrame": 55117,
+      "endFrame": 55148,
+      "cueIds": [
+        199
+      ],
+      "sourceText": "动哥之前做出来的这两篇文章的一个字幕啊，这个全部都是语音转文字识别出来的。"
+    },
+    {
+      "startFrame": 55156,
+      "endFrame": 55201,
+      "cueIds": [
+        199
+      ],
+      "sourceText": "动哥之前做出来的这两篇文章的一个字幕啊，这个全部都是语音转文字识别出来的。"
+    },
+    {
+      "startFrame": 55214,
+      "endFrame": 55294,
+      "cueIds": [
+        200
+      ],
+      "sourceText": "那么正常应该怎么去使用这个 codex 呢？我是我觉得是这样子。"
+    },
+    {
+      "startFrame": 55326,
+      "endFrame": 55351,
+      "cueIds": [
+        200
+      ],
+      "sourceText": "那么正常应该怎么去使用这个 codex 呢？我是我觉得是这样子。"
+    },
+    {
+      "startFrame": 55430,
+      "endFrame": 55494,
+      "cueIds": [
+        201
+      ],
+      "sourceText": "帮我总结一下这两篇。"
+    },
+    {
+      "startFrame": 55561,
+      "endFrame": 55710,
+      "cueIds": [
+        202
+      ],
+      "sourceText": "自媒体博主的一个语音转文字的一个文字稿的一个内容，然后帮我总结一下它里面讲的个什么内容，哪些东西。"
+    },
+    {
+      "startFrame": 55720,
+      "endFrame": 55812,
+      "cueIds": [
+        202
+      ],
+      "sourceText": "自媒体博主的一个语音转文字的一个文字稿的一个内容，然后帮我总结一下它里面讲的个什么内容，哪些东西。"
+    },
+    {
+      "startFrame": 55885,
+      "endFrame": 55900,
+      "cueIds": [
+        203
+      ],
+      "sourceText": "对我有用"
+    },
+    {
+      "startFrame": 55906,
+      "endFrame": 55920,
+      "cueIds": [
+        203
+      ],
+      "sourceText": "对我有用"
+    },
+    {
+      "startFrame": 55971,
+      "endFrame": 56015,
+      "cueIds": [
+        204
+      ],
+      "sourceText": "关键信的结构是什么他们争议的争点是什么"
+    },
+    {
+      "startFrame": 56022,
+      "endFrame": 56070,
+      "cueIds": [
+        204
+      ],
+      "sourceText": "关键信的结构是什么他们争议的争点是什么"
+    },
+    {
+      "startFrame": 56248,
+      "endFrame": 56319,
+      "cueIds": [
+        205
+      ],
+      "sourceText": "以及里面的一些底层逻辑是哪些？"
+    },
+    {
+      "startFrame": 56367,
+      "endFrame": 56425,
+      "cueIds": [
+        206
+      ],
+      "sourceText": "帮我拆解一下，详细拆解一下。"
+    },
+    {
+      "startFrame": 56536,
+      "endFrame": 56576,
+      "cueIds": [
+        207
+      ],
+      "sourceText": "我要学习他们整个视频里面讨论的内容。"
+    },
+    {
+      "startFrame": 56587,
+      "endFrame": 56607,
+      "cueIds": [
+        207
+      ],
+      "sourceText": "我要学习他们整个视频里面讨论的内容。"
+    },
+    {
+      "startFrame": 56612,
+      "endFrame": 56638,
+      "cueIds": [
+        207
+      ],
+      "sourceText": "我要学习他们整个视频里面讨论的内容。"
+    },
+    {
+      "startFrame": 56643,
+      "endFrame": 56669,
+      "cueIds": [
+        207
+      ],
+      "sourceText": "我要学习他们整个视频里面讨论的内容。"
+    },
+    {
+      "startFrame": 57217,
+      "endFrame": 57361,
+      "cueIds": [
+        209
+      ],
+      "sourceText": "这两篇文稿呢是两个人在互相讨论的一个过程"
+    },
+    {
+      "startFrame": 57450,
+      "endFrame": 57488,
+      "cueIds": [
+        210
+      ],
+      "sourceText": "大概就是这样子去语音转文字，随便口喷嘛。"
+    },
+    {
+      "startFrame": 57495,
+      "endFrame": 57561,
+      "cueIds": [
+        210
+      ],
+      "sourceText": "大概就是这样子去语音转文字，随便口喷嘛。"
+    },
+    {
+      "startFrame": 57604,
+      "endFrame": 57685,
+      "cueIds": [
+        211
+      ],
+      "sourceText": "就把你想要的一些什么东西，然后给口喷一下。然后呢？"
+    },
+    {
+      "startFrame": 57705,
+      "endFrame": 57721,
+      "cueIds": [
+        211
+      ],
+      "sourceText": "就把你想要的一些什么东西，然后给口喷一下。然后呢？"
+    },
+    {
+      "startFrame": 57786,
+      "endFrame": 57811,
+      "cueIds": [
+        212
+      ],
+      "sourceText": "将我们的"
+    },
+    {
+      "startFrame": 58123,
+      "endFrame": 58173,
+      "cueIds": [
+        213
+      ],
+      "sourceText": "所有内容直接复制进来。"
+    },
+    {
+      "startFrame": 58204,
+      "endFrame": 58282,
+      "cueIds": [
+        214
+      ],
+      "sourceText": "然后呢它就形成了这样的两个文本框，之后呢直接发送给"
+    },
+    {
+      "startFrame": 58292,
+      "endFrame": 58337,
+      "cueIds": [
+        214
+      ],
+      "sourceText": "然后呢它就形成了这样的两个文本框，之后呢直接发送给"
+    },
+    {
+      "startFrame": 58373,
+      "endFrame": 58375,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 58435,
+      "endFrame": 58509,
+      "cueIds": [
+        215
+      ],
+      "sourceText": "你可以发送给豆包或者是任何的 AI 的助手。不过呢"
+    },
+    {
+      "startFrame": 58528,
+      "endFrame": 58551,
+      "cueIds": [
+        215
+      ],
+      "sourceText": "你可以发送给豆包或者是任何的 AI 的助手。不过呢"
+    },
+    {
+      "startFrame": 58558,
+      "endFrame": 58575,
+      "cueIds": [
+        215
+      ],
+      "sourceText": "你可以发送给豆包或者是任何的 AI 的助手。不过呢"
+    },
+    {
+      "startFrame": 58670,
+      "endFrame": 58781,
+      "cueIds": [
+        216
+      ],
+      "sourceText": "你如果说本地有一个 agent 的话，那么你这样拆解之后，你跟 AI 讨论的任何的内容，你都可以把它沉淀成对应的这种知识。"
+    },
+    {
+      "startFrame": 58788,
+      "endFrame": 58858,
+      "cueIds": [
+        216
+      ],
+      "sourceText": "你如果说本地有一个 agent 的话，那么你这样拆解之后，你跟 AI 讨论的任何的内容，你都可以把它沉淀成对应的这种知识。"
+    },
+    {
+      "startFrame": 58864,
+      "endFrame": 58950,
+      "cueIds": [
+        216
+      ],
+      "sourceText": "你如果说本地有一个 agent 的话，那么你这样拆解之后，你跟 AI 讨论的任何的内容，你都可以把它沉淀成对应的这种知识。"
+    },
+    {
+      "startFrame": 58956,
+      "endFrame": 59038,
+      "cueIds": [
+        217
+      ],
+      "sourceText": "当你下一次运用的时候，你就可以去"
+    },
+    {
+      "startFrame": 59207,
+      "endFrame": 59305,
+      "cueIds": [
+        218
+      ],
+      "sourceText": "AI 就可以获取到这里面的一些结论或者一些知识。"
+    },
+    {
+      "startFrame": 59433,
+      "endFrame": 59581,
+      "cueIds": [
+        219
+      ],
+      "sourceText": "就不会说是完全重新开了个窗口，然后所有的记忆全部都是从零开始。"
+    },
+    {
+      "startFrame": 59616,
+      "endFrame": 59675,
+      "cueIds": [
+        220
+      ],
+      "sourceText": "他就有一个基础了，包括我"
+    },
+    {
+      "startFrame": 59709,
+      "endFrame": 59735,
+      "cueIds": [
+        221
+      ],
+      "sourceText": "很多的内容"
+    },
+    {
+      "startFrame": 59768,
+      "endFrame": 59857,
+      "cueIds": [
+        222
+      ],
+      "sourceText": "我都是借助这样的一个 agent 去进行打磨的。"
+    },
+    {
+      "startFrame": 59883,
+      "endFrame": 59885,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 59941,
+      "endFrame": 59995,
+      "cueIds": [
+        223
+      ],
+      "sourceText": "给大家看一下，简单看一下。"
+    },
+    {
+      "startFrame": 60028,
+      "endFrame": 60030,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 60099,
+      "endFrame": 60233,
+      "cueIds": [
+        224
+      ],
+      "sourceText": "在它运行的过程当中呢，我给大家简单的看一下我的 agent 的一个目录的一个结构啊，它的一个复杂的程度。"
+    },
+    {
+      "startFrame": 60248,
+      "endFrame": 60283,
+      "cueIds": [
+        224
+      ],
+      "sourceText": "在它运行的过程当中呢，我给大家简单的看一下我的 agent 的一个目录的一个结构啊，它的一个复杂的程度。"
+    },
+    {
+      "startFrame": 60661,
+      "endFrame": 60665,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 60677,
+      "endFrame": 60681,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 60989,
+      "endFrame": 61053,
+      "cueIds": [
+        226
+      ],
+      "sourceText": "大概就是这样的一个结果哈。"
+    },
+    {
+      "startFrame": 61060,
+      "endFrame": 61138,
+      "cueIds": [
+        227
+      ],
+      "sourceText": "可以看到我这个里文件里面非常的多啊，包括我的输入的一些原料，包括我刚才我贴的那些文字，它都会进入到这个目录里面哈。"
+    },
+    {
+      "startFrame": 61148,
+      "endFrame": 61209,
+      "cueIds": [
+        227
+      ],
+      "sourceText": "可以看到我这个里文件里面非常的多啊，包括我的输入的一些原料，包括我刚才我贴的那些文字，它都会进入到这个目录里面哈。"
+    },
+    {
+      "startFrame": 61217,
+      "endFrame": 61323,
+      "cueIds": [
+        227
+      ],
+      "sourceText": "可以看到我这个里文件里面非常的多啊，包括我的输入的一些原料，包括我刚才我贴的那些文字，它都会进入到这个目录里面哈。"
+    },
+    {
+      "startFrame": 61437,
+      "endFrame": 61457,
+      "cueIds": [
+        228
+      ],
+      "sourceText": "然后呢，如果说我要写稿子的话，它会进入初稿。"
+    },
+    {
+      "startFrame": 61475,
+      "endFrame": 61548,
+      "cueIds": [
+        228
+      ],
+      "sourceText": "然后呢，如果说我要写稿子的话，它会进入初稿。"
+    },
+    {
+      "startFrame": 61551,
+      "endFrame": 61553,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 61558,
+      "endFrame": 61560,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 61565,
+      "endFrame": 61664,
+      "cueIds": [
+        229
+      ],
+      "sourceText": "啊，如果说最终出来一个稿子的话，它会进入终稿。以及呢，我会落"
+    },
+    {
+      "startFrame": 61711,
+      "endFrame": 61713,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 61840,
+      "endFrame": 61910,
+      "cueIds": [
+        230
+      ],
+      "sourceText": "我在刷短视频或者整个，我在解决我的痛点的时候呢，会有一些"
+    },
+    {
+      "startFrame": 61919,
+      "endFrame": 62001,
+      "cueIds": [
+        230
+      ],
+      "sourceText": "我在刷短视频或者整个，我在解决我的痛点的时候呢，会有一些"
+    },
+    {
+      "startFrame": 62016,
+      "endFrame": 62038,
+      "cueIds": [
+        230
+      ],
+      "sourceText": "我在刷短视频或者整个，我在解决我的痛点的时候呢，会有一些"
+    },
+    {
+      "startFrame": 62139,
+      "endFrame": 62179,
+      "cueIds": [
+        231
+      ],
+      "sourceText": "所谓的选题库吧，啊，它就会沉淀进去。"
+    },
+    {
+      "startFrame": 62193,
+      "endFrame": 62196,
+      "cueIds": [
+        231
+      ],
+      "sourceText": "所谓的选题库吧，啊，它就会沉淀进去。"
+    },
+    {
+      "startFrame": 62200,
+      "endFrame": 62234,
+      "cueIds": [
+        231
+      ],
+      "sourceText": "所谓的选题库吧，啊，它就会沉淀进去。"
+    },
+    {
+      "startFrame": 62614,
+      "endFrame": 62616,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 62632,
+      "endFrame": 62634,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 62679,
+      "endFrame": 62759,
+      "cueIds": [
+        233
+      ],
+      "sourceText": "吸收了栋哥的这两篇文章之后。"
+    },
+    {
+      "startFrame": 62830,
+      "endFrame": 62839,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 62878,
+      "endFrame": 62950,
+      "cueIds": [
+        234
+      ],
+      "sourceText": "我对我的老文稿又进行了一次进化包括本次的这个"
+    },
+    {
+      "startFrame": 62965,
+      "endFrame": 63017,
+      "cueIds": [
+        234
+      ],
+      "sourceText": "我对我的老文稿又进行了一次进化包括本次的这个"
+    },
+    {
+      "startFrame": 63213,
+      "endFrame": 63242,
+      "cueIds": [
+        235
+      ],
+      "sourceText": "视频的出发点。"
+    },
+    {
+      "startFrame": 63333,
+      "endFrame": 63433,
+      "cueIds": [
+        236
+      ],
+      "sourceText": "我都已经做了一个所谓的这种开口的一个"
+    },
+    {
+      "startFrame": 63590,
+      "endFrame": 63624,
+      "cueIds": [
+        237
+      ],
+      "sourceText": "放大的一个处理哈。"
+    },
+    {
+      "startFrame": 63664,
+      "endFrame": 63760,
+      "cueIds": [
+        238
+      ],
+      "sourceText": "这个都是我跟我的老公搞的 AI 讨论出来的。"
+    },
+    {
+      "startFrame": 63834,
+      "endFrame": 63925,
+      "cueIds": [
+        239
+      ],
+      "sourceText": "他的这个理念呢全部都是栋哥的这两篇文章里面的一些理念。"
+    },
+    {
+      "startFrame": 63931,
+      "endFrame": 63963,
+      "cueIds": [
+        239
+      ],
+      "sourceText": "他的这个理念呢全部都是栋哥的这两篇文章里面的一些理念。"
+    },
+    {
+      "startFrame": 63985,
+      "endFrame": 64063,
+      "cueIds": [
+        240
+      ],
+      "sourceText": "原本的话，其实我只是想要去"
+    },
+    {
+      "startFrame": 64296,
+      "endFrame": 64485,
+      "cueIds": [
+        241
+      ],
+      "sourceText": "给我的这个训练营里面的这些同学，给他录一期，Codec到底怎么使用的一个教学而已。"
+    },
+    {
+      "startFrame": 64973,
+      "endFrame": 65034,
+      "cueIds": [
+        242
+      ],
+      "sourceText": "但是呢我跟 ai 讨论之后啊，他给出来了我一个这样的一个建议啊。"
+    },
+    {
+      "startFrame": 65038,
+      "endFrame": 65041,
+      "cueIds": [
+        242
+      ],
+      "sourceText": "但是呢我跟 ai 讨论之后啊，他给出来了我一个这样的一个建议啊。"
+    },
+    {
+      "startFrame": 65045,
+      "endFrame": 65080,
+      "cueIds": [
+        242
+      ],
+      "sourceText": "但是呢我跟 ai 讨论之后啊，他给出来了我一个这样的一个建议啊。"
+    },
+    {
+      "startFrame": 65104,
+      "endFrame": 65112,
+      "cueIds": [
+        242
+      ],
+      "sourceText": "但是呢我跟 ai 讨论之后啊，他给出来了我一个这样的一个建议啊。"
+    },
+    {
+      "startFrame": 65116,
+      "endFrame": 65197,
+      "cueIds": [
+        242,
+        243
+      ],
+      "sourceText": "但是呢我跟 ai 讨论之后啊，他给出来了我一个这样的一个建议啊。 然后呢我在跟他呃讨论的过程当中呢，我们就迸发出来了这样的一个"
+    },
+    {
+      "startFrame": 65221,
+      "endFrame": 65284,
+      "cueIds": [
+        243
+      ],
+      "sourceText": "然后呢我在跟他呃讨论的过程当中呢，我们就迸发出来了这样的一个"
+    },
+    {
+      "startFrame": 65509,
+      "endFrame": 65613,
+      "cueIds": [
+        245
+      ],
+      "sourceText": "迸发出来了这样的一个选题，就是普通人怎么学好 AI 就是用 AI 学 AI 的这样一个比较大的一个选题呀，也就是所谓的一个话题吧。"
+    },
+    {
+      "startFrame": 65618,
+      "endFrame": 65654,
+      "cueIds": [
+        245
+      ],
+      "sourceText": "迸发出来了这样的一个选题，就是普通人怎么学好 AI 就是用 AI 学 AI 的这样一个比较大的一个选题呀，也就是所谓的一个话题吧。"
+    },
+    {
+      "startFrame": 65687,
+      "endFrame": 65747,
+      "cueIds": [
+        245
+      ],
+      "sourceText": "迸发出来了这样的一个选题，就是普通人怎么学好 AI 就是用 AI 学 AI 的这样一个比较大的一个选题呀，也就是所谓的一个话题吧。"
+    },
+    {
+      "startFrame": 65771,
+      "endFrame": 65828,
+      "cueIds": [
+        245
+      ],
+      "sourceText": "迸发出来了这样的一个选题，就是普通人怎么学好 AI 就是用 AI 学 AI 的这样一个比较大的一个选题呀，也就是所谓的一个话题吧。"
+    },
+    {
+      "startFrame": 65931,
+      "endFrame": 65999,
+      "cueIds": [
+        246
+      ],
+      "sourceText": "我也不知道我这次视频发出去的，这个效果到底如何啊？"
+    },
+    {
+      "startFrame": 66014,
+      "endFrame": 66056,
+      "cueIds": [
+        246
+      ],
+      "sourceText": "我也不知道我这次视频发出去的，这个效果到底如何啊？"
+    },
+    {
+      "startFrame": 66059,
+      "endFrame": 66119,
+      "cueIds": [
+        247
+      ],
+      "sourceText": "大家能够吸收到多少的这种实践的经验。"
+    },
+    {
+      "startFrame": 66137,
+      "endFrame": 66171,
+      "cueIds": [
+        247
+      ],
+      "sourceText": "大家能够吸收到多少的这种实践的经验。"
+    },
+    {
+      "startFrame": 66257,
+      "endFrame": 66330,
+      "cueIds": [
+        248
+      ],
+      "sourceText": "好，我们可以看到这个地方呢，已经"
+    },
+    {
+      "startFrame": 66539,
+      "endFrame": 66699,
+      "cueIds": [
+        249
+      ],
+      "sourceText": "给出来了对应的这种结论哈，然后我们会看这里面两篇材料分别讲了什么内容啊。"
+    },
+    {
+      "startFrame": 66715,
+      "endFrame": 66717,
+      "cueIds": [
+        249
+      ],
+      "sourceText": "给出来了对应的这种结论哈，然后我们会看这里面两篇材料分别讲了什么内容啊。"
+    },
+    {
+      "startFrame": 66761,
+      "endFrame": 66786,
+      "cueIds": [
+        250
+      ],
+      "sourceText": "然后你会看这个地方呢，他说的讨论的部分，核心的内容都是非常的详细的。"
+    },
+    {
+      "startFrame": 66792,
+      "endFrame": 66890,
+      "cueIds": [
+        250
+      ],
+      "sourceText": "然后你会看这个地方呢，他说的讨论的部分，核心的内容都是非常的详细的。"
+    },
+    {
+      "startFrame": 66895,
+      "endFrame": 66952,
+      "cueIds": [
+        250
+      ],
+      "sourceText": "然后你会看这个地方呢，他说的讨论的部分，核心的内容都是非常的详细的。"
+    },
+    {
+      "startFrame": 66965,
+      "endFrame": 66986,
+      "cueIds": [
+        250
+      ],
+      "sourceText": "然后你会看这个地方呢，他说的讨论的部分，核心的内容都是非常的详细的。"
+    },
+    {
+      "startFrame": 67015,
+      "endFrame": 67017,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 67041,
+      "endFrame": 67150,
+      "cueIds": [
+        251
+      ],
+      "sourceText": "那么其实我对于这种内容的话，它第一遍的话，如果说你了解 AI 的话，你就会很明白 AI 给的第一版内容。"
+    },
+    {
+      "startFrame": 67175,
+      "endFrame": 67319,
+      "cueIds": [
+        251
+      ],
+      "sourceText": "那么其实我对于这种内容的话，它第一遍的话，如果说你了解 AI 的话，你就会很明白 AI 给的第一版内容。"
+    },
+    {
+      "startFrame": 67396,
+      "endFrame": 67413,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 67466,
+      "endFrame": 67513,
+      "cueIds": [
+        252
+      ],
+      "sourceText": "基本上都是应付你的，他只只是为了满足你的 agent 里面的某些规则。"
+    },
+    {
+      "startFrame": 67517,
+      "endFrame": 67533,
+      "cueIds": [
+        252
+      ],
+      "sourceText": "基本上都是应付你的，他只只是为了满足你的 agent 里面的某些规则。"
+    },
+    {
+      "startFrame": 67537,
+      "endFrame": 67574,
+      "cueIds": [
+        252
+      ],
+      "sourceText": "基本上都是应付你的，他只只是为了满足你的 agent 里面的某些规则。"
+    },
+    {
+      "startFrame": 67585,
+      "endFrame": 67639,
+      "cueIds": [
+        252
+      ],
+      "sourceText": "基本上都是应付你的，他只只是为了满足你的 agent 里面的某些规则。"
+    },
+    {
+      "startFrame": 67662,
+      "endFrame": 67718,
+      "cueIds": [
+        253
+      ],
+      "sourceText": "如果说你这个规则设计得不够详细，规范性不够很强的话。"
+    },
+    {
+      "startFrame": 67727,
+      "endFrame": 67749,
+      "cueIds": [
+        253
+      ],
+      "sourceText": "如果说你这个规则设计得不够详细，规范性不够很强的话。"
+    },
+    {
+      "startFrame": 67763,
+      "endFrame": 67810,
+      "cueIds": [
+        253
+      ],
+      "sourceText": "如果说你这个规则设计得不够详细，规范性不够很强的话。"
+    },
+    {
+      "startFrame": 67837,
+      "endFrame": 67877,
+      "cueIds": [
+        254
+      ],
+      "sourceText": "那么他就只会应付你"
+    },
+    {
+      "startFrame": 67982,
+      "endFrame": 67984,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 68002,
+      "endFrame": 68085,
+      "cueIds": [
+        255
+      ],
+      "sourceText": "他就只会满足了合格的要求就行了。"
+    },
+    {
+      "startFrame": 68157,
+      "endFrame": 68179,
+      "cueIds": [
+        256
+      ],
+      "sourceText": "所以呢"
+    },
+    {
+      "startFrame": 68273,
+      "endFrame": 68369,
+      "cueIds": [
+        257
+      ],
+      "sourceText": "这是我玩 AI 这么久以来得到的一个"
+    },
+    {
+      "startFrame": 68440,
+      "endFrame": 68481,
+      "cueIds": [
+        258
+      ],
+      "sourceText": "非常基础的一个判断。"
+    },
+    {
+      "startFrame": 68515,
+      "endFrame": 68518,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 68523,
+      "endFrame": 68615,
+      "cueIds": [
+        259
+      ],
+      "sourceText": "别看他这个地方说的头头是道的，对吧？"
+    },
+    {
+      "startFrame": 68623,
+      "endFrame": 68631,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 68647,
+      "endFrame": 68712,
+      "cueIds": [
+        260
+      ],
+      "sourceText": "怎么质疑做内容就是解决问题？"
+    },
+    {
+      "startFrame": 68771,
+      "endFrame": 68791,
+      "cueIds": [
+        261
+      ],
+      "sourceText": "第一步，啊，第二步是区分素材和选题。"
+    },
+    {
+      "startFrame": 68795,
+      "endFrame": 68869,
+      "cueIds": [
+        261
+      ],
+      "sourceText": "第一步，啊，第二步是区分素材和选题。"
+    },
+    {
+      "startFrame": 68950,
+      "endFrame": 69005,
+      "cueIds": [
+        262
+      ],
+      "sourceText": "第三步是选题，不是单一分类，而是多维决策。"
+    },
+    {
+      "startFrame": 69032,
+      "endFrame": 69047,
+      "cueIds": [
+        262
+      ],
+      "sourceText": "第三步是选题，不是单一分类，而是多维决策。"
+    },
+    {
+      "startFrame": 69056,
+      "endFrame": 69109,
+      "cueIds": [
+        262
+      ],
+      "sourceText": "第三步是选题，不是单一分类，而是多维决策。"
+    },
+    {
+      "startFrame": 69252,
+      "endFrame": 69267,
+      "cueIds": [
+        263
+      ],
+      "sourceText": "然后再再下面的话就是"
+    },
+    {
+      "startFrame": 69287,
+      "endFrame": 69325,
+      "cueIds": [
+        263
+      ],
+      "sourceText": "然后再再下面的话就是"
+    },
+    {
+      "startFrame": 69363,
+      "endFrame": 69500,
+      "cueIds": [
+        264
+      ],
+      "sourceText": "第四步，用开锁案例证明材料相同，选题也可能不同。"
+    },
+    {
+      "startFrame": 69621,
+      "endFrame": 69744,
+      "cueIds": [
+        265
+      ],
+      "sourceText": "第五步是区分选题本体、生成、传播和实现。"
+    },
+    {
+      "startFrame": 69753,
+      "endFrame": 69821,
+      "cueIds": [
+        266
+      ],
+      "sourceText": "我们可以看到整个的内容，它都是做得比较宽泛的啊。"
+    },
+    {
+      "startFrame": 69824,
+      "endFrame": 69827,
+      "cueIds": [
+        266
+      ],
+      "sourceText": "我们可以看到整个的内容，它都是做得比较宽泛的啊。"
+    },
+    {
+      "startFrame": 69838,
+      "endFrame": 69902,
+      "cueIds": [
+        266
+      ],
+      "sourceText": "我们可以看到整个的内容，它都是做得比较宽泛的啊。"
+    },
+    {
+      "startFrame": 69922,
+      "endFrame": 69986,
+      "cueIds": [
+        267
+      ],
+      "sourceText": "你可以看这个地方呢，就是一个层次啊，然后为什么要做这条内容，希望观众怎样认识你。"
+    },
+    {
+      "startFrame": 69997,
+      "endFrame": 70012,
+      "cueIds": [
+        267
+      ],
+      "sourceText": "你可以看这个地方呢，就是一个层次啊，然后为什么要做这条内容，希望观众怎样认识你。"
+    },
+    {
+      "startFrame": 70018,
+      "endFrame": 70103,
+      "cueIds": [
+        267
+      ],
+      "sourceText": "你可以看这个地方呢，就是一个层次啊，然后为什么要做这条内容，希望观众怎样认识你。"
+    },
+    {
+      "startFrame": 70116,
+      "endFrame": 70156,
+      "cueIds": [
+        268
+      ],
+      "sourceText": "他说的这种东西呢，我个人看呢，他是非常浅显的，他都是浮于表面的这种。"
+    },
+    {
+      "startFrame": 70165,
+      "endFrame": 70225,
+      "cueIds": [
+        268
+      ],
+      "sourceText": "他说的这种东西呢，我个人看呢，他是非常浅显的，他都是浮于表面的这种。"
+    },
+    {
+      "startFrame": 70229,
+      "endFrame": 70279,
+      "cueIds": [
+        268
+      ],
+      "sourceText": "他说的这种东西呢，我个人看呢，他是非常浅显的，他都是浮于表面的这种。"
+    },
+    {
+      "startFrame": 70442,
+      "endFrame": 70458,
+      "cueIds": [
+        269
+      ],
+      "sourceText": "回答呀。"
+    },
+    {
+      "startFrame": 70468,
+      "endFrame": 70470,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 70477,
+      "endFrame": 70503,
+      "cueIds": [
+        270
+      ],
+      "sourceText": "那么我一般的话会是去进行一个，嗯，我会发给他一个指令啊，就是让他去"
+    },
+    {
+      "startFrame": 70508,
+      "endFrame": 70534,
+      "cueIds": [
+        270
+      ],
+      "sourceText": "那么我一般的话会是去进行一个，嗯，我会发给他一个指令啊，就是让他去"
+    },
+    {
+      "startFrame": 70538,
+      "endFrame": 70559,
+      "cueIds": [
+        270
+      ],
+      "sourceText": "那么我一般的话会是去进行一个，嗯，我会发给他一个指令啊，就是让他去"
+    },
+    {
+      "startFrame": 70573,
+      "endFrame": 70619,
+      "cueIds": [
+        270
+      ],
+      "sourceText": "那么我一般的话会是去进行一个，嗯，我会发给他一个指令啊，就是让他去"
+    },
+    {
+      "startFrame": 70640,
+      "endFrame": 70740,
+      "cueIds": [
+        270
+      ],
+      "sourceText": "那么我一般的话会是去进行一个，嗯，我会发给他一个指令啊，就是让他去"
+    },
+    {
+      "startFrame": 70760,
+      "endFrame": 70824,
+      "cueIds": [
+        271
+      ],
+      "sourceText": "进行一个更深入的一个分析"
+    },
+    {
+      "startFrame": 70886,
+      "endFrame": 70890,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 70892,
+      "endFrame": 70991,
+      "cueIds": [
+        272
+      ],
+      "sourceText": "啊，我们看到这个地方呢，有很多很多的一些增点啊，然后呢，他把整个的这个内容全部都拆解出来了。"
+    },
+    {
+      "startFrame": 71002,
+      "endFrame": 71042,
+      "cueIds": [
+        272
+      ],
+      "sourceText": "啊，我们看到这个地方呢，有很多很多的一些增点啊，然后呢，他把整个的这个内容全部都拆解出来了。"
+    },
+    {
+      "startFrame": 71047,
+      "endFrame": 71103,
+      "cueIds": [
+        272
+      ],
+      "sourceText": "啊，我们看到这个地方呢，有很多很多的一些增点啊，然后呢，他把整个的这个内容全部都拆解出来了。"
+    },
+    {
+      "startFrame": 71193,
+      "endFrame": 71195,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 71350,
+      "endFrame": 71453,
+      "cueIds": [
+        273
+      ],
+      "sourceText": "我们可以简单地看一下啊，我在说话的过程当中呢，我要不停地翻动，我要不停地说话的，因为我后面是用 AI 剪辑，我 AI 剪辑的这个理论的这个基础呢，就是有音频。"
+    },
+    {
+      "startFrame": 71463,
+      "endFrame": 71485,
+      "cueIds": [
+        273
+      ],
+      "sourceText": "我们可以简单地看一下啊，我在说话的过程当中呢，我要不停地翻动，我要不停地说话的，因为我后面是用 AI 剪辑，我 AI 剪辑的这个理论的这个基础呢，就是有音频。"
+    },
+    {
+      "startFrame": 71494,
+      "endFrame": 71603,
+      "cueIds": [
+        273
+      ],
+      "sourceText": "我们可以简单地看一下啊，我在说话的过程当中呢，我要不停地翻动，我要不停地说话的，因为我后面是用 AI 剪辑，我 AI 剪辑的这个理论的这个基础呢，就是有音频。"
+    },
+    {
+      "startFrame": 71608,
+      "endFrame": 71723,
+      "cueIds": [
+        273
+      ],
+      "sourceText": "我们可以简单地看一下啊，我在说话的过程当中呢，我要不停地翻动，我要不停地说话的，因为我后面是用 AI 剪辑，我 AI 剪辑的这个理论的这个基础呢，就是有音频。"
+    },
+    {
+      "startFrame": 71730,
+      "endFrame": 71857,
+      "cueIds": [
+        274
+      ],
+      "sourceText": "它才会剪辑，没有音频的话，它就会当成气口给它剪辑掉了。"
+    },
+    {
+      "startFrame": 71869,
+      "endFrame": 71960,
+      "cueIds": [
+        275
+      ],
+      "sourceText": "所以现在我的很多的内容的生产过程呢，都是可 AI 介入了啊，所以我现在说一些口水话吧，然后大家简单的看一下这个内容。"
+    },
+    {
+      "startFrame": 71966,
+      "endFrame": 71989,
+      "cueIds": [
+        275
+      ],
+      "sourceText": "所以现在我的很多的内容的生产过程呢，都是可 AI 介入了啊，所以我现在说一些口水话吧，然后大家简单的看一下这个内容。"
+    },
+    {
+      "startFrame": 71996,
+      "endFrame": 72000,
+      "cueIds": [
+        275
+      ],
+      "sourceText": "所以现在我的很多的内容的生产过程呢，都是可 AI 介入了啊，所以我现在说一些口水话吧，然后大家简单的看一下这个内容。"
+    },
+    {
+      "startFrame": 72004,
+      "endFrame": 72078,
+      "cueIds": [
+        275
+      ],
+      "sourceText": "所以现在我的很多的内容的生产过程呢，都是可 AI 介入了啊，所以我现在说一些口水话吧，然后大家简单的看一下这个内容。"
+    },
+    {
+      "startFrame": 72088,
+      "endFrame": 72181,
+      "cueIds": [
+        275
+      ],
+      "sourceText": "所以现在我的很多的内容的生产过程呢，都是可 AI 介入了啊，所以我现在说一些口水话吧，然后大家简单的看一下这个内容。"
+    },
+    {
+      "startFrame": 72286,
+      "endFrame": 72288,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 72422,
+      "endFrame": 72476,
+      "cueIds": [
+        276
+      ],
+      "sourceText": "哦，这里是什么传播设计啊？这个生于享乐。"
+    },
+    {
+      "startFrame": 72479,
+      "endFrame": 72483,
+      "cueIds": [
+        276
+      ],
+      "sourceText": "哦，这里是什么传播设计啊？这个生于享乐。"
+    },
+    {
+      "startFrame": 72487,
+      "endFrame": 72523,
+      "cueIds": [
+        276
+      ],
+      "sourceText": "哦，这里是什么传播设计啊？这个生于享乐。"
+    },
+    {
+      "startFrame": 72740,
+      "endFrame": 72821,
+      "cueIds": [
+        277
+      ],
+      "sourceText": "然后这边对谈后的底层逻辑。"
+    },
+    {
+      "startFrame": 72830,
+      "endFrame": 72949,
+      "cueIds": [
+        278
+      ],
+      "sourceText": "内容竞争不只是文字竞争，而是上游认知竞争。"
+    },
+    {
+      "startFrame": 72980,
+      "endFrame": 73057,
+      "cueIds": [
+        279
+      ],
+      "sourceText": "独特不是目标，而是生产路径的结果。"
+    },
+    {
+      "startFrame": 73103,
+      "endFrame": 73166,
+      "cueIds": [
+        280
+      ],
+      "sourceText": "深度和流量不是天然对立"
+    },
+    {
+      "startFrame": 73238,
+      "endFrame": 73244,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 73266,
+      "endFrame": 73326,
+      "cueIds": [
+        281
+      ],
+      "sourceText": "你看这些标题，我觉得都特别的好啊。"
+    },
+    {
+      "startFrame": 73332,
+      "endFrame": 73358,
+      "cueIds": [
+        281
+      ],
+      "sourceText": "你看这些标题，我觉得都特别的好啊。"
+    },
+    {
+      "startFrame": 73401,
+      "endFrame": 73519,
+      "cueIds": [
+        282
+      ],
+      "sourceText": "选题既有自下而上的生成也有自上而下的约束"
+    },
+    {
+      "startFrame": 73618,
+      "endFrame": 73718,
+      "cueIds": [
+        283
+      ],
+      "sourceText": "IP 不是标签而是反复出现的因果关系。"
+    },
+    {
+      "startFrame": 73760,
+      "endFrame": 73836,
+      "cueIds": [
+        284
+      ],
+      "sourceText": "细腻的作用不是整理，而是积累判断。"
+    },
+    {
+      "startFrame": 73848,
+      "endFrame": 73931,
+      "cueIds": [
+        285
+      ],
+      "sourceText": "真正可以被复制的是流程，不是成品。"
+    },
+    {
+      "startFrame": 73982,
+      "endFrame": 74029,
+      "cueIds": [
+        286
+      ],
+      "sourceText": "啊，然后呢这里就是对我有用的一些东西。"
+    },
+    {
+      "startFrame": 74034,
+      "endFrame": 74084,
+      "cueIds": [
+        286,
+        287
+      ],
+      "sourceText": "啊，然后呢这里就是对我有用的一些东西。 那么呃因为我整个项目的话，它记录了我的一些素材，我的"
+    },
+    {
+      "startFrame": 74113,
+      "endFrame": 74161,
+      "cueIds": [
+        287
+      ],
+      "sourceText": "那么呃因为我整个项目的话，它记录了我的一些素材，我的"
+    },
+    {
+      "startFrame": 74167,
+      "endFrame": 74212,
+      "cueIds": [
+        287
+      ],
+      "sourceText": "那么呃因为我整个项目的话，它记录了我的一些素材，我的"
+    },
+    {
+      "startFrame": 74221,
+      "endFrame": 74260,
+      "cueIds": [
+        287
+      ],
+      "sourceText": "那么呃因为我整个项目的话，它记录了我的一些素材，我的"
+    },
+    {
+      "startFrame": 74331,
+      "endFrame": 74475,
+      "cueIds": [
+        288
+      ],
+      "sourceText": "整个账号啊或者是我的定位呀，很多东西我都跟他讨论的，所以呢他很明白我到底需要什么东西，所以这后面的内容就不给大家看了。"
+    },
+    {
+      "startFrame": 74494,
+      "endFrame": 74548,
+      "cueIds": [
+        288
+      ],
+      "sourceText": "整个账号啊或者是我的定位呀，很多东西我都跟他讨论的，所以呢他很明白我到底需要什么东西，所以这后面的内容就不给大家看了。"
+    },
+    {
+      "startFrame": 74555,
+      "endFrame": 74604,
+      "cueIds": [
+        288
+      ],
+      "sourceText": "整个账号啊或者是我的定位呀，很多东西我都跟他讨论的，所以呢他很明白我到底需要什么东西，所以这后面的内容就不给大家看了。"
+    },
+    {
+      "startFrame": 74638,
+      "endFrame": 74723,
+      "cueIds": [
+        289
+      ],
+      "sourceText": "那么我会发一条命令是什么呢？就是"
+    },
+    {
+      "startFrame": 74760,
+      "endFrame": 74843,
+      "cueIds": [
+        290
+      ],
+      "sourceText": "我觉得你输出的这些内容都太表面了，还不够有深度。"
+    },
+    {
+      "startFrame": 74849,
+      "endFrame": 74897,
+      "cueIds": [
+        290,
+        291
+      ],
+      "sourceText": "我觉得你输出的这些内容都太表面了，还不够有深度。 你能不能给出了一些更有见解的、更有深度的一些拆解或者认知呢？"
+    },
+    {
+      "startFrame": 74900,
+      "endFrame": 74978,
+      "cueIds": [
+        291
+      ],
+      "sourceText": "你能不能给出了一些更有见解的、更有深度的一些拆解或者认知呢？"
+    },
+    {
+      "startFrame": 74995,
+      "endFrame": 75052,
+      "cueIds": [
+        291,
+        292
+      ],
+      "sourceText": "你能不能给出了一些更有见解的、更有深度的一些拆解或者认知呢？ 或者是内容帮助我吸收的"
+    },
+    {
+      "startFrame": 75061,
+      "endFrame": 75107,
+      "cueIds": [
+        292
+      ],
+      "sourceText": "或者是内容帮助我吸收的"
+    },
+    {
+      "startFrame": 75187,
+      "endFrame": 75194,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 75198,
+      "endFrame": 75200,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 75280,
+      "endFrame": 75351,
+      "cueIds": [
+        294
+      ],
+      "sourceText": "大概我就是会发这样的一条命令啊。"
+    },
+    {
+      "startFrame": 75369,
+      "endFrame": 75434,
+      "cueIds": [
+        295
+      ],
+      "sourceText": "你可以理解成它就是一个 PUA 啊。"
+    },
+    {
+      "startFrame": 75442,
+      "endFrame": 75461,
+      "cueIds": [
+        296
+      ],
+      "sourceText": "虽然说它可能写得非常好，但是呢，你发一条命令，它就会去反思自己发出来的这个东西到底哪里有问题。"
+    },
+    {
+      "startFrame": 75472,
+      "endFrame": 75629,
+      "cueIds": [
+        296
+      ],
+      "sourceText": "虽然说它可能写得非常好，但是呢，你发一条命令，它就会去反思自己发出来的这个东西到底哪里有问题。"
+    },
+    {
+      "startFrame": 75642,
+      "endFrame": 75677,
+      "cueIds": [
+        296
+      ],
+      "sourceText": "虽然说它可能写得非常好，但是呢，你发一条命令，它就会去反思自己发出来的这个东西到底哪里有问题。"
+    },
+    {
+      "startFrame": 75709,
+      "endFrame": 75746,
+      "cueIds": [
+        296
+      ],
+      "sourceText": "虽然说它可能写得非常好，但是呢，你发一条命令，它就会去反思自己发出来的这个东西到底哪里有问题。"
+    },
+    {
+      "startFrame": 75773,
+      "endFrame": 75873,
+      "cueIds": [
+        297
+      ],
+      "sourceText": "然后呢，它就会给你一个非常详细、更有深度的一些内容。"
+    },
+    {
+      "startFrame": 75914,
+      "endFrame": 75917,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 76049,
+      "endFrame": 76164,
+      "cueIds": [
+        299
+      ],
+      "sourceText": "这个呢就是，这个呢就是大概我想给大家表达的，我怎么去使用 Agent 的一个方式，一个方法。"
+    },
+    {
+      "startFrame": 76169,
+      "endFrame": 76206,
+      "cueIds": [
+        299
+      ],
+      "sourceText": "这个呢就是，这个呢就是大概我想给大家表达的，我怎么去使用 Agent 的一个方式，一个方法。"
+    },
+    {
+      "startFrame": 77775,
+      "endFrame": 77920,
+      "cueIds": [
+        300
+      ],
+      "sourceText": "然后在拆解的过程当中呢，它会去调用你的整个项目里面的所有的，已经被安装过的一些 skill 哈。"
+    },
+    {
+      "startFrame": 77928,
+      "endFrame": 77949,
+      "cueIds": [
+        300
+      ],
+      "sourceText": "然后在拆解的过程当中呢，它会去调用你的整个项目里面的所有的，已经被安装过的一些 skill 哈。"
+    },
+    {
+      "startFrame": 77968,
+      "endFrame": 78036,
+      "cueIds": [
+        300
+      ],
+      "sourceText": "然后在拆解的过程当中呢，它会去调用你的整个项目里面的所有的，已经被安装过的一些 skill 哈。"
+    },
+    {
+      "startFrame": 78047,
+      "endFrame": 78062,
+      "cueIds": [
+        301
+      ],
+      "sourceText": "然后呢，刚才我点了一下，我发现它这个地方读取的 skill 呢，就是用的动哥的啊，看看，这个地方就是 Deep Skill 里面的。"
+    },
+    {
+      "startFrame": 78066,
+      "endFrame": 78116,
+      "cueIds": [
+        301
+      ],
+      "sourceText": "然后呢，刚才我点了一下，我发现它这个地方读取的 skill 呢，就是用的动哥的啊，看看，这个地方就是 Deep Skill 里面的。"
+    },
+    {
+      "startFrame": 78126,
+      "endFrame": 78208,
+      "cueIds": [
+        301
+      ],
+      "sourceText": "然后呢，刚才我点了一下，我发现它这个地方读取的 skill 呢，就是用的动哥的啊，看看，这个地方就是 Deep Skill 里面的。"
+    },
+    {
+      "startFrame": 78211,
+      "endFrame": 78214,
+      "cueIds": [
+        301
+      ],
+      "sourceText": "然后呢，刚才我点了一下，我发现它这个地方读取的 skill 呢，就是用的动哥的啊，看看，这个地方就是 Deep Skill 里面的。"
+    },
+    {
+      "startFrame": 78219,
+      "endFrame": 78234,
+      "cueIds": [
+        301
+      ],
+      "sourceText": "然后呢，刚才我点了一下，我发现它这个地方读取的 skill 呢，就是用的动哥的啊，看看，这个地方就是 Deep Skill 里面的。"
+    },
+    {
+      "startFrame": 78243,
+      "endFrame": 78314,
+      "cueIds": [
+        301
+      ],
+      "sourceText": "然后呢，刚才我点了一下，我发现它这个地方读取的 skill 呢，就是用的动哥的啊，看看，这个地方就是 Deep Skill 里面的。"
+    },
+    {
+      "startFrame": 78347,
+      "endFrame": 78400,
+      "cueIds": [
+        302
+      ],
+      "sourceText": "这边是 constraints。"
+    },
+    {
+      "startFrame": 78439,
+      "endFrame": 78520,
+      "cueIds": [
+        303
+      ],
+      "sourceText": "就是中国的这个 DV skill 里面的一个技能呢。"
+    },
+    {
+      "startFrame": 78524,
+      "endFrame": 78582,
+      "cueIds": [
+        304
+      ],
+      "sourceText": "然后呢他就拿出来拆解了，所以呢。"
+    },
+    {
+      "startFrame": 78599,
+      "endFrame": 78625,
+      "cueIds": [
+        304
+      ],
+      "sourceText": "然后呢他就拿出来拆解了，所以呢。"
+    },
+    {
+      "startFrame": 78796,
+      "endFrame": 78854,
+      "cueIds": [
+        305
+      ],
+      "sourceText": "用东哥的技能去拆解他，东哥说出来的话我觉得还挺有意思的。"
+    },
+    {
+      "startFrame": 78864,
+      "endFrame": 78930,
+      "cueIds": [
+        305
+      ],
+      "sourceText": "用东哥的技能去拆解他，东哥说出来的话我觉得还挺有意思的。"
+    },
+    {
+      "startFrame": 78950,
+      "endFrame": 78952,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 79279,
+      "endFrame": 79336,
+      "cueIds": [
+        306
+      ],
+      "sourceText": "啊，然后呢，这两篇文章真正讨论的不是选题技巧。"
+    },
+    {
+      "startFrame": 79340,
+      "endFrame": 79393,
+      "cueIds": [
+        306
+      ],
+      "sourceText": "啊，然后呢，这两篇文章真正讨论的不是选题技巧。"
+    },
+    {
+      "startFrame": 79426,
+      "endFrame": 79443,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 79476,
+      "endFrame": 79552,
+      "cueIds": [
+        307
+      ],
+      "sourceText": "真正争论的真正争论的是内容应该从哪里开始。"
+    },
+    {
+      "startFrame": 79625,
+      "endFrame": 79838,
+      "cueIds": [
+        308
+      ],
+      "sourceText": "两个人代表了两种不同的内容的世界观，自下而上的知识生长，自上而下的传播设计。"
+    },
+    {
+      "startFrame": 79913,
+      "endFrame": 79951,
+      "cueIds": [
+        309
+      ],
+      "sourceText": "这个应该是"
+    },
+    {
+      "startFrame": 80021,
+      "endFrame": 80060,
+      "cueIds": [
+        310
+      ],
+      "sourceText": "动哥在这个里面吧？"
+    },
+    {
+      "startFrame": 80246,
+      "endFrame": 80285,
+      "cueIds": [
+        311
+      ],
+      "sourceText": "然后呢，这个是另外一个博主的这个理念吧。"
+    },
+    {
+      "startFrame": 80295,
+      "endFrame": 80331,
+      "cueIds": [
+        311
+      ],
+      "sourceText": "然后呢，这个是另外一个博主的这个理念吧。"
+    },
+    {
+      "startFrame": 80342,
+      "endFrame": 80362,
+      "cueIds": [
+        311
+      ],
+      "sourceText": "然后呢，这个是另外一个博主的这个理念吧。"
+    },
+    {
+      "startFrame": 80412,
+      "endFrame": 80452,
+      "cueIds": [
+        312
+      ],
+      "sourceText": "好像还真是这样子哈。"
+    },
+    {
+      "startFrame": 80480,
+      "endFrame": 80542,
+      "cueIds": [
+        313
+      ],
+      "sourceText": "所以呢，AI 比我们聪明的多。"
+    },
+    {
+      "startFrame": 80586,
+      "endFrame": 80612,
+      "cueIds": [
+        314
+      ],
+      "sourceText": "我们只需要掌握"
+    },
+    {
+      "startFrame": 80622,
+      "endFrame": 80641,
+      "cueIds": [
+        314
+      ],
+      "sourceText": "我们只需要掌握"
+    },
+    {
+      "startFrame": 80672,
+      "endFrame": 80779,
+      "cueIds": [
+        315
+      ],
+      "sourceText": "给 AI 下命令的这种判断，或者是一些口令，一些指令。"
+    },
+    {
+      "startFrame": 80796,
+      "endFrame": 80820,
+      "cueIds": [
+        315
+      ],
+      "sourceText": "给 AI 下命令的这种判断，或者是一些口令，一些指令。"
+    },
+    {
+      "startFrame": 80862,
+      "endFrame": 80958,
+      "cueIds": [
+        316
+      ],
+      "sourceText": "我再给大家分享一几个指令吧，我最常用的。"
+    },
+    {
+      "startFrame": 80965,
+      "endFrame": 81004,
+      "cueIds": [
+        316
+      ],
+      "sourceText": "我再给大家分享一几个指令吧，我最常用的。"
+    },
+    {
+      "startFrame": 81063,
+      "endFrame": 81096,
+      "cueIds": [
+        317
+      ],
+      "sourceText": "其实就是四个字，解释一下。"
+    },
+    {
+      "startFrame": 81103,
+      "endFrame": 81127,
+      "cueIds": [
+        317
+      ],
+      "sourceText": "其实就是四个字，解释一下。"
+    },
+    {
+      "startFrame": 81164,
+      "endFrame": 81189,
+      "cueIds": [
+        318
+      ],
+      "sourceText": "就比如说"
+    },
+    {
+      "startFrame": 81224,
+      "endFrame": 81363,
+      "cueIds": [
+        319
+      ],
+      "sourceText": "我不明白这个自下而上的知识生产和自上而下的知传播设计。"
+    },
+    {
+      "startFrame": 81367,
+      "endFrame": 81389,
+      "cueIds": [
+        319
+      ],
+      "sourceText": "我不明白这个自下而上的知识生产和自上而下的知传播设计。"
+    },
+    {
+      "startFrame": 81441,
+      "endFrame": 81493,
+      "cueIds": [
+        320
+      ],
+      "sourceText": "这两个概念你给我解释一下。"
+    },
+    {
+      "startFrame": 81562,
+      "endFrame": 81629,
+      "cueIds": [
+        321
+      ],
+      "sourceText": "然后呢它就会正儿八经的给你解释啊，然后"
+    },
+    {
+      "startFrame": 81636,
+      "endFrame": 81650,
+      "cueIds": [
+        321
+      ],
+      "sourceText": "然后呢它就会正儿八经的给你解释啊，然后"
+    },
+    {
+      "startFrame": 81833,
+      "endFrame": 81836,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 81872,
+      "endFrame": 81874,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 82006,
+      "endFrame": 82198,
+      "cueIds": [
+        322,
+        323
+      ],
+      "sourceText": "得出来一些能，你能够吸收的一些内容啊。 然后在这个过程当中呢，你发现了哪些问题，你没有明白，你没明白的，那么你都可以去使用这种方式。"
+    },
+    {
+      "startFrame": 82248,
+      "endFrame": 82342,
+      "cueIds": [
+        323
+      ],
+      "sourceText": "然后在这个过程当中呢，你发现了哪些问题，你没有明白，你没明白的，那么你都可以去使用这种方式。"
+    },
+    {
+      "startFrame": 82346,
+      "endFrame": 82386,
+      "cueIds": [
+        324
+      ],
+      "sourceText": "啊，把整个的，你有问题的所有的内容，你都可以去使用这样的方式去。"
+    },
+    {
+      "startFrame": 82389,
+      "endFrame": 82433,
+      "cueIds": [
+        324
+      ],
+      "sourceText": "啊，把整个的，你有问题的所有的内容，你都可以去使用这样的方式去。"
+    },
+    {
+      "startFrame": 82436,
+      "endFrame": 82462,
+      "cueIds": [
+        324
+      ],
+      "sourceText": "啊，把整个的，你有问题的所有的内容，你都可以去使用这样的方式去。"
+    },
+    {
+      "startFrame": 82471,
+      "endFrame": 82520,
+      "cueIds": [
+        324
+      ],
+      "sourceText": "啊，把整个的，你有问题的所有的内容，你都可以去使用这样的方式去。"
+    },
+    {
+      "startFrame": 82583,
+      "endFrame": 82605,
+      "cueIds": [
+        325
+      ],
+      "sourceText": "让他解释啊。"
+    },
+    {
+      "startFrame": 82610,
+      "endFrame": 82696,
+      "cueIds": [
+        326
+      ],
+      "sourceText": "然后呢，这个解释一下，还有一个魅力在于。"
+    },
+    {
+      "startFrame": 82790,
+      "endFrame": 82812,
+      "cueIds": [
+        327
+      ],
+      "sourceText": "如果说"
+    },
+    {
+      "startFrame": 82846,
+      "endFrame": 82850,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 83043,
+      "endFrame": 83046,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 83070,
+      "endFrame": 83145,
+      "cueIds": [
+        329
+      ],
+      "sourceText": "不知道大家不知道大家发现没有哈，我的 codex 它说出来这些文字哈，它说的都是人话，你不知道大家发现没有哈。"
+    },
+    {
+      "startFrame": 83152,
+      "endFrame": 83190,
+      "cueIds": [
+        329
+      ],
+      "sourceText": "不知道大家不知道大家发现没有哈，我的 codex 它说出来这些文字哈，它说的都是人话，你不知道大家发现没有哈。"
+    },
+    {
+      "startFrame": 83204,
+      "endFrame": 83257,
+      "cueIds": [
+        329
+      ],
+      "sourceText": "不知道大家不知道大家发现没有哈，我的 codex 它说出来这些文字哈，它说的都是人话，你不知道大家发现没有哈。"
+    },
+    {
+      "startFrame": 83372,
+      "endFrame": 83384,
+      "cueIds": [
+        330
+      ],
+      "sourceText": "你看，他们最大的争论其实是一场伪争论。"
+    },
+    {
+      "startFrame": 83388,
+      "endFrame": 83463,
+      "cueIds": [
+        330
+      ],
+      "sourceText": "你看，他们最大的争论其实是一场伪争论。"
+    },
+    {
+      "startFrame": 83477,
+      "endFrame": 83573,
+      "cueIds": [
+        331
+      ],
+      "sourceText": "我不知道大家的 codex 他们总结出来的这种标题啊或者什么之类的，会不会像我的这个老文稿一样，说的这么的自然哈。"
+    },
+    {
+      "startFrame": 83577,
+      "endFrame": 83624,
+      "cueIds": [
+        331
+      ],
+      "sourceText": "我不知道大家的 codex 他们总结出来的这种标题啊或者什么之类的，会不会像我的这个老文稿一样，说的这么的自然哈。"
+    },
+    {
+      "startFrame": 83630,
+      "endFrame": 83665,
+      "cueIds": [
+        331
+      ],
+      "sourceText": "我不知道大家的 codex 他们总结出来的这种标题啊或者什么之类的，会不会像我的这个老文稿一样，说的这么的自然哈。"
+    },
+    {
+      "startFrame": 83680,
+      "endFrame": 83713,
+      "cueIds": [
+        331
+      ],
+      "sourceText": "我不知道大家的 codex 他们总结出来的这种标题啊或者什么之类的，会不会像我的这个老文稿一样，说的这么的自然哈。"
+    },
+    {
+      "startFrame": 83716,
+      "endFrame": 83752,
+      "cueIds": [
+        331
+      ],
+      "sourceText": "我不知道大家的 codex 他们总结出来的这种标题啊或者什么之类的，会不会像我的这个老文稿一样，说的这么的自然哈。"
+    },
+    {
+      "startFrame": 83819,
+      "endFrame": 83855,
+      "cueIds": [
+        332
+      ],
+      "sourceText": "这个呢其实花了我很多的时间去调整他的说话的这种风格，这种表达方式。"
+    },
+    {
+      "startFrame": 83860,
+      "endFrame": 83998,
+      "cueIds": [
+        332
+      ],
+      "sourceText": "这个呢其实花了我很多的时间去调整他的说话的这种风格，这种表达方式。"
+    },
+    {
+      "startFrame": 84443,
+      "endFrame": 84519,
+      "cueIds": [
+        333
+      ],
+      "sourceText": "在刚开始的时候呢，我给大家区分了两个概念，一个叫硅基语言，一个叫碳基语言，对吧？"
+    },
+    {
+      "startFrame": 84539,
+      "endFrame": 84607,
+      "cueIds": [
+        333
+      ],
+      "sourceText": "在刚开始的时候呢，我给大家区分了两个概念，一个叫硅基语言，一个叫碳基语言，对吧？"
+    },
+    {
+      "startFrame": 84610,
+      "endFrame": 84655,
+      "cueIds": [
+        333
+      ],
+      "sourceText": "在刚开始的时候呢，我给大家区分了两个概念，一个叫硅基语言，一个叫碳基语言，对吧？"
+    },
+    {
+      "startFrame": 84711,
+      "endFrame": 84713,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 84873,
+      "endFrame": 84915,
+      "cueIds": [
+        335
+      ],
+      "sourceText": "我去，我用我用的完全就是 GPT 啊，并且我使用的还是这个调试跟发布的这种。"
+    },
+    {
+      "startFrame": 84931,
+      "endFrame": 85063,
+      "cueIds": [
+        335
+      ],
+      "sourceText": "我去，我用我用的完全就是 GPT 啊，并且我使用的还是这个调试跟发布的这种。"
+    },
+    {
+      "startFrame": 85144,
+      "endFrame": 85203,
+      "cueIds": [
+        336
+      ],
+      "sourceText": "程序员的这种使用的这种啊。"
+    },
+    {
+      "startFrame": 85214,
+      "endFrame": 85229,
+      "cueIds": [
+        337
+      ],
+      "sourceText": "然后呢，这个 CodeX 如果说你选中的这个 ChatGPT 的话，它可能还会说人话。"
+    },
+    {
+      "startFrame": 85244,
+      "endFrame": 85374,
+      "cueIds": [
+        337
+      ],
+      "sourceText": "然后呢，这个 CodeX 如果说你选中的这个 ChatGPT 的话，它可能还会说人话。"
+    },
+    {
+      "startFrame": 85385,
+      "endFrame": 85425,
+      "cueIds": [
+        338
+      ],
+      "sourceText": "但你用 CodeX 的话，它就是一个程序员的语言，与程序员的一个思维。"
+    },
+    {
+      "startFrame": 85433,
+      "endFrame": 85482,
+      "cueIds": [
+        338
+      ],
+      "sourceText": "但你用 CodeX 的话，它就是一个程序员的语言，与程序员的一个思维。"
+    },
+    {
+      "startFrame": 85489,
+      "endFrame": 85534,
+      "cueIds": [
+        338
+      ],
+      "sourceText": "但你用 CodeX 的话，它就是一个程序员的语言，与程序员的一个思维。"
+    },
+    {
+      "startFrame": 85543,
+      "endFrame": 85563,
+      "cueIds": [
+        339
+      ],
+      "sourceText": "它在 ChatGPT 里面的系统的提示词里面吧，它会内置一个所有的内容要尽可能简洁。"
+    },
+    {
+      "startFrame": 85580,
+      "endFrame": 85650,
+      "cueIds": [
+        339
+      ],
+      "sourceText": "它在 ChatGPT 里面的系统的提示词里面吧，它会内置一个所有的内容要尽可能简洁。"
+    },
+    {
+      "startFrame": 85664,
+      "endFrame": 85692,
+      "cueIds": [
+        339
+      ],
+      "sourceText": "它在 ChatGPT 里面的系统的提示词里面吧，它会内置一个所有的内容要尽可能简洁。"
+    },
+    {
+      "startFrame": 85700,
+      "endFrame": 85703,
+      "cueIds": [
+        339
+      ],
+      "sourceText": "它在 ChatGPT 里面的系统的提示词里面吧，它会内置一个所有的内容要尽可能简洁。"
+    },
+    {
+      "startFrame": 85706,
+      "endFrame": 85750,
+      "cueIds": [
+        339
+      ],
+      "sourceText": "它在 ChatGPT 里面的系统的提示词里面吧，它会内置一个所有的内容要尽可能简洁。"
+    },
+    {
+      "startFrame": 85761,
+      "endFrame": 85845,
+      "cueIds": [
+        339
+      ],
+      "sourceText": "它在 ChatGPT 里面的系统的提示词里面吧，它会内置一个所有的内容要尽可能简洁。"
+    },
+    {
+      "startFrame": 85881,
+      "endFrame": 85915,
+      "cueIds": [
+        340
+      ],
+      "sourceText": "概念的一个这种核心的规则。"
+    },
+    {
+      "startFrame": 85932,
+      "endFrame": 85966,
+      "cueIds": [
+        340
+      ],
+      "sourceText": "概念的一个这种核心的规则。"
+    },
+    {
+      "startFrame": 85971,
+      "endFrame": 86063,
+      "cueIds": [
+        341
+      ],
+      "sourceText": "所以呢，你就会感觉他说话说的非常的"
+    },
+    {
+      "startFrame": 86152,
+      "endFrame": 86297,
+      "cueIds": [
+        342
+      ],
+      "sourceText": "压缩啊，就是把很多相似的一些概念呐之类的，它会用一个那种普通的一些词，或者是语义近似的一些词，给它笼统地概括起来。"
+    },
+    {
+      "startFrame": 86302,
+      "endFrame": 86315,
+      "cueIds": [
+        342
+      ],
+      "sourceText": "压缩啊，就是把很多相似的一些概念呐之类的，它会用一个那种普通的一些词，或者是语义近似的一些词，给它笼统地概括起来。"
+    },
+    {
+      "startFrame": 86347,
+      "endFrame": 86382,
+      "cueIds": [
+        342
+      ],
+      "sourceText": "压缩啊，就是把很多相似的一些概念呐之类的，它会用一个那种普通的一些词，或者是语义近似的一些词，给它笼统地概括起来。"
+    },
+    {
+      "startFrame": 86396,
+      "endFrame": 86489,
+      "cueIds": [
+        342
+      ],
+      "sourceText": "压缩啊，就是把很多相似的一些概念呐之类的，它会用一个那种普通的一些词，或者是语义近似的一些词，给它笼统地概括起来。"
+    },
+    {
+      "startFrame": 86505,
+      "endFrame": 86507,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 86536,
+      "endFrame": 86538,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 86583,
+      "endFrame": 86642,
+      "cueIds": [
+        343
+      ],
+      "sourceText": "我不知道大家有没有发现这样的一个特点。"
+    },
+    {
+      "startFrame": 86781,
+      "endFrame": 86836,
+      "cueIds": [
+        344
+      ],
+      "sourceText": "然后呢我就把它给解决掉了。"
+    },
+    {
+      "startFrame": 86879,
+      "endFrame": 86887,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 86915,
+      "endFrame": 86980,
+      "cueIds": [
+        345
+      ],
+      "sourceText": "这个呢大家感，这个呢大家感兴趣的话，我可以在下一次的 Agent 的构建的分享里面给大家分享一下我是怎么解决这个问题的。"
+    },
+    {
+      "startFrame": 86989,
+      "endFrame": 87092,
+      "cueIds": [
+        345
+      ],
+      "sourceText": "这个呢大家感，这个呢大家感兴趣的话，我可以在下一次的 Agent 的构建的分享里面给大家分享一下我是怎么解决这个问题的。"
+    },
+    {
+      "startFrame": 87098,
+      "endFrame": 87157,
+      "cueIds": [
+        345
+      ],
+      "sourceText": "这个呢大家感，这个呢大家感兴趣的话，我可以在下一次的 Agent 的构建的分享里面给大家分享一下我是怎么解决这个问题的。"
+    },
+    {
+      "startFrame": 87255,
+      "endFrame": 87257,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 87403,
+      "endFrame": 87406,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 88702,
+      "endFrame": 88709,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 88714,
+      "endFrame": 88734,
+      "cueIds": [
+        346
+      ],
+      "sourceText": "嗯，刚才思维有点卡壳啊，然后我们就不管了，然后直接。"
+    },
+    {
+      "startFrame": 88741,
+      "endFrame": 88775,
+      "cueIds": [
+        346
+      ],
+      "sourceText": "嗯，刚才思维有点卡壳啊，然后我们就不管了，然后直接。"
+    },
+    {
+      "startFrame": 88780,
+      "endFrame": 88834,
+      "cueIds": [
+        346
+      ],
+      "sourceText": "嗯，刚才思维有点卡壳啊，然后我们就不管了，然后直接。"
+    },
+    {
+      "startFrame": 88899,
+      "endFrame": 88971,
+      "cueIds": [
+        347
+      ],
+      "sourceText": "我基本上我基本上就是想到什么说什么，所以呢。"
+    },
+    {
+      "startFrame": 88976,
+      "endFrame": 88995,
+      "cueIds": [
+        347
+      ],
+      "sourceText": "我基本上我基本上就是想到什么说什么，所以呢。"
+    },
+    {
+      "startFrame": 89015,
+      "endFrame": 89095,
+      "cueIds": [
+        348
+      ],
+      "sourceText": "我觉得我应该挺适合直播的，但是"
+    },
+    {
+      "startFrame": 89145,
+      "endFrame": 89162,
+      "cueIds": [
+        349
+      ],
+      "sourceText": "没有人"
+    },
+    {
+      "startFrame": 89234,
+      "endFrame": 89236,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 89325,
+      "endFrame": 89327,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 89334,
+      "endFrame": 89397,
+      "cueIds": [
+        350
+      ],
+      "sourceText": "我的发散型思维比较多啊。"
+    },
+    {
+      "startFrame": 89562,
+      "endFrame": 89588,
+      "cueIds": [
+        351
+      ],
+      "sourceText": "然后我们继续看吧。"
+    },
+    {
+      "startFrame": 89602,
+      "endFrame": 89604,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 89608,
+      "endFrame": 89649,
+      "cueIds": [
+        352
+      ],
+      "sourceText": "啊，然后呢，这里说，呃，另一个人说的，一个人说的选题是指的一份内容最终形成的完整配置。"
+    },
+    {
+      "startFrame": 89659,
+      "endFrame": 89661,
+      "cueIds": [
+        352
+      ],
+      "sourceText": "啊，然后呢，这里说，呃，另一个人说的，一个人说的选题是指的一份内容最终形成的完整配置。"
+    },
+    {
+      "startFrame": 89665,
+      "endFrame": 89820,
+      "cueIds": [
+        352
+      ],
+      "sourceText": "啊，然后呢，这里说，呃，另一个人说的，一个人说的选题是指的一份内容最终形成的完整配置。"
+    },
+    {
+      "startFrame": 89836,
+      "endFrame": 89944,
+      "cueIds": [
+        353
+      ],
+      "sourceText": "另一个人说的选题指的是创作者面对的实际难题。"
+    },
+    {
+      "startFrame": 89983,
+      "endFrame": 90161,
+      "cueIds": [
+        354
+      ],
+      "sourceText": "两个人的争论相当于一个人在回答汽车是什么，另一个人在问我怎样造出一辆汽车。"
+    },
+    {
+      "startFrame": 90173,
+      "endFrame": 90227,
+      "cueIds": [
+        355
+      ],
+      "sourceText": "这个呢，他用的是东哥的这个。"
+    },
+    {
+      "startFrame": 90400,
+      "endFrame": 90421,
+      "cueIds": [
+        356
+      ],
+      "sourceText": "个案例啊，那个例子。"
+    },
+    {
+      "startFrame": 90424,
+      "endFrame": 90439,
+      "cueIds": [
+        356
+      ],
+      "sourceText": "个案例啊，那个例子。"
+    },
+    {
+      "startFrame": 91052,
+      "endFrame": 91190,
+      "cueIds": [
+        357
+      ],
+      "sourceText": "然后呢这个地方给选题下了个定义很多啊，就是这么这么多的一些定义。啊，然后呢"
+    },
+    {
+      "startFrame": 91205,
+      "endFrame": 91240,
+      "cueIds": [
+        357
+      ],
+      "sourceText": "然后呢这个地方给选题下了个定义很多啊，就是这么这么多的一些定义。啊，然后呢"
+    },
+    {
+      "startFrame": 91252,
+      "endFrame": 91274,
+      "cueIds": [
+        357
+      ],
+      "sourceText": "然后呢这个地方给选题下了个定义很多啊，就是这么这么多的一些定义。啊，然后呢"
+    },
+    {
+      "startFrame": 91318,
+      "endFrame": 91329,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 91332,
+      "endFrame": 91499,
+      "cueIds": [
+        358
+      ],
+      "sourceText": "它的价值是同样的素材只要主次关系和表达动作不同，就会变成不同的内容。"
+    },
+    {
+      "startFrame": 91515,
+      "endFrame": 91647,
+      "cueIds": [
+        359
+      ],
+      "sourceText": "但是呢它也存在着一个问题，就是如果说把所有的决定都叫做选题。那本身它就不是选题。"
+    },
+    {
+      "startFrame": 91659,
+      "endFrame": 91685,
+      "cueIds": [
+        359
+      ],
+      "sourceText": "但是呢它也存在着一个问题，就是如果说把所有的决定都叫做选题。那本身它就不是选题。"
+    },
+    {
+      "startFrame": 91694,
+      "endFrame": 91724,
+      "cueIds": [
+        359
+      ],
+      "sourceText": "但是呢它也存在着一个问题，就是如果说把所有的决定都叫做选题。那本身它就不是选题。"
+    },
+    {
+      "startFrame": 91834,
+      "endFrame": 91916,
+      "cueIds": [
+        360
+      ],
+      "sourceText": "那么选题就那么选题就几乎等于整份内容的方案。"
+    },
+    {
+      "startFrame": 92507,
+      "endFrame": 92596,
+      "cueIds": [
+        361
+      ],
+      "sourceText": "然后呢这里给出了一个更准确的一个定义啊，就是"
+    },
+    {
+      "startFrame": 92684,
+      "endFrame": 92929,
+      "cueIds": [
+        362
+      ],
+      "sourceText": "选题是创作者针对特定接收者、特定目标，对使用哪些可证材料、建立什么关系、提出什么判断和体验，让接收者发生变化，做出的一次可验证内容承诺。"
+    },
+    {
+      "startFrame": 92952,
+      "endFrame": 92954,
+      "cueIds": [
+        362
+      ],
+      "sourceText": "选题是创作者针对特定接收者、特定目标，对使用哪些可证材料、建立什么关系、提出什么判断和体验，让接收者发生变化，做出的一次可验证内容承诺。"
+    },
+    {
+      "startFrame": 92960,
+      "endFrame": 93032,
+      "cueIds": [
+        362
+      ],
+      "sourceText": "选题是创作者针对特定接收者、特定目标，对使用哪些可证材料、建立什么关系、提出什么判断和体验，让接收者发生变化，做出的一次可验证内容承诺。"
+    },
+    {
+      "startFrame": 93036,
+      "endFrame": 93102,
+      "cueIds": [
+        362
+      ],
+      "sourceText": "选题是创作者针对特定接收者、特定目标，对使用哪些可证材料、建立什么关系、提出什么判断和体验，让接收者发生变化，做出的一次可验证内容承诺。"
+    },
+    {
+      "startFrame": 93430,
+      "endFrame": 93499,
+      "cueIds": [
+        363
+      ],
+      "sourceText": "这个地方呢，他说的比较"
+    },
+    {
+      "startFrame": 93603,
+      "endFrame": 93620,
+      "cueIds": [
+        364
+      ],
+      "sourceText": "拗口啊，这个呢之前我跟他讨论过。"
+    },
+    {
+      "startFrame": 93633,
+      "endFrame": 93676,
+      "cueIds": [
+        364
+      ],
+      "sourceText": "拗口啊，这个呢之前我跟他讨论过。"
+    },
+    {
+      "startFrame": 93762,
+      "endFrame": 93829,
+      "cueIds": [
+        365
+      ],
+      "sourceText": "这个呢用大白话来讲呢，其实就是。"
+    },
+    {
+      "startFrame": 93841,
+      "endFrame": 93845,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 94719,
+      "endFrame": 94768,
+      "cueIds": [
+        366
+      ],
+      "sourceText": "使用你的个人经验。"
+    },
+    {
+      "startFrame": 96090,
+      "endFrame": 96140,
+      "cueIds": [
+        367
+      ],
+      "sourceText": "对你想要影响到的的一个人群。"
+    },
+    {
+      "startFrame": 96143,
+      "endFrame": 96169,
+      "cueIds": [
+        367
+      ],
+      "sourceText": "对你想要影响到的的一个人群。"
+    },
+    {
+      "startFrame": 96286,
+      "endFrame": 96347,
+      "cueIds": [
+        368
+      ],
+      "sourceText": "让他们去产生一个"
+    },
+    {
+      "startFrame": 96391,
+      "endFrame": 96445,
+      "cueIds": [
+        369
+      ],
+      "sourceText": "判断或者体验或者"
+    },
+    {
+      "startFrame": 96532,
+      "endFrame": 96564,
+      "cueIds": [
+        370
+      ],
+      "sourceText": "产生一个变化，大概就是这样的一个意思啊。"
+    },
+    {
+      "startFrame": 96583,
+      "endFrame": 96620,
+      "cueIds": [
+        370
+      ],
+      "sourceText": "产生一个变化，大概就是这样的一个意思啊。"
+    },
+    {
+      "startFrame": 96778,
+      "endFrame": 96780,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 96899,
+      "endFrame": 96903,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 96907,
+      "endFrame": 97019,
+      "cueIds": [
+        371
+      ],
+      "sourceText": "啊，然后关于更多的内容呢，这里就不给大家探讨了。"
+    },
+    {
+      "startFrame": 97184,
+      "endFrame": 97231,
+      "cueIds": [
+        372
+      ],
+      "sourceText": "然后呢整个的过程当中呢，我其实刚才跟他几张，然后刚才我给大家演示的这两种方式呢，它只是一个非常粗糙的一个使用啊，还是比较宽泛的。"
+    },
+    {
+      "startFrame": 97299,
+      "endFrame": 97341,
+      "cueIds": [
+        372
+      ],
+      "sourceText": "然后呢整个的过程当中呢，我其实刚才跟他几张，然后刚才我给大家演示的这两种方式呢，它只是一个非常粗糙的一个使用啊，还是比较宽泛的。"
+    },
+    {
+      "startFrame": 97348,
+      "endFrame": 97401,
+      "cueIds": [
+        372
+      ],
+      "sourceText": "然后呢整个的过程当中呢，我其实刚才跟他几张，然后刚才我给大家演示的这两种方式呢，它只是一个非常粗糙的一个使用啊，还是比较宽泛的。"
+    },
+    {
+      "startFrame": 97406,
+      "endFrame": 97474,
+      "cueIds": [
+        372
+      ],
+      "sourceText": "然后呢整个的过程当中呢，我其实刚才跟他几张，然后刚才我给大家演示的这两种方式呢，它只是一个非常粗糙的一个使用啊，还是比较宽泛的。"
+    },
+    {
+      "startFrame": 97485,
+      "endFrame": 97529,
+      "cueIds": [
+        372
+      ],
+      "sourceText": "然后呢整个的过程当中呢，我其实刚才跟他几张，然后刚才我给大家演示的这两种方式呢，它只是一个非常粗糙的一个使用啊，还是比较宽泛的。"
+    },
+    {
+      "startFrame": 97539,
+      "endFrame": 97543,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 97552,
+      "endFrame": 97644,
+      "cueIds": [
+        373
+      ],
+      "sourceText": "啊，但是呢它会有一个宏观的一个内容，然后你在看这个内容的过程当中呢，你肯定是会有一些不同的见解，或者是想要反驳，或者是想要"
+    },
+    {
+      "startFrame": 97654,
+      "endFrame": 97832,
+      "cueIds": [
+        373
+      ],
+      "sourceText": "啊，但是呢它会有一个宏观的一个内容，然后你在看这个内容的过程当中呢，你肯定是会有一些不同的见解，或者是想要反驳，或者是想要"
+    },
+    {
+      "startFrame": 97860,
+      "endFrame": 97902,
+      "cueIds": [
+        374
+      ],
+      "sourceText": "去搞明白的一些内容，那么对你自己有什么样的帮助？"
+    },
+    {
+      "startFrame": 97905,
+      "endFrame": 97962,
+      "cueIds": [
+        374
+      ],
+      "sourceText": "去搞明白的一些内容，那么对你自己有什么样的帮助？"
+    },
+    {
+      "startFrame": 97975,
+      "endFrame": 97978,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 97983,
+      "endFrame": 98075,
+      "cueIds": [
+        375
+      ],
+      "sourceText": "啊，那你就可以去他跟他进行对应的这种探讨。"
+    },
+    {
+      "startFrame": 98250,
+      "endFrame": 98252,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 98261,
+      "endFrame": 98276,
+      "cueIds": [
+        376
+      ],
+      "sourceText": "像这两条视频对我的帮助的话，其实就是"
+    },
+    {
+      "startFrame": 98292,
+      "endFrame": 98355,
+      "cueIds": [
+        376
+      ],
+      "sourceText": "像这两条视频对我的帮助的话，其实就是"
+    },
+    {
+      "startFrame": 98379,
+      "endFrame": 98416,
+      "cueIds": [
+        376
+      ],
+      "sourceText": "像这两条视频对我的帮助的话，其实就是"
+    },
+    {
+      "startFrame": 98571,
+      "endFrame": 98665,
+      "cueIds": [
+        377
+      ],
+      "sourceText": "其实就是他让我学会了东哥的这种方法论。"
+    },
+    {
+      "startFrame": 98733,
+      "endFrame": 98933,
+      "cueIds": [
+        378
+      ],
+      "sourceText": "因为我很多的内容全部都是原创的，都是我在解决我真实的使用 AI 的过程当中的一个个的痛点。"
+    },
+    {
+      "startFrame": 98981,
+      "endFrame": 99096,
+      "cueIds": [
+        379
+      ],
+      "sourceText": "然后呢，但是我是受限于这种痛点，我不知道怎么去把这个开口给它弄大，就是让更多的人知道这个东西。"
+    },
+    {
+      "startFrame": 99103,
+      "endFrame": 99123,
+      "cueIds": [
+        379
+      ],
+      "sourceText": "然后呢，但是我是受限于这种痛点，我不知道怎么去把这个开口给它弄大，就是让更多的人知道这个东西。"
+    },
+    {
+      "startFrame": 99126,
+      "endFrame": 99213,
+      "cueIds": [
+        379
+      ],
+      "sourceText": "然后呢，但是我是受限于这种痛点，我不知道怎么去把这个开口给它弄大，就是让更多的人知道这个东西。"
+    },
+    {
+      "startFrame": 99217,
+      "endFrame": 99391,
+      "cueIds": [
+        380
+      ],
+      "sourceText": "其实我自己知道这个东西非常有价值，但是我不知道这个东西怎么能让很多的人知道这个东西有价值。"
+    },
+    {
+      "startFrame": 99420,
+      "endFrame": 99445,
+      "cueIds": [
+        380
+      ],
+      "sourceText": "其实我自己知道这个东西非常有价值，但是我不知道这个东西怎么能让很多的人知道这个东西有价值。"
+    },
+    {
+      "startFrame": 99530,
+      "endFrame": 99596,
+      "cueIds": [
+        381
+      ],
+      "sourceText": "然后呢，栋哥的这个理念就是去找一个开口比较大的，更关心于这方面的一个比较大的一个话题，然后呢去做"
+    },
+    {
+      "startFrame": 99623,
+      "endFrame": 99653,
+      "cueIds": [
+        381
+      ],
+      "sourceText": "然后呢，栋哥的这个理念就是去找一个开口比较大的，更关心于这方面的一个比较大的一个话题，然后呢去做"
+    },
+    {
+      "startFrame": 99672,
+      "endFrame": 99809,
+      "cueIds": [
+        381
+      ],
+      "sourceText": "然后呢，栋哥的这个理念就是去找一个开口比较大的，更关心于这方面的一个比较大的一个话题，然后呢去做"
+    },
+    {
+      "startFrame": 99821,
+      "endFrame": 99853,
+      "cueIds": [
+        381
+      ],
+      "sourceText": "然后呢，栋哥的这个理念就是去找一个开口比较大的，更关心于这方面的一个比较大的一个话题，然后呢去做"
+    },
+    {
+      "startFrame": 100345,
+      "endFrame": 100463,
+      "cueIds": [
+        382
+      ],
+      "sourceText": "去做这个针对这个话题下面的不同内容的一个"
+    },
+    {
+      "startFrame": 100823,
+      "endFrame": 100915,
+      "cueIds": [
+        383
+      ],
+      "sourceText": "分块的教学，比如说哈，那个最经典的就是啊。"
+    },
+    {
+      "startFrame": 100930,
+      "endFrame": 100932,
+      "cueIds": [
+        383
+      ],
+      "sourceText": "分块的教学，比如说哈，那个最经典的就是啊。"
+    },
+    {
+      "startFrame": 101002,
+      "endFrame": 101252,
+      "cueIds": [
+        384,
+        385,
+        386
+      ],
+      "sourceText": "AI 的工具怎么使用，对吧？ 我今天讲 CodeX，明天讲 Workbody，然后下一次我就讲豆包，对吧？ 所以呢，就完成了整个话题的一个。"
+    },
+    {
+      "startFrame": 102538,
+      "endFrame": 102557,
+      "cueIds": [
+        387
+      ],
+      "sourceText": "讲述啊。"
+    },
+    {
+      "startFrame": 102619,
+      "endFrame": 102666,
+      "cueIds": [
+        388
+      ],
+      "sourceText": "啊，然后这里我就简，快速地过一下吧。"
+    },
+    {
+      "startFrame": 102684,
+      "endFrame": 102729,
+      "cueIds": [
+        388
+      ],
+      "sourceText": "啊，然后这里我就简，快速地过一下吧。"
+    },
+    {
+      "startFrame": 102736,
+      "endFrame": 102802,
+      "cueIds": [
+        389
+      ],
+      "sourceText": "然后如果感兴趣的可以看一下。"
+    },
+    {
+      "startFrame": 102823,
+      "endFrame": 102901,
+      "cueIds": [
+        390
+      ],
+      "sourceText": "然后今天的内容呢，基本上就这样子，大概讲了，我录制录了接近一个小时啊。"
+    },
+    {
+      "startFrame": 102905,
+      "endFrame": 102989,
+      "cueIds": [
+        390
+      ],
+      "sourceText": "然后今天的内容呢，基本上就这样子，大概讲了，我录制录了接近一个小时啊。"
+    },
+    {
+      "startFrame": 102998,
+      "endFrame": 103000,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 103006,
+      "endFrame": 103037,
+      "cueIds": [
+        391
+      ],
+      "sourceText": "然后等会我就会直接用我的 agent 然后呢直接把我这个录制下的视频就直接丢给 agent 然后呢它就会直接会帮我剪出来一个，进行一个初检和精检。"
+    },
+    {
+      "startFrame": 103047,
+      "endFrame": 103109,
+      "cueIds": [
+        391
+      ],
+      "sourceText": "然后等会我就会直接用我的 agent 然后呢直接把我这个录制下的视频就直接丢给 agent 然后呢它就会直接会帮我剪出来一个，进行一个初检和精检。"
+    },
+    {
+      "startFrame": 103121,
+      "endFrame": 103206,
+      "cueIds": [
+        391
+      ],
+      "sourceText": "然后等会我就会直接用我的 agent 然后呢直接把我这个录制下的视频就直接丢给 agent 然后呢它就会直接会帮我剪出来一个，进行一个初检和精检。"
+    },
+    {
+      "startFrame": 103215,
+      "endFrame": 103297,
+      "cueIds": [
+        391
+      ],
+      "sourceText": "然后等会我就会直接用我的 agent 然后呢直接把我这个录制下的视频就直接丢给 agent 然后呢它就会直接会帮我剪出来一个，进行一个初检和精检。"
+    },
+    {
+      "startFrame": 103305,
+      "endFrame": 103348,
+      "cueIds": [
+        391
+      ],
+      "sourceText": "然后等会我就会直接用我的 agent 然后呢直接把我这个录制下的视频就直接丢给 agent 然后呢它就会直接会帮我剪出来一个，进行一个初检和精检。"
+    },
+    {
+      "startFrame": 103370,
+      "endFrame": 103461,
+      "cueIds": [
+        392
+      ],
+      "sourceText": "啊，初检的话就是根据我的这个音频的这个，我在录制的时候呢，其实里面有很多的一些比较气口啊，或者是一些口水话。"
+    },
+    {
+      "startFrame": 103478,
+      "endFrame": 103630,
+      "cueIds": [
+        392
+      ],
+      "sourceText": "啊，初检的话就是根据我的这个音频的这个，我在录制的时候呢，其实里面有很多的一些比较气口啊，或者是一些口水话。"
+    },
+    {
+      "startFrame": 103644,
+      "endFrame": 103646,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 103650,
+      "endFrame": 103735,
+      "cueIds": [
+        393
+      ],
+      "sourceText": "啊，然后呢他首先会剪一些气口，把一些"
+    },
+    {
+      "startFrame": 103827,
+      "endFrame": 103861,
+      "cueIds": [
+        394
+      ],
+      "sourceText": "没说话的部分啊，根据音频的波形，然后给它剪掉。"
+    },
+    {
+      "startFrame": 103866,
+      "endFrame": 104091,
+      "cueIds": [
+        394,
+        395
+      ],
+      "sourceText": "没说话的部分啊，根据音频的波形，然后给它剪掉。 然后呢，再去识别 ASR 的这个字幕，它的文字，把这个一些文字里面一些口水话。的内容给它剪掉。"
+    },
+    {
+      "startFrame": 104099,
+      "endFrame": 104138,
+      "cueIds": [
+        395
+      ],
+      "sourceText": "然后呢，再去识别 ASR 的这个字幕，它的文字，把这个一些文字里面一些口水话。的内容给它剪掉。"
+    },
+    {
+      "startFrame": 104147,
+      "endFrame": 104184,
+      "cueIds": [
+        395
+      ],
+      "sourceText": "然后呢，再去识别 ASR 的这个字幕，它的文字，把这个一些文字里面一些口水话。的内容给它剪掉。"
+    },
+    {
+      "startFrame": 104214,
+      "endFrame": 104216,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 104230,
+      "endFrame": 104243,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 104266,
+      "endFrame": 104381,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 104384,
+      "endFrame": 104412,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 104425,
+      "endFrame": 104548,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 104557,
+      "endFrame": 104585,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 104621,
+      "endFrame": 104642,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 104647,
+      "endFrame": 104686,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 104703,
+      "endFrame": 104734,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 104737,
+      "endFrame": 104759,
+      "cueIds": [
+        396
+      ],
+      "sourceText": "然后呢，甚至呢我还会把它进行这样的，如果说后面有一些补充的内容的话，我甚至会让它去进行一个排列组合，把正确的语序正确的文字给它给它，让它自然而然地去调整到合适的这个"
+    },
+    {
+      "startFrame": 105021,
+      "endFrame": 105083,
+      "cueIds": [
+        397
+      ],
+      "sourceText": "它应该出现的这个位置上面啊。"
+    },
+    {
+      "startFrame": 105089,
+      "endFrame": 105219,
+      "cueIds": [
+        398
+      ],
+      "sourceText": "然后呢，这个大家如果有兴趣的话，我可以再出一视频给大家演示一下我怎么做的，以及这个相关的这个 a 镜头呢，好像我也开远了吧，我看看有没有开远。"
+    },
+    {
+      "startFrame": 105225,
+      "endFrame": 105244,
+      "cueIds": [
+        398
+      ],
+      "sourceText": "然后呢，这个大家如果有兴趣的话，我可以再出一视频给大家演示一下我怎么做的，以及这个相关的这个 a 镜头呢，好像我也开远了吧，我看看有没有开远。"
+    },
+    {
+      "startFrame": 105248,
+      "endFrame": 105256,
+      "cueIds": [
+        398
+      ],
+      "sourceText": "然后呢，这个大家如果有兴趣的话，我可以再出一视频给大家演示一下我怎么做的，以及这个相关的这个 a 镜头呢，好像我也开远了吧，我看看有没有开远。"
+    },
+    {
+      "startFrame": 105260,
+      "endFrame": 105277,
+      "cueIds": [
+        398
+      ],
+      "sourceText": "然后呢，这个大家如果有兴趣的话，我可以再出一视频给大家演示一下我怎么做的，以及这个相关的这个 a 镜头呢，好像我也开远了吧，我看看有没有开远。"
+    },
+    {
+      "startFrame": 105287,
+      "endFrame": 105305,
+      "cueIds": [
+        398
+      ],
+      "sourceText": "然后呢，这个大家如果有兴趣的话，我可以再出一视频给大家演示一下我怎么做的，以及这个相关的这个 a 镜头呢，好像我也开远了吧，我看看有没有开远。"
+    },
+    {
+      "startFrame": 105314,
+      "endFrame": 105427,
+      "cueIds": [
+        398
+      ],
+      "sourceText": "然后呢，这个大家如果有兴趣的话，我可以再出一视频给大家演示一下我怎么做的，以及这个相关的这个 a 镜头呢，好像我也开远了吧，我看看有没有开远。"
+    },
+    {
+      "startFrame": 106078,
+      "endFrame": 106084,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 106087,
+      "endFrame": 106169,
+      "cueIds": [
+        399
+      ],
+      "sourceText": "呃，好像我开源了，不知道是不是这个呀？"
+    },
+    {
+      "startFrame": 106268,
+      "endFrame": 106352,
+      "cueIds": [
+        400
+      ],
+      "sourceText": "好像是这个，然后呢这个应该是上个月，这个"
+    },
+    {
+      "startFrame": 106380,
+      "endFrame": 106409,
+      "cueIds": [
+        400
+      ],
+      "sourceText": "好像是这个，然后呢这个应该是上个月，这个"
+    },
+    {
+      "startFrame": 106480,
+      "endFrame": 106502,
+      "cueIds": [
+        401
+      ],
+      "sourceText": "发布的啊，我还没，好久没发布了，因为我也没咋更新啊，这个我本来。"
+    },
+    {
+      "startFrame": 106511,
+      "endFrame": 106598,
+      "cueIds": [
+        401
+      ],
+      "sourceText": "发布的啊，我还没，好久没发布了，因为我也没咋更新啊，这个我本来。"
+    },
+    {
+      "startFrame": 106601,
+      "endFrame": 106609,
+      "cueIds": [
+        401
+      ],
+      "sourceText": "发布的啊，我还没，好久没发布了，因为我也没咋更新啊，这个我本来。"
+    },
+    {
+      "startFrame": 106613,
+      "endFrame": 106636,
+      "cueIds": [
+        401
+      ],
+      "sourceText": "发布的啊，我还没，好久没发布了，因为我也没咋更新啊，这个我本来。"
+    },
+    {
+      "startFrame": 106661,
+      "endFrame": 106663,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 106670,
+      "endFrame": 106677,
+      "cueIds": [
+        402
+      ],
+      "sourceText": "好，我不讲了不讲了，等会。"
+    },
+    {
+      "startFrame": 106684,
+      "endFrame": 106725,
+      "cueIds": [
+        402
+      ],
+      "sourceText": "好，我不讲了不讲了，等会。"
+    },
+    {
+      "startFrame": 106769,
+      "endFrame": 106771,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 106777,
+      "endFrame": 106779,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 106784,
+      "endFrame": 106818,
+      "cueIds": [
+        403
+      ],
+      "sourceText": "我我一讲就没停了啊，拜拜。"
+    },
+    {
+      "startFrame": 106823,
+      "endFrame": 106832,
+      "cueIds": [
+        403
+      ],
+      "sourceText": "我我一讲就没停了啊，拜拜。"
+    },
+    {
+      "startFrame": 106846,
+      "endFrame": 106849,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 106856,
+      "endFrame": 106858,
+      "cueIds": [],
+      "sourceText": ""
+    },
+    {
+      "startFrame": 106893,
+      "endFrame": 106936,
+      "cueIds": [
+        404
+      ],
+      "sourceText": "咱们下次见，拜拜！"
+    },
+    {
+      "startFrame": 106973,
+      "endFrame": 106975,
+      "cueIds": [],
+      "sourceText": ""
+    }
+  ],
+  "expectedFrames": 46200,
+  "expectedDurationSeconds": 1540,
+  "outputProbe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_type": "video",
+        "width": 1920,
+        "height": 952,
+        "r_frame_rate": "30/1",
+        "start_time": "0.000000",
+        "duration": "1539.991016",
+        "nb_read_frames": "46200"
+      },
+      {
+        "index": 1,
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "start_time": "0.000000",
+        "duration": "1539.961000",
+        "nb_read_frames": "72187"
+      }
+    ],
+    "format": {
+      "start_time": "0.000000",
+      "duration": "1539.991016",
+      "size": "381118752"
+    }
+  },
+  "renderMethod": "independent-frame-aligned-segments-with-pcm-concat",
+  "renderedAt": "2026-08-29T00:54:30.455Z"
+}

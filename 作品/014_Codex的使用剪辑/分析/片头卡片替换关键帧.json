@@ -1,0 +1,32 @@
+{
+  "source_video": "/Users/a1/Downloads/视频 (5).mp4",
+  "replacement_images": {
+    "left": "/Users/a1/Downloads/image (2).png",
+    "right": "/Users/a1/Downloads/image (3).png"
+  },
+  "canvas": {"width": 1280, "height": 720, "fps": 30},
+  "active_range_seconds": [10.5, 13.633333],
+  "mapping": "图一替换左侧卡片，图二替换右侧卡片",
+  "stable_quads": {
+    "left": [[550, 225], [800, 255], [548, 440], [800, 475]],
+    "right": [[912, 310], [1148, 355], [885, 530], [1165, 578]]
+  },
+  "late_quads": {
+    "left": [[670, 170], [915, 185], [670, 410], [915, 422]],
+    "right": [[940, 305], [1195, 335], [925, 550], [1210, 585]]
+  },
+  "keyframes": [
+    {"time": 10.5, "opacity": 0.0, "state": "沿原卡片位置淡入"},
+    {"time": 10.8, "opacity": 1.0, "state": "完成覆盖"},
+    {"time": 12.00, "opacity": 1.0, "state": "保持第一组原透视与位置"},
+    {"time": 12.50, "opacity": 1.0, "state": "跟随原卡片向右移动并改变透视"},
+    {"time": 13.20, "opacity": 1.0, "state": "保持第二组原透视与位置"},
+    {"time": 13.45, "left_opacity": 0.0, "right_opacity": 1.0, "right_translate_x": 230, "state": "跟随原转场退出"},
+    {"time": 13.633333, "opacity": 0.0, "right_translate_x": 340, "state": "完全退出"}
+  ],
+  "render_notes": [
+    "源图使用圆角透明蒙版和轻微暖色辉光，使覆盖层与原动画融合",
+    "覆盖层只替换红框中的两个卡片，原人物、背景、发光连线和后续脑图动画不改",
+    "所有时间参数保留为文字记录，临时逐帧 PNG 在验证后删除"
+  ]
+}
