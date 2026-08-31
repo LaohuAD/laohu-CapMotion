@@ -16,7 +16,7 @@
 - 创建：`/Users/a1/Library/Application Support/so.cap.desktop.dev/recordings/Mi Monitor (Area) 2026-08-30 06.23 PM.cap/.codex-backup/remotion-demo-2026-08-31/` — 仅保存写入前的小型 JSON 配置备份。
 - 创建：`/Users/a1/Library/Application Support/so.cap.desktop.dev/recordings/Mi Monitor (Area) 2026-08-30 06.23 PM.cap/motion/cache/` — Cap CLI 按内容哈希生成的预览缓存。
 - 不修改：`recording-meta.json`、`content/segments/**`、录屏、摄像头、麦克风和系统声音媒体。
-- 复用：`/Volumes/Laohu_Work/项目/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/` — 唯一 Remotion workspace。
+- 复用：`/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/` — 唯一 Remotion workspace。
 
 ### Task 1: 写入前保护与基线验证
 
@@ -55,7 +55,7 @@ npm run compositions
 Working directory:
 
 ```text
-/Volumes/Laohu_Work/项目/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace
+/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace
 ```
 
 Expected: 测试和类型检查通过；输出包含 `KineticStatement`、`CompareTransform`、`FlowNodeGraph`、`EvidenceBoard`。
