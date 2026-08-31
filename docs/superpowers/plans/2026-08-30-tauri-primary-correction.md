@@ -481,7 +481,7 @@ Expected: no GPUI file appears.
 Do not start the GUI automatically. Report this command:
 
 ```bash
-/Users/a1/Documents/老胡/老胡自媒体/老胡画面讲解/scripts/start-cap.sh
+/Volumes/Laohu_Work/项目/老胡画面讲解/scripts/start-cap.sh
 ```
 
 When the user explicitly asks to open Cap, launch it once, leave it open for Tauri HMR, and avoid repeated native restarts.

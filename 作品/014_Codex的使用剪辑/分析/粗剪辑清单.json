@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-08-28T14:12:49.734Z",
   "sourcePath": "/Users/a1/Movies/codex的使用.mp4",
-  "rawAsrPath": "/Users/a1/Documents/老胡/老胡自媒体/老胡画面讲解/作品/014_Codex的使用剪辑/输入/Codex的使用.raw.json",
-  "srtPath": "/Users/a1/Documents/老胡/老胡自媒体/老胡画面讲解/作品/014_Codex的使用剪辑/输入/Codex的使用.srt",
+  "rawAsrPath": "/Volumes/Laohu_Work/项目/老胡画面讲解/作品/014_Codex的使用剪辑/输入/Codex的使用.raw.json",
+  "srtPath": "/Volumes/Laohu_Work/项目/老胡画面讲解/作品/014_Codex的使用剪辑/输入/Codex的使用.srt",
   "sourceDuration": 3565.833333,
   "silenceThreshold": "-45dB / 0.1s",
   "retainedBreathSecondsPerSide": 0.025,
