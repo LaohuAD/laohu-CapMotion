@@ -66,12 +66,16 @@ Expected: PASS.
 ### Task 2: Track-wide manual subtitle coordinates
 
 **Files:**
-- Create: `apps/desktop/src/routes/editor/caption-position.ts`
-- Create: `apps/desktop/src/routes/editor/caption-position.test.ts`
+- Modify: `apps/desktop/src/routes/editor/caption-position.ts`
+- Modify: `apps/desktop/src/routes/editor/caption-position.test.ts`
+- Modify: `apps/desktop/src/routes/editor/caption-tracks.ts`
+- Modify: `apps/desktop/src/routes/editor/caption-tracks.test.ts`
 - Modify: `apps/desktop/src/store/captions.ts`
 - Modify: `crates/project/src/configuration.rs`
 - Modify: `apps/desktop/src/routes/editor/CaptionsTab.tsx`
 - Modify: `apps/desktop/src/routes/editor/CaptionOverlay.tsx`
+- Modify: `apps/desktop/src/routes/editor/context.ts`
+- Modify: `apps/desktop/src/i18n-literals.ts`
 - Modify: `crates/rendering/src/layers/captions.rs`
 - Modify generated bindings: `apps/desktop/src/utils/tauri.ts`
 
@@ -110,21 +114,93 @@ Run: `cargo test -p cap-project manual_positions -- --nocapture`
 
 Expected: FAIL until the new shape is implemented.
 
-- [ ] **Step 4: Implement sidebar coordinates and track selection**
+- [ ] **Step 4: Write failing tests for visible position groups and stale-setting cleanup**
 
-The selected caption segment determines the active track; otherwise use the first caption track. When position is Manual, show X/Y number inputs in centered 1920x1080 pixels. Writing either input updates that track and clears position overrides from every segment in that track.
+Extend `caption-tracks.test.ts` to prove the visible controls come from actual tracks, not from `trackPositions` or an implicit active selection:
 
-- [ ] **Step 5: Make canvas drag and arrow keys update the track**
+```ts
+const groups = groupCaptionSegmentsByTrack([
+  { id: "zh-1", trackId: "zh-CN", start: 0, end: 1, text: "中文" },
+  { id: "en-1", trackId: "en", start: 0, end: 1, text: "English" },
+] as never);
+expect(groups.map(({ id }) => id)).toEqual(["zh-CN", "en"]);
+```
+
+Extend `caption-position.test.ts` with cleanup behavior:
+
+```ts
+expect(
+  pruneCaptionTrackPositions(
+    [
+      { trackId: "zh-CN", position: "manual", manualPosition: { x: 0.5, y: 0.8 } },
+      { trackId: "en", position: "manual", manualPosition: { x: 0.5, y: 0.9 } },
+    ],
+    new Set(["zh-CN"]),
+  ),
+).toEqual([
+  { trackId: "zh-CN", position: "manual", manualPosition: { x: 0.5, y: 0.8 } },
+]);
+```
+
+Run: `pnpm --dir apps/desktop vitest run src/routes/editor/caption-position.test.ts src/routes/editor/caption-tracks.test.ts`
+
+Expected: FAIL because `pruneCaptionTrackPositions` is not implemented yet.
+
+- [ ] **Step 5: Render one independent position control for every actual caption track**
+
+Replace `activeCaptionTrackId`, `activeCaptionPosition`, and the single position selector in `CaptionsTab.tsx` with track-parameterized helpers:
+
+```ts
+const captionPositionTracks = createMemo(() =>
+  groupCaptionSegmentsByTrack(project.timeline?.captionSegments ?? []),
+);
+
+const captionPositionForTrack = (trackId: string) =>
+  resolveCaptionTrackPosition(getSetting("trackPositions"), trackId, {
+    position: getSetting("position"),
+    manualPosition: getSetting("manualPosition"),
+  });
+```
+
+Render the groups together inside the existing Position field. Use `Chinese Position` for `zh-CN`, `English Position` for `en`, and `<localized track label> + Position` for other track ids. Each group owns its position select and conditionally visible X/Y inputs. Add these localized labels to `i18n-literals.ts`:
+
+```ts
+"Chinese Position": "中文位置",
+"English Position": "英文位置",
+```
+
+Every update helper must take `trackId` explicitly. Changing the Chinese control must never read or write the English entry, and vice versa. A new track without a `trackPositions` entry resolves through the global legacy fallback until its first edit.
+
+- [ ] **Step 6: Make canvas drag and arrow keys update the selected caption's track**
 
 Dragging any active caption writes one track setting, not one segment override. Add a document `keydown` handler that accepts held arrow repeats, ignores editable controls, and nudges by `1 / 1920` or `1 / 1080` per event.
 
-- [ ] **Step 6: Render track positions consistently**
+- [ ] **Step 7: Remove orphaned track positions when the last segment in a track is deleted**
+
+Add this pure helper to `caption-position.ts`:
+
+```ts
+export function pruneCaptionTrackPositions(
+  positions: CaptionTrackPositionSetting[] | null | undefined,
+  activeTrackIds: ReadonlySet<string>,
+) {
+  return (positions ?? []).filter(({ trackId }) => activeTrackIds.has(trackId));
+}
+```
+
+Change `projectActions.deleteCaptionSegments` in `context.ts` to update the timeline segments and caption settings in one `setProject(produce(...))` transaction. After removing the requested segment indices, derive the remaining normalized track ids and prune `settings.trackPositions`. Deleting one segment from a multi-segment track keeps its setting; deleting the last segment removes it.
+
+- [ ] **Step 8: Render track positions consistently**
 
 Resolve position in this order: legacy segment override, matching track setting, global caption setting. Preview overlay and Rust renderer must use the same resolver.
 
-- [ ] **Step 7: Run caption tests**
+- [ ] **Step 9: Run caption and localization tests**
 
-Run: `pnpm --dir apps/desktop vitest run src/routes/editor/caption-position.test.ts src/routes/editor/caption-tracks.test.ts`
+Run: `pnpm --dir apps/desktop vitest run src/routes/editor/caption-position.test.ts src/routes/editor/caption-tracks.test.ts src/editor-i18n-coverage.test.ts src/i18n-literals.test.ts`
+
+Run: `rg -n "activeCaptionTrackId|activeCaptionPosition" apps/desktop/src/routes/editor/CaptionsTab.tsx`
+
+Expected: no matches; the sidebar must no longer depend on one implicit active track.
 
 Run: `cargo test -p cap-project caption -- --nocapture && cargo test -p cap-rendering caption -- --nocapture`
 
