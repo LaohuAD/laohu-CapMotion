@@ -34,6 +34,7 @@ jobs:
       - uses: swatinem/rust-cache@v2
         with:
           shared-key: capmotion-windows
+          cache-on-failure: true
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Prepare native dependencies
