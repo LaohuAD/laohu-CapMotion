@@ -21,6 +21,9 @@ $actualVersion = (Get-Item $exe).VersionInfo.ProductVersion
 if (-not $actualVersion.StartsWith($version)) { throw "App version mismatch: $actualVersion" }
 $cliHelp = & $cli --help
 if ($LASTEXITCODE -ne 0) { throw 'Installed CLI cannot start; check DLLs and runtime.' }
+$cliTransactions = & node scripts/verify-cap-cli.mjs $cli
+if ($LASTEXITCODE -ne 0) { throw 'Installed CLI project transaction checks failed.' }
+$cliTransactions = $cliTransactions | ConvertFrom-Json
 $app = Start-Process $exe -PassThru
 Start-Sleep -Seconds 12
 $app.Refresh()
@@ -30,6 +33,7 @@ $report = @{
     version = $version; commit = $env:GITHUB_SHA; installer = $installer.Name
     sha256 = (Get-FileHash $installer.FullName -Algorithm SHA256).Hash.ToLower()
     archive = 'PASS'; silentInstall = 'PASS'; cliLaunch = 'PASS'; desktopLaunch = 'PASS'
+    projectTransactions = $cliTransactions
     signature = (Get-AuthenticodeSignature $installer.FullName).Status.ToString()
     limitations = @('No Authenticode certificate configured; unsigned community distribution.','Physical camera, microphone, GPU recording and interactive editing require device acceptance.')
 }
