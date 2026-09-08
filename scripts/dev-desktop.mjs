@@ -22,6 +22,7 @@ const repoRoot = path.resolve(
 	path.dirname(fileURLToPath(import.meta.url)),
 	"..",
 );
+const tauriCli = path.join(repoRoot, "apps", "desktop", "node_modules", "@tauri-apps", "cli", "tauri.js");
 const gpuiDir = path.join(repoRoot, "apps", "desktop-gpui");
 const gpuiDevScript = path.join(gpuiDir, "dev.sh");
 const reopenSentinel = path.join(
@@ -35,7 +36,12 @@ let lastTauriCode = 0;
 let exiting = false;
 
 function startTauri() {
-	tauri = spawn("pnpm", ["tauri", "dev"], { stdio: "inherit" });
+	tauri = spawn(process.execPath, [tauriCli, "dev"], { stdio: "inherit" });
+	tauri.on("error", (error) => {
+		console.error("Failed to start Tauri:", error.message);
+		lastTauriCode = 1;
+		finish(null);
+	});
 	tauri.on("exit", (code, signal) => {
 		tauri = null;
 		lastTauriCode = signal ? 1 : (code ?? 1);
