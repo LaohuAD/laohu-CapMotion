@@ -16,7 +16,10 @@ export function resolveTimelineWheelIntent(
 	input: TimelineWheelInput,
 ): TimelineWheelIntent {
 	if (input.ctrlKey) return { type: "zoom", delta: input.deltaY };
-	if (input.platform === "macos" && input.metaKey) {
+	if (
+		(input.platform === "macos" && input.metaKey) ||
+		(input.platform === "windows" && input.shiftKey)
+	) {
 		return { type: "vertical", delta: input.deltaY };
 	}
 

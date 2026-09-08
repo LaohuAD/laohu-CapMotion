@@ -381,3 +381,40 @@ fn render_command_builds_content_addressed_cache_and_links_artifact() {
     assert_ne!(changed_source.artifact.unwrap().id, first_artifact_id);
     assert_eq!(changed_source_renderer.requests.lock().unwrap().len(), 1);
 }
+
+#[test]
+fn node_renderer_preserves_unicode_paths_and_json_without_shell_parsing() {
+    use cap_motion_cli::RemotionCliRunner;
+    use cap_project::MotionArtifactQuality;
+    let directory = tempfile::tempdir().unwrap();
+    let workspace = directory.path().join("动画 workspace & quotes");
+    std::fs::create_dir_all(workspace.join("node_modules/@remotion/cli")).unwrap();
+    std::fs::create_dir_all(workspace.join("src")).unwrap();
+    std::fs::write(workspace.join("src/index.ts"), "// fixture").unwrap();
+    std::fs::write(workspace.join("node_modules/@remotion/cli/remotion-cli.js"),
+        r#"const fs = require('node:fs'); const args = process.argv.slice(2); fs.writeFileSync(args[3], JSON.stringify(args));"#).unwrap();
+    let output = workspace.join("成片 & preview.json");
+    let props = serde_json::json!({"title": "中文 \"quoted\" & %PATH% $HOME", "items": [1,2]});
+    RemotionCliRunner
+        .render(&MotionRenderRequest {
+            workspace: workspace.clone(),
+            composition_id: "Main".into(),
+            output_path: output.clone(),
+            props: props.clone(),
+            quality: MotionArtifactQuality::Preview,
+            width: 1920,
+            height: 1080,
+            fps: 30,
+            duration_in_frames: 30,
+            has_alpha: true,
+        })
+        .unwrap();
+    let args: Vec<String> = serde_json::from_slice(&std::fs::read(output).unwrap()).unwrap();
+    assert_eq!(args[0], "render");
+    assert_eq!(args[1], workspace.join("src/index.ts").to_str().unwrap());
+    let props_arg = args.iter().position(|a| a == "--props").unwrap() + 1;
+    assert_eq!(
+        serde_json::from_str::<serde_json::Value>(&args[props_arg]).unwrap(),
+        props
+    );
+}

@@ -1,6 +1,7 @@
 import { Button } from "@cap/ui-solid";
 import { CheckMenuItem, Menu } from "@tauri-apps/api/menu";
 import { open } from "@tauri-apps/plugin-dialog";
+import { type as osType } from "@tauri-apps/plugin-os";
 import { cx } from "cva";
 import {
 	type Component,
@@ -1084,7 +1085,11 @@ function ActionParams(props: {
 						<div class="flex gap-2">
 							<TextInput
 								value={a.dir}
-								placeholder="/Users/you/Screenshots"
+								placeholder={
+									osType() === "windows"
+										? "C:\\Users\\you\\Pictures"
+										: "/Users/you/Screenshots"
+								}
 								onInput={(v) =>
 									props.onChange((act) => {
 										if (act.type === "saveToLocation") act.dir = v;

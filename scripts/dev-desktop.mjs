@@ -22,7 +22,15 @@ const repoRoot = path.resolve(
 	path.dirname(fileURLToPath(import.meta.url)),
 	"..",
 );
-const tauriCli = path.join(repoRoot, "apps", "desktop", "node_modules", "@tauri-apps", "cli", "tauri.js");
+const tauriCli = path.join(
+	repoRoot,
+	"apps",
+	"desktop",
+	"node_modules",
+	"@tauri-apps",
+	"cli",
+	"tauri.js",
+);
 const gpuiDir = path.join(repoRoot, "apps", "desktop-gpui");
 const gpuiDevScript = path.join(gpuiDir, "dev.sh");
 const reopenSentinel = path.join(

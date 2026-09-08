@@ -313,7 +313,7 @@ const recognizeCapProject = async ({project, outputDir, planOnly = false, speake
       let asrInput = source.microphonePath;
       if (!DIRECT_FLASH_FORMATS.has(extension)) {
         asrInput = join(tempDir, `${label}.asr.mp3`);
-        await runProcess("bash", [join(ASR_SCRIPT_DIR, "extract-audio.sh"), source.microphonePath, asrInput]);
+        await runProcess(process.execPath, [join(ASR_SCRIPT_DIR, "extract-audio.mjs"), source.microphonePath, asrInput]);
       }
       const args = [
         join(ASR_SCRIPT_DIR, "transcribe-flash.mjs"),

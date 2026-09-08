@@ -24,7 +24,7 @@ Cap 与 Codex 保持独立。用户在 Codex 中通过自然语言提出要求�
 ## 当前落地方向
 
 - Cap 是仓库根目录的产品源码。
-- macOS 是第一实现和验收平台，保留上游 Windows 能力。
+- macOS 与 Windows 共用编辑器、字幕、预设和 Agent 工程能力，并使用各自的系统接口与安装包。双端构建及验证范围见 [双端构建与发布](workflows/laohu-video/规范/双端构建与发布.md)。
 - MotionTrack 支持动画的时间、位置、时长、层级和公开参数编辑。
 - Remotion 源码是动画事实来源，MOV/WebM 等文件只是可重建缓存。
 - 简单拖拽不依赖 Codex；复杂动画结构继续由 Codex 修改。
@@ -102,7 +102,7 @@ cargo check -p cap
 ./scripts/start-cap.sh
 ```
 
-这个脚本只启动 Tauri，不构建也不监管 GPUI。上游双应用开发命令只在明确进行 GPUI 对齐或迁移时使用；正式打包仍使用 `pnpm tauri:build`。
+这个脚本只启动 Tauri，不构建也不监管 GPUI。上游双应用开发命令只在明确进行 GPUI 对齐或迁移时使用；CapMotion 分发使用专用双端构建脚本，见 [双端构建与发布](workflows/laohu-video/规范/双端构建与发布.md)。
 
 Agent 可以执行后台编译、自动测试和热更新。未经用户明确要求“打开让我测试”，不得首次启动 Cap；用户进入测试阶段后，可以让应用保持打开，Agent 也可以同时继续修改代码，不要求冻结开发。首次启动或偶尔一次原生重启激活窗口可以接受；前端 HMR 一般应让 Cap 保持在后台，Rust / Tauri 改动确需重启验证时应控制频率，不得形成保存一次、抢一次焦点的连续循环。Agent 也不得自行启动已经运行的开发服务器。
 

@@ -3,6 +3,9 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 desktop_dir="$repo_root/apps/desktop"
+# Keep build intermediates on the workspace volume, including external drives.
+export TMPDIR="${CAP_BUILD_TMPDIR:-$repo_root/target/capmotion-release/tmp}"
+mkdir -p "$TMPDIR"
 source_app="$repo_root/target/release/bundle/macos/CapMotion.app"
 destination_app="${CAP_LOCAL_APP_DEST:-$HOME/Applications/CapMotion.app}"
 signing_identity="${CAP_LOCAL_SIGNING_IDENTITY:-CapMotion Local Code Signing}"

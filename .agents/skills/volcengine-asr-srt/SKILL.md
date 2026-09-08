@@ -31,6 +31,8 @@ Load credentials from:
 ~/.config/laohu/volcengine-asr.env
 ```
 
+On Windows, `~` means the current user home (for example `C:\Users\you`); configure credentials there, never copy secrets into the installer. In PowerShell use commands on one line, or backticks for continuation instead of the Bash `\` shown below.
+
 The scripts support both official authentication modes:
 
 ```text
@@ -65,10 +67,10 @@ Check authentication without uploading audio or creating a paid recognition task
 node .agents/skills/volcengine-asr-srt/scripts/check-auth.mjs
 ```
 
-Extract speech audio:
+Extract speech audio (macOS and Windows use the same Node entry; install FFmpeg on PATH or set `FFMPEG_BIN` and `FFPROBE_BIN` to executable paths):
 
 ```bash
-bash .agents/skills/volcengine-asr-srt/scripts/extract-audio.sh \
+node .agents/skills/volcengine-asr-srt/scripts/extract-audio.mjs \
   /absolute/input.mp4 /absolute/output.asr.mp3
 ```
 

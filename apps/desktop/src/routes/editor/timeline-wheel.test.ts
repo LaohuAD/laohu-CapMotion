@@ -54,3 +54,22 @@ describe("timeline wheel routing", () => {
 		).toEqual({ type: "pan", delta: -55 });
 	});
 });
+
+it("supports Windows mouse navigation without a Command key", () => {
+	const input = {
+		deltaX: 0,
+		deltaY: 42,
+		ctrlKey: false,
+		metaKey: false,
+		shiftKey: false,
+		platform: "windows",
+	};
+	expect(resolveTimelineWheelIntent(input)).toEqual({ type: "pan", delta: 42 });
+	expect(resolveTimelineWheelIntent({ ...input, shiftKey: true })).toEqual({
+		type: "vertical",
+		delta: 42,
+	});
+	expect(
+		resolveTimelineWheelIntent({ ...input, ctrlKey: true, shiftKey: true }),
+	).toEqual({ type: "zoom", delta: 42 });
+});
