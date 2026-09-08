@@ -41,7 +41,7 @@ jobs:
       - name: Test project tooling
         run: node --test scripts/pre-edit-review.test.mjs scripts/postproduction-package.test.mjs scripts/check-cap-local-release.test.mjs scripts/build-cap-local.test.mjs scripts/run-gpui-build.test.mjs scripts/cap-project-asr.test.mjs
       - name: Test shared editor interactions
-        run: pnpm --dir apps/desktop exec vitest run src/routes/editor/timeline-wheel.test.ts src/routes/editor/preset-config.test.ts src/routes/editor/caption-tracks.test.ts src/routes/editor/caption-position.test.ts src/store/captions.test.ts src/i18n.test.ts src/utils/os-permissions.test.ts 'src/routes/(window-chrome)/onboarding-permissions.test.ts'
+        run: pnpm --dir apps/desktop exec vitest run src/routes/editor/existing-recording-picker.test.ts src/routes/editor/timeline-wheel.test.ts src/routes/editor/preset-config.test.ts src/routes/editor/caption-tracks.test.ts src/routes/editor/caption-position.test.ts src/store/captions.test.ts src/i18n.test.ts src/utils/os-permissions.test.ts 'src/routes/(window-chrome)/onboarding-permissions.test.ts'
         shell: bash
       - name: Test native project and CLI operations
         run: cargo test -p cap-motion-cli -p cap-cli-install -p cap-utils --tests

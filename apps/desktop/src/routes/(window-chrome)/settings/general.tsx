@@ -751,12 +751,14 @@ function Inner(props: {
 							value={!!settings.captureKeyboardEvents}
 							onChange={(value) => handleChange("captureKeyboardEvents", value)}
 						/>
-						<ToggleSettingItem
-							label={i18n.t("settings.recording.notch")}
-							description={i18n.t("settings.recording.notchDescription")}
-							value={!!settings.macbookNotchOverlay}
-							onChange={(value) => handleChange("macbookNotchOverlay", value)}
-						/>
+						<Show when={ostype === "macos"}>
+							<ToggleSettingItem
+								label={i18n.t("settings.recording.notch")}
+								description={i18n.t("settings.recording.notchDescription")}
+								value={!!settings.macbookNotchOverlay}
+								onChange={(value) => handleChange("macbookNotchOverlay", value)}
+							/>
+						</Show>
 						<SelectSettingItem
 							label={i18n.t("settings.recording.maxFps")}
 							description={
