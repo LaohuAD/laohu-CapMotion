@@ -130,6 +130,25 @@ Agent 可以执行后台编译、自动测试和热更新。未经用户明确�
 - Codex 修改工程必须使用 revision 检查，不允许静默覆盖人工编辑。
 - 删除或迁移私人文件前必须检查明确目标，发生同名冲突时停止而不是覆盖。
 
+## 老胡的创作项目与入口
+
+老胡的统一入口：[个人主页](https://lao-hu.com) · [教程与资料](https://lao-hu.com/learn/) · [全部开源项目](https://lao-hu.com/projects/) · [公众号与联系方式](https://lao-hu.com/#contact) · [模型小屋](https://api.lao-hu.com)。
+
+教程入口汇总文字资料和配套视频；公众号入口可在主页查看。模型小屋是独立的模型服务，不是使用这些开源项目的必购项，具体接入与费用以各项目说明和服务页面为准。
+
+| 项目 | 用途 |
+| --- | --- |
+| [老胡的审美起源](https://github.com/LaohuAD/laohu-taste-genesis) | 把人的判断与反馈整理成专业 Agent 能力 |
+| [CapMotion](https://github.com/LaohuAD/laohu-CapMotion) | 基于 Cap 的录屏、口播剪辑、字幕与讲解动画工作台 |
+| [老胡 AI 视觉](https://github.com/LaohuAD/laohu-ai-visual) | 故事、剧本、视觉资产、分镜与视频提示词 |
+| [老胡音乐 V4](https://github.com/LaohuAD/laohu-music) | 从歌曲灵感、歌词和谱曲推进到封面与发布 |
+| [老胡无限画布](https://github.com/LaohuAD/laohu-Infinite-Canvas) | 基于 Infinite-Canvas 继续开发的本地素材与模型工作台 |
+| [Luna 音乐创作体系](https://github.com/LaohuAD/luna-music-creative-system) | AI 音乐创作的方法资料 |
+
+按当前任务选择项目即可，它们不是彼此的必装依赖。
+
 ## License
 
-Cap 产品源码沿用上游的 AGPLv3 和分组件许可证，见 [`LICENSE`](LICENSE) 与 [`licenses/`](licenses/)。合并前已有的 Laohu 工作流、文档、Agent skills 和模板在未另行声明时使用 [`licenses/LICENSE-LAOHU-WORKFLOW-MIT`](licenses/LICENSE-LAOHU-WORKFLOW-MIT)。
+老胡有权独立授权的原创部分采用：**代码：MIT License；规则、Skill、提示词、文档和案例：CC BY-SA 4.0**。详见 [原创部分授权范围](LICENSE-LAOHU.md)。
+
+Cap 产品源码及其衍生修改仍沿用上游 AGPLv3 和分组件许可证，见 [`LICENSE`](LICENSE) 与 [`licenses/`](licenses/)。本次调整不是把 Cap 产品整体改成 MIT。既有 Laohu 工作流的历史 MIT 授权继续有效；当前独立原创内容按上述分层说明授权，第三方材料保留原许可。

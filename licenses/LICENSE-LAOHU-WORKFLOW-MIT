@@ -1,5 +1,8 @@
-This license applies to the original Laohu workflow, documentation, Agent skills,
-and templates that predate the Cap source merge, except where a file states otherwise.
+Historical notice: this MIT grant applies to the original Laohu workflow,
+documentation, Agent skills, and templates released under this notice before
+2026-09-08, except where a file states otherwise. Those existing grants remain
+valid. See ../LICENSE-LAOHU.md for the current code/content scope; this notice
+does not relicense Cap or third-party materials.
 
 MIT License
 
