@@ -34,6 +34,21 @@ struct UpdateReport {
 }
 
 pub fn run(format: OutputFormat) -> Result<(), String> {
+    if cfg!(cap_laohu_local_build) {
+        const DOWNLOAD_URL: &str = "https://github.com/LaohuAD/laohu-CapMotion/releases/latest";
+        return match format {
+            OutputFormat::Json => write_json(&serde_json::json!({
+                "started": false,
+                "completed": false,
+                "manualUpdateRequired": true,
+                "downloadUrl": DOWNLOAD_URL,
+            })),
+            OutputFormat::Text => {
+                println!("CapMotion uses manual updates. Download the new installer from {DOWNLOAD_URL}");
+                Ok(())
+            }
+        };
+    }
     #[cfg(windows)]
     {
         start_windows_update()?;

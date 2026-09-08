@@ -13,6 +13,10 @@ const run=(args)=>{
  return JSON.parse(result.stdout);
 };
 try{
+ const update=run(['update','--json']);
+ assert.equal(update.started,false);assert.equal(update.completed,false);
+ assert.equal(update.manualUpdateRequired,true);
+ assert.equal(update.downloadUrl,'https://github.com/LaohuAD/laohu-CapMotion/releases/latest');
  const project=join(dir,'中文 & project.cap');mkdirSync(project);
  const config=join(project,'project-config.json');
  writeFileSync(config,JSON.stringify({projectRevision:0,timeline:{segments:[{recordingSegment:0,timescale:1,start:0,end:1,name:null}],zoomSegments:[]}}));
@@ -31,5 +35,5 @@ try{
  assert.equal(result.projectRevision,2);assert.equal(result.aspectRatio,'wide');
  assert.equal(result.timeline.captionSegments.length,2);assert.equal(result.timeline.captionSegments[0].text,'你好 Windows');
  assert.notDeepEqual(result.timeline.captionSegments[0].manualPositionOverride,result.timeline.captionSegments[1].manualPositionOverride);
- console.log(JSON.stringify({status:'PASS',checks:['installed CLI launch','Unicode and space paths','presentation transaction','stale revision protection','editable bilingual tracks','independent caption positions','config read after write']}));
+ console.log(JSON.stringify({status:'PASS',checks:['installed CLI launch','CapMotion manual update route','Unicode and space paths','presentation transaction','stale revision protection','editable bilingual tracks','independent caption positions','config read after write']}));
 }finally{rmSync(dir,{recursive:true,force:true});}

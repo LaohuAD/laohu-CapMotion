@@ -9,6 +9,11 @@ use std::path::Path;
 // including playwright-core — bloating the shipped CLI and making builds
 // non-reproducible. Guard against that here, loudly, at build time.
 fn main() {
+    println!("cargo:rustc-check-cfg=cfg(cap_laohu_local_build)");
+    println!("cargo:rerun-if-env-changed=CAP_LAOHU_LOCAL_BUILD");
+    if std::env::var_os("CAP_LAOHU_LOCAL_BUILD").is_some() {
+        println!("cargo:rustc-cfg=cap_laohu_local_build");
+    }
     let manifest_dir = std::env::var("CARGO_MANIFEST_DIR").expect("CARGO_MANIFEST_DIR is set");
     let node_modules = Path::new(&manifest_dir)
         .join("skill")
