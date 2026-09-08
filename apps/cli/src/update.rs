@@ -44,7 +44,9 @@ pub fn run(format: OutputFormat) -> Result<(), String> {
                 "downloadUrl": DOWNLOAD_URL,
             })),
             OutputFormat::Text => {
-                println!("CapMotion uses manual updates. Download the new installer from {DOWNLOAD_URL}");
+                println!(
+                    "CapMotion uses manual updates. Download the new installer from {DOWNLOAD_URL}"
+                );
                 Ok(())
             }
         };

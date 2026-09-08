@@ -6,6 +6,9 @@ desktop_dir="$repo_root/apps/desktop"
 # Keep build intermediates on the workspace volume, including external drives.
 export TMPDIR="${CAP_BUILD_TMPDIR:-$repo_root/target/capmotion-release/tmp}"
 mkdir -p "$TMPDIR"
+# Published apps are stripped below. Avoid generating full debug metadata during
+# fat LTO: it can exceed this machine's RAM without changing video quality.
+export CARGO_PROFILE_RELEASE_DEBUG="${CARGO_PROFILE_RELEASE_DEBUG:-0}"
 source_app="$repo_root/target/release/bundle/macos/CapMotion.app"
 destination_app="${CAP_LOCAL_APP_DEST:-$HOME/Applications/CapMotion.app}"
 if [[ -L "$destination_app" ]]; then
