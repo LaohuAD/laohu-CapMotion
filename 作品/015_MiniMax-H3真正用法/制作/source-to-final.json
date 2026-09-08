@@ -1,0 +1,5104 @@
+{
+  "schema": "laohu.source-to-final/3",
+  "purpose": "approved-virtual-edit-to-review-media",
+  "source": "/Users/a1/Movies/h3双采.mp4",
+  "output": "/Users/a1/Movies/h3双采_成片_重新校对.mp4",
+  "approvalStatus": "APPROVED",
+  "deliveryStatus": "REVIEW_READY",
+  "fps": 30,
+  "finalDurationSeconds": 687.1,
+  "sequence": [
+    {
+      "index": 1,
+      "startFrame": 123,
+      "endFrame": 207,
+      "sourceStart": 4.1,
+      "sourceEnd": 6.9,
+      "targetStart": 0,
+      "targetEnd": 2.8,
+      "durationFrames": 84,
+      "duration": 2.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-1"
+      ]
+    },
+    {
+      "index": 2,
+      "startFrame": 208,
+      "endFrame": 265,
+      "sourceStart": 6.933333333333334,
+      "sourceEnd": 8.833333333333334,
+      "targetStart": 2.8,
+      "targetEnd": 4.7,
+      "durationFrames": 57,
+      "duration": 1.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-2"
+      ]
+    },
+    {
+      "index": 3,
+      "startFrame": 282,
+      "endFrame": 357,
+      "sourceStart": 9.4,
+      "sourceEnd": 11.9,
+      "targetStart": 4.7,
+      "targetEnd": 7.2,
+      "durationFrames": 75,
+      "duration": 2.5,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-2"
+      ]
+    },
+    {
+      "index": 4,
+      "startFrame": 418,
+      "endFrame": 490,
+      "sourceStart": 13.933333333333334,
+      "sourceEnd": 16.333333333333332,
+      "targetStart": 7.2,
+      "targetEnd": 9.6,
+      "durationFrames": 72,
+      "duration": 2.4,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-3"
+      ]
+    },
+    {
+      "index": 5,
+      "startFrame": 563,
+      "endFrame": 579,
+      "sourceStart": 18.766666666666666,
+      "sourceEnd": 19.3,
+      "targetStart": 9.6,
+      "targetEnd": 10.133333333333333,
+      "durationFrames": 16,
+      "duration": 0.5333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-3"
+      ]
+    },
+    {
+      "index": 6,
+      "startFrame": 1164,
+      "endFrame": 1263,
+      "sourceStart": 38.8,
+      "sourceEnd": 42.1,
+      "targetStart": 10.133333333333333,
+      "targetEnd": 13.433333333333334,
+      "durationFrames": 99,
+      "duration": 3.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-4"
+      ]
+    },
+    {
+      "index": 7,
+      "startFrame": 1507,
+      "endFrame": 1605,
+      "sourceStart": 50.233333333333334,
+      "sourceEnd": 53.5,
+      "targetStart": 13.433333333333334,
+      "targetEnd": 16.7,
+      "durationFrames": 98,
+      "duration": 3.2666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-5",
+        "caption-6"
+      ]
+    },
+    {
+      "index": 8,
+      "startFrame": 1645,
+      "endFrame": 1716,
+      "sourceStart": 54.833333333333336,
+      "sourceEnd": 57.2,
+      "targetStart": 16.7,
+      "targetEnd": 19.066666666666666,
+      "durationFrames": 71,
+      "duration": 2.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-6",
+        "caption-7"
+      ]
+    },
+    {
+      "index": 9,
+      "startFrame": 1960,
+      "endFrame": 2008,
+      "sourceStart": 65.33333333333333,
+      "sourceEnd": 66.93333333333334,
+      "targetStart": 19.066666666666666,
+      "targetEnd": 20.666666666666668,
+      "durationFrames": 48,
+      "duration": 1.6,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-8"
+      ]
+    },
+    {
+      "index": 10,
+      "startFrame": 2039,
+      "endFrame": 2110,
+      "sourceStart": 67.96666666666667,
+      "sourceEnd": 70.33333333333333,
+      "targetStart": 20.666666666666668,
+      "targetEnd": 23.033333333333335,
+      "durationFrames": 71,
+      "duration": 2.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-9"
+      ]
+    },
+    {
+      "index": 11,
+      "startFrame": 2141,
+      "endFrame": 2241,
+      "sourceStart": 71.36666666666666,
+      "sourceEnd": 74.7,
+      "targetStart": 23.033333333333335,
+      "targetEnd": 26.366666666666667,
+      "durationFrames": 100,
+      "duration": 3.3333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-10"
+      ]
+    },
+    {
+      "index": 12,
+      "startFrame": 3136,
+      "endFrame": 3233,
+      "sourceStart": 104.53333333333333,
+      "sourceEnd": 107.76666666666667,
+      "targetStart": 26.366666666666667,
+      "targetEnd": 29.6,
+      "durationFrames": 97,
+      "duration": 3.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-11"
+      ]
+    },
+    {
+      "index": 13,
+      "startFrame": 3241,
+      "endFrame": 3300,
+      "sourceStart": 108.03333333333333,
+      "sourceEnd": 110,
+      "targetStart": 29.6,
+      "targetEnd": 31.566666666666666,
+      "durationFrames": 59,
+      "duration": 1.9666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-12"
+      ]
+    },
+    {
+      "index": 14,
+      "startFrame": 3313,
+      "endFrame": 3431,
+      "sourceStart": 110.43333333333334,
+      "sourceEnd": 114.36666666666666,
+      "targetStart": 31.566666666666666,
+      "targetEnd": 35.5,
+      "durationFrames": 118,
+      "duration": 3.933333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-13",
+        "caption-14"
+      ]
+    },
+    {
+      "index": 15,
+      "startFrame": 3700,
+      "endFrame": 3739,
+      "sourceStart": 123.33333333333333,
+      "sourceEnd": 124.63333333333334,
+      "targetStart": 35.5,
+      "targetEnd": 36.8,
+      "durationFrames": 39,
+      "duration": 1.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-15"
+      ]
+    },
+    {
+      "index": 16,
+      "startFrame": 3756,
+      "endFrame": 3809,
+      "sourceStart": 125.2,
+      "sourceEnd": 126.96666666666667,
+      "targetStart": 36.8,
+      "targetEnd": 38.56666666666667,
+      "durationFrames": 53,
+      "duration": 1.7666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-15"
+      ]
+    },
+    {
+      "index": 17,
+      "startFrame": 3831,
+      "endFrame": 3973,
+      "sourceStart": 127.7,
+      "sourceEnd": 132.43333333333334,
+      "targetStart": 38.56666666666667,
+      "targetEnd": 43.3,
+      "durationFrames": 142,
+      "duration": 4.733333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-16",
+        "caption-17",
+        "caption-18"
+      ]
+    },
+    {
+      "index": 18,
+      "startFrame": 4159,
+      "endFrame": 4224,
+      "sourceStart": 138.63333333333333,
+      "sourceEnd": 140.8,
+      "targetStart": 43.3,
+      "targetEnd": 45.46666666666667,
+      "durationFrames": 65,
+      "duration": 2.1666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-19"
+      ]
+    },
+    {
+      "index": 19,
+      "startFrame": 4245,
+      "endFrame": 4318,
+      "sourceStart": 141.5,
+      "sourceEnd": 143.93333333333334,
+      "targetStart": 45.46666666666667,
+      "targetEnd": 47.9,
+      "durationFrames": 73,
+      "duration": 2.433333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-20",
+        "caption-21"
+      ]
+    },
+    {
+      "index": 20,
+      "startFrame": 4758,
+      "endFrame": 4787,
+      "sourceStart": 158.6,
+      "sourceEnd": 159.56666666666666,
+      "targetStart": 47.9,
+      "targetEnd": 48.86666666666667,
+      "durationFrames": 29,
+      "duration": 0.9666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-21"
+      ]
+    },
+    {
+      "index": 21,
+      "startFrame": 5169,
+      "endFrame": 5223,
+      "sourceStart": 172.3,
+      "sourceEnd": 174.1,
+      "targetStart": 48.86666666666667,
+      "targetEnd": 50.666666666666664,
+      "durationFrames": 54,
+      "duration": 1.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-21"
+      ]
+    },
+    {
+      "index": 22,
+      "startFrame": 5709,
+      "endFrame": 5844,
+      "sourceStart": 190.3,
+      "sourceEnd": 194.8,
+      "targetStart": 50.666666666666664,
+      "targetEnd": 55.166666666666664,
+      "durationFrames": 135,
+      "duration": 4.5,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-22"
+      ]
+    },
+    {
+      "index": 23,
+      "startFrame": 5894,
+      "endFrame": 5917,
+      "sourceStart": 196.46666666666667,
+      "sourceEnd": 197.23333333333332,
+      "targetStart": 55.166666666666664,
+      "targetEnd": 55.93333333333333,
+      "durationFrames": 23,
+      "duration": 0.7666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-23"
+      ]
+    },
+    {
+      "index": 24,
+      "startFrame": 5968,
+      "endFrame": 6044,
+      "sourceStart": 198.93333333333334,
+      "sourceEnd": 201.46666666666667,
+      "targetStart": 55.93333333333333,
+      "targetEnd": 58.46666666666667,
+      "durationFrames": 76,
+      "duration": 2.533333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-23",
+        "caption-24"
+      ]
+    },
+    {
+      "index": 25,
+      "startFrame": 6406,
+      "endFrame": 6462,
+      "sourceStart": 213.53333333333333,
+      "sourceEnd": 215.4,
+      "targetStart": 58.46666666666667,
+      "targetEnd": 60.333333333333336,
+      "durationFrames": 56,
+      "duration": 1.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-25"
+      ]
+    },
+    {
+      "index": 26,
+      "startFrame": 6616,
+      "endFrame": 6738,
+      "sourceStart": 220.53333333333333,
+      "sourceEnd": 224.6,
+      "targetStart": 60.333333333333336,
+      "targetEnd": 64.4,
+      "durationFrames": 122,
+      "duration": 4.066666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-26",
+        "caption-27",
+        "caption-28"
+      ]
+    },
+    {
+      "index": 27,
+      "startFrame": 6747,
+      "endFrame": 6850,
+      "sourceStart": 224.9,
+      "sourceEnd": 228.33333333333334,
+      "targetStart": 64.4,
+      "targetEnd": 67.83333333333333,
+      "durationFrames": 103,
+      "duration": 3.433333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-26",
+        "caption-27",
+        "caption-28"
+      ]
+    },
+    {
+      "index": 28,
+      "startFrame": 7362,
+      "endFrame": 7455,
+      "sourceStart": 245.4,
+      "sourceEnd": 248.5,
+      "targetStart": 67.83333333333333,
+      "targetEnd": 70.93333333333334,
+      "durationFrames": 93,
+      "duration": 3.1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-29"
+      ]
+    },
+    {
+      "index": 29,
+      "startFrame": 7750,
+      "endFrame": 7815,
+      "sourceStart": 258.3333333333333,
+      "sourceEnd": 260.5,
+      "targetStart": 70.93333333333334,
+      "targetEnd": 73.1,
+      "durationFrames": 65,
+      "duration": 2.1666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-30"
+      ]
+    },
+    {
+      "index": 30,
+      "startFrame": 7850,
+      "endFrame": 7882,
+      "sourceStart": 261.6666666666667,
+      "sourceEnd": 262.73333333333335,
+      "targetStart": 73.1,
+      "targetEnd": 74.16666666666667,
+      "durationFrames": 32,
+      "duration": 1.0666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-30"
+      ]
+    },
+    {
+      "index": 31,
+      "startFrame": 8071,
+      "endFrame": 8139,
+      "sourceStart": 269.03333333333336,
+      "sourceEnd": 271.3,
+      "targetStart": 74.16666666666667,
+      "targetEnd": 76.43333333333334,
+      "durationFrames": 68,
+      "duration": 2.2666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-31"
+      ]
+    },
+    {
+      "index": 32,
+      "startFrame": 8901,
+      "endFrame": 9077,
+      "sourceStart": 296.7,
+      "sourceEnd": 302.56666666666666,
+      "targetStart": 76.43333333333334,
+      "targetEnd": 82.3,
+      "durationFrames": 176,
+      "duration": 5.866666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-32",
+        "caption-33",
+        "caption-34"
+      ]
+    },
+    {
+      "index": 33,
+      "startFrame": 9082,
+      "endFrame": 9127,
+      "sourceStart": 302.73333333333335,
+      "sourceEnd": 304.23333333333335,
+      "targetStart": 82.3,
+      "targetEnd": 83.8,
+      "durationFrames": 45,
+      "duration": 1.5,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-32",
+        "caption-33",
+        "caption-34"
+      ]
+    },
+    {
+      "index": 34,
+      "startFrame": 9131,
+      "endFrame": 9199,
+      "sourceStart": 304.3666666666667,
+      "sourceEnd": 306.6333333333333,
+      "targetStart": 83.8,
+      "targetEnd": 86.06666666666666,
+      "durationFrames": 68,
+      "duration": 2.2666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-35"
+      ]
+    },
+    {
+      "index": 35,
+      "startFrame": 9214,
+      "endFrame": 9316,
+      "sourceStart": 307.1333333333333,
+      "sourceEnd": 310.53333333333336,
+      "targetStart": 86.06666666666666,
+      "targetEnd": 89.46666666666667,
+      "durationFrames": 102,
+      "duration": 3.4,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-36"
+      ]
+    },
+    {
+      "index": 36,
+      "startFrame": 9345,
+      "endFrame": 9420,
+      "sourceStart": 311.5,
+      "sourceEnd": 314,
+      "targetStart": 89.46666666666667,
+      "targetEnd": 91.96666666666667,
+      "durationFrames": 75,
+      "duration": 2.5,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-37"
+      ]
+    },
+    {
+      "index": 37,
+      "startFrame": 10268,
+      "endFrame": 10350,
+      "sourceStart": 342.26666666666665,
+      "sourceEnd": 345,
+      "targetStart": 91.96666666666667,
+      "targetEnd": 94.7,
+      "durationFrames": 82,
+      "duration": 2.7333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-38"
+      ]
+    },
+    {
+      "index": 38,
+      "startFrame": 10531,
+      "endFrame": 10634,
+      "sourceStart": 351.03333333333336,
+      "sourceEnd": 354.46666666666664,
+      "targetStart": 94.7,
+      "targetEnd": 98.13333333333334,
+      "durationFrames": 103,
+      "duration": 3.433333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-39"
+      ]
+    },
+    {
+      "index": 39,
+      "startFrame": 10995,
+      "endFrame": 11070,
+      "sourceStart": 366.5,
+      "sourceEnd": 369,
+      "targetStart": 98.13333333333334,
+      "targetEnd": 100.63333333333334,
+      "durationFrames": 75,
+      "duration": 2.5,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-40"
+      ]
+    },
+    {
+      "index": 40,
+      "startFrame": 12021,
+      "endFrame": 12067,
+      "sourceStart": 400.7,
+      "sourceEnd": 402.23333333333335,
+      "targetStart": 100.63333333333334,
+      "targetEnd": 102.16666666666667,
+      "durationFrames": 46,
+      "duration": 1.5333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-41",
+        "caption-42"
+      ]
+    },
+    {
+      "index": 41,
+      "startFrame": 12078,
+      "endFrame": 12221,
+      "sourceStart": 402.6,
+      "sourceEnd": 407.3666666666667,
+      "targetStart": 102.16666666666667,
+      "targetEnd": 106.93333333333334,
+      "durationFrames": 143,
+      "duration": 4.766666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-41",
+        "caption-42"
+      ]
+    },
+    {
+      "index": 42,
+      "startFrame": 12369,
+      "endFrame": 12435,
+      "sourceStart": 412.3,
+      "sourceEnd": 414.5,
+      "targetStart": 106.93333333333334,
+      "targetEnd": 109.13333333333334,
+      "durationFrames": 66,
+      "duration": 2.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-43",
+        "caption-44"
+      ]
+    },
+    {
+      "index": 43,
+      "startFrame": 12440,
+      "endFrame": 12479,
+      "sourceStart": 414.6666666666667,
+      "sourceEnd": 415.96666666666664,
+      "targetStart": 109.13333333333334,
+      "targetEnd": 110.43333333333334,
+      "durationFrames": 39,
+      "duration": 1.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-45"
+      ]
+    },
+    {
+      "index": 44,
+      "startFrame": 12496,
+      "endFrame": 12539,
+      "sourceStart": 416.53333333333336,
+      "sourceEnd": 417.96666666666664,
+      "targetStart": 110.43333333333334,
+      "targetEnd": 111.86666666666666,
+      "durationFrames": 43,
+      "duration": 1.4333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-46"
+      ]
+    },
+    {
+      "index": 45,
+      "startFrame": 12546,
+      "endFrame": 12616,
+      "sourceStart": 418.2,
+      "sourceEnd": 420.53333333333336,
+      "targetStart": 111.86666666666666,
+      "targetEnd": 114.2,
+      "durationFrames": 70,
+      "duration": 2.3333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-47"
+      ]
+    },
+    {
+      "index": 46,
+      "startFrame": 13112,
+      "endFrame": 13169,
+      "sourceStart": 437.06666666666666,
+      "sourceEnd": 438.96666666666664,
+      "targetStart": 114.2,
+      "targetEnd": 116.1,
+      "durationFrames": 57,
+      "duration": 1.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-48"
+      ]
+    },
+    {
+      "index": 47,
+      "startFrame": 13176,
+      "endFrame": 13235,
+      "sourceStart": 439.2,
+      "sourceEnd": 441.1666666666667,
+      "targetStart": 116.1,
+      "targetEnd": 118.06666666666666,
+      "durationFrames": 59,
+      "duration": 1.9666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-48"
+      ]
+    },
+    {
+      "index": 48,
+      "startFrame": 13286,
+      "endFrame": 13312,
+      "sourceStart": 442.8666666666667,
+      "sourceEnd": 443.73333333333335,
+      "targetStart": 118.06666666666666,
+      "targetEnd": 118.93333333333334,
+      "durationFrames": 26,
+      "duration": 0.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-48"
+      ]
+    },
+    {
+      "index": 49,
+      "startFrame": 13556,
+      "endFrame": 13653,
+      "sourceStart": 451.8666666666667,
+      "sourceEnd": 455.1,
+      "targetStart": 118.93333333333334,
+      "targetEnd": 122.16666666666667,
+      "durationFrames": 97,
+      "duration": 3.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-49"
+      ]
+    },
+    {
+      "index": 50,
+      "startFrame": 13659,
+      "endFrame": 13783,
+      "sourceStart": 455.3,
+      "sourceEnd": 459.43333333333334,
+      "targetStart": 122.16666666666667,
+      "targetEnd": 126.3,
+      "durationFrames": 124,
+      "duration": 4.133333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-50",
+        "caption-51"
+      ]
+    },
+    {
+      "index": 51,
+      "startFrame": 14064,
+      "endFrame": 14146,
+      "sourceStart": 468.8,
+      "sourceEnd": 471.53333333333336,
+      "targetStart": 126.3,
+      "targetEnd": 129.03333333333333,
+      "durationFrames": 82,
+      "duration": 2.7333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-52"
+      ]
+    },
+    {
+      "index": 52,
+      "startFrame": 14171,
+      "endFrame": 14240,
+      "sourceStart": 472.3666666666667,
+      "sourceEnd": 474.6666666666667,
+      "targetStart": 129.03333333333333,
+      "targetEnd": 131.33333333333334,
+      "durationFrames": 69,
+      "duration": 2.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-52"
+      ]
+    },
+    {
+      "index": 53,
+      "startFrame": 14278,
+      "endFrame": 14325,
+      "sourceStart": 475.93333333333334,
+      "sourceEnd": 477.5,
+      "targetStart": 131.33333333333334,
+      "targetEnd": 132.9,
+      "durationFrames": 47,
+      "duration": 1.5666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-53"
+      ]
+    },
+    {
+      "index": 54,
+      "startFrame": 14344,
+      "endFrame": 14507,
+      "sourceStart": 478.1333333333333,
+      "sourceEnd": 483.56666666666666,
+      "targetStart": 132.9,
+      "targetEnd": 138.33333333333334,
+      "durationFrames": 163,
+      "duration": 5.433333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-54",
+        "caption-55"
+      ]
+    },
+    {
+      "index": 55,
+      "startFrame": 14959,
+      "endFrame": 15020,
+      "sourceStart": 498.6333333333333,
+      "sourceEnd": 500.6666666666667,
+      "targetStart": 138.33333333333334,
+      "targetEnd": 140.36666666666667,
+      "durationFrames": 61,
+      "duration": 2.033333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-56"
+      ]
+    },
+    {
+      "index": 56,
+      "startFrame": 15028,
+      "endFrame": 15084,
+      "sourceStart": 500.93333333333334,
+      "sourceEnd": 502.8,
+      "targetStart": 140.36666666666667,
+      "targetEnd": 142.23333333333332,
+      "durationFrames": 56,
+      "duration": 1.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-57"
+      ]
+    },
+    {
+      "index": 57,
+      "startFrame": 15105,
+      "endFrame": 15141,
+      "sourceStart": 503.5,
+      "sourceEnd": 504.7,
+      "targetStart": 142.23333333333332,
+      "targetEnd": 143.43333333333334,
+      "durationFrames": 36,
+      "duration": 1.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-57"
+      ]
+    },
+    {
+      "index": 58,
+      "startFrame": 15150,
+      "endFrame": 15205,
+      "sourceStart": 505,
+      "sourceEnd": 506.8333333333333,
+      "targetStart": 143.43333333333334,
+      "targetEnd": 145.26666666666668,
+      "durationFrames": 55,
+      "duration": 1.8333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-57"
+      ]
+    },
+    {
+      "index": 59,
+      "startFrame": 15217,
+      "endFrame": 15288,
+      "sourceStart": 507.23333333333335,
+      "sourceEnd": 509.6,
+      "targetStart": 145.26666666666668,
+      "targetEnd": 147.63333333333333,
+      "durationFrames": 71,
+      "duration": 2.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-58"
+      ]
+    },
+    {
+      "index": 60,
+      "startFrame": 15306,
+      "endFrame": 15391,
+      "sourceStart": 510.2,
+      "sourceEnd": 513.0333333333333,
+      "targetStart": 147.63333333333333,
+      "targetEnd": 150.46666666666667,
+      "durationFrames": 85,
+      "duration": 2.8333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-59"
+      ]
+    },
+    {
+      "index": 61,
+      "startFrame": 15398,
+      "endFrame": 15406,
+      "sourceStart": 513.2666666666667,
+      "sourceEnd": 513.5333333333333,
+      "targetStart": 150.46666666666667,
+      "targetEnd": 150.73333333333332,
+      "durationFrames": 8,
+      "duration": 0.26666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-59"
+      ]
+    },
+    {
+      "index": 62,
+      "startFrame": 15411,
+      "endFrame": 15462,
+      "sourceStart": 513.7,
+      "sourceEnd": 515.4,
+      "targetStart": 150.73333333333332,
+      "targetEnd": 152.43333333333334,
+      "durationFrames": 51,
+      "duration": 1.7,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-59"
+      ]
+    },
+    {
+      "index": 63,
+      "startFrame": 15699,
+      "endFrame": 15788,
+      "sourceStart": 523.3,
+      "sourceEnd": 526.2666666666667,
+      "targetStart": 152.43333333333334,
+      "targetEnd": 155.4,
+      "durationFrames": 89,
+      "duration": 2.966666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-60"
+      ]
+    },
+    {
+      "index": 64,
+      "startFrame": 15791,
+      "endFrame": 15823,
+      "sourceStart": 526.3666666666667,
+      "sourceEnd": 527.4333333333333,
+      "targetStart": 155.4,
+      "targetEnd": 156.46666666666667,
+      "durationFrames": 32,
+      "duration": 1.0666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-60"
+      ]
+    },
+    {
+      "index": 65,
+      "startFrame": 16114,
+      "endFrame": 16217,
+      "sourceStart": 537.1333333333333,
+      "sourceEnd": 540.5666666666667,
+      "targetStart": 156.46666666666667,
+      "targetEnd": 159.9,
+      "durationFrames": 103,
+      "duration": 3.433333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-61"
+      ]
+    },
+    {
+      "index": 66,
+      "startFrame": 16477,
+      "endFrame": 16558,
+      "sourceStart": 549.2333333333333,
+      "sourceEnd": 551.9333333333333,
+      "targetStart": 159.9,
+      "targetEnd": 162.6,
+      "durationFrames": 81,
+      "duration": 2.7,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-62",
+        "caption-63"
+      ]
+    },
+    {
+      "index": 67,
+      "startFrame": 16568,
+      "endFrame": 16609,
+      "sourceStart": 552.2666666666667,
+      "sourceEnd": 553.6333333333333,
+      "targetStart": 162.6,
+      "targetEnd": 163.96666666666667,
+      "durationFrames": 41,
+      "duration": 1.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-62",
+        "caption-63"
+      ]
+    },
+    {
+      "index": 68,
+      "startFrame": 18194,
+      "endFrame": 18289,
+      "sourceStart": 606.4666666666667,
+      "sourceEnd": 609.6333333333333,
+      "targetStart": 163.96666666666667,
+      "targetEnd": 167.13333333333333,
+      "durationFrames": 95,
+      "duration": 3.1666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-64"
+      ]
+    },
+    {
+      "index": 69,
+      "startFrame": 18296,
+      "endFrame": 18322,
+      "sourceStart": 609.8666666666667,
+      "sourceEnd": 610.7333333333333,
+      "targetStart": 167.13333333333333,
+      "targetEnd": 168,
+      "durationFrames": 26,
+      "duration": 0.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-64"
+      ]
+    },
+    {
+      "index": 70,
+      "startFrame": 18353,
+      "endFrame": 18444,
+      "sourceStart": 611.7666666666667,
+      "sourceEnd": 614.8,
+      "targetStart": 168,
+      "targetEnd": 171.03333333333333,
+      "durationFrames": 91,
+      "duration": 3.033333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-65"
+      ]
+    },
+    {
+      "index": 71,
+      "startFrame": 18825,
+      "endFrame": 18878,
+      "sourceStart": 627.5,
+      "sourceEnd": 629.2666666666667,
+      "targetStart": 171.03333333333333,
+      "targetEnd": 172.8,
+      "durationFrames": 53,
+      "duration": 1.7666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-66"
+      ]
+    },
+    {
+      "index": 72,
+      "startFrame": 18890,
+      "endFrame": 19009,
+      "sourceStart": 629.6666666666666,
+      "sourceEnd": 633.6333333333333,
+      "targetStart": 172.8,
+      "targetEnd": 176.76666666666668,
+      "durationFrames": 119,
+      "duration": 3.966666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-67"
+      ]
+    },
+    {
+      "index": 73,
+      "startFrame": 19094,
+      "endFrame": 19210,
+      "sourceStart": 636.4666666666667,
+      "sourceEnd": 640.3333333333334,
+      "targetStart": 176.76666666666668,
+      "targetEnd": 180.63333333333333,
+      "durationFrames": 116,
+      "duration": 3.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-68",
+        "caption-69"
+      ]
+    },
+    {
+      "index": 74,
+      "startFrame": 19240,
+      "endFrame": 19332,
+      "sourceStart": 641.3333333333334,
+      "sourceEnd": 644.4,
+      "targetStart": 180.63333333333333,
+      "targetEnd": 183.7,
+      "durationFrames": 92,
+      "duration": 3.066666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-69"
+      ]
+    },
+    {
+      "index": 75,
+      "startFrame": 19526,
+      "endFrame": 19542,
+      "sourceStart": 650.8666666666667,
+      "sourceEnd": 651.4,
+      "targetStart": 183.7,
+      "targetEnd": 184.23333333333332,
+      "durationFrames": 16,
+      "duration": 0.5333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-69"
+      ]
+    },
+    {
+      "index": 76,
+      "startFrame": 19588,
+      "endFrame": 19671,
+      "sourceStart": 652.9333333333333,
+      "sourceEnd": 655.7,
+      "targetStart": 184.23333333333332,
+      "targetEnd": 187,
+      "durationFrames": 83,
+      "duration": 2.7666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-70"
+      ]
+    },
+    {
+      "index": 77,
+      "startFrame": 19714,
+      "endFrame": 19756,
+      "sourceStart": 657.1333333333333,
+      "sourceEnd": 658.5333333333333,
+      "targetStart": 187,
+      "targetEnd": 188.4,
+      "durationFrames": 42,
+      "duration": 1.4,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-70"
+      ]
+    },
+    {
+      "index": 78,
+      "startFrame": 19766,
+      "endFrame": 19809,
+      "sourceStart": 658.8666666666667,
+      "sourceEnd": 660.3,
+      "targetStart": 188.4,
+      "targetEnd": 189.83333333333334,
+      "durationFrames": 43,
+      "duration": 1.4333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-70"
+      ]
+    },
+    {
+      "index": 79,
+      "startFrame": 20871,
+      "endFrame": 21000,
+      "sourceStart": 695.7,
+      "sourceEnd": 700,
+      "targetStart": 189.83333333333334,
+      "targetEnd": 194.13333333333333,
+      "durationFrames": 129,
+      "duration": 4.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-71"
+      ]
+    },
+    {
+      "index": 80,
+      "startFrame": 21137,
+      "endFrame": 21223,
+      "sourceStart": 704.5666666666667,
+      "sourceEnd": 707.4333333333333,
+      "targetStart": 194.13333333333333,
+      "targetEnd": 197,
+      "durationFrames": 86,
+      "duration": 2.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-72"
+      ]
+    },
+    {
+      "index": 81,
+      "startFrame": 21246,
+      "endFrame": 21342,
+      "sourceStart": 708.2,
+      "sourceEnd": 711.4,
+      "targetStart": 197,
+      "targetEnd": 200.2,
+      "durationFrames": 96,
+      "duration": 3.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-72"
+      ]
+    },
+    {
+      "index": 82,
+      "startFrame": 21505,
+      "endFrame": 21572,
+      "sourceStart": 716.8333333333334,
+      "sourceEnd": 719.0666666666667,
+      "targetStart": 200.2,
+      "targetEnd": 202.43333333333334,
+      "durationFrames": 67,
+      "duration": 2.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-72",
+        "caption-73"
+      ]
+    },
+    {
+      "index": 83,
+      "startFrame": 21622,
+      "endFrame": 21668,
+      "sourceStart": 720.7333333333333,
+      "sourceEnd": 722.2666666666667,
+      "targetStart": 202.43333333333334,
+      "targetEnd": 203.96666666666667,
+      "durationFrames": 46,
+      "duration": 1.5333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-73"
+      ]
+    },
+    {
+      "index": 84,
+      "startFrame": 21703,
+      "endFrame": 21805,
+      "sourceStart": 723.4333333333333,
+      "sourceEnd": 726.8333333333334,
+      "targetStart": 203.96666666666667,
+      "targetEnd": 207.36666666666667,
+      "durationFrames": 102,
+      "duration": 3.4,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-73",
+        "caption-74"
+      ]
+    },
+    {
+      "index": 85,
+      "startFrame": 21899,
+      "endFrame": 21983,
+      "sourceStart": 729.9666666666667,
+      "sourceEnd": 732.7666666666667,
+      "targetStart": 207.36666666666667,
+      "targetEnd": 210.16666666666666,
+      "durationFrames": 84,
+      "duration": 2.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-74"
+      ]
+    },
+    {
+      "index": 86,
+      "startFrame": 21993,
+      "endFrame": 22049,
+      "sourceStart": 733.1,
+      "sourceEnd": 734.9666666666667,
+      "targetStart": 210.16666666666666,
+      "targetEnd": 212.03333333333333,
+      "durationFrames": 56,
+      "duration": 1.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-74"
+      ]
+    },
+    {
+      "index": 87,
+      "startFrame": 22153,
+      "endFrame": 22239,
+      "sourceStart": 738.4333333333333,
+      "sourceEnd": 741.3,
+      "targetStart": 212.03333333333333,
+      "targetEnd": 214.9,
+      "durationFrames": 86,
+      "duration": 2.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-75"
+      ]
+    },
+    {
+      "index": 88,
+      "startFrame": 22296,
+      "endFrame": 22338,
+      "sourceStart": 743.2,
+      "sourceEnd": 744.6,
+      "targetStart": 214.9,
+      "targetEnd": 216.3,
+      "durationFrames": 42,
+      "duration": 1.4,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-75"
+      ]
+    },
+    {
+      "index": 89,
+      "startFrame": 22342,
+      "endFrame": 22388,
+      "sourceStart": 744.7333333333333,
+      "sourceEnd": 746.2666666666667,
+      "targetStart": 216.3,
+      "targetEnd": 217.83333333333334,
+      "durationFrames": 46,
+      "duration": 1.5333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-75"
+      ]
+    },
+    {
+      "index": 90,
+      "startFrame": 22520,
+      "endFrame": 22569,
+      "sourceStart": 750.6666666666666,
+      "sourceEnd": 752.3,
+      "targetStart": 217.83333333333334,
+      "targetEnd": 219.46666666666667,
+      "durationFrames": 49,
+      "duration": 1.6333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-76"
+      ]
+    },
+    {
+      "index": 91,
+      "startFrame": 22619,
+      "endFrame": 22660,
+      "sourceStart": 753.9666666666667,
+      "sourceEnd": 755.3333333333334,
+      "targetStart": 219.46666666666667,
+      "targetEnd": 220.83333333333334,
+      "durationFrames": 41,
+      "duration": 1.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-76"
+      ]
+    },
+    {
+      "index": 92,
+      "startFrame": 22696,
+      "endFrame": 22726,
+      "sourceStart": 756.5333333333333,
+      "sourceEnd": 757.5333333333333,
+      "targetStart": 220.83333333333334,
+      "targetEnd": 221.83333333333334,
+      "durationFrames": 30,
+      "duration": 1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-76"
+      ]
+    },
+    {
+      "index": 93,
+      "startFrame": 22747,
+      "endFrame": 22780,
+      "sourceStart": 758.2333333333333,
+      "sourceEnd": 759.3333333333334,
+      "targetStart": 221.83333333333334,
+      "targetEnd": 222.93333333333334,
+      "durationFrames": 33,
+      "duration": 1.1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-77"
+      ]
+    },
+    {
+      "index": 94,
+      "startFrame": 22806,
+      "endFrame": 22935,
+      "sourceStart": 760.2,
+      "sourceEnd": 764.5,
+      "targetStart": 222.93333333333334,
+      "targetEnd": 227.23333333333332,
+      "durationFrames": 129,
+      "duration": 4.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-77"
+      ]
+    },
+    {
+      "index": 95,
+      "startFrame": 23138,
+      "endFrame": 23290,
+      "sourceStart": 771.2666666666667,
+      "sourceEnd": 776.3333333333334,
+      "targetStart": 227.23333333333332,
+      "targetEnd": 232.3,
+      "durationFrames": 152,
+      "duration": 5.066666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-78"
+      ]
+    },
+    {
+      "index": 96,
+      "startFrame": 23328,
+      "endFrame": 23412,
+      "sourceStart": 777.6,
+      "sourceEnd": 780.4,
+      "targetStart": 232.3,
+      "targetEnd": 235.1,
+      "durationFrames": 84,
+      "duration": 2.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-79"
+      ]
+    },
+    {
+      "index": 97,
+      "startFrame": 23570,
+      "endFrame": 23637,
+      "sourceStart": 785.6666666666666,
+      "sourceEnd": 787.9,
+      "targetStart": 235.1,
+      "targetEnd": 237.33333333333334,
+      "durationFrames": 67,
+      "duration": 2.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-80"
+      ]
+    },
+    {
+      "index": 98,
+      "startFrame": 24113,
+      "endFrame": 24229,
+      "sourceStart": 803.7666666666667,
+      "sourceEnd": 807.6333333333333,
+      "targetStart": 237.33333333333334,
+      "targetEnd": 241.2,
+      "durationFrames": 116,
+      "duration": 3.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-81"
+      ]
+    },
+    {
+      "index": 99,
+      "startFrame": 24276,
+      "endFrame": 24319,
+      "sourceStart": 809.2,
+      "sourceEnd": 810.6333333333333,
+      "targetStart": 241.2,
+      "targetEnd": 242.63333333333333,
+      "durationFrames": 43,
+      "duration": 1.4333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-82"
+      ]
+    },
+    {
+      "index": 100,
+      "startFrame": 24338,
+      "endFrame": 24418,
+      "sourceStart": 811.2666666666667,
+      "sourceEnd": 813.9333333333333,
+      "targetStart": 242.63333333333333,
+      "targetEnd": 245.3,
+      "durationFrames": 80,
+      "duration": 2.6666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-83"
+      ]
+    },
+    {
+      "index": 101,
+      "startFrame": 24528,
+      "endFrame": 24559,
+      "sourceStart": 817.6,
+      "sourceEnd": 818.6333333333333,
+      "targetStart": 245.3,
+      "targetEnd": 246.33333333333334,
+      "durationFrames": 31,
+      "duration": 1.0333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-84"
+      ]
+    },
+    {
+      "index": 102,
+      "startFrame": 24564,
+      "endFrame": 24660,
+      "sourceStart": 818.8,
+      "sourceEnd": 822,
+      "targetStart": 246.33333333333334,
+      "targetEnd": 249.53333333333333,
+      "durationFrames": 96,
+      "duration": 3.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-84"
+      ]
+    },
+    {
+      "index": 103,
+      "startFrame": 24705,
+      "endFrame": 24766,
+      "sourceStart": 823.5,
+      "sourceEnd": 825.5333333333333,
+      "targetStart": 249.53333333333333,
+      "targetEnd": 251.56666666666666,
+      "durationFrames": 61,
+      "duration": 2.033333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-85"
+      ]
+    },
+    {
+      "index": 104,
+      "startFrame": 24809,
+      "endFrame": 24869,
+      "sourceStart": 826.9666666666667,
+      "sourceEnd": 828.9666666666667,
+      "targetStart": 251.56666666666666,
+      "targetEnd": 253.56666666666666,
+      "durationFrames": 60,
+      "duration": 2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-86",
+        "caption-87"
+      ]
+    },
+    {
+      "index": 105,
+      "startFrame": 24879,
+      "endFrame": 24933,
+      "sourceStart": 829.3,
+      "sourceEnd": 831.1,
+      "targetStart": 253.56666666666666,
+      "targetEnd": 255.36666666666667,
+      "durationFrames": 54,
+      "duration": 1.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-86",
+        "caption-87"
+      ]
+    },
+    {
+      "index": 106,
+      "startFrame": 24938,
+      "endFrame": 24979,
+      "sourceStart": 831.2666666666667,
+      "sourceEnd": 832.6333333333333,
+      "targetStart": 255.36666666666667,
+      "targetEnd": 256.73333333333335,
+      "durationFrames": 41,
+      "duration": 1.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-86",
+        "caption-87"
+      ]
+    },
+    {
+      "index": 107,
+      "startFrame": 25113,
+      "endFrame": 25156,
+      "sourceStart": 837.1,
+      "sourceEnd": 838.5333333333333,
+      "targetStart": 256.73333333333335,
+      "targetEnd": 258.1666666666667,
+      "durationFrames": 43,
+      "duration": 1.4333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-87"
+      ]
+    },
+    {
+      "index": 108,
+      "startFrame": 25160,
+      "endFrame": 25243,
+      "sourceStart": 838.6666666666666,
+      "sourceEnd": 841.4333333333333,
+      "targetStart": 258.1666666666667,
+      "targetEnd": 260.93333333333334,
+      "durationFrames": 83,
+      "duration": 2.7666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-87"
+      ]
+    },
+    {
+      "index": 109,
+      "startFrame": 26821,
+      "endFrame": 26990,
+      "sourceStart": 894.0333333333333,
+      "sourceEnd": 899.6666666666666,
+      "targetStart": 260.93333333333334,
+      "targetEnd": 266.56666666666666,
+      "durationFrames": 169,
+      "duration": 5.633333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-88",
+        "caption-89"
+      ]
+    },
+    {
+      "index": 110,
+      "startFrame": 27068,
+      "endFrame": 27116,
+      "sourceStart": 902.2666666666667,
+      "sourceEnd": 903.8666666666667,
+      "targetStart": 266.56666666666666,
+      "targetEnd": 268.1666666666667,
+      "durationFrames": 48,
+      "duration": 1.6,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-90"
+      ]
+    },
+    {
+      "index": 111,
+      "startFrame": 27128,
+      "endFrame": 27195,
+      "sourceStart": 904.2666666666667,
+      "sourceEnd": 906.5,
+      "targetStart": 268.1666666666667,
+      "targetEnd": 270.4,
+      "durationFrames": 67,
+      "duration": 2.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-90"
+      ]
+    },
+    {
+      "index": 112,
+      "startFrame": 27273,
+      "endFrame": 27313,
+      "sourceStart": 909.1,
+      "sourceEnd": 910.4333333333333,
+      "targetStart": 270.4,
+      "targetEnd": 271.73333333333335,
+      "durationFrames": 40,
+      "duration": 1.3333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-90"
+      ]
+    },
+    {
+      "index": 113,
+      "startFrame": 27353,
+      "endFrame": 27430,
+      "sourceStart": 911.7666666666667,
+      "sourceEnd": 914.3333333333334,
+      "targetStart": 271.73333333333335,
+      "targetEnd": 274.3,
+      "durationFrames": 77,
+      "duration": 2.566666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-91"
+      ]
+    },
+    {
+      "index": 114,
+      "startFrame": 27438,
+      "endFrame": 27499,
+      "sourceStart": 914.6,
+      "sourceEnd": 916.6333333333333,
+      "targetStart": 274.3,
+      "targetEnd": 276.3333333333333,
+      "durationFrames": 61,
+      "duration": 2.033333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-92"
+      ]
+    },
+    {
+      "index": 115,
+      "startFrame": 27507,
+      "endFrame": 27567,
+      "sourceStart": 916.9,
+      "sourceEnd": 918.9,
+      "targetStart": 276.3333333333333,
+      "targetEnd": 278.3333333333333,
+      "durationFrames": 60,
+      "duration": 2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-92"
+      ]
+    },
+    {
+      "index": 116,
+      "startFrame": 27701,
+      "endFrame": 27761,
+      "sourceStart": 923.3666666666667,
+      "sourceEnd": 925.3666666666667,
+      "targetStart": 278.3333333333333,
+      "targetEnd": 280.3333333333333,
+      "durationFrames": 60,
+      "duration": 2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-92"
+      ]
+    },
+    {
+      "index": 117,
+      "startFrame": 27771,
+      "endFrame": 27788,
+      "sourceStart": 925.7,
+      "sourceEnd": 926.2666666666667,
+      "targetStart": 280.3333333333333,
+      "targetEnd": 280.9,
+      "durationFrames": 17,
+      "duration": 0.5666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-92"
+      ]
+    },
+    {
+      "index": 118,
+      "startFrame": 27793,
+      "endFrame": 27814,
+      "sourceStart": 926.4333333333333,
+      "sourceEnd": 927.1333333333333,
+      "targetStart": 280.9,
+      "targetEnd": 281.6,
+      "durationFrames": 21,
+      "duration": 0.7,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-93"
+      ]
+    },
+    {
+      "index": 119,
+      "startFrame": 27821,
+      "endFrame": 27852,
+      "sourceStart": 927.3666666666667,
+      "sourceEnd": 928.4,
+      "targetStart": 281.6,
+      "targetEnd": 282.6333333333333,
+      "durationFrames": 31,
+      "duration": 1.0333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-93"
+      ]
+    },
+    {
+      "index": 120,
+      "startFrame": 27924,
+      "endFrame": 27980,
+      "sourceStart": 930.8,
+      "sourceEnd": 932.6666666666666,
+      "targetStart": 282.6333333333333,
+      "targetEnd": 284.5,
+      "durationFrames": 56,
+      "duration": 1.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-93"
+      ]
+    },
+    {
+      "index": 121,
+      "startFrame": 27996,
+      "endFrame": 28092,
+      "sourceStart": 933.2,
+      "sourceEnd": 936.4,
+      "targetStart": 284.5,
+      "targetEnd": 287.7,
+      "durationFrames": 96,
+      "duration": 3.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-94"
+      ]
+    },
+    {
+      "index": 122,
+      "startFrame": 28567,
+      "endFrame": 28607,
+      "sourceStart": 952.2333333333333,
+      "sourceEnd": 953.5666666666667,
+      "targetStart": 287.7,
+      "targetEnd": 289.03333333333336,
+      "durationFrames": 40,
+      "duration": 1.3333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-95"
+      ]
+    },
+    {
+      "index": 123,
+      "startFrame": 28610,
+      "endFrame": 28669,
+      "sourceStart": 953.6666666666666,
+      "sourceEnd": 955.6333333333333,
+      "targetStart": 289.03333333333336,
+      "targetEnd": 291,
+      "durationFrames": 59,
+      "duration": 1.9666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-96"
+      ]
+    },
+    {
+      "index": 124,
+      "startFrame": 28724,
+      "endFrame": 28750,
+      "sourceStart": 957.4666666666667,
+      "sourceEnd": 958.3333333333334,
+      "targetStart": 291,
+      "targetEnd": 291.8666666666667,
+      "durationFrames": 26,
+      "duration": 0.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-96"
+      ]
+    },
+    {
+      "index": 125,
+      "startFrame": 29233,
+      "endFrame": 29291,
+      "sourceStart": 974.4333333333333,
+      "sourceEnd": 976.3666666666667,
+      "targetStart": 291.8666666666667,
+      "targetEnd": 293.8,
+      "durationFrames": 58,
+      "duration": 1.9333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-97"
+      ]
+    },
+    {
+      "index": 126,
+      "startFrame": 29448,
+      "endFrame": 29565,
+      "sourceStart": 981.6,
+      "sourceEnd": 985.5,
+      "targetStart": 293.8,
+      "targetEnd": 297.7,
+      "durationFrames": 117,
+      "duration": 3.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-97"
+      ]
+    },
+    {
+      "index": 127,
+      "startFrame": 29578,
+      "endFrame": 29644,
+      "sourceStart": 985.9333333333333,
+      "sourceEnd": 988.1333333333333,
+      "targetStart": 297.7,
+      "targetEnd": 299.9,
+      "durationFrames": 66,
+      "duration": 2.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-98"
+      ]
+    },
+    {
+      "index": 128,
+      "startFrame": 30432,
+      "endFrame": 30613,
+      "sourceStart": 1014.4,
+      "sourceEnd": 1020.4333333333333,
+      "targetStart": 299.9,
+      "targetEnd": 305.93333333333334,
+      "durationFrames": 181,
+      "duration": 6.033333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-99",
+        "caption-100"
+      ]
+    },
+    {
+      "index": 129,
+      "startFrame": 30775,
+      "endFrame": 30799,
+      "sourceStart": 1025.8333333333333,
+      "sourceEnd": 1026.6333333333334,
+      "targetStart": 305.93333333333334,
+      "targetEnd": 306.73333333333335,
+      "durationFrames": 24,
+      "duration": 0.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-100"
+      ]
+    },
+    {
+      "index": 130,
+      "startFrame": 30819,
+      "endFrame": 30842,
+      "sourceStart": 1027.3,
+      "sourceEnd": 1028.0666666666666,
+      "targetStart": 306.73333333333335,
+      "targetEnd": 307.5,
+      "durationFrames": 23,
+      "duration": 0.7666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-100"
+      ]
+    },
+    {
+      "index": 131,
+      "startFrame": 31002,
+      "endFrame": 31079,
+      "sourceStart": 1033.4,
+      "sourceEnd": 1035.9666666666667,
+      "targetStart": 307.5,
+      "targetEnd": 310.06666666666666,
+      "durationFrames": 77,
+      "duration": 2.566666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-101"
+      ]
+    },
+    {
+      "index": 132,
+      "startFrame": 31104,
+      "endFrame": 31141,
+      "sourceStart": 1036.8,
+      "sourceEnd": 1038.0333333333333,
+      "targetStart": 310.06666666666666,
+      "targetEnd": 311.3,
+      "durationFrames": 37,
+      "duration": 1.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-101"
+      ]
+    },
+    {
+      "index": 133,
+      "startFrame": 31237,
+      "endFrame": 31294,
+      "sourceStart": 1041.2333333333333,
+      "sourceEnd": 1043.1333333333334,
+      "targetStart": 311.3,
+      "targetEnd": 313.2,
+      "durationFrames": 57,
+      "duration": 1.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-102"
+      ]
+    },
+    {
+      "index": 134,
+      "startFrame": 31417,
+      "endFrame": 31477,
+      "sourceStart": 1047.2333333333333,
+      "sourceEnd": 1049.2333333333333,
+      "targetStart": 313.2,
+      "targetEnd": 315.2,
+      "durationFrames": 60,
+      "duration": 2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-102"
+      ]
+    },
+    {
+      "index": 135,
+      "startFrame": 31885,
+      "endFrame": 31938,
+      "sourceStart": 1062.8333333333333,
+      "sourceEnd": 1064.6,
+      "targetStart": 315.2,
+      "targetEnd": 316.96666666666664,
+      "durationFrames": 53,
+      "duration": 1.7666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-103"
+      ]
+    },
+    {
+      "index": 136,
+      "startFrame": 31989,
+      "endFrame": 32015,
+      "sourceStart": 1066.3,
+      "sourceEnd": 1067.1666666666667,
+      "targetStart": 316.96666666666664,
+      "targetEnd": 317.8333333333333,
+      "durationFrames": 26,
+      "duration": 0.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-104"
+      ]
+    },
+    {
+      "index": 137,
+      "startFrame": 32038,
+      "endFrame": 32100,
+      "sourceStart": 1067.9333333333334,
+      "sourceEnd": 1070,
+      "targetStart": 317.8333333333333,
+      "targetEnd": 319.9,
+      "durationFrames": 62,
+      "duration": 2.066666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-104"
+      ]
+    },
+    {
+      "index": 138,
+      "startFrame": 32148,
+      "endFrame": 32179,
+      "sourceStart": 1071.6,
+      "sourceEnd": 1072.6333333333334,
+      "targetStart": 319.9,
+      "targetEnd": 320.93333333333334,
+      "durationFrames": 31,
+      "duration": 1.0333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-104"
+      ]
+    },
+    {
+      "index": 139,
+      "startFrame": 32250,
+      "endFrame": 32307,
+      "sourceStart": 1075,
+      "sourceEnd": 1076.9,
+      "targetStart": 320.93333333333334,
+      "targetEnd": 322.8333333333333,
+      "durationFrames": 57,
+      "duration": 1.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-105"
+      ]
+    },
+    {
+      "index": 140,
+      "startFrame": 32452,
+      "endFrame": 32519,
+      "sourceStart": 1081.7333333333333,
+      "sourceEnd": 1083.9666666666667,
+      "targetStart": 322.8333333333333,
+      "targetEnd": 325.06666666666666,
+      "durationFrames": 67,
+      "duration": 2.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-105",
+        "caption-106"
+      ]
+    },
+    {
+      "index": 141,
+      "startFrame": 32533,
+      "endFrame": 32537,
+      "sourceStart": 1084.4333333333334,
+      "sourceEnd": 1084.5666666666666,
+      "targetStart": 325.06666666666666,
+      "targetEnd": 325.2,
+      "durationFrames": 4,
+      "duration": 0.13333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-105",
+        "caption-106"
+      ]
+    },
+    {
+      "index": 142,
+      "startFrame": 32565,
+      "endFrame": 32706,
+      "sourceStart": 1085.5,
+      "sourceEnd": 1090.2,
+      "targetStart": 325.2,
+      "targetEnd": 329.9,
+      "durationFrames": 141,
+      "duration": 4.7,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-105",
+        "caption-106"
+      ]
+    },
+    {
+      "index": 143,
+      "startFrame": 32737,
+      "endFrame": 32780,
+      "sourceStart": 1091.2333333333333,
+      "sourceEnd": 1092.6666666666667,
+      "targetStart": 329.9,
+      "targetEnd": 331.3333333333333,
+      "durationFrames": 43,
+      "duration": 1.4333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-105",
+        "caption-106"
+      ]
+    },
+    {
+      "index": 144,
+      "startFrame": 32880,
+      "endFrame": 32916,
+      "sourceStart": 1096,
+      "sourceEnd": 1097.2,
+      "targetStart": 331.3333333333333,
+      "targetEnd": 332.53333333333336,
+      "durationFrames": 36,
+      "duration": 1.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-107"
+      ]
+    },
+    {
+      "index": 145,
+      "startFrame": 32922,
+      "endFrame": 32956,
+      "sourceStart": 1097.4,
+      "sourceEnd": 1098.5333333333333,
+      "targetStart": 332.53333333333336,
+      "targetEnd": 333.6666666666667,
+      "durationFrames": 34,
+      "duration": 1.1333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-107"
+      ]
+    },
+    {
+      "index": 146,
+      "startFrame": 32974,
+      "endFrame": 33032,
+      "sourceStart": 1099.1333333333334,
+      "sourceEnd": 1101.0666666666666,
+      "targetStart": 333.6666666666667,
+      "targetEnd": 335.6,
+      "durationFrames": 58,
+      "duration": 1.9333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-107"
+      ]
+    },
+    {
+      "index": 147,
+      "startFrame": 33191,
+      "endFrame": 33271,
+      "sourceStart": 1106.3666666666666,
+      "sourceEnd": 1109.0333333333333,
+      "targetStart": 335.6,
+      "targetEnd": 338.26666666666665,
+      "durationFrames": 80,
+      "duration": 2.6666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-108"
+      ]
+    },
+    {
+      "index": 148,
+      "startFrame": 33520,
+      "endFrame": 33607,
+      "sourceStart": 1117.3333333333333,
+      "sourceEnd": 1120.2333333333333,
+      "targetStart": 338.26666666666665,
+      "targetEnd": 341.1666666666667,
+      "durationFrames": 87,
+      "duration": 2.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-109"
+      ]
+    },
+    {
+      "index": 149,
+      "startFrame": 33804,
+      "endFrame": 33922,
+      "sourceStart": 1126.8,
+      "sourceEnd": 1130.7333333333333,
+      "targetStart": 341.1666666666667,
+      "targetEnd": 345.1,
+      "durationFrames": 118,
+      "duration": 3.933333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-110",
+        "caption-111"
+      ]
+    },
+    {
+      "index": 150,
+      "startFrame": 34101,
+      "endFrame": 34211,
+      "sourceStart": 1136.7,
+      "sourceEnd": 1140.3666666666666,
+      "targetStart": 345.1,
+      "targetEnd": 348.76666666666665,
+      "durationFrames": 110,
+      "duration": 3.6666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-112",
+        "caption-113"
+      ]
+    },
+    {
+      "index": 151,
+      "startFrame": 34382,
+      "endFrame": 34440,
+      "sourceStart": 1146.0666666666666,
+      "sourceEnd": 1148,
+      "targetStart": 348.76666666666665,
+      "targetEnd": 350.7,
+      "durationFrames": 58,
+      "duration": 1.9333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-114"
+      ]
+    },
+    {
+      "index": 152,
+      "startFrame": 34445,
+      "endFrame": 34519,
+      "sourceStart": 1148.1666666666667,
+      "sourceEnd": 1150.6333333333334,
+      "targetStart": 350.7,
+      "targetEnd": 353.1666666666667,
+      "durationFrames": 74,
+      "duration": 2.466666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-114"
+      ]
+    },
+    {
+      "index": 153,
+      "startFrame": 34534,
+      "endFrame": 34554,
+      "sourceStart": 1151.1333333333334,
+      "sourceEnd": 1151.8,
+      "targetStart": 353.1666666666667,
+      "targetEnd": 353.8333333333333,
+      "durationFrames": 20,
+      "duration": 0.6666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-114"
+      ]
+    },
+    {
+      "index": 154,
+      "startFrame": 34639,
+      "endFrame": 34729,
+      "sourceStart": 1154.6333333333334,
+      "sourceEnd": 1157.6333333333334,
+      "targetStart": 353.8333333333333,
+      "targetEnd": 356.8333333333333,
+      "durationFrames": 90,
+      "duration": 3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-115"
+      ]
+    },
+    {
+      "index": 155,
+      "startFrame": 35260,
+      "endFrame": 35313,
+      "sourceStart": 1175.3333333333333,
+      "sourceEnd": 1177.1,
+      "targetStart": 356.8333333333333,
+      "targetEnd": 358.6,
+      "durationFrames": 53,
+      "duration": 1.7666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-116"
+      ]
+    },
+    {
+      "index": 156,
+      "startFrame": 35379,
+      "endFrame": 35415,
+      "sourceStart": 1179.3,
+      "sourceEnd": 1180.5,
+      "targetStart": 358.6,
+      "targetEnd": 359.8,
+      "durationFrames": 36,
+      "duration": 1.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-117",
+        "caption-118"
+      ]
+    },
+    {
+      "index": 157,
+      "startFrame": 35424,
+      "endFrame": 35489,
+      "sourceStart": 1180.8,
+      "sourceEnd": 1182.9666666666667,
+      "targetStart": 359.8,
+      "targetEnd": 361.96666666666664,
+      "durationFrames": 65,
+      "duration": 2.1666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-117",
+        "caption-118"
+      ]
+    },
+    {
+      "index": 158,
+      "startFrame": 35508,
+      "endFrame": 35573,
+      "sourceStart": 1183.6,
+      "sourceEnd": 1185.7666666666667,
+      "targetStart": 361.96666666666664,
+      "targetEnd": 364.1333333333333,
+      "durationFrames": 65,
+      "duration": 2.1666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-117",
+        "caption-118"
+      ]
+    },
+    {
+      "index": 159,
+      "startFrame": 35588,
+      "endFrame": 35640,
+      "sourceStart": 1186.2666666666667,
+      "sourceEnd": 1188,
+      "targetStart": 364.1333333333333,
+      "targetEnd": 365.8666666666667,
+      "durationFrames": 52,
+      "duration": 1.7333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-117",
+        "caption-118"
+      ]
+    },
+    {
+      "index": 160,
+      "startFrame": 35868,
+      "endFrame": 35927,
+      "sourceStart": 1195.6,
+      "sourceEnd": 1197.5666666666666,
+      "targetStart": 365.8666666666667,
+      "targetEnd": 367.8333333333333,
+      "durationFrames": 59,
+      "duration": 1.9666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-118"
+      ]
+    },
+    {
+      "index": 161,
+      "startFrame": 35931,
+      "endFrame": 35957,
+      "sourceStart": 1197.7,
+      "sourceEnd": 1198.5666666666666,
+      "targetStart": 367.8333333333333,
+      "targetEnd": 368.7,
+      "durationFrames": 26,
+      "duration": 0.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-118"
+      ]
+    },
+    {
+      "index": 162,
+      "startFrame": 36183,
+      "endFrame": 36336,
+      "sourceStart": 1206.1,
+      "sourceEnd": 1211.2,
+      "targetStart": 368.7,
+      "targetEnd": 373.8,
+      "durationFrames": 153,
+      "duration": 5.1,
+      "kinds": [
+        "system"
+      ],
+      "virtualCaptionIds": [
+        "system-1"
+      ]
+    },
+    {
+      "index": 163,
+      "startFrame": 36354,
+      "endFrame": 36420,
+      "sourceStart": 1211.8,
+      "sourceEnd": 1214,
+      "targetStart": 373.8,
+      "targetEnd": 376,
+      "durationFrames": 66,
+      "duration": 2.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-119"
+      ]
+    },
+    {
+      "index": 164,
+      "startFrame": 36425,
+      "endFrame": 36504,
+      "sourceStart": 1214.1666666666667,
+      "sourceEnd": 1216.8,
+      "targetStart": 376,
+      "targetEnd": 378.6333333333333,
+      "durationFrames": 79,
+      "duration": 2.6333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-119"
+      ]
+    },
+    {
+      "index": 165,
+      "startFrame": 37119,
+      "endFrame": 37176,
+      "sourceStart": 1237.3,
+      "sourceEnd": 1239.2,
+      "targetStart": 378.6333333333333,
+      "targetEnd": 380.53333333333336,
+      "durationFrames": 57,
+      "duration": 1.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-120"
+      ]
+    },
+    {
+      "index": 166,
+      "startFrame": 37201,
+      "endFrame": 37226,
+      "sourceStart": 1240.0333333333333,
+      "sourceEnd": 1240.8666666666666,
+      "targetStart": 380.53333333333336,
+      "targetEnd": 381.3666666666667,
+      "durationFrames": 25,
+      "duration": 0.8333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-120"
+      ]
+    },
+    {
+      "index": 167,
+      "startFrame": 37248,
+      "endFrame": 37318,
+      "sourceStart": 1241.6,
+      "sourceEnd": 1243.9333333333334,
+      "targetStart": 381.3666666666667,
+      "targetEnd": 383.7,
+      "durationFrames": 70,
+      "duration": 2.3333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-121"
+      ]
+    },
+    {
+      "index": 168,
+      "startFrame": 37315,
+      "endFrame": 37425,
+      "sourceStart": 1243.8333333333333,
+      "sourceEnd": 1247.5,
+      "targetStart": 383.7,
+      "targetEnd": 387.3666666666667,
+      "durationFrames": 110,
+      "duration": 3.6666666666666665,
+      "kinds": [
+        "system"
+      ],
+      "virtualCaptionIds": [
+        "system-2"
+      ]
+    },
+    {
+      "index": 169,
+      "startFrame": 37485,
+      "endFrame": 37548,
+      "sourceStart": 1249.5,
+      "sourceEnd": 1251.6,
+      "targetStart": 387.3666666666667,
+      "targetEnd": 389.46666666666664,
+      "durationFrames": 63,
+      "duration": 2.1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-122"
+      ]
+    },
+    {
+      "index": 170,
+      "startFrame": 37558,
+      "endFrame": 37596,
+      "sourceStart": 1251.9333333333334,
+      "sourceEnd": 1253.2,
+      "targetStart": 389.46666666666664,
+      "targetEnd": 390.73333333333335,
+      "durationFrames": 38,
+      "duration": 1.2666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-122"
+      ]
+    },
+    {
+      "index": 171,
+      "startFrame": 37706,
+      "endFrame": 37746,
+      "sourceStart": 1256.8666666666666,
+      "sourceEnd": 1258.2,
+      "targetStart": 390.73333333333335,
+      "targetEnd": 392.06666666666666,
+      "durationFrames": 40,
+      "duration": 1.3333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-123"
+      ]
+    },
+    {
+      "index": 172,
+      "startFrame": 37763,
+      "endFrame": 37815,
+      "sourceStart": 1258.7666666666667,
+      "sourceEnd": 1260.5,
+      "targetStart": 392.06666666666666,
+      "targetEnd": 393.8,
+      "durationFrames": 52,
+      "duration": 1.7333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-123"
+      ]
+    },
+    {
+      "index": 173,
+      "startFrame": 37835,
+      "endFrame": 37930,
+      "sourceStart": 1261.1666666666667,
+      "sourceEnd": 1264.3333333333333,
+      "targetStart": 393.8,
+      "targetEnd": 396.96666666666664,
+      "durationFrames": 95,
+      "duration": 3.1666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-124"
+      ]
+    },
+    {
+      "index": 174,
+      "startFrame": 37942,
+      "endFrame": 37987,
+      "sourceStart": 1264.7333333333333,
+      "sourceEnd": 1266.2333333333333,
+      "targetStart": 396.96666666666664,
+      "targetEnd": 398.46666666666664,
+      "durationFrames": 45,
+      "duration": 1.5,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-125"
+      ]
+    },
+    {
+      "index": 175,
+      "startFrame": 37995,
+      "endFrame": 38058,
+      "sourceStart": 1266.5,
+      "sourceEnd": 1268.6,
+      "targetStart": 398.46666666666664,
+      "targetEnd": 400.56666666666666,
+      "durationFrames": 63,
+      "duration": 2.1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-126"
+      ]
+    },
+    {
+      "index": 176,
+      "startFrame": 38728,
+      "endFrame": 38829,
+      "sourceStart": 1290.9333333333334,
+      "sourceEnd": 1294.3,
+      "targetStart": 400.56666666666666,
+      "targetEnd": 403.93333333333334,
+      "durationFrames": 101,
+      "duration": 3.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-127"
+      ]
+    },
+    {
+      "index": 177,
+      "startFrame": 38841,
+      "endFrame": 38865,
+      "sourceStart": 1294.7,
+      "sourceEnd": 1295.5,
+      "targetStart": 403.93333333333334,
+      "targetEnd": 404.73333333333335,
+      "durationFrames": 24,
+      "duration": 0.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-127"
+      ]
+    },
+    {
+      "index": 178,
+      "startFrame": 38868,
+      "endFrame": 38900,
+      "sourceStart": 1295.6,
+      "sourceEnd": 1296.6666666666667,
+      "targetStart": 404.73333333333335,
+      "targetEnd": 405.8,
+      "durationFrames": 32,
+      "duration": 1.0666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-127"
+      ]
+    },
+    {
+      "index": 179,
+      "startFrame": 39004,
+      "endFrame": 39158,
+      "sourceStart": 1300.1333333333334,
+      "sourceEnd": 1305.2666666666667,
+      "targetStart": 405.8,
+      "targetEnd": 410.93333333333334,
+      "durationFrames": 154,
+      "duration": 5.133333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-128",
+        "caption-129",
+        "caption-130"
+      ]
+    },
+    {
+      "index": 180,
+      "startFrame": 39282,
+      "endFrame": 39312,
+      "sourceStart": 1309.4,
+      "sourceEnd": 1310.4,
+      "targetStart": 410.93333333333334,
+      "targetEnd": 411.93333333333334,
+      "durationFrames": 30,
+      "duration": 1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-131"
+      ]
+    },
+    {
+      "index": 181,
+      "startFrame": 39329,
+      "endFrame": 39375,
+      "sourceStart": 1310.9666666666667,
+      "sourceEnd": 1312.5,
+      "targetStart": 411.93333333333334,
+      "targetEnd": 413.46666666666664,
+      "durationFrames": 46,
+      "duration": 1.5333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-131"
+      ]
+    },
+    {
+      "index": 182,
+      "startFrame": 39395,
+      "endFrame": 39445,
+      "sourceStart": 1313.1666666666667,
+      "sourceEnd": 1314.8333333333333,
+      "targetStart": 413.46666666666664,
+      "targetEnd": 415.1333333333333,
+      "durationFrames": 50,
+      "duration": 1.6666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-132"
+      ]
+    },
+    {
+      "index": 183,
+      "startFrame": 39595,
+      "endFrame": 39709,
+      "sourceStart": 1319.8333333333333,
+      "sourceEnd": 1323.6333333333334,
+      "targetStart": 415.1333333333333,
+      "targetEnd": 418.93333333333334,
+      "durationFrames": 114,
+      "duration": 3.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-133",
+        "caption-134"
+      ]
+    },
+    {
+      "index": 184,
+      "startFrame": 39717,
+      "endFrame": 39737,
+      "sourceStart": 1323.9,
+      "sourceEnd": 1324.5666666666666,
+      "targetStart": 418.93333333333334,
+      "targetEnd": 419.6,
+      "durationFrames": 20,
+      "duration": 0.6666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-133",
+        "caption-134"
+      ]
+    },
+    {
+      "index": 185,
+      "startFrame": 39922,
+      "endFrame": 39972,
+      "sourceStart": 1330.7333333333333,
+      "sourceEnd": 1332.4,
+      "targetStart": 419.6,
+      "targetEnd": 421.26666666666665,
+      "durationFrames": 50,
+      "duration": 1.6666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-135"
+      ]
+    },
+    {
+      "index": 186,
+      "startFrame": 40025,
+      "endFrame": 40092,
+      "sourceStart": 1334.1666666666667,
+      "sourceEnd": 1336.4,
+      "targetStart": 421.26666666666665,
+      "targetEnd": 423.5,
+      "durationFrames": 67,
+      "duration": 2.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-136"
+      ]
+    },
+    {
+      "index": 187,
+      "startFrame": 40099,
+      "endFrame": 40193,
+      "sourceStart": 1336.6333333333334,
+      "sourceEnd": 1339.7666666666667,
+      "targetStart": 423.5,
+      "targetEnd": 426.6333333333333,
+      "durationFrames": 94,
+      "duration": 3.1333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-137"
+      ]
+    },
+    {
+      "index": 188,
+      "startFrame": 40226,
+      "endFrame": 40312,
+      "sourceStart": 1340.8666666666666,
+      "sourceEnd": 1343.7333333333333,
+      "targetStart": 426.6333333333333,
+      "targetEnd": 429.5,
+      "durationFrames": 86,
+      "duration": 2.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-138"
+      ]
+    },
+    {
+      "index": 189,
+      "startFrame": 40348,
+      "endFrame": 40426,
+      "sourceStart": 1344.9333333333334,
+      "sourceEnd": 1347.5333333333333,
+      "targetStart": 429.5,
+      "targetEnd": 432.1,
+      "durationFrames": 78,
+      "duration": 2.6,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-139"
+      ]
+    },
+    {
+      "index": 190,
+      "startFrame": 40483,
+      "endFrame": 40552,
+      "sourceStart": 1349.4333333333334,
+      "sourceEnd": 1351.7333333333333,
+      "targetStart": 432.1,
+      "targetEnd": 434.4,
+      "durationFrames": 69,
+      "duration": 2.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-140"
+      ]
+    },
+    {
+      "index": 191,
+      "startFrame": 40570,
+      "endFrame": 40632,
+      "sourceStart": 1352.3333333333333,
+      "sourceEnd": 1354.4,
+      "targetStart": 434.4,
+      "targetEnd": 436.46666666666664,
+      "durationFrames": 62,
+      "duration": 2.066666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-141"
+      ]
+    },
+    {
+      "index": 192,
+      "startFrame": 40685,
+      "endFrame": 40777,
+      "sourceStart": 1356.1666666666667,
+      "sourceEnd": 1359.2333333333333,
+      "targetStart": 436.46666666666664,
+      "targetEnd": 439.53333333333336,
+      "durationFrames": 92,
+      "duration": 3.066666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-142"
+      ]
+    },
+    {
+      "index": 193,
+      "startFrame": 40782,
+      "endFrame": 40801,
+      "sourceStart": 1359.4,
+      "sourceEnd": 1360.0333333333333,
+      "targetStart": 439.53333333333336,
+      "targetEnd": 440.1666666666667,
+      "durationFrames": 19,
+      "duration": 0.6333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-142"
+      ]
+    },
+    {
+      "index": 194,
+      "startFrame": 40912,
+      "endFrame": 41076,
+      "sourceStart": 1363.7333333333333,
+      "sourceEnd": 1369.2,
+      "targetStart": 440.1666666666667,
+      "targetEnd": 445.6333333333333,
+      "durationFrames": 164,
+      "duration": 5.466666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-143"
+      ]
+    },
+    {
+      "index": 195,
+      "startFrame": 41246,
+      "endFrame": 41360,
+      "sourceStart": 1374.8666666666666,
+      "sourceEnd": 1378.6666666666667,
+      "targetStart": 445.6333333333333,
+      "targetEnd": 449.43333333333334,
+      "durationFrames": 114,
+      "duration": 3.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-144"
+      ]
+    },
+    {
+      "index": 196,
+      "startFrame": 41362,
+      "endFrame": 41382,
+      "sourceStart": 1378.7333333333333,
+      "sourceEnd": 1379.4,
+      "targetStart": 449.43333333333334,
+      "targetEnd": 450.1,
+      "durationFrames": 20,
+      "duration": 0.6666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-144"
+      ]
+    },
+    {
+      "index": 197,
+      "startFrame": 42659,
+      "endFrame": 42788,
+      "sourceStart": 1421.9666666666667,
+      "sourceEnd": 1426.2666666666667,
+      "targetStart": 450.1,
+      "targetEnd": 454.4,
+      "durationFrames": 129,
+      "duration": 4.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-145",
+        "caption-146"
+      ]
+    },
+    {
+      "index": 198,
+      "startFrame": 42893,
+      "endFrame": 42963,
+      "sourceStart": 1429.7666666666667,
+      "sourceEnd": 1432.1,
+      "targetStart": 454.4,
+      "targetEnd": 456.73333333333335,
+      "durationFrames": 70,
+      "duration": 2.3333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-146"
+      ]
+    },
+    {
+      "index": 199,
+      "startFrame": 42994,
+      "endFrame": 43067,
+      "sourceStart": 1433.1333333333334,
+      "sourceEnd": 1435.5666666666666,
+      "targetStart": 456.73333333333335,
+      "targetEnd": 459.1666666666667,
+      "durationFrames": 73,
+      "duration": 2.433333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-147"
+      ]
+    },
+    {
+      "index": 200,
+      "startFrame": 43369,
+      "endFrame": 43449,
+      "sourceStart": 1445.6333333333334,
+      "sourceEnd": 1448.3,
+      "targetStart": 459.1666666666667,
+      "targetEnd": 461.8333333333333,
+      "durationFrames": 80,
+      "duration": 2.6666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-148"
+      ]
+    },
+    {
+      "index": 201,
+      "startFrame": 43494,
+      "endFrame": 43592,
+      "sourceStart": 1449.8,
+      "sourceEnd": 1453.0666666666666,
+      "targetStart": 461.8333333333333,
+      "targetEnd": 465.1,
+      "durationFrames": 98,
+      "duration": 3.2666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-148"
+      ]
+    },
+    {
+      "index": 202,
+      "startFrame": 43597,
+      "endFrame": 43704,
+      "sourceStart": 1453.2333333333333,
+      "sourceEnd": 1456.8,
+      "targetStart": 465.1,
+      "targetEnd": 468.6666666666667,
+      "durationFrames": 107,
+      "duration": 3.566666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-149"
+      ]
+    },
+    {
+      "index": 203,
+      "startFrame": 43763,
+      "endFrame": 43801,
+      "sourceStart": 1458.7666666666667,
+      "sourceEnd": 1460.0333333333333,
+      "targetStart": 468.6666666666667,
+      "targetEnd": 469.93333333333334,
+      "durationFrames": 38,
+      "duration": 1.2666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-150"
+      ]
+    },
+    {
+      "index": 204,
+      "startFrame": 43821,
+      "endFrame": 43860,
+      "sourceStart": 1460.7,
+      "sourceEnd": 1462,
+      "targetStart": 469.93333333333334,
+      "targetEnd": 471.23333333333335,
+      "durationFrames": 39,
+      "duration": 1.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-151"
+      ]
+    },
+    {
+      "index": 205,
+      "startFrame": 43863,
+      "endFrame": 43907,
+      "sourceStart": 1462.1,
+      "sourceEnd": 1463.5666666666666,
+      "targetStart": 471.23333333333335,
+      "targetEnd": 472.7,
+      "durationFrames": 44,
+      "duration": 1.4666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-151"
+      ]
+    },
+    {
+      "index": 206,
+      "startFrame": 43915,
+      "endFrame": 43958,
+      "sourceStart": 1463.8333333333333,
+      "sourceEnd": 1465.2666666666667,
+      "targetStart": 472.7,
+      "targetEnd": 474.1333333333333,
+      "durationFrames": 43,
+      "duration": 1.4333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-152"
+      ]
+    },
+    {
+      "index": 207,
+      "startFrame": 43967,
+      "endFrame": 44054,
+      "sourceStart": 1465.5666666666666,
+      "sourceEnd": 1468.4666666666667,
+      "targetStart": 474.1333333333333,
+      "targetEnd": 477.03333333333336,
+      "durationFrames": 87,
+      "duration": 2.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-152"
+      ]
+    },
+    {
+      "index": 208,
+      "startFrame": 44137,
+      "endFrame": 44187,
+      "sourceStart": 1471.2333333333333,
+      "sourceEnd": 1472.9,
+      "targetStart": 477.03333333333336,
+      "targetEnd": 478.7,
+      "durationFrames": 50,
+      "duration": 1.6666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-153"
+      ]
+    },
+    {
+      "index": 209,
+      "startFrame": 44426,
+      "endFrame": 44472,
+      "sourceStart": 1480.8666666666666,
+      "sourceEnd": 1482.4,
+      "targetStart": 478.7,
+      "targetEnd": 480.23333333333335,
+      "durationFrames": 46,
+      "duration": 1.5333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-154"
+      ]
+    },
+    {
+      "index": 210,
+      "startFrame": 44478,
+      "endFrame": 44547,
+      "sourceStart": 1482.6,
+      "sourceEnd": 1484.9,
+      "targetStart": 480.23333333333335,
+      "targetEnd": 482.53333333333336,
+      "durationFrames": 69,
+      "duration": 2.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-154"
+      ]
+    },
+    {
+      "index": 211,
+      "startFrame": 44958,
+      "endFrame": 45033,
+      "sourceStart": 1498.6,
+      "sourceEnd": 1501.1,
+      "targetStart": 482.53333333333336,
+      "targetEnd": 485.03333333333336,
+      "durationFrames": 75,
+      "duration": 2.5,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-155"
+      ]
+    },
+    {
+      "index": 212,
+      "startFrame": 45194,
+      "endFrame": 45363,
+      "sourceStart": 1506.4666666666667,
+      "sourceEnd": 1512.1,
+      "targetStart": 485.03333333333336,
+      "targetEnd": 490.6666666666667,
+      "durationFrames": 169,
+      "duration": 5.633333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-156",
+        "caption-157"
+      ]
+    },
+    {
+      "index": 213,
+      "startFrame": 45822,
+      "endFrame": 45911,
+      "sourceStart": 1527.4,
+      "sourceEnd": 1530.3666666666666,
+      "targetStart": 490.6666666666667,
+      "targetEnd": 493.6333333333333,
+      "durationFrames": 89,
+      "duration": 2.966666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-158"
+      ]
+    },
+    {
+      "index": 214,
+      "startFrame": 46008,
+      "endFrame": 46069,
+      "sourceStart": 1533.6,
+      "sourceEnd": 1535.6333333333334,
+      "targetStart": 493.6333333333333,
+      "targetEnd": 495.6666666666667,
+      "durationFrames": 61,
+      "duration": 2.033333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-159"
+      ]
+    },
+    {
+      "index": 215,
+      "startFrame": 46071,
+      "endFrame": 46106,
+      "sourceStart": 1535.7,
+      "sourceEnd": 1536.8666666666666,
+      "targetStart": 495.6666666666667,
+      "targetEnd": 496.8333333333333,
+      "durationFrames": 35,
+      "duration": 1.1666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-159"
+      ]
+    },
+    {
+      "index": 216,
+      "startFrame": 46153,
+      "endFrame": 46286,
+      "sourceStart": 1538.4333333333334,
+      "sourceEnd": 1542.8666666666666,
+      "targetStart": 496.8333333333333,
+      "targetEnd": 501.26666666666665,
+      "durationFrames": 133,
+      "duration": 4.433333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-160"
+      ]
+    },
+    {
+      "index": 217,
+      "startFrame": 46299,
+      "endFrame": 46373,
+      "sourceStart": 1543.3,
+      "sourceEnd": 1545.7666666666667,
+      "targetStart": 501.26666666666665,
+      "targetEnd": 503.73333333333335,
+      "durationFrames": 74,
+      "duration": 2.466666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-161"
+      ]
+    },
+    {
+      "index": 218,
+      "startFrame": 46407,
+      "endFrame": 46482,
+      "sourceStart": 1546.9,
+      "sourceEnd": 1549.4,
+      "targetStart": 503.73333333333335,
+      "targetEnd": 506.23333333333335,
+      "durationFrames": 75,
+      "duration": 2.5,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-162"
+      ]
+    },
+    {
+      "index": 219,
+      "startFrame": 46486,
+      "endFrame": 46523,
+      "sourceStart": 1549.5333333333333,
+      "sourceEnd": 1550.7666666666667,
+      "targetStart": 506.23333333333335,
+      "targetEnd": 507.46666666666664,
+      "durationFrames": 37,
+      "duration": 1.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-162"
+      ]
+    },
+    {
+      "index": 220,
+      "startFrame": 46535,
+      "endFrame": 46570,
+      "sourceStart": 1551.1666666666667,
+      "sourceEnd": 1552.3333333333333,
+      "targetStart": 507.46666666666664,
+      "targetEnd": 508.6333333333333,
+      "durationFrames": 35,
+      "duration": 1.1666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-162"
+      ]
+    },
+    {
+      "index": 221,
+      "startFrame": 46578,
+      "endFrame": 46655,
+      "sourceStart": 1552.6,
+      "sourceEnd": 1555.1666666666667,
+      "targetStart": 508.6333333333333,
+      "targetEnd": 511.2,
+      "durationFrames": 77,
+      "duration": 2.566666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-162"
+      ]
+    },
+    {
+      "index": 222,
+      "startFrame": 46797,
+      "endFrame": 46864,
+      "sourceStart": 1559.9,
+      "sourceEnd": 1562.1333333333334,
+      "targetStart": 511.2,
+      "targetEnd": 513.4333333333333,
+      "durationFrames": 67,
+      "duration": 2.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-163"
+      ]
+    },
+    {
+      "index": 223,
+      "startFrame": 46872,
+      "endFrame": 46909,
+      "sourceStart": 1562.4,
+      "sourceEnd": 1563.6333333333334,
+      "targetStart": 513.4333333333333,
+      "targetEnd": 514.6666666666666,
+      "durationFrames": 37,
+      "duration": 1.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-163"
+      ]
+    },
+    {
+      "index": 224,
+      "startFrame": 46922,
+      "endFrame": 46984,
+      "sourceStart": 1564.0666666666666,
+      "sourceEnd": 1566.1333333333334,
+      "targetStart": 514.6666666666666,
+      "targetEnd": 516.7333333333333,
+      "durationFrames": 62,
+      "duration": 2.066666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-163"
+      ]
+    },
+    {
+      "index": 225,
+      "startFrame": 46995,
+      "endFrame": 47022,
+      "sourceStart": 1566.5,
+      "sourceEnd": 1567.4,
+      "targetStart": 516.7333333333333,
+      "targetEnd": 517.6333333333333,
+      "durationFrames": 27,
+      "duration": 0.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-163"
+      ]
+    },
+    {
+      "index": 226,
+      "startFrame": 47030,
+      "endFrame": 47126,
+      "sourceStart": 1567.6666666666667,
+      "sourceEnd": 1570.8666666666666,
+      "targetStart": 517.6333333333333,
+      "targetEnd": 520.8333333333334,
+      "durationFrames": 96,
+      "duration": 3.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-164"
+      ]
+    },
+    {
+      "index": 227,
+      "startFrame": 47208,
+      "endFrame": 47235,
+      "sourceStart": 1573.6,
+      "sourceEnd": 1574.5,
+      "targetStart": 520.8333333333334,
+      "targetEnd": 521.7333333333333,
+      "durationFrames": 27,
+      "duration": 0.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-164"
+      ]
+    },
+    {
+      "index": 228,
+      "startFrame": 47241,
+      "endFrame": 47262,
+      "sourceStart": 1574.7,
+      "sourceEnd": 1575.4,
+      "targetStart": 521.7333333333333,
+      "targetEnd": 522.4333333333333,
+      "durationFrames": 21,
+      "duration": 0.7,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-165"
+      ]
+    },
+    {
+      "index": 229,
+      "startFrame": 47268,
+      "endFrame": 47378,
+      "sourceStart": 1575.6,
+      "sourceEnd": 1579.2666666666667,
+      "targetStart": 522.4333333333333,
+      "targetEnd": 526.1,
+      "durationFrames": 110,
+      "duration": 3.6666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-165"
+      ]
+    },
+    {
+      "index": 230,
+      "startFrame": 47383,
+      "endFrame": 47485,
+      "sourceStart": 1579.4333333333334,
+      "sourceEnd": 1582.8333333333333,
+      "targetStart": 526.1,
+      "targetEnd": 529.5,
+      "durationFrames": 102,
+      "duration": 3.4,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-166"
+      ]
+    },
+    {
+      "index": 231,
+      "startFrame": 47491,
+      "endFrame": 47546,
+      "sourceStart": 1583.0333333333333,
+      "sourceEnd": 1584.8666666666666,
+      "targetStart": 529.5,
+      "targetEnd": 531.3333333333334,
+      "durationFrames": 55,
+      "duration": 1.8333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-167"
+      ]
+    },
+    {
+      "index": 232,
+      "startFrame": 47551,
+      "endFrame": 47564,
+      "sourceStart": 1585.0333333333333,
+      "sourceEnd": 1585.4666666666667,
+      "targetStart": 531.3333333333334,
+      "targetEnd": 531.7666666666667,
+      "durationFrames": 13,
+      "duration": 0.43333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-167"
+      ]
+    },
+    {
+      "index": 233,
+      "startFrame": 47569,
+      "endFrame": 47629,
+      "sourceStart": 1585.6333333333334,
+      "sourceEnd": 1587.6333333333334,
+      "targetStart": 531.7666666666667,
+      "targetEnd": 533.7666666666667,
+      "durationFrames": 60,
+      "duration": 2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-167"
+      ]
+    },
+    {
+      "index": 234,
+      "startFrame": 47636,
+      "endFrame": 47665,
+      "sourceStart": 1587.8666666666666,
+      "sourceEnd": 1588.8333333333333,
+      "targetStart": 533.7666666666667,
+      "targetEnd": 534.7333333333333,
+      "durationFrames": 29,
+      "duration": 0.9666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-167"
+      ]
+    },
+    {
+      "index": 235,
+      "startFrame": 47705,
+      "endFrame": 47748,
+      "sourceStart": 1590.1666666666667,
+      "sourceEnd": 1591.6,
+      "targetStart": 534.7333333333333,
+      "targetEnd": 536.1666666666666,
+      "durationFrames": 43,
+      "duration": 1.4333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-168"
+      ]
+    },
+    {
+      "index": 236,
+      "startFrame": 48465,
+      "endFrame": 48544,
+      "sourceStart": 1615.5,
+      "sourceEnd": 1618.1333333333334,
+      "targetStart": 536.1666666666666,
+      "targetEnd": 538.8,
+      "durationFrames": 79,
+      "duration": 2.6333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-169"
+      ]
+    },
+    {
+      "index": 237,
+      "startFrame": 48564,
+      "endFrame": 48628,
+      "sourceStart": 1618.8,
+      "sourceEnd": 1620.9333333333334,
+      "targetStart": 538.8,
+      "targetEnd": 540.9333333333333,
+      "durationFrames": 64,
+      "duration": 2.1333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-169"
+      ]
+    },
+    {
+      "index": 238,
+      "startFrame": 48641,
+      "endFrame": 48726,
+      "sourceStart": 1621.3666666666666,
+      "sourceEnd": 1624.2,
+      "targetStart": 540.9333333333333,
+      "targetEnd": 543.7666666666667,
+      "durationFrames": 85,
+      "duration": 2.8333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-170"
+      ]
+    },
+    {
+      "index": 239,
+      "startFrame": 48796,
+      "endFrame": 48823,
+      "sourceStart": 1626.5333333333333,
+      "sourceEnd": 1627.4333333333334,
+      "targetStart": 543.7666666666667,
+      "targetEnd": 544.6666666666666,
+      "durationFrames": 27,
+      "duration": 0.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-170"
+      ]
+    },
+    {
+      "index": 240,
+      "startFrame": 49159,
+      "endFrame": 49271,
+      "sourceStart": 1638.6333333333334,
+      "sourceEnd": 1642.3666666666666,
+      "targetStart": 544.6666666666666,
+      "targetEnd": 548.4,
+      "durationFrames": 112,
+      "duration": 3.7333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-171"
+      ]
+    },
+    {
+      "index": 241,
+      "startFrame": 49330,
+      "endFrame": 49386,
+      "sourceStart": 1644.3333333333333,
+      "sourceEnd": 1646.2,
+      "targetStart": 548.4,
+      "targetEnd": 550.2666666666667,
+      "durationFrames": 56,
+      "duration": 1.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-172"
+      ]
+    },
+    {
+      "index": 242,
+      "startFrame": 49404,
+      "endFrame": 49454,
+      "sourceStart": 1646.8,
+      "sourceEnd": 1648.4666666666667,
+      "targetStart": 550.2666666666667,
+      "targetEnd": 551.9333333333333,
+      "durationFrames": 50,
+      "duration": 1.6666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-173"
+      ]
+    },
+    {
+      "index": 243,
+      "startFrame": 49461,
+      "endFrame": 49491,
+      "sourceStart": 1648.7,
+      "sourceEnd": 1649.7,
+      "targetStart": 551.9333333333333,
+      "targetEnd": 552.9333333333333,
+      "durationFrames": 30,
+      "duration": 1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-173"
+      ]
+    },
+    {
+      "index": 244,
+      "startFrame": 49510,
+      "endFrame": 49558,
+      "sourceStart": 1650.3333333333333,
+      "sourceEnd": 1651.9333333333334,
+      "targetStart": 552.9333333333333,
+      "targetEnd": 554.5333333333333,
+      "durationFrames": 48,
+      "duration": 1.6,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-174"
+      ]
+    },
+    {
+      "index": 245,
+      "startFrame": 49562,
+      "endFrame": 49600,
+      "sourceStart": 1652.0666666666666,
+      "sourceEnd": 1653.3333333333333,
+      "targetStart": 554.5333333333333,
+      "targetEnd": 555.8,
+      "durationFrames": 38,
+      "duration": 1.2666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-174"
+      ]
+    },
+    {
+      "index": 246,
+      "startFrame": 49733,
+      "endFrame": 49813,
+      "sourceStart": 1657.7666666666667,
+      "sourceEnd": 1660.4333333333334,
+      "targetStart": 555.8,
+      "targetEnd": 558.4666666666667,
+      "durationFrames": 80,
+      "duration": 2.6666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-175"
+      ]
+    },
+    {
+      "index": 247,
+      "startFrame": 49929,
+      "endFrame": 49998,
+      "sourceStart": 1664.3,
+      "sourceEnd": 1666.6,
+      "targetStart": 558.4666666666667,
+      "targetEnd": 560.7666666666667,
+      "durationFrames": 69,
+      "duration": 2.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-176"
+      ]
+    },
+    {
+      "index": 248,
+      "startFrame": 50084,
+      "endFrame": 50167,
+      "sourceStart": 1669.4666666666667,
+      "sourceEnd": 1672.2333333333333,
+      "targetStart": 560.7666666666667,
+      "targetEnd": 563.5333333333333,
+      "durationFrames": 83,
+      "duration": 2.7666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-177"
+      ]
+    },
+    {
+      "index": 249,
+      "startFrame": 50171,
+      "endFrame": 50189,
+      "sourceStart": 1672.3666666666666,
+      "sourceEnd": 1672.9666666666667,
+      "targetStart": 563.5333333333333,
+      "targetEnd": 564.1333333333333,
+      "durationFrames": 18,
+      "duration": 0.6,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-177"
+      ]
+    },
+    {
+      "index": 250,
+      "startFrame": 50197,
+      "endFrame": 50249,
+      "sourceStart": 1673.2333333333333,
+      "sourceEnd": 1674.9666666666667,
+      "targetStart": 564.1333333333333,
+      "targetEnd": 565.8666666666667,
+      "durationFrames": 52,
+      "duration": 1.7333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-177"
+      ]
+    },
+    {
+      "index": 251,
+      "startFrame": 50410,
+      "endFrame": 50509,
+      "sourceStart": 1680.3333333333333,
+      "sourceEnd": 1683.6333333333334,
+      "targetStart": 565.8666666666667,
+      "targetEnd": 569.1666666666666,
+      "durationFrames": 99,
+      "duration": 3.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-178"
+      ]
+    },
+    {
+      "index": 252,
+      "startFrame": 50787,
+      "endFrame": 50847,
+      "sourceStart": 1692.9,
+      "sourceEnd": 1694.9,
+      "targetStart": 569.1666666666666,
+      "targetEnd": 571.1666666666666,
+      "durationFrames": 60,
+      "duration": 2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-179"
+      ]
+    },
+    {
+      "index": 253,
+      "startFrame": 50883,
+      "endFrame": 50969,
+      "sourceStart": 1696.1,
+      "sourceEnd": 1698.9666666666667,
+      "targetStart": 571.1666666666666,
+      "targetEnd": 574.0333333333333,
+      "durationFrames": 86,
+      "duration": 2.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-179"
+      ]
+    },
+    {
+      "index": 254,
+      "startFrame": 51004,
+      "endFrame": 51125,
+      "sourceStart": 1700.1333333333334,
+      "sourceEnd": 1704.1666666666667,
+      "targetStart": 574.0333333333333,
+      "targetEnd": 578.0666666666667,
+      "durationFrames": 121,
+      "duration": 4.033333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-180"
+      ]
+    },
+    {
+      "index": 255,
+      "startFrame": 51181,
+      "endFrame": 51278,
+      "sourceStart": 1706.0333333333333,
+      "sourceEnd": 1709.2666666666667,
+      "targetStart": 578.0666666666667,
+      "targetEnd": 581.3,
+      "durationFrames": 97,
+      "duration": 3.2333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-181",
+        "caption-182"
+      ]
+    },
+    {
+      "index": 256,
+      "startFrame": 51499,
+      "endFrame": 51599,
+      "sourceStart": 1716.6333333333334,
+      "sourceEnd": 1719.9666666666667,
+      "targetStart": 581.3,
+      "targetEnd": 584.6333333333333,
+      "durationFrames": 100,
+      "duration": 3.3333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-183"
+      ]
+    },
+    {
+      "index": 257,
+      "startFrame": 51674,
+      "endFrame": 51890,
+      "sourceStart": 1722.4666666666667,
+      "sourceEnd": 1729.6666666666667,
+      "targetStart": 584.6333333333333,
+      "targetEnd": 591.8333333333334,
+      "durationFrames": 216,
+      "duration": 7.2,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-184"
+      ]
+    },
+    {
+      "index": 258,
+      "startFrame": 51947,
+      "endFrame": 51974,
+      "sourceStart": 1731.5666666666666,
+      "sourceEnd": 1732.4666666666667,
+      "targetStart": 591.8333333333334,
+      "targetEnd": 592.7333333333333,
+      "durationFrames": 27,
+      "duration": 0.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-185"
+      ]
+    },
+    {
+      "index": 259,
+      "startFrame": 51979,
+      "endFrame": 52035,
+      "sourceStart": 1732.6333333333334,
+      "sourceEnd": 1734.5,
+      "targetStart": 592.7333333333333,
+      "targetEnd": 594.6,
+      "durationFrames": 56,
+      "duration": 1.8666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-185"
+      ]
+    },
+    {
+      "index": 260,
+      "startFrame": 52039,
+      "endFrame": 52091,
+      "sourceStart": 1734.6333333333334,
+      "sourceEnd": 1736.3666666666666,
+      "targetStart": 594.6,
+      "targetEnd": 596.3333333333334,
+      "durationFrames": 52,
+      "duration": 1.7333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-186"
+      ]
+    },
+    {
+      "index": 261,
+      "startFrame": 52202,
+      "endFrame": 52265,
+      "sourceStart": 1740.0666666666666,
+      "sourceEnd": 1742.1666666666667,
+      "targetStart": 596.3333333333334,
+      "targetEnd": 598.4333333333333,
+      "durationFrames": 63,
+      "duration": 2.1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-187"
+      ]
+    },
+    {
+      "index": 262,
+      "startFrame": 53956,
+      "endFrame": 54058,
+      "sourceStart": 1798.5333333333333,
+      "sourceEnd": 1801.9333333333334,
+      "targetStart": 598.4333333333333,
+      "targetEnd": 601.8333333333334,
+      "durationFrames": 102,
+      "duration": 3.4,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-188"
+      ]
+    },
+    {
+      "index": 263,
+      "startFrame": 54072,
+      "endFrame": 54125,
+      "sourceStart": 1802.4,
+      "sourceEnd": 1804.1666666666667,
+      "targetStart": 601.8333333333334,
+      "targetEnd": 603.6,
+      "durationFrames": 53,
+      "duration": 1.7666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-188"
+      ]
+    },
+    {
+      "index": 264,
+      "startFrame": 54225,
+      "endFrame": 54263,
+      "sourceStart": 1807.5,
+      "sourceEnd": 1808.7666666666667,
+      "targetStart": 603.6,
+      "targetEnd": 604.8666666666667,
+      "durationFrames": 38,
+      "duration": 1.2666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-189"
+      ]
+    },
+    {
+      "index": 265,
+      "startFrame": 54744,
+      "endFrame": 54866,
+      "sourceStart": 1824.8,
+      "sourceEnd": 1828.8666666666666,
+      "targetStart": 604.8666666666667,
+      "targetEnd": 608.9333333333333,
+      "durationFrames": 122,
+      "duration": 4.066666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-190"
+      ]
+    },
+    {
+      "index": 266,
+      "startFrame": 54879,
+      "endFrame": 54927,
+      "sourceStart": 1829.3,
+      "sourceEnd": 1830.9,
+      "targetStart": 608.9333333333333,
+      "targetEnd": 610.5333333333333,
+      "durationFrames": 48,
+      "duration": 1.6,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-190"
+      ]
+    },
+    {
+      "index": 267,
+      "startFrame": 54933,
+      "endFrame": 54966,
+      "sourceStart": 1831.1,
+      "sourceEnd": 1832.2,
+      "targetStart": 610.5333333333333,
+      "targetEnd": 611.6333333333333,
+      "durationFrames": 33,
+      "duration": 1.1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-191",
+        "caption-192"
+      ]
+    },
+    {
+      "index": 268,
+      "startFrame": 54969,
+      "endFrame": 55058,
+      "sourceStart": 1832.3,
+      "sourceEnd": 1835.2666666666667,
+      "targetStart": 611.6333333333333,
+      "targetEnd": 614.6,
+      "durationFrames": 89,
+      "duration": 2.966666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-191",
+        "caption-192"
+      ]
+    },
+    {
+      "index": 269,
+      "startFrame": 55065,
+      "endFrame": 55107,
+      "sourceStart": 1835.5,
+      "sourceEnd": 1836.9,
+      "targetStart": 614.6,
+      "targetEnd": 616,
+      "durationFrames": 42,
+      "duration": 1.4,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-191",
+        "caption-192"
+      ]
+    },
+    {
+      "index": 270,
+      "startFrame": 55118,
+      "endFrame": 55164,
+      "sourceStart": 1837.2666666666667,
+      "sourceEnd": 1838.8,
+      "targetStart": 616,
+      "targetEnd": 617.5333333333333,
+      "durationFrames": 46,
+      "duration": 1.5333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-191",
+        "caption-192"
+      ]
+    },
+    {
+      "index": 271,
+      "startFrame": 55205,
+      "endFrame": 55249,
+      "sourceStart": 1840.1666666666667,
+      "sourceEnd": 1841.6333333333334,
+      "targetStart": 617.5333333333333,
+      "targetEnd": 619,
+      "durationFrames": 44,
+      "duration": 1.4666666666666666,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-192"
+      ]
+    },
+    {
+      "index": 272,
+      "startFrame": 55266,
+      "endFrame": 55316,
+      "sourceStart": 1842.2,
+      "sourceEnd": 1843.8666666666666,
+      "targetStart": 619,
+      "targetEnd": 620.6666666666666,
+      "durationFrames": 50,
+      "duration": 1.6666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-192"
+      ]
+    },
+    {
+      "index": 273,
+      "startFrame": 55325,
+      "endFrame": 55396,
+      "sourceStart": 1844.1666666666667,
+      "sourceEnd": 1846.5333333333333,
+      "targetStart": 620.6666666666666,
+      "targetEnd": 623.0333333333333,
+      "durationFrames": 71,
+      "duration": 2.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-193"
+      ]
+    },
+    {
+      "index": 274,
+      "startFrame": 55411,
+      "endFrame": 55482,
+      "sourceStart": 1847.0333333333333,
+      "sourceEnd": 1849.4,
+      "targetStart": 623.0333333333333,
+      "targetEnd": 625.4,
+      "durationFrames": 71,
+      "duration": 2.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-194"
+      ]
+    },
+    {
+      "index": 275,
+      "startFrame": 55505,
+      "endFrame": 55521,
+      "sourceStart": 1850.1666666666667,
+      "sourceEnd": 1850.7,
+      "targetStart": 625.4,
+      "targetEnd": 625.9333333333333,
+      "durationFrames": 16,
+      "duration": 0.5333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-194"
+      ]
+    },
+    {
+      "index": 276,
+      "startFrame": 56279,
+      "endFrame": 56348,
+      "sourceStart": 1875.9666666666667,
+      "sourceEnd": 1878.2666666666667,
+      "targetStart": 625.9333333333333,
+      "targetEnd": 628.2333333333333,
+      "durationFrames": 69,
+      "duration": 2.3,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-195"
+      ]
+    },
+    {
+      "index": 277,
+      "startFrame": 56358,
+      "endFrame": 56459,
+      "sourceStart": 1878.6,
+      "sourceEnd": 1881.9666666666667,
+      "targetStart": 628.2333333333333,
+      "targetEnd": 631.6,
+      "durationFrames": 101,
+      "duration": 3.3666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-196"
+      ]
+    },
+    {
+      "index": 278,
+      "startFrame": 56465,
+      "endFrame": 56554,
+      "sourceStart": 1882.1666666666667,
+      "sourceEnd": 1885.1333333333334,
+      "targetStart": 631.6,
+      "targetEnd": 634.5666666666667,
+      "durationFrames": 89,
+      "duration": 2.966666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-197"
+      ]
+    },
+    {
+      "index": 279,
+      "startFrame": 56555,
+      "endFrame": 56706,
+      "sourceStart": 1885.1666666666667,
+      "sourceEnd": 1890.2,
+      "targetStart": 634.5666666666667,
+      "targetEnd": 639.6,
+      "durationFrames": 151,
+      "duration": 5.033333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-198",
+        "caption-199"
+      ]
+    },
+    {
+      "index": 280,
+      "startFrame": 56709,
+      "endFrame": 56819,
+      "sourceStart": 1890.3,
+      "sourceEnd": 1893.9666666666667,
+      "targetStart": 639.6,
+      "targetEnd": 643.2666666666667,
+      "durationFrames": 110,
+      "duration": 3.6666666666666665,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-198",
+        "caption-199"
+      ]
+    },
+    {
+      "index": 281,
+      "startFrame": 57030,
+      "endFrame": 57063,
+      "sourceStart": 1901,
+      "sourceEnd": 1902.1,
+      "targetStart": 643.2666666666667,
+      "targetEnd": 644.3666666666667,
+      "durationFrames": 33,
+      "duration": 1.1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-200",
+        "caption-201"
+      ]
+    },
+    {
+      "index": 282,
+      "startFrame": 57068,
+      "endFrame": 57305,
+      "sourceStart": 1902.2666666666667,
+      "sourceEnd": 1910.1666666666667,
+      "targetStart": 644.3666666666667,
+      "targetEnd": 652.2666666666667,
+      "durationFrames": 237,
+      "duration": 7.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-200",
+        "caption-201"
+      ]
+    },
+    {
+      "index": 283,
+      "startFrame": 57313,
+      "endFrame": 57407,
+      "sourceStart": 1910.4333333333334,
+      "sourceEnd": 1913.5666666666666,
+      "targetStart": 652.2666666666667,
+      "targetEnd": 655.4,
+      "durationFrames": 94,
+      "duration": 3.1333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-200",
+        "caption-201"
+      ]
+    },
+    {
+      "index": 284,
+      "startFrame": 57418,
+      "endFrame": 57597,
+      "sourceStart": 1913.9333333333334,
+      "sourceEnd": 1919.9,
+      "targetStart": 655.4,
+      "targetEnd": 661.3666666666667,
+      "durationFrames": 179,
+      "duration": 5.966666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-202",
+        "caption-203"
+      ]
+    },
+    {
+      "index": 285,
+      "startFrame": 57609,
+      "endFrame": 57644,
+      "sourceStart": 1920.3,
+      "sourceEnd": 1921.4666666666667,
+      "targetStart": 661.3666666666667,
+      "targetEnd": 662.5333333333333,
+      "durationFrames": 35,
+      "duration": 1.1666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-204"
+      ]
+    },
+    {
+      "index": 286,
+      "startFrame": 57652,
+      "endFrame": 57745,
+      "sourceStart": 1921.7333333333333,
+      "sourceEnd": 1924.8333333333333,
+      "targetStart": 662.5333333333333,
+      "targetEnd": 665.6333333333333,
+      "durationFrames": 93,
+      "duration": 3.1,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-204"
+      ]
+    },
+    {
+      "index": 287,
+      "startFrame": 57887,
+      "endFrame": 57972,
+      "sourceStart": 1929.5666666666666,
+      "sourceEnd": 1932.4,
+      "targetStart": 665.6333333333333,
+      "targetEnd": 668.4666666666667,
+      "durationFrames": 85,
+      "duration": 2.8333333333333335,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-205"
+      ]
+    },
+    {
+      "index": 288,
+      "startFrame": 57981,
+      "endFrame": 58012,
+      "sourceStart": 1932.7,
+      "sourceEnd": 1933.7333333333333,
+      "targetStart": 668.4666666666667,
+      "targetEnd": 669.5,
+      "durationFrames": 31,
+      "duration": 1.0333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-205"
+      ]
+    },
+    {
+      "index": 289,
+      "startFrame": 58020,
+      "endFrame": 58207,
+      "sourceStart": 1934,
+      "sourceEnd": 1940.2333333333333,
+      "targetStart": 669.5,
+      "targetEnd": 675.7333333333333,
+      "durationFrames": 187,
+      "duration": 6.233333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-206",
+        "caption-207"
+      ]
+    },
+    {
+      "index": 290,
+      "startFrame": 58214,
+      "endFrame": 58237,
+      "sourceStart": 1940.4666666666667,
+      "sourceEnd": 1941.2333333333333,
+      "targetStart": 675.7333333333333,
+      "targetEnd": 676.5,
+      "durationFrames": 23,
+      "duration": 0.7666666666666667,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-206",
+        "caption-207"
+      ]
+    },
+    {
+      "index": 291,
+      "startFrame": 58279,
+      "endFrame": 58336,
+      "sourceStart": 1942.6333333333334,
+      "sourceEnd": 1944.5333333333333,
+      "targetStart": 676.5,
+      "targetEnd": 678.4,
+      "durationFrames": 57,
+      "duration": 1.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-208"
+      ]
+    },
+    {
+      "index": 292,
+      "startFrame": 58394,
+      "endFrame": 58452,
+      "sourceStart": 1946.4666666666667,
+      "sourceEnd": 1948.4,
+      "targetStart": 678.4,
+      "targetEnd": 680.3333333333334,
+      "durationFrames": 58,
+      "duration": 1.9333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-209"
+      ]
+    },
+    {
+      "index": 293,
+      "startFrame": 58457,
+      "endFrame": 58497,
+      "sourceStart": 1948.5666666666666,
+      "sourceEnd": 1949.9,
+      "targetStart": 680.3333333333334,
+      "targetEnd": 681.6666666666666,
+      "durationFrames": 40,
+      "duration": 1.3333333333333333,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-209"
+      ]
+    },
+    {
+      "index": 294,
+      "startFrame": 58617,
+      "endFrame": 58674,
+      "sourceStart": 1953.9,
+      "sourceEnd": 1955.8,
+      "targetStart": 681.6666666666666,
+      "targetEnd": 683.5666666666667,
+      "durationFrames": 57,
+      "duration": 1.9,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-210"
+      ]
+    },
+    {
+      "index": 295,
+      "startFrame": 58724,
+      "endFrame": 58748,
+      "sourceStart": 1957.4666666666667,
+      "sourceEnd": 1958.2666666666667,
+      "targetStart": 683.5666666666667,
+      "targetEnd": 684.3666666666667,
+      "durationFrames": 24,
+      "duration": 0.8,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-210"
+      ]
+    },
+    {
+      "index": 296,
+      "startFrame": 58799,
+      "endFrame": 58881,
+      "sourceStart": 1959.9666666666667,
+      "sourceEnd": 1962.7,
+      "targetStart": 684.3666666666667,
+      "targetEnd": 687.1,
+      "durationFrames": 82,
+      "duration": 2.7333333333333334,
+      "kinds": [
+        "speech"
+      ],
+      "virtualCaptionIds": [
+        "caption-210",
+        "caption-211"
+      ]
+    }
+  ]
+}

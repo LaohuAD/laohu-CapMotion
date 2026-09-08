@@ -1,0 +1,56 @@
+{
+  "schema": "laohu.cap-asr-source-index/1",
+  "purpose": "first-pass-content-transcription",
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM.cap",
+  "projectName": "Cap 2026-09-02 at 18.04.04",
+  "projectRevision": 1,
+  "recordingType": "studio-multiple-segments",
+  "orderPolicy": "recording-meta-segments",
+  "timeBasis": "raw-recording-display-timeline",
+  "recordingMetaPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM.cap/recording-meta.json",
+  "projectConfigPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM.cap/project-config.json",
+  "segments": [
+    {
+      "recordingSegment": 0,
+      "displayPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM.cap/content/segments/segment-0/display.mp4",
+      "microphonePath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM.cap/content/segments/segment-0/audio-input.ogg",
+      "displayDurationSeconds": 1857.84,
+      "microphoneDurationSeconds": 1857.915833,
+      "microphoneStartTime": -0.006230416,
+      "sourceTimelineOffsetSeconds": 0.182073,
+      "globalOffsetSeconds": 0,
+      "timelineReferences": [
+        0
+      ]
+    },
+    {
+      "recordingSegment": 1,
+      "displayPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM.cap/content/segments/segment-1/display.mp4",
+      "microphonePath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM.cap/content/segments/segment-1/audio-input.ogg",
+      "displayDurationSeconds": 108.921667,
+      "microphoneDurationSeconds": 109.028083,
+      "microphoneStartTime": -0.010685916,
+      "sourceTimelineOffsetSeconds": 0.152072,
+      "globalOffsetSeconds": 1857.84,
+      "timelineReferences": [
+        1
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "timelineIndex": 0,
+      "recordingSegment": 0,
+      "start": 0,
+      "end": 1857.915833,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 1,
+      "recordingSegment": 1,
+      "start": 0,
+      "end": 109.028083,
+      "timescale": 1
+    }
+  ]
+}

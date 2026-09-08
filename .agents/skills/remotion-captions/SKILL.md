@@ -1,36 +1,6 @@
 ---
 name: remotion-captions
-description: Dealing with captions in Remotion
-metadata:
-  tags: subtitles, captions, remotion, json
+description: Compatibility entry for the official remotion-captions reference
 ---
 
-All captions must be processed in JSON. The captions must use the [`Caption`](https://www.remotion.dev/docs/captions/caption.md) type which is the following:
-
-```ts
-import type { Caption } from "@remotion/captions";
-```
-
-This is the definition:
-
-```ts
-type Caption = {
-  text: string;
-  startMs: number;
-  endMs: number;
-  timestampMs: number | null;
-  confidence: number | null;
-};
-```
-
-## Generating captions
-
-To transcribe video and audio files to generate captions, load the [transcribe-captions.md](transcribe-captions.md) file for more instructions.
-
-## Displaying captions
-
-To display captions in your video, load the [display-captions.md](display-captions.md) file for more instructions.
-
-## Importing captions
-
-To import captions from a .srt file, load the [import-srt-captions.md](import-srt-captions.md) file for more instructions.
+Read [official remotion-captions](../remotion-best-practices/remotion-captions/REFERENCE.md). The canonical technical knowledge lives in remotion-best-practices; other files in this legacy directory are retained for traceability, not a separate maintained rule set. For project animation design and installed API compatibility, follow laohu-animation-director.

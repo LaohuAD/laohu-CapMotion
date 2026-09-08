@@ -1,0 +1,6646 @@
+{
+  "schema": "laohu.bilingual-caption-track/1",
+  "languages": [
+    "zh-CN",
+    "en"
+  ],
+  "sourceTimed": false,
+  "segments": [
+    {
+      "id": "caption-1",
+      "start": 0.04,
+      "end": 2.76,
+      "targetStart": 0.04,
+      "targetEnd": 2.76,
+      "sourceStart": 4.17,
+      "sourceEnd": 6.81,
+      "sourceRanges": [
+        [
+          4.17,
+          6.81
+        ]
+      ],
+      "cueIds": [
+        1
+      ],
+      "text": "如果你最近正在尝试用 MiniMax H3",
+      "note": "",
+      "en": "If you've recently been trying MiniMax H3",
+      "targetRanges": [
+        [
+          0.07,
+          2.71
+        ]
+      ],
+      "boundSourceSpeech": "如果你最近正在尝试用MinimaxH3"
+    },
+    {
+      "id": "caption-2",
+      "start": 2.847,
+      "end": 7.198,
+      "targetStart": 2.847,
+      "targetEnd": 7.198,
+      "sourceStart": 7.01,
+      "sourceEnd": 11.81,
+      "sourceRanges": [
+        [
+          7.01,
+          11.81
+        ]
+      ],
+      "cueIds": [
+        1
+      ],
+      "text": "取代 Seedance 2.5 制作真人影视剧",
+      "note": "",
+      "en": "to replace Seedance 2.5 for live-action filmmaking",
+      "targetRanges": [
+        [
+          2.877,
+          4.7
+        ],
+        [
+          4.7,
+          7.11
+        ]
+      ],
+      "boundSourceSpeech": "去取代C轮12做真人影视剧方面的一个创作"
+    },
+    {
+      "id": "caption-3",
+      "start": 7.198,
+      "end": 10.168,
+      "targetStart": 7.198,
+      "targetEnd": 10.168,
+      "sourceStart": 14,
+      "sourceEnd": 19.28,
+      "sourceRanges": [
+        [
+          14,
+          16.3
+        ],
+        [
+          18.84,
+          19.28
+        ]
+      ],
+      "cueIds": [
+        3
+      ],
+      "text": "却发现生成的人物脸部很油腻",
+      "note": "",
+      "en": "but found that the generated faces look very oily",
+      "targetRanges": [
+        [
+          7.267,
+          9.567
+        ],
+        [
+          9.673,
+          10.113
+        ]
+      ],
+      "boundSourceSpeech": "然后你又发现你创作出来的人物的脸很油腻"
+    },
+    {
+      "id": "caption-4",
+      "start": 10.168,
+      "end": 13.447,
+      "targetStart": 10.168,
+      "targetEnd": 13.447,
+      "sourceStart": 38.87,
+      "sourceEnd": 42.03,
+      "sourceRanges": [
+        [
+          38.87,
+          42.03
+        ]
+      ],
+      "cueIds": [
+        5
+      ],
+      "text": "这就是我这几天反复测试出来的一个效果",
+      "note": "",
+      "en": "this is the result of my repeated testing over the past few days",
+      "targetRanges": [
+        [
+          10.203,
+          13.363
+        ]
+      ],
+      "boundSourceSpeech": "这就是我这几天反复测试出来的一个效果"
+    },
+    {
+      "id": "caption-5",
+      "start": 13.447,
+      "end": 14.56,
+      "targetStart": 13.447,
+      "targetEnd": 14.56,
+      "sourceStart": 50.31,
+      "sourceEnd": 51.31,
+      "sourceRanges": [
+        [
+          50.31,
+          51.31
+        ]
+      ],
+      "cueIds": [
+        7
+      ],
+      "text": "画面没有那么油",
+      "note": "",
+      "en": "The image no longer looks as oily",
+      "targetRanges": [
+        [
+          13.51,
+          14.51
+        ]
+      ],
+      "boundSourceSpeech": "画面没有那么油"
+    },
+    {
+      "id": "caption-6",
+      "start": 14.68,
+      "end": 17.137,
+      "targetStart": 14.68,
+      "targetEnd": 17.137,
+      "sourceStart": 51.51,
+      "sourceEnd": 55.22,
+      "sourceRanges": [
+        [
+          51.51,
+          53.43
+        ],
+        [
+          54.9,
+          55.22
+        ]
+      ],
+      "cueIds": [
+        7,
+        8
+      ],
+      "text": "人物的停顿 情绪和重音",
+      "note": "",
+      "en": "The character's pauses emotions and emphasis",
+      "targetRanges": [
+        [
+          14.71,
+          16.63
+        ],
+        [
+          16.767,
+          17.087
+        ]
+      ],
+      "boundSourceSpeech": "人物的停顿情绪重音"
+    },
+    {
+      "id": "caption-7",
+      "start": 17.137,
+      "end": 19.08,
+      "targetStart": 17.137,
+      "targetEnd": 19.08,
+      "sourceStart": 55.3,
+      "sourceEnd": 57.14,
+      "sourceRanges": [
+        [
+          55.3,
+          57.14
+        ]
+      ],
+      "cueIds": [
+        8
+      ],
+      "text": "也都能很好地表现出来",
+      "note": "",
+      "en": "also come through very well",
+      "targetRanges": [
+        [
+          17.167,
+          19.007
+        ]
+      ],
+      "boundSourceSpeech": "也都能够很好地表现出来"
+    },
+    {
+      "id": "caption-8",
+      "start": 19.08,
+      "end": 20.623,
+      "targetStart": 19.08,
+      "targetEnd": 20.623,
+      "sourceStart": 65.4,
+      "sourceEnd": 66.84,
+      "sourceRanges": [
+        [
+          65.4,
+          66.84
+        ]
+      ],
+      "cueIds": [
+        10
+      ],
+      "text": "而且生成速度还很快",
+      "note": "",
+      "en": "And generation is fast",
+      "targetRanges": [
+        [
+          19.133,
+          20.573
+        ]
+      ],
+      "boundSourceSpeech": "并且呢速度还很快哦"
+    },
+    {
+      "id": "caption-9",
+      "start": 20.72,
+      "end": 23.038,
+      "targetStart": 20.72,
+      "targetEnd": 23.038,
+      "sourceStart": 68.05,
+      "sourceEnd": 70.25,
+      "sourceRanges": [
+        [
+          68.05,
+          70.25
+        ]
+      ],
+      "cueIds": [
+        11
+      ],
+      "text": "15 秒视频 832 分辨率",
+      "note": "",
+      "en": "A 15-second video at 832 resolution",
+      "targetRanges": [
+        [
+          20.75,
+          22.95
+        ]
+      ],
+      "boundSourceSpeech": "15秒钟的视频832的分辨率"
+    },
+    {
+      "id": "caption-10",
+      "start": 23.038,
+      "end": 26.39,
+      "targetStart": 23.038,
+      "targetEnd": 26.39,
+      "sourceStart": 71.44,
+      "sourceEnd": 74.64,
+      "sourceRanges": [
+        [
+          71.44,
+          74.64
+        ]
+      ],
+      "cueIds": [
+        12
+      ],
+      "text": "生成时间只要 10 到 12 分钟",
+      "note": "",
+      "en": "takes only 10 to 12 minutes to generate",
+      "targetRanges": [
+        [
+          23.107,
+          26.307
+        ]
+      ],
+      "boundSourceSpeech": "也就10分钟到12分钟的一个生成时间"
+    },
+    {
+      "id": "caption-11",
+      "start": 26.39,
+      "end": 29.61,
+      "targetStart": 26.39,
+      "targetEnd": 29.61,
+      "sourceStart": 104.62,
+      "sourceEnd": 107.7,
+      "sourceRanges": [
+        [
+          104.62,
+          107.7
+        ]
+      ],
+      "cueIds": [
+        13
+      ],
+      "text": "这期视频我会给你分享一下我是怎么做的",
+      "note": "",
+      "en": "In this video I'll show you exactly how I did it",
+      "targetRanges": [
+        [
+          26.453,
+          29.533
+        ]
+      ],
+      "boundSourceSpeech": "这期视频我会给你分享一下我是怎么做的"
+    },
+    {
+      "id": "caption-12",
+      "start": 29.61,
+      "end": 31.58,
+      "targetStart": 29.61,
+      "targetEnd": 31.58,
+      "sourceStart": 108.1,
+      "sourceEnd": 109.94,
+      "sourceRanges": [
+        [
+          108.1,
+          109.94
+        ]
+      ],
+      "cueIds": [
+        14
+      ],
+      "text": "其实核心就是一采跟二采",
+      "note": "",
+      "en": "The key is the first pass and the second pass",
+      "targetRanges": [
+        [
+          29.667,
+          31.507
+        ]
+      ],
+      "boundSourceSpeech": "其实核心就是一彩跟二彩"
+    },
+    {
+      "id": "caption-13",
+      "start": 31.58,
+      "end": 33.003,
+      "targetStart": 31.58,
+      "targetEnd": 33.003,
+      "sourceStart": 110.5,
+      "sourceEnd": 111.86,
+      "sourceRanges": [
+        [
+          110.5,
+          111.86
+        ]
+      ],
+      "cueIds": [
+        14
+      ],
+      "text": "很多博主其实都讲过",
+      "note": "",
+      "en": "Many creators have already covered them",
+      "targetRanges": [
+        [
+          31.633,
+          32.993
+        ]
+      ],
+      "boundSourceSpeech": "很多博主其实都讲过"
+    },
+    {
+      "id": "caption-14",
+      "start": 33.003,
+      "end": 35.51,
+      "targetStart": 33.003,
+      "targetEnd": 35.51,
+      "sourceStart": 111.86,
+      "sourceEnd": 114.3,
+      "sourceRanges": [
+        [
+          111.86,
+          114.3
+        ]
+      ],
+      "cueIds": [
+        14
+      ],
+      "text": "但是我发现没有讲到核心的地方",
+      "note": "",
+      "en": "but I found that they missed the real key",
+      "targetRanges": [
+        [
+          32.993,
+          35.433
+        ]
+      ],
+      "boundSourceSpeech": "但是我发现没有讲到核心的地方"
+    },
+    {
+      "id": "caption-15",
+      "start": 35.51,
+      "end": 38.563,
+      "targetStart": 35.51,
+      "targetEnd": 38.563,
+      "sourceStart": 123.4,
+      "sourceEnd": 127.68,
+      "sourceRanges": [
+        [
+          123.4,
+          127.68
+        ]
+      ],
+      "cueIds": [
+        15
+      ],
+      "text": "今天我就把研究出来的两套工作流",
+      "note": "",
+      "en": "Today I'll break down the two workflows I developed",
+      "targetRanges": [
+        [
+          35.567,
+          36.8
+        ],
+        [
+          36.8,
+          38.567
+        ]
+      ],
+      "boundSourceSpeech": "今天我就把我研究出来的两套工作流"
+    },
+    {
+      "id": "caption-16",
+      "start": 38.563,
+      "end": 39.637,
+      "targetStart": 38.563,
+      "targetEnd": 39.637,
+      "sourceStart": 127.76,
+      "sourceEnd": 128.76,
+      "sourceRanges": [
+        [
+          127.76,
+          128.76
+        ]
+      ],
+      "cueIds": [
+        15
+      ],
+      "text": "一套多参的",
+      "note": "",
+      "en": "one for multi-reference generation",
+      "targetRanges": [
+        [
+          38.627,
+          39.627
+        ]
+      ],
+      "boundSourceSpeech": "一套多参的"
+    },
+    {
+      "id": "caption-17",
+      "start": 39.637,
+      "end": 40.717,
+      "targetStart": 39.637,
+      "targetEnd": 40.717,
+      "sourceStart": 128.76,
+      "sourceEnd": 129.84,
+      "sourceRanges": [
+        [
+          128.76,
+          129.84
+        ]
+      ],
+      "cueIds": [
+        15
+      ],
+      "text": "一套数字人的",
+      "note": "",
+      "en": "and one for digital humans",
+      "targetRanges": [
+        [
+          39.627,
+          40.707
+        ]
+      ],
+      "boundSourceSpeech": "一套数字人的"
+    },
+    {
+      "id": "caption-18",
+      "start": 40.717,
+      "end": 43.312,
+      "targetStart": 40.717,
+      "targetEnd": 43.312,
+      "sourceStart": 129.84,
+      "sourceEnd": 132.36,
+      "sourceRanges": [
+        [
+          129.84,
+          132.36
+        ]
+      ],
+      "cueIds": [
+        15
+      ],
+      "text": "完整地给大家拆一遍",
+      "note": "",
+      "en": "and walk you through both in full",
+      "targetRanges": [
+        [
+          40.707,
+          43.227
+        ]
+      ],
+      "boundSourceSpeech": "这两套工作流给大家完整的拆一遍"
+    },
+    {
+      "id": "caption-19",
+      "start": 43.312,
+      "end": 45.427,
+      "targetStart": 43.312,
+      "targetEnd": 45.427,
+      "sourceStart": 138.71,
+      "sourceEnd": 140.71,
+      "sourceRanges": [
+        [
+          138.71,
+          140.71
+        ]
+      ],
+      "cueIds": [
+        16
+      ],
+      "text": "本期视频会分成两个部分",
+      "note": "",
+      "en": "This video is divided into two parts",
+      "targetRanges": [
+        [
+          43.377,
+          45.377
+        ]
+      ],
+      "boundSourceSpeech": "本期视频呢我会分成两个部分"
+    },
+    {
+      "id": "caption-20",
+      "start": 45.527,
+      "end": 47.167,
+      "targetStart": 45.527,
+      "targetEnd": 47.167,
+      "sourceStart": 141.59,
+      "sourceEnd": 143.19,
+      "sourceRanges": [
+        [
+          141.59,
+          143.19
+        ]
+      ],
+      "cueIds": [
+        16
+      ],
+      "text": "一部分针对小白",
+      "note": "",
+      "en": "One part is for beginners",
+      "targetRanges": [
+        [
+          45.557,
+          47.157
+        ]
+      ],
+      "boundSourceSpeech": "分别是针对小白的"
+    },
+    {
+      "id": "caption-21",
+      "start": 47.167,
+      "end": 50.637,
+      "targetStart": 47.167,
+      "targetEnd": 50.637,
+      "sourceStart": 143.19,
+      "sourceEnd": 174.02,
+      "sourceRanges": [
+        [
+          143.19,
+          143.87
+        ],
+        [
+          158.66,
+          159.5
+        ],
+        [
+          172.38,
+          174.02
+        ]
+      ],
+      "cueIds": [
+        16,
+        17,
+        18
+      ],
+      "text": "另一部分面向有搭建能力的专业同学",
+      "note": "",
+      "en": "The other is for advanced users who can build workflows",
+      "targetRanges": [
+        [
+          47.157,
+          47.837
+        ],
+        [
+          47.96,
+          48.8
+        ],
+        [
+          48.947,
+          50.587
+        ]
+      ],
+      "boundSourceSpeech": "和有搭建能力者比较专业的一些同学"
+    },
+    {
+      "id": "caption-22",
+      "start": 50.727,
+      "end": 55.163,
+      "targetStart": 50.727,
+      "targetEnd": 55.163,
+      "sourceStart": 190.39,
+      "sourceEnd": 194.71,
+      "sourceRanges": [
+        [
+          190.39,
+          194.71
+        ]
+      ],
+      "cueIds": [
+        19
+      ],
+      "text": "小白部分会讲这两套工作流怎么使用",
+      "note": "",
+      "en": "The beginner section explains how to use both workflows",
+      "targetRanges": [
+        [
+          50.757,
+          55.077
+        ]
+      ],
+      "boundSourceSpeech": "小白的讲解部分呢我会讲这两套工作流怎么去使用"
+    },
+    {
+      "id": "caption-23",
+      "start": 55.163,
+      "end": 57.33,
+      "targetStart": 55.163,
+      "targetEnd": 57.33,
+      "sourceStart": 196.53,
+      "sourceEnd": 200.28,
+      "sourceRanges": [
+        [
+          196.53,
+          197.17
+        ],
+        [
+          199,
+          200.28
+        ]
+      ],
+      "cueIds": [
+        20,
+        21
+      ],
+      "text": "包括参考图 视频和音频怎么设置",
+      "note": "",
+      "en": "including how to set reference images video and audio",
+      "targetRanges": [
+        [
+          55.23,
+          55.87
+        ],
+        [
+          56,
+          57.28
+        ]
+      ],
+      "boundSourceSpeech": "参考图视频音频怎么设置"
+    },
+    {
+      "id": "caption-24",
+      "start": 57.33,
+      "end": 58.487,
+      "targetStart": 57.33,
+      "targetEnd": 58.487,
+      "sourceStart": 200.36,
+      "sourceEnd": 201.4,
+      "sourceRanges": [
+        [
+          200.36,
+          201.4
+        ]
+      ],
+      "cueIds": [
+        21
+      ],
+      "text": "提示词怎么写",
+      "note": "",
+      "en": "how to write the prompt",
+      "targetRanges": [
+        [
+          57.36,
+          58.4
+        ]
+      ],
+      "boundSourceSpeech": "提示词怎么写"
+    },
+    {
+      "id": "caption-25",
+      "start": 58.487,
+      "end": 60.357,
+      "targetStart": 58.487,
+      "targetEnd": 60.357,
+      "sourceStart": 213.62,
+      "sourceEnd": 215.34,
+      "sourceRanges": [
+        [
+          213.62,
+          215.34
+        ]
+      ],
+      "cueIds": [
+        22
+      ],
+      "text": "分辨率和时长怎么设置",
+      "note": "",
+      "en": "and how to set resolution and duration",
+      "targetRanges": [
+        [
+          58.553,
+          60.273
+        ]
+      ],
+      "boundSourceSpeech": "分辨率和时长怎么设置"
+    },
+    {
+      "id": "caption-26",
+      "start": 60.357,
+      "end": 62.47,
+      "targetStart": 60.357,
+      "targetEnd": 62.47,
+      "sourceStart": 220.62,
+      "sourceEnd": 222.66,
+      "sourceRanges": [
+        [
+          220.62,
+          222.66
+        ]
+      ],
+      "cueIds": [
+        23
+      ],
+      "text": "如果你本身会搭工作流的话",
+      "note": "",
+      "en": "If you already know how to build workflows",
+      "targetRanges": [
+        [
+          60.42,
+          62.46
+        ]
+      ],
+      "boundSourceSpeech": "如果你本身会搭工作流的话"
+    },
+    {
+      "id": "caption-27",
+      "start": 62.47,
+      "end": 65.15,
+      "targetStart": 62.47,
+      "targetEnd": 65.15,
+      "sourceStart": 222.66,
+      "sourceEnd": 225.62,
+      "sourceRanges": [
+        [
+          222.66,
+          225.62
+        ]
+      ],
+      "cueIds": [
+        23
+      ],
+      "text": "那你可以直接点击下面的进度条",
+      "note": "",
+      "en": "you can click the progress bar below",
+      "targetRanges": [
+        [
+          62.46,
+          64.4
+        ],
+        [
+          64.4,
+          65.12
+        ]
+      ],
+      "boundSourceSpeech": "那你可以直接点击下面的进度条"
+    },
+    {
+      "id": "caption-28",
+      "start": 65.15,
+      "end": 67.81,
+      "targetStart": 65.15,
+      "targetEnd": 67.81,
+      "sourceStart": 225.66,
+      "sourceEnd": 228.26,
+      "sourceRanges": [
+        [
+          225.66,
+          228.26
+        ]
+      ],
+      "cueIds": [
+        23
+      ],
+      "text": "然后直接跳转到后面的专业讲解部分",
+      "note": "",
+      "en": "and jump straight to the advanced section",
+      "targetRanges": [
+        [
+          65.16,
+          67.76
+        ]
+      ],
+      "boundSourceSpeech": "然后直接跳转到后面的专业讲解部分"
+    },
+    {
+      "id": "caption-29",
+      "start": 67.893,
+      "end": 70.893,
+      "targetStart": 67.893,
+      "targetEnd": 70.893,
+      "sourceStart": 245.49,
+      "sourceEnd": 248.41,
+      "sourceRanges": [
+        [
+          245.49,
+          248.41
+        ]
+      ],
+      "cueIds": [
+        24
+      ],
+      "text": "下面进入工作流讲解",
+      "note": "",
+      "en": "Now let's walk through the workflow",
+      "targetRanges": [
+        [
+          67.923,
+          70.843
+        ]
+      ],
+      "boundSourceSpeech": "好那么下面我们进入我们工作流的这个讲解啊"
+    },
+    {
+      "id": "caption-30",
+      "start": 70.98,
+      "end": 74.178,
+      "targetStart": 70.98,
+      "targetEnd": 74.178,
+      "sourceStart": 258.41,
+      "sourceEnd": 262.67,
+      "sourceRanges": [
+        [
+          258.41,
+          260.41
+        ],
+        [
+          261.75,
+          262.67
+        ]
+      ],
+      "cueIds": [
+        27,
+        28
+      ],
+      "text": "左边部分是参数输入区",
+      "note": "",
+      "en": "The left side is the parameter input area",
+      "targetRanges": [
+        [
+          71.01,
+          73.01
+        ],
+        [
+          73.183,
+          74.103
+        ]
+      ],
+      "boundSourceSpeech": "左边的这一部分呢是这个参数的输入区"
+    },
+    {
+      "id": "caption-31",
+      "start": 74.178,
+      "end": 76.403,
+      "targetStart": 74.178,
+      "targetEnd": 76.403,
+      "sourceStart": 269.1,
+      "sourceEnd": 271.22,
+      "sourceRanges": [
+        [
+          269.1,
+          271.22
+        ]
+      ],
+      "cueIds": [
+        29
+      ],
+      "text": "右边部分是运行区域",
+      "note": "",
+      "en": "The right side is the execution area",
+      "targetRanges": [
+        [
+          74.233,
+          76.353
+        ]
+      ],
+      "boundSourceSpeech": "右边部分呢是这个运行的区域"
+    },
+    {
+      "id": "caption-32",
+      "start": 76.493,
+      "end": 78.453,
+      "targetStart": 76.493,
+      "targetEnd": 78.453,
+      "sourceStart": 296.79,
+      "sourceEnd": 298.71,
+      "sourceRanges": [
+        [
+          296.79,
+          298.71
+        ]
+      ],
+      "cueIds": [
+        32
+      ],
+      "text": "我们现在已经有三张参考图了",
+      "note": "",
+      "en": "We already have three reference images",
+      "targetRanges": [
+        [
+          76.523,
+          78.443
+        ]
+      ],
+      "boundSourceSpeech": "我们现在已经有三张参考图了"
+    },
+    {
+      "id": "caption-33",
+      "start": 78.453,
+      "end": 80.873,
+      "targetStart": 78.453,
+      "targetEnd": 80.873,
+      "sourceStart": 298.71,
+      "sourceEnd": 301.11,
+      "sourceRanges": [
+        [
+          298.71,
+          301.11
+        ]
+      ],
+      "cueIds": [
+        33
+      ],
+      "text": "如果想添加第四张参考图",
+      "note": "",
+      "en": "To add a fourth reference image",
+      "targetRanges": [
+        [
+          78.443,
+          80.843
+        ]
+      ],
+      "boundSourceSpeech": "如果说你想要加第四张参考图"
+    },
+    {
+      "id": "caption-34",
+      "start": 80.873,
+      "end": 83.8,
+      "targetStart": 80.873,
+      "targetEnd": 83.8,
+      "sourceStart": 301.15,
+      "sourceEnd": 304.15,
+      "sourceRanges": [
+        [
+          301.15,
+          304.15
+        ]
+      ],
+      "cueIds": [
+        33
+      ],
+      "text": "点一下 Yes 再点击箭头",
+      "note": "",
+      "en": "click Yes and then click the arrow",
+      "targetRanges": [
+        [
+          80.883,
+          82.3
+        ],
+        [
+          82.3,
+          83.717
+        ]
+      ],
+      "boundSourceSpeech": "那你就点一下Yes然后点一下这个箭头"
+    },
+    {
+      "id": "caption-35",
+      "start": 83.8,
+      "end": 86.073,
+      "targetStart": 83.8,
+      "targetEnd": 86.073,
+      "sourceStart": 304.43,
+      "sourceEnd": 306.55,
+      "sourceRanges": [
+        [
+          304.43,
+          306.55
+        ]
+      ],
+      "cueIds": [
+        33
+      ],
+      "text": "就会跳转到第四张图",
+      "note": "",
+      "en": "It will switch to the fourth image slot",
+      "targetRanges": [
+        [
+          83.863,
+          85.983
+        ]
+      ],
+      "boundSourceSpeech": "它就会跳转到第四张图"
+    },
+    {
+      "id": "caption-36",
+      "start": 86.073,
+      "end": 89.47,
+      "targetStart": 86.073,
+      "targetEnd": 89.47,
+      "sourceStart": 307.21,
+      "sourceEnd": 310.45,
+      "sourceRanges": [
+        [
+          307.21,
+          310.45
+        ]
+      ],
+      "cueIds": [
+        34
+      ],
+      "text": "然后上传图片即可",
+      "note": "",
+      "en": "Then upload the image",
+      "targetRanges": [
+        [
+          86.143,
+          89.383
+        ]
+      ],
+      "boundSourceSpeech": "然后呢就把这个图进行上传就行了"
+    },
+    {
+      "id": "caption-37",
+      "start": 89.47,
+      "end": 91.983,
+      "targetStart": 89.47,
+      "targetEnd": 91.983,
+      "sourceStart": 311.57,
+      "sourceEnd": 314.25,
+      "sourceRanges": [
+        [
+          311.57,
+          314.25
+        ]
+      ],
+      "cueIds": [
+        35
+      ],
+      "text": "如果不需要就直接关闭",
+      "note": "",
+      "en": "If you don't need it just turn it off",
+      "targetRanges": [
+        [
+          89.537,
+          91.967
+        ]
+      ],
+      "boundSourceSpeech": "如果不需要的话你可以直接关闭"
+    },
+    {
+      "id": "caption-38",
+      "start": 91.983,
+      "end": 94.698,
+      "targetStart": 91.983,
+      "targetEnd": 94.698,
+      "sourceStart": 342.35,
+      "sourceEnd": 344.91,
+      "sourceRanges": [
+        [
+          342.35,
+          344.91
+        ]
+      ],
+      "cueIds": [
+        37
+      ],
+      "text": "参考视频和参考音频的用法也一样",
+      "note": "",
+      "en": "Reference video and audio work the same way",
+      "targetRanges": [
+        [
+          92.05,
+          94.61
+        ]
+      ],
+      "boundSourceSpeech": "参考视频和参考音频都是同样的一个用法"
+    },
+    {
+      "id": "caption-39",
+      "start": 94.698,
+      "end": 98.135,
+      "targetStart": 94.698,
+      "targetEnd": 98.135,
+      "sourceStart": 351.1,
+      "sourceEnd": 354.38,
+      "sourceRanges": [
+        [
+          351.1,
+          354.38
+        ]
+      ],
+      "cueIds": [
+        39
+      ],
+      "text": "左边是运行时长和提示词输入",
+      "note": "",
+      "en": "The left side contains duration and prompt inputs",
+      "targetRanges": [
+        [
+          94.767,
+          98.047
+        ]
+      ],
+      "boundSourceSpeech": "运行时长的输入和这里有个提示词的输入"
+    },
+    {
+      "id": "caption-40",
+      "start": 98.135,
+      "end": 100.608,
+      "targetStart": 98.135,
+      "targetEnd": 100.608,
+      "sourceStart": 366.57,
+      "sourceEnd": 368.93,
+      "sourceRanges": [
+        [
+          366.57,
+          368.93
+        ]
+      ],
+      "cueIds": [
+        41
+      ],
+      "text": "下面是两阶段采样设置",
+      "note": "",
+      "en": "Below are the two-stage sampling settings",
+      "targetRanges": [
+        [
+          98.203,
+          100.563
+        ]
+      ],
+      "boundSourceSpeech": "这个两阶段采样的一个设置"
+    },
+    {
+      "id": "caption-41",
+      "start": 100.608,
+      "end": 104.877,
+      "targetStart": 100.608,
+      "targetEnd": 104.877,
+      "sourceStart": 400.7,
+      "sourceEnd": 405.26,
+      "sourceRanges": [
+        [
+          400.7,
+          405.26
+        ]
+      ],
+      "cueIds": [
+        42
+      ],
+      "text": "左边用于设置时长 最长 15 秒",
+      "note": "",
+      "en": "Set the duration on the left up to 15 seconds",
+      "targetRanges": [
+        [
+          100.633,
+          102.167
+        ],
+        [
+          102.167,
+          104.827
+        ]
+      ],
+      "boundSourceSpeech": "左边部分就是设置时长最长是15秒钟"
+    },
+    {
+      "id": "caption-42",
+      "start": 104.877,
+      "end": 106.95,
+      "targetStart": 104.877,
+      "targetEnd": 106.95,
+      "sourceStart": 405.34,
+      "sourceEnd": 407.3,
+      "sourceRanges": [
+        [
+          405.34,
+          407.3
+        ]
+      ],
+      "cueIds": [
+        42
+      ],
+      "text": "这里用于输入提示词",
+      "note": "",
+      "en": "Enter the prompt here",
+      "targetRanges": [
+        [
+          104.907,
+          106.867
+        ]
+      ],
+      "boundSourceSpeech": "然后这里是提示词的输入"
+    },
+    {
+      "id": "caption-43",
+      "start": 106.95,
+      "end": 108.243,
+      "targetStart": 106.95,
+      "targetEnd": 108.243,
+      "sourceStart": 412.38,
+      "sourceEnd": 413.58,
+      "sourceRanges": [
+        [
+          412.38,
+          413.58
+        ]
+      ],
+      "cueIds": [
+        44
+      ],
+      "text": "人物要做什么动作",
+      "note": "",
+      "en": "What actions the character performs",
+      "targetRanges": [
+        [
+          107.013,
+          108.213
+        ]
+      ],
+      "boundSourceSpeech": "人物要做什么动作"
+    },
+    {
+      "id": "caption-44",
+      "start": 108.243,
+      "end": 109.14,
+      "targetStart": 108.243,
+      "targetEnd": 109.14,
+      "sourceStart": 413.62,
+      "sourceEnd": 414.42,
+      "sourceRanges": [
+        [
+          413.62,
+          414.42
+        ]
+      ],
+      "cueIds": [
+        45
+      ],
+      "text": "说什么话",
+      "note": "",
+      "en": "what the character says",
+      "targetRanges": [
+        [
+          108.253,
+          109.053
+        ]
+      ],
+      "boundSourceSpeech": "说什么话"
+    },
+    {
+      "id": "caption-45",
+      "start": 109.14,
+      "end": 110.453,
+      "targetStart": 109.14,
+      "targetEnd": 110.453,
+      "sourceStart": 414.74,
+      "sourceEnd": 415.9,
+      "sourceRanges": [
+        [
+          414.74,
+          415.9
+        ]
+      ],
+      "cueIds": [
+        46
+      ],
+      "text": "是什么样的情绪",
+      "note": "",
+      "en": "what emotion the character shows",
+      "targetRanges": [
+        [
+          109.207,
+          110.367
+        ]
+      ],
+      "boundSourceSpeech": "是什么样的情绪"
+    },
+    {
+      "id": "caption-46",
+      "start": 110.453,
+      "end": 111.873,
+      "targetStart": 110.453,
+      "targetEnd": 111.873,
+      "sourceStart": 416.62,
+      "sourceEnd": 417.9,
+      "sourceRanges": [
+        [
+          416.62,
+          417.9
+        ]
+      ],
+      "cueIds": [
+        47
+      ],
+      "text": "镜头如何运动",
+      "note": "",
+      "en": "and how the camera moves",
+      "targetRanges": [
+        [
+          110.52,
+          111.8
+        ]
+      ],
+      "boundSourceSpeech": "镜头如何运动"
+    },
+    {
+      "id": "caption-47",
+      "start": 111.873,
+      "end": 114.21,
+      "targetStart": 111.873,
+      "targetEnd": 114.21,
+      "sourceStart": 418.26,
+      "sourceEnd": 420.46,
+      "sourceRanges": [
+        [
+          418.26,
+          420.46
+        ]
+      ],
+      "cueIds": [
+        48
+      ],
+      "text": "都是在这个提示词里面去写入",
+      "note": "",
+      "en": "are all written into this prompt",
+      "targetRanges": [
+        [
+          111.927,
+          114.127
+        ]
+      ],
+      "boundSourceSpeech": "都是在这个提示词里面去写入"
+    },
+    {
+      "id": "caption-48",
+      "start": 114.21,
+      "end": 118.938,
+      "targetStart": 114.21,
+      "targetEnd": 118.938,
+      "sourceStart": 437.14,
+      "sourceEnd": 443.66,
+      "sourceRanges": [
+        [
+          437.14,
+          441.1
+        ],
+        [
+          442.94,
+          443.66
+        ]
+      ],
+      "cueIds": [
+        49,
+        50
+      ],
+      "text": "下面是一采和二采的输出设置",
+      "note": "",
+      "en": "Below are the outputs for the first and second passes",
+      "targetRanges": [
+        [
+          114.273,
+          116.1
+        ],
+        [
+          116.1,
+          118
+        ],
+        [
+          118.14,
+          118.86
+        ]
+      ],
+      "boundSourceSpeech": "然后在下面的这个地方是一彩跟二彩的输出设置"
+    },
+    {
+      "id": "caption-49",
+      "start": 118.938,
+      "end": 122.167,
+      "targetStart": 118.938,
+      "targetEnd": 122.167,
+      "sourceStart": 451.93,
+      "sourceEnd": 455.01,
+      "sourceRanges": [
+        [
+          451.93,
+          455.01
+        ]
+      ],
+      "cueIds": [
+        51
+      ],
+      "text": "一采数值大约设在 0.5 到 0.6",
+      "note": "",
+      "en": "Set the first pass to about 0.5 to 0.6",
+      "targetRanges": [
+        [
+          118.997,
+          122.077
+        ]
+      ],
+      "boundSourceSpeech": "一采的这个值呢大概是0.5~0.6之间"
+    },
+    {
+      "id": "caption-50",
+      "start": 122.167,
+      "end": 124.707,
+      "targetStart": 122.167,
+      "targetEnd": 124.707,
+      "sourceStart": 455.37,
+      "sourceEnd": 457.81,
+      "sourceRanges": [
+        [
+          455.37,
+          457.81
+        ]
+      ],
+      "cueIds": [
+        52
+      ],
+      "text": "二采设在 0.9 到 1.2",
+      "note": "",
+      "en": "Set the second pass to 0.9 to 1.2",
+      "targetRanges": [
+        [
+          122.237,
+          124.677
+        ]
+      ],
+      "boundSourceSpeech": "然后二采的话是0.9~1.2"
+    },
+    {
+      "id": "caption-51",
+      "start": 124.707,
+      "end": 126.313,
+      "targetStart": 124.707,
+      "targetEnd": 126.313,
+      "sourceStart": 457.85,
+      "sourceEnd": 459.37,
+      "sourceRanges": [
+        [
+          457.85,
+          459.37
+        ]
+      ],
+      "cueIds": [
+        52
+      ],
+      "text": "这是我测试后的设置",
+      "note": "",
+      "en": "These are the settings from my tests",
+      "targetRanges": [
+        [
+          124.717,
+          126.237
+        ]
+      ],
+      "boundSourceSpeech": "我是这样子测试的"
+    },
+    {
+      "id": "caption-52",
+      "start": 126.313,
+      "end": 131.338,
+      "targetStart": 126.313,
+      "targetEnd": 131.338,
+      "sourceStart": 468.87,
+      "sourceEnd": 474.59,
+      "sourceRanges": [
+        [
+          468.87,
+          474.59
+        ]
+      ],
+      "cueIds": [
+        55
+      ],
+      "text": "如果二采直接输入 2.0 运行就会崩",
+      "note": "",
+      "en": "If you enter 2.0 for the second pass it will crash",
+      "targetRanges": [
+        [
+          126.37,
+          129.033
+        ],
+        [
+          129.033,
+          131.257
+        ]
+      ],
+      "boundSourceSpeech": "如果说二彩这个地方我直接输入2.0的话它会崩啊"
+    },
+    {
+      "id": "caption-53",
+      "start": 131.338,
+      "end": 132.913,
+      "targetStart": 131.338,
+      "targetEnd": 132.913,
+      "sourceStart": 476,
+      "sourceEnd": 477.44,
+      "sourceRanges": [
+        [
+          476,
+          477.44
+        ]
+      ],
+      "cueIds": [
+        56
+      ],
+      "text": "这个可能跟模型有关",
+      "note": "",
+      "en": "This may be model-related",
+      "targetRanges": [
+        [
+          131.4,
+          132.84
+        ]
+      ],
+      "boundSourceSpeech": "这个可能跟模型有关"
+    },
+    {
+      "id": "caption-54",
+      "start": 132.913,
+      "end": 135.097,
+      "targetStart": 132.913,
+      "targetEnd": 135.097,
+      "sourceStart": 478.2,
+      "sourceEnd": 480.32,
+      "sourceRanges": [
+        [
+          478.2,
+          480.32
+        ]
+      ],
+      "cueIds": [
+        57
+      ],
+      "text": "具体参数大家可以自己测试",
+      "note": "",
+      "en": "You can test the exact values yourself",
+      "targetRanges": [
+        [
+          132.967,
+          135.087
+        ]
+      ],
+      "boundSourceSpeech": "这个具体大家自己去测试一下吧"
+    },
+    {
+      "id": "caption-55",
+      "start": 135.097,
+      "end": 138.297,
+      "targetStart": 135.097,
+      "targetEnd": 138.297,
+      "sourceStart": 480.32,
+      "sourceEnd": 483.48,
+      "sourceRanges": [
+        [
+          480.32,
+          483.48
+        ]
+      ],
+      "cueIds": [
+        57
+      ],
+      "text": "我觉得 0.9 到 1.2 已经够了",
+      "note": "",
+      "en": "I think 0.9 to 1.2 is enough",
+      "targetRanges": [
+        [
+          135.087,
+          138.247
+        ]
+      ],
+      "boundSourceSpeech": "我是觉得1.20.9就已经够了"
+    },
+    {
+      "id": "caption-56",
+      "start": 138.39,
+      "end": 140.377,
+      "targetStart": 138.39,
+      "targetEnd": 140.377,
+      "sourceStart": 498.72,
+      "sourceEnd": 500.64,
+      "sourceRanges": [
+        [
+          498.72,
+          500.64
+        ]
+      ],
+      "cueIds": [
+        58
+      ],
+      "text": "这里的 0.6 和 1.2",
+      "note": "",
+      "en": "The 0.6 and 1.2 values here",
+      "targetRanges": [
+        [
+          138.42,
+          140.34
+        ]
+      ],
+      "boundSourceSpeech": "然后这里0.6跟1.2"
+    },
+    {
+      "id": "caption-57",
+      "start": 140.377,
+      "end": 145.283,
+      "targetStart": 140.377,
+      "targetEnd": 145.283,
+      "sourceStart": 500.96,
+      "sourceEnd": 506.76,
+      "sourceRanges": [
+        [
+          500.96,
+          502.72
+        ],
+        [
+          503.56,
+          506.76
+        ]
+      ],
+      "cueIds": [
+        58,
+        59
+      ],
+      "text": "对应左侧表格的第一列数值",
+      "note": "",
+      "en": "match the values in the first column on the left",
+      "targetRanges": [
+        [
+          140.393,
+          142.153
+        ],
+        [
+          142.293,
+          143.433
+        ],
+        [
+          143.433,
+          145.193
+        ]
+      ],
+      "boundSourceSpeech": "是左边的这里有个表格对应的是左边第一列的数值"
+    },
+    {
+      "id": "caption-58",
+      "start": 145.283,
+      "end": 147.603,
+      "targetStart": 145.283,
+      "targetEnd": 147.603,
+      "sourceStart": 507.32,
+      "sourceEnd": 509.52,
+      "sourceRanges": [
+        [
+          507.32,
+          509.52
+        ]
+      ],
+      "cueIds": [
+        60
+      ],
+      "text": "分辨率对应最右边一列",
+      "note": "",
+      "en": "Resolution corresponds to the far-right column",
+      "targetRanges": [
+        [
+          145.353,
+          147.553
+        ]
+      ],
+      "boundSourceSpeech": "它的分辨率是最右边的这一个对应"
+    },
+    {
+      "id": "caption-59",
+      "start": 147.693,
+      "end": 152.453,
+      "targetStart": 147.693,
+      "targetEnd": 152.453,
+      "sourceStart": 510.29,
+      "sourceEnd": 515.33,
+      "sourceRanges": [
+        [
+          510.29,
+          515.33
+        ]
+      ],
+      "cueIds": [
+        61
+      ],
+      "text": "这里用于选择画幅比例",
+      "note": "",
+      "en": "Choose the aspect ratio here",
+      "targetRanges": [
+        [
+          147.723,
+          150.467
+        ],
+        [
+          150.467,
+          150.733
+        ],
+        [
+          150.733,
+          152.363
+        ]
+      ],
+      "boundSourceSpeech": "然后这个呢就是对应的画幅的比例画画幅的这个参数的选择"
+    },
+    {
+      "id": "caption-60",
+      "start": 152.453,
+      "end": 156.493,
+      "targetStart": 152.453,
+      "targetEnd": 156.493,
+      "sourceStart": 523.39,
+      "sourceEnd": 527.39,
+      "sourceRanges": [
+        [
+          523.39,
+          527.39
+        ]
+      ],
+      "cueIds": [
+        62
+      ],
+      "text": "选择完成后 点击右上角运行",
+      "note": "",
+      "en": "After selecting it click Run in the upper right",
+      "targetRanges": [
+        [
+          152.523,
+          155.4
+        ],
+        [
+          155.4,
+          156.423
+        ]
+      ],
+      "boundSourceSpeech": "选择完成之后呢点击右上角的运行就行了"
+    },
+    {
+      "id": "caption-61",
+      "start": 156.493,
+      "end": 159.91,
+      "targetStart": 156.493,
+      "targetEnd": 159.91,
+      "sourceStart": 537.21,
+      "sourceEnd": 540.49,
+      "sourceRanges": [
+        [
+          537.21,
+          540.49
+        ]
+      ],
+      "cueIds": [
+        64
+      ],
+      "text": "如果视频时长比较长 建议选择 Plus",
+      "note": "",
+      "en": "For longer videos I recommend Plus",
+      "targetRanges": [
+        [
+          156.543,
+          159.823
+        ]
+      ],
+      "boundSourceSpeech": "如果你的时长运行的比较长的话建议选择Plus"
+    },
+    {
+      "id": "caption-62",
+      "start": 159.91,
+      "end": 162.027,
+      "targetStart": 159.91,
+      "targetEnd": 162.027,
+      "sourceStart": 549.31,
+      "sourceEnd": 551.31,
+      "sourceRanges": [
+        [
+          549.31,
+          551.31
+        ]
+      ],
+      "cueIds": [
+        65
+      ],
+      "text": "我之前爆过几次显存",
+      "note": "",
+      "en": "I've run out of VRAM several times before",
+      "targetRanges": [
+        [
+          159.977,
+          161.977
+        ]
+      ],
+      "boundSourceSpeech": "因为我之前有爆过几次显存"
+    },
+    {
+      "id": "caption-63",
+      "start": 162.107,
+      "end": 163.967,
+      "targetStart": 162.107,
+      "targetEnd": 163.967,
+      "sourceStart": 551.47,
+      "sourceEnd": 553.55,
+      "sourceRanges": [
+        [
+          551.47,
+          553.55
+        ]
+      ],
+      "cueIds": [
+        65
+      ],
+      "text": "Plus 会更稳定一些",
+      "note": "",
+      "en": "Plus is more stable",
+      "targetRanges": [
+        [
+          162.137,
+          162.6
+        ],
+        [
+          162.6,
+          163.883
+        ]
+      ],
+      "boundSourceSpeech": "然后plus更稳定一点"
+    },
+    {
+      "id": "caption-64",
+      "start": 163.967,
+      "end": 167.967,
+      "targetStart": 163.967,
+      "targetEnd": 167.967,
+      "sourceStart": 606.53,
+      "sourceEnd": 610.65,
+      "sourceRanges": [
+        [
+          606.53,
+          610.65
+        ]
+      ],
+      "cueIds": [
+        67
+      ],
+      "text": "基础的小白部分已经讲完了",
+      "note": "",
+      "en": "That covers the beginner section",
+      "targetRanges": [
+        [
+          164.03,
+          167.133
+        ],
+        [
+          167.133,
+          167.917
+        ]
+      ],
+      "boundSourceSpeech": "基础的小白部分的讲解输入已经讲完了"
+    },
+    {
+      "id": "caption-65",
+      "start": 168.053,
+      "end": 171.053,
+      "targetStart": 168.053,
+      "targetEnd": 171.053,
+      "sourceStart": 611.85,
+      "sourceEnd": 614.73,
+      "sourceRanges": [
+        [
+          611.85,
+          614.73
+        ]
+      ],
+      "cueIds": [
+        68
+      ],
+      "text": "接下来进入这套工作流最重要的部分",
+      "note": "",
+      "en": "Now we come to the most important part of this workflow",
+      "targetRanges": [
+        [
+          168.083,
+          170.963
+        ]
+      ],
+      "boundSourceSpeech": "接下来就进入我这套工作流的最重要的部分"
+    },
+    {
+      "id": "caption-66",
+      "start": 171.053,
+      "end": 172.813,
+      "targetStart": 171.053,
+      "targetEnd": 172.813,
+      "sourceStart": 627.59,
+      "sourceEnd": 629.19,
+      "sourceRanges": [
+        [
+          627.59,
+          629.19
+        ]
+      ],
+      "cueIds": [
+        69
+      ],
+      "text": "也就是一采和二采",
+      "note": "",
+      "en": "the first pass and the second pass",
+      "targetRanges": [
+        [
+          171.123,
+          172.723
+        ]
+      ],
+      "boundSourceSpeech": "也就是一彩跟二彩"
+    },
+    {
+      "id": "caption-67",
+      "start": 172.813,
+      "end": 176.767,
+      "targetStart": 172.813,
+      "targetEnd": 176.767,
+      "sourceStart": 629.75,
+      "sourceEnd": 633.55,
+      "sourceRanges": [
+        [
+          629.75,
+          633.55
+        ]
+      ],
+      "cueIds": [
+        70
+      ],
+      "text": "先要理解它们各自的作用",
+      "note": "",
+      "en": "First you need to understand what each one does",
+      "targetRanges": [
+        [
+          172.883,
+          176.683
+        ]
+      ],
+      "boundSourceSpeech": "首先我们要明白一彩跟二彩它是一个什么样的作用"
+    },
+    {
+      "id": "caption-68",
+      "start": 176.767,
+      "end": 179.14,
+      "targetStart": 176.767,
+      "targetEnd": 179.14,
+      "sourceStart": 636.53,
+      "sourceEnd": 638.81,
+      "sourceRanges": [
+        [
+          636.53,
+          638.81
+        ]
+      ],
+      "cueIds": [
+        71
+      ],
+      "text": "很多博主已经讲过一采和二采",
+      "note": "",
+      "en": "Many creators have already explained both passes",
+      "targetRanges": [
+        [
+          176.83,
+          179.11
+        ]
+      ],
+      "boundSourceSpeech": "其实很多博主都已经讲过一彩跟二彩了"
+    },
+    {
+      "id": "caption-69",
+      "start": 179.14,
+      "end": 184.252,
+      "targetStart": 179.14,
+      "targetEnd": 184.252,
+      "sourceStart": 638.85,
+      "sourceEnd": 651.33,
+      "sourceRanges": [
+        [
+          638.85,
+          640.25
+        ],
+        [
+          641.42,
+          644.34
+        ],
+        [
+          650.93,
+          651.33
+        ]
+      ],
+      "cueIds": [
+        71,
+        72,
+        73
+      ],
+      "text": "一采就是固定画面的整体构图",
+      "note": "",
+      "en": "The first pass locks in the overall composition",
+      "targetRanges": [
+        [
+          179.15,
+          180.55
+        ],
+        [
+          180.72,
+          183.64
+        ],
+        [
+          183.763,
+          184.163
+        ]
+      ],
+      "boundSourceSpeech": "一彩的话其实就是去固定这个画面的整体的这个构图"
+    },
+    {
+      "id": "caption-70",
+      "start": 184.252,
+      "end": 189.838,
+      "targetStart": 184.252,
+      "targetEnd": 189.838,
+      "sourceStart": 653.02,
+      "sourceEnd": 660.22,
+      "sourceRanges": [
+        [
+          653.02,
+          655.62
+        ],
+        [
+          657.22,
+          660.22
+        ]
+      ],
+      "cueIds": [
+        74,
+        75
+      ],
+      "text": "二采则是在整体构图的基础上进一步细化",
+      "note": "",
+      "en": "The second pass further refines that composition",
+      "targetRanges": [
+        [
+          184.32,
+          186.92
+        ],
+        [
+          187.087,
+          188.4
+        ],
+        [
+          188.4,
+          189.753
+        ]
+      ],
+      "boundSourceSpeech": "然后二彩的话就是在整个的这个构图的基础上去进行一个细化"
+    },
+    {
+      "id": "caption-71",
+      "start": 189.838,
+      "end": 194.145,
+      "targetStart": 189.838,
+      "targetEnd": 194.145,
+      "sourceStart": 695.77,
+      "sourceEnd": 699.93,
+      "sourceRanges": [
+        [
+          695.77,
+          699.93
+        ]
+      ],
+      "cueIds": [
+        76
+      ],
+      "text": "我对这套工作流的关键修改就在 Sigma 值",
+      "note": "",
+      "en": "My key change to this workflow is in the Sigma values",
+      "targetRanges": [
+        [
+          189.903,
+          194.063
+        ]
+      ],
+      "boundSourceSpeech": "然后我针对这个工作流的一个修改部分呢其实就是这个西格玛值"
+    },
+    {
+      "id": "caption-72",
+      "start": 194.145,
+      "end": 201.877,
+      "targetStart": 194.145,
+      "targetEnd": 201.877,
+      "sourceStart": 704.64,
+      "sourceEnd": 718.44,
+      "sourceRanges": [
+        [
+          704.64,
+          711.32
+        ],
+        [
+          716.92,
+          718.44
+        ]
+      ],
+      "cueIds": [
+        77,
+        78
+      ],
+      "text": "正常情况下一采会生成细节完整的画面",
+      "note": "",
+      "en": "Normally the first pass produces a fully detailed image",
+      "targetRanges": [
+        [
+          194.207,
+          197
+        ],
+        [
+          197,
+          200.12
+        ],
+        [
+          200.287,
+          201.807
+        ]
+      ],
+      "boundSourceSpeech": "正常的很多同学可能这个伊彩的话它会跑出来一个非常完整的一个有细节的一个画面"
+    },
+    {
+      "id": "caption-73",
+      "start": 201.877,
+      "end": 205.873,
+      "targetStart": 201.877,
+      "targetEnd": 205.873,
+      "sourceStart": 718.56,
+      "sourceEnd": 725.27,
+      "sourceRanges": [
+        [
+          718.56,
+          719
+        ],
+        [
+          720.82,
+          722.18
+        ],
+        [
+          723.51,
+          725.27
+        ]
+      ],
+      "cueIds": [
+        78,
+        79,
+        80
+      ],
+      "text": "但你看我这里的一采结果非常模糊",
+      "note": "",
+      "en": "But my first-pass result here is very blurry",
+      "targetRanges": [
+        [
+          201.927,
+          202.367
+        ],
+        [
+          202.52,
+          203.88
+        ],
+        [
+          204.043,
+          205.803
+        ]
+      ],
+      "boundSourceSpeech": "但是你可以看我这个一彩的结果它是很糊的"
+    },
+    {
+      "id": "caption-74",
+      "start": 205.873,
+      "end": 212.033,
+      "targetStart": 205.873,
+      "targetEnd": 212.033,
+      "sourceStart": 725.39,
+      "sourceEnd": 734.88,
+      "sourceRanges": [
+        [
+          725.39,
+          726.75
+        ],
+        [
+          730.04,
+          734.88
+        ]
+      ],
+      "cueIds": [
+        80,
+        81
+      ],
+      "text": "不过人物轮廓和整体构图仍然很清楚",
+      "note": "",
+      "en": "The character outline and overall composition are still clear",
+      "targetRanges": [
+        [
+          205.923,
+          207.283
+        ],
+        [
+          207.44,
+          210.167
+        ],
+        [
+          210.167,
+          211.947
+        ]
+      ],
+      "boundSourceSpeech": "但是它整体的这个人物的图形和构图其实是能很明显的看出来"
+    },
+    {
+      "id": "caption-75",
+      "start": 212.033,
+      "end": 217.842,
+      "targetStart": 212.033,
+      "targetEnd": 217.842,
+      "sourceStart": 738.5,
+      "sourceEnd": 746.19,
+      "sourceRanges": [
+        [
+          738.5,
+          741.22
+        ],
+        [
+          743.27,
+          746.19
+        ]
+      ],
+      "cueIds": [
+        82,
+        83
+      ],
+      "text": "我这里一采跑四步 二采跑五步",
+      "note": "",
+      "en": "I use four steps for the first pass and five for the second",
+      "targetRanges": [
+        [
+          212.1,
+          214.82
+        ],
+        [
+          214.97,
+          216.3
+        ],
+        [
+          216.3,
+          217.757
+        ]
+      ],
+      "boundSourceSpeech": "然后我整体的话就是伊采的话我是跑了四步然后二彩的话跑了五步"
+    },
+    {
+      "id": "caption-76",
+      "start": 217.842,
+      "end": 221.85,
+      "targetStart": 217.842,
+      "targetEnd": 221.85,
+      "sourceStart": 750.74,
+      "sourceEnd": 757.47,
+      "sourceRanges": [
+        [
+          750.74,
+          757.47
+        ]
+      ],
+      "cueIds": [
+        84,
+        85,
+        86
+      ],
+      "text": "一采在 0.9231 结束",
+      "note": "用户已确认",
+      "en": "The first pass ends at 0.9231",
+      "targetRanges": [
+        [
+          217.907,
+          219.467
+        ],
+        [
+          219.467,
+          220.833
+        ],
+        [
+          220.833,
+          221.77
+        ]
+      ],
+      "boundSourceSpeech": "一彩的sigma值是是不到了零点9231"
+    },
+    {
+      "id": "caption-77",
+      "start": 221.85,
+      "end": 227.25,
+      "targetStart": 221.85,
+      "targetEnd": 227.25,
+      "sourceStart": 758.31,
+      "sourceEnd": 764.43,
+      "sourceRanges": [
+        [
+          758.31,
+          764.43
+        ]
+      ],
+      "cueIds": [
+        86
+      ],
+      "text": "二采从 0.9231 开始 一直到 0 结束",
+      "note": "用户已确认",
+      "en": "The second pass starts at 0.9231 and ends at 0",
+      "targetRanges": [
+        [
+          221.91,
+          222.933
+        ],
+        [
+          222.933,
+          227.163
+        ]
+      ],
+      "boundSourceSpeech": "然后二彩的西格玛值呢是从0.9231开始一直到0结束"
+    },
+    {
+      "id": "caption-78",
+      "start": 227.25,
+      "end": 232.313,
+      "targetStart": 227.25,
+      "targetEnd": 232.313,
+      "sourceStart": 771.35,
+      "sourceEnd": 776.27,
+      "sourceRanges": [
+        [
+          771.35,
+          776.27
+        ]
+      ],
+      "cueIds": [
+        87
+      ],
+      "text": "可以理解为分阶段完成采样",
+      "note": "",
+      "en": "You can think of it as sampling in stages",
+      "targetRanges": [
+        [
+          227.317,
+          232.237
+        ]
+      ],
+      "boundSourceSpeech": "这样子做的话其实你可以理解成在整个采样里面它分阶段去采样嘛"
+    },
+    {
+      "id": "caption-79",
+      "start": 232.313,
+      "end": 235.06,
+      "targetStart": 232.313,
+      "targetEnd": 235.06,
+      "sourceStart": 777.67,
+      "sourceEnd": 780.31,
+      "sourceRanges": [
+        [
+          777.67,
+          780.31
+        ]
+      ],
+      "cueIds": [
+        88
+      ],
+      "text": "0.9231 之前是一采",
+      "note": "",
+      "en": "Everything before 0.9231 is the first pass",
+      "targetRanges": [
+        [
+          232.37,
+          235.01
+        ]
+      ],
+      "boundSourceSpeech": "0.9231之前是一彩的部分"
+    },
+    {
+      "id": "caption-80",
+      "start": 235.143,
+      "end": 237.303,
+      "targetStart": 235.143,
+      "targetEnd": 237.303,
+      "sourceStart": 785.74,
+      "sourceEnd": 787.82,
+      "sourceRanges": [
+        [
+          785.74,
+          787.82
+        ]
+      ],
+      "cueIds": [
+        90
+      ],
+      "text": "一采输出的是 Latent",
+      "note": "",
+      "en": "The first pass outputs a Latent",
+      "targetRanges": [
+        [
+          235.173,
+          237.253
+        ]
+      ],
+      "boundSourceSpeech": "将伊采的这个输出拉成的"
+    },
+    {
+      "id": "caption-81",
+      "start": 237.387,
+      "end": 241.223,
+      "targetStart": 237.387,
+      "targetEnd": 241.223,
+      "sourceStart": 803.85,
+      "sourceEnd": 807.57,
+      "sourceRanges": [
+        [
+          803.85,
+          807.57
+        ]
+      ],
+      "cueIds": [
+        91
+      ],
+      "text": "再送入二采采样器进行重采样",
+      "note": "",
+      "en": "which is then resampled by the second-pass sampler",
+      "targetRanges": [
+        [
+          237.417,
+          241.137
+        ]
+      ],
+      "boundSourceSpeech": "然后送入到二采的采样器里面去进行一个重采样"
+    },
+    {
+      "id": "caption-82",
+      "start": 241.223,
+      "end": 242.643,
+      "targetStart": 241.223,
+      "targetEnd": 242.643,
+      "sourceStart": 809.29,
+      "sourceEnd": 810.57,
+      "sourceRanges": [
+        [
+          809.29,
+          810.57
+        ]
+      ],
+      "cueIds": [
+        92
+      ],
+      "text": "基本逻辑就是这样",
+      "note": "",
+      "en": "That's the basic logic",
+      "targetRanges": [
+        [
+          241.29,
+          242.57
+        ]
+      ],
+      "boundSourceSpeech": "基本上就是这样的一个逻辑"
+    },
+    {
+      "id": "caption-83",
+      "start": 242.643,
+      "end": 245.303,
+      "targetStart": 242.643,
+      "targetEnd": 245.303,
+      "sourceStart": 811.33,
+      "sourceEnd": 813.85,
+      "sourceRanges": [
+        [
+          811.33,
+          813.85
+        ]
+      ],
+      "cueIds": [
+        93
+      ],
+      "text": "这里最重要的一点是",
+      "note": "",
+      "en": "The most important point here is",
+      "targetRanges": [
+        [
+          242.697,
+          245.217
+        ]
+      ],
+      "boundSourceSpeech": "然后这里面比较重要的一点呢就是"
+    },
+    {
+      "id": "caption-84",
+      "start": 245.303,
+      "end": 249.493,
+      "targetStart": 245.303,
+      "targetEnd": 249.493,
+      "sourceStart": 817.67,
+      "sourceEnd": 821.91,
+      "sourceRanges": [
+        [
+          817.67,
+          821.91
+        ]
+      ],
+      "cueIds": [
+        94
+      ],
+      "text": "一采输出必须接降噪输出",
+      "note": "",
+      "en": "The first-pass output must use the denoised output",
+      "targetRanges": [
+        [
+          245.37,
+          246.333
+        ],
+        [
+          246.333,
+          249.443
+        ]
+      ],
+      "boundSourceSpeech": "这个地方的伊采的输出必须要接这个降噪输出"
+    },
+    {
+      "id": "caption-85",
+      "start": 249.573,
+      "end": 251.572,
+      "targetStart": 249.573,
+      "targetEnd": 251.572,
+      "sourceStart": 823.57,
+      "sourceEnd": 825.45,
+      "sourceRanges": [
+        [
+          823.57,
+          825.45
+        ]
+      ],
+      "cueIds": [
+        95
+      ],
+      "text": "接另一个输出就不行",
+      "note": "",
+      "en": "The other output will not work",
+      "targetRanges": [
+        [
+          249.603,
+          251.483
+        ]
+      ],
+      "boundSourceSpeech": "如果说你接这个输出的话就不行"
+    },
+    {
+      "id": "caption-86",
+      "start": 251.572,
+      "end": 254.557,
+      "targetStart": 251.572,
+      "targetEnd": 254.557,
+      "sourceStart": 827.04,
+      "sourceEnd": 830.24,
+      "sourceRanges": [
+        [
+          827.04,
+          830.24
+        ]
+      ],
+      "cueIds": [
+        96
+      ],
+      "text": "降噪输出只是预览输出",
+      "note": "",
+      "en": "The denoised output is only a preview output",
+      "targetRanges": [
+        [
+          251.64,
+          253.567
+        ],
+        [
+          253.567,
+          254.507
+        ]
+      ],
+      "boundSourceSpeech": "降噪输出它是一个预览输出"
+    },
+    {
+      "id": "caption-87",
+      "start": 254.637,
+      "end": 260.935,
+      "targetStart": 254.637,
+      "targetEnd": 260.935,
+      "sourceStart": 830.4,
+      "sourceEnd": 841.35,
+      "sourceRanges": [
+        [
+          830.4,
+          832.56
+        ],
+        [
+          837.19,
+          841.35
+        ]
+      ],
+      "cueIds": [
+        96,
+        97
+      ],
+      "text": "它还没有真正完成采样",
+      "note": "",
+      "en": "It has not actually finished sampling",
+      "targetRanges": [
+        [
+          254.667,
+          255.367
+        ],
+        [
+          255.367,
+          256.66
+        ],
+        [
+          256.823,
+          258.167
+        ],
+        [
+          258.167,
+          260.85
+        ]
+      ],
+      "boundSourceSpeech": "就是它其实是没有真正的采样完的也就是它这个地方没有真正的采样到里面"
+    },
+    {
+      "id": "caption-88",
+      "start": 260.935,
+      "end": 263.57,
+      "targetStart": 260.935,
+      "targetEnd": 263.57,
+      "sourceStart": 894.1,
+      "sourceEnd": 896.62,
+      "sourceRanges": [
+        [
+          894.1,
+          896.62
+        ]
+      ],
+      "cueIds": [
+        98
+      ],
+      "text": "它又不同于直接输出",
+      "note": "",
+      "en": "It is also different from the direct output",
+      "targetRanges": [
+        [
+          261,
+          263.52
+        ]
+      ],
+      "boundSourceSpeech": "但是呢它又不像这个直接输出里面"
+    },
+    {
+      "id": "caption-89",
+      "start": 263.57,
+      "end": 266.53,
+      "targetStart": 263.57,
+      "targetEnd": 266.53,
+      "sourceStart": 896.7,
+      "sourceEnd": 899.58,
+      "sourceRanges": [
+        [
+          896.7,
+          899.58
+        ]
+      ],
+      "cueIds": [
+        98
+      ],
+      "text": "直接输出的全是噪点",
+      "note": "",
+      "en": "The direct output is nothing but noise",
+      "targetRanges": [
+        [
+          263.6,
+          266.48
+        ]
+      ],
+      "boundSourceSpeech": "它直接输出了输出出来的全部都是噪点"
+    },
+    {
+      "id": "caption-90",
+      "start": 266.61,
+      "end": 271.7,
+      "targetStart": 266.61,
+      "targetEnd": 271.7,
+      "sourceStart": 902.34,
+      "sourceEnd": 910.35,
+      "sourceRanges": [
+        [
+          902.34,
+          906.42
+        ],
+        [
+          909.19,
+          910.35
+        ]
+      ],
+      "cueIds": [
+        99,
+        100
+      ],
+      "text": "它为二采保留了继续输入的空间",
+      "note": "",
+      "en": "It leaves room for the second pass to continue",
+      "targetRanges": [
+        [
+          266.64,
+          268.167
+        ],
+        [
+          268.167,
+          270.32
+        ],
+        [
+          270.49,
+          271.65
+        ]
+      ],
+      "boundSourceSpeech": "它有一个接续的一个给二彩进行一个输入的一个空间"
+    },
+    {
+      "id": "caption-91",
+      "start": 271.787,
+      "end": 274.267,
+      "targetStart": 271.787,
+      "targetEnd": 274.267,
+      "sourceStart": 911.85,
+      "sourceEnd": 914.25,
+      "sourceRanges": [
+        [
+          911.85,
+          914.25
+        ]
+      ],
+      "cueIds": [
+        101
+      ],
+      "text": "接着经过潜空间放大",
+      "note": "",
+      "en": "Then it goes through latent-space upscaling",
+      "targetRanges": [
+        [
+          271.817,
+          274.217
+        ]
+      ],
+      "boundSourceSpeech": "然后呢经过这个潜空间放大"
+    },
+    {
+      "id": "caption-92",
+      "start": 274.36,
+      "end": 280.92,
+      "targetStart": 274.36,
+      "targetEnd": 280.92,
+      "sourceStart": 914.69,
+      "sourceEnd": 926.2,
+      "sourceRanges": [
+        [
+          914.69,
+          918.81
+        ],
+        [
+          923.44,
+          926.2
+        ]
+      ],
+      "cueIds": [
+        101,
+        102
+      ],
+      "text": "这个节点由英伟达开源",
+      "note": "",
+      "en": "This node was open-sourced by NVIDIA",
+      "targetRanges": [
+        [
+          274.39,
+          276.333
+        ],
+        [
+          276.333,
+          278.243
+        ],
+        [
+          278.407,
+          280.333
+        ],
+        [
+          280.333,
+          280.833
+        ]
+      ],
+      "boundSourceSpeech": "然后这个潜空间放大呢其实这个节点呢就是英伟达开源的这个节点"
+    },
+    {
+      "id": "caption-93",
+      "start": 280.92,
+      "end": 284.517,
+      "targetStart": 280.92,
+      "targetEnd": 284.517,
+      "sourceStart": 926.52,
+      "sourceEnd": 932.6,
+      "sourceRanges": [
+        [
+          926.52,
+          928.32
+        ],
+        [
+          930.88,
+          932.6
+        ]
+      ],
+      "cueIds": [
+        102,
+        103
+      ],
+      "text": "它的参数与这里的节点相同",
+      "note": "",
+      "en": "Its parameters match the node shown here",
+      "targetRanges": [
+        [
+          280.987,
+          281.6
+        ],
+        [
+          281.6,
+          282.553
+        ],
+        [
+          282.713,
+          284.433
+        ]
+      ],
+      "boundSourceSpeech": "然后它的整个参数跟这个节点是一样的"
+    },
+    {
+      "id": "caption-94",
+      "start": 284.517,
+      "end": 287.67,
+      "targetStart": 284.517,
+      "targetEnd": 287.67,
+      "sourceStart": 933.28,
+      "sourceEnd": 936.32,
+      "sourceRanges": [
+        [
+          933.28,
+          936.32
+        ]
+      ],
+      "cueIds": [
+        104
+      ],
+      "text": "也支持按倍数放大",
+      "note": "",
+      "en": "It also supports scaling by a multiplier",
+      "targetRanges": [
+        [
+          284.58,
+          287.62
+        ]
+      ],
+      "boundSourceSpeech": "我们可以看一下这个里面它也是可倍速放大的"
+    },
+    {
+      "id": "caption-95",
+      "start": 287.757,
+      "end": 289.047,
+      "targetStart": 287.757,
+      "targetEnd": 289.047,
+      "sourceStart": 952.32,
+      "sourceEnd": 953.52,
+      "sourceRanges": [
+        [
+          952.32,
+          953.52
+        ]
+      ],
+      "cueIds": [
+        105
+      ],
+      "text": "我没有研究技术细节",
+      "note": "",
+      "en": "I haven't studied the technical details",
+      "targetRanges": [
+        [
+          287.787,
+          288.987
+        ]
+      ],
+      "boundSourceSpeech": "我没有看技术细节"
+    },
+    {
+      "id": "caption-96",
+      "start": 289.047,
+      "end": 291.843,
+      "targetStart": 289.047,
+      "targetEnd": 291.843,
+      "sourceStart": 953.72,
+      "sourceEnd": 958.26,
+      "sourceRanges": [
+        [
+          953.72,
+          955.56
+        ],
+        [
+          957.54,
+          958.26
+        ]
+      ],
+      "cueIds": [
+        105,
+        106
+      ],
+      "text": "但感觉这两个节点比较类似",
+      "note": "",
+      "en": "but these two nodes seem quite similar",
+      "targetRanges": [
+        [
+          289.087,
+          290.927
+        ],
+        [
+          291.073,
+          291.793
+        ]
+      ],
+      "boundSourceSpeech": "但我感觉这两个东西应该比较类似"
+    },
+    {
+      "id": "caption-97",
+      "start": 291.923,
+      "end": 297.67,
+      "targetStart": 291.923,
+      "targetEnd": 297.67,
+      "sourceStart": 974.52,
+      "sourceEnd": 985.42,
+      "sourceRanges": [
+        [
+          974.52,
+          976.28
+        ],
+        [
+          981.66,
+          985.42
+        ]
+      ],
+      "cueIds": [
+        107,
+        108
+      ],
+      "text": "原来的高清放大使用 RTX 图像放大",
+      "note": "",
+      "en": "The old high-resolution upscale used RTX image upscaling",
+      "targetRanges": [
+        [
+          291.953,
+          293.713
+        ],
+        [
+          293.86,
+          297.62
+        ]
+      ],
+      "boundSourceSpeech": "因为我们原本的这个高清放大就是通过这个RTX的这个图像放大嘛"
+    },
+    {
+      "id": "caption-98",
+      "start": 297.757,
+      "end": 299.908,
+      "targetStart": 297.757,
+      "targetEnd": 299.908,
+      "sourceStart": 986.02,
+      "sourceEnd": 988.06,
+      "sourceRanges": [
+        [
+          986.02,
+          988.06
+        ]
+      ],
+      "cueIds": [
+        109
+      ],
+      "text": "现在则换成潜空间放大",
+      "note": "",
+      "en": "Now it uses latent-space upscaling instead",
+      "targetRanges": [
+        [
+          297.787,
+          299.827
+        ]
+      ],
+      "boundSourceSpeech": "现在它换到了浅空间放大"
+    },
+    {
+      "id": "caption-99",
+      "start": 299.908,
+      "end": 305.22,
+      "targetStart": 299.908,
+      "targetEnd": 305.22,
+      "sourceStart": 1014.47,
+      "sourceEnd": 1019.71,
+      "sourceRanges": [
+        [
+          1014.47,
+          1019.71
+        ]
+      ],
+      "cueIds": [
+        110
+      ],
+      "text": "一采四步 二采五步",
+      "note": "",
+      "en": "Four steps in the first pass and five in the second",
+      "targetRanges": [
+        [
+          299.97,
+          305.21
+        ]
+      ],
+      "boundSourceSpeech": "这样子我们的一踩跟二踩呢它就是一个四步跟五步的总共九步"
+    },
+    {
+      "id": "caption-100",
+      "start": 305.22,
+      "end": 307.473,
+      "targetStart": 305.22,
+      "targetEnd": 307.473,
+      "sourceStart": 1019.71,
+      "sourceEnd": 1027.99,
+      "sourceRanges": [
+        [
+          1019.71,
+          1020.35
+        ],
+        [
+          1025.91,
+          1027.99
+        ]
+      ],
+      "cueIds": [
+        110,
+        111
+      ],
+      "text": "总共九步完成整个过程",
+      "note": "",
+      "en": "make nine steps for the complete process",
+      "targetRanges": [
+        [
+          305.21,
+          305.85
+        ],
+        [
+          306.01,
+          306.733
+        ],
+        [
+          306.733,
+          307.423
+        ]
+      ],
+      "boundSourceSpeech": "的一个完整的过程"
+    },
+    {
+      "id": "caption-101",
+      "start": 307.56,
+      "end": 311.312,
+      "targetStart": 307.56,
+      "targetEnd": 311.312,
+      "sourceStart": 1033.49,
+      "sourceEnd": 1037.97,
+      "sourceRanges": [
+        [
+          1033.49,
+          1037.97
+        ]
+      ],
+      "cueIds": [
+        112
+      ],
+      "text": "一采和二采只影响生成速度",
+      "note": "",
+      "en": "The two passes only affect generation speed",
+      "targetRanges": [
+        [
+          307.59,
+          310.067
+        ],
+        [
+          310.067,
+          311.237
+        ]
+      ],
+      "boundSourceSpeech": "但这个一产二产呢它只影响这个生成的速度啊"
+    },
+    {
+      "id": "caption-102",
+      "start": 311.312,
+      "end": 315.167,
+      "targetStart": 311.312,
+      "targetEnd": 315.167,
+      "sourceStart": 1041.3,
+      "sourceEnd": 1049.15,
+      "sourceRanges": [
+        [
+          1041.3,
+          1043.06
+        ],
+        [
+          1047.31,
+          1049.15
+        ]
+      ],
+      "cueIds": [
+        113,
+        114
+      ],
+      "text": "人物脸部去油依靠的是这套模型搭配",
+      "note": "",
+      "en": "Reducing facial oiliness depends on this model combination",
+      "targetRanges": [
+        [
+          311.367,
+          313.127
+        ],
+        [
+          313.277,
+          315.117
+        ]
+      ],
+      "boundSourceSpeech": "人物的脸部去油呢是使用的我这一套模型的搭配"
+    },
+    {
+      "id": "caption-103",
+      "start": 315.257,
+      "end": 316.967,
+      "targetStart": 315.257,
+      "targetEnd": 316.967,
+      "sourceStart": 1062.92,
+      "sourceEnd": 1064.52,
+      "sourceRanges": [
+        [
+          1062.92,
+          1064.52
+        ]
+      ],
+      "cueIds": [
+        116
+      ],
+      "text": "底模用的是这个",
+      "note": "",
+      "en": "This is the base model",
+      "targetRanges": [
+        [
+          315.287,
+          316.887
+        ]
+      ],
+      "boundSourceSpeech": "底膜呢就是用的这个哦"
+    },
+    {
+      "id": "caption-104",
+      "start": 316.967,
+      "end": 320.947,
+      "targetStart": 316.967,
+      "targetEnd": 320.947,
+      "sourceStart": 1066.36,
+      "sourceEnd": 1072.57,
+      "sourceRanges": [
+        [
+          1066.36,
+          1072.57
+        ]
+      ],
+      "cueIds": [
+        117,
+        118
+      ],
+      "text": "这个融合模型是 B25-49",
+      "note": "用户已确认",
+      "en": "This merged model is B25-49",
+      "targetRanges": [
+        [
+          317.027,
+          317.833
+        ],
+        [
+          317.833,
+          319.9
+        ],
+        [
+          319.9,
+          320.87
+        ]
+      ],
+      "boundSourceSpeech": "融合模型这个呢是B25我要听四十九城"
+    },
+    {
+      "id": "caption-105",
+      "start": 320.947,
+      "end": 325.95,
+      "targetStart": 320.947,
+      "targetEnd": 325.95,
+      "sourceStart": 1075.07,
+      "sourceEnd": 1086.2,
+      "sourceRanges": [
+        [
+          1075.07,
+          1076.83
+        ],
+        [
+          1081.82,
+          1086.2
+        ]
+      ],
+      "cueIds": [
+        119,
+        121,
+        122
+      ],
+      "text": "另外还有一个 B20-49 的融合模型",
+      "note": "用户已确认",
+      "en": "There is also a B20-49 merged model",
+      "targetRanges": [
+        [
+          321.003,
+          322.763
+        ],
+        [
+          322.92,
+          325.067
+        ],
+        [
+          325.067,
+          325.2
+        ],
+        [
+          325.2,
+          325.9
+        ]
+      ],
+      "boundSourceSpeech": "还有一个20跟49还有一个20~49层的融合模型"
+    },
+    {
+      "id": "caption-106",
+      "start": 325.95,
+      "end": 331.33,
+      "targetStart": 325.95,
+      "targetEnd": 331.33,
+      "sourceStart": 1086.28,
+      "sourceEnd": 1092.58,
+      "sourceRanges": [
+        [
+          1086.28,
+          1092.58
+        ]
+      ],
+      "cueIds": [
+        123,
+        124
+      ],
+      "text": "其中 B25-49 更偏向参考图",
+      "note": "",
+      "en": "B25-49 leans more toward the reference image",
+      "targetRanges": [
+        [
+          325.98,
+          329.9
+        ],
+        [
+          329.9,
+          331.247
+        ]
+      ],
+      "boundSourceSpeech": "这个模型呢25~49层的是更偏靠于参考的这个部分"
+    },
+    {
+      "id": "caption-107",
+      "start": 331.33,
+      "end": 335.563,
+      "targetStart": 331.33,
+      "targetEnd": 335.563,
+      "sourceStart": 1096.06,
+      "sourceEnd": 1100.98,
+      "sourceRanges": [
+        [
+          1096.06,
+          1100.98
+        ]
+      ],
+      "cueIds": [
+        125
+      ],
+      "text": "后面再接一个真实人像 LoRA",
+      "note": "",
+      "en": "Then I add a realistic portrait LoRA",
+      "targetRanges": [
+        [
+          331.393,
+          332.533
+        ],
+        [
+          332.533,
+          333.667
+        ],
+        [
+          333.667,
+          335.513
+        ]
+      ],
+      "boundSourceSpeech": "然后过来的话接了一个真实的人像的一个Lora"
+    },
+    {
+      "id": "caption-108",
+      "start": 335.643,
+      "end": 338.273,
+      "targetStart": 335.643,
+      "targetEnd": 338.273,
+      "sourceStart": 1106.44,
+      "sourceEnd": 1108.96,
+      "sourceRanges": [
+        [
+          1106.44,
+          1108.96
+        ]
+      ],
+      "cueIds": [
+        126
+      ],
+      "text": "加速模型使用这个",
+      "note": "",
+      "en": "This is the acceleration model",
+      "targetRanges": [
+        [
+          335.673,
+          338.193
+        ]
+      ],
+      "boundSourceSpeech": "然后加速的模型使用的是这个模型"
+    },
+    {
+      "id": "caption-109",
+      "start": 338.273,
+      "end": 341.143,
+      "targetStart": 338.273,
+      "targetEnd": 341.143,
+      "sourceStart": 1117.4,
+      "sourceEnd": 1120.16,
+      "sourceRanges": [
+        [
+          1117.4,
+          1120.16
+        ]
+      ],
+      "cueIds": [
+        127
+      ],
+      "text": "加速模型的数值调大",
+      "note": "",
+      "en": "Increase the acceleration model's value",
+      "targetRanges": [
+        [
+          338.333,
+          341.093
+        ]
+      ],
+      "boundSourceSpeech": "这个模型呢它的数值如果说你"
+    },
+    {
+      "id": "caption-110",
+      "start": 341.227,
+      "end": 343.367,
+      "targetStart": 341.227,
+      "targetEnd": 343.367,
+      "sourceStart": 1126.89,
+      "sourceEnd": 1128.97,
+      "sourceRanges": [
+        [
+          1126.89,
+          1128.97
+        ]
+      ],
+      "cueIds": [
+        128
+      ],
+      "text": "画面会更锐",
+      "note": "",
+      "en": "and the image becomes sharper",
+      "targetRanges": [
+        [
+          341.257,
+          343.337
+        ]
+      ],
+      "boundSourceSpeech": "大了设置的话它会更锐化一些"
+    },
+    {
+      "id": "caption-111",
+      "start": 343.367,
+      "end": 345.103,
+      "targetStart": 343.367,
+      "targetEnd": 345.103,
+      "sourceStart": 1129.01,
+      "sourceEnd": 1130.65,
+      "sourceRanges": [
+        [
+          1129.01,
+          1130.65
+        ]
+      ],
+      "cueIds": [
+        129
+      ],
+      "text": "数值调小",
+      "note": "",
+      "en": "Decrease the value",
+      "targetRanges": [
+        [
+          343.377,
+          345.017
+        ]
+      ],
+      "boundSourceSpeech": "往小了设置的话它就会"
+    },
+    {
+      "id": "caption-112",
+      "start": 345.103,
+      "end": 346.9,
+      "targetStart": 345.103,
+      "targetEnd": 346.9,
+      "sourceStart": 1136.77,
+      "sourceEnd": 1138.57,
+      "sourceRanges": [
+        [
+          1136.77,
+          1138.57
+        ]
+      ],
+      "cueIds": [
+        130
+      ],
+      "text": "画面会更朦胧",
+      "note": "",
+      "en": "and the image becomes softer",
+      "targetRanges": [
+        [
+          345.17,
+          346.97
+        ]
+      ],
+      "boundSourceSpeech": "变得更朦胧一点就有摄影"
+    },
+    {
+      "id": "caption-113",
+      "start": 346.9,
+      "end": 348.74,
+      "targetStart": 346.9,
+      "targetEnd": 348.74,
+      "sourceStart": 1138.57,
+      "sourceEnd": 1140.29,
+      "sourceRanges": [
+        [
+          1138.57,
+          1140.29
+        ]
+      ],
+      "cueIds": [
+        130
+      ],
+      "text": "还会有胶片般的颗粒感",
+      "note": "",
+      "en": "with a film-like grain",
+      "targetRanges": [
+        [
+          346.97,
+          348.69
+        ]
+      ],
+      "boundSourceSpeech": "的那种胶片的颗粒感"
+    },
+    {
+      "id": "caption-114",
+      "start": 348.82,
+      "end": 353.793,
+      "targetStart": 348.82,
+      "targetEnd": 353.793,
+      "sourceStart": 1146.15,
+      "sourceEnd": 1151.71,
+      "sourceRanges": [
+        [
+          1146.15,
+          1151.71
+        ]
+      ],
+      "cueIds": [
+        131
+      ],
+      "text": "经过两个注意力节点",
+      "note": "",
+      "en": "After passing through two attention nodes",
+      "targetRanges": [
+        [
+          348.85,
+          350.7
+        ],
+        [
+          350.7,
+          353.167
+        ],
+        [
+          353.167,
+          353.743
+        ]
+      ],
+      "boundSourceSpeech": "然后来来到右边的话然后经过这两个注意力的节点"
+    },
+    {
+      "id": "caption-115",
+      "start": 353.89,
+      "end": 356.81,
+      "targetStart": 353.89,
+      "targetEnd": 356.81,
+      "sourceStart": 1154.72,
+      "sourceEnd": 1157.56,
+      "sourceRanges": [
+        [
+          1154.72,
+          1157.56
+        ]
+      ],
+      "cueIds": [
+        132
+      ],
+      "text": "再进入双时钟节点",
+      "note": "用户已确认节点名",
+      "en": "it enters the Dual Clock node",
+      "targetRanges": [
+        [
+          353.92,
+          356.76
+        ]
+      ],
+      "boundSourceSpeech": "之后经过这个双时钟的一个这个节点"
+    },
+    {
+      "id": "caption-116",
+      "start": 356.89,
+      "end": 358.605,
+      "targetStart": 356.89,
+      "targetEnd": 358.605,
+      "sourceStart": 1175.42,
+      "sourceEnd": 1177.02,
+      "sourceRanges": [
+        [
+          1175.42,
+          1177.02
+        ]
+      ],
+      "cueIds": [
+        135
+      ],
+      "text": "它不是把音频和画面分开采样",
+      "note": "",
+      "en": "It does not sample audio and video separately",
+      "targetRanges": [
+        [
+          356.92,
+          358.52
+        ]
+      ],
+      "boundSourceSpeech": "它不是分开采样啊它是"
+    },
+    {
+      "id": "caption-117",
+      "start": 358.605,
+      "end": 361.54,
+      "targetStart": 358.605,
+      "targetEnd": 361.54,
+      "sourceStart": 1179.37,
+      "sourceEnd": 1182.55,
+      "sourceRanges": [
+        [
+          1179.37,
+          1182.55
+        ]
+      ],
+      "cueIds": [
+        136
+      ],
+      "text": "而是在同一次采样中",
+      "note": "",
+      "en": "Instead within the same sampling process",
+      "targetRanges": [
+        [
+          358.67,
+          359.8
+        ],
+        [
+          359.8,
+          361.55
+        ]
+      ],
+      "boundSourceSpeech": "一个采样里面针对视频和音频"
+    },
+    {
+      "id": "caption-118",
+      "start": 361.54,
+      "end": 368.673,
+      "targetStart": 361.54,
+      "targetEnd": 368.673,
+      "sourceStart": 1182.55,
+      "sourceEnd": 1198.49,
+      "sourceRanges": [
+        [
+          1182.55,
+          1187.93
+        ],
+        [
+          1195.69,
+          1198.49
+        ]
+      ],
+      "cueIds": [
+        136,
+        137
+      ],
+      "text": "让音频和画面采用不同的采样频率",
+      "note": "",
+      "en": "it uses different sampling rates for audio and video",
+      "targetRanges": [
+        [
+          361.55,
+          361.967
+        ],
+        [
+          361.967,
+          364.133
+        ],
+        [
+          364.133,
+          365.797
+        ],
+        [
+          365.957,
+          367.833
+        ],
+        [
+          367.833,
+          368.623
+        ]
+      ],
+      "boundSourceSpeech": "部分就是针对音频和画面部分它会有不同的采样的频率或者是节点的一个概念吧"
+    },
+    {
+      "id": "caption-119",
+      "start": 373.85,
+      "end": 378.603,
+      "targetStart": 373.85,
+      "targetEnd": 378.603,
+      "sourceStart": 1211.88,
+      "sourceEnd": 1216.72,
+      "sourceRanges": [
+        [
+          1211.88,
+          1216.72
+        ]
+      ],
+      "cueIds": [
+        141
+      ],
+      "text": "可以看到 一采的结果音画不同步",
+      "note": "用户确认系统演示结束后的复盘口播必须保留",
+      "en": "You can see that the first-pass result is out of sync",
+      "targetRanges": [
+        [
+          373.88,
+          376
+        ],
+        [
+          376,
+          378.553
+        ]
+      ],
+      "boundSourceSpeech": "我们可以看到这个它的一采的结果它音画是不同步的"
+    },
+    {
+      "id": "caption-120",
+      "start": 378.683,
+      "end": 381.363,
+      "targetStart": 378.683,
+      "targetEnd": 381.363,
+      "sourceStart": 1237.38,
+      "sourceEnd": 1240.78,
+      "sourceRanges": [
+        [
+          1237.38,
+          1240.78
+        ]
+      ],
+      "cueIds": [
+        142
+      ],
+      "text": "这就是双时钟的结果",
+      "note": "",
+      "en": "This is the result of the Dual Clock setup",
+      "targetRanges": [
+        [
+          378.713,
+          380.533
+        ],
+        [
+          380.533,
+          381.28
+        ]
+      ],
+      "boundSourceSpeech": "这就是双时钟的一个结果啊"
+    },
+    {
+      "id": "caption-121",
+      "start": 381.363,
+      "end": 383.777,
+      "targetStart": 381.363,
+      "targetEnd": 383.777,
+      "sourceStart": 1241.66,
+      "sourceEnd": 1243.86,
+      "sourceRanges": [
+        [
+          1241.66,
+          1243.86
+        ]
+      ],
+      "cueIds": [
+        143
+      ],
+      "text": "接着再看这个画面",
+      "note": "",
+      "en": "Now look at this shot",
+      "targetRanges": [
+        [
+          381.427,
+          383.627
+        ],
+        [
+          383.7,
+          383.727
+        ]
+      ],
+      "boundSourceSpeech": "然后我们还可以看到这个画面的话"
+    },
+    {
+      "id": "caption-122",
+      "start": 387.407,
+      "end": 390.74,
+      "targetStart": 387.407,
+      "targetEnd": 390.74,
+      "sourceStart": 1249.57,
+      "sourceEnd": 1253.13,
+      "sourceRanges": [
+        [
+          1249.57,
+          1253.13
+        ]
+      ],
+      "cueIds": [
+        144
+      ],
+      "text": "锤子穿过脑袋 发生了穿模",
+      "note": "",
+      "en": "The hammer passes through the head causing clipping",
+      "targetRanges": [
+        [
+          387.437,
+          389.467
+        ],
+        [
+          389.467,
+          390.663
+        ]
+      ],
+      "boundSourceSpeech": "锤子它穿过了脑袋穿模了哈这个呢是"
+    },
+    {
+      "id": "caption-123",
+      "start": 390.74,
+      "end": 393.76,
+      "targetStart": 390.74,
+      "targetEnd": 393.76,
+      "sourceStart": 1256.93,
+      "sourceEnd": 1260.41,
+      "sourceRanges": [
+        [
+          1256.93,
+          1260.41
+        ]
+      ],
+      "cueIds": [
+        145
+      ],
+      "text": "我认为这既是缺点 也是优点",
+      "note": "",
+      "en": "I see this as both a flaw and an advantage",
+      "targetRanges": [
+        [
+          390.797,
+          392.067
+        ],
+        [
+          392.067,
+          393.71
+        ]
+      ],
+      "boundSourceSpeech": "我认为是一个缺点也是一个优点"
+    },
+    {
+      "id": "caption-124",
+      "start": 393.853,
+      "end": 396.933,
+      "targetStart": 393.853,
+      "targetEnd": 396.933,
+      "sourceStart": 1261.25,
+      "sourceEnd": 1264.25,
+      "sourceRanges": [
+        [
+          1261.25,
+          1264.25
+        ]
+      ],
+      "cueIds": [
+        146
+      ],
+      "text": "它不是模型或节点的问题",
+      "note": "",
+      "en": "This is not a model or node problem",
+      "targetRanges": [
+        [
+          393.883,
+          396.883
+        ]
+      ],
+      "boundSourceSpeech": "这个呢不是模型问题也不是节点的问题"
+    },
+    {
+      "id": "caption-125",
+      "start": 397.013,
+      "end": 398.48,
+      "targetStart": 397.013,
+      "targetEnd": 398.48,
+      "sourceStart": 1264.81,
+      "sourceEnd": 1266.17,
+      "sourceRanges": [
+        [
+          1264.81,
+          1266.17
+        ]
+      ],
+      "cueIds": [
+        146
+      ],
+      "text": "而是提示词的问题",
+      "note": "",
+      "en": "It is a prompt problem",
+      "targetRanges": [
+        [
+          397.043,
+          398.403
+        ]
+      ],
+      "boundSourceSpeech": "它是提示词的问题"
+    },
+    {
+      "id": "caption-126",
+      "start": 398.48,
+      "end": 400.575,
+      "targetStart": 398.48,
+      "targetEnd": 400.575,
+      "sourceStart": 1266.57,
+      "sourceEnd": 1268.53,
+      "sourceRanges": [
+        [
+          1266.57,
+          1268.53
+        ]
+      ],
+      "cueIds": [
+        147
+      ],
+      "text": "然后我们看一下这个提示词的结构",
+      "note": "",
+      "en": "Now let's examine the structure of this prompt",
+      "targetRanges": [
+        [
+          398.537,
+          400.497
+        ]
+      ],
+      "boundSourceSpeech": "然后我们看一下这个提示词的结构"
+    },
+    {
+      "id": "caption-127",
+      "start": 400.575,
+      "end": 405.82,
+      "targetStart": 400.575,
+      "targetEnd": 405.82,
+      "sourceStart": 1291,
+      "sourceEnd": 1296.6,
+      "sourceRanges": [
+        [
+          1291,
+          1296.6
+        ]
+      ],
+      "cueIds": [
+        148
+      ],
+      "text": "这个提示词由我的智能体生成",
+      "note": "",
+      "en": "This prompt was generated by my agent",
+      "targetRanges": [
+        [
+          400.633,
+          403.933
+        ],
+        [
+          403.933,
+          404.733
+        ],
+        [
+          404.733,
+          405.733
+        ]
+      ],
+      "boundSourceSpeech": "这个提示词呢是使用的我的智能体产出的"
+    },
+    {
+      "id": "caption-128",
+      "start": 405.82,
+      "end": 407.457,
+      "targetStart": 405.82,
+      "targetEnd": 407.457,
+      "sourceStart": 1300.22,
+      "sourceEnd": 1301.7,
+      "sourceRanges": [
+        [
+          1300.22,
+          1301.7
+        ]
+      ],
+      "cueIds": [
+        149
+      ],
+      "text": "我中间没有做过修改",
+      "note": "",
+      "en": "I did not edit it manually",
+      "targetRanges": [
+        [
+          405.887,
+          407.367
+        ]
+      ],
+      "boundSourceSpeech": "我中间没有修改过啊"
+    },
+    {
+      "id": "caption-129",
+      "start": 407.457,
+      "end": 409.497,
+      "targetStart": 407.457,
+      "targetEnd": 409.497,
+      "sourceStart": 1301.86,
+      "sourceEnd": 1303.78,
+      "sourceRanges": [
+        [
+          1301.86,
+          1303.78
+        ]
+      ],
+      "cueIds": [
+        149
+      ],
+      "text": "但这里面有一些问题",
+      "note": "",
+      "en": "But it contains some problems",
+      "targetRanges": [
+        [
+          407.527,
+          409.447
+        ]
+      ],
+      "boundSourceSpeech": "然后呢这里面就有一些问题"
+    },
+    {
+      "id": "caption-130",
+      "start": 409.497,
+      "end": 410.897,
+      "targetStart": 409.497,
+      "targetEnd": 410.897,
+      "sourceStart": 1303.86,
+      "sourceEnd": 1305.18,
+      "sourceRanges": [
+        [
+          1303.86,
+          1305.18
+        ]
+      ],
+      "cueIds": [
+        149
+      ],
+      "text": "比如这句话",
+      "note": "",
+      "en": "For example this sentence",
+      "targetRanges": [
+        [
+          409.527,
+          410.847
+        ]
+      ],
+      "boundSourceSpeech": "比如说这里面的"
+    },
+    {
+      "id": "caption-131",
+      "start": 410.993,
+      "end": 413.427,
+      "targetStart": 410.993,
+      "targetEnd": 413.427,
+      "sourceStart": 1309.49,
+      "sourceEnd": 1312.41,
+      "sourceRanges": [
+        [
+          1309.49,
+          1312.41
+        ]
+      ],
+      "cueIds": [
+        150
+      ],
+      "text": "他把锤子收回",
+      "note": "",
+      "en": "He pulls the hammer back",
+      "targetRanges": [
+        [
+          411.023,
+          411.933
+        ],
+        [
+          411.933,
+          413.377
+        ]
+      ],
+      "boundSourceSpeech": "这句话他他把锤子收回"
+    },
+    {
+      "id": "caption-132",
+      "start": 413.52,
+      "end": 415.155,
+      "targetStart": 413.52,
+      "targetEnd": 415.155,
+      "sourceStart": 1313.25,
+      "sourceEnd": 1314.77,
+      "sourceRanges": [
+        [
+          1313.25,
+          1314.77
+        ]
+      ],
+      "cueIds": [
+        150
+      ],
+      "text": "并搭在右肩",
+      "note": "",
+      "en": "and rests it on his right shoulder",
+      "targetRanges": [
+        [
+          413.55,
+          415.07
+        ]
+      ],
+      "boundSourceSpeech": "并且搭在右肩"
+    },
+    {
+      "id": "caption-133",
+      "start": 415.155,
+      "end": 416.43,
+      "targetStart": 415.155,
+      "targetEnd": 416.43,
+      "sourceStart": 1319.92,
+      "sourceEnd": 1321.08,
+      "sourceRanges": [
+        [
+          1319.92,
+          1321.08
+        ]
+      ],
+      "cueIds": [
+        152
+      ],
+      "text": "再看这句话",
+      "note": "",
+      "en": "Now look at this sentence",
+      "targetRanges": [
+        [
+          415.22,
+          416.38
+        ]
+      ],
+      "boundSourceSpeech": "然后我们可以看这句话呀"
+    },
+    {
+      "id": "caption-134",
+      "start": 416.51,
+      "end": 419.6,
+      "targetStart": 416.51,
+      "targetEnd": 419.6,
+      "sourceStart": 1321.24,
+      "sourceEnd": 1324.48,
+      "sourceRanges": [
+        [
+          1321.24,
+          1324.48
+        ]
+      ],
+      "cueIds": [
+        152
+      ],
+      "text": "他把锤柄斜举过右肩",
+      "note": "",
+      "en": "He raises the hammer handle diagonally over his right shoulder",
+      "targetRanges": [
+        [
+          416.54,
+          418.933
+        ],
+        [
+          418.933,
+          419.513
+        ]
+      ],
+      "boundSourceSpeech": "他把锤柄斜举过右肩对吧"
+    },
+    {
+      "id": "caption-135",
+      "start": 419.6,
+      "end": 421.273,
+      "targetStart": 419.6,
+      "targetEnd": 421.273,
+      "sourceStart": 1330.8,
+      "sourceEnd": 1332.32,
+      "sourceRanges": [
+        [
+          1330.8,
+          1332.32
+        ]
+      ],
+      "cueIds": [
+        153
+      ],
+      "text": "前面又写了",
+      "note": "",
+      "en": "Earlier it also says",
+      "targetRanges": [
+        [
+          419.667,
+          421.187
+        ]
+      ],
+      "boundSourceSpeech": "然后呢前面他又说"
+    },
+    {
+      "id": "caption-136",
+      "start": 421.273,
+      "end": 423.47,
+      "targetStart": 421.273,
+      "targetEnd": 423.47,
+      "sourceStart": 1334.24,
+      "sourceEnd": 1336.32,
+      "sourceRanges": [
+        [
+          1334.24,
+          1336.32
+        ]
+      ],
+      "cueIds": [
+        154
+      ],
+      "text": "右手握住画外锤柄",
+      "note": "",
+      "en": "his right hand grips the off-screen hammer handle",
+      "targetRanges": [
+        [
+          421.34,
+          423.42
+        ]
+      ],
+      "boundSourceSpeech": "右手握住这个画外垂柄"
+    },
+    {
+      "id": "caption-137",
+      "start": 423.557,
+      "end": 426.632,
+      "targetStart": 423.557,
+      "targetEnd": 426.632,
+      "sourceStart": 1336.72,
+      "sourceEnd": 1339.68,
+      "sourceRanges": [
+        [
+          1336.72,
+          1339.68
+        ]
+      ],
+      "cueIds": [
+        154
+      ],
+      "text": "左手握住更高的位置",
+      "note": "",
+      "en": "while his left hand grips a higher position",
+      "targetRanges": [
+        [
+          423.587,
+          426.547
+        ]
+      ],
+      "boundSourceSpeech": "然后左手去拿住这个更高的一个位置"
+    },
+    {
+      "id": "caption-138",
+      "start": 426.632,
+      "end": 429.507,
+      "targetStart": 426.632,
+      "targetEnd": 429.507,
+      "sourceStart": 1340.93,
+      "sourceEnd": 1343.65,
+      "sourceRanges": [
+        [
+          1340.93,
+          1343.65
+        ]
+      ],
+      "cueIds": [
+        155
+      ],
+      "text": "后面又写了一个超大的玩具锤",
+      "note": "",
+      "en": "Later it mentions an oversized toy hammer",
+      "targetRanges": [
+        [
+          426.697,
+          429.417
+        ]
+      ],
+      "boundSourceSpeech": "然后这里又写了一个超大的一个玩具锤"
+    },
+    {
+      "id": "caption-139",
+      "start": 429.507,
+      "end": 432.102,
+      "targetStart": 429.507,
+      "targetEnd": 432.102,
+      "sourceStart": 1345.01,
+      "sourceEnd": 1347.45,
+      "sourceRanges": [
+        [
+          1345.01,
+          1347.45
+        ]
+      ],
+      "cueIds": [
+        156
+      ],
+      "text": "这会产生什么结果呢",
+      "note": "",
+      "en": "What result does this create",
+      "targetRanges": [
+        [
+          429.577,
+          432.017
+        ]
+      ],
+      "boundSourceSpeech": "那就会产生一个什么样的一个效果呢就是"
+    },
+    {
+      "id": "caption-140",
+      "start": 432.102,
+      "end": 434.377,
+      "targetStart": 432.102,
+      "targetEnd": 434.377,
+      "sourceStart": 1349.5,
+      "sourceEnd": 1351.66,
+      "sourceRanges": [
+        [
+          1349.5,
+          1351.66
+        ]
+      ],
+      "cueIds": [
+        157
+      ],
+      "text": "AI 会怎样理解这个超大的玩具锤",
+      "note": "",
+      "en": "How will the AI interpret this oversized toy hammer",
+      "targetRanges": [
+        [
+          432.167,
+          434.327
+        ]
+      ],
+      "boundSourceSpeech": "AI怎么去理解这个超大的玩具锤呢"
+    },
+    {
+      "id": "caption-141",
+      "start": 434.457,
+      "end": 436.478,
+      "targetStart": 434.457,
+      "targetEnd": 436.478,
+      "sourceStart": 1352.42,
+      "sourceEnd": 1354.34,
+      "sourceRanges": [
+        [
+          1352.42,
+          1354.34
+        ]
+      ],
+      "cueIds": [
+        158
+      ],
+      "text": "它就是要占满这个画面",
+      "note": "用户已确认删除“不”",
+      "en": "It needs to fill the frame",
+      "targetRanges": [
+        [
+          434.487,
+          436.407
+        ]
+      ],
+      "boundSourceSpeech": "它就是要不占满这个画面"
+    },
+    {
+      "id": "caption-142",
+      "start": 436.478,
+      "end": 440.168,
+      "targetStart": 436.478,
+      "targetEnd": 440.168,
+      "sourceStart": 1356.23,
+      "sourceEnd": 1359.95,
+      "sourceRanges": [
+        [
+          1356.23,
+          1359.95
+        ]
+      ],
+      "cueIds": [
+        159
+      ],
+      "text": "这里又要求右手拿住锤子",
+      "note": "",
+      "en": "Here it also requires the right hand to hold the hammer",
+      "targetRanges": [
+        [
+          436.53,
+          439.533
+        ],
+        [
+          439.533,
+          440.083
+        ]
+      ],
+      "boundSourceSpeech": "然后这个地方他又说右手拿住这个画面这种锤子"
+    },
+    {
+      "id": "caption-143",
+      "start": 440.168,
+      "end": 445.64,
+      "targetStart": 440.168,
+      "targetEnd": 445.64,
+      "sourceStart": 1363.8,
+      "sourceEnd": 1369.12,
+      "sourceRanges": [
+        [
+          1363.8,
+          1369.12
+        ]
+      ],
+      "cueIds": [
+        160
+      ],
+      "text": "模型想把整把锤子完整展示出来",
+      "note": "",
+      "en": "The model wants to show the entire hammer",
+      "targetRanges": [
+        [
+          440.233,
+          445.553
+        ]
+      ],
+      "boundSourceSpeech": "那么模型它想要把这个锤子完整的展现出来它就只能够是"
+    },
+    {
+      "id": "caption-144",
+      "start": 445.64,
+      "end": 450.112,
+      "targetStart": 445.64,
+      "targetEnd": 450.112,
+      "sourceStart": 1374.94,
+      "sourceEnd": 1379.34,
+      "sourceRanges": [
+        [
+          1374.94,
+          1379.34
+        ]
+      ],
+      "cueIds": [
+        161
+      ],
+      "text": "就只能让锤柄在右手 锤头出现在左边",
+      "note": "",
+      "en": "so the handle must be in the right hand and the head on the left",
+      "targetRanges": [
+        [
+          445.707,
+          449.433
+        ],
+        [
+          449.433,
+          450.04
+        ]
+      ],
+      "boundSourceSpeech": "锤柄在右手然后它的锤头在左边的这个区域"
+    },
+    {
+      "id": "caption-145",
+      "start": 450.112,
+      "end": 452.773,
+      "targetStart": 450.112,
+      "targetEnd": 452.773,
+      "sourceStart": 1422.03,
+      "sourceEnd": 1424.59,
+      "sourceRanges": [
+        [
+          1422.03,
+          1424.59
+        ]
+      ],
+      "cueIds": [
+        164
+      ],
+      "text": "为了完整展现整把锤子",
+      "note": "",
+      "en": "To show the entire hammer",
+      "targetRanges": [
+        [
+          450.163,
+          452.723
+        ]
+      ],
+      "boundSourceSpeech": "然后呢他要把这个锤子完整的展现出来"
+    },
+    {
+      "id": "caption-146",
+      "start": 452.773,
+      "end": 456.752,
+      "targetStart": 452.773,
+      "targetEnd": 456.752,
+      "sourceStart": 1424.67,
+      "sourceEnd": 1432.04,
+      "sourceRanges": [
+        [
+          1424.67,
+          1426.19
+        ],
+        [
+          1429.84,
+          1432.04
+        ]
+      ],
+      "cueIds": [
+        164,
+        165
+      ],
+      "text": "它只能从画面右边（口误）出现",
+      "note": "用户确认原声中的‘左边’是口误，正确方向为右边",
+      "en": "It can only enter from the right side of the frame (verbal slip)",
+      "targetRanges": [
+        [
+          452.803,
+          454.323
+        ],
+        [
+          454.473,
+          456.673
+        ]
+      ],
+      "boundSourceSpeech": "他就只能是把这个锤子从左边去展现出来"
+    },
+    {
+      "id": "caption-147",
+      "start": 456.752,
+      "end": 459.177,
+      "targetStart": 456.752,
+      "targetEnd": 459.177,
+      "sourceStart": 1433.21,
+      "sourceEnd": 1435.49,
+      "sourceRanges": [
+        [
+          1433.21,
+          1435.49
+        ]
+      ],
+      "cueIds": [
+        166
+      ],
+      "text": "因为提示词没有明确描述方向",
+      "note": "",
+      "en": "because the prompt never specifies the direction",
+      "targetRanges": [
+        [
+          456.81,
+          459.09
+        ]
+      ],
+      "boundSourceSpeech": "因为我这个地方没有明确的描述这个方向"
+    },
+    {
+      "id": "caption-148",
+      "start": 459.177,
+      "end": 465.11,
+      "targetStart": 459.177,
+      "targetEnd": 465.11,
+      "sourceStart": 1445.71,
+      "sourceEnd": 1452.99,
+      "sourceRanges": [
+        [
+          1445.71,
+          1448.23
+        ],
+        [
+          1449.87,
+          1452.99
+        ]
+      ],
+      "cueIds": [
+        167,
+        168
+      ],
+      "text": "也没说明锤子从左边还是右边进入画面",
+      "note": "",
+      "en": "It also doesn't say whether the hammer enters from the left or right",
+      "targetRanges": [
+        [
+          459.243,
+          461.763
+        ],
+        [
+          461.903,
+          465.023
+        ]
+      ],
+      "boundSourceSpeech": "然后我也没有你描述这个锤子是是从左边进入画面还是从右边进入画面"
+    },
+    {
+      "id": "caption-149",
+      "start": 465.11,
+      "end": 468.627,
+      "targetStart": 465.11,
+      "targetEnd": 468.627,
+      "sourceStart": 1453.31,
+      "sourceEnd": 1456.71,
+      "sourceRanges": [
+        [
+          1453.31,
+          1456.71
+        ]
+      ],
+      "cueIds": [
+        169
+      ],
+      "text": "挥舞方向同样没有描述",
+      "note": "",
+      "en": "The swing direction is not specified either",
+      "targetRanges": [
+        [
+          465.177,
+          468.577
+        ]
+      ],
+      "boundSourceSpeech": "然后这个锤子挥舞的方向也没有描述所以呢"
+    },
+    {
+      "id": "caption-150",
+      "start": 468.71,
+      "end": 469.937,
+      "targetStart": 468.71,
+      "targetEnd": 469.937,
+      "sourceStart": 1458.84,
+      "sourceEnd": 1460,
+      "sourceRanges": [
+        [
+          1458.84,
+          1460
+        ]
+      ],
+      "cueIds": [
+        170
+      ],
+      "text": "所以模型只能靠猜",
+      "note": "",
+      "en": "So the model can only guess",
+      "targetRanges": [
+        [
+          468.74,
+          469.9
+        ]
+      ],
+      "boundSourceSpeech": "模型就可以靠拆"
+    },
+    {
+      "id": "caption-151",
+      "start": 469.937,
+      "end": 472.663,
+      "targetStart": 469.937,
+      "targetEnd": 472.663,
+      "sourceStart": 1460,
+      "sourceEnd": 1463.48,
+      "sourceRanges": [
+        [
+          1460,
+          1463.48
+        ]
+      ],
+      "cueIds": [
+        170
+      ],
+      "text": "最后就生成了这样的结果",
+      "note": "",
+      "en": "and this is the result it generates",
+      "targetRanges": [
+        [
+          469.9,
+          469.933
+        ],
+        [
+          469.933,
+          471.233
+        ],
+        [
+          471.233,
+          472.613
+        ]
+      ],
+      "boundSourceSpeech": "它就拆出来这样子的一个效果"
+    },
+    {
+      "id": "caption-152",
+      "start": 472.757,
+      "end": 477.053,
+      "targetStart": 472.757,
+      "targetEnd": 477.053,
+      "sourceStart": 1463.92,
+      "sourceEnd": 1468.4,
+      "sourceRanges": [
+        [
+          1463.92,
+          1468.4
+        ]
+      ],
+      "cueIds": [
+        171
+      ],
+      "text": "右手握锤柄 左边出现锤头",
+      "note": "",
+      "en": "The right hand holds the handle and the hammer head appears on the left",
+      "targetRanges": [
+        [
+          472.787,
+          474.133
+        ],
+        [
+          474.133,
+          476.967
+        ]
+      ],
+      "boundSourceSpeech": "右手拿这个锤柄左边出现这个锤头它就可以把这个"
+    },
+    {
+      "id": "caption-153",
+      "start": 477.053,
+      "end": 478.717,
+      "targetStart": 477.053,
+      "targetEnd": 478.717,
+      "sourceStart": 1471.32,
+      "sourceEnd": 1472.84,
+      "sourceRanges": [
+        [
+          1471.32,
+          1472.84
+        ]
+      ],
+      "cueIds": [
+        172
+      ],
+      "text": "才能完整展现整把锤子",
+      "note": "",
+      "en": "so the whole hammer can fit in the frame",
+      "targetRanges": [
+        [
+          477.12,
+          478.64
+        ]
+      ],
+      "boundSourceSpeech": "锤子完整的展现出来"
+    },
+    {
+      "id": "caption-154",
+      "start": 478.717,
+      "end": 482.533,
+      "targetStart": 478.717,
+      "targetEnd": 482.533,
+      "sourceStart": 1480.94,
+      "sourceEnd": 1484.82,
+      "sourceRanges": [
+        [
+          1480.94,
+          1484.82
+        ]
+      ],
+      "cueIds": [
+        173
+      ],
+      "text": "结果到挥锤镜头时 它直接穿模了",
+      "note": "",
+      "en": "When the swing shot arrives it clips straight through the character",
+      "targetRanges": [
+        [
+          478.773,
+          480.233
+        ],
+        [
+          480.233,
+          482.453
+        ]
+      ],
+      "boundSourceSpeech": "结果呢在锤这个镜头的时候呢它就直接穿模了"
+    },
+    {
+      "id": "caption-155",
+      "start": 482.533,
+      "end": 485.04,
+      "targetStart": 482.533,
+      "targetEnd": 485.04,
+      "sourceStart": 1498.66,
+      "sourceEnd": 1501.02,
+      "sourceRanges": [
+        [
+          1498.66,
+          1501.02
+        ]
+      ],
+      "cueIds": [
+        175
+      ],
+      "text": "这是我分析出的提示词原因",
+      "note": "",
+      "en": "That's my analysis of the prompt issue",
+      "targetRanges": [
+        [
+          482.593,
+          484.953
+        ]
+      ],
+      "boundSourceSpeech": "这是我分析出来的一个提示词的原因啊"
+    },
+    {
+      "id": "caption-156",
+      "start": 485.04,
+      "end": 488.017,
+      "targetStart": 485.04,
+      "targetEnd": 488.017,
+      "sourceStart": 1506.54,
+      "sourceEnd": 1509.42,
+      "sourceRanges": [
+        [
+          1506.54,
+          1509.42
+        ]
+      ],
+      "cueIds": [
+        176
+      ],
+      "text": "多参工作流讲完了",
+      "note": "",
+      "en": "That concludes the multi-reference workflow",
+      "targetRanges": [
+        [
+          485.107,
+          487.987
+        ]
+      ],
+      "boundSourceSpeech": "那么我们多参的这个工作流就给大家讲完了"
+    },
+    {
+      "id": "caption-157",
+      "start": 488.017,
+      "end": 490.637,
+      "targetStart": 488.017,
+      "targetEnd": 490.637,
+      "sourceStart": 1509.46,
+      "sourceEnd": 1512.02,
+      "sourceRanges": [
+        [
+          1509.46,
+          1512.02
+        ]
+      ],
+      "cueIds": [
+        176
+      ],
+      "text": "现在来看数字人",
+      "note": "",
+      "en": "Now let's look at the digital-human workflow",
+      "targetRanges": [
+        [
+          488.027,
+          490.587
+        ]
+      ],
+      "boundSourceSpeech": "我们现在来到数字人的这边"
+    },
+    {
+      "id": "caption-158",
+      "start": 490.727,
+      "end": 493.645,
+      "targetStart": 490.727,
+      "targetEnd": 493.645,
+      "sourceStart": 1527.49,
+      "sourceEnd": 1530.29,
+      "sourceRanges": [
+        [
+          1527.49,
+          1530.29
+        ]
+      ],
+      "cueIds": [
+        178
+      ],
+      "text": "上一期视频已经讲过",
+      "note": "",
+      "en": "I covered this in the previous video",
+      "targetRanges": [
+        [
+          490.757,
+          493.557
+        ]
+      ],
+      "boundSourceSpeech": "你可以看一下我上一期视频讲的内容"
+    },
+    {
+      "id": "caption-159",
+      "start": 493.645,
+      "end": 496.853,
+      "targetStart": 493.645,
+      "targetEnd": 496.853,
+      "sourceStart": 1533.68,
+      "sourceEnd": 1536.8,
+      "sourceRanges": [
+        [
+          1533.68,
+          1536.8
+        ]
+      ],
+      "cueIds": [
+        179
+      ],
+      "text": "整体架构怎么搭建",
+      "note": "",
+      "en": "including how to build the overall architecture",
+      "targetRanges": [
+        [
+          493.713,
+          495.667
+        ],
+        [
+          495.667,
+          496.767
+        ]
+      ],
+      "boundSourceSpeech": "整体的架构怎么搭建的我讲的很清楚"
+    },
+    {
+      "id": "caption-160",
+      "start": 496.853,
+      "end": 501.273,
+      "targetStart": 496.853,
+      "targetEnd": 501.273,
+      "sourceStart": 1538.52,
+      "sourceEnd": 1542.8,
+      "sourceRanges": [
+        [
+          1538.52,
+          1542.8
+        ]
+      ],
+      "cueIds": [
+        180
+      ],
+      "text": "基础内容不变 只替换两个 Sigma 值",
+      "note": "用户已确认",
+      "en": "The basic structure stays the same with only two Sigma values replaced",
+      "targetRanges": [
+        [
+          496.92,
+          501.2
+        ]
+      ],
+      "boundSourceSpeech": "然后基础的内容都是不变的只是把两个c个码值给它换了"
+    },
+    {
+      "id": "caption-161",
+      "start": 501.273,
+      "end": 503.697,
+      "targetStart": 501.273,
+      "targetEnd": 503.697,
+      "sourceStart": 1543.36,
+      "sourceEnd": 1545.68,
+      "sourceRanges": [
+        [
+          1543.36,
+          1545.68
+        ]
+      ],
+      "cueIds": [
+        181
+      ],
+      "text": "同时替换这里的模型",
+      "note": "",
+      "en": "I also replace the models here",
+      "targetRanges": [
+        [
+          501.327,
+          503.647
+        ]
+      ],
+      "boundSourceSpeech": "然后呢模型这地方呢我也给它换了"
+    },
+    {
+      "id": "caption-162",
+      "start": 503.783,
+      "end": 511.222,
+      "targetStart": 503.783,
+      "targetEnd": 511.222,
+      "sourceStart": 1546.98,
+      "sourceEnd": 1555.1,
+      "sourceRanges": [
+        [
+          1546.98,
+          1555.1
+        ]
+      ],
+      "cueIds": [
+        182,
+        183
+      ],
+      "text": "基础模型使用肥猴的底模和加速模型",
+      "note": "用户确认统一写作“肥猴”",
+      "en": "The base setup uses Feihou's base and acceleration models",
+      "targetRanges": [
+        [
+          503.813,
+          506.233
+        ],
+        [
+          506.233,
+          507.467
+        ],
+        [
+          507.467,
+          508.633
+        ],
+        [
+          508.633,
+          511.133
+        ]
+      ],
+      "boundSourceSpeech": "现在基础模型呢是用的肥猴的这这两个搭配啊肥猴这个底膜以及呢这一个的加速模型"
+    },
+    {
+      "id": "caption-163",
+      "start": 511.222,
+      "end": 517.593,
+      "targetStart": 511.222,
+      "targetEnd": 517.593,
+      "sourceStart": 1559.99,
+      "sourceEnd": 1567.31,
+      "sourceRanges": [
+        [
+          1559.99,
+          1567.31
+        ]
+      ],
+      "cueIds": [
+        185
+      ],
+      "text": "为什么不用之前测试好的模型搭配",
+      "note": "",
+      "en": "Why not use the model combination I tested before",
+      "targetRanges": [
+        [
+          511.29,
+          513.433
+        ],
+        [
+          513.433,
+          514.667
+        ],
+        [
+          514.667,
+          516.733
+        ],
+        [
+          516.733,
+          517.543
+        ]
+      ],
+      "boundSourceSpeech": "为什么我不用之前已经测试好的这一套搭配的这个模型呢"
+    },
+    {
+      "id": "caption-164",
+      "start": 517.687,
+      "end": 521.713,
+      "targetStart": 517.687,
+      "targetEnd": 521.713,
+      "sourceStart": 1567.75,
+      "sourceEnd": 1574.43,
+      "sourceRanges": [
+        [
+          1567.75,
+          1570.79
+        ],
+        [
+          1573.67,
+          1574.43
+        ]
+      ],
+      "cueIds": [
+        186,
+        187
+      ],
+      "text": "因为那套模型只适合取中间值",
+      "note": "",
+      "en": "Because that combination only works well near the middle value",
+      "targetRanges": [
+        [
+          517.717,
+          520.757
+        ],
+        [
+          520.903,
+          521.663
+        ]
+      ],
+      "boundSourceSpeech": "因为我发现这一套模型呢它只适合取中间值"
+    },
+    {
+      "id": "caption-165",
+      "start": 521.793,
+      "end": 526.11,
+      "targetStart": 521.793,
+      "targetEnd": 526.11,
+      "sourceStart": 1574.79,
+      "sourceEnd": 1579.19,
+      "sourceRanges": [
+        [
+          1574.79,
+          1579.19
+        ]
+      ],
+      "cueIds": [
+        188
+      ],
+      "text": "加速模型的数值越大",
+      "note": "",
+      "en": "The higher the acceleration model's value",
+      "targetRanges": [
+        [
+          521.823,
+          522.433
+        ],
+        [
+          522.433,
+          526.023
+        ]
+      ],
+      "boundSourceSpeech": "就是刚才我给大家说过这一个加速模型如果说这个值"
+    },
+    {
+      "id": "caption-166",
+      "start": 526.11,
+      "end": 529.507,
+      "targetStart": 526.11,
+      "targetEnd": 529.507,
+      "sourceStart": 1579.51,
+      "sourceEnd": 1582.75,
+      "sourceRanges": [
+        [
+          1579.51,
+          1582.75
+        ]
+      ],
+      "cueIds": [
+        188
+      ],
+      "text": "画面越锐 人脸也越显油",
+      "note": "",
+      "en": "the sharper the image and the oilier the face",
+      "targetRanges": [
+        [
+          526.177,
+          529.417
+        ]
+      ],
+      "boundSourceSpeech": "取得比较大它就会比较锐化它就脸显得比较油"
+    },
+    {
+      "id": "caption-167",
+      "start": 529.507,
+      "end": 534.733,
+      "targetStart": 529.507,
+      "targetEnd": 534.733,
+      "sourceStart": 1583.11,
+      "sourceEnd": 1588.75,
+      "sourceRanges": [
+        [
+          1583.11,
+          1584.79
+        ],
+        [
+          1585.11,
+          1588.75
+        ]
+      ],
+      "cueIds": [
+        189,
+        190
+      ],
+      "text": "数值越小 画面越朦胧",
+      "note": "",
+      "en": "The lower the value the softer the image",
+      "targetRanges": [
+        [
+          529.577,
+          531.257
+        ],
+        [
+          531.41,
+          531.767
+        ],
+        [
+          531.767,
+          533.767
+        ],
+        [
+          533.767,
+          534.65
+        ]
+      ],
+      "boundSourceSpeech": "如果值取得比较小的话看你这个我整个画面呢又不够清晰它有那种"
+    },
+    {
+      "id": "caption-168",
+      "start": 534.733,
+      "end": 536.127,
+      "targetStart": 534.733,
+      "targetEnd": 536.127,
+      "sourceStart": 1590.23,
+      "sourceEnd": 1591.51,
+      "sourceRanges": [
+        [
+          1590.23,
+          1591.51
+        ]
+      ],
+      "cueIds": [
+        191
+      ],
+      "text": "还会带有摄影镜头般的颗粒感",
+      "note": "",
+      "en": "with a camera-lens-like grain",
+      "targetRanges": [
+        [
+          534.797,
+          536.077
+        ]
+      ],
+      "boundSourceSpeech": "摄影镜头的颗粒感"
+    },
+    {
+      "id": "caption-169",
+      "start": 536.227,
+      "end": 540.943,
+      "targetStart": 536.227,
+      "targetEnd": 540.943,
+      "sourceStart": 1615.59,
+      "sourceEnd": 1620.87,
+      "sourceRanges": [
+        [
+          1615.59,
+          1620.87
+        ]
+      ],
+      "cueIds": [
+        194
+      ],
+      "text": "这套模型搭配的优点",
+      "note": "",
+      "en": "The advantage of this model combination",
+      "targetRanges": [
+        [
+          536.257,
+          538.8
+        ],
+        [
+          538.8,
+          540.87
+        ]
+      ],
+      "boundSourceSpeech": "然后我发现这个模型搭配里面它比较好的第一点呢就是"
+    },
+    {
+      "id": "caption-170",
+      "start": 540.943,
+      "end": 544.678,
+      "targetStart": 540.943,
+      "targetEnd": 544.678,
+      "sourceStart": 1621.43,
+      "sourceEnd": 1627.37,
+      "sourceRanges": [
+        [
+          1621.43,
+          1624.11
+        ],
+        [
+          1626.61,
+          1627.37
+        ]
+      ],
+      "cueIds": [
+        194,
+        195
+      ],
+      "text": "是能明显表现人物情绪",
+      "note": "",
+      "en": "is that it expresses the character's emotions clearly",
+      "targetRanges": [
+        [
+          540.997,
+          543.677
+        ],
+        [
+          543.843,
+          544.603
+        ]
+      ],
+      "boundSourceSpeech": "这个人物的情绪它能够很明显的展现出来"
+    },
+    {
+      "id": "caption-171",
+      "start": 544.678,
+      "end": 548.42,
+      "targetStart": 544.678,
+      "targetEnd": 548.42,
+      "sourceStart": 1638.7,
+      "sourceEnd": 1642.3,
+      "sourceRanges": [
+        [
+          1638.7,
+          1642.3
+        ]
+      ],
+      "cueIds": [
+        196
+      ],
+      "text": "我们回到多参工作流的提示词",
+      "note": "",
+      "en": "Let's return to the prompt in the multi-reference workflow",
+      "targetRanges": [
+        [
+          544.733,
+          548.333
+        ]
+      ],
+      "boundSourceSpeech": "我们再回到这个之前的多参的里面的提示词里面啊"
+    },
+    {
+      "id": "caption-172",
+      "start": 548.42,
+      "end": 550.277,
+      "targetStart": 548.42,
+      "targetEnd": 550.277,
+      "sourceStart": 1644.42,
+      "sourceEnd": 1646.14,
+      "sourceRanges": [
+        [
+          1644.42,
+          1646.14
+        ]
+      ],
+      "cueIds": [
+        197
+      ],
+      "text": "这句话写了",
+      "note": "",
+      "en": "This sentence says",
+      "targetRanges": [
+        [
+          548.487,
+          550.207
+        ]
+      ],
+      "boundSourceSpeech": "我们可以看到这个一句话里面"
+    },
+    {
+      "id": "caption-173",
+      "start": 550.277,
+      "end": 552.903,
+      "targetStart": 550.277,
+      "targetEnd": 552.903,
+      "sourceStart": 1646.86,
+      "sourceEnd": 1649.62,
+      "sourceRanges": [
+        [
+          1646.86,
+          1649.62
+        ]
+      ],
+      "cueIds": [
+        197
+      ],
+      "text": "音量明显抬高 咬字变硬",
+      "note": "",
+      "en": "The volume rises noticeably and the articulation becomes harder",
+      "targetRanges": [
+        [
+          550.327,
+          551.933
+        ],
+        [
+          551.933,
+          552.853
+        ]
+      ],
+      "boundSourceSpeech": "音量明显抬高咬字变硬"
+    },
+    {
+      "id": "caption-174",
+      "start": 552.99,
+      "end": 555.815,
+      "targetStart": 552.99,
+      "targetEnd": 555.815,
+      "sourceStart": 1650.42,
+      "sourceEnd": 1653.26,
+      "sourceRanges": [
+        [
+          1650.42,
+          1653.26
+        ]
+      ],
+      "cueIds": [
+        197
+      ],
+      "text": "重音落在“一锤子”和“捶死你”上",
+      "note": "",
+      "en": "The emphasis falls on “one hammer” and “smash you to death”",
+      "targetRanges": [
+        [
+          553.02,
+          554.533
+        ],
+        [
+          554.533,
+          555.727
+        ]
+      ],
+      "boundSourceSpeech": "重音落在一锤子和锤死里面"
+    },
+    {
+      "id": "caption-175",
+      "start": 555.815,
+      "end": 558.475,
+      "targetStart": 555.815,
+      "targetEnd": 558.475,
+      "sourceStart": 1657.85,
+      "sourceEnd": 1660.37,
+      "sourceRanges": [
+        [
+          1657.85,
+          1660.37
+        ]
+      ],
+      "cueIds": [
+        199
+      ],
+      "text": "所以能明显感受到情绪变化",
+      "note": "",
+      "en": "So the emotional shift is very easy to feel",
+      "targetRanges": [
+        [
+          555.883,
+          558.403
+        ]
+      ],
+      "boundSourceSpeech": "所以你能够很明显的感觉到这个情绪的变化"
+    },
+    {
+      "id": "caption-176",
+      "start": 558.475,
+      "end": 560.768,
+      "targetStart": 558.475,
+      "targetEnd": 560.768,
+      "sourceStart": 1664.36,
+      "sourceEnd": 1666.52,
+      "sourceRanges": [
+        [
+          1664.36,
+          1666.52
+        ]
+      ],
+      "cueIds": [
+        200
+      ],
+      "text": "所以我选择了这套搭配",
+      "note": "",
+      "en": "That's why I chose this combination",
+      "targetRanges": [
+        [
+          558.527,
+          560.687
+        ]
+      ],
+      "boundSourceSpeech": "所以我选择了这一套搭配"
+    },
+    {
+      "id": "caption-177",
+      "start": 560.768,
+      "end": 565.877,
+      "targetStart": 560.768,
+      "targetEnd": 565.877,
+      "sourceStart": 1669.53,
+      "sourceEnd": 1674.89,
+      "sourceRanges": [
+        [
+          1669.53,
+          1674.89
+        ]
+      ],
+      "cueIds": [
+        201
+      ],
+      "text": "代价是要在清晰度和油腻感之间取平衡",
+      "note": "",
+      "en": "The tradeoff is balancing clarity against an oily look",
+      "targetRanges": [
+        [
+          560.83,
+          563.533
+        ],
+        [
+          563.533,
+          564.133
+        ],
+        [
+          564.133,
+          565.79
+        ]
+      ],
+      "boundSourceSpeech": "但是呢它的损失的就是它的清晰度和油腻之间的一个平衡值"
+    },
+    {
+      "id": "caption-178",
+      "start": 565.877,
+      "end": 569.19,
+      "targetStart": 565.877,
+      "targetEnd": 569.19,
+      "sourceStart": 1680.41,
+      "sourceEnd": 1683.57,
+      "sourceRanges": [
+        [
+          1680.41,
+          1683.57
+        ]
+      ],
+      "cueIds": [
+        202
+      ],
+      "text": "然后我为什么要使用这一套模型的搭配呢",
+      "note": "",
+      "en": "So why do I use this model combination",
+      "targetRanges": [
+        [
+          565.943,
+          569.103
+        ]
+      ],
+      "boundSourceSpeech": "然后我为什么要使用这一套模型的搭配呢"
+    },
+    {
+      "id": "caption-179",
+      "start": 569.19,
+      "end": 574.043,
+      "targetStart": 569.19,
+      "targetEnd": 574.043,
+      "sourceStart": 1692.99,
+      "sourceEnd": 1698.89,
+      "sourceRanges": [
+        [
+          1692.99,
+          1698.89
+        ]
+      ],
+      "cueIds": [
+        203,
+        204
+      ],
+      "text": "这套模型搭配的优点是画面更清晰",
+      "note": "",
+      "en": "Its advantage is a clearer image",
+      "targetRanges": [
+        [
+          569.257,
+          571.167
+        ],
+        [
+          571.167,
+          573.957
+        ]
+      ],
+      "boundSourceSpeech": "这一套模型的搭配呢它的优点是在于它的画面会更清晰"
+    },
+    {
+      "id": "caption-180",
+      "start": 574.043,
+      "end": 578.04,
+      "targetStart": 574.043,
+      "targetEnd": 578.04,
+      "sourceStart": 1700.21,
+      "sourceEnd": 1704.09,
+      "sourceRanges": [
+        [
+          1700.21,
+          1704.09
+        ]
+      ],
+      "cueIds": [
+        205
+      ],
+      "text": "缺点是人物说话的情绪偏软",
+      "note": "",
+      "en": "Its drawback is softer speaking emotion",
+      "targetRanges": [
+        [
+          574.11,
+          577.99
+        ]
+      ],
+      "boundSourceSpeech": "但缺点在于他说话的这个人物的情绪会更软"
+    },
+    {
+      "id": "caption-181",
+      "start": 578.123,
+      "end": 579.163,
+      "targetStart": 578.123,
+      "targetEnd": 579.163,
+      "sourceStart": 1706.12,
+      "sourceEnd": 1707.12,
+      "sourceRanges": [
+        [
+          1706.12,
+          1707.12
+        ]
+      ],
+      "cueIds": [
+        206
+      ],
+      "text": "听起来软趴趴的",
+      "note": "",
+      "en": "The delivery sounds weak and limp",
+      "targetRanges": [
+        [
+          578.153,
+          579.153
+        ]
+      ],
+      "boundSourceSpeech": "很软趴趴的"
+    },
+    {
+      "id": "caption-182",
+      "start": 579.163,
+      "end": 581.31,
+      "targetStart": 579.163,
+      "targetEnd": 581.31,
+      "sourceStart": 1707.12,
+      "sourceEnd": 1709.2,
+      "sourceRanges": [
+        [
+          1707.12,
+          1709.2
+        ]
+      ],
+      "cueIds": [
+        206
+      ],
+      "text": "我们看一下两段视频的对比",
+      "note": "",
+      "en": "Let's compare the two videos",
+      "targetRanges": [
+        [
+          579.153,
+          581.233
+        ]
+      ],
+      "boundSourceSpeech": "我们可以看一下这两个视频的对比效果"
+    },
+    {
+      "id": "caption-183",
+      "start": 581.31,
+      "end": 584.652,
+      "targetStart": 581.31,
+      "targetEnd": 584.652,
+      "sourceStart": 1716.7,
+      "sourceEnd": 1719.9,
+      "sourceRanges": [
+        [
+          1716.7,
+          1719.9
+        ]
+      ],
+      "cueIds": [
+        208
+      ],
+      "text": "因此在数字人工作流里",
+      "note": "",
+      "en": "So in the digital-human workflow",
+      "targetRanges": [
+        [
+          581.367,
+          584.567
+        ]
+      ],
+      "boundSourceSpeech": "因为这个原因呢所以我在数字人这一边"
+    },
+    {
+      "id": "caption-184",
+      "start": 584.652,
+      "end": 591.842,
+      "targetStart": 584.652,
+      "targetEnd": 591.842,
+      "sourceStart": 1722.55,
+      "sourceEnd": 1729.59,
+      "sourceRanges": [
+        [
+          1722.55,
+          1729.59
+        ]
+      ],
+      "cueIds": [
+        209
+      ],
+      "text": "音频从外部导入 不依赖模型生成说话情绪",
+      "note": "",
+      "en": "the audio is imported and does not rely on the model's speaking emotion",
+      "targetRanges": [
+        [
+          584.717,
+          591.757
+        ]
+      ],
+      "boundSourceSpeech": "但是数字人这边的话他其实不关心这个音频的这个说话的情绪的因为音频是从外部导入的"
+    },
+    {
+      "id": "caption-185",
+      "start": 591.842,
+      "end": 594.623,
+      "targetStart": 591.842,
+      "targetEnd": 594.623,
+      "sourceStart": 1731.64,
+      "sourceEnd": 1734.44,
+      "sourceRanges": [
+        [
+          1731.64,
+          1734.44
+        ]
+      ],
+      "cueIds": [
+        210
+      ],
+      "text": "所以我更关心画面清晰度",
+      "note": "",
+      "en": "I care more about image clarity",
+      "targetRanges": [
+        [
+          591.907,
+          592.733
+        ],
+        [
+          592.733,
+          594.54
+        ]
+      ],
+      "boundSourceSpeech": "所以呢我就更关心这个画面的清晰度"
+    },
+    {
+      "id": "caption-186",
+      "start": 594.623,
+      "end": 596.332,
+      "targetStart": 594.623,
+      "targetEnd": 596.332,
+      "sourceStart": 1734.72,
+      "sourceEnd": 1736.28,
+      "sourceRanges": [
+        [
+          1734.72,
+          1736.28
+        ]
+      ],
+      "cueIds": [
+        210
+      ],
+      "text": "最终选择了这套搭配",
+      "note": "",
+      "en": "so I ultimately chose this combination",
+      "targetRanges": [
+        [
+          594.687,
+          596.247
+        ]
+      ],
+      "boundSourceSpeech": "所以我就用了这一套搭配"
+    },
+    {
+      "id": "caption-187",
+      "start": 596.332,
+      "end": 598.443,
+      "targetStart": 596.332,
+      "targetEnd": 598.443,
+      "sourceStart": 1740.13,
+      "sourceEnd": 1742.09,
+      "sourceRanges": [
+        [
+          1740.13,
+          1742.09
+        ]
+      ],
+      "cueIds": [
+        211
+      ],
+      "text": "大家可以自己下去测试一下",
+      "note": "",
+      "en": "You can test it for yourself",
+      "targetRanges": [
+        [
+          596.397,
+          598.357
+        ]
+      ],
+      "boundSourceSpeech": "大家可以下去自己测试一下"
+    },
+    {
+      "id": "caption-188",
+      "start": 598.443,
+      "end": 603.612,
+      "targetStart": 598.443,
+      "targetEnd": 603.612,
+      "sourceStart": 1798.61,
+      "sourceEnd": 1804.09,
+      "sourceRanges": [
+        [
+          1798.61,
+          1804.09
+        ]
+      ],
+      "cueIds": [
+        212
+      ],
+      "text": "这就是今天分享的两套工作流和模型搭配",
+      "note": "",
+      "en": "Those are the two workflows and model combinations I wanted to share today",
+      "targetRanges": [
+        [
+          598.51,
+          601.833
+        ],
+        [
+          601.833,
+          603.523
+        ]
+      ],
+      "boundSourceSpeech": "好这就是我今天要给大家分享的两套工作流以及我的模型的搭配"
+    },
+    {
+      "id": "caption-189",
+      "start": 603.612,
+      "end": 604.883,
+      "targetStart": 603.612,
+      "targetEnd": 604.883,
+      "sourceStart": 1807.58,
+      "sourceEnd": 1808.7,
+      "sourceRanges": [
+        [
+          1807.58,
+          1808.7
+        ]
+      ],
+      "cueIds": [
+        213
+      ],
+      "text": "希望大家给一个三连",
+      "note": "",
+      "en": "Please support the video with a like comment and favorite",
+      "targetRanges": [
+        [
+          603.68,
+          604.8
+        ]
+      ],
+      "boundSourceSpeech": "希望大家给一个三连"
+    },
+    {
+      "id": "caption-190",
+      "start": 604.883,
+      "end": 610.543,
+      "targetStart": 604.883,
+      "targetEnd": 610.543,
+      "sourceStart": 1824.88,
+      "sourceEnd": 1830.84,
+      "sourceRanges": [
+        [
+          1824.88,
+          1830.84
+        ]
+      ],
+      "cueIds": [
+        214
+      ],
+      "text": "下一期会分享资产图的制作心得",
+      "note": "",
+      "en": "Next time I'll share what I learned about creating asset images",
+      "targetRanges": [
+        [
+          604.947,
+          608.933
+        ],
+        [
+          608.933,
+          610.473
+        ]
+      ],
+      "boundSourceSpeech": "下一期视频我会给大家分享关于这个资产图我制作的一些心得体验啊"
+    },
+    {
+      "id": "caption-191",
+      "start": 610.543,
+      "end": 615.44,
+      "targetStart": 610.543,
+      "targetEnd": 615.44,
+      "sourceStart": 1831.16,
+      "sourceEnd": 1836.31,
+      "sourceRanges": [
+        [
+          1831.16,
+          1836.31
+        ]
+      ],
+      "cueIds": [
+        215
+      ],
+      "text": "包括素体资产 服装资产和形象资产",
+      "note": "用户已确认“素体资产”",
+      "en": "including base-body clothing and character assets",
+      "targetRanges": [
+        [
+          610.593,
+          611.633
+        ],
+        [
+          611.633,
+          614.6
+        ],
+        [
+          614.6,
+          615.41
+        ]
+      ],
+      "boundSourceSpeech": "就是这种关于数据资产啊服装资产和形象资产"
+    },
+    {
+      "id": "caption-192",
+      "start": 615.44,
+      "end": 620.69,
+      "targetStart": 615.44,
+      "targetEnd": 620.69,
+      "sourceStart": 1836.35,
+      "sourceEnd": 1843.83,
+      "sourceRanges": [
+        [
+          1836.35,
+          1838.71
+        ],
+        [
+          1840.23,
+          1843.83
+        ]
+      ],
+      "cueIds": [
+        215,
+        216
+      ],
+      "text": "还有我研究出来的一些图片技巧",
+      "note": "",
+      "en": "along with some image techniques I developed",
+      "targetRanges": [
+        [
+          615.45,
+          616
+        ],
+        [
+          616,
+          617.443
+        ],
+        [
+          617.597,
+          619
+        ],
+        [
+          619,
+          620.63
+        ]
+      ],
+      "boundSourceSpeech": "还有我研究出来的这个关于图片的一些技巧"
+    },
+    {
+      "id": "caption-193",
+      "start": 620.69,
+      "end": 623.05,
+      "targetStart": 620.69,
+      "targetEnd": 623.05,
+      "sourceStart": 1844.23,
+      "sourceEnd": 1846.47,
+      "sourceRanges": [
+        [
+          1844.23,
+          1846.47
+        ]
+      ],
+      "cueIds": [
+        216
+      ],
+      "text": "也就是怎么把图片做得更好看",
+      "note": "",
+      "en": "in other words how to make the images look better",
+      "targetRanges": [
+        [
+          620.73,
+          622.97
+        ]
+      ],
+      "boundSourceSpeech": "就是怎么把这个图片做得更好看"
+    },
+    {
+      "id": "caption-194",
+      "start": 623.05,
+      "end": 625.955,
+      "targetStart": 623.05,
+      "targetEnd": 625.955,
+      "sourceStart": 1847.11,
+      "sourceEnd": 1850.64,
+      "sourceRanges": [
+        [
+          1847.11,
+          1849.31
+        ],
+        [
+          1850.24,
+          1850.64
+        ]
+      ],
+      "cueIds": [
+        217,
+        218
+      ],
+      "text": "比如这是我最开始做的画面",
+      "note": "",
+      "en": "For example this was one of my earliest images",
+      "targetRanges": [
+        [
+          623.11,
+          625.31
+        ],
+        [
+          625.473,
+          625.873
+        ]
+      ],
+      "boundSourceSpeech": "比如说这个是我最开头做的一个画面"
+    },
+    {
+      "id": "caption-195",
+      "start": 625.955,
+      "end": 628.28,
+      "targetStart": 625.955,
+      "targetEnd": 628.28,
+      "sourceStart": 1876.05,
+      "sourceEnd": 1878.25,
+      "sourceRanges": [
+        [
+          1876.05,
+          1878.25
+        ]
+      ],
+      "cueIds": [
+        220
+      ],
+      "text": "可以看到这组画面",
+      "note": "",
+      "en": "You can see this group of images",
+      "targetRanges": [
+        [
+          626.017,
+          628.217
+        ]
+      ],
+      "boundSourceSpeech": "可以看到我们的这个画面里"
+    },
+    {
+      "id": "caption-196",
+      "start": 628.28,
+      "end": 631.613,
+      "targetStart": 628.28,
+      "targetEnd": 631.613,
+      "sourceStart": 1878.69,
+      "sourceEnd": 1881.89,
+      "sourceRanges": [
+        [
+          1878.69,
+          1881.89
+        ]
+      ],
+      "cueIds": [
+        220
+      ],
+      "text": "右边是最开始的版本 人物非常死板",
+      "note": "",
+      "en": "The version on the right was the earliest and the character looks very stiff",
+      "targetRanges": [
+        [
+          628.323,
+          631.523
+        ]
+      ],
+      "boundSourceSpeech": "右边的是我最开始做的啊人物非常死板"
+    },
+    {
+      "id": "caption-197",
+      "start": 631.613,
+      "end": 634.533,
+      "targetStart": 631.613,
+      "targetEnd": 634.533,
+      "sourceStart": 1882.25,
+      "sourceEnd": 1885.05,
+      "sourceRanges": [
+        [
+          1882.25,
+          1885.05
+        ]
+      ],
+      "cueIds": [
+        221
+      ],
+      "text": "中间这个版本要好一些",
+      "note": "",
+      "en": "The middle version is a little better",
+      "targetRanges": [
+        [
+          631.683,
+          634.483
+        ]
+      ],
+      "boundSourceSpeech": "然后这个人物呢就显得要好一些了"
+    },
+    {
+      "id": "caption-198",
+      "start": 634.62,
+      "end": 638.66,
+      "targetStart": 634.62,
+      "targetEnd": 638.66,
+      "sourceStart": 1885.25,
+      "sourceEnd": 1889.25,
+      "sourceRanges": [
+        [
+          1885.25,
+          1889.25
+        ]
+      ],
+      "cueIds": [
+        222
+      ],
+      "text": "而最左边是我现在使用的结构",
+      "note": "",
+      "en": "The far-left version uses my current structure",
+      "targetRanges": [
+        [
+          634.65,
+          638.65
+        ]
+      ],
+      "boundSourceSpeech": "然后呢相比于右边来说这个人物跟左边的这一幅"
+    },
+    {
+      "id": "caption-199",
+      "start": 638.66,
+      "end": 643.268,
+      "targetStart": 638.66,
+      "targetEnd": 643.268,
+      "sourceStart": 1889.25,
+      "sourceEnd": 1893.89,
+      "sourceRanges": [
+        [
+          1889.25,
+          1893.89
+        ]
+      ],
+      "cueIds": [
+        222
+      ],
+      "text": "效果又更好一些",
+      "note": "",
+      "en": "and the result is even better",
+      "targetRanges": [
+        [
+          638.65,
+          639.6
+        ],
+        [
+          639.6,
+          643.19
+        ]
+      ],
+      "boundSourceSpeech": "我最现在的这套结构它要更要更好一些了对吧"
+    },
+    {
+      "id": "caption-200",
+      "start": 643.268,
+      "end": 647.53,
+      "targetStart": 643.268,
+      "targetEnd": 647.53,
+      "sourceStart": 1901.06,
+      "sourceEnd": 1905.38,
+      "sourceRanges": [
+        [
+          1901.06,
+          1905.38
+        ]
+      ],
+      "cueIds": [
+        223
+      ],
+      "text": "资产相关内容可能会在下一期分享",
+      "note": "",
+      "en": "I may cover the asset-related content in the next video",
+      "targetRanges": [
+        [
+          643.327,
+          644.367
+        ],
+        [
+          644.367,
+          647.48
+        ]
+      ],
+      "boundSourceSpeech": "然后呢这是可能下一期给大家分享的关于资产的"
+    },
+    {
+      "id": "caption-201",
+      "start": 647.65,
+      "end": 655.41,
+      "targetStart": 647.65,
+      "targetEnd": 655.41,
+      "sourceStart": 1905.58,
+      "sourceEnd": 1913.5,
+      "sourceRanges": [
+        [
+          1905.58,
+          1913.5
+        ]
+      ],
+      "cueIds": [
+        223
+      ],
+      "text": "再下一期可能会讲如何用 MiniMax H3 制作动画",
+      "note": "",
+      "en": "The video after that may cover animation with MiniMax H3",
+      "targetRanges": [
+        [
+          647.68,
+          652.267
+        ],
+        [
+          652.267,
+          655.333
+        ]
+      ],
+      "boundSourceSpeech": "然后再再下下期呢可能还会给大家分享一下关于Minimax去制作动画的这相关的一些内容"
+    },
+    {
+      "id": "caption-202",
+      "start": 655.41,
+      "end": 658.117,
+      "targetStart": 655.41,
+      "targetEnd": 658.117,
+      "sourceStart": 1914,
+      "sourceEnd": 1916.64,
+      "sourceRanges": [
+        [
+          1914,
+          1916.64
+        ]
+      ],
+      "cueIds": [
+        224
+      ],
+      "text": "就像前几期视频讲过的",
+      "note": "",
+      "en": "As I mentioned in earlier videos",
+      "targetRanges": [
+        [
+          655.467,
+          658.107
+        ]
+      ],
+      "boundSourceSpeech": "因为就像我前面几期视频给大家讲的"
+    },
+    {
+      "id": "caption-203",
+      "start": 658.117,
+      "end": 661.377,
+      "targetStart": 658.117,
+      "targetEnd": 661.377,
+      "sourceStart": 1916.64,
+      "sourceEnd": 1919.84,
+      "sourceRanges": [
+        [
+          1916.64,
+          1919.84
+        ]
+      ],
+      "cueIds": [
+        224
+      ],
+      "text": "MiniMax H3 的动画效果非常好",
+      "note": "",
+      "en": "MiniMax H3 produces excellent animation",
+      "targetRanges": [
+        [
+          658.107,
+          661.307
+        ]
+      ],
+      "boundSourceSpeech": "MiniMaxH3制作动画的效果是非常好的"
+    },
+    {
+      "id": "caption-204",
+      "start": 661.377,
+      "end": 665.648,
+      "targetStart": 661.377,
+      "targetEnd": 665.648,
+      "sourceStart": 1920.36,
+      "sourceEnd": 1924.76,
+      "sourceRanges": [
+        [
+          1920.36,
+          1924.76
+        ]
+      ],
+      "cueIds": [
+        224
+      ],
+      "text": "也适合博主做知识讲解等内容",
+      "note": "",
+      "en": "It also works well for creator-led educational content",
+      "targetRanges": [
+        [
+          661.427,
+          662.533
+        ],
+        [
+          662.533,
+          665.56
+        ]
+      ],
+      "boundSourceSpeech": "包括我们做博主的知识讲解或者是相关的一些内容"
+    },
+    {
+      "id": "caption-205",
+      "start": 665.648,
+      "end": 669.467,
+      "targetStart": 665.648,
+      "targetEnd": 669.467,
+      "sourceStart": 1929.65,
+      "sourceEnd": 1933.65,
+      "sourceRanges": [
+        [
+          1929.65,
+          1933.65
+        ]
+      ],
+      "cueIds": [
+        225
+      ],
+      "text": "我用 Seedance 2.5 和 Wan 3",
+      "note": "",
+      "en": "I compared Seedance 2.5 and Wan 3",
+      "targetRanges": [
+        [
+          665.717,
+          668.467
+        ],
+        [
+          668.467,
+          669.417
+        ]
+      ],
+      "boundSourceSpeech": "我拿C零十二点五还有One三"
+    },
+    {
+      "id": "caption-206",
+      "start": 669.56,
+      "end": 672.08,
+      "targetStart": 669.56,
+      "targetEnd": 672.08,
+      "sourceStart": 1934.09,
+      "sourceEnd": 1936.57,
+      "sourceRanges": [
+        [
+          1934.09,
+          1936.57
+        ]
+      ],
+      "cueIds": [
+        225
+      ],
+      "text": "与 MiniMax H3 做了对比",
+      "note": "三个模型名均已确认",
+      "en": "against MiniMax H3",
+      "targetRanges": [
+        [
+          669.59,
+          672.07
+        ]
+      ],
+      "boundSourceSpeech": "还有这个MinimaxX三做对比"
+    },
+    {
+      "id": "caption-207",
+      "start": 672.08,
+      "end": 676.512,
+      "targetStart": 672.08,
+      "targetEnd": 676.512,
+      "sourceStart": 1936.57,
+      "sourceEnd": 1941.16,
+      "sourceRanges": [
+        [
+          1936.57,
+          1941.16
+        ]
+      ],
+      "cueIds": [
+        225
+      ],
+      "text": "我发现 MiniMax H3 的表现更好",
+      "note": "",
+      "en": "and found that MiniMax H3 performs better",
+      "targetRanges": [
+        [
+          672.07,
+          675.733
+        ],
+        [
+          675.733,
+          676.427
+        ]
+      ],
+      "boundSourceSpeech": "我发现MinimaxX三的效果都是比它们叫好的"
+    },
+    {
+      "id": "caption-208",
+      "start": 676.512,
+      "end": 678.41,
+      "targetStart": 676.512,
+      "targetEnd": 678.41,
+      "sourceStart": 1942.71,
+      "sourceEnd": 1944.47,
+      "sourceRanges": [
+        [
+          1942.71,
+          1944.47
+        ]
+      ],
+      "cueIds": [
+        226
+      ],
+      "text": "至少从动画效果来看",
+      "note": "",
+      "en": "at least in terms of animation",
+      "targetRanges": [
+        [
+          676.577,
+          678.337
+        ]
+      ],
+      "boundSourceSpeech": "至少从动画这个角度来说"
+    },
+    {
+      "id": "caption-209",
+      "start": 678.41,
+      "end": 681.662,
+      "targetStart": 678.41,
+      "targetEnd": 681.662,
+      "sourceStart": 1946.53,
+      "sourceEnd": 1949.81,
+      "sourceRanges": [
+        [
+          1946.53,
+          1949.81
+        ]
+      ],
+      "cueIds": [
+        227
+      ],
+      "text": "它更能理解我想表达的内容",
+      "note": "",
+      "en": "It understands what I want to express more accurately",
+      "targetRanges": [
+        [
+          678.463,
+          680.333
+        ],
+        [
+          680.333,
+          681.577
+        ]
+      ],
+      "boundSourceSpeech": "它能够更明白我想表达的内容"
+    },
+    {
+      "id": "caption-210",
+      "start": 681.662,
+      "end": 685.33,
+      "targetStart": 681.662,
+      "targetEnd": 685.33,
+      "sourceStart": 1953.96,
+      "sourceEnd": 1960.92,
+      "sourceRanges": [
+        [
+          1953.96,
+          1955.72
+        ],
+        [
+          1957.54,
+          1958.18
+        ],
+        [
+          1960.04,
+          1960.92
+        ]
+      ],
+      "cueIds": [
+        228,
+        229,
+        230
+      ],
+      "text": "具体演示和讲解留到下期",
+      "note": "",
+      "en": "I'll save the detailed demo and explanation for next time",
+      "targetRanges": [
+        [
+          681.727,
+          683.487
+        ],
+        [
+          683.64,
+          684.28
+        ],
+        [
+          684.44,
+          685.32
+        ]
+      ],
+      "boundSourceSpeech": "好那么我们下期视频再给大家演示和讲解"
+    },
+    {
+      "id": "caption-211",
+      "start": 685.33,
+      "end": 687.09,
+      "targetStart": 685.33,
+      "targetEnd": 687.09,
+      "sourceStart": 1960.92,
+      "sourceEnd": 1962.64,
+      "sourceRanges": [
+        [
+          1960.92,
+          1962.64
+        ]
+      ],
+      "cueIds": [
+        230
+      ],
+      "text": "我们下期再见 拜拜",
+      "note": "",
+      "en": "See you in the next video bye",
+      "targetRanges": [
+        [
+          685.32,
+          687.04
+        ]
+      ],
+      "boundSourceSpeech": "我们下期视频再见拜拜"
+    }
+  ],
+  "systemEvents": [
+    {
+      "sourceStart": 1206.11,
+      "sourceEnd": 1211.19,
+      "sourceRanges": [
+        [
+          1206.11,
+          1211.19
+        ]
+      ],
+      "targetStart": 368.71,
+      "targetEnd": 373.79,
+      "text": "【系统声音演示 不显示字幕】",
+      "cueId": 139,
+      "cueIds": [
+        139,
+        140
+      ],
+      "note": "用户指定只保留系统声音",
+      "isEvent": true,
+      "targetRanges": [
+        [
+          368.71,
+          373.79
+        ]
+      ]
+    },
+    {
+      "sourceStart": 1243.86,
+      "sourceEnd": 1247.5,
+      "sourceRanges": [
+        [
+          1243.86,
+          1247.5
+        ]
+      ],
+      "targetStart": 383.627,
+      "targetEnd": 387.367,
+      "text": "【系统声音演示 不显示字幕】",
+      "cueId": 0,
+      "cueIds": [],
+      "note": "持续系统声音",
+      "isEvent": true,
+      "targetRanges": [
+        [
+          383.627,
+          383.7
+        ],
+        [
+          383.727,
+          387.367
+        ]
+      ]
+    }
+  ]
+}

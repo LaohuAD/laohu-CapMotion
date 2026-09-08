@@ -1,0 +1,211 @@
+If you've recently been trying MiniMax H3
+to replace Seedance 2.5 for live-action filmmaking
+but found that the generated faces look very oily
+this is the result of my repeated testing over the past few days
+The image no longer looks as oily
+The character's pauses emotions and emphasis
+also come through very well
+And generation is fast
+A 15-second video at 832 resolution
+takes only 10 to 12 minutes to generate
+In this video I'll show you exactly how I did it
+The key is the first pass and the second pass
+Many creators have already covered them
+but I found that they missed the real key
+Today I'll break down the two workflows I developed
+one for multi-reference generation
+and one for digital humans
+and walk you through both in full
+This video is divided into two parts
+One part is for beginners
+The other is for advanced users who can build workflows
+The beginner section explains how to use both workflows
+including how to set reference images video and audio
+how to write the prompt
+and how to set resolution and duration
+If you already know how to build workflows
+you can click the progress bar below
+and jump straight to the advanced section
+Now let's walk through the workflow
+The left side is the parameter input area
+The right side is the execution area
+We already have three reference images
+To add a fourth reference image
+click Yes and then click the arrow
+It will switch to the fourth image slot
+Then upload the image
+If you don't need it just turn it off
+Reference video and audio work the same way
+The left side contains duration and prompt inputs
+Below are the two-stage sampling settings
+Set the duration on the left up to 15 seconds
+Enter the prompt here
+What actions the character performs
+what the character says
+what emotion the character shows
+and how the camera moves
+are all written into this prompt
+Below are the outputs for the first and second passes
+Set the first pass to about 0.5 to 0.6
+Set the second pass to 0.9 to 1.2
+These are the settings from my tests
+If you enter 2.0 for the second pass it will crash
+This may be model-related
+You can test the exact values yourself
+I think 0.9 to 1.2 is enough
+The 0.6 and 1.2 values here
+match the values in the first column on the left
+Resolution corresponds to the far-right column
+Choose the aspect ratio here
+After selecting it click Run in the upper right
+For longer videos I recommend Plus
+I've run out of VRAM several times before
+Plus is more stable
+That covers the beginner section
+Now we come to the most important part of this workflow
+the first pass and the second pass
+First you need to understand what each one does
+Many creators have already explained both passes
+The first pass locks in the overall composition
+The second pass further refines that composition
+My key change to this workflow is in the Sigma values
+Normally the first pass produces a fully detailed image
+But my first-pass result here is very blurry
+The character outline and overall composition are still clear
+I use four steps for the first pass and five for the second
+The first pass ends at 0.9231
+The second pass starts at 0.9231 and ends at 0
+You can think of it as sampling in stages
+Everything before 0.9231 is the first pass
+The first pass outputs a Latent
+which is then resampled by the second-pass sampler
+That's the basic logic
+The most important point here is
+The first-pass output must use the denoised output
+The other output will not work
+The denoised output is only a preview output
+It has not actually finished sampling
+It is also different from the direct output
+The direct output is nothing but noise
+It leaves room for the second pass to continue
+Then it goes through latent-space upscaling
+This node was open-sourced by NVIDIA
+Its parameters match the node shown here
+It also supports scaling by a multiplier
+I haven't studied the technical details
+but these two nodes seem quite similar
+The old high-resolution upscale used RTX image upscaling
+Now it uses latent-space upscaling instead
+Four steps in the first pass and five in the second
+make nine steps for the complete process
+The two passes only affect generation speed
+Reducing facial oiliness depends on this model combination
+This is the base model
+This merged model is B25-49
+There is also a B20-49 merged model
+B25-49 leans more toward the reference image
+Then I add a realistic portrait LoRA
+This is the acceleration model
+Increase the acceleration model's value
+and the image becomes sharper
+Decrease the value
+and the image becomes softer
+with a film-like grain
+After passing through two attention nodes
+it enters the Dual Clock node
+It does not sample audio and video separately
+Instead within the same sampling process
+it uses different sampling rates for audio and video
+You can see that the first-pass result is out of sync
+This is the result of the Dual Clock setup
+Now look at this shot
+The hammer passes through the head causing clipping
+I see this as both a flaw and an advantage
+This is not a model or node problem
+It is a prompt problem
+Now let's examine the structure of this prompt
+This prompt was generated by my agent
+I did not edit it manually
+But it contains some problems
+For example this sentence
+He pulls the hammer back
+and rests it on his right shoulder
+Now look at this sentence
+He raises the hammer handle diagonally over his right shoulder
+Earlier it also says
+his right hand grips the off-screen hammer handle
+while his left hand grips a higher position
+Later it mentions an oversized toy hammer
+What result does this create
+How will the AI interpret this oversized toy hammer
+It needs to fill the frame
+Here it also requires the right hand to hold the hammer
+The model wants to show the entire hammer
+so the handle must be in the right hand and the head on the left
+To show the entire hammer
+It can only enter from the right side of the frame (verbal slip)
+because the prompt never specifies the direction
+It also doesn't say whether the hammer enters from the left or right
+The swing direction is not specified either
+So the model can only guess
+and this is the result it generates
+The right hand holds the handle and the hammer head appears on the left
+so the whole hammer can fit in the frame
+When the swing shot arrives it clips straight through the character
+That's my analysis of the prompt issue
+That concludes the multi-reference workflow
+Now let's look at the digital-human workflow
+I covered this in the previous video
+including how to build the overall architecture
+The basic structure stays the same with only two Sigma values replaced
+I also replace the models here
+The base setup uses Feihou's base and acceleration models
+Why not use the model combination I tested before
+Because that combination only works well near the middle value
+The higher the acceleration model's value
+the sharper the image and the oilier the face
+The lower the value the softer the image
+with a camera-lens-like grain
+The advantage of this model combination
+is that it expresses the character's emotions clearly
+Let's return to the prompt in the multi-reference workflow
+This sentence says
+The volume rises noticeably and the articulation becomes harder
+The emphasis falls on “one hammer” and “smash you to death”
+So the emotional shift is very easy to feel
+That's why I chose this combination
+The tradeoff is balancing clarity against an oily look
+So why do I use this model combination
+Its advantage is a clearer image
+Its drawback is softer speaking emotion
+The delivery sounds weak and limp
+Let's compare the two videos
+So in the digital-human workflow
+the audio is imported and does not rely on the model's speaking emotion
+I care more about image clarity
+so I ultimately chose this combination
+You can test it for yourself
+Those are the two workflows and model combinations I wanted to share today
+Please support the video with a like comment and favorite
+Next time I'll share what I learned about creating asset images
+including base-body clothing and character assets
+along with some image techniques I developed
+in other words how to make the images look better
+For example this was one of my earliest images
+You can see this group of images
+The version on the right was the earliest and the character looks very stiff
+The middle version is a little better
+The far-left version uses my current structure
+and the result is even better
+I may cover the asset-related content in the next video
+The video after that may cover animation with MiniMax H3
+As I mentioned in earlier videos
+MiniMax H3 produces excellent animation
+It also works well for creator-led educational content
+I compared Seedance 2.5 and Wan 3
+against MiniMax H3
+and found that MiniMax H3 performs better
+at least in terms of animation
+It understands what I want to express more accurately
+I'll save the detailed demo and explanation for next time
+See you in the next video bye

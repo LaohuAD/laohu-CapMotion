@@ -1,0 +1,111 @@
+{
+  "selectedWordCount": 213,
+  "selectedWordPartialCount": 0,
+  "finalAsrVirtualCaptionCount": 211,
+  "finalAsrFlagCount": 4,
+  "finalAsrFlags": [
+    {
+      "id": "caption-76",
+      "virtualText": "一采在 0.9231 结束",
+      "sourceRanges": [
+        [
+          750.74,
+          757.47
+        ]
+      ],
+      "targetRanges": [
+        [
+          217.907,
+          219.467
+        ],
+        [
+          219.467,
+          220.833
+        ],
+        [
+          220.833,
+          221.77
+        ]
+      ],
+      "expectedSourceSpeech": "一彩的sigma值是是不到了零点9231",
+      "renderedAsrSpeech": "一彩的sigma值是4步到了0.9231",
+      "sourceRetentionScore": 0.8
+    },
+    {
+      "id": "caption-103",
+      "virtualText": "底模用的是这个",
+      "sourceRanges": [
+        [
+          1062.92,
+          1064.52
+        ]
+      ],
+      "targetRanges": [
+        [
+          315.287,
+          316.887
+        ]
+      ],
+      "expectedSourceSpeech": "底膜呢就是用的这个哦",
+      "renderedAsrSpeech": "底模呢就是用的这个",
+      "sourceRetentionScore": 0.8
+    },
+    {
+      "id": "caption-104",
+      "virtualText": "这个融合模型是 B25-49",
+      "sourceRanges": [
+        [
+          1066.36,
+          1072.57
+        ]
+      ],
+      "targetRanges": [
+        [
+          317.027,
+          317.833
+        ],
+        [
+          317.833,
+          319.9
+        ],
+        [
+          319.9,
+          320.87
+        ]
+      ],
+      "expectedSourceSpeech": "融合模型这个呢是B25我要听四十九城",
+      "renderedAsrSpeech": "融合模型这个呢是B25和49层",
+      "sourceRetentionScore": 0.611
+    },
+    {
+      "id": "caption-205",
+      "virtualText": "我用 Seedance 2.5 和 Wan 3",
+      "sourceRanges": [
+        [
+          1929.65,
+          1933.65
+        ]
+      ],
+      "targetRanges": [
+        [
+          665.717,
+          668.467
+        ],
+        [
+          668.467,
+          669.417
+        ]
+      ],
+      "expectedSourceSpeech": "我拿C零十二点五还有One三",
+      "renderedAsrSpeech": "我拿C.12.5还有One3",
+      "sourceRetentionScore": 0.571
+    }
+  ],
+  "interpretation": "四项均为专名、数字或同音 ASR 差异；未发现虚拟剪辑所需语音缺失。",
+  "captionCoverage": {
+    "captionCount": 211,
+    "systemEventCount": 2,
+    "uncoveredSpeechWordCount": 0,
+    "subtitleOverlapCount": 0
+  }
+}

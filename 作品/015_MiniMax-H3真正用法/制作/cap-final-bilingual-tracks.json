@@ -1,0 +1,3411 @@
+{
+  "schema": "laohu.cap-caption-tracks/1",
+  "tracks": [
+    {
+      "id": "zh-CN",
+      "label": "中文字幕",
+      "language": "zh-CN",
+      "style": {
+        "fontSize": 64,
+        "position": "manual",
+        "manualPosition": {
+          "x": 0.5,
+          "y": 0.92
+        }
+      },
+      "segments": [
+        {
+          "id": "caption-1-zh",
+          "pairId": "caption-1",
+          "start": 0.04,
+          "end": 2.76,
+          "text": "如果你最近正在尝试用 MiniMax H3",
+          "words": []
+        },
+        {
+          "id": "caption-2-zh",
+          "pairId": "caption-2",
+          "start": 2.847,
+          "end": 7.198,
+          "text": "取代 Seedance 2.5 制作真人影视剧",
+          "words": []
+        },
+        {
+          "id": "caption-3-zh",
+          "pairId": "caption-3",
+          "start": 7.198,
+          "end": 10.168,
+          "text": "却发现生成的人物脸部很油腻",
+          "words": []
+        },
+        {
+          "id": "caption-4-zh",
+          "pairId": "caption-4",
+          "start": 10.168,
+          "end": 13.447,
+          "text": "这就是我这几天反复测试出来的一个效果",
+          "words": []
+        },
+        {
+          "id": "caption-5-zh",
+          "pairId": "caption-5",
+          "start": 13.447,
+          "end": 14.56,
+          "text": "画面没有那么油",
+          "words": []
+        },
+        {
+          "id": "caption-6-zh",
+          "pairId": "caption-6",
+          "start": 14.68,
+          "end": 17.137,
+          "text": "人物的停顿情绪和重音",
+          "words": []
+        },
+        {
+          "id": "caption-7-zh",
+          "pairId": "caption-7",
+          "start": 17.137,
+          "end": 19.08,
+          "text": "也都能很好地表现出来",
+          "words": []
+        },
+        {
+          "id": "caption-8-zh",
+          "pairId": "caption-8",
+          "start": 19.08,
+          "end": 20.623,
+          "text": "而且生成速度还很快",
+          "words": []
+        },
+        {
+          "id": "caption-9-zh",
+          "pairId": "caption-9",
+          "start": 20.72,
+          "end": 23.038,
+          "text": "15 秒视频 832 分辨率",
+          "words": []
+        },
+        {
+          "id": "caption-10-zh",
+          "pairId": "caption-10",
+          "start": 23.038,
+          "end": 26.39,
+          "text": "生成时间只要 10 到 12 分钟",
+          "words": []
+        },
+        {
+          "id": "caption-11-zh",
+          "pairId": "caption-11",
+          "start": 26.39,
+          "end": 29.61,
+          "text": "这期视频我会给你分享一下我是怎么做的",
+          "words": []
+        },
+        {
+          "id": "caption-12-zh",
+          "pairId": "caption-12",
+          "start": 29.61,
+          "end": 31.58,
+          "text": "其实核心就是一采跟二采",
+          "words": []
+        },
+        {
+          "id": "caption-13-zh",
+          "pairId": "caption-13",
+          "start": 31.58,
+          "end": 33.003,
+          "text": "很多博主其实都讲过",
+          "words": []
+        },
+        {
+          "id": "caption-14-zh",
+          "pairId": "caption-14",
+          "start": 33.003,
+          "end": 35.51,
+          "text": "但是我发现没有讲到核心的地方",
+          "words": []
+        },
+        {
+          "id": "caption-15-zh",
+          "pairId": "caption-15",
+          "start": 35.51,
+          "end": 38.563,
+          "text": "今天我就把研究出来的两套工作流",
+          "words": []
+        },
+        {
+          "id": "caption-16-zh",
+          "pairId": "caption-16",
+          "start": 38.563,
+          "end": 39.637,
+          "text": "一套多参的",
+          "words": []
+        },
+        {
+          "id": "caption-17-zh",
+          "pairId": "caption-17",
+          "start": 39.637,
+          "end": 40.717,
+          "text": "一套数字人的",
+          "words": []
+        },
+        {
+          "id": "caption-18-zh",
+          "pairId": "caption-18",
+          "start": 40.717,
+          "end": 43.312,
+          "text": "完整地给大家拆一遍",
+          "words": []
+        },
+        {
+          "id": "caption-19-zh",
+          "pairId": "caption-19",
+          "start": 43.312,
+          "end": 45.427,
+          "text": "本期视频会分成两个部分",
+          "words": []
+        },
+        {
+          "id": "caption-20-zh",
+          "pairId": "caption-20",
+          "start": 45.527,
+          "end": 47.167,
+          "text": "一部分针对小白",
+          "words": []
+        },
+        {
+          "id": "caption-21-zh",
+          "pairId": "caption-21",
+          "start": 47.167,
+          "end": 50.637,
+          "text": "另一部分面向有搭建能力的专业同学",
+          "words": []
+        },
+        {
+          "id": "caption-22-zh",
+          "pairId": "caption-22",
+          "start": 50.727,
+          "end": 55.163,
+          "text": "小白部分会讲这两套工作流怎么使用",
+          "words": []
+        },
+        {
+          "id": "caption-23-zh",
+          "pairId": "caption-23",
+          "start": 55.163,
+          "end": 57.33,
+          "text": "包括参考图视频和音频怎么设置",
+          "words": []
+        },
+        {
+          "id": "caption-24-zh",
+          "pairId": "caption-24",
+          "start": 57.33,
+          "end": 58.487,
+          "text": "提示词怎么写",
+          "words": []
+        },
+        {
+          "id": "caption-25-zh",
+          "pairId": "caption-25",
+          "start": 58.487,
+          "end": 60.357,
+          "text": "分辨率和时长怎么设置",
+          "words": []
+        },
+        {
+          "id": "caption-26-zh",
+          "pairId": "caption-26",
+          "start": 60.357,
+          "end": 62.47,
+          "text": "如果你本身会搭工作流的话",
+          "words": []
+        },
+        {
+          "id": "caption-27-zh",
+          "pairId": "caption-27",
+          "start": 62.47,
+          "end": 65.15,
+          "text": "那你可以直接点击下面的进度条",
+          "words": []
+        },
+        {
+          "id": "caption-28-zh",
+          "pairId": "caption-28",
+          "start": 65.15,
+          "end": 67.81,
+          "text": "然后直接跳转到后面的专业讲解部分",
+          "words": []
+        },
+        {
+          "id": "caption-29-zh",
+          "pairId": "caption-29",
+          "start": 67.893,
+          "end": 70.893,
+          "text": "下面进入工作流讲解",
+          "words": []
+        },
+        {
+          "id": "caption-30-zh",
+          "pairId": "caption-30",
+          "start": 70.98,
+          "end": 74.178,
+          "text": "左边部分是参数输入区",
+          "words": []
+        },
+        {
+          "id": "caption-31-zh",
+          "pairId": "caption-31",
+          "start": 74.178,
+          "end": 76.403,
+          "text": "右边部分是运行区域",
+          "words": []
+        },
+        {
+          "id": "caption-32-zh",
+          "pairId": "caption-32",
+          "start": 76.493,
+          "end": 78.453,
+          "text": "我们现在已经有三张参考图了",
+          "words": []
+        },
+        {
+          "id": "caption-33-zh",
+          "pairId": "caption-33",
+          "start": 78.453,
+          "end": 80.873,
+          "text": "如果想添加第四张参考图",
+          "words": []
+        },
+        {
+          "id": "caption-34-zh",
+          "pairId": "caption-34",
+          "start": 80.873,
+          "end": 83.8,
+          "text": "点一下 Yes 再点击箭头",
+          "words": []
+        },
+        {
+          "id": "caption-35-zh",
+          "pairId": "caption-35",
+          "start": 83.8,
+          "end": 86.073,
+          "text": "就会跳转到第四张图",
+          "words": []
+        },
+        {
+          "id": "caption-36-zh",
+          "pairId": "caption-36",
+          "start": 86.073,
+          "end": 89.47,
+          "text": "然后上传图片即可",
+          "words": []
+        },
+        {
+          "id": "caption-37-zh",
+          "pairId": "caption-37",
+          "start": 89.47,
+          "end": 91.983,
+          "text": "如果不需要就直接关闭",
+          "words": []
+        },
+        {
+          "id": "caption-38-zh",
+          "pairId": "caption-38",
+          "start": 91.983,
+          "end": 94.698,
+          "text": "参考视频和参考音频的用法也一样",
+          "words": []
+        },
+        {
+          "id": "caption-39-zh",
+          "pairId": "caption-39",
+          "start": 94.698,
+          "end": 98.135,
+          "text": "左边是运行时长和提示词输入",
+          "words": []
+        },
+        {
+          "id": "caption-40-zh",
+          "pairId": "caption-40",
+          "start": 98.135,
+          "end": 100.608,
+          "text": "下面是两阶段采样设置",
+          "words": []
+        },
+        {
+          "id": "caption-41-zh",
+          "pairId": "caption-41",
+          "start": 100.608,
+          "end": 104.877,
+          "text": "左边用于设置时长最长 15 秒",
+          "words": []
+        },
+        {
+          "id": "caption-42-zh",
+          "pairId": "caption-42",
+          "start": 104.877,
+          "end": 106.95,
+          "text": "这里用于输入提示词",
+          "words": []
+        },
+        {
+          "id": "caption-43-zh",
+          "pairId": "caption-43",
+          "start": 106.95,
+          "end": 108.243,
+          "text": "人物要做什么动作",
+          "words": []
+        },
+        {
+          "id": "caption-44-zh",
+          "pairId": "caption-44",
+          "start": 108.243,
+          "end": 109.14,
+          "text": "说什么话",
+          "words": []
+        },
+        {
+          "id": "caption-45-zh",
+          "pairId": "caption-45",
+          "start": 109.14,
+          "end": 110.453,
+          "text": "是什么样的情绪",
+          "words": []
+        },
+        {
+          "id": "caption-46-zh",
+          "pairId": "caption-46",
+          "start": 110.453,
+          "end": 111.873,
+          "text": "镜头如何运动",
+          "words": []
+        },
+        {
+          "id": "caption-47-zh",
+          "pairId": "caption-47",
+          "start": 111.873,
+          "end": 114.21,
+          "text": "都是在这个提示词里面去写入",
+          "words": []
+        },
+        {
+          "id": "caption-48-zh",
+          "pairId": "caption-48",
+          "start": 114.21,
+          "end": 118.938,
+          "text": "下面是一采和二采的输出设置",
+          "words": []
+        },
+        {
+          "id": "caption-49-zh",
+          "pairId": "caption-49",
+          "start": 118.938,
+          "end": 122.167,
+          "text": "一采数值大约设在 0.5 到 0.6",
+          "words": []
+        },
+        {
+          "id": "caption-50-zh",
+          "pairId": "caption-50",
+          "start": 122.167,
+          "end": 124.707,
+          "text": "二采设在 0.9 到 1.2",
+          "words": []
+        },
+        {
+          "id": "caption-51-zh",
+          "pairId": "caption-51",
+          "start": 124.707,
+          "end": 126.313,
+          "text": "这是我测试后的设置",
+          "words": []
+        },
+        {
+          "id": "caption-52-zh",
+          "pairId": "caption-52",
+          "start": 126.313,
+          "end": 131.338,
+          "text": "如果二采直接输入 2.0 运行就会崩",
+          "words": []
+        },
+        {
+          "id": "caption-53-zh",
+          "pairId": "caption-53",
+          "start": 131.338,
+          "end": 132.913,
+          "text": "这个可能跟模型有关",
+          "words": []
+        },
+        {
+          "id": "caption-54-zh",
+          "pairId": "caption-54",
+          "start": 132.913,
+          "end": 135.097,
+          "text": "具体参数大家可以自己测试",
+          "words": []
+        },
+        {
+          "id": "caption-55-zh",
+          "pairId": "caption-55",
+          "start": 135.097,
+          "end": 138.297,
+          "text": "我觉得 0.9 到 1.2 已经够了",
+          "words": []
+        },
+        {
+          "id": "caption-56-zh",
+          "pairId": "caption-56",
+          "start": 138.39,
+          "end": 140.377,
+          "text": "这里的 0.6 和 1.2",
+          "words": []
+        },
+        {
+          "id": "caption-57-zh",
+          "pairId": "caption-57",
+          "start": 140.377,
+          "end": 145.283,
+          "text": "对应左侧表格的第一列数值",
+          "words": []
+        },
+        {
+          "id": "caption-58-zh",
+          "pairId": "caption-58",
+          "start": 145.283,
+          "end": 147.603,
+          "text": "分辨率对应最右边一列",
+          "words": []
+        },
+        {
+          "id": "caption-59-zh",
+          "pairId": "caption-59",
+          "start": 147.693,
+          "end": 152.453,
+          "text": "这里用于选择画幅比例",
+          "words": []
+        },
+        {
+          "id": "caption-60-zh",
+          "pairId": "caption-60",
+          "start": 152.453,
+          "end": 156.493,
+          "text": "选择完成后点击右上角运行",
+          "words": []
+        },
+        {
+          "id": "caption-61-zh",
+          "pairId": "caption-61",
+          "start": 156.493,
+          "end": 159.91,
+          "text": "如果视频时长比较长建议选择 Plus",
+          "words": []
+        },
+        {
+          "id": "caption-62-zh",
+          "pairId": "caption-62",
+          "start": 159.91,
+          "end": 162.027,
+          "text": "我之前爆过几次显存",
+          "words": []
+        },
+        {
+          "id": "caption-63-zh",
+          "pairId": "caption-63",
+          "start": 162.107,
+          "end": 163.967,
+          "text": "Plus 会更稳定一些",
+          "words": []
+        },
+        {
+          "id": "caption-64-zh",
+          "pairId": "caption-64",
+          "start": 163.967,
+          "end": 167.967,
+          "text": "基础的小白部分已经讲完了",
+          "words": []
+        },
+        {
+          "id": "caption-65-zh",
+          "pairId": "caption-65",
+          "start": 168.053,
+          "end": 171.053,
+          "text": "接下来进入这套工作流最重要的部分",
+          "words": []
+        },
+        {
+          "id": "caption-66-zh",
+          "pairId": "caption-66",
+          "start": 171.053,
+          "end": 172.813,
+          "text": "也就是一采和二采",
+          "words": []
+        },
+        {
+          "id": "caption-67-zh",
+          "pairId": "caption-67",
+          "start": 172.813,
+          "end": 176.767,
+          "text": "先要理解它们各自的作用",
+          "words": []
+        },
+        {
+          "id": "caption-68-zh",
+          "pairId": "caption-68",
+          "start": 176.767,
+          "end": 179.14,
+          "text": "很多博主已经讲过一采和二采",
+          "words": []
+        },
+        {
+          "id": "caption-69-zh",
+          "pairId": "caption-69",
+          "start": 179.14,
+          "end": 184.252,
+          "text": "一采就是固定画面的整体构图",
+          "words": []
+        },
+        {
+          "id": "caption-70-zh",
+          "pairId": "caption-70",
+          "start": 184.252,
+          "end": 189.838,
+          "text": "二采则是在整体构图的基础上进一步细化",
+          "words": []
+        },
+        {
+          "id": "caption-71-zh",
+          "pairId": "caption-71",
+          "start": 189.838,
+          "end": 194.145,
+          "text": "我对这套工作流的关键修改就在 Sigma 值",
+          "words": []
+        },
+        {
+          "id": "caption-72-zh",
+          "pairId": "caption-72",
+          "start": 194.145,
+          "end": 201.877,
+          "text": "正常情况下一采会生成细节完整的画面",
+          "words": []
+        },
+        {
+          "id": "caption-73-zh",
+          "pairId": "caption-73",
+          "start": 201.877,
+          "end": 205.873,
+          "text": "但你看我这里的一采结果非常模糊",
+          "words": []
+        },
+        {
+          "id": "caption-74-zh",
+          "pairId": "caption-74",
+          "start": 205.873,
+          "end": 212.033,
+          "text": "不过人物轮廓和整体构图仍然很清楚",
+          "words": []
+        },
+        {
+          "id": "caption-75-zh",
+          "pairId": "caption-75",
+          "start": 212.033,
+          "end": 217.842,
+          "text": "我这里一采跑四步二采跑五步",
+          "words": []
+        },
+        {
+          "id": "caption-76-zh",
+          "pairId": "caption-76",
+          "start": 217.842,
+          "end": 221.85,
+          "text": "一采在 0.9231 结束",
+          "words": []
+        },
+        {
+          "id": "caption-77-zh",
+          "pairId": "caption-77",
+          "start": 221.85,
+          "end": 227.25,
+          "text": "二采从 0.9231 开始一直到 0 结束",
+          "words": []
+        },
+        {
+          "id": "caption-78-zh",
+          "pairId": "caption-78",
+          "start": 227.25,
+          "end": 232.313,
+          "text": "可以理解为分阶段完成采样",
+          "words": []
+        },
+        {
+          "id": "caption-79-zh",
+          "pairId": "caption-79",
+          "start": 232.313,
+          "end": 235.06,
+          "text": "0.9231 之前是一采",
+          "words": []
+        },
+        {
+          "id": "caption-80-zh",
+          "pairId": "caption-80",
+          "start": 235.143,
+          "end": 237.303,
+          "text": "一采输出的是 Latent",
+          "words": []
+        },
+        {
+          "id": "caption-81-zh",
+          "pairId": "caption-81",
+          "start": 237.387,
+          "end": 241.223,
+          "text": "再送入二采采样器进行重采样",
+          "words": []
+        },
+        {
+          "id": "caption-82-zh",
+          "pairId": "caption-82",
+          "start": 241.223,
+          "end": 242.643,
+          "text": "基本逻辑就是这样",
+          "words": []
+        },
+        {
+          "id": "caption-83-zh",
+          "pairId": "caption-83",
+          "start": 242.643,
+          "end": 245.303,
+          "text": "这里最重要的一点是",
+          "words": []
+        },
+        {
+          "id": "caption-84-zh",
+          "pairId": "caption-84",
+          "start": 245.303,
+          "end": 249.493,
+          "text": "一采输出必须接降噪输出",
+          "words": []
+        },
+        {
+          "id": "caption-85-zh",
+          "pairId": "caption-85",
+          "start": 249.573,
+          "end": 251.572,
+          "text": "接另一个输出就不行",
+          "words": []
+        },
+        {
+          "id": "caption-86-zh",
+          "pairId": "caption-86",
+          "start": 251.572,
+          "end": 254.557,
+          "text": "降噪输出只是预览输出",
+          "words": []
+        },
+        {
+          "id": "caption-87-zh",
+          "pairId": "caption-87",
+          "start": 254.637,
+          "end": 260.935,
+          "text": "它还没有真正完成采样",
+          "words": []
+        },
+        {
+          "id": "caption-88-zh",
+          "pairId": "caption-88",
+          "start": 260.935,
+          "end": 263.57,
+          "text": "它又不同于直接输出",
+          "words": []
+        },
+        {
+          "id": "caption-89-zh",
+          "pairId": "caption-89",
+          "start": 263.57,
+          "end": 266.53,
+          "text": "直接输出的全是噪点",
+          "words": []
+        },
+        {
+          "id": "caption-90-zh",
+          "pairId": "caption-90",
+          "start": 266.61,
+          "end": 271.7,
+          "text": "它为二采保留了继续输入的空间",
+          "words": []
+        },
+        {
+          "id": "caption-91-zh",
+          "pairId": "caption-91",
+          "start": 271.787,
+          "end": 274.267,
+          "text": "接着经过潜空间放大",
+          "words": []
+        },
+        {
+          "id": "caption-92-zh",
+          "pairId": "caption-92",
+          "start": 274.36,
+          "end": 280.92,
+          "text": "这个节点由英伟达开源",
+          "words": []
+        },
+        {
+          "id": "caption-93-zh",
+          "pairId": "caption-93",
+          "start": 280.92,
+          "end": 284.517,
+          "text": "它的参数与这里的节点相同",
+          "words": []
+        },
+        {
+          "id": "caption-94-zh",
+          "pairId": "caption-94",
+          "start": 284.517,
+          "end": 287.67,
+          "text": "也支持按倍数放大",
+          "words": []
+        },
+        {
+          "id": "caption-95-zh",
+          "pairId": "caption-95",
+          "start": 287.757,
+          "end": 289.047,
+          "text": "我没有研究技术细节",
+          "words": []
+        },
+        {
+          "id": "caption-96-zh",
+          "pairId": "caption-96",
+          "start": 289.047,
+          "end": 291.843,
+          "text": "但感觉这两个节点比较类似",
+          "words": []
+        },
+        {
+          "id": "caption-97-zh",
+          "pairId": "caption-97",
+          "start": 291.923,
+          "end": 297.67,
+          "text": "原来的高清放大使用 RTX 图像放大",
+          "words": []
+        },
+        {
+          "id": "caption-98-zh",
+          "pairId": "caption-98",
+          "start": 297.757,
+          "end": 299.908,
+          "text": "现在则换成潜空间放大",
+          "words": []
+        },
+        {
+          "id": "caption-99-zh",
+          "pairId": "caption-99",
+          "start": 299.908,
+          "end": 305.22,
+          "text": "一采四步二采五步",
+          "words": []
+        },
+        {
+          "id": "caption-100-zh",
+          "pairId": "caption-100",
+          "start": 305.22,
+          "end": 307.473,
+          "text": "总共九步完成整个过程",
+          "words": []
+        },
+        {
+          "id": "caption-101-zh",
+          "pairId": "caption-101",
+          "start": 307.56,
+          "end": 311.312,
+          "text": "一采和二采只影响生成速度",
+          "words": []
+        },
+        {
+          "id": "caption-102-zh",
+          "pairId": "caption-102",
+          "start": 311.312,
+          "end": 315.167,
+          "text": "人物脸部去油依靠的是这套模型搭配",
+          "words": []
+        },
+        {
+          "id": "caption-103-zh",
+          "pairId": "caption-103",
+          "start": 315.257,
+          "end": 316.967,
+          "text": "底模用的是这个",
+          "words": []
+        },
+        {
+          "id": "caption-104-zh",
+          "pairId": "caption-104",
+          "start": 316.967,
+          "end": 320.947,
+          "text": "这个融合模型是 B25-49",
+          "words": []
+        },
+        {
+          "id": "caption-105-zh",
+          "pairId": "caption-105",
+          "start": 320.947,
+          "end": 325.95,
+          "text": "另外还有一个 B20-49 的融合模型",
+          "words": []
+        },
+        {
+          "id": "caption-106-zh",
+          "pairId": "caption-106",
+          "start": 325.95,
+          "end": 331.33,
+          "text": "其中 B25-49 更偏向参考图",
+          "words": []
+        },
+        {
+          "id": "caption-107-zh",
+          "pairId": "caption-107",
+          "start": 331.33,
+          "end": 335.563,
+          "text": "后面再接一个真实人像 LoRA",
+          "words": []
+        },
+        {
+          "id": "caption-108-zh",
+          "pairId": "caption-108",
+          "start": 335.643,
+          "end": 338.273,
+          "text": "加速模型使用这个",
+          "words": []
+        },
+        {
+          "id": "caption-109-zh",
+          "pairId": "caption-109",
+          "start": 338.273,
+          "end": 341.143,
+          "text": "加速模型的数值调大",
+          "words": []
+        },
+        {
+          "id": "caption-110-zh",
+          "pairId": "caption-110",
+          "start": 341.227,
+          "end": 343.367,
+          "text": "画面会更锐",
+          "words": []
+        },
+        {
+          "id": "caption-111-zh",
+          "pairId": "caption-111",
+          "start": 343.367,
+          "end": 345.103,
+          "text": "数值调小",
+          "words": []
+        },
+        {
+          "id": "caption-112-zh",
+          "pairId": "caption-112",
+          "start": 345.103,
+          "end": 346.9,
+          "text": "画面会更朦胧",
+          "words": []
+        },
+        {
+          "id": "caption-113-zh",
+          "pairId": "caption-113",
+          "start": 346.9,
+          "end": 348.74,
+          "text": "还会有胶片般的颗粒感",
+          "words": []
+        },
+        {
+          "id": "caption-114-zh",
+          "pairId": "caption-114",
+          "start": 348.82,
+          "end": 353.793,
+          "text": "经过两个注意力节点",
+          "words": []
+        },
+        {
+          "id": "caption-115-zh",
+          "pairId": "caption-115",
+          "start": 353.89,
+          "end": 356.81,
+          "text": "再进入双时钟节点",
+          "words": []
+        },
+        {
+          "id": "caption-116-zh",
+          "pairId": "caption-116",
+          "start": 356.89,
+          "end": 358.605,
+          "text": "它不是把音频和画面分开采样",
+          "words": []
+        },
+        {
+          "id": "caption-117-zh",
+          "pairId": "caption-117",
+          "start": 358.605,
+          "end": 361.54,
+          "text": "而是在同一次采样中",
+          "words": []
+        },
+        {
+          "id": "caption-118-zh",
+          "pairId": "caption-118",
+          "start": 361.54,
+          "end": 368.673,
+          "text": "让音频和画面采用不同的采样频率",
+          "words": []
+        },
+        {
+          "id": "caption-119-zh",
+          "pairId": "caption-119",
+          "start": 373.85,
+          "end": 378.603,
+          "text": "可以看到一采的结果音画不同步",
+          "words": []
+        },
+        {
+          "id": "caption-120-zh",
+          "pairId": "caption-120",
+          "start": 378.683,
+          "end": 381.363,
+          "text": "这就是双时钟的结果",
+          "words": []
+        },
+        {
+          "id": "caption-121-zh",
+          "pairId": "caption-121",
+          "start": 381.363,
+          "end": 383.777,
+          "text": "接着再看这个画面",
+          "words": []
+        },
+        {
+          "id": "caption-122-zh",
+          "pairId": "caption-122",
+          "start": 387.407,
+          "end": 390.74,
+          "text": "锤子穿过脑袋发生了穿模",
+          "words": []
+        },
+        {
+          "id": "caption-123-zh",
+          "pairId": "caption-123",
+          "start": 390.74,
+          "end": 393.76,
+          "text": "我认为这既是缺点也是优点",
+          "words": []
+        },
+        {
+          "id": "caption-124-zh",
+          "pairId": "caption-124",
+          "start": 393.853,
+          "end": 396.933,
+          "text": "它不是模型或节点的问题",
+          "words": []
+        },
+        {
+          "id": "caption-125-zh",
+          "pairId": "caption-125",
+          "start": 397.013,
+          "end": 398.48,
+          "text": "而是提示词的问题",
+          "words": []
+        },
+        {
+          "id": "caption-126-zh",
+          "pairId": "caption-126",
+          "start": 398.48,
+          "end": 400.575,
+          "text": "然后我们看一下这个提示词的结构",
+          "words": []
+        },
+        {
+          "id": "caption-127-zh",
+          "pairId": "caption-127",
+          "start": 400.575,
+          "end": 405.82,
+          "text": "这个提示词由我的智能体生成",
+          "words": []
+        },
+        {
+          "id": "caption-128-zh",
+          "pairId": "caption-128",
+          "start": 405.82,
+          "end": 407.457,
+          "text": "我中间没有做过修改",
+          "words": []
+        },
+        {
+          "id": "caption-129-zh",
+          "pairId": "caption-129",
+          "start": 407.457,
+          "end": 409.497,
+          "text": "但这里面有一些问题",
+          "words": []
+        },
+        {
+          "id": "caption-130-zh",
+          "pairId": "caption-130",
+          "start": 409.497,
+          "end": 410.897,
+          "text": "比如这句话",
+          "words": []
+        },
+        {
+          "id": "caption-131-zh",
+          "pairId": "caption-131",
+          "start": 410.993,
+          "end": 413.427,
+          "text": "他把锤子收回",
+          "words": []
+        },
+        {
+          "id": "caption-132-zh",
+          "pairId": "caption-132",
+          "start": 413.52,
+          "end": 415.155,
+          "text": "并搭在右肩",
+          "words": []
+        },
+        {
+          "id": "caption-133-zh",
+          "pairId": "caption-133",
+          "start": 415.155,
+          "end": 416.43,
+          "text": "再看这句话",
+          "words": []
+        },
+        {
+          "id": "caption-134-zh",
+          "pairId": "caption-134",
+          "start": 416.51,
+          "end": 419.6,
+          "text": "他把锤柄斜举过右肩",
+          "words": []
+        },
+        {
+          "id": "caption-135-zh",
+          "pairId": "caption-135",
+          "start": 419.6,
+          "end": 421.273,
+          "text": "前面又写了",
+          "words": []
+        },
+        {
+          "id": "caption-136-zh",
+          "pairId": "caption-136",
+          "start": 421.273,
+          "end": 423.47,
+          "text": "右手握住画外锤柄",
+          "words": []
+        },
+        {
+          "id": "caption-137-zh",
+          "pairId": "caption-137",
+          "start": 423.557,
+          "end": 426.632,
+          "text": "左手握住更高的位置",
+          "words": []
+        },
+        {
+          "id": "caption-138-zh",
+          "pairId": "caption-138",
+          "start": 426.632,
+          "end": 429.507,
+          "text": "后面又写了一个超大的玩具锤",
+          "words": []
+        },
+        {
+          "id": "caption-139-zh",
+          "pairId": "caption-139",
+          "start": 429.507,
+          "end": 432.102,
+          "text": "这会产生什么结果呢",
+          "words": []
+        },
+        {
+          "id": "caption-140-zh",
+          "pairId": "caption-140",
+          "start": 432.102,
+          "end": 434.377,
+          "text": "AI 会怎样理解这个超大的玩具锤",
+          "words": []
+        },
+        {
+          "id": "caption-141-zh",
+          "pairId": "caption-141",
+          "start": 434.457,
+          "end": 436.478,
+          "text": "它就是要占满这个画面",
+          "words": []
+        },
+        {
+          "id": "caption-142-zh",
+          "pairId": "caption-142",
+          "start": 436.478,
+          "end": 440.168,
+          "text": "这里又要求右手拿住锤子",
+          "words": []
+        },
+        {
+          "id": "caption-143-zh",
+          "pairId": "caption-143",
+          "start": 440.168,
+          "end": 445.64,
+          "text": "模型想把整把锤子完整展示出来",
+          "words": []
+        },
+        {
+          "id": "caption-144-zh",
+          "pairId": "caption-144",
+          "start": 445.64,
+          "end": 450.112,
+          "text": "就只能让锤柄在右手锤头出现在左边",
+          "words": []
+        },
+        {
+          "id": "caption-145-zh",
+          "pairId": "caption-145",
+          "start": 450.112,
+          "end": 452.773,
+          "text": "为了完整展现整把锤子",
+          "words": []
+        },
+        {
+          "id": "caption-146-zh",
+          "pairId": "caption-146",
+          "start": 452.773,
+          "end": 456.752,
+          "text": "它只能从画面右边（口误）出现",
+          "words": []
+        },
+        {
+          "id": "caption-147-zh",
+          "pairId": "caption-147",
+          "start": 456.752,
+          "end": 459.177,
+          "text": "因为提示词没有明确描述方向",
+          "words": []
+        },
+        {
+          "id": "caption-148-zh",
+          "pairId": "caption-148",
+          "start": 459.177,
+          "end": 465.11,
+          "text": "也没说明锤子从左边还是右边进入画面",
+          "words": []
+        },
+        {
+          "id": "caption-149-zh",
+          "pairId": "caption-149",
+          "start": 465.11,
+          "end": 468.627,
+          "text": "挥舞方向同样没有描述",
+          "words": []
+        },
+        {
+          "id": "caption-150-zh",
+          "pairId": "caption-150",
+          "start": 468.71,
+          "end": 469.937,
+          "text": "所以模型只能靠猜",
+          "words": []
+        },
+        {
+          "id": "caption-151-zh",
+          "pairId": "caption-151",
+          "start": 469.937,
+          "end": 472.663,
+          "text": "最后就生成了这样的结果",
+          "words": []
+        },
+        {
+          "id": "caption-152-zh",
+          "pairId": "caption-152",
+          "start": 472.757,
+          "end": 477.053,
+          "text": "右手握锤柄左边出现锤头",
+          "words": []
+        },
+        {
+          "id": "caption-153-zh",
+          "pairId": "caption-153",
+          "start": 477.053,
+          "end": 478.717,
+          "text": "才能完整展现整把锤子",
+          "words": []
+        },
+        {
+          "id": "caption-154-zh",
+          "pairId": "caption-154",
+          "start": 478.717,
+          "end": 482.533,
+          "text": "结果到挥锤镜头时它直接穿模了",
+          "words": []
+        },
+        {
+          "id": "caption-155-zh",
+          "pairId": "caption-155",
+          "start": 482.533,
+          "end": 485.04,
+          "text": "这是我分析出的提示词原因",
+          "words": []
+        },
+        {
+          "id": "caption-156-zh",
+          "pairId": "caption-156",
+          "start": 485.04,
+          "end": 488.017,
+          "text": "多参工作流讲完了",
+          "words": []
+        },
+        {
+          "id": "caption-157-zh",
+          "pairId": "caption-157",
+          "start": 488.017,
+          "end": 490.637,
+          "text": "现在来看数字人",
+          "words": []
+        },
+        {
+          "id": "caption-158-zh",
+          "pairId": "caption-158",
+          "start": 490.727,
+          "end": 493.645,
+          "text": "上一期视频已经讲过",
+          "words": []
+        },
+        {
+          "id": "caption-159-zh",
+          "pairId": "caption-159",
+          "start": 493.645,
+          "end": 496.853,
+          "text": "整体架构怎么搭建",
+          "words": []
+        },
+        {
+          "id": "caption-160-zh",
+          "pairId": "caption-160",
+          "start": 496.853,
+          "end": 501.273,
+          "text": "基础内容不变只替换两个 Sigma 值",
+          "words": []
+        },
+        {
+          "id": "caption-161-zh",
+          "pairId": "caption-161",
+          "start": 501.273,
+          "end": 503.697,
+          "text": "同时替换这里的模型",
+          "words": []
+        },
+        {
+          "id": "caption-162-zh",
+          "pairId": "caption-162",
+          "start": 503.783,
+          "end": 511.222,
+          "text": "基础模型使用肥猴的底模和加速模型",
+          "words": []
+        },
+        {
+          "id": "caption-163-zh",
+          "pairId": "caption-163",
+          "start": 511.222,
+          "end": 517.593,
+          "text": "为什么不用之前测试好的模型搭配",
+          "words": []
+        },
+        {
+          "id": "caption-164-zh",
+          "pairId": "caption-164",
+          "start": 517.687,
+          "end": 521.713,
+          "text": "因为那套模型只适合取中间值",
+          "words": []
+        },
+        {
+          "id": "caption-165-zh",
+          "pairId": "caption-165",
+          "start": 521.793,
+          "end": 526.11,
+          "text": "加速模型的数值越大",
+          "words": []
+        },
+        {
+          "id": "caption-166-zh",
+          "pairId": "caption-166",
+          "start": 526.11,
+          "end": 529.507,
+          "text": "画面越锐人脸也越显油",
+          "words": []
+        },
+        {
+          "id": "caption-167-zh",
+          "pairId": "caption-167",
+          "start": 529.507,
+          "end": 534.733,
+          "text": "数值越小画面越朦胧",
+          "words": []
+        },
+        {
+          "id": "caption-168-zh",
+          "pairId": "caption-168",
+          "start": 534.733,
+          "end": 536.127,
+          "text": "还会带有摄影镜头般的颗粒感",
+          "words": []
+        },
+        {
+          "id": "caption-169-zh",
+          "pairId": "caption-169",
+          "start": 536.227,
+          "end": 540.943,
+          "text": "这套模型搭配的优点",
+          "words": []
+        },
+        {
+          "id": "caption-170-zh",
+          "pairId": "caption-170",
+          "start": 540.943,
+          "end": 544.678,
+          "text": "是能明显表现人物情绪",
+          "words": []
+        },
+        {
+          "id": "caption-171-zh",
+          "pairId": "caption-171",
+          "start": 544.678,
+          "end": 548.42,
+          "text": "我们回到多参工作流的提示词",
+          "words": []
+        },
+        {
+          "id": "caption-172-zh",
+          "pairId": "caption-172",
+          "start": 548.42,
+          "end": 550.277,
+          "text": "这句话写了",
+          "words": []
+        },
+        {
+          "id": "caption-173-zh",
+          "pairId": "caption-173",
+          "start": 550.277,
+          "end": 552.903,
+          "text": "音量明显抬高咬字变硬",
+          "words": []
+        },
+        {
+          "id": "caption-174-zh",
+          "pairId": "caption-174",
+          "start": 552.99,
+          "end": 555.815,
+          "text": "重音落在“一锤子”和“捶死你”上",
+          "words": []
+        },
+        {
+          "id": "caption-175-zh",
+          "pairId": "caption-175",
+          "start": 555.815,
+          "end": 558.475,
+          "text": "所以能明显感受到情绪变化",
+          "words": []
+        },
+        {
+          "id": "caption-176-zh",
+          "pairId": "caption-176",
+          "start": 558.475,
+          "end": 560.768,
+          "text": "所以我选择了这套搭配",
+          "words": []
+        },
+        {
+          "id": "caption-177-zh",
+          "pairId": "caption-177",
+          "start": 560.768,
+          "end": 565.877,
+          "text": "代价是要在清晰度和油腻感之间取平衡",
+          "words": []
+        },
+        {
+          "id": "caption-178-zh",
+          "pairId": "caption-178",
+          "start": 565.877,
+          "end": 569.19,
+          "text": "然后我为什么要使用这一套模型的搭配呢",
+          "words": []
+        },
+        {
+          "id": "caption-179-zh",
+          "pairId": "caption-179",
+          "start": 569.19,
+          "end": 574.043,
+          "text": "这套模型搭配的优点是画面更清晰",
+          "words": []
+        },
+        {
+          "id": "caption-180-zh",
+          "pairId": "caption-180",
+          "start": 574.043,
+          "end": 578.04,
+          "text": "缺点是人物说话的情绪偏软",
+          "words": []
+        },
+        {
+          "id": "caption-181-zh",
+          "pairId": "caption-181",
+          "start": 578.123,
+          "end": 579.163,
+          "text": "听起来软趴趴的",
+          "words": []
+        },
+        {
+          "id": "caption-182-zh",
+          "pairId": "caption-182",
+          "start": 579.163,
+          "end": 581.31,
+          "text": "我们看一下两段视频的对比",
+          "words": []
+        },
+        {
+          "id": "caption-183-zh",
+          "pairId": "caption-183",
+          "start": 581.31,
+          "end": 584.652,
+          "text": "因此在数字人工作流里",
+          "words": []
+        },
+        {
+          "id": "caption-184-zh",
+          "pairId": "caption-184",
+          "start": 584.652,
+          "end": 591.842,
+          "text": "音频从外部导入不依赖模型生成说话情绪",
+          "words": []
+        },
+        {
+          "id": "caption-185-zh",
+          "pairId": "caption-185",
+          "start": 591.842,
+          "end": 594.623,
+          "text": "所以我更关心画面清晰度",
+          "words": []
+        },
+        {
+          "id": "caption-186-zh",
+          "pairId": "caption-186",
+          "start": 594.623,
+          "end": 596.332,
+          "text": "最终选择了这套搭配",
+          "words": []
+        },
+        {
+          "id": "caption-187-zh",
+          "pairId": "caption-187",
+          "start": 596.332,
+          "end": 598.443,
+          "text": "大家可以自己下去测试一下",
+          "words": []
+        },
+        {
+          "id": "caption-188-zh",
+          "pairId": "caption-188",
+          "start": 598.443,
+          "end": 603.612,
+          "text": "这就是今天分享的两套工作流和模型搭配",
+          "words": []
+        },
+        {
+          "id": "caption-189-zh",
+          "pairId": "caption-189",
+          "start": 603.612,
+          "end": 604.883,
+          "text": "希望大家给一个三连",
+          "words": []
+        },
+        {
+          "id": "caption-190-zh",
+          "pairId": "caption-190",
+          "start": 604.883,
+          "end": 610.543,
+          "text": "下一期会分享资产图的制作心得",
+          "words": []
+        },
+        {
+          "id": "caption-191-zh",
+          "pairId": "caption-191",
+          "start": 610.543,
+          "end": 615.44,
+          "text": "包括素体资产服装资产和形象资产",
+          "words": []
+        },
+        {
+          "id": "caption-192-zh",
+          "pairId": "caption-192",
+          "start": 615.44,
+          "end": 620.69,
+          "text": "还有我研究出来的一些图片技巧",
+          "words": []
+        },
+        {
+          "id": "caption-193-zh",
+          "pairId": "caption-193",
+          "start": 620.69,
+          "end": 623.05,
+          "text": "也就是怎么把图片做得更好看",
+          "words": []
+        },
+        {
+          "id": "caption-194-zh",
+          "pairId": "caption-194",
+          "start": 623.05,
+          "end": 625.955,
+          "text": "比如这是我最开始做的画面",
+          "words": []
+        },
+        {
+          "id": "caption-195-zh",
+          "pairId": "caption-195",
+          "start": 625.955,
+          "end": 628.28,
+          "text": "可以看到这组画面",
+          "words": []
+        },
+        {
+          "id": "caption-196-zh",
+          "pairId": "caption-196",
+          "start": 628.28,
+          "end": 631.613,
+          "text": "右边是最开始的版本人物非常死板",
+          "words": []
+        },
+        {
+          "id": "caption-197-zh",
+          "pairId": "caption-197",
+          "start": 631.613,
+          "end": 634.533,
+          "text": "中间这个版本要好一些",
+          "words": []
+        },
+        {
+          "id": "caption-198-zh",
+          "pairId": "caption-198",
+          "start": 634.62,
+          "end": 638.66,
+          "text": "而最左边是我现在使用的结构",
+          "words": []
+        },
+        {
+          "id": "caption-199-zh",
+          "pairId": "caption-199",
+          "start": 638.66,
+          "end": 643.268,
+          "text": "效果又更好一些",
+          "words": []
+        },
+        {
+          "id": "caption-200-zh",
+          "pairId": "caption-200",
+          "start": 643.268,
+          "end": 647.53,
+          "text": "资产相关内容可能会在下一期分享",
+          "words": []
+        },
+        {
+          "id": "caption-201-zh",
+          "pairId": "caption-201",
+          "start": 647.65,
+          "end": 655.41,
+          "text": "再下一期可能会讲如何用 MiniMax H3 制作动画",
+          "words": []
+        },
+        {
+          "id": "caption-202-zh",
+          "pairId": "caption-202",
+          "start": 655.41,
+          "end": 658.117,
+          "text": "就像前几期视频讲过的",
+          "words": []
+        },
+        {
+          "id": "caption-203-zh",
+          "pairId": "caption-203",
+          "start": 658.117,
+          "end": 661.377,
+          "text": "MiniMax H3 的动画效果非常好",
+          "words": []
+        },
+        {
+          "id": "caption-204-zh",
+          "pairId": "caption-204",
+          "start": 661.377,
+          "end": 665.648,
+          "text": "也适合博主做知识讲解等内容",
+          "words": []
+        },
+        {
+          "id": "caption-205-zh",
+          "pairId": "caption-205",
+          "start": 665.648,
+          "end": 669.467,
+          "text": "我用 Seedance 2.5 和 Wan 3",
+          "words": []
+        },
+        {
+          "id": "caption-206-zh",
+          "pairId": "caption-206",
+          "start": 669.56,
+          "end": 672.08,
+          "text": "与 MiniMax H3 做了对比",
+          "words": []
+        },
+        {
+          "id": "caption-207-zh",
+          "pairId": "caption-207",
+          "start": 672.08,
+          "end": 676.512,
+          "text": "我发现 MiniMax H3 的表现更好",
+          "words": []
+        },
+        {
+          "id": "caption-208-zh",
+          "pairId": "caption-208",
+          "start": 676.512,
+          "end": 678.41,
+          "text": "至少从动画效果来看",
+          "words": []
+        },
+        {
+          "id": "caption-209-zh",
+          "pairId": "caption-209",
+          "start": 678.41,
+          "end": 681.662,
+          "text": "它更能理解我想表达的内容",
+          "words": []
+        },
+        {
+          "id": "caption-210-zh",
+          "pairId": "caption-210",
+          "start": 681.662,
+          "end": 685.33,
+          "text": "具体演示和讲解留到下期",
+          "words": []
+        },
+        {
+          "id": "caption-211-zh",
+          "pairId": "caption-211",
+          "start": 685.33,
+          "end": 687.09,
+          "text": "我们下期再见拜拜",
+          "words": []
+        }
+      ]
+    },
+    {
+      "id": "en",
+      "label": "English Captions",
+      "language": "en",
+      "style": {
+        "fontSize": 34,
+        "position": "manual",
+        "manualPosition": {
+          "x": 0.5,
+          "y": 0.972
+        }
+      },
+      "segments": [
+        {
+          "id": "caption-1-en",
+          "pairId": "caption-1",
+          "start": 0.04,
+          "end": 2.76,
+          "text": "If you've recently been trying MiniMax H3",
+          "words": []
+        },
+        {
+          "id": "caption-2-en",
+          "pairId": "caption-2",
+          "start": 2.847,
+          "end": 7.198,
+          "text": "to replace Seedance 2.5 for live-action filmmaking",
+          "words": []
+        },
+        {
+          "id": "caption-3-en",
+          "pairId": "caption-3",
+          "start": 7.198,
+          "end": 10.168,
+          "text": "but found that the generated faces look very oily",
+          "words": []
+        },
+        {
+          "id": "caption-4-en",
+          "pairId": "caption-4",
+          "start": 10.168,
+          "end": 13.447,
+          "text": "this is the result of my repeated testing over the past few days",
+          "words": []
+        },
+        {
+          "id": "caption-5-en",
+          "pairId": "caption-5",
+          "start": 13.447,
+          "end": 14.56,
+          "text": "The image no longer looks as oily",
+          "words": []
+        },
+        {
+          "id": "caption-6-en",
+          "pairId": "caption-6",
+          "start": 14.68,
+          "end": 17.137,
+          "text": "The character's pauses emotions and emphasis",
+          "words": []
+        },
+        {
+          "id": "caption-7-en",
+          "pairId": "caption-7",
+          "start": 17.137,
+          "end": 19.08,
+          "text": "also come through very well",
+          "words": []
+        },
+        {
+          "id": "caption-8-en",
+          "pairId": "caption-8",
+          "start": 19.08,
+          "end": 20.623,
+          "text": "And generation is fast",
+          "words": []
+        },
+        {
+          "id": "caption-9-en",
+          "pairId": "caption-9",
+          "start": 20.72,
+          "end": 23.038,
+          "text": "A 15-second video at 832 resolution",
+          "words": []
+        },
+        {
+          "id": "caption-10-en",
+          "pairId": "caption-10",
+          "start": 23.038,
+          "end": 26.39,
+          "text": "takes only 10 to 12 minutes to generate",
+          "words": []
+        },
+        {
+          "id": "caption-11-en",
+          "pairId": "caption-11",
+          "start": 26.39,
+          "end": 29.61,
+          "text": "In this video I'll show you exactly how I did it",
+          "words": []
+        },
+        {
+          "id": "caption-12-en",
+          "pairId": "caption-12",
+          "start": 29.61,
+          "end": 31.58,
+          "text": "The key is the first pass and the second pass",
+          "words": []
+        },
+        {
+          "id": "caption-13-en",
+          "pairId": "caption-13",
+          "start": 31.58,
+          "end": 33.003,
+          "text": "Many creators have already covered them",
+          "words": []
+        },
+        {
+          "id": "caption-14-en",
+          "pairId": "caption-14",
+          "start": 33.003,
+          "end": 35.51,
+          "text": "but I found that they missed the real key",
+          "words": []
+        },
+        {
+          "id": "caption-15-en",
+          "pairId": "caption-15",
+          "start": 35.51,
+          "end": 38.563,
+          "text": "Today I'll break down the two workflows I developed",
+          "words": []
+        },
+        {
+          "id": "caption-16-en",
+          "pairId": "caption-16",
+          "start": 38.563,
+          "end": 39.637,
+          "text": "one for multi-reference generation",
+          "words": []
+        },
+        {
+          "id": "caption-17-en",
+          "pairId": "caption-17",
+          "start": 39.637,
+          "end": 40.717,
+          "text": "and one for digital humans",
+          "words": []
+        },
+        {
+          "id": "caption-18-en",
+          "pairId": "caption-18",
+          "start": 40.717,
+          "end": 43.312,
+          "text": "and walk you through both in full",
+          "words": []
+        },
+        {
+          "id": "caption-19-en",
+          "pairId": "caption-19",
+          "start": 43.312,
+          "end": 45.427,
+          "text": "This video is divided into two parts",
+          "words": []
+        },
+        {
+          "id": "caption-20-en",
+          "pairId": "caption-20",
+          "start": 45.527,
+          "end": 47.167,
+          "text": "One part is for beginners",
+          "words": []
+        },
+        {
+          "id": "caption-21-en",
+          "pairId": "caption-21",
+          "start": 47.167,
+          "end": 50.637,
+          "text": "The other is for advanced users who can build workflows",
+          "words": []
+        },
+        {
+          "id": "caption-22-en",
+          "pairId": "caption-22",
+          "start": 50.727,
+          "end": 55.163,
+          "text": "The beginner section explains how to use both workflows",
+          "words": []
+        },
+        {
+          "id": "caption-23-en",
+          "pairId": "caption-23",
+          "start": 55.163,
+          "end": 57.33,
+          "text": "including how to set reference images video and audio",
+          "words": []
+        },
+        {
+          "id": "caption-24-en",
+          "pairId": "caption-24",
+          "start": 57.33,
+          "end": 58.487,
+          "text": "how to write the prompt",
+          "words": []
+        },
+        {
+          "id": "caption-25-en",
+          "pairId": "caption-25",
+          "start": 58.487,
+          "end": 60.357,
+          "text": "and how to set resolution and duration",
+          "words": []
+        },
+        {
+          "id": "caption-26-en",
+          "pairId": "caption-26",
+          "start": 60.357,
+          "end": 62.47,
+          "text": "If you already know how to build workflows",
+          "words": []
+        },
+        {
+          "id": "caption-27-en",
+          "pairId": "caption-27",
+          "start": 62.47,
+          "end": 65.15,
+          "text": "you can click the progress bar below",
+          "words": []
+        },
+        {
+          "id": "caption-28-en",
+          "pairId": "caption-28",
+          "start": 65.15,
+          "end": 67.81,
+          "text": "and jump straight to the advanced section",
+          "words": []
+        },
+        {
+          "id": "caption-29-en",
+          "pairId": "caption-29",
+          "start": 67.893,
+          "end": 70.893,
+          "text": "Now let's walk through the workflow",
+          "words": []
+        },
+        {
+          "id": "caption-30-en",
+          "pairId": "caption-30",
+          "start": 70.98,
+          "end": 74.178,
+          "text": "The left side is the parameter input area",
+          "words": []
+        },
+        {
+          "id": "caption-31-en",
+          "pairId": "caption-31",
+          "start": 74.178,
+          "end": 76.403,
+          "text": "The right side is the execution area",
+          "words": []
+        },
+        {
+          "id": "caption-32-en",
+          "pairId": "caption-32",
+          "start": 76.493,
+          "end": 78.453,
+          "text": "We already have three reference images",
+          "words": []
+        },
+        {
+          "id": "caption-33-en",
+          "pairId": "caption-33",
+          "start": 78.453,
+          "end": 80.873,
+          "text": "To add a fourth reference image",
+          "words": []
+        },
+        {
+          "id": "caption-34-en",
+          "pairId": "caption-34",
+          "start": 80.873,
+          "end": 83.8,
+          "text": "click Yes and then click the arrow",
+          "words": []
+        },
+        {
+          "id": "caption-35-en",
+          "pairId": "caption-35",
+          "start": 83.8,
+          "end": 86.073,
+          "text": "It will switch to the fourth image slot",
+          "words": []
+        },
+        {
+          "id": "caption-36-en",
+          "pairId": "caption-36",
+          "start": 86.073,
+          "end": 89.47,
+          "text": "Then upload the image",
+          "words": []
+        },
+        {
+          "id": "caption-37-en",
+          "pairId": "caption-37",
+          "start": 89.47,
+          "end": 91.983,
+          "text": "If you don't need it just turn it off",
+          "words": []
+        },
+        {
+          "id": "caption-38-en",
+          "pairId": "caption-38",
+          "start": 91.983,
+          "end": 94.698,
+          "text": "Reference video and audio work the same way",
+          "words": []
+        },
+        {
+          "id": "caption-39-en",
+          "pairId": "caption-39",
+          "start": 94.698,
+          "end": 98.135,
+          "text": "The left side contains duration and prompt inputs",
+          "words": []
+        },
+        {
+          "id": "caption-40-en",
+          "pairId": "caption-40",
+          "start": 98.135,
+          "end": 100.608,
+          "text": "Below are the two-stage sampling settings",
+          "words": []
+        },
+        {
+          "id": "caption-41-en",
+          "pairId": "caption-41",
+          "start": 100.608,
+          "end": 104.877,
+          "text": "Set the duration on the left up to 15 seconds",
+          "words": []
+        },
+        {
+          "id": "caption-42-en",
+          "pairId": "caption-42",
+          "start": 104.877,
+          "end": 106.95,
+          "text": "Enter the prompt here",
+          "words": []
+        },
+        {
+          "id": "caption-43-en",
+          "pairId": "caption-43",
+          "start": 106.95,
+          "end": 108.243,
+          "text": "What actions the character performs",
+          "words": []
+        },
+        {
+          "id": "caption-44-en",
+          "pairId": "caption-44",
+          "start": 108.243,
+          "end": 109.14,
+          "text": "what the character says",
+          "words": []
+        },
+        {
+          "id": "caption-45-en",
+          "pairId": "caption-45",
+          "start": 109.14,
+          "end": 110.453,
+          "text": "what emotion the character shows",
+          "words": []
+        },
+        {
+          "id": "caption-46-en",
+          "pairId": "caption-46",
+          "start": 110.453,
+          "end": 111.873,
+          "text": "and how the camera moves",
+          "words": []
+        },
+        {
+          "id": "caption-47-en",
+          "pairId": "caption-47",
+          "start": 111.873,
+          "end": 114.21,
+          "text": "are all written into this prompt",
+          "words": []
+        },
+        {
+          "id": "caption-48-en",
+          "pairId": "caption-48",
+          "start": 114.21,
+          "end": 118.938,
+          "text": "Below are the outputs for the first and second passes",
+          "words": []
+        },
+        {
+          "id": "caption-49-en",
+          "pairId": "caption-49",
+          "start": 118.938,
+          "end": 122.167,
+          "text": "Set the first pass to about 0.5 to 0.6",
+          "words": []
+        },
+        {
+          "id": "caption-50-en",
+          "pairId": "caption-50",
+          "start": 122.167,
+          "end": 124.707,
+          "text": "Set the second pass to 0.9 to 1.2",
+          "words": []
+        },
+        {
+          "id": "caption-51-en",
+          "pairId": "caption-51",
+          "start": 124.707,
+          "end": 126.313,
+          "text": "These are the settings from my tests",
+          "words": []
+        },
+        {
+          "id": "caption-52-en",
+          "pairId": "caption-52",
+          "start": 126.313,
+          "end": 131.338,
+          "text": "If you enter 2.0 for the second pass it will crash",
+          "words": []
+        },
+        {
+          "id": "caption-53-en",
+          "pairId": "caption-53",
+          "start": 131.338,
+          "end": 132.913,
+          "text": "This may be model-related",
+          "words": []
+        },
+        {
+          "id": "caption-54-en",
+          "pairId": "caption-54",
+          "start": 132.913,
+          "end": 135.097,
+          "text": "You can test the exact values yourself",
+          "words": []
+        },
+        {
+          "id": "caption-55-en",
+          "pairId": "caption-55",
+          "start": 135.097,
+          "end": 138.297,
+          "text": "I think 0.9 to 1.2 is enough",
+          "words": []
+        },
+        {
+          "id": "caption-56-en",
+          "pairId": "caption-56",
+          "start": 138.39,
+          "end": 140.377,
+          "text": "The 0.6 and 1.2 values here",
+          "words": []
+        },
+        {
+          "id": "caption-57-en",
+          "pairId": "caption-57",
+          "start": 140.377,
+          "end": 145.283,
+          "text": "match the values in the first column on the left",
+          "words": []
+        },
+        {
+          "id": "caption-58-en",
+          "pairId": "caption-58",
+          "start": 145.283,
+          "end": 147.603,
+          "text": "Resolution corresponds to the far-right column",
+          "words": []
+        },
+        {
+          "id": "caption-59-en",
+          "pairId": "caption-59",
+          "start": 147.693,
+          "end": 152.453,
+          "text": "Choose the aspect ratio here",
+          "words": []
+        },
+        {
+          "id": "caption-60-en",
+          "pairId": "caption-60",
+          "start": 152.453,
+          "end": 156.493,
+          "text": "After selecting it click Run in the upper right",
+          "words": []
+        },
+        {
+          "id": "caption-61-en",
+          "pairId": "caption-61",
+          "start": 156.493,
+          "end": 159.91,
+          "text": "For longer videos I recommend Plus",
+          "words": []
+        },
+        {
+          "id": "caption-62-en",
+          "pairId": "caption-62",
+          "start": 159.91,
+          "end": 162.027,
+          "text": "I've run out of VRAM several times before",
+          "words": []
+        },
+        {
+          "id": "caption-63-en",
+          "pairId": "caption-63",
+          "start": 162.107,
+          "end": 163.967,
+          "text": "Plus is more stable",
+          "words": []
+        },
+        {
+          "id": "caption-64-en",
+          "pairId": "caption-64",
+          "start": 163.967,
+          "end": 167.967,
+          "text": "That covers the beginner section",
+          "words": []
+        },
+        {
+          "id": "caption-65-en",
+          "pairId": "caption-65",
+          "start": 168.053,
+          "end": 171.053,
+          "text": "Now we come to the most important part of this workflow",
+          "words": []
+        },
+        {
+          "id": "caption-66-en",
+          "pairId": "caption-66",
+          "start": 171.053,
+          "end": 172.813,
+          "text": "the first pass and the second pass",
+          "words": []
+        },
+        {
+          "id": "caption-67-en",
+          "pairId": "caption-67",
+          "start": 172.813,
+          "end": 176.767,
+          "text": "First you need to understand what each one does",
+          "words": []
+        },
+        {
+          "id": "caption-68-en",
+          "pairId": "caption-68",
+          "start": 176.767,
+          "end": 179.14,
+          "text": "Many creators have already explained both passes",
+          "words": []
+        },
+        {
+          "id": "caption-69-en",
+          "pairId": "caption-69",
+          "start": 179.14,
+          "end": 184.252,
+          "text": "The first pass locks in the overall composition",
+          "words": []
+        },
+        {
+          "id": "caption-70-en",
+          "pairId": "caption-70",
+          "start": 184.252,
+          "end": 189.838,
+          "text": "The second pass further refines that composition",
+          "words": []
+        },
+        {
+          "id": "caption-71-en",
+          "pairId": "caption-71",
+          "start": 189.838,
+          "end": 194.145,
+          "text": "My key change to this workflow is in the Sigma values",
+          "words": []
+        },
+        {
+          "id": "caption-72-en",
+          "pairId": "caption-72",
+          "start": 194.145,
+          "end": 201.877,
+          "text": "Normally the first pass produces a fully detailed image",
+          "words": []
+        },
+        {
+          "id": "caption-73-en",
+          "pairId": "caption-73",
+          "start": 201.877,
+          "end": 205.873,
+          "text": "But my first-pass result here is very blurry",
+          "words": []
+        },
+        {
+          "id": "caption-74-en",
+          "pairId": "caption-74",
+          "start": 205.873,
+          "end": 212.033,
+          "text": "The character outline and overall composition are still clear",
+          "words": []
+        },
+        {
+          "id": "caption-75-en",
+          "pairId": "caption-75",
+          "start": 212.033,
+          "end": 217.842,
+          "text": "I use four steps for the first pass and five for the second",
+          "words": []
+        },
+        {
+          "id": "caption-76-en",
+          "pairId": "caption-76",
+          "start": 217.842,
+          "end": 221.85,
+          "text": "The first pass ends at 0.9231",
+          "words": []
+        },
+        {
+          "id": "caption-77-en",
+          "pairId": "caption-77",
+          "start": 221.85,
+          "end": 227.25,
+          "text": "The second pass starts at 0.9231 and ends at 0",
+          "words": []
+        },
+        {
+          "id": "caption-78-en",
+          "pairId": "caption-78",
+          "start": 227.25,
+          "end": 232.313,
+          "text": "You can think of it as sampling in stages",
+          "words": []
+        },
+        {
+          "id": "caption-79-en",
+          "pairId": "caption-79",
+          "start": 232.313,
+          "end": 235.06,
+          "text": "Everything before 0.9231 is the first pass",
+          "words": []
+        },
+        {
+          "id": "caption-80-en",
+          "pairId": "caption-80",
+          "start": 235.143,
+          "end": 237.303,
+          "text": "The first pass outputs a Latent",
+          "words": []
+        },
+        {
+          "id": "caption-81-en",
+          "pairId": "caption-81",
+          "start": 237.387,
+          "end": 241.223,
+          "text": "which is then resampled by the second-pass sampler",
+          "words": []
+        },
+        {
+          "id": "caption-82-en",
+          "pairId": "caption-82",
+          "start": 241.223,
+          "end": 242.643,
+          "text": "That's the basic logic",
+          "words": []
+        },
+        {
+          "id": "caption-83-en",
+          "pairId": "caption-83",
+          "start": 242.643,
+          "end": 245.303,
+          "text": "The most important point here is",
+          "words": []
+        },
+        {
+          "id": "caption-84-en",
+          "pairId": "caption-84",
+          "start": 245.303,
+          "end": 249.493,
+          "text": "The first-pass output must use the denoised output",
+          "words": []
+        },
+        {
+          "id": "caption-85-en",
+          "pairId": "caption-85",
+          "start": 249.573,
+          "end": 251.572,
+          "text": "The other output will not work",
+          "words": []
+        },
+        {
+          "id": "caption-86-en",
+          "pairId": "caption-86",
+          "start": 251.572,
+          "end": 254.557,
+          "text": "The denoised output is only a preview output",
+          "words": []
+        },
+        {
+          "id": "caption-87-en",
+          "pairId": "caption-87",
+          "start": 254.637,
+          "end": 260.935,
+          "text": "It has not actually finished sampling",
+          "words": []
+        },
+        {
+          "id": "caption-88-en",
+          "pairId": "caption-88",
+          "start": 260.935,
+          "end": 263.57,
+          "text": "It is also different from the direct output",
+          "words": []
+        },
+        {
+          "id": "caption-89-en",
+          "pairId": "caption-89",
+          "start": 263.57,
+          "end": 266.53,
+          "text": "The direct output is nothing but noise",
+          "words": []
+        },
+        {
+          "id": "caption-90-en",
+          "pairId": "caption-90",
+          "start": 266.61,
+          "end": 271.7,
+          "text": "It leaves room for the second pass to continue",
+          "words": []
+        },
+        {
+          "id": "caption-91-en",
+          "pairId": "caption-91",
+          "start": 271.787,
+          "end": 274.267,
+          "text": "Then it goes through latent-space upscaling",
+          "words": []
+        },
+        {
+          "id": "caption-92-en",
+          "pairId": "caption-92",
+          "start": 274.36,
+          "end": 280.92,
+          "text": "This node was open-sourced by NVIDIA",
+          "words": []
+        },
+        {
+          "id": "caption-93-en",
+          "pairId": "caption-93",
+          "start": 280.92,
+          "end": 284.517,
+          "text": "Its parameters match the node shown here",
+          "words": []
+        },
+        {
+          "id": "caption-94-en",
+          "pairId": "caption-94",
+          "start": 284.517,
+          "end": 287.67,
+          "text": "It also supports scaling by a multiplier",
+          "words": []
+        },
+        {
+          "id": "caption-95-en",
+          "pairId": "caption-95",
+          "start": 287.757,
+          "end": 289.047,
+          "text": "I haven't studied the technical details",
+          "words": []
+        },
+        {
+          "id": "caption-96-en",
+          "pairId": "caption-96",
+          "start": 289.047,
+          "end": 291.843,
+          "text": "but these two nodes seem quite similar",
+          "words": []
+        },
+        {
+          "id": "caption-97-en",
+          "pairId": "caption-97",
+          "start": 291.923,
+          "end": 297.67,
+          "text": "The old high-resolution upscale used RTX image upscaling",
+          "words": []
+        },
+        {
+          "id": "caption-98-en",
+          "pairId": "caption-98",
+          "start": 297.757,
+          "end": 299.908,
+          "text": "Now it uses latent-space upscaling instead",
+          "words": []
+        },
+        {
+          "id": "caption-99-en",
+          "pairId": "caption-99",
+          "start": 299.908,
+          "end": 305.22,
+          "text": "Four steps in the first pass and five in the second",
+          "words": []
+        },
+        {
+          "id": "caption-100-en",
+          "pairId": "caption-100",
+          "start": 305.22,
+          "end": 307.473,
+          "text": "make nine steps for the complete process",
+          "words": []
+        },
+        {
+          "id": "caption-101-en",
+          "pairId": "caption-101",
+          "start": 307.56,
+          "end": 311.312,
+          "text": "The two passes only affect generation speed",
+          "words": []
+        },
+        {
+          "id": "caption-102-en",
+          "pairId": "caption-102",
+          "start": 311.312,
+          "end": 315.167,
+          "text": "Reducing facial oiliness depends on this model combination",
+          "words": []
+        },
+        {
+          "id": "caption-103-en",
+          "pairId": "caption-103",
+          "start": 315.257,
+          "end": 316.967,
+          "text": "This is the base model",
+          "words": []
+        },
+        {
+          "id": "caption-104-en",
+          "pairId": "caption-104",
+          "start": 316.967,
+          "end": 320.947,
+          "text": "This merged model is B25-49",
+          "words": []
+        },
+        {
+          "id": "caption-105-en",
+          "pairId": "caption-105",
+          "start": 320.947,
+          "end": 325.95,
+          "text": "There is also a B20-49 merged model",
+          "words": []
+        },
+        {
+          "id": "caption-106-en",
+          "pairId": "caption-106",
+          "start": 325.95,
+          "end": 331.33,
+          "text": "B25-49 leans more toward the reference image",
+          "words": []
+        },
+        {
+          "id": "caption-107-en",
+          "pairId": "caption-107",
+          "start": 331.33,
+          "end": 335.563,
+          "text": "Then I add a realistic portrait LoRA",
+          "words": []
+        },
+        {
+          "id": "caption-108-en",
+          "pairId": "caption-108",
+          "start": 335.643,
+          "end": 338.273,
+          "text": "This is the acceleration model",
+          "words": []
+        },
+        {
+          "id": "caption-109-en",
+          "pairId": "caption-109",
+          "start": 338.273,
+          "end": 341.143,
+          "text": "Increase the acceleration model's value",
+          "words": []
+        },
+        {
+          "id": "caption-110-en",
+          "pairId": "caption-110",
+          "start": 341.227,
+          "end": 343.367,
+          "text": "and the image becomes sharper",
+          "words": []
+        },
+        {
+          "id": "caption-111-en",
+          "pairId": "caption-111",
+          "start": 343.367,
+          "end": 345.103,
+          "text": "Decrease the value",
+          "words": []
+        },
+        {
+          "id": "caption-112-en",
+          "pairId": "caption-112",
+          "start": 345.103,
+          "end": 346.9,
+          "text": "and the image becomes softer",
+          "words": []
+        },
+        {
+          "id": "caption-113-en",
+          "pairId": "caption-113",
+          "start": 346.9,
+          "end": 348.74,
+          "text": "with a film-like grain",
+          "words": []
+        },
+        {
+          "id": "caption-114-en",
+          "pairId": "caption-114",
+          "start": 348.82,
+          "end": 353.793,
+          "text": "After passing through two attention nodes",
+          "words": []
+        },
+        {
+          "id": "caption-115-en",
+          "pairId": "caption-115",
+          "start": 353.89,
+          "end": 356.81,
+          "text": "it enters the Dual Clock node",
+          "words": []
+        },
+        {
+          "id": "caption-116-en",
+          "pairId": "caption-116",
+          "start": 356.89,
+          "end": 358.605,
+          "text": "It does not sample audio and video separately",
+          "words": []
+        },
+        {
+          "id": "caption-117-en",
+          "pairId": "caption-117",
+          "start": 358.605,
+          "end": 361.54,
+          "text": "Instead within the same sampling process",
+          "words": []
+        },
+        {
+          "id": "caption-118-en",
+          "pairId": "caption-118",
+          "start": 361.54,
+          "end": 368.673,
+          "text": "it uses different sampling rates for audio and video",
+          "words": []
+        },
+        {
+          "id": "caption-119-en",
+          "pairId": "caption-119",
+          "start": 373.85,
+          "end": 378.603,
+          "text": "You can see that the first-pass result is out of sync",
+          "words": []
+        },
+        {
+          "id": "caption-120-en",
+          "pairId": "caption-120",
+          "start": 378.683,
+          "end": 381.363,
+          "text": "This is the result of the Dual Clock setup",
+          "words": []
+        },
+        {
+          "id": "caption-121-en",
+          "pairId": "caption-121",
+          "start": 381.363,
+          "end": 383.777,
+          "text": "Now look at this shot",
+          "words": []
+        },
+        {
+          "id": "caption-122-en",
+          "pairId": "caption-122",
+          "start": 387.407,
+          "end": 390.74,
+          "text": "The hammer passes through the head causing clipping",
+          "words": []
+        },
+        {
+          "id": "caption-123-en",
+          "pairId": "caption-123",
+          "start": 390.74,
+          "end": 393.76,
+          "text": "I see this as both a flaw and an advantage",
+          "words": []
+        },
+        {
+          "id": "caption-124-en",
+          "pairId": "caption-124",
+          "start": 393.853,
+          "end": 396.933,
+          "text": "This is not a model or node problem",
+          "words": []
+        },
+        {
+          "id": "caption-125-en",
+          "pairId": "caption-125",
+          "start": 397.013,
+          "end": 398.48,
+          "text": "It is a prompt problem",
+          "words": []
+        },
+        {
+          "id": "caption-126-en",
+          "pairId": "caption-126",
+          "start": 398.48,
+          "end": 400.575,
+          "text": "Now let's examine the structure of this prompt",
+          "words": []
+        },
+        {
+          "id": "caption-127-en",
+          "pairId": "caption-127",
+          "start": 400.575,
+          "end": 405.82,
+          "text": "This prompt was generated by my agent",
+          "words": []
+        },
+        {
+          "id": "caption-128-en",
+          "pairId": "caption-128",
+          "start": 405.82,
+          "end": 407.457,
+          "text": "I did not edit it manually",
+          "words": []
+        },
+        {
+          "id": "caption-129-en",
+          "pairId": "caption-129",
+          "start": 407.457,
+          "end": 409.497,
+          "text": "But it contains some problems",
+          "words": []
+        },
+        {
+          "id": "caption-130-en",
+          "pairId": "caption-130",
+          "start": 409.497,
+          "end": 410.897,
+          "text": "For example this sentence",
+          "words": []
+        },
+        {
+          "id": "caption-131-en",
+          "pairId": "caption-131",
+          "start": 410.993,
+          "end": 413.427,
+          "text": "He pulls the hammer back",
+          "words": []
+        },
+        {
+          "id": "caption-132-en",
+          "pairId": "caption-132",
+          "start": 413.52,
+          "end": 415.155,
+          "text": "and rests it on his right shoulder",
+          "words": []
+        },
+        {
+          "id": "caption-133-en",
+          "pairId": "caption-133",
+          "start": 415.155,
+          "end": 416.43,
+          "text": "Now look at this sentence",
+          "words": []
+        },
+        {
+          "id": "caption-134-en",
+          "pairId": "caption-134",
+          "start": 416.51,
+          "end": 419.6,
+          "text": "He raises the hammer handle diagonally over his right shoulder",
+          "words": []
+        },
+        {
+          "id": "caption-135-en",
+          "pairId": "caption-135",
+          "start": 419.6,
+          "end": 421.273,
+          "text": "Earlier it also says",
+          "words": []
+        },
+        {
+          "id": "caption-136-en",
+          "pairId": "caption-136",
+          "start": 421.273,
+          "end": 423.47,
+          "text": "his right hand grips the off-screen hammer handle",
+          "words": []
+        },
+        {
+          "id": "caption-137-en",
+          "pairId": "caption-137",
+          "start": 423.557,
+          "end": 426.632,
+          "text": "while his left hand grips a higher position",
+          "words": []
+        },
+        {
+          "id": "caption-138-en",
+          "pairId": "caption-138",
+          "start": 426.632,
+          "end": 429.507,
+          "text": "Later it mentions an oversized toy hammer",
+          "words": []
+        },
+        {
+          "id": "caption-139-en",
+          "pairId": "caption-139",
+          "start": 429.507,
+          "end": 432.102,
+          "text": "What result does this create",
+          "words": []
+        },
+        {
+          "id": "caption-140-en",
+          "pairId": "caption-140",
+          "start": 432.102,
+          "end": 434.377,
+          "text": "How will the AI interpret this oversized toy hammer",
+          "words": []
+        },
+        {
+          "id": "caption-141-en",
+          "pairId": "caption-141",
+          "start": 434.457,
+          "end": 436.478,
+          "text": "It needs to fill the frame",
+          "words": []
+        },
+        {
+          "id": "caption-142-en",
+          "pairId": "caption-142",
+          "start": 436.478,
+          "end": 440.168,
+          "text": "Here it also requires the right hand to hold the hammer",
+          "words": []
+        },
+        {
+          "id": "caption-143-en",
+          "pairId": "caption-143",
+          "start": 440.168,
+          "end": 445.64,
+          "text": "The model wants to show the entire hammer",
+          "words": []
+        },
+        {
+          "id": "caption-144-en",
+          "pairId": "caption-144",
+          "start": 445.64,
+          "end": 450.112,
+          "text": "so the handle must be in the right hand and the head on the left",
+          "words": []
+        },
+        {
+          "id": "caption-145-en",
+          "pairId": "caption-145",
+          "start": 450.112,
+          "end": 452.773,
+          "text": "To show the entire hammer",
+          "words": []
+        },
+        {
+          "id": "caption-146-en",
+          "pairId": "caption-146",
+          "start": 452.773,
+          "end": 456.752,
+          "text": "It can only enter from the right side of the frame (verbal slip)",
+          "words": []
+        },
+        {
+          "id": "caption-147-en",
+          "pairId": "caption-147",
+          "start": 456.752,
+          "end": 459.177,
+          "text": "because the prompt never specifies the direction",
+          "words": []
+        },
+        {
+          "id": "caption-148-en",
+          "pairId": "caption-148",
+          "start": 459.177,
+          "end": 465.11,
+          "text": "It also doesn't say whether the hammer enters from the left or right",
+          "words": []
+        },
+        {
+          "id": "caption-149-en",
+          "pairId": "caption-149",
+          "start": 465.11,
+          "end": 468.627,
+          "text": "The swing direction is not specified either",
+          "words": []
+        },
+        {
+          "id": "caption-150-en",
+          "pairId": "caption-150",
+          "start": 468.71,
+          "end": 469.937,
+          "text": "So the model can only guess",
+          "words": []
+        },
+        {
+          "id": "caption-151-en",
+          "pairId": "caption-151",
+          "start": 469.937,
+          "end": 472.663,
+          "text": "and this is the result it generates",
+          "words": []
+        },
+        {
+          "id": "caption-152-en",
+          "pairId": "caption-152",
+          "start": 472.757,
+          "end": 477.053,
+          "text": "The right hand holds the handle and the hammer head appears on the left",
+          "words": []
+        },
+        {
+          "id": "caption-153-en",
+          "pairId": "caption-153",
+          "start": 477.053,
+          "end": 478.717,
+          "text": "so the whole hammer can fit in the frame",
+          "words": []
+        },
+        {
+          "id": "caption-154-en",
+          "pairId": "caption-154",
+          "start": 478.717,
+          "end": 482.533,
+          "text": "When the swing shot arrives it clips straight through the character",
+          "words": []
+        },
+        {
+          "id": "caption-155-en",
+          "pairId": "caption-155",
+          "start": 482.533,
+          "end": 485.04,
+          "text": "That's my analysis of the prompt issue",
+          "words": []
+        },
+        {
+          "id": "caption-156-en",
+          "pairId": "caption-156",
+          "start": 485.04,
+          "end": 488.017,
+          "text": "That concludes the multi-reference workflow",
+          "words": []
+        },
+        {
+          "id": "caption-157-en",
+          "pairId": "caption-157",
+          "start": 488.017,
+          "end": 490.637,
+          "text": "Now let's look at the digital-human workflow",
+          "words": []
+        },
+        {
+          "id": "caption-158-en",
+          "pairId": "caption-158",
+          "start": 490.727,
+          "end": 493.645,
+          "text": "I covered this in the previous video",
+          "words": []
+        },
+        {
+          "id": "caption-159-en",
+          "pairId": "caption-159",
+          "start": 493.645,
+          "end": 496.853,
+          "text": "including how to build the overall architecture",
+          "words": []
+        },
+        {
+          "id": "caption-160-en",
+          "pairId": "caption-160",
+          "start": 496.853,
+          "end": 501.273,
+          "text": "The basic structure stays the same with only two Sigma values replaced",
+          "words": []
+        },
+        {
+          "id": "caption-161-en",
+          "pairId": "caption-161",
+          "start": 501.273,
+          "end": 503.697,
+          "text": "I also replace the models here",
+          "words": []
+        },
+        {
+          "id": "caption-162-en",
+          "pairId": "caption-162",
+          "start": 503.783,
+          "end": 511.222,
+          "text": "The base setup uses Feihou's base and acceleration models",
+          "words": []
+        },
+        {
+          "id": "caption-163-en",
+          "pairId": "caption-163",
+          "start": 511.222,
+          "end": 517.593,
+          "text": "Why not use the model combination I tested before",
+          "words": []
+        },
+        {
+          "id": "caption-164-en",
+          "pairId": "caption-164",
+          "start": 517.687,
+          "end": 521.713,
+          "text": "Because that combination only works well near the middle value",
+          "words": []
+        },
+        {
+          "id": "caption-165-en",
+          "pairId": "caption-165",
+          "start": 521.793,
+          "end": 526.11,
+          "text": "The higher the acceleration model's value",
+          "words": []
+        },
+        {
+          "id": "caption-166-en",
+          "pairId": "caption-166",
+          "start": 526.11,
+          "end": 529.507,
+          "text": "the sharper the image and the oilier the face",
+          "words": []
+        },
+        {
+          "id": "caption-167-en",
+          "pairId": "caption-167",
+          "start": 529.507,
+          "end": 534.733,
+          "text": "The lower the value the softer the image",
+          "words": []
+        },
+        {
+          "id": "caption-168-en",
+          "pairId": "caption-168",
+          "start": 534.733,
+          "end": 536.127,
+          "text": "with a camera-lens-like grain",
+          "words": []
+        },
+        {
+          "id": "caption-169-en",
+          "pairId": "caption-169",
+          "start": 536.227,
+          "end": 540.943,
+          "text": "The advantage of this model combination",
+          "words": []
+        },
+        {
+          "id": "caption-170-en",
+          "pairId": "caption-170",
+          "start": 540.943,
+          "end": 544.678,
+          "text": "is that it expresses the character's emotions clearly",
+          "words": []
+        },
+        {
+          "id": "caption-171-en",
+          "pairId": "caption-171",
+          "start": 544.678,
+          "end": 548.42,
+          "text": "Let's return to the prompt in the multi-reference workflow",
+          "words": []
+        },
+        {
+          "id": "caption-172-en",
+          "pairId": "caption-172",
+          "start": 548.42,
+          "end": 550.277,
+          "text": "This sentence says",
+          "words": []
+        },
+        {
+          "id": "caption-173-en",
+          "pairId": "caption-173",
+          "start": 550.277,
+          "end": 552.903,
+          "text": "The volume rises noticeably and the articulation becomes harder",
+          "words": []
+        },
+        {
+          "id": "caption-174-en",
+          "pairId": "caption-174",
+          "start": 552.99,
+          "end": 555.815,
+          "text": "The emphasis falls on “one hammer” and “smash you to death”",
+          "words": []
+        },
+        {
+          "id": "caption-175-en",
+          "pairId": "caption-175",
+          "start": 555.815,
+          "end": 558.475,
+          "text": "So the emotional shift is very easy to feel",
+          "words": []
+        },
+        {
+          "id": "caption-176-en",
+          "pairId": "caption-176",
+          "start": 558.475,
+          "end": 560.768,
+          "text": "That's why I chose this combination",
+          "words": []
+        },
+        {
+          "id": "caption-177-en",
+          "pairId": "caption-177",
+          "start": 560.768,
+          "end": 565.877,
+          "text": "The tradeoff is balancing clarity against an oily look",
+          "words": []
+        },
+        {
+          "id": "caption-178-en",
+          "pairId": "caption-178",
+          "start": 565.877,
+          "end": 569.19,
+          "text": "So why do I use this model combination",
+          "words": []
+        },
+        {
+          "id": "caption-179-en",
+          "pairId": "caption-179",
+          "start": 569.19,
+          "end": 574.043,
+          "text": "Its advantage is a clearer image",
+          "words": []
+        },
+        {
+          "id": "caption-180-en",
+          "pairId": "caption-180",
+          "start": 574.043,
+          "end": 578.04,
+          "text": "Its drawback is softer speaking emotion",
+          "words": []
+        },
+        {
+          "id": "caption-181-en",
+          "pairId": "caption-181",
+          "start": 578.123,
+          "end": 579.163,
+          "text": "The delivery sounds weak and limp",
+          "words": []
+        },
+        {
+          "id": "caption-182-en",
+          "pairId": "caption-182",
+          "start": 579.163,
+          "end": 581.31,
+          "text": "Let's compare the two videos",
+          "words": []
+        },
+        {
+          "id": "caption-183-en",
+          "pairId": "caption-183",
+          "start": 581.31,
+          "end": 584.652,
+          "text": "So in the digital-human workflow",
+          "words": []
+        },
+        {
+          "id": "caption-184-en",
+          "pairId": "caption-184",
+          "start": 584.652,
+          "end": 591.842,
+          "text": "the audio is imported and does not rely on the model's speaking emotion",
+          "words": []
+        },
+        {
+          "id": "caption-185-en",
+          "pairId": "caption-185",
+          "start": 591.842,
+          "end": 594.623,
+          "text": "I care more about image clarity",
+          "words": []
+        },
+        {
+          "id": "caption-186-en",
+          "pairId": "caption-186",
+          "start": 594.623,
+          "end": 596.332,
+          "text": "so I ultimately chose this combination",
+          "words": []
+        },
+        {
+          "id": "caption-187-en",
+          "pairId": "caption-187",
+          "start": 596.332,
+          "end": 598.443,
+          "text": "You can test it for yourself",
+          "words": []
+        },
+        {
+          "id": "caption-188-en",
+          "pairId": "caption-188",
+          "start": 598.443,
+          "end": 603.612,
+          "text": "Those are the two workflows and model combinations I wanted to share today",
+          "words": []
+        },
+        {
+          "id": "caption-189-en",
+          "pairId": "caption-189",
+          "start": 603.612,
+          "end": 604.883,
+          "text": "Please support the video with a like comment and favorite",
+          "words": []
+        },
+        {
+          "id": "caption-190-en",
+          "pairId": "caption-190",
+          "start": 604.883,
+          "end": 610.543,
+          "text": "Next time I'll share what I learned about creating asset images",
+          "words": []
+        },
+        {
+          "id": "caption-191-en",
+          "pairId": "caption-191",
+          "start": 610.543,
+          "end": 615.44,
+          "text": "including base-body clothing and character assets",
+          "words": []
+        },
+        {
+          "id": "caption-192-en",
+          "pairId": "caption-192",
+          "start": 615.44,
+          "end": 620.69,
+          "text": "along with some image techniques I developed",
+          "words": []
+        },
+        {
+          "id": "caption-193-en",
+          "pairId": "caption-193",
+          "start": 620.69,
+          "end": 623.05,
+          "text": "in other words how to make the images look better",
+          "words": []
+        },
+        {
+          "id": "caption-194-en",
+          "pairId": "caption-194",
+          "start": 623.05,
+          "end": 625.955,
+          "text": "For example this was one of my earliest images",
+          "words": []
+        },
+        {
+          "id": "caption-195-en",
+          "pairId": "caption-195",
+          "start": 625.955,
+          "end": 628.28,
+          "text": "You can see this group of images",
+          "words": []
+        },
+        {
+          "id": "caption-196-en",
+          "pairId": "caption-196",
+          "start": 628.28,
+          "end": 631.613,
+          "text": "The version on the right was the earliest and the character looks very stiff",
+          "words": []
+        },
+        {
+          "id": "caption-197-en",
+          "pairId": "caption-197",
+          "start": 631.613,
+          "end": 634.533,
+          "text": "The middle version is a little better",
+          "words": []
+        },
+        {
+          "id": "caption-198-en",
+          "pairId": "caption-198",
+          "start": 634.62,
+          "end": 638.66,
+          "text": "The far-left version uses my current structure",
+          "words": []
+        },
+        {
+          "id": "caption-199-en",
+          "pairId": "caption-199",
+          "start": 638.66,
+          "end": 643.268,
+          "text": "and the result is even better",
+          "words": []
+        },
+        {
+          "id": "caption-200-en",
+          "pairId": "caption-200",
+          "start": 643.268,
+          "end": 647.53,
+          "text": "I may cover the asset-related content in the next video",
+          "words": []
+        },
+        {
+          "id": "caption-201-en",
+          "pairId": "caption-201",
+          "start": 647.65,
+          "end": 655.41,
+          "text": "The video after that may cover animation with MiniMax H3",
+          "words": []
+        },
+        {
+          "id": "caption-202-en",
+          "pairId": "caption-202",
+          "start": 655.41,
+          "end": 658.117,
+          "text": "As I mentioned in earlier videos",
+          "words": []
+        },
+        {
+          "id": "caption-203-en",
+          "pairId": "caption-203",
+          "start": 658.117,
+          "end": 661.377,
+          "text": "MiniMax H3 produces excellent animation",
+          "words": []
+        },
+        {
+          "id": "caption-204-en",
+          "pairId": "caption-204",
+          "start": 661.377,
+          "end": 665.648,
+          "text": "It also works well for creator-led educational content",
+          "words": []
+        },
+        {
+          "id": "caption-205-en",
+          "pairId": "caption-205",
+          "start": 665.648,
+          "end": 669.467,
+          "text": "I compared Seedance 2.5 and Wan 3",
+          "words": []
+        },
+        {
+          "id": "caption-206-en",
+          "pairId": "caption-206",
+          "start": 669.56,
+          "end": 672.08,
+          "text": "against MiniMax H3",
+          "words": []
+        },
+        {
+          "id": "caption-207-en",
+          "pairId": "caption-207",
+          "start": 672.08,
+          "end": 676.512,
+          "text": "and found that MiniMax H3 performs better",
+          "words": []
+        },
+        {
+          "id": "caption-208-en",
+          "pairId": "caption-208",
+          "start": 676.512,
+          "end": 678.41,
+          "text": "at least in terms of animation",
+          "words": []
+        },
+        {
+          "id": "caption-209-en",
+          "pairId": "caption-209",
+          "start": 678.41,
+          "end": 681.662,
+          "text": "It understands what I want to express more accurately",
+          "words": []
+        },
+        {
+          "id": "caption-210-en",
+          "pairId": "caption-210",
+          "start": 681.662,
+          "end": 685.33,
+          "text": "I'll save the detailed demo and explanation for next time",
+          "words": []
+        },
+        {
+          "id": "caption-211-en",
+          "pairId": "caption-211",
+          "start": 685.33,
+          "end": 687.09,
+          "text": "See you in the next video bye",
+          "words": []
+        }
+      ]
+    }
+  ]
+}

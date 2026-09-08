@@ -1,28 +1,6 @@
 ---
 name: remotion-render
-description: Best practices for rendering videos
-metadata:
-  tags: remotion, render
+description: Compatibility entry for the official remotion-render reference
 ---
 
-## General rendering strategy
-
-Render a video using:
-
-```
-npx remotion render
-```
-
-Full list of options: https://www.remotion.dev/docs/cli/render.md
-
-Render a still using:
-
-```
-npx remotion still
-```
-
-Full list of options: https://www.remotion.dev/docs/cli/still.md
-
-## Transparent videos
-
-See [Transparent videos](./transparent-videos.md) for rendering out a video with transparency.
+Read [official remotion-render](../remotion-best-practices/remotion-render/REFERENCE.md). The canonical technical knowledge lives in remotion-best-practices; other files in this legacy directory are retained for traceability, not a separate maintained rule set. For project animation design and installed API compatibility, follow laohu-animation-director.

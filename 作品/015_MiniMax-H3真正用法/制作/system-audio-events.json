@@ -1,0 +1,42 @@
+{
+  "schema": "laohu.system-audio-events/1",
+  "events": [
+    {
+      "sourceStart": 1206.11,
+      "sourceEnd": 1211.19,
+      "sourceRanges": [
+        [
+          1206.11,
+          1211.19
+        ]
+      ],
+      "targetStart": 378.97666666666663,
+      "targetEnd": 384.0566666666668,
+      "text": "【系统声音演示 不显示字幕】",
+      "cueId": 139,
+      "cueIds": [
+        139,
+        140
+      ],
+      "note": "用户指定只保留系统声音",
+      "isEvent": true
+    },
+    {
+      "sourceStart": 1243.86,
+      "sourceEnd": 1247.5,
+      "sourceRanges": [
+        [
+          1243.86,
+          1247.5
+        ]
+      ],
+      "targetStart": 394.22666666666663,
+      "targetEnd": 397.86666666666673,
+      "text": "【系统声音演示 不显示字幕】",
+      "cueId": 0,
+      "cueIds": [],
+      "note": "持续系统声音",
+      "isEvent": true
+    }
+  ]
+}

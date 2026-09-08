@@ -1,0 +1,21 @@
+{
+  "schema": "laohu.final-asr-provenance/2",
+  "media": "/Users/a1/Movies/h3双采_成片_重新校对.mp4",
+  "mediaSha256": "18faf47f68f417c05f9506cf09902f670e9e017f0e3669df42b8491f2230ce1b",
+  "mediaDurationSeconds": 687.1,
+  "asrEngine": "Volcengine large-model recording-file recognition flash API",
+  "rawJson": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输出/h3双采_成片.asr.raw.json",
+  "srt": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输出/h3双采_成片.asr.srt",
+  "cueCount": 126,
+  "finalWordEndSeconds": 686.93,
+  "comparedAgainst": [
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/分析/全片预剪辑字幕审稿.md",
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/制作/final.edl.json",
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/制作/captions.final.bilingual.json"
+  ],
+  "auditResult": {
+    "virtualCaptionCount": 211,
+    "termDifferenceFlags": 4,
+    "contentOmissionFlags": 0
+  }
+}

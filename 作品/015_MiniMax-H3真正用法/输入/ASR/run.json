@@ -1,0 +1,16 @@
+{
+  "schema": "laohu.cap-asr-run/1",
+  "status": "complete",
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM.cap",
+  "projectRevision": 1,
+  "sourceIndex": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输入/ASR/source-index.json",
+  "rawJson": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输入/ASR/cap-asr.raw.json",
+  "srt": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输入/ASR/cap-asr.srt",
+  "text": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输入/ASR/cap-asr.txt",
+  "captionImport": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输入/ASR/cap-captions.import.json",
+  "segmentRawJson": [
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输入/ASR/segments/000.raw.json",
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/输入/ASR/segments/001.raw.json"
+  ],
+  "cueCount": 233
+}

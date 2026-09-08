@@ -1,0 +1,13 @@
+{
+  "schema": "laohu.cap-edl-receipt/1",
+  "status": "applied",
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM_H3精修预览.cap",
+  "projectName": "Mi Monitor (Area) 2026-09-02 05.30 PM_H3精修预览.cap",
+  "edlPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/制作/final.edl.json",
+  "edlSha256": "622587651c70193bb42581e611e1926a3de9ed46325fdd6f326770a2fca1c841",
+  "previousRevision": 1,
+  "newRevision": 2,
+  "segmentCount": 333,
+  "durationSeconds": 744.1299999999846,
+  "appliedAt": "2026-09-02T14:13:06.575Z"
+}

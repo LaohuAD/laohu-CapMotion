@@ -1,0 +1,58 @@
+name: CapMotion Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/windows-release]
+permissions:
+  contents: read
+concurrency:
+  group: capmotion-windows-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-and-verify:
+    runs-on: windows-2022
+    timeout-minutes: 180
+    env:
+      CAP_GPUI_DEV: '0'
+      CAP_LAOHU_LOCAL_BUILD: '1'
+      RUST_TARGET_TRIPLE: x86_64-pc-windows-msvc
+      CARGO_PROFILE_RELEASE_DEBUG: '0'
+      VITE_ENVIRONMENT: production
+      NEXT_PUBLIC_WEB_URL: https://cap.so
+      NEXTAUTH_URL: https://cap.so
+      VITE_SERVER_URL: https://cap.so
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.88.0
+        with:
+          targets: x86_64-pc-windows-msvc
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - uses: swatinem/rust-cache@v2
+        with:
+          shared-key: capmotion-windows
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Prepare native dependencies
+        run: pnpm -w cap-setup
+      - name: Test project tooling
+        run: node --test scripts/pre-edit-review.test.mjs scripts/postproduction-package.test.mjs scripts/check-cap-local-release.test.mjs scripts/build-cap-local.test.mjs
+      - name: Test shared editor interactions
+        run: pnpm --dir apps/desktop exec vitest run src/routes/editor/timeline-wheel.test.ts 'src/routes/(window-chrome)/onboarding-permissions.test.ts'
+        shell: bash
+      - name: Build Windows installer
+        shell: pwsh
+        run: ./scripts/build-cap-windows.ps1 -SkipSetup
+      - name: Install and verify artifact
+        shell: pwsh
+        run: ./scripts/verify-cap-windows.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: capmotion-windows-verified
+          path: |
+            target/x86_64-pc-windows-msvc/release/bundle/nsis/*.exe
+            target/capmotion-windows-verification.json
+          if-no-files-found: error

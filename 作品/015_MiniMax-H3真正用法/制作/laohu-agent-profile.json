@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "captions": {
+    "languageMode": "bilingual",
+    "segmentation": "semanticUnits",
+    "rewriteForReadability": true,
+    "maxLines": 2
+  },
+  "editing": {
+    "pausePolicy": "adaptive",
+    "preservePersonalExpression": true,
+    "removeStandaloneFillers": true,
+    "retakePolicy": "preferLaterComplete"
+  },
+  "motion": {
+    "engine": "remotion",
+    "activeScreenDemo": "avoidOverlay",
+    "backdrop": "dimFullFrame"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "laohu.h3-motion-apply-receipt/1",
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM_H3基础成片.cap",
+  "workspace": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace",
+  "group": "placeholders",
+  "finalRevision": 27,
+  "operations": [
+    {
+      "task": "h3-missing-opening-evidence",
+      "operation": "definition-register",
+      "revision": 19
+    },
+    {
+      "task": "h3-missing-opening-evidence",
+      "operation": "segment-add",
+      "revision": 20
+    },
+    {
+      "task": "h3-missing-opening-evidence",
+      "operation": "render-final",
+      "revision": 21,
+      "artifact": {
+        "id": "motion-f12ef8c5e27bce8e-final",
+        "segmentId": "h3-missing-opening-evidence",
+        "contentHash": "f12ef8c5e27bce8e3472e213793cba301af516979a7260c8414f8e6dd004d7b3",
+        "quality": "final",
+        "status": "ready",
+        "path": "motion/cache/f12ef8c5e27bce8e3472e213793cba301af516979a7260c8414f8e6dd004d7b3/final.mov",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "hasAlpha": true,
+        "duration": 4.4,
+        "error": null
+      }
+    },
+    {
+      "task": "h3-missing-same-task-comparison",
+      "operation": "definition-register",
+      "revision": 22
+    },
+    {
+      "task": "h3-missing-same-task-comparison",
+      "operation": "segment-add",
+      "revision": 23
+    },
+    {
+      "task": "h3-missing-same-task-comparison",
+      "operation": "render-final",
+      "revision": 24,
+      "artifact": {
+        "id": "motion-2e0242e96b7ceab3-final",
+        "segmentId": "h3-missing-same-task-comparison",
+        "contentHash": "2e0242e96b7ceab308e399d9f865f17115512fb14aa1bdb1fc747ca4c8849d5e",
+        "quality": "final",
+        "status": "ready",
+        "path": "motion/cache/2e0242e96b7ceab308e399d9f865f17115512fb14aa1bdb1fc747ca4c8849d5e/final.mov",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "hasAlpha": true,
+        "duration": 5,
+        "error": null
+      }
+    },
+    {
+      "task": "h3-missing-controlled-strength",
+      "operation": "definition-register",
+      "revision": 25
+    },
+    {
+      "task": "h3-missing-controlled-strength",
+      "operation": "segment-add",
+      "revision": 26
+    },
+    {
+      "task": "h3-missing-controlled-strength",
+      "operation": "render-final",
+      "revision": 27,
+      "artifact": {
+        "id": "motion-6c2baddb7b26a6ff-final",
+        "segmentId": "h3-missing-controlled-strength",
+        "contentHash": "6c2baddb7b26a6ffe0521d464e6ea7d5e0988b3327e83b896c1237c09ac7c16a",
+        "quality": "final",
+        "status": "ready",
+        "path": "motion/cache/6c2baddb7b26a6ffe0521d464e6ea7d5e0988b3327e83b896c1237c09ac7c16a/final.mov",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "hasAlpha": true,
+        "duration": 6,
+        "error": null
+      }
+    }
+  ]
+}

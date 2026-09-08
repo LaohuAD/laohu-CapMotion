@@ -1,0 +1,86 @@
+{
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap",
+  "valid": true,
+  "recordingType": "studio",
+  "checks": [
+    {
+      "role": "recordingMeta",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/recording-meta.json",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "projectConfig",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/project-config.json",
+      "exists": true,
+      "required": false
+    },
+    {
+      "role": "displayVideo",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-0/display.mp4",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "camera",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-0/camera.mp4",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "mic",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-0/audio-input.ogg",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "systemAudio",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-0/system_audio.ogg",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "cursor",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-0/cursor.json",
+      "exists": true,
+      "required": false
+    },
+    {
+      "role": "displayVideo",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-1/display.mp4",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "camera",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-1/camera.mp4",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "mic",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-1/audio-input.ogg",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "systemAudio",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-1/system_audio.ogg",
+      "exists": true,
+      "required": true
+    },
+    {
+      "role": "cursor",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/content/segments/segment-1/cursor.json",
+      "exists": true,
+      "required": false
+    },
+    {
+      "role": "output",
+      "path": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_老胡剪辑工程.cap/output/result.mp4",
+      "exists": true,
+      "required": false
+    }
+  ],
+  "missing": []
+}

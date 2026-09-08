@@ -1,5 +1,13 @@
 # 第二遍后期任务包契约
 
+主审稿默认由 `scripts/pre-edit-review.mjs` 从唯一 `预剪辑审稿.json` 生成 HTML；格式契约见 `workflows/laohu-video/模板/口播精剪审稿模板.md`。这里的 `edit.preEditReview.documentPath` 指向用户实际看过的 HTML，批准修订和范围与原审稿数据一致。网页意见必须先合入数据再重新生成；HTML 的本地草稿不是用户整体批准。旧 Markdown 审稿保持可读兼容，不自动迁移其批准。
+
+## 设计输入与正式执行包
+
+下列字段是正式执行契约，不是对创意输入的要求。制作脚本的动画建议不完整时，先由后期负责人调用 `laohu-animation-director` 完成转译，在同一份审稿数据中记录设计、生成 HTML 交用户审阅，控制文档保留索引，再编译为这里的字段。已有 `validatePostproductionPackage()` 不接受未完成批注；不能以草案替代执行包。预计时码只用于设计，正式 `finalRange` 必须来自冻结映射。
+
+整片/章节请求还要先有“讲解单元与画面安排”：按剪后连续内容组合保留片段，选择动画或保留底画，列实际覆盖窗口与素材准备状态。一个单元不必对应一条字幕或一个执行任务。`finalRange` 表示当前任务实际连续覆盖的成片区间，不是全部引用材料的最小/最大时码；不连续窗口应拆任务，连续状态用已有合同承接。片段追溯、未选动画理由与素材缺口保留在策划文档，不自行新增运行字段。
+
 ## 必须字段
 
 ```json
@@ -45,6 +53,12 @@
     },
     "preEditReview": {
       "documentPath": "/absolute/full-pre-edit-review.md",
+      "revision": 1,
+      "visualPlan": {
+        "included": true,
+        "feedbackResolved": true,
+        "materialsResolved": true
+      },
       "fullTimelineCovered": true,
       "segmentBoundariesIncluded": true,
       "virtualRoughCutComplete": true,
@@ -55,7 +69,9 @@
       "uncertaintiesResolved": true,
       "userApproval": {
         "status": "APPROVED",
-        "reference": "可追溯的用户确认回执"
+        "reference": "可追溯的用户确认回执",
+        "scope": "EDIT_AND_VISUALS",
+        "reviewRevision": 1
       }
     }
   },
@@ -67,6 +83,12 @@
   "tasks": []
 }
 ```
+
+`preEditReview.documentPath` 指向同一份剪辑、字幕与画面审稿主文档。先设计再批准，批准后才执行剪辑与动画制作。`visualPlan.included` 表示方案已含对应讲述/组合片段、预期时间和覆盖窗口、进入—变化—收束、材料用途、音效及底画交还安排；`feedbackResolved` 表示反馈已合入方案且无未决取舍；`materialsResolved` 表示来源与获取安排或替代方案已经确定，不表示提前生成了成品。执行 Agent 要核实正文与真实回执，布尔值不能证明用户已经同意。
+
+包含 `SCREEN_RECORDING / EVIDENCE / REMOTION / AVATAR / AI_VIDEO` 任务，或显式声明 `visualPlan` / `EDIT_AND_VISUALS` 范围时，上述画面字段必须为真；`revision` 必须是正整数，`userApproval.scope=EDIT_AND_VISUALS`，`reviewRevision` 必须等于当前审稿修订。用户反馈改变剪口、可见起止、画面内容、材料用途、覆盖方式或音效时，执行 Agent 须递增修订、将批准改回 `PENDING`，整体确认后才恢复 `APPROVED`。旧的文字/剪口批准不能自动迁移为动画批准。仅 `BASE` 或空任务的纯剪辑可保留原批准格式，不强制增加画面制作；用户要求了画面策划但最终选择全部保留底画时，仍保留 `visualPlan` 及整体确认。
+
+`validatePostproductionPackage` 与冻结入口检查这些声明；生成 Cap 覆盖命令前再次校验，防止冻结后改回待确认状态仍继续导入。错误码：`PRE_EDIT_VISUAL_PLAN_INCOMPLETE`、`PRE_EDIT_VISUAL_APPROVAL_REQUIRED`、`PRE_EDIT_APPROVAL_STALE`。这些检查不读取审稿正文、不验证对话真实性，也不是 Cap 原生权限系统，不能替代执行 Agent 的批准核实。
 
 任务可用 `BASE / SCREEN_RECORDING / EVIDENCE / REMOTION / AVATAR / AI_VIDEO`。每项必须有唯一 `id`、冻结成片 `finalRange` 与 `narrative`：
 

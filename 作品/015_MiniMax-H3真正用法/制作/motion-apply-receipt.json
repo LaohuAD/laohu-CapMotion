@@ -1,0 +1,153 @@
+{
+  "schema": "laohu.h3-motion-apply-receipt/1",
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM_H3基础成片.cap",
+  "workspace": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace",
+  "finalRevision": 18,
+  "operations": [
+    {
+      "task": "h3-ratio-lock",
+      "operation": "definition-register",
+      "revision": 4
+    },
+    {
+      "task": "h3-ratio-lock",
+      "operation": "segment-add",
+      "revision": 5
+    },
+    {
+      "task": "h3-ratio-lock",
+      "operation": "render-final",
+      "revision": 6,
+      "artifact": {
+        "id": "motion-d8d1d268c788c677-final",
+        "segmentId": "h3-ratio-lock",
+        "contentHash": "d8d1d268c788c6775f9f0b01e7c608e5c6401e0a5f687dbe6a629a9ad94b2f96",
+        "quality": "final",
+        "status": "ready",
+        "path": "motion/cache/d8d1d268c788c6775f9f0b01e7c608e5c6401e0a5f687dbe6a629a9ad94b2f96/final.mov",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "hasAlpha": true,
+        "duration": 8,
+        "error": null
+      }
+    },
+    {
+      "task": "h3-sampling-chain",
+      "operation": "definition-register",
+      "revision": 7
+    },
+    {
+      "task": "h3-sampling-chain",
+      "operation": "segment-add",
+      "revision": 8
+    },
+    {
+      "task": "h3-sampling-chain",
+      "operation": "render-final",
+      "revision": 9,
+      "artifact": {
+        "id": "motion-d758e97de9d5c177-final",
+        "segmentId": "h3-sampling-chain",
+        "contentHash": "d758e97de9d5c177add4f8c14b4f13bea14f1ba7c1f34d5a2d83625a2e93d058",
+        "quality": "final",
+        "status": "ready",
+        "path": "motion/cache/d758e97de9d5c177add4f8c14b4f13bea14f1ba7c1f34d5a2d83625a2e93d058/final.mov",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "hasAlpha": true,
+        "duration": 12,
+        "error": null
+      }
+    },
+    {
+      "task": "h3-latent-transfer",
+      "operation": "definition-register",
+      "revision": 10
+    },
+    {
+      "task": "h3-latent-transfer",
+      "operation": "segment-add",
+      "revision": 11
+    },
+    {
+      "task": "h3-latent-transfer",
+      "operation": "render-final",
+      "revision": 12,
+      "artifact": {
+        "id": "motion-517bcf22a5bbdf5c-final",
+        "segmentId": "h3-latent-transfer",
+        "contentHash": "517bcf22a5bbdf5ce0c42a2d11e4393216fe27225aac3b74564fee65e1548920",
+        "quality": "final",
+        "status": "ready",
+        "path": "motion/cache/517bcf22a5bbdf5ce0c42a2d11e4393216fe27225aac3b74564fee65e1548920/final.mov",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "hasAlpha": true,
+        "duration": 12,
+        "error": null
+      }
+    },
+    {
+      "task": "h3-task-model-choice",
+      "operation": "definition-register",
+      "revision": 13
+    },
+    {
+      "task": "h3-task-model-choice",
+      "operation": "segment-add",
+      "revision": 14
+    },
+    {
+      "task": "h3-task-model-choice",
+      "operation": "render-final",
+      "revision": 15,
+      "artifact": {
+        "id": "motion-57800bbf669c78f7-final",
+        "segmentId": "h3-task-model-choice",
+        "contentHash": "57800bbf669c78f7a1d283fa02bdafcec181b6c655e2e5e3751db57e127e0b01",
+        "quality": "final",
+        "status": "ready",
+        "path": "motion/cache/57800bbf669c78f7a1d283fa02bdafcec181b6c655e2e5e3751db57e127e0b01/final.mov",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "hasAlpha": true,
+        "duration": 12,
+        "error": null
+      }
+    },
+    {
+      "task": "h3-final-recap",
+      "operation": "definition-register",
+      "revision": 16
+    },
+    {
+      "task": "h3-final-recap",
+      "operation": "segment-add",
+      "revision": 17
+    },
+    {
+      "task": "h3-final-recap",
+      "operation": "render-final",
+      "revision": 18,
+      "artifact": {
+        "id": "motion-ffae67220ce071a2-final",
+        "segmentId": "h3-final-recap",
+        "contentHash": "ffae67220ce071a2a8f989764058c244438c6e96dff91137168b86460197d4ef",
+        "quality": "final",
+        "status": "ready",
+        "path": "motion/cache/ffae67220ce071a2a8f989764058c244438c6e96dff91137168b86460197d4ef/final.mov",
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "hasAlpha": true,
+        "duration": 7,
+        "error": null
+      }
+    }
+  ]
+}

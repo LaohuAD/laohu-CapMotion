@@ -35,10 +35,9 @@ pub struct RemotionCliRunner;
 
 impl MotionRenderRunner for RemotionCliRunner {
     fn render(&self, request: &MotionRenderRequest) -> Result<(), String> {
-        #[cfg(windows)]
-        let executable = request.workspace.join("node_modules/.bin/remotion.cmd");
-        #[cfg(not(windows))]
-        let executable = request.workspace.join("node_modules/.bin/remotion");
+        // Invoke the JavaScript entry with Node on both platforms. A Windows
+        // .cmd shim would otherwise send JSON props through cmd.exe parsing.
+        let executable = request.workspace.join("node_modules/@remotion/cli/remotion-cli.js");
 
         if !executable.is_file() {
             return Err(format!(
@@ -58,8 +57,10 @@ impl MotionRenderRunner for RemotionCliRunner {
 
         let props = serde_json::to_string(&request.props)
             .map_err(|error| format!("failed to encode Remotion props: {error}"))?;
-        let mut command = Command::new(executable);
+        let node = std::env::var_os("CAP_REMOTION_NODE").unwrap_or_else(|| "node".into());
+        let mut command = Command::new(node);
         command
+            .arg(executable)
             .current_dir(&request.workspace)
             .arg("render")
             .arg(entry)

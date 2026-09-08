@@ -1,0 +1,10 @@
+{
+  "aspectRatio": "wide",
+  "background": {
+    "sourceBinding": "currentDesktop",
+    "displayPosition": {
+      "x": 0.5,
+      "y": 0.44
+    }
+  }
+}

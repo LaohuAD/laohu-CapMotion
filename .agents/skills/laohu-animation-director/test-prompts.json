@@ -2,7 +2,7 @@
   {
     "name": "vague-time-range",
     "prompt": "请在 05:20 到 06:24 做一个动画，我没有明确想法。先读 ASR 和素材再推荐。",
-    "expected": "先分析语义和补充内容，再推荐主组件与备选，不直接套最近组件。"
+    "expected": "先读对应 ASR、材料与前后文，完成画面理解和具体动作/焦点/声音节拍，再选择实现。若只有预计时间，标为设计草案；不伪造冻结时码。"
   },
   {
     "name": "explicit-matrix",
@@ -22,7 +22,7 @@
   {
     "name": "reject-vague-remotion-label",
     "prompt": "制作脚本只写了这里做 REMOTION 动画。",
-    "expected": "返回 REMOTION_ANNOTATION_INCOMPLETE，要求对象、关系、进入、变化、前后承接、收束、材料和验收，不靠后期猜。"
+    "expected": "先检查口播与材料。能确定主张与对象时由导演完成转译，不因缺动作参数直接退回用户；执行前仍必须补齐合同，否则 REMOTION_ANNOTATION_INCOMPLETE。"
   },
   {
     "name": "knowledge-must-change-a-decision",
@@ -37,11 +37,116 @@
   {
     "name": "understand-requires-knowledge-visual-contract",
     "prompt": "这段口播在讲资料经过筛选后变成可复用工具，脚本只写了做 Remotion 动画。",
-    "expected": "返回 KNOWLEDGE_VISUAL_CONTRACT_INCOMPLETE；要求补齐主张、语义对象、初态、作用、状态变化、结果、口播语义锚点、中文大标签计划与静音/声画同步验收，不靠后期猜。"
+    "expected": "先把已知的资料、筛选与工具关系转成初态、作用、分流和结果，补知识视觉合同及语义锚点；未知事实不能猜。未补齐合同的正式执行仍返回 KNOWLEDGE_VISUAL_CONTRACT_INCOMPLETE。"
   },
   {
     "name": "semantic-anchors-drive-visible-state-changes",
     "prompt": "合同已经写清口播说到输入、筛选和可复用结果的三个语义锚点，请制作透明 Remotion 叠层。",
     "expected": "把三个 spokenCue 分别映射为对象建立、作用路径和结果锁定的可见状态变化；用少量中文大标签就近标注，默认灰黑半透明蒙版，并完成静音理解和声画同步验收。"
+  },
+  {
+    "name": "poster-idea-before-edl",
+    "prompt": "我有六张海报，想从堆叠摊开成两行，镜头扫过去，最后一张放大。先帮我设计，还没有口播或 EDL。",
+    "expected": "交付相对秒数的画面、运动、视窗、图层、声音设计和停稳结果；保留原比例与图片主角。无 ASR/EDL 不妨碍设计，但不伪造正式合同或制作已冻结资产。"
+  },
+  {
+    "name": "custom-composition-is-not-new-engine",
+    "prompt": "六张图的透视编排现有组件做不了，这段已经授权制作，也有冻结时码和素材。",
+    "expected": "允许在共享 workspace 注册作品专属 Composition 与自身 props schema，记录 source/compositionId，按同一个 Cap definition 接入；不必先升级为公共家族，不另装一套依赖。"
+  },
+  {
+    "name": "reference-does-not-lock-style",
+    "prompt": "参考里都是深色玻璃侧边卡片，这次六张彩色海报是否也必须统一包成玻璃卡？",
+    "expected": "说明参考的适用范围；海报自身可以成为主体，迁移逐步建立和焦点交接的方法即可，不强制照抄参考皮肤。"
+  },
+  {
+    "name": "ranking-image-is-not-history",
+    "prompt": "就用这张静态榜单做 GPT 从末位冲到第一，分数跟着涨，要像真实历史。",
+    "expected": "区分动画演示与真实历史，索取历史数据或改为明确示意；不能根据静态截图编造评分演变。"
+  },
+  {
+    "name": "sound-delivery-must-be-audible",
+    "prompt": "设计里每次落位有声音，导入 Cap Motion 就算交付了吗？",
+    "expected": "不能。视觉默认静音，记录声音事件；核验独立音轨或混音链并试听最终导出后才能报告有声交付，未支持时明确待接入而非改写原主音频。"
+  },
+  {
+    "name": "official-documentation-is-not-runtime-upgrade",
+    "prompt": "官方 4.0.522 示例用 CanvasImage，当前工程 4.0.489，直接复制吗？",
+    "expected": "读取实际导出和类型确认；不支持则采用兼容实现，不能因同步 Skills 自动升级依赖或虚报 API 可用。"
+  },
+  {
+    "name": "missing-fact-is-not-missing-design",
+    "prompt": "帮我做“效率提升 90%”的动画，脚本和材料没有这个数字的出处。",
+    "expected": "缺少事实依据，不能自行填来源或伪造统计；保留可做的视觉设计，说明数字缺口，正式事实画面不能执行。"
+  },
+  {
+    "name": "approved-design-must-survive",
+    "prompt": "已确定六张图片的顺序、最后主图和浅色背景，只要补运动，不改方案。",
+    "expected": "沿原设计补动作与节拍，保留顺序、主图、浅色背景，不因默认 preset 或新奇要求改成新方案。"
+  },
+  {
+    "name": "group-cut-content-before-animation",
+    "prompt": "虚拟成片 40–43 秒说资料多，43–46 秒说筛选，46–50 秒说留下工具，50–56 秒实际点击工具；前三段共分成六条字幕。请规划动画。",
+    "expected": "把前三段组成一个解释单元，六条字幕不机械拆六个动画；依据真实底画决定覆盖，动画在 50 秒操作前交还。40–50 仅为有条件的示例候选，结果停留须容纳其中，不延长音频。保存片段引用和内容/覆盖边界。"
+  },
+  {
+    "name": "split-discontinuous-overlays",
+    "prompt": "40–45 秒解释结构，45–52 秒必须看软件操作，52–57 秒继续同一结构。能把动画从 40 秒覆盖到 57 秒吗？",
+    "expected": "检查中间操作职责，不因主题相同直接取最小/最大区间；通常拆两个覆盖任务，保留 45–52 操作，用连续组保存解释状态。"
+  },
+  {
+    "name": "no-script-label-still-plan",
+    "prompt": "请规划整条口播，制作脚本只有两处动画建议，但剪后还有一段复杂流程，原画面一直停在桌面。",
+    "expected": "检查全请求范围，不仅加工两个标记；评估复杂流程的真实理解缺口，可提出新的动画单元，给内容/覆盖范围与材料依据，不按静止时长机械填满。"
+  },
+  {
+    "name": "still-speaker-may-matter",
+    "prompt": "这段老胡坐着不动在讲亲身经历和感受，是不是应该整段盖掉？",
+    "expected": "检查表情、态度、可信度和讲述任务，不以不动为充分理由；可保留人物、局部辅助或在必要点切材料，说明取舍。"
+  },
+  {
+    "name": "asset-plan-follows-purpose",
+    "prompt": "一段解释抽象分流，另一段证明软件操作结果。都要生成几张图片配动画吗？",
+    "expected": "抽象关系可用程序图形与短标签；真实操作结果优先实际录屏/截图并记录出处及可读细节。逐项列用途、时间、来源、准备状态，缺材料不自动授权生成或采购。"
+  },
+  {
+    "name": "virtual-asr-does-not-require-render",
+    "prompt": "虚拟剪辑已经完成，还没有渲染最终视频，也没重新识别成片。可以先决定动画区间吗？",
+    "expected": "可以用保留词流与映射派生的预期成片内容策划，未冻结标草案；不强制先渲染/重新 ASR，不使用删掉的旧句子，也不把预计时间当正式 T2。"
+  },
+  {
+    "name": "scoped-animation-stays-scoped",
+    "prompt": "只帮我判断 2:10–2:25 的画面，其他都已经确认。",
+    "expected": "仅看该段与必要前后文，保留其他已确认安排；不借整片能力重做全片，不越界扩大覆盖。"
+  },
+  {
+    "name": "joint-review-before-production",
+    "prompt": "虚拟剪辑后给我同一份方案，里面一起看动画，所有东西确认好再剪辑和制作。",
+    "expected": "在同一份审稿主文档提供源引用、预期成片字幕、动画单元/效果/可见窗口/素材/覆盖/音效，整体批准前只读分析和文字设计，不开始剪辑写入、作品动画代码或渲染。"
+  },
+  {
+    "name": "picture-feedback-updates-design",
+    "prompt": "A02方案不好，换成我这三张截图，第二张要放大讲，其他先别做。",
+    "expected": "把反馈写回A02，更新三图用途、顺序、第二图放大和阅读时间、覆盖及前后衔接；若影响时码同步重算。保留其他有效决定，递增当前审稿修订并待整体批准，不能只追加素材路径或先制作其他段。"
+  },
+  {
+    "name": "partial-approval-is-not-whole",
+    "prompt": "剪口都可以，动画第三段我还想改。",
+    "expected": "记录剪口已解决、动画第三段未决；不把局部同意标为EDIT_AND_VISUALS整体批准，继续改同一方案，整个请求范围的生产等待整份确认。"
+  },
+  {
+    "name": "approved-implementation-details",
+    "prompt": "整份剪辑和动画方案就按现在这个来，可以开始了。",
+    "expected": "保存当前修订的真实整体批准回执，冻结并核验映射，执行已确认剪辑和动画。缓动、帧取整等不改变观看效果的细节直接完成；不能再要求用户逐个确认工程参数。"
+  },
+  {
+    "name": "joint-html-not-old-caption-table",
+    "prompt": "按我以前左右时码的想法做HTML，但内容用刚刚完善的新审稿模板。",
+    "expected": "保留新联合审稿的疑难、主线、跨字幕动画理由/覆盖窗/图片用途/逐拍动作/音效/反馈与整体确认；生成中央竖轴左右关联的HTML，不只翻版旧字幕表。"
+  },
+  {
+    "name": "html-feedback-does-not-authorize-media",
+    "prompt": "我在A01下面写了“第二张图多留两秒”，你把这个意见接回去。",
+    "expected": "核对作品修订与内容标识，将反馈合入同一审稿JSON，更新效果/阅读时间/覆盖/衔接并重生HTML；浏览器留言不自动批准或触发媒体制作。"
   }
 ]

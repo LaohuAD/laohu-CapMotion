@@ -1,0 +1,111 @@
+{
+  "schema": "laohu.silence-refinement/1",
+  "sourceTimelineSeconds": 730.3,
+  "finalTimelineSeconds": 726.1666666666666,
+  "cuts": [
+    {
+      "startFrame": 3191,
+      "endFrame": 3199,
+      "sourceSilenceStart": 106.275312,
+      "sourceSilenceEnd": 106.740187,
+      "removedFrames": 8,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 4713,
+      "endFrame": 4716,
+      "sourceSilenceStart": 156.99775,
+      "sourceSilenceEnd": 157.303854,
+      "removedFrames": 3,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 5110,
+      "endFrame": 5117,
+      "sourceSilenceStart": 170.238563,
+      "sourceSilenceEnd": 170.659417,
+      "removedFrames": 7,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 6175,
+      "endFrame": 6196,
+      "sourceSilenceStart": 205.744271,
+      "sourceSilenceEnd": 206.644167,
+      "removedFrames": 21,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 7005,
+      "endFrame": 7028,
+      "sourceSilenceStart": 233.387438,
+      "sourceSilenceEnd": 234.350917,
+      "removedFrames": 23,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 11181,
+      "endFrame": 11193,
+      "sourceSilenceStart": 372.611042,
+      "sourceSilenceEnd": 373.20325,
+      "removedFrames": 12,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 12836,
+      "endFrame": 12845,
+      "sourceSilenceStart": 427.769437,
+      "sourceSilenceEnd": 428.265688,
+      "removedFrames": 9,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 13091,
+      "endFrame": 13105,
+      "sourceSilenceStart": 436.262396,
+      "sourceSilenceEnd": 436.933229,
+      "removedFrames": 14,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 15046,
+      "endFrame": 15053,
+      "sourceSilenceStart": 501.450187,
+      "sourceSilenceEnd": 501.867896,
+      "removedFrames": 7,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 16920,
+      "endFrame": 16925,
+      "sourceSilenceStart": 563.914625,
+      "sourceSilenceEnd": 564.261458,
+      "removedFrames": 5,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 18006,
+      "endFrame": 18010,
+      "sourceSilenceStart": 600.094167,
+      "sourceSilenceEnd": 600.417792,
+      "removedFrames": 4,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 20794,
+      "endFrame": 20800,
+      "sourceSilenceStart": 693.039708,
+      "sourceSilenceEnd": 693.417375,
+      "removedFrames": 6,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    },
+    {
+      "startFrame": 21320,
+      "endFrame": 21325,
+      "sourceSilenceStart": 710.578208,
+      "sourceSilenceEnd": 710.92325,
+      "removedFrames": 5,
+      "reason": "无词级发声、无系统演示覆盖的纯气口；两侧合计保留约 0.16 秒自然收放音"
+    }
+  ]
+}

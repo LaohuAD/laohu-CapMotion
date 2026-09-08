@@ -1,0 +1,478 @@
+{
+  "symptom": "用户希望制作脚本中的模糊动画建议经过导演转译，再使用官方 Remotion 实现；现有导演入口却把完整批注当作先决条件，且参考案例和组件选择容易提前限定形式。用户同时要求核对本地 Remotion 与官方是否一致、是否落后。",
+  "date": "2026-09-08",
+  "TriggerEvidence": [
+    "本轮用户明确要求优化动画 Skill 与项目创作流程，并提供八张 Motion Director 工作流截图",
+    "追问要求检查本地 Remotion 的工具身份、官方一致性与版本更新"
+  ],
+  "triggerScope": "PROJECT_CAPABILITY",
+  "earliestFailure": "动画导演创意入口与正式制作闸门混用：SKILL.md 要求先有完整 annotation/knowledgeVisual，否则退回，尚未承担从已知口播意图到可执行视觉设计的责任。",
+  "rootLayer": "STRUCTURE",
+  "layerAnalysis": {
+    "SOUL": "原知识解释原则继续保留；另承认展示、开场与情绪的观看目标，不强行变成知识图表。",
+    "STRUCTURE": "区分创意转译、已有设计深化、正式制作；后期总装调用创意准备，再走原执行校验。",
+    "FLESH": "具体对象、起态、触发、动作、镜头/焦点、声音、结果及材料职责进入必要中间结果。",
+    "SURFACE": "参考皮肤的适用范围明确；技术完整、行为有效、真实视觉质量分开验证。"
+  },
+  "hypothesis": "在口播、主张和材料足够但动画描述粗略时，导演能自行产出具体可视设计；不知道事实时仍澄清，未冻结时仍不制作；现有组件不适合时能走注册作品 Composition，而非把内容压成固定卡片。",
+  "protection": [
+    "Remotion 是唯一程序动画引擎",
+    "正式生产仍用冻结 T2 与真实主音频，不伪造 ASR/EDL/批准",
+    "KnowledgeVisualContract、OverlayContinuityContract、AI host compatibility 与 revision/hash 校验继续有效",
+    "原 12 语义家族与 EditorialOverlayShell 保留，未修改旧组件代码或用户作品",
+    "真实数据、来源与原始素材不被参考示例替换",
+    "不更新运行依赖、不启动 GUI、不打包 Cap、不提交或推送 Git、不修改相邻项目"
+  ],
+  "authorityPath": ".agents/skills/laohu-animation-director/SKILL.md",
+  "change": "升级现有导演 Skill，新增统一规范目录中的动画导演转译规范，接通后期准备与知识路由，给旧参考及视觉规则补适用边界，补齐官方分发聚合技能并将旧同名入口改为兼容路由。核验实际安装程序版本及官方包一致性。",
+  "decisionChanges": [
+    "缺动作参数从退回上游变为导演完成设计；未知事实仍不能猜",
+    "先设计画面变化与结果，再选择复用/组合/作品 Composition/公共升级",
+    "参考案例迁移机制，不把深色玻璃侧边布局升级为全部动画的默认皮肤",
+    "音效设计单独记录，须验证真实混音和最终试听才能报为有声交付",
+    "官方文档版本与运行依赖版本分开维护，新 API 使用前检查实际导出"
+  ],
+  "capabilityDestinations": [
+    {
+      "before": "只收完整 REMOTION 批注",
+      "after": "设计入口接受粗建议；完整合同仍保留为执行闸门",
+      "location": ".agents/skills/laohu-animation-director/SKILL.md"
+    },
+    {
+      "before": "ASR、知识视觉与跨载体连续性",
+      "after": "完整保留，不以新设计字段替换原 JSON 契约",
+      "location": "scripts/postproduction-package.mjs + workspace/src/schemas/director.ts（初次进化未改动；后续整体审稿进化仅扩展前者的批准检查，原语义合同不变）"
+    },
+    {
+      "before": "组件缺口需先升级公共登记",
+      "after": "允许在共享 workspace 注册作品 Composition；公共升级规则仍在",
+      "location": "workflows/laohu-video/规范/组件设计方法论.md"
+    },
+    {
+      "before": "旧官方 48 文件聚合包与顶层同名副本",
+      "after": "137 个当前官方文件为技术权威；旧入口兼容转发，旧非入口页面保留追溯，不再作为当前知识路由",
+      "location": ".agents/skills/remotion-best-practices/upstream-lock.json"
+    },
+    {
+      "before": "参考视频的长期叠层语法",
+      "after": "保留拆解、来源及既有实现，加上当前适用范围",
+      "location": "知识沉淀/参考视频拆解与编辑型信息叠层进化计划.md"
+    }
+  ],
+  "knowledgeActivations": [
+    {
+      "asset": ".agents/skills/laohu-video-evolution/SKILL.md + references/四层能力进化与保真.md",
+      "trigger": "明确要求项目级动画流程升级",
+      "judgment": "最早缺口在创意入口，不能取消下游正式执行约束",
+      "changedDecision": "先补设计职责再接回原契约，保留成熟组件与历史证据",
+      "resultLocation": "导演 Skill、后期 Skill 与本记录",
+      "unusedBoundary": "没有删除旧作品或重构 Cap 程序"
+    },
+    {
+      "asset": "../老胡AI视觉/skills/laohu-video-prompt/SKILL.md",
+      "trigger": "用户明确指出与 AI 视觉视频提示词的理念相似",
+      "judgment": "可借用稳定起态、触发、可见变化、结果停点与参考职责；生成模型提示词不是 Remotion 的执行接口",
+      "changedDecision": "用人可审阅的动作/镜头/声音设计转为帧与 props，未照抄该项目的镜号和整套生成合同",
+      "resultLocation": "workflows/laohu-video/规范/动画导演转译规范.md",
+      "unusedBoundary": "未修改 AI 视觉项目、未调用 AI 视频生成或导入其全部角色资产规则"
+    },
+    {
+      "asset": "本轮八张参考截图",
+      "trigger": "理解用户期望的从短想法到详细动作描述",
+      "judgment": "海报本体、错峰展开、空间扫视、最后主角放大是可迁移编排；榜单截图不等于历史数据",
+      "changedDecision": "新增六图编排示范及静态榜单事实边界；不锁截图中的具体压缩比例与节奏为通用值",
+      "resultLocation": "动画导演转译规范第 8 节",
+      "unusedBoundary": "未获得博主 Skill 源文、原始视频或海报文件，不能声称精确还原曲线、声音或源码"
+    },
+    {
+      "asset": "官方 remotion-dev/remotion packages/skills 与 remotion-dev/skills 分发聚合包",
+      "trigger": "核对用户所说的技能完整性和是否更新",
+      "judgment": "本地知识有基础覆盖但缺当前文档路由和新主题，官方发布技能版本 4.0.522",
+      "changedDecision": "同步官方聚合包并记录逐文件 hash；运行程序继续与技术文档分开验证",
+      "resultLocation": ".agents/skills/remotion-best-practices/ + runtimeAudit",
+      "unusedBoundary": "未升级 npm 依赖、未默认加载地图/SaaS/语音生成内容"
+    },
+    {
+      "asset": "/Users/a1/.codex/skills/.system/skill-creator/SKILL.md",
+      "trigger": "修改已有复杂 Skill 的职责和发现入口",
+      "judgment": "更新现有唯一主责，按需披露详细模板，不重复新建 Skill；自评不能证明质量提升",
+      "changedDecision": "细节落统一规范文件，主 Skill 接通；行为记 OBSERVE、质量 UNKNOWN",
+      "resultLocation": "主 Skill、转译规范、test-prompts.json 与本记录",
+      "unusedBoundary": "本轮没有独立评审或真实生产作品，不标为审美验收通过"
+    }
+  ],
+  "regressions": {
+    "current": [
+      "模糊筛选建议可生成材料分流与工具组合的具体设计，详见转译规范第 8 节；self-run OBSERVE",
+      "六图展示可做相对秒数的设计，不要求伪造 ASR/EDL；self-run OBSERVE",
+      "8 个已安装 Remotion 直接依赖共 901 个文件与官方同版本 tarball 无差异"
+    ],
+    "legacy": [
+      "scripts/postproduction-package.test.mjs / project-routing.test.mjs / evolution-record.test.mjs：合计 38 tests PASS，覆盖冻结、合同、revision、来源和专用路由",
+      "共享 workspace npm run typecheck PASS；npm test：6 files / 42 tests PASS，包含旧 schema、组件、状态与连续性"
+    ],
+    "adjacent": [
+      "只有设计请求不渲染、不碰 Cap；旧第一遍 ASR 路由测试继续 PASS",
+      "静态榜单不能生成虚假真实历史；无来源的 90% 数字保持事实缺口，self-run OBSERVE",
+      "已确定顺序、主图和浅色背景的设计只深化动作；不被参考皮肤覆盖，self-run OBSERVE"
+    ]
+  },
+  "behaviorTrials": [
+    {
+      "input": "口播说资料经过筛选成为工具，建议只写这里做动画",
+      "observedDecision": "三个示意材料分流、淘汰一个、保留两个组合成工具；不显示真实通过率；动画时刻等待实际语义锚点",
+      "artifact": "动画导演转译规范第 8 节教学例",
+      "status": "OBSERVE"
+    },
+    {
+      "input": "六张海报从堆叠变两行，扫视后突出一张；没有 EDL",
+      "observedDecision": "相对 7 秒逐拍设计；图像保留比例；主图未锁则可调整；声音是设计而非已生成资产",
+      "artifact": "动画导演转译规范第 8 节效果例",
+      "status": "OBSERVE"
+    },
+    {
+      "input": "新图层编排不被旧组件 schema 支持，但已授权制作",
+      "observedDecision": "共享 workspace 的独立 Composition、自身 schema、同一 Cap definition，不把图层塞入错误家族",
+      "artifact": "动画导演转译规范第 5 节 + Cap motion definition/source/compositionId 源码核验",
+      "status": "OBSERVE"
+    },
+    {
+      "input": "榜单静图做真实排名上涨",
+      "observedDecision": "拒绝无数据的事实演变，允许明确的示意动画",
+      "artifact": ".agents/skills/laohu-animation-director/test-prompts.json: ranking-image-is-not-history",
+      "status": "OBSERVE"
+    }
+  ],
+  "runtimeAudit": {
+    "release": {
+      "latest": "4.0.522",
+      "latestPublished": "2026-09-07T09:38:41.493Z",
+      "installedPublished": "2026-07-12T12:53:55.383Z",
+      "checkedOn": "2026-09-08"
+    },
+    "packages": [
+      {
+        "name": "@remotion/cli",
+        "version": "4.0.489",
+        "officialTarball": "https://registry.npmjs.org/@remotion/cli/-/cli-4.0.489.tgz",
+        "integrityMatchesRegistry": true,
+        "integrityMatchesLock": true,
+        "filesChecked": 180,
+        "localDifferences": []
+      },
+      {
+        "name": "@remotion/layout-utils",
+        "version": "4.0.489",
+        "officialTarball": "https://registry.npmjs.org/@remotion/layout-utils/-/layout-utils-4.0.489.tgz",
+        "integrityMatchesRegistry": true,
+        "integrityMatchesLock": true,
+        "filesChecked": 13,
+        "localDifferences": []
+      },
+      {
+        "name": "@remotion/media",
+        "version": "4.0.489",
+        "officialTarball": "https://registry.npmjs.org/@remotion/media/-/media-4.0.489.tgz",
+        "integrityMatchesRegistry": true,
+        "integrityMatchesLock": true,
+        "filesChecked": 61,
+        "localDifferences": []
+      },
+      {
+        "name": "@remotion/paths",
+        "version": "4.0.489",
+        "officialTarball": "https://registry.npmjs.org/@remotion/paths/-/paths-4.0.489.tgz",
+        "integrityMatchesRegistry": true,
+        "integrityMatchesLock": true,
+        "filesChecked": 94,
+        "localDifferences": []
+      },
+      {
+        "name": "@remotion/shapes",
+        "version": "4.0.489",
+        "officialTarball": "https://registry.npmjs.org/@remotion/shapes/-/shapes-4.0.489.tgz",
+        "integrityMatchesRegistry": true,
+        "integrityMatchesLock": true,
+        "filesChecked": 60,
+        "localDifferences": []
+      },
+      {
+        "name": "@remotion/transitions",
+        "version": "4.0.489",
+        "officialTarball": "https://registry.npmjs.org/@remotion/transitions/-/transitions-4.0.489.tgz",
+        "integrityMatchesRegistry": true,
+        "integrityMatchesLock": true,
+        "filesChecked": 94,
+        "localDifferences": []
+      },
+      {
+        "name": "@remotion/zod-types",
+        "version": "4.0.489",
+        "officialTarball": "https://registry.npmjs.org/@remotion/zod-types/-/zod-types-4.0.489.tgz",
+        "integrityMatchesRegistry": true,
+        "integrityMatchesLock": true,
+        "filesChecked": 11,
+        "localDifferences": []
+      },
+      {
+        "name": "remotion",
+        "version": "4.0.489",
+        "officialTarball": "https://registry.npmjs.org/remotion/-/remotion-4.0.489.tgz",
+        "integrityMatchesRegistry": true,
+        "integrityMatchesLock": true,
+        "filesChecked": 388,
+        "localDifferences": []
+      }
+    ]
+  },
+  "evidence": [
+    "改前 Git 原文已检查；新增为创意职责与知识路由，原正式 validator/schema 没有放宽",
+    "官方 137 文件 sha256 全部与固定 distribution commit 一致，内部 Markdown 链接零失效",
+    "两个修改的项目 Skills 通过 skill-creator quick_validate.py",
+    "38 项后期/路由/进化测试与 42 项 Remotion 测试通过，TypeScript 通过",
+    "实际 runtime 的 registry integrity、lock integrity、901 文件逐一比较全部匹配",
+    "规则文件 diff --check 通过；官方原文保留三处 Markdown 行尾空白，忽略 blank-at-eol 后检查通过，未为格式更改上游原文"
+  ],
+  "knownLimitations": [
+    "全库 remotion-only.test.mjs 有已存在的误报：burn-subtitles/SKILL.md 第 57 行描述两种字幕渲染方式的“双引擎”字样被全库正则命中；Git HEAD 同样含该字样，本轮未更改此文件或放宽测试",
+    "无真实作品渲染与 Cap 最终声画观看验收，本次验证不代表审美已提高",
+    "运行依赖保持 4.0.489，官方最新稳定 4.0.522；后续升级需同时对齐相关包并验证既有渲染和 Cap 回填",
+    "AGENTS.md 在当前仓库未被 Git 跟踪；已更新本地路由，其持久版本管理沿用项目现状"
+  ],
+  "rollback": "若设计过程改写事实/已锁定方向、未冻结即进入制作、旧组件或跨载体状态失效，则回退对应项目规则改动；官方新 API 不兼容时先采用已安装版本的兼容实现，不能偷偷升级依赖。若新转译连续真实任务仍只产出模板卡片，需要重新定位选择机制，不能把本文当质量完成证据。",
+  "validation": {
+    "STRUCTURE": "PASS",
+    "ROUTE": "PASS",
+    "BEHAVIOR": "OBSERVE",
+    "QUALITY": "UNKNOWN"
+  },
+  "decision": "OBSERVE",
+  "followUpEvolutions": [
+    {
+      "symptom": "上一轮转译仍主要从给定动画段落开始，用户进一步要求按虚拟成片内容主动选择动画、组合片段、制定起止、覆盖方式与图片/截图/文字需求。",
+      "triggerScope": "PROJECT_CAPABILITY",
+      "earliestFailure": "动画任务划分之前缺少由导演负责的讲解单元与画面安排，粗建议和已有 finalRange 容易被当成既定任务。",
+      "rootLayer": "STRUCTURE",
+      "hypothesis": "增加策划入口与必要中间结果后，同一解释的多条字幕能组织成连续动画，独立操作窗口保持可见，素材按证明和理解职责选择，而非每条字幕或每个静态段都制作动画。",
+      "protection": [
+        "正式 T2、EDL、词级映射及原执行合同仍有效",
+        "组合仅限视觉解释，不改变口播剪辑",
+        "真实操作、系统声音、人物表达、字幕和已锁定用户决定受保护",
+        "限定单段请求不扩张整片；虚拟策划不强制渲染或新 ASR",
+        "不新增并行 Skill、运行 schema 或作品媒体"
+      ],
+      "authorityPath": ".agents/skills/laohu-animation-director/SKILL.md",
+      "change": "在现有导演 Skill 增加整片/章节画面策划入口；转译规范第 2A 节明确单元划分、时间/覆盖窗口、底画证据、素材准备和规划表；同步后期总装、任务契约、制作流程与知识路由。",
+      "decisionChanges": [
+        "先按实际保留词流和成片顺序划单元，再设计动画",
+        "同一解释可跨字幕或剪辑片段，但不连续覆盖区间拆成多个任务",
+        "内容范围、覆盖开始/结束、内部动作分开判断",
+        "原画面静止仅是线索，按理解、证据、操作和人物职责选择保留/局部/全幅",
+        "素材选择先说明用途，程序图形能解释时不强配图片，证明软件结果时不伪造截图"
+      ],
+      "knowledgeActivations": [
+        {
+          "asset": "现有动画导演 Skill 与动画导演转译规范",
+          "trigger": "用户补充全片选择与起止规划职责",
+          "judgment": "局部动作转译不能替代动画任务生成",
+          "changedDecision": "先产出讲解单元与画面安排，选中单元再转译",
+          "resultLocation": "导演 Skill 从什么输入开始、规范第 2A 节",
+          "unusedBoundary": "本轮未制作任何实际作品"
+        },
+        {
+          "asset": "workflows/laohu-video/规范/画面补充策略.md 与后期任务契约",
+          "trigger": "判断动画必要性、素材依据与写回路径",
+          "judgment": "画面任务应服务真实理解或证据，现有 finalRange 是连续覆盖而非引用范围并集",
+          "changedDecision": "保留原执行结构，规划文字保存片段追溯，分离覆盖拆任务并接连续组",
+          "resultLocation": "规范第 2A/5 节与 handoff-contract.md",
+          "unusedBoundary": "没有以规划名义重新剪辑、获取收费素材或生成媒体"
+        }
+      ],
+      "regressions": {
+        "current": [
+          "连续三段解释与六条字幕：组合为一个讲解单元，最后交还操作；见下面规划演练",
+          "新增 7 个 test-prompts：分组、非连续覆盖、脚本漏标、静态人物、素材、虚拟时间与范围控制"
+        ],
+        "legacy": [
+          "38 项现有后期、路由、进化测试再次通过；原 schema 与执行代码未修改",
+          "保留已有设计继承、知识合同与连续状态规则"
+        ],
+        "adjacent": [
+          "虚拟剪辑未渲染时允许策划但不生成冻结覆盖",
+          "静态人物表达与独立操作可选择保留",
+          "用户只指定单段时不扩大到整片"
+        ]
+      },
+      "behaviorTrials": [
+        {
+          "input": "假设预期成片 40–43 资料多、43–46 筛选、46–50 工具结果，50–56 必须观看实际点击；前三段分为六条字幕。",
+          "output": {
+            "unit": "资料—筛选—工具共同完成一项解释，引用三个保留片段与相应词范围",
+            "contentRange": [
+              40,
+              50
+            ],
+            "proposedOverlayRange": [
+              40,
+              50
+            ],
+            "phases": [
+              "40–43 建立对象",
+              "43–46 分流筛选",
+              "46–约49 形成结果",
+              "余下窗口停留并退出，50 秒前交还操作"
+            ],
+            "nextUnit": "50–56 保留录屏与声音，必要时只做局部指示",
+            "materials": "抽象图形与少量标签；操作段使用真实录屏，不强制新图片",
+            "qualification": "仅为文字演练；正式边界待真实语音、底画及冻结映射验证，时码不是生产授权"
+          },
+          "status": "OBSERVE"
+        },
+        {
+          "input": "40–45 解释、45–52 操作、52–57 继续解释。",
+          "output": "两个候选覆盖窗 [40,45)、[52,57)，不生成 [40,57) 的大覆盖；第二次接续前次图形状态，操作区间保持可见。",
+          "status": "OBSERVE"
+        },
+        {
+          "input": "只判断已锁定作品的 2:10–2:25，人物在静态讲述亲身经历。",
+          "output": "只读该段与必要承接；若人物表情和可信度承担内容则保留，不因不动默认盖掉，其余已确认安排不变。",
+          "status": "OBSERVE"
+        }
+      ],
+      "evidence": [
+        "主 Skill 与后期 Skill 的 YAML 已用 Ruby YAML 解析通过",
+        "项目引用路径有效、所改受管文件 git diff --check 通过",
+        "node --test scripts/project-routing.test.mjs scripts/postproduction-package.test.mjs scripts/evolution-record.test.mjs：38/38 PASS",
+        "自身文字规划演练支持职责与边界调整，未进行独立 Agent 或真实成片质量验收"
+      ],
+      "rollback": "若跨段规划吞掉独立操作、误用未冻结时间、改变主音频或越过用户范围，则回退该决策并重审单元/窗口；不以增加动画数量证明本规则成功。",
+      "validation": {
+        "STRUCTURE": "PASS",
+        "ROUTE": "PASS",
+        "BEHAVIOR": "OBSERVE",
+        "QUALITY": "UNKNOWN"
+      },
+      "decision": "OBSERVE"
+    },
+    {
+      "date": "2026-09-08",
+      "symptom": "最新反馈要求剪辑与动画在同一份预剪辑文档讨论，整份确认后再制作；现有链路只要求文字剪口批准，允许动画转译晚于批准，任务包无法区分两者。",
+      "triggerScope": "PROJECT_CAPABILITY",
+      "earliestFailure": "后期PRE_EDIT_REVIEW_APPROVED的批准范围未包括可讨论的画面方案及其反馈。",
+      "rootLayer": "STRUCTURE",
+      "hypothesis": "把动画设计前移到同一审稿文档，并在执行合同检查画面准备、整体批准和修订一致性，可阻止旧剪口批准直接授权新动画，同时保留纯剪辑和已授权局部返工。",
+      "protection": [
+        "不创建并列审稿副本，不覆盖既有作品决定",
+        "纯剪辑不引入动画；明确局部返工不扩大整片审批",
+        "不改变Remotion运行时、Cap接口或现有语义/连续性合同",
+        "冻结T2、主音频与原有revision/hash及媒体质检继续有效",
+        "批准后的普通工程细化直接执行，不要求逐帧审批"
+      ],
+      "authorityPath": ".agents/skills/laohu-video-postproduction/SKILL.md",
+      "change": "调整整体批准的顺序和范围，扩展现有审稿模板与preEditReview声明；导演规范处理图片反馈、时码联动和修订；任务包冻结及覆盖命令生成阶段验证当前画面批准。",
+      "decisionChanges": [
+        "动画效果设计从冻结后的候选工作变成批准前的必要审稿内容",
+        "图片反馈更新布局、节拍、窗口与衔接，不只收路径",
+        "旧剪口批准和局部同意不能授权整个画面制作",
+        "普通工程参数留给批准后的实现，制作前读取分析不受阻"
+      ],
+      "regressions": {
+        "current": [
+          "五个新增自动测试先失败后通过：旧剪口批准、画面/素材未决、修订过期、纯剪辑兼容、冻结后重新待确认拦截"
+        ],
+        "legacy": [
+          "原后期、路由和进化记录回归全部通过；纯剪辑旧格式仍被接受"
+        ],
+        "adjacent": [
+          "要求画面策划但最终无覆盖仍需整体确认；已授权局部返工与纯创意仍可在原范围设计",
+          "人工文字演练：三张截图反馈更新单元和依赖时码，未启动媒体制作"
+        ]
+      },
+      "knowledgeActivation": {
+        "why": "用户明确要求统一审稿、共同设计后再生产",
+        "source": "laohu-video-evolution + 动画导演转译规范 + 真实任务包校验代码",
+        "decision": "保留旧执行闸门，补批准范围与修订，不把Skill检查冒称Cap原生权限",
+        "result": "现有审稿模板、主Skill与postproduction-package校验",
+        "notAdopted": "未实现审稿UI、自动文档签名、程序性读取对话证明、真实视频制作或新一轮运行库升级"
+      },
+      "evidence": [
+        "node --test scripts/project-routing.test.mjs scripts/postproduction-package.test.mjs scripts/evolution-record.test.mjs: 43/43 PASS",
+        "新增5条确定性测试在实现前5/5失败，实现后通过",
+        "4个行为回归提示已加入导演test-prompts；自评只支持OBSERVE，未以脚本测试代替真实画面质量",
+        "两份主Skill的YAML、三份进化记录和28条行为提示JSON解析通过；非官方资料树的git diff --check通过。"
+      ],
+      "rollback": "若审批声明错误阻止纯剪辑或把每个工程细节变成审批，则修正适用范围；若修改方案仍可沿用旧批准，则回退该批准并修复入口。",
+      "validation": {
+        "STRUCTURE": "PASS",
+        "ROUTE": "PASS",
+        "BEHAVIOR": "OBSERVE",
+        "QUALITY": "UNKNOWN"
+      },
+      "decision": "OBSERVE"
+    },
+    {
+      "date": "2026-09-08",
+      "symptom": "用户希望把联合审稿呈现为顶部疑难、中央竖轴、左侧两种时码和最终字幕、右侧跨字幕动画及图片的HTML；随后明确旧字幕表只是阅读参考，必须保留刚完善的新联合审稿内容。",
+      "triggerScope": "PROJECT_CAPABILITY",
+      "earliestFailure": "审稿主交付仍是分散表格，跨字幕动画、真实覆盖窗、图片用途与反馈缺少可直接对应的阅读视图。",
+      "rootLayer": "STRUCTURE",
+      "hypothesis": "由唯一审稿数据生成HTML，使每段画面与其全部连续字幕共同排布，并把细节按需展开，可降低用户来回对照成本且不丢追溯和批准边界。",
+      "protection": [
+        "保留最终字幕、多个源时间引用、无字幕事件、源素材保留/删除理由",
+        "保留最新联合审稿的主线、画面理由、覆盖范围、逐拍动作、图片用途、音效和反馈",
+        "EDL与冻结映射仍是制作时间权威；网页高度与留言不是时码或批准",
+        "不修改已有015作品或迁移历史批准，不更新Cap应用或Remotion依赖",
+        "不引入新依赖或新Skill主入口，纯剪辑仍可只安排底画"
+      ],
+      "authorityPath": "workflows/laohu-video/模板/口播精剪审稿模板.md",
+      "change": "添加固定HTML模板、无依赖生成器及结构化示例；后期与导演从同一JSON生成HTML主审稿视图。保留源审稿和联合批准，支持疑难跳转、图片放大、搜索、意见草稿与复制/下载。",
+      "decisionChanges": [
+        "采用用户指定左右时间轴阅读方式，但使用最新联合审稿的完整内容",
+        "一份JSON负责方案编辑、一个HTML负责展示，不平行手工维护Markdown副本",
+        "跨字幕动画共享右侧卡片，实际可见窗口独立标示，间隙不当删除",
+        "网页修改意见带作品/修订/内容指纹，需交回Agent合入；不同修订或图片内容不混用草稿"
+      ],
+      "regressions": {
+        "current": [
+          "示例7条字幕/事件映射3个画面单元，三图在方案旁逐项列用途；2个未决疑难可跳到段落"
+        ],
+        "legacy": [
+          "源字幕由两个不同源文件区间组成时两者都保留",
+          "无字幕系统声音事件保留底画，源删除决定独立核查",
+          "原有43项后期/路由/进化检查通过"
+        ],
+        "adjacent": [
+          "全BASE纯剪辑能生成审稿；未决问题与旧修订不能冒称APPROVED",
+          "历史时码标HISTORICAL；缺失图片与不连续引用明确失败",
+          "桌面1512、1024与手机390宽度无横向溢出；旧修订本地留言不会进入新修订"
+        ]
+      },
+      "knowledgeActivation": {
+        "why": "用户要求固定可视化审稿，且纠正不能只翻新版旧表",
+        "sources": [
+          "laohu-video-evolution",
+          "skill-creator",
+          "frontend-design",
+          "现有联合审稿模板与批准契约"
+        ],
+        "decision": "沿用同一后期和导演负责人，增加派生展示工具；浅色编辑版面围绕时间轴与阅读关系组织",
+        "result": "scripts/pre-edit-review.mjs + 预剪辑时间轴模板.html + 审稿模板HTML规范",
+        "notAdopted": "未新建网页审批服务、远程上传、Cap内嵌新界面或其他动画引擎；未擅改历史真实作品"
+      },
+      "evidence": [
+        "53项联合测试全部通过，其中10项新增审稿测试包含后台Chrome浏览器交互",
+        "实际检查桌面截图；浏览器验证疑难定位、图片放大、搜索、跨修订草稿隔离、意见下载及无脚本错误",
+        "内容指纹包含实际嵌入图片，覆盖同路径换图的旧留言隔离测试",
+        "格式示例输出到Codex本地可视化目录，示例正文明确为虚构时码和布局示意"
+      ],
+      "rollback": "若视觉分组导致字幕漏项、覆盖吞掉中间操作、源时间丢失或旧批准迁移，则拒绝该数据并返回源映射/方案修订；若用户阅读仍困难，调整单一HTML模板，不重写时间或另起主稿。",
+      "validation": {
+        "STRUCTURE": "PASS",
+        "ROUTE": "PASS",
+        "BEHAVIOR": "OBSERVE",
+        "QUALITY": "UNKNOWN"
+      },
+      "decision": "OBSERVE"
+    }
+  ]
+}

@@ -1,14 +1,6 @@
 ---
 name: remotion-interactivity
-description: Best practices for writing Remotion animations that stay intuitive for agents and editable in Remotion Studio Visual Mode.
-metadata:
-  tags: remotion, interactivity, studio, visual mode
+description: Compatibility entry for the official remotion-interactivity reference
 ---
 
-# Remotion Interactivity
-
-Use the canonical interactivity best-practices page instead:
-[Interactivity best practices](https://www.remotion.dev/docs/studio/interactivity-best-practices)
-
-To make an element or custom component interactive, use:
-[Make a component interactive](https://www.remotion.dev/docs/studio/make-component-interactive)
+Read [official remotion-interactivity](../remotion-best-practices/remotion-interactivity/REFERENCE.md). The canonical technical knowledge lives in remotion-best-practices; other files in this legacy directory are retained for traceability, not a separate maintained rule set. For project animation design and installed API compatibility, follow laohu-animation-director.

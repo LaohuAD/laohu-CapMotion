@@ -1,0 +1,13 @@
+{
+  "schema": "laohu.cap-edl-receipt/1",
+  "status": "applied",
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_精修成片.cap",
+  "projectName": "MiniMax H3真正用法_精修成片.cap",
+  "edlPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/制作/final.edl.json",
+  "edlSha256": "3369c17dbb7d76a7079c6174f0c19d1985bafd424a361bc2b7bf81d3b2e2dc5c",
+  "previousRevision": 1,
+  "newRevision": 2,
+  "segmentCount": 186,
+  "durationSeconds": 837.6099999999917,
+  "appliedAt": "2026-09-02T17:32:48.569Z"
+}

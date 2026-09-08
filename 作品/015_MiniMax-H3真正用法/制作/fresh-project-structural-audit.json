@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "errors": [],
+  "revision": 18,
+  "durationSeconds": 687.1000000000024,
+  "editSegments": 296,
+  "sourceCaptions": 311,
+  "displayCaptionSegments": 422,
+  "pairs": 211,
+  "tracks": {
+    "zh-CN": 211,
+    "en": 211
+  },
+  "aspectRatio": "wide",
+  "backgroundBinding": "currentDesktop",
+  "displayPosition": {
+    "x": 0.5,
+    "y": 0.44
+  },
+  "captionStyle": {
+    "font": "Source Han Sans CN VF",
+    "size": 62,
+    "fontWeight": 700,
+    "outline": true,
+    "outlineWidth": 4,
+    "shadow": true,
+    "shadowOpacity": 75
+  }
+}

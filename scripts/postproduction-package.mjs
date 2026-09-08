@@ -277,6 +277,23 @@ export function validatePostproductionPackage(value) {
     if (preEditReview.userApproval?.status !== "APPROVED" || !nonEmpty(preEditReview.userApproval?.reference)) {
       errors.push(error("PRE_EDIT_REVIEW_NOT_APPROVED", "edit.preEditReview.userApproval", "必须记录用户对整份预剪辑字幕审稿文档的明确批准"));
     }
+    const requiresVisualReview = preEditReview.visualPlan !== undefined
+      || preEditReview.userApproval?.scope === "EDIT_AND_VISUALS"
+      || (Array.isArray(value.tasks) && value.tasks.some((task) => ["REMOTION", "AVATAR", "AI_VIDEO", "EVIDENCE", "SCREEN_RECORDING"].includes(task.type)));
+    if (requiresVisualReview) {
+      if (preEditReview.visualPlan?.included !== true
+        || preEditReview.visualPlan?.feedbackResolved !== true
+        || preEditReview.visualPlan?.materialsResolved !== true) {
+        errors.push(error("PRE_EDIT_VISUAL_PLAN_INCOMPLETE", "edit.preEditReview.visualPlan", "同一审稿文档必须包含画面与动画方案，并解决反馈、素材来源或替代方案；未完成不得执行剪辑或覆盖制作"));
+      }
+      if (preEditReview.userApproval?.scope !== "EDIT_AND_VISUALS") {
+        errors.push(error("PRE_EDIT_VISUAL_APPROVAL_REQUIRED", "edit.preEditReview.userApproval.scope", "剪口批准不能代替整份剪辑与画面方案批准"));
+      }
+      if (!Number.isInteger(preEditReview.revision) || preEditReview.revision < 1
+        || preEditReview.userApproval?.reviewRevision !== preEditReview.revision) {
+        errors.push(error("PRE_EDIT_APPROVAL_STALE", "edit.preEditReview.userApproval.reviewRevision", "必须确认当前审稿修订；反馈改变时间、效果、材料或覆盖方式后不能沿用旧批准"));
+      }
+    }
   }
   if (!Array.isArray(value.tasks)) errors.push(error("TASKS_ARRAY_REQUIRED", "tasks", "tasks 必须是数组"));
   const ids = new Set();
@@ -492,6 +509,12 @@ export async function verifyFrozenPackageFiles(value, {readText = (path) => read
 export function buildOverlayCommandPlan(value, assets) {
   if (value.state !== "EDL_FROZEN" || value.freeze?.projectRevision !== value.capProject?.expectedRevision) {
     throw new Error("OVERLAY_REQUIRES_FROZEN_TIMELINE");
+  }
+  const validation = validatePostproductionPackage(value);
+  if (!validation.ok) {
+    const failure = new Error(validation.errors.map(({code}) => code).join(", "));
+    failure.errors = validation.errors;
+    throw failure;
   }
   let revision = value.freeze.projectRevision;
   const steps = [];

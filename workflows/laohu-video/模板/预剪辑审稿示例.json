@@ -1,0 +1,383 @@
+{
+  "schema": "laohu.pre-edit-review/1",
+  "id": "timeline-format-demo",
+  "title": "把讲述，变成看得懂的画面",
+  "revision": 1,
+  "isExample": true,
+  "scope": {
+    "start": 172,
+    "end": 204
+  },
+  "timing": {
+    "basis": "PROVISIONAL",
+    "reference": "格式演示：虚构的 02:52–03:24 局部片段。正式审稿从真实保留词流与 S2→T2 映射派生。"
+  },
+  "approval": {
+    "status": "PENDING"
+  },
+  "questions": [
+    {
+      "id": "Q01",
+      "category": "图片与展示重点",
+      "status": "OPEN",
+      "targets": [
+        "A01",
+        "C02"
+      ],
+      "question": "第二张图，要不要单独放大讲？",
+      "context": "三张图属于同一个讲解单元，当前预留 4 秒突出第二张。",
+      "suggestion": "在“第二张保留细节”这句出现时放大，另外两张退到两侧。"
+    },
+    {
+      "id": "Q02",
+      "category": "保留真实操作",
+      "status": "OPEN",
+      "targets": [
+        "A02",
+        "C04"
+      ],
+      "question": "这 6 秒结果播放是否完整保留？",
+      "context": "这是无字幕事件。正式任务必须核对实际画面和系统声音，不能根据字幕空白删除。",
+      "suggestion": "示例暂安排保留底画与系统声音，不加覆盖。"
+    },
+    {
+      "id": "Q03",
+      "category": "文字确认示例",
+      "status": "RESOLVED",
+      "targets": [
+        "C05"
+      ],
+      "question": "这里使用“筛选”还是“生成”？",
+      "resolution": "示例选择“筛选”：只改变材料的选择关系，不暗示生成了新内容。"
+    }
+  ],
+  "segments": [
+    {
+      "id": "C01",
+      "finalRange": {
+        "start": 172,
+        "end": 176
+      },
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 310,
+          "end": 314
+        }
+      ],
+      "text": "先把这三张参考图放在一起",
+      "kind": "CAPTION",
+      "chapter": "01 / 三张图，讲清一个选择",
+      "note": "",
+      "questionIds": []
+    },
+    {
+      "id": "C02",
+      "finalRange": {
+        "start": 176,
+        "end": 180
+      },
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 326,
+          "end": 330
+        }
+      ],
+      "text": "第二张保留了我们真正需要的细节",
+      "kind": "CAPTION",
+      "chapter": "01 / 三张图，讲清一个选择",
+      "note": "",
+      "questionIds": [
+        "Q01"
+      ]
+    },
+    {
+      "id": "C03",
+      "finalRange": {
+        "start": 180,
+        "end": 184
+      },
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 334,
+          "end": 336
+        },
+        {
+          "file": "示例补录.mp4",
+          "start": 28,
+          "end": 30
+        }
+      ],
+      "text": "再把这个细节带到最后的结果里",
+      "kind": "CAPTION",
+      "chapter": "01 / 三张图，讲清一个选择",
+      "note": "同一句由两个源片段组成，分别保留源时码。",
+      "questionIds": []
+    },
+    {
+      "id": "C04",
+      "finalRange": {
+        "start": 184,
+        "end": 190
+      },
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 345,
+          "end": 351
+        }
+      ],
+      "text": "结果播放：保留原画面与系统声音",
+      "kind": "EVENT",
+      "chapter": "02 / 把画面交还给证据",
+      "note": "无字幕不等于无内容；是否保留以真实音画证据为准。",
+      "questionIds": [
+        "Q02"
+      ]
+    },
+    {
+      "id": "C05",
+      "finalRange": {
+        "start": 190,
+        "end": 194
+      },
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 363,
+          "end": 367
+        }
+      ],
+      "text": "所以这里做的是筛选",
+      "kind": "CAPTION",
+      "chapter": "03 / 用变化解释筛选",
+      "note": "",
+      "questionIds": [
+        "Q03"
+      ]
+    },
+    {
+      "id": "C06",
+      "finalRange": {
+        "start": 194,
+        "end": 199
+      },
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 373,
+          "end": 378
+        }
+      ],
+      "text": "不合适的退出 合适的留下",
+      "kind": "CAPTION",
+      "chapter": "03 / 用变化解释筛选",
+      "note": "",
+      "questionIds": []
+    },
+    {
+      "id": "C07",
+      "finalRange": {
+        "start": 199,
+        "end": 204
+      },
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 382,
+          "end": 387
+        }
+      ],
+      "text": "最后我们得到一份可以继续使用的结果",
+      "kind": "CAPTION",
+      "chapter": "03 / 用变化解释筛选",
+      "note": "",
+      "questionIds": []
+    }
+  ],
+  "visuals": [
+    {
+      "id": "A01",
+      "segmentIds": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "title": "三图并列 → 聚焦第二张 → 带入结果",
+      "mode": "FULL",
+      "status": "REVISED",
+      "visibleRanges": [
+        {
+          "start": 172,
+          "end": 184
+        }
+      ],
+      "reason": "三句共同回答“参考图怎么变成可用选择”，用同一段连续画面把选择过程连起来。",
+      "summary": "三张图先依次展开。讲到第二张时，它移到中央放大，其余两张退到两侧。接着把选中的细节带向结果位置，停稳后退出。",
+      "materialPlan": "正式制作需要三张实际参考图。这里的三个小图仅演示图片栏的排法。",
+      "handoff": "03:04 前退出全幅画面，随后 6 秒完整展示真实结果。",
+      "assets": [
+        {
+          "id": "img1",
+          "label": "图一 / 建立比较",
+          "status": "SCHEMATIC",
+          "diagram": "input",
+          "use": "三图并列，先看整体关系"
+        },
+        {
+          "id": "img2",
+          "label": "图二 / 重点放大",
+          "status": "SCHEMATIC",
+          "diagram": "focus",
+          "use": "第二张居中，保留阅读时间"
+        },
+        {
+          "id": "img3",
+          "label": "图三 / 结果承接",
+          "status": "SCHEMATIC",
+          "diagram": "result",
+          "use": "把选中细节接到结果位置"
+        }
+      ],
+      "phases": [
+        {
+          "range": {
+            "start": 172,
+            "end": 176
+          },
+          "cue": "“三张参考图”",
+          "action": "三张图错开半拍展开，尺寸相同；标题不抢先出现。",
+          "camera": "固定镜头",
+          "sound": "无"
+        },
+        {
+          "range": {
+            "start": 176,
+            "end": 180
+          },
+          "cue": "“第二张”",
+          "action": "第二张放大居中，其余两张后退降权，关键区域加细框。",
+          "camera": "轻推到细节",
+          "sound": "可选一次轻提示音，素材尚待确定"
+        },
+        {
+          "range": {
+            "start": 180,
+            "end": 184
+          },
+          "cue": "“带到最后的结果”",
+          "action": "选中细节移向结果位置，最后停稳并淡出覆盖。",
+          "camera": "固定镜头",
+          "sound": "无"
+        }
+      ],
+      "feedbackHistory": [
+        "示例意见：第二张要看清楚 → 已改为单独放大，并预留 4 秒窗口。"
+      ]
+    },
+    {
+      "id": "A02",
+      "segmentIds": [
+        "C04"
+      ],
+      "title": "保留结果播放，让实际效果说话",
+      "mode": "BASE",
+      "status": "PENDING",
+      "visibleRanges": [],
+      "reason": "这段承担验证效果的职责，覆盖会遮住观众需要判断的细节。",
+      "summary": "保留完整结果画面与原系统声音，不加动画、不叠文字。无字幕事件仍保留在审稿时间轴中。",
+      "handoff": "结果播放结束，再回到“所以这里做的是筛选”的解释。",
+      "assets": [],
+      "phases": []
+    },
+    {
+      "id": "A03",
+      "segmentIds": [
+        "C05",
+        "C06",
+        "C07"
+      ],
+      "title": "让“筛选”变成一眼可见的过程",
+      "mode": "SIDE",
+      "status": "PENDING",
+      "visibleRanges": [
+        {
+          "start": 190,
+          "end": 204
+        }
+      ],
+      "reason": "三句依次解释名称、动作与结果；连续呈现材料减少，比只打出“筛选”更容易理解。",
+      "summary": "人物留在左侧。右侧出现一组材料，经过筛选区域，不合适的淡出，合适的汇集成结果。最后只留下可继续使用的那一份。",
+      "materialPlan": "抽象关系可用 Remotion 图形与短标签实现，不必为了动画额外找图片。",
+      "handoff": "结果停稳后收起侧栏，视线回到下一句口播。",
+      "assets": [],
+      "phases": [
+        {
+          "range": {
+            "start": 190,
+            "end": 194
+          },
+          "cue": "“做的是筛选”",
+          "action": "建立材料与筛选区域，只出现两个短标签。",
+          "camera": "固定镜头",
+          "sound": "无"
+        },
+        {
+          "range": {
+            "start": 194,
+            "end": 199
+          },
+          "cue": "“退出 / 留下”",
+          "action": "分别触发不合适材料退出、合适材料汇集，动作跟随口播。",
+          "camera": "固定镜头",
+          "sound": "无"
+        },
+        {
+          "range": {
+            "start": 199,
+            "end": 204
+          },
+          "cue": "“可以继续使用”",
+          "action": "汇集为一个清楚的结果，停留后收起。",
+          "camera": "固定镜头",
+          "sound": "无"
+        }
+      ]
+    }
+  ],
+  "sourceDecisions": [
+    {
+      "id": "S01",
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 310,
+          "end": 314
+        }
+      ],
+      "decision": "KEEP",
+      "text": "先把这三张参考图放在一起",
+      "reason": "建立后续比较所需的对象。"
+    },
+    {
+      "id": "S02",
+      "sourceRanges": [
+        {
+          "file": "示例录制.mp4",
+          "start": 314,
+          "end": 320
+        }
+      ],
+      "decision": "DELETE",
+      "text": "重复起头（示例）",
+      "reason": "示例展示删除项的位置，不作为任何真实素材的删除决定。"
+    }
+  ],
+  "brief": {
+    "audience": "需要从参考材料中挑选可用细节的观众（示例）",
+    "mainline": "先看三图比较，再看实际结果，最后理解筛选关系。",
+    "captionStyle": "此页仅审文字与画面方案。正式字幕沿用用户已确认的中英双轨与字体样式，示例不改变它们。"
+  }
+}

@@ -14,7 +14,7 @@ description: 第二遍 Cap 正式录制完成后，接收单条教学视频制�
 - 第一遍自由录制属于“老胡文稿”。上游只调用 `scripts/cap-project-asr.mjs`，本 Skill 必须拒绝第一遍任务。
 - 第二遍正式录制后，每条视频建立一个独立 Codex 任务。上游只创建并发送首份任务包，之后由老胡直接在该任务返工。
 - `S2` 是第二遍源时间，`T2` 是冻结 EDL 后的成片时间。所有覆盖任务只写 `T2`；第一遍 `F1` 永不进入成片映射。
-- 任务包唯一契约和状态见 [handoff-contract.md](references/handoff-contract.md)。先运行 `node scripts/postproduction-package.mjs validate <package.json>`。
+- 任务包唯一契约和状态见 [handoff-contract.md](references/handoff-contract.md)。先运行 `node scripts/postproduction-package.mjs validate <package.json>`。 这是正式执行校验：遇到动画批注、知识视觉或叠层设计不完整，先转入下述设计准备，不把校验失败直接当成要求用户补动画设计；其余阶段、授权、来源和时间错误仍分别处理。
 - 任务明确指定用户命名预设时，在做剪辑、字幕和动画判断前用 `cap presets inspect <name> --json` 读取同一条目的 `agentProfile`，并把当时的预设 store revision 记入任务记录。没有 `agentProfile` 时使用本 Skill 的项目规则，不猜用户偏好；预设与用户当轮明确指令冲突时，当轮指令优先。
 - 任务包必须先写 `intent`、`knowledgeActivations` 和每个覆盖任务的 `narrative`。没有观众变化、媒介理由和前后交接的任务，即使时码与接口正确，也不能进入制作。
 - `narrative.purpose=UNDERSTAND` 且任务类型为 `REMOTION / AI_VIDEO` 时，任务必须带完整 `KnowledgeVisualContract`。它要说清口播主张、语义对象、起始状态、作用、状态变化、结果、口播触发、少量中文大标签及静音 / 声画同步验收；不承担知识证明的 `TRANSITION`任务不强行增加。
@@ -22,6 +22,8 @@ description: 第二遍 Cap 正式录制完成后，接收单条教学视频制�
 - 当 Remotion 覆盖在 `AI_VIDEO_FULL` 上时，必须携带 `hostCompatibility`，并在真实生成视频到位后复核视觉锚点、稳定负空间、亮度与运动负荷。上游建议不替代真实像素验收；不因有动画而默认全幅蒙版。
 
 ## 按需读取知识
+
+- 交付虚拟成片审稿时，读 `workflows/laohu-video/模板/口播精剪审稿模板.md` 的 HTML 规范，维护作品已有分析目录中的唯一审稿 JSON，并用 `node scripts/pre-edit-review.mjs <data.json> <review.html>` 生成主审稿页。顶部疑难、左侧成片/源时码与字幕、右侧跨段动画和图片必须来自同一份数据；不回退为旧的纯字幕表，也不平行手改 Markdown 和 HTML。
 
 - 设计整条后期链与交付状态时，读 `workflows/laohu-video/规范/制作流程.md`。
 - 判断画面是否真正补充口播、选用什么视觉形式时，读 `workflows/laohu-video/规范/画面补充策略.md` 与 `workflows/laohu-video/规范/画面表达规则.md`。
@@ -35,16 +37,20 @@ description: 第二遍 Cap 正式录制完成后，接收单条教学视频制�
 ```text
 RECEIVED
 → 原 Cap 工程只读校验并建立非破坏工作副本
-→ 读取并应用 Laohu 预设（16:9、当前桌面背景绑定、画面上移、字幕公共样式）
+→ 读取 Laohu 预设供审稿使用（画幅、背景、画面位置、字幕样式），暂不写入工程
 → 第二遍 Cap 新 ASR
 → 观众、承诺、主线、主胜负手与视觉策略
 → 文档内完成虚拟初剪、虚拟精剪、字幕切分与顺句
-→ 全片预剪辑字幕审稿文档（逐候选片段 + 预期成片字幕时间轴 + 全部疑难）
-→ 用户确认文字、剪口、音频分类、字体与样式
+→ 基于虚拟成片内容安排讲解单元、动画必要性、覆盖窗口与素材需求（时间未冻结时为草案）
+→ 同一份全片预剪辑审稿文档（逐候选片段 + 预期成片字幕时间轴 + 动画效果/时间/图片与覆盖方案 + 全部疑难）
+→ 用户参谋与修改，反馈写回对应单元并重算受影响的时码与衔接
+→ 用户批准当前整份方案：文字、剪口、音频分类、字体样式、画面动画及素材安排
 → PRE_EDIT_REVIEW_APPROVED
+→ 应用已确认预设到非破坏工作工程
 → 粗剪 EDL
 → 内容导演精剪 EDL
 → EDL_FROZEN（Cap revision + EDL hash + S2→T2 hash）
+→ 将已批准的动画设计按冻结 T2 编译为正式任务合同并校验；改变观看效果的冲突返回审稿
 → Remotion / 数字人 / 录屏 / 证据 / AI 视频并行制作
 → Cap Motion 上层覆盖写入
 → 修正 SRT 与中英双展示字幕轨物化
@@ -56,7 +62,7 @@ RECEIVED
 
 用户直接交付正式录制 `.cap` 时，`capProject.sourcePath` 是只读原工程，`capProject.path` 必须是不同路径的新工作工程，且 `nonDestructiveCopy=true`。目标已存在时不覆盖，而是继续使用任务记录里已建立的同一工作工程；不得在每次反馈时制造 `_v2 / _最终版`。建立工作工程后先验证媒体、源音轨和 revision，再把任务明确指定的用户预设应用到工作工程。对于 `Laohu`，可渲染结果必须同时满足：画布 `16:9`；背景保存为 `currentDesktop` 语义绑定并解析到本工程的桌面快照；录屏等比完整保留并整体上移；字幕公共样式为思源黑体粗体、白字黑描边、黑色阴影、无实心底框。预设不能携带字幕正文、EDL、源媒体路径或覆盖轨。
 
-全片预剪辑字幕审稿文档是剪辑授权，不是可选分析附件。执行 AI 必须先在文档中走完虚拟初剪、虚拟精剪、字幕切分和字幕顺句，再交付“按此方案剪完后”的预期成片字幕时间轴；每条同时带源时码和连续计算的目标时码。拟用字幕必须先跨相邻 ASR 条目恢复连续词流，再按完整意群重新切分；每条能独立顺读，上一句的句尾不遗落到下一条，模型名、版本号和术语组合不从中间拆开。文档还必须覆盖源视频首尾，逐个候选剪辑片段写明 ASR 原文、建议状态和理由，并集中列出会影响剪口、字幕文字、专名、字体或样式的疑难。录制音频只分麦克风声音和系统声音；外部录音归入麦克风声音。两者都无有效声音才进入气口候选；系统声音持续存在时，才结合画面和语境判断作品播放或操作演示。证据不足时只能标 `待确认`，不得用“可能是动画”直接保护或删除。只有用户明确批准且疑难清零后，任务包才能进入真实 EDL 与媒体执行阶段。
+全片预剪辑审稿文档承接剪辑授权；含画面增强时也承接动画与素材方案的整体批准，不是可选分析附件。执行 AI 必须先在文档中走完虚拟初剪、虚拟精剪、字幕切分和字幕顺句，再交付“按此方案剪完后”的预期成片字幕时间轴；每条同时带源时码和连续计算的目标时码。拟用字幕必须先跨相邻 ASR 条目恢复连续词流，再按完整意群重新切分；每条能独立顺读，上一句的句尾不遗落到下一条，模型名、版本号和术语组合不从中间拆开。文档还必须覆盖源视频首尾，逐个候选剪辑片段写明 ASR 原文、建议状态和理由，并集中列出会影响剪口、字幕文字、专名、字体或样式的疑难。录制音频只分麦克风声音和系统声音；外部录音归入麦克风声音。两者都无有效声音才进入气口候选；系统声音持续存在时，才结合画面和语境判断作品播放或操作演示。证据不足时只能标 `待确认`，不得用“可能是动画”直接保护或删除。只有用户明确批准且疑难清零后，任务包才能进入真实 EDL 与媒体执行阶段。
 
 初剪与精剪职责必须分开。初剪只处理已确认的气口、空白和无意义等待；精剪才处理失败起头、前后重录和可证明的语义重复，默认保留后面更完整的一版。精剪冻结后再以最终保留语音和词级时码重新切分展示字幕，在不改变事实、观点和语气含义的前提下改善书面语序；切分后反查句尾残词、跨条目承接和专名完整性。上下文唯一的术语错词直接修正并记录，存在两个以上合理候选才询问用户。除系统声音演示外，每段有效人物讲话都必须有字幕覆盖，并沿用用户已确认的双语字体与样式。
 
@@ -69,6 +75,16 @@ RECEIVED
 Cap 字幕写入必须同时维护两个层级：`captions.segments` 是可重新派生的源字幕权威，`timeline.captionSegments` 是当前冻结 EDL 上的展示轨。只写展示轨会在工程重载或重新派生时被清空；只写源字幕则不能证明当前展示断句和 T2 映射正确。双语展示字幕调用 `cap project captions materialize`，按 `trackId=zh-CN` 与 `trackId=en` 建成两条可编辑轨；同一屏中英两段共享 `pairId` 与 T2 起止，中文字幕使用老胡预设的大字号主行，英文使用较小字号副行。写入后 `captions.displayMode` 必须为 `materialized`，防止编辑器用源 ASR 自动投影覆盖翻译和顺句结果。EDL 一旦改变，两条展示轨必须重新物化。写入完成后必须关闭或重载解析一次，再验证源字幕非空、展示轨恰好两条、每个 pair 两侧齐全、数量和 T2 时码符合预期。
 
 整条视频还必须有一条可复述的观看路径。相邻任务的 `handoffOut` 必须能被下一任务的 `handoffIn` 接住；同一种信息已经由录屏或证据承担时，不再用动画重复解释。删除、调换或替换一个覆盖任务而不影响理解，说明它只是装饰，不是章法的一部分。
+
+## 动画建议的设计准备
+
+制作脚本允许只提供口播、段落位置、材料与粗略动画建议。后期负责人先调用 `laohu-animation-director` 的创意转译入口，产出具体的画面、对象动作、镜头/焦点、节拍、声音设计和收束，再把结果写入同一任务的 `annotation`、适用的 `knowledgeVisual` 与 `overlayContinuity`。已有合同只深化，不反转已确定主张。不要把尚未完成的设计伪装成一个通过校验的执行任务。
+
+整片/章节总装不能只把脚本中已有 `REMOTION` 标记逐个派发。后期负责人先给动画导演该范围的虚拟成片连续文字、保留片段顺序与词级映射、源媒体和底画状态，让它形成“讲解单元与画面安排”：判断哪些片段合成一个解释，是否需要动画，实际覆盖起止、局部/全幅/保留底画、图片/截图/文字需求与缺口。没有动画的讲述也要有简要安排；后期负责人回收并检查与录屏、证据、人物、字幕和其他覆盖的冲突，再编译成执行任务。原脚本粗建议可调整，已锁定承诺与用户决定必须保护。
+
+一个语义单元可跨多条字幕与多个相邻保留片段；内容范围与动画实际可见范围分开记录。成片中不连续的覆盖拆成多个 `finalRange` 和任务，必要时用原 `overlayContinuity.groupId/order` 接住状态，不能用最小/最大时码把中间操作一起盖住。正式任务起止由导演提出、后期按冻结映射验证；不得把这一步变成重新剪辑或自动重跑 ASR。
+
+完整后期必须在剪辑前的同一份审稿文档里完成可讨论的动画设计，只有预计时间时标为预期成片时间或相对节拍。用户提出图片、效果、覆盖或节奏修改时，直接更新对应单元并处理时间与衔接影响；整份当前修订批准前，不执行剪辑、作品动画实现、渲染或生成媒体。取得整体批准并冻结 T2 后，将已确认设计编译成正式合同、补足工程细节并执行，不再自行重设画面方向。执行字段以 `references/handoff-contract.md` 为准；必须校验画面方案完整、反馈与材料取舍已解决、批准覆盖剪辑与画面且对应当前修订。纯剪辑不因此扩大范围。`REMOTION_ANNOTATION_INCOMPLETE` 等原执行检查继续保留。
 
 ## 材料怎样变成画面
 
@@ -103,7 +119,7 @@ Cap 字幕写入必须同时维护两个层级：`captions.segments` 是可重�
 
 ## 失败回传
 
-使用稳定错误码，不隐瞒缺口：`WRONG_PHASE`、`PRE_EDIT_REVIEW_REQUIRED`、`PRE_EDIT_REVIEW_INCOMPLETE`、`PRE_EDIT_VIRTUAL_EDIT_INCOMPLETE`、`PRE_EDIT_UNCERTAINTIES_UNRESOLVED`、`PRE_EDIT_REVIEW_NOT_APPROVED`、`CAP_REVISION_CONFLICT`、`EDL_NOT_FROZEN`、`MAPPING_STALE`、`REMOTION_ANNOTATION_INCOMPLETE`、`KNOWLEDGE_VISUAL_CONTRACT_INCOMPLETE`、`OVERLAY_CONTINUITY_INCOMPLETE`、`OVERLAY_STATE_DISCONTINUITY`、`AI_HOST_COMPATIBILITY_INCOMPLETE`、`AVATAR_SEGMENT_TOO_LONG`、`RUNNINGHUB_FAILED`、`MEDIA_QA_FAILED`。只重试失败资产，不整批无脑重跑。
+使用稳定错误码，不隐瞒缺口：`WRONG_PHASE`、`PRE_EDIT_REVIEW_REQUIRED`、`PRE_EDIT_REVIEW_INCOMPLETE`、`PRE_EDIT_VIRTUAL_EDIT_INCOMPLETE`、`PRE_EDIT_UNCERTAINTIES_UNRESOLVED`、`PRE_EDIT_REVIEW_NOT_APPROVED`、`PRE_EDIT_VISUAL_PLAN_INCOMPLETE`、`PRE_EDIT_VISUAL_APPROVAL_REQUIRED`、`PRE_EDIT_APPROVAL_STALE`、`CAP_REVISION_CONFLICT`、`EDL_NOT_FROZEN`、`MAPPING_STALE`、`REMOTION_ANNOTATION_INCOMPLETE`、`KNOWLEDGE_VISUAL_CONTRACT_INCOMPLETE`、`OVERLAY_CONTINUITY_INCOMPLETE`、`OVERLAY_STATE_DISCONTINUITY`、`AI_HOST_COMPATIBILITY_INCOMPLETE`、`AVATAR_SEGMENT_TOO_LONG`、`RUNNINGHUB_FAILED`、`MEDIA_QA_FAILED`。只重试失败资产，不整批无脑重跑。
 
 ## 反馈进化
 

@@ -1,0 +1,225 @@
+{
+  "ok": true,
+  "preset": {
+    "agentProfile": {
+      "captions": {
+        "languageMode": "bilingual",
+        "maxLines": 2,
+        "rewriteForReadability": true,
+        "segmentation": "semanticUnits"
+      },
+      "editing": {
+        "pausePolicy": "adaptive",
+        "preservePersonalExpression": true,
+        "removeStandaloneFillers": true,
+        "retakePolicy": "preferLaterComplete"
+      },
+      "motion": {
+        "activeScreenDemo": "avoidOverlay",
+        "backdrop": "dimFullFrame",
+        "engine": "remotion"
+      },
+      "schemaVersion": 1
+    },
+    "config": {
+      "annotations": [],
+      "aspectRatio": "wide",
+      "audio": {
+        "improve": false,
+        "micStereoMode": "stereo",
+        "micVolumeDb": 0.0,
+        "microphoneTrack": {
+          "cuts": [],
+          "expanded": false,
+          "mutedRanges": []
+        },
+        "mute": false,
+        "systemAudioTrack": {
+          "cuts": [],
+          "expanded": false,
+          "mutedRanges": []
+        },
+        "systemVolumeDb": 0.0
+      },
+      "background": {
+        "advancedShadow": {
+          "blur": 9.100000381469727,
+          "opacity": 24.100000381469727,
+          "size": 8.0
+        },
+        "blur": 7.8,
+        "border": {
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "enabled": true,
+          "opacity": 47.0,
+          "width": 2.9000000953674316
+        },
+        "crop": null,
+        "displayPosition": {
+          "x": 0.5,
+          "y": 0.44
+        },
+        "frame": null,
+        "inset": 0,
+        "notch": null,
+        "padding": 4.0,
+        "rounding": 9.1,
+        "roundingType": "squircle",
+        "shadow": 39.599998474121094,
+        "source": {
+          "path": null,
+          "type": "wallpaper"
+        },
+        "sourceBinding": "currentDesktop"
+      },
+      "camera": {
+        "advancedShadow": {
+          "blur": 10.5,
+          "opacity": 44.20000076293945,
+          "size": 33.900001525878906
+        },
+        "backgroundBlur": {
+          "mode": "off"
+        },
+        "hide": false,
+        "manualPosition": null,
+        "mirror": false,
+        "position": {
+          "x": "right",
+          "y": "bottom"
+        },
+        "rounding": 25.0,
+        "roundingType": "squircle",
+        "scaleDuringZoom": 0.699999988079071,
+        "shadow": 46.099998474121094,
+        "shape": "square",
+        "size": 20.0,
+        "zoomSize": 60.0
+      },
+      "captions": {
+        "displayMode": "materialized",
+        "segments": [],
+        "settings": {
+          "activeWordHighlight": false,
+          "animation": "none",
+          "backgroundColor": "#000000",
+          "backgroundOpacity": 0,
+          "color": "#FFFFFF",
+          "enabled": true,
+          "exportWithSubtitles": true,
+          "fadeDuration": 0.11999999731779099,
+          "font": "Source Han Sans CN VF",
+          "fontWeight": 700,
+          "highlightColor": "#FFFFFF",
+          "highlightStyle": "color",
+          "italic": false,
+          "letterSpacing": 0.0,
+          "lingerDuration": 0.4000000059604645,
+          "manualPosition": {
+            "x": 0.5,
+            "y": 0.9490740895271301
+          },
+          "outline": true,
+          "outlineColor": "#000000",
+          "outlineWidth": 4.0,
+          "position": "bottom-center",
+          "preset": "user:Laohu",
+          "shadow": true,
+          "shadowAngle": -45.0,
+          "shadowBlur": 15.0,
+          "shadowColor": "#000000",
+          "shadowDistance": 5.0,
+          "shadowOpacity": 75.0,
+          "size": 62,
+          "uppercase": false,
+          "wordTransitionDuration": 0.25
+        },
+        "sourceTimed": true
+      },
+      "clips": [],
+      "colorCorrection": {
+        "camera": {
+          "contrast": 0.0,
+          "exposure": 0.0,
+          "fade": 0.0,
+          "grain": 0.0,
+          "intensity": 1.0,
+          "preset": "none",
+          "saturation": 0.0,
+          "splitTone": 0.0,
+          "temperature": 0.0,
+          "tint": 0.0,
+          "vignette": 0.0
+        },
+        "gradeCursor": true,
+        "screen": {
+          "contrast": 0.0,
+          "exposure": 0.0,
+          "fade": 0.0,
+          "grain": 0.0,
+          "intensity": 1.0,
+          "preset": "none",
+          "saturation": 0.0,
+          "splitTone": 0.0,
+          "temperature": 0.0,
+          "tint": 0.0,
+          "vignette": 0.0
+        }
+      },
+      "cursor": {
+        "animationStyle": "mellow",
+        "baseRotation": 0.0,
+        "clickSpring": null,
+        "friction": 70.0,
+        "hide": false,
+        "hideWhenIdle": false,
+        "hideWhenIdleDelay": 2.0,
+        "mass": 3.0,
+        "motionBlur": 1.0,
+        "raw": false,
+        "ripple": {
+          "color": [
+            71,
+            133,
+            255
+          ],
+          "duration": 0.6000000238418579,
+          "enabled": false,
+          "size": 1.0,
+          "strength": 0.699999988079071
+        },
+        "rotationAmount": 0.15000000596046448,
+        "size": 100,
+        "stopMovementInLastSeconds": null,
+        "tension": 470.0,
+        "type": "auto",
+        "useSvg": true
+      },
+      "hotkeys": {
+        "show": false
+      },
+      "keyboard": null,
+      "motion": {
+        "artifacts": [],
+        "definitions": [],
+        "segments": []
+      },
+      "projectRevision": 0,
+      "screenMotionBlur": 1.0,
+      "screenMovementSpring": {
+        "damping": 40.0,
+        "mass": 2.25,
+        "stiffness": 200.0
+      },
+      "textAnimVersion": 1,
+      "textSizeVersion": 1,
+      "timeline": null
+    },
+    "name": "Laohu"
+  },
+  "revision": 3
+}

@@ -1,0 +1,76 @@
+{
+  "rules": [
+    {
+      "pattern": "/Minimax/g",
+      "replacement": "MiniMax"
+    },
+    {
+      "pattern": "/(一踩|伊采|伊踩|一彩|伊彩)/g",
+      "replacement": "一采"
+    },
+    {
+      "pattern": "/(二踩|二彩|二，采)/g",
+      "replacement": "二采"
+    },
+    {
+      "pattern": "/西格玛/g",
+      "replacement": "Sigma"
+    },
+    {
+      "pattern": "/Lora/g",
+      "replacement": "LoRA"
+    },
+    {
+      "pattern": "/双十中/g",
+      "replacement": "双时钟"
+    },
+    {
+      "pattern": "/浅空间/g",
+      "replacement": "潜空间"
+    },
+    {
+      "pattern": "/伊莱(?=的?Sigma)/g",
+      "replacement": "一采"
+    },
+    {
+      "pattern": "/画画幅/g",
+      "replacement": "画幅"
+    },
+    {
+      "pattern": "/来来到/g",
+      "replacement": "来到"
+    },
+    {
+      "pattern": "/表表示/g",
+      "replacement": "表示"
+    },
+    {
+      "pattern": "/叫好的/g",
+      "replacement": "较好的"
+    },
+    {
+      "pattern": "/看你这个我整个画面呢/g",
+      "replacement": "整个画面"
+    },
+    {
+      "pattern": "/我最现在/g",
+      "replacement": "我现在"
+    },
+    {
+      "pattern": "/还要更要更好/g",
+      "replacement": "还要更好"
+    },
+    {
+      "pattern": "/再再下下期/g",
+      "replacement": "再下期"
+    },
+    {
+      "pattern": "/的这相关的/g",
+      "replacement": "的相关"
+    },
+    {
+      "pattern": "/这是可能下一期/g",
+      "replacement": "这可能是下一期"
+    }
+  ]
+}

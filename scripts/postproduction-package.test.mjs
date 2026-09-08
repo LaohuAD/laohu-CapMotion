@@ -130,6 +130,8 @@ const basePackage = () => ({
     },
     preEditReview: {
       documentPath: "/records/full-pre-edit-review.md",
+      revision: 1,
+      visualPlan: {included: true, feedbackResolved: true, materialsResolved: true},
       fullTimelineCovered: true,
       segmentBoundariesIncluded: true,
       virtualRoughCutComplete: true,
@@ -138,7 +140,7 @@ const basePackage = () => ({
       crossCueSemanticReviewComplete: true,
       atomicTermsPreserved: true,
       uncertaintiesResolved: true,
-      userApproval: {status: "APPROVED", reference: "user-confirmed-review-turn"},
+      userApproval: {status: "APPROVED", reference: "user-confirmed-review-turn", scope: "EDIT_AND_VISUALS", reviewRevision: 1},
     },
   },
   tasks: [
@@ -190,6 +192,49 @@ test("rejects postproduction before the full pre-edit transcript review exists",
   const result = validatePostproductionPackage(value);
   assert.equal(result.ok, false);
   assert(result.errors.some((error) => error.code === "PRE_EDIT_REVIEW_REQUIRED"));
+});
+
+test("cut approval alone cannot authorize visual production", () => {
+  const value = basePackage();
+  delete value.edit.preEditReview.visualPlan;
+  value.edit.preEditReview.userApproval.scope = "EDIT_ONLY";
+  const result = validatePostproductionPackage(value);
+  assert(result.errors.some(({code}) => code === "PRE_EDIT_VISUAL_PLAN_INCOMPLETE"));
+  assert(result.errors.some(({code}) => code === "PRE_EDIT_VISUAL_APPROVAL_REQUIRED"));
+  assert.throws(() => freezePostproductionPackage(value, {edlContent: "edl", mappingContent: "map"}));
+});
+
+test("unresolved visual feedback or materials blocks the whole production package", () => {
+  for (const field of ["included", "feedbackResolved", "materialsResolved"]) {
+    const value = basePackage();
+    value.edit.preEditReview.visualPlan[field] = false;
+    assert(validatePostproductionPackage(value).errors.some(({code}) => code === "PRE_EDIT_VISUAL_PLAN_INCOMPLETE"), field);
+  }
+});
+
+test("feedback revising the reviewed plan requires approval of that revision", () => {
+  const value = basePackage();
+  value.edit.preEditReview.revision = 2;
+  assert(validatePostproductionPackage(value).errors.some(({code}) => code === "PRE_EDIT_APPROVAL_STALE"));
+  value.edit.preEditReview.userApproval.reviewRevision = 2;
+  assert.equal(validatePostproductionPackage(value).ok, true);
+});
+
+test("legacy cut-only reviews remain valid without introducing visual work", () => {
+  const value = basePackage();
+  value.tasks = [];
+  delete value.edit.preEditReview.visualPlan;
+  delete value.edit.preEditReview.revision;
+  value.edit.preEditReview.userApproval = {status: "APPROVED", reference: "cut-only-approval"};
+  assert.equal(validatePostproductionPackage(value).ok, true);
+  value.edit.preEditReview.visualPlan = {included: true, feedbackResolved: false, materialsResolved: true};
+  assert.equal(validatePostproductionPackage(value).ok, false, "requested visual planning still needs approval when the result selects only base footage");
+});
+
+test("a frozen timeline cannot bypass a reopened visual review when building Cap commands", () => {
+  const frozen = freezePostproductionPackage(basePackage(), {edlContent: "edl", mappingContent: "map"});
+  frozen.edit.preEditReview.visualPlan.feedbackResolved = false;
+  assert.throws(() => buildOverlayCommandPlan(frozen, {}), /PRE_EDIT_VISUAL_PLAN_INCOMPLETE/);
 });
 
 test("rejects postproduction while pre-edit questions or user approval remain unresolved", () => {

@@ -1,0 +1,11 @@
+{
+  "schema": "laohu.cap-caption-track-receipt/1",
+  "status": "applied",
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/MiniMax H3真正用法_精修成片.cap",
+  "trackPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/制作/captions.final-track.json",
+  "trackSha256": "993faf79f0928d48e17e920ceb756bad590235f9eb1e22ed7354332211560222",
+  "previousRevision": 8,
+  "newRevision": 9,
+  "captionTrackCount": 314,
+  "appliedAt": "2026-09-02T17:41:28.502Z"
+}

@@ -1,5 +1,17 @@
 [
 	{
+		"version": "0.1.3",
+		"publishedAt": "2026-09-08T00:00:00+08:00",
+		"title": {
+			"en": "Windows distribution and shared production review",
+			"zh-CN": "Windows 分发与统一制作审稿"
+		},
+		"content": {
+			"en": "### Cross-platform delivery\n\n- Adds a dedicated CapMotion Windows installer build and installation verification workflow, using the same application identity, version, settings UI, presets and bilingual caption tools as macOS.\n- Invokes Remotion through its Node entry on both systems so JSON props and paths do not pass through Windows batch-file parsing.\n\n### Project workflow\n\n- Adds a joint pre-edit review with captions, source timecodes, animation plans, image roles and questions in an offline HTML timeline.\n- Updates the animation director and official Remotion skill references. These project tools are distributed with the repository, separately from the desktop installer.",
+			"zh-CN": "### 双端交付\n\n- 新增 CapMotion 专用 Windows 安装包构建与安装校验流程，使用与 macOS 一致的应用标识、版本、设置界面、预设和双语字幕工具。\n- 两端统一通过 Node 入口调用 Remotion，避免 JSON 参数与路径经过 Windows 批处理解释。\n\n### 项目流程\n\n- 新增联合预剪辑审稿：离线 HTML 时间轴同时呈现字幕、源时码、动画方案、图片用途与疑难。\n- 升级动画导演与官方 Remotion 技能资料。项目工具随仓库分发，与桌面安装包分别交付。"
+		}
+	},
+	{
 		"version": "0.1.2",
 		"publishedAt": "2026-09-05T19:15:00+08:00",
 		"title": {

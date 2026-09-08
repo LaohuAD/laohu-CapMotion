@@ -1,0 +1,11 @@
+{
+  "schema": "laohu.cap-caption-track-receipt/1",
+  "status": "applied",
+  "projectPath": "/Users/a1/Library/Application Support/com.laohu.capmotion/recordings/Mi Monitor (Area) 2026-09-02 05.30 PM_H3基础成片.cap",
+  "trackPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/015_MiniMax-H3真正用法/制作/captions.final-track.json",
+  "trackSha256": "f76c77714c0db2806916f0dcb952cd802712ffc33c077065acbf56be9b26cbae",
+  "previousRevision": 27,
+  "newRevision": 28,
+  "captionTrackCount": 214,
+  "appliedAt": "2026-09-02T11:58:55.096Z"
+}
