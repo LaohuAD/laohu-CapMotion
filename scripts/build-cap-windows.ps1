@@ -4,6 +4,10 @@ Set-StrictMode -Version Latest
 if (-not $IsWindows) { throw 'Run this script with PowerShell 7 on Windows.' }
 $root = Split-Path $PSScriptRoot -Parent
 Set-Location $root
+$buildTemp = Join-Path $root 'target/capmotion-release/tmp'
+New-Item -ItemType Directory -Force $buildTemp | Out-Null
+$env:TEMP = $buildTemp
+$env:TMP = $buildTemp
 function Invoke-Checked([string]$Program, [string[]]$Arguments) {
     & $Program @Arguments
     if ($LASTEXITCODE -ne 0) { throw "$Program failed ($LASTEXITCODE)" }
