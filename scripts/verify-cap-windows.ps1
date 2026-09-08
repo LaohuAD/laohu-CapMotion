@@ -17,8 +17,11 @@ if ($setup.ExitCode -ne 0) { throw "Installer exit: $($setup.ExitCode)" }
 $exe = Join-Path $installDir 'CapMotion.exe'
 $cli = Join-Path $installDir 'cap-cli.exe'
 if (-not (Test-Path $exe) -or -not (Test-Path $cli)) { throw 'Silent installation did not produce the app and CLI.' }
-$actualVersion = (Get-Item $exe).VersionInfo.ProductVersion
+$versionInfo = (Get-Item $exe).VersionInfo
+$actualVersion = $versionInfo.ProductVersion
 if (-not $actualVersion.StartsWith($version)) { throw "App version mismatch: $actualVersion" }
+$numericVersion = "$($versionInfo.ProductMajorPart).$($versionInfo.ProductMinorPart).$($versionInfo.ProductBuildPart)"
+if ($numericVersion -ne $version -or -not $versionInfo.FileVersion.StartsWith($version)) { throw 'Numeric or file version does not match the CapMotion release.' }
 $cliHelp = & $cli --help
 if ($LASTEXITCODE -ne 0) { throw 'Installed CLI cannot start; check DLLs and runtime.' }
 $cliTransactions = & node scripts/verify-cap-cli.mjs $cli
@@ -34,6 +37,7 @@ $report = @{
     sha256 = (Get-FileHash $installer.FullName -Algorithm SHA256).Hash.ToLower()
     archive = 'PASS'; silentInstall = 'PASS'; cliLaunch = 'PASS'; desktopLaunch = 'PASS'
     projectTransactions = $cliTransactions
+    embeddedVersion = @{ product = $actualVersion; file = $versionInfo.FileVersion; numeric = $numericVersion }
     signature = (Get-AuthenticodeSignature $installer.FullName).Status.ToString()
     limitations = @('No Authenticode certificate configured; unsigned community distribution.','Physical camera, microphone, GPU recording and interactive editing require device acceptance.')
 }

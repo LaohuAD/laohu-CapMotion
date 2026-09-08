@@ -13,6 +13,7 @@ function Invoke-Checked([string]$Program, [string[]]$Arguments) {
     if ($LASTEXITCODE -ne 0) { throw "$Program failed ($LASTEXITCODE)" }
 }
 Invoke-Checked node @('scripts/check-cap-local-release.mjs')
+$env:CAPMOTION_RELEASE_VERSION = (Get-Content apps/desktop/src-tauri/tauri.local.conf.json -Raw | ConvertFrom-Json).version
 $env:CAP_GPUI_DEV = '0'
 $env:CAP_LAOHU_LOCAL_BUILD = '1'
 $env:RUST_TARGET_TRIPLE = 'x86_64-pc-windows-msvc'
