@@ -62,20 +62,30 @@ pub fn writable_recordings_dir(app: &AppHandle<Wry>) -> Result<PathBuf, String> 
         .as_ref()
         .and_then(|s| s.recordings_path.as_deref())
         .map(Path::new);
-    cap_utils::storage::prepare_media_root(custom, &default_recordings_dir(app))
-        .map_err(|e| e.to_string())
+    let root = cap_utils::storage::prepare_media_root(custom, &default_recordings_dir(app))
+        .map_err(|e| e.to_string())?;
+    app.asset_protocol_scope()
+        .allow_directory(&root, true)
+        .map_err(|e| e.to_string())?;
+    Ok(root)
 }
 
 pub fn writable_screenshots_dir(app: &AppHandle<Wry>) -> Result<PathBuf, String> {
     writable_recordings_dir(app)?;
     let dir = screenshots_dir(app);
     std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    app.asset_protocol_scope()
+        .allow_directory(&dir, true)
+        .map_err(|e| e.to_string())?;
     Ok(dir)
 }
 
 pub fn exports_dir(app: &AppHandle<Wry>) -> Result<PathBuf, String> {
     let dir = writable_recordings_dir(app)?.join("exports");
     std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    app.asset_protocol_scope()
+        .allow_directory(&dir, true)
+        .map_err(|e| e.to_string())?;
     Ok(dir)
 }
 
@@ -99,7 +109,13 @@ pub fn known_screenshots_dirs(app: &AppHandle<Wry>) -> Vec<PathBuf> {
         );
     }
 
-    dedupe_existing_dirs(dirs)
+    let dirs = dedupe_existing_dirs(dirs);
+    for dir in &dirs {
+        if let Err(error) = app.asset_protocol_scope().allow_directory(dir, true) {
+            warn!(?dir, %error, "Could not authorize media preview directory");
+        }
+    }
+    dirs
 }
 
 /// Every directory that may contain recordings: the active directory first,
@@ -121,7 +137,13 @@ pub fn known_recordings_dirs(app: &AppHandle<Wry>) -> Vec<PathBuf> {
         );
     }
 
-    dedupe_existing_dirs(dirs)
+    let dirs = dedupe_existing_dirs(dirs);
+    for dir in &dirs {
+        if let Err(error) = app.asset_protocol_scope().allow_directory(dir, true) {
+            warn!(?dir, %error, "Could not authorize media preview directory");
+        }
+    }
+    dirs
 }
 
 fn dedupe_existing_dirs(dirs: Vec<PathBuf>) -> Vec<PathBuf> {

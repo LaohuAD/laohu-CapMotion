@@ -7174,6 +7174,9 @@ async fn create_editor_instance_impl(
     let app = app.clone();
 
     wait_for_recording_ready(&app, &path).await?;
+    app.asset_protocol_scope()
+        .allow_directory(&path, true)
+        .map_err(|e| e.to_string())?;
 
     recording::spawn_heal_oversized_desktop_background_snapshots(path.clone());
 
