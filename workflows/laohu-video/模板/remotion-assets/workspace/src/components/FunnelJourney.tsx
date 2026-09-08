@@ -16,7 +16,7 @@ export const FunnelJourney: React.FC<{config: ComponentConfig}> = ({config}) => 
       <div style={{display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: 54, marginTop: 18, height: 640}}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: 12, paddingTop: 16}}>
           {config.items.map((item, index) => {
-            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd);
+            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
             const width = 100 - index * (48 / Math.max(1, config.items.length - 1));
             return (
               <div

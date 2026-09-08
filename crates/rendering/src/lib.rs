@@ -21,7 +21,7 @@ use futures::future::OptionFuture;
 use layers::{
     Background, BackgroundLayer, BlurLayer, Camera3DBlurKind, Camera3DLayer, CameraLayer,
     CaptionsLayer, ClickRippleLayer, ColorGradeLayer, CursorLayer, DisplayLayer, FrameLayer,
-    KeyboardLayer, MaskLayer, MotionLayer, NotchLayer, NotchUniforms, TextLayer,
+    KeyboardLayer, MaskLayer, MotionLayer, NotchLayer, NotchUniforms, TextLayer, caption_track_ids,
 };
 use specta::Type;
 use spring_mass_damper::SpringMassDamperSimulationConfig;
@@ -5900,6 +5900,7 @@ pub struct RendererLayers {
     mask: MaskLayer,
     text: TextLayer,
     captions: CaptionsLayer,
+    secondary_captions: CaptionsLayer,
     keyboard: KeyboardLayer,
     motion: MotionLayer,
     camera3d: Camera3DLayer,
@@ -5948,6 +5949,7 @@ impl RendererLayers {
             mask: MaskLayer::new(device),
             text: TextLayer::new(device, queue),
             captions: CaptionsLayer::new(device, queue),
+            secondary_captions: CaptionsLayer::new(device, queue),
             keyboard: KeyboardLayer::new(device, queue),
             motion: MotionLayer::new(
                 shared_yuv_pipelines,
@@ -6179,11 +6181,29 @@ impl RendererLayers {
             &uniforms.texts,
         );
 
+        let caption_tracks = uniforms
+            .project
+            .timeline
+            .as_ref()
+            .map(|timeline| caption_track_ids(&timeline.caption_segments))
+            .unwrap_or_default();
+        let primary_track = caption_tracks.first().copied();
+        let secondary_track = caption_tracks.get(1).copied();
         self.captions.prepare(
             uniforms,
             segment_frames,
             XY::new(uniforms.output_size.0, uniforms.output_size.1),
             constants,
+            primary_track.flatten(),
+            primary_track.is_some(),
+        );
+        self.secondary_captions.prepare(
+            uniforms,
+            segment_frames,
+            XY::new(uniforms.output_size.0, uniforms.output_size.1),
+            constants,
+            secondary_track.flatten(),
+            secondary_track.is_some(),
         );
 
         self.keyboard.prepare(
@@ -6191,7 +6211,9 @@ impl RendererLayers {
             segment_frames,
             XY::new(uniforms.output_size.0, uniforms.output_size.1),
             constants,
-            self.captions.active_layout(),
+            self.captions
+                .active_layout()
+                .or_else(|| self.secondary_captions.active_layout()),
         );
 
         self.motion.prepare(constants, uniforms).await?;
@@ -6359,11 +6381,29 @@ impl RendererLayers {
         timings.text_prepare_duration = start.elapsed();
 
         let start = Instant::now();
+        let caption_tracks = uniforms
+            .project
+            .timeline
+            .as_ref()
+            .map(|timeline| caption_track_ids(&timeline.caption_segments))
+            .unwrap_or_default();
+        let primary_track = caption_tracks.first().copied();
+        let secondary_track = caption_tracks.get(1).copied();
         self.captions.prepare(
             uniforms,
             segment_frames,
             XY::new(uniforms.output_size.0, uniforms.output_size.1),
             constants,
+            primary_track.flatten(),
+            primary_track.is_some(),
+        );
+        self.secondary_captions.prepare(
+            uniforms,
+            segment_frames,
+            XY::new(uniforms.output_size.0, uniforms.output_size.1),
+            constants,
+            secondary_track.flatten(),
+            secondary_track.is_some(),
         );
         timings.captions_prepare_duration = start.elapsed();
 
@@ -6373,7 +6413,9 @@ impl RendererLayers {
             segment_frames,
             XY::new(uniforms.output_size.0, uniforms.output_size.1),
             constants,
-            self.captions.active_layout(),
+            self.captions
+                .active_layout()
+                .or_else(|| self.secondary_captions.active_layout()),
         );
         timings.keyboard_prepare_duration = start.elapsed();
 
@@ -6583,6 +6625,10 @@ impl RendererLayers {
         if self.captions.has_content() {
             let mut pass = render_pass!(session.current_texture_view(), wgpu::LoadOp::Load);
             self.captions.render(&mut pass);
+        }
+        if self.secondary_captions.has_content() {
+            let mut pass = render_pass!(session.current_texture_view(), wgpu::LoadOp::Load);
+            self.secondary_captions.render(&mut pass);
         }
     }
 }

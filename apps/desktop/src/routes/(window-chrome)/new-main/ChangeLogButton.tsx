@@ -2,11 +2,11 @@ import { makePersisted } from "@solid-primitives/storage";
 import { getVersion } from "@tauri-apps/api/app";
 import { createEffect, createResource } from "solid-js";
 import { createStore } from "solid-js/store";
+import { CAPMOTION_CHANGELOG } from "~/capmotion-changelog";
 import Tooltip from "~/components/Tooltip";
 import { useI18n } from "~/i18n";
 import { hideCurrentWindow } from "~/utils/hide-window";
 import { commands } from "~/utils/tauri";
-import { apiClient } from "~/utils/web-api";
 import IconLucideBell from "~icons/lucide/bell";
 
 const ChangelogButton = () => {
@@ -22,20 +22,6 @@ const ChangelogButton = () => {
 
 	const [currentVersion] = createResource(() => getVersion());
 
-	const [changelogStatus] = createResource(
-		() => currentVersion(),
-		async (version) => {
-			if (!version) {
-				return { hasUpdate: false };
-			}
-			const response = await apiClient.desktop.getChangelogStatus({
-				query: { version },
-			});
-			if (response.status === 200) return response.body;
-			return null;
-		},
-	);
-
 	const handleChangelogClick = () => {
 		commands.showWindow({ Settings: { page: "changelog" } });
 		hideCurrentWindow();
@@ -50,18 +36,17 @@ const ChangelogButton = () => {
 	};
 
 	createEffect(() => {
-		if (changelogStatus.state === "ready" && currentVersion()) {
-			const hasUpdate = changelogStatus()?.hasUpdate || false;
-			if (
-				hasUpdate === true &&
-				changelogState.lastOpenedVersion !== currentVersion()
-			) {
-				setChangelogState({
-					hasUpdate: true,
-					lastOpenedVersion: currentVersion(),
-					changelogClicked: false,
-				});
-			}
+		const version = currentVersion();
+		if (
+			version &&
+			CAPMOTION_CHANGELOG.some((entry) => entry.version === version) &&
+			changelogState.lastOpenedVersion !== version
+		) {
+			setChangelogState({
+				hasUpdate: true,
+				lastOpenedVersion: version,
+				changelogClicked: false,
+			});
 		}
 	});
 

@@ -226,6 +226,10 @@ impl RecordingMeta {
                     .iter()
                     .map(|seg| crate::CaptionTrackSegment {
                         id: seg.id.clone(),
+                        track_id: None,
+                        track_label: None,
+                        language: None,
+                        pair_id: None,
                         start: seg.start as f64,
                         end: seg.end as f64,
                         text: seg.text.clone(),
@@ -236,6 +240,7 @@ impl RecordingMeta {
                         color_override: None,
                         background_color_override: None,
                         font_size_override: None,
+                        manual_position_override: None,
                     })
                     .collect();
 

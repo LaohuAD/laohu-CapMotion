@@ -671,14 +671,12 @@ impl CursorMonitorInfo {
         (pos_x, pos_y)
     }
 
-    fn bottom_center_position(
-        &self,
-        window_width: f64,
-        window_height: f64,
-        offset_y: f64,
-    ) -> (f64, f64) {
-        let pos_x = self.x + (self.width - window_width) / 2.0;
-        let pos_y = self.y + self.height - window_height - offset_y;
+    fn upper_left_third_position(&self, window_width: f64, window_height: f64) -> (f64, f64) {
+        let division_x = self.x + self.width / 3.0;
+        let max_x = (self.x + self.width - window_width).max(self.x);
+        let pos_x = (division_x - window_width / 2.0).clamp(self.x, max_x);
+        let max_y = (self.y + self.height - window_height).max(self.y);
+        let pos_y = (self.y + 16.0).clamp(self.y, max_y);
         (pos_x, pos_y)
     }
 
@@ -1418,22 +1416,17 @@ impl ShowCapWindow {
         }
 
         #[cfg(target_os = "macos")]
-        if let Self::InProgressRecording { capture_target, .. } = self
+        if let Self::InProgressRecording { .. } = self
             && let Some(window) = self.id(app).get(app)
         {
             use crate::panel_manager::is_window_handle_valid;
 
             if is_window_handle_valid(&window) {
                 debug!("InProgressRecording: reusing existing window");
-                let width = 320.0;
-                let height = 150.0;
-                let (pos_x, pos_y) = capture_target
-                    .as_ref()
-                    .and_then(fake_window::calculate_recording_controls_position_for_target)
-                    .unwrap_or_else(|| {
-                        CursorMonitorInfo::get().bottom_center_position(width, height, 120.0)
-                    });
-                let _ = window.set_position(tauri::LogicalPosition::new(pos_x, pos_y));
+                debug!(
+                    preserve_position = true,
+                    "InProgressRecording: preserving reused window position"
+                );
 
                 let label = window.label().to_string();
                 app.run_on_main_thread({
@@ -1477,18 +1470,13 @@ impl ShowCapWindow {
         }
 
         #[cfg(not(target_os = "macos"))]
-        if let Self::InProgressRecording { capture_target, .. } = self
+        if let Self::InProgressRecording { .. } = self
             && let Some(window) = self.id(app).get(app)
         {
-            let width = 320.0;
-            let height = 150.0;
-            let (pos_x, pos_y) = capture_target
-                .as_ref()
-                .and_then(fake_window::calculate_recording_controls_position_for_target)
-                .unwrap_or_else(|| {
-                    CursorMonitorInfo::get().bottom_center_position(width, height, 120.0)
-                });
-            let _ = window.set_position(logical_point_position(pos_x, pos_y));
+            debug!(
+                preserve_position = true,
+                "InProgressRecording: preserving reused window position"
+            );
             window.show().ok();
             window.set_focus().ok();
             fake_window::spawn_fake_window_listener(app.clone(), window.clone());
@@ -2789,7 +2777,7 @@ impl ShowCapWindow {
                 let (pos_x, pos_y) = capture_target
                     .as_ref()
                     .and_then(fake_window::calculate_recording_controls_position_for_target)
-                    .unwrap_or_else(|| cursor_monitor.bottom_center_position(width, height, 120.0));
+                    .unwrap_or_else(|| cursor_monitor.upper_left_third_position(width, height));
                 let _ = window.set_position(logical_point_position(pos_x, pos_y));
 
                 debug!(

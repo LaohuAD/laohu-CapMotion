@@ -49,7 +49,7 @@ git remote add upstream https://github.com/CapSoftware/Cap.git
 git fetch --depth=1 upstream main
 ```
 
-Expected: `git remote -v` shows `origin` at `LaohuAD/laohu-Voice2MotionFrameCut` and `upstream` at `CapSoftware/Cap`.
+Expected: `git remote -v` shows `origin` at `LaohuAD/laohu-CapMotion` and `upstream` at `CapSoftware/Cap`.
 
 - [ ] **Step 2: Merge the upstream root without committing conflict resolutions**
 

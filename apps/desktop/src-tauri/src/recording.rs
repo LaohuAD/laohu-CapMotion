@@ -335,6 +335,78 @@ pub async fn import_current_desktop_background(project_path: String) -> Result<S
     .map_err(|err| format!("Desktop background snapshot task failed: {err}"))?
 }
 
+fn project_background_extension(file_name: &str) -> Option<&'static str> {
+    match Path::new(file_name)
+        .extension()
+        .and_then(|extension| extension.to_str())
+        .map(str::to_ascii_lowercase)
+        .as_deref()
+    {
+        Some("apng") => Some("apng"),
+        Some("avif") => Some("avif"),
+        Some("jpeg") | Some("jpg") => Some("jpg"),
+        Some("png") => Some("png"),
+        Some("webp") => Some("webp"),
+        _ => None,
+    }
+}
+
+/// Store imported backgrounds inside the `.cap` bundle that owns them. This
+/// makes the user's one storage-location setting authoritative for both the
+/// project and all project-owned media.
+#[tauri::command]
+#[specta::specta]
+#[instrument(skip(data))]
+pub async fn import_project_background_image(
+    project_path: String,
+    file_name: String,
+    data: Vec<u8>,
+) -> Result<String, String> {
+    if data.is_empty() {
+        return Err("The selected image is empty".to_string());
+    }
+    if data.len() > 100 * 1024 * 1024 {
+        return Err("The selected image exceeds 100 MB".to_string());
+    }
+    let extension = project_background_extension(&file_name)
+        .ok_or_else(|| "Unsupported background image type".to_string())?;
+    let project_dir = PathBuf::from(project_path);
+    if !project_dir.is_dir()
+        || project_dir.extension().and_then(|value| value.to_str()) != Some("cap")
+    {
+        return Err("Background images can only be added to a Cap project".to_string());
+    }
+
+    tokio::task::spawn_blocking(move || {
+        let assets_dir = project_dir.join("assets").join("backgrounds");
+        std::fs::create_dir_all(&assets_dir)
+            .map_err(|error| format!("Failed to create project assets directory: {error}"))?;
+        let stem = Path::new(&file_name)
+            .file_stem()
+            .and_then(|value| value.to_str())
+            .map(sanitize_filename::sanitize)
+            .filter(|value| !value.is_empty())
+            .unwrap_or_else(|| "background".to_string());
+        let timestamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|elapsed| elapsed.as_millis())
+            .unwrap_or(0);
+        let output_name = format!("bg-{timestamp}-{stem}.{extension}");
+        let output_path = assets_dir.join(cap_utils::ensure_unique_filename(
+            &output_name,
+            &assets_dir,
+        )?);
+        let pending_path = output_path.with_extension(format!("{extension}.pending"));
+        std::fs::write(&pending_path, data)
+            .map_err(|error| format!("Failed to write project background: {error}"))?;
+        std::fs::rename(&pending_path, &output_path)
+            .map_err(|error| format!("Failed to finish project background import: {error}"))?;
+        Ok(output_path.to_string_lossy().into_owned())
+    })
+    .await
+    .map_err(|error| format!("Project background import task failed: {error}"))?
+}
+
 fn remove_imported_desktop_background_snapshots(assets_dir: &Path, keep_name: &str) {
     let Ok(entries) = std::fs::read_dir(assets_dir) else {
         return;
@@ -918,6 +990,14 @@ impl InProgressRecording {
         match self {
             Self::Instant { common, .. } => common,
             Self::Studio { common, .. } => common,
+        }
+    }
+
+    pub fn camera_feed(&self) -> Option<Arc<CameraFeedLock>> {
+        match self {
+            Self::Instant { camera_feed, .. } | Self::Studio { camera_feed, .. } => {
+                camera_feed.clone()
+            }
         }
     }
 
@@ -1515,15 +1595,33 @@ async fn lock_selected_camera(
     selected_id: Option<camera::DeviceOrModelID>,
     selected_settings: Option<camera::CameraDeviceSettings>,
     capture_target: &ScreenCaptureTarget,
+    restart_lock: Option<Arc<CameraFeedLock>>,
 ) -> anyhow::Result<Option<Arc<CameraFeedLock>>> {
-    let Some(id) = selected_id else {
-        if matches!(capture_target, ScreenCaptureTarget::CameraOnly) {
-            return Err(anyhow!(
-                "Camera-only recording requires a selected camera. Please select a camera before starting."
-            ));
+    let restart_lock_id = restart_lock
+        .as_ref()
+        .map(|lock| camera::DeviceOrModelID::from_info(lock.camera_info()));
+    match camera_lock_plan(selected_id.as_ref(), restart_lock_id.as_ref()) {
+        CameraLockPlan::NoCamera => {
+            if matches!(capture_target, ScreenCaptureTarget::CameraOnly) {
+                return Err(anyhow!(
+                    "Camera-only recording requires a selected camera. Please select a camera before starting."
+                ));
+            }
+            return Ok(None);
         }
+        CameraLockPlan::ReuseRestartLock => {
+            let id = selected_id
+                .as_ref()
+                .expect("camera plan requires selected id");
+            let lock = restart_lock.expect("camera plan requires restart lock");
+            validate_camera_receiving(&lock, id).await?;
+            return Ok(Some(lock));
+        }
+        CameraLockPlan::AcquireSelectedCamera => {}
+    }
 
-        return Ok(None);
+    let Some(id) = selected_id else {
+        unreachable!("camera plan handled missing selection")
     };
 
     let existing_lock = match camera_feed.ask(camera::Lock).await {
@@ -1551,6 +1649,26 @@ async fn lock_selected_camera(
 
     validate_camera_receiving(&lock, &id).await?;
     Ok(Some(Arc::new(lock)))
+}
+
+#[derive(Debug, PartialEq, Eq)]
+enum CameraLockPlan {
+    NoCamera,
+    ReuseRestartLock,
+    AcquireSelectedCamera,
+}
+
+fn camera_lock_plan(
+    selected_id: Option<&camera::DeviceOrModelID>,
+    restart_lock_id: Option<&camera::DeviceOrModelID>,
+) -> CameraLockPlan {
+    match (selected_id, restart_lock_id) {
+        (None, _) => CameraLockPlan::NoCamera,
+        (Some(selected), Some(previous)) if selected == previous => {
+            CameraLockPlan::ReuseRestartLock
+        }
+        (Some(_), _) => CameraLockPlan::AcquireSelectedCamera,
+    }
 }
 
 async fn initialize_selected_microphone(
@@ -1714,6 +1832,15 @@ pub async fn start_recording(
     app: AppHandle,
     state_mtx: MutableState<'_, App>,
     inputs: StartRecordingInputs,
+) -> Result<RecordingAction, String> {
+    start_recording_with_camera_lock(app, state_mtx, inputs, None).await
+}
+
+async fn start_recording_with_camera_lock(
+    app: AppHandle,
+    state_mtx: MutableState<'_, App>,
+    inputs: StartRecordingInputs,
+    restart_camera_lock: Option<Arc<CameraFeedLock>>,
 ) -> Result<RecordingAction, String> {
     let mut inputs = inputs;
 
@@ -2084,6 +2211,7 @@ pub async fn start_recording(
                 selected_camera_id,
                 selected_camera_settings,
                 &inputs.capture_target,
+                restart_camera_lock,
             )
             .await?;
             debug!(
@@ -3083,6 +3211,7 @@ pub async fn restart_recording(
 
     let inputs = recording.inputs().clone();
     let recording_dir = recording.recording_dir().clone();
+    let restart_camera_lock = recording.camera_feed();
 
     // Cleanup of the discarded recording must not block or abort the restart:
     // the old recording is already cancelled at this point, and the new one
@@ -3100,7 +3229,7 @@ pub async fn restart_recording(
         warn!("Failed to delete recording files while restarting: {err}");
     }
 
-    start_recording(app.clone(), state, inputs).await
+    start_recording_with_camera_lock(app.clone(), state, inputs, restart_camera_lock).await
 }
 
 #[tauri::command]
@@ -3216,7 +3345,7 @@ pub async fn take_screenshot(
     let filename = project_name.replace(":", ".");
     let filename = format!("{}.cap", sanitize_filename::sanitize(&filename));
 
-    let screenshots_base_dir = app.path().app_data_dir().unwrap().join("screenshots");
+    let screenshots_base_dir = crate::recordings_locations::screenshots_dir(&app);
 
     let project_file_path = screenshots_base_dir.join(&cap_utils::ensure_unique_filename(
         &filename,
@@ -4253,7 +4382,11 @@ fn apply_recording_presentation_defaults(
     using_default_config: bool,
     stored_desktop_background_path: Option<String>,
 ) {
-    let default_wallpaper_path = if using_default_config {
+    let wants_current_desktop = matches!(
+        config.background.source_binding,
+        Some(cap_project::BackgroundSourceBinding::CurrentDesktop)
+    );
+    let default_wallpaper_path = if using_default_config || wants_current_desktop {
         stored_desktop_background_path.or_else(|| {
             app.path()
                 .resolve("assets/backgrounds/cities/sf.jpg", BaseDirectory::Resource)
@@ -4309,7 +4442,11 @@ fn apply_screen_recording_presentation_defaults(
         BackgroundSource::Color { value, alpha } if *value == [255, 255, 255] && *alpha == 255
     );
 
-    if using_default_config && has_default_background {
+    let wants_current_desktop = matches!(
+        config.background.source_binding,
+        Some(cap_project::BackgroundSourceBinding::CurrentDesktop)
+    );
+    if (using_default_config && has_default_background) || wants_current_desktop {
         if let Some(path) = default_wallpaper_path {
             config.background.source = BackgroundSource::Wallpaper { path: Some(path) };
         }
@@ -4552,6 +4689,14 @@ mod tests {
     }
 
     #[test]
+    fn project_background_import_accepts_only_supported_image_extensions() {
+        assert_eq!(project_background_extension("background.PNG"), Some("png"));
+        assert_eq!(project_background_extension("photo.jpeg"), Some("jpg"));
+        assert_eq!(project_background_extension("clip.mp4"), None);
+        assert_eq!(project_background_extension("no-extension"), None);
+    }
+
+    #[test]
     fn recording_finalization_keeps_only_explicit_manual_zoom_segments() {
         let manual = ZoomSegment {
             start: 1.0,
@@ -4759,6 +4904,31 @@ mod tests {
     #[test]
     fn mic_feed_locked_ignores_unrelated_errors() {
         assert!(!mic_feed_locked(&anyhow!("different failure")));
+    }
+
+    #[test]
+    fn restart_reuses_the_matching_camera_lock_instead_of_relocking_the_feed() {
+        let selected = camera::DeviceOrModelID::DeviceID("camera-a".to_string());
+
+        assert_eq!(
+            camera_lock_plan(Some(&selected), Some(&selected)),
+            CameraLockPlan::ReuseRestartLock
+        );
+    }
+
+    #[test]
+    fn restart_does_not_reuse_a_camera_lock_for_another_input() {
+        let selected = camera::DeviceOrModelID::DeviceID("camera-a".to_string());
+        let previous = camera::DeviceOrModelID::DeviceID("camera-b".to_string());
+
+        assert_eq!(
+            camera_lock_plan(Some(&selected), Some(&previous)),
+            CameraLockPlan::AcquireSelectedCamera
+        );
+        assert_eq!(
+            camera_lock_plan(None, Some(&previous)),
+            CameraLockPlan::NoCamera
+        );
     }
 
     #[test]
@@ -4973,6 +5143,31 @@ mod tests {
         assert!(matches!(
             config.background.source,
             cap_project::BackgroundSource::Wallpaper { path: Some(path) } if path == "wallpaper.jpg"
+        ));
+    }
+
+    #[test]
+    fn named_preset_desktop_background_intent_binds_the_recording_snapshot() {
+        let mut config = ProjectConfiguration::default();
+        config.aspect_ratio = Some(cap_project::AspectRatio::Wide);
+        config.background.source = cap_project::BackgroundSource::Wallpaper { path: None };
+        config.background.source_binding =
+            Some(cap_project::BackgroundSourceBinding::CurrentDesktop);
+        let capture_target = ScreenCaptureTarget::Display {
+            id: "1".parse().unwrap(),
+        };
+
+        apply_screen_recording_presentation_defaults(
+            &mut config,
+            Some(&capture_target),
+            false,
+            Some("current-desktop-background.jpg".to_string()),
+        );
+
+        assert!(matches!(
+            config.background.source,
+            cap_project::BackgroundSource::Wallpaper { path: Some(path) }
+                if path == "current-desktop-background.jpg"
         ));
     }
 

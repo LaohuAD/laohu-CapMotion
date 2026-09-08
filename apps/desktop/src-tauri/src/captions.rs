@@ -833,13 +833,26 @@ fn normalize_caption_words(words: Vec<CaptionWord>) -> Vec<CaptionWord> {
 fn caption_text_from_words<'a>(words: impl IntoIterator<Item = &'a CaptionWord>) -> String {
     let mut text = String::new();
 
+    let is_cjk = |value: char| {
+        matches!(
+            value,
+            '\u{3400}'..='\u{4dbf}'
+                | '\u{4e00}'..='\u{9fff}'
+                | '\u{f900}'..='\u{faff}'
+                | '\u{3040}'..='\u{30ff}'
+                | '\u{ac00}'..='\u{d7af}'
+        )
+    };
+
     for word in words {
         let word_text = word.text.trim();
         if word_text.is_empty() {
             continue;
         }
 
-        if !text.is_empty() && !caption_token_attaches_to_previous(word_text) {
+        let touches_cjk = text.chars().next_back().is_some_and(&is_cjk)
+            || word_text.chars().next().is_some_and(&is_cjk);
+        if !text.is_empty() && !caption_token_attaches_to_previous(word_text) && !touches_cjk {
             text.push(' ');
         }
         text.push_str(word_text);
@@ -1708,6 +1721,43 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         .and_then(|v| v.as_f64())
                         .unwrap_or(-45.0) as f32;
 
+                    let outline_shadow = settings_obj
+                        .get("outlineShadow")
+                        .or_else(|| settings_obj.get("outline_shadow"))
+                        .and_then(|v| v.as_bool())
+                        .unwrap_or(false);
+
+                    let outline_shadow_color = settings_obj
+                        .get("outlineShadowColor")
+                        .or_else(|| settings_obj.get("outline_shadow_color"))
+                        .and_then(|v| v.as_str())
+                        .unwrap_or("#000000")
+                        .to_string();
+
+                    let outline_shadow_opacity = settings_obj
+                        .get("outlineShadowOpacity")
+                        .or_else(|| settings_obj.get("outline_shadow_opacity"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(75.0) as f32;
+
+                    let outline_shadow_blur = settings_obj
+                        .get("outlineShadowBlur")
+                        .or_else(|| settings_obj.get("outline_shadow_blur"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(15.0) as f32;
+
+                    let outline_shadow_distance = settings_obj
+                        .get("outlineShadowDistance")
+                        .or_else(|| settings_obj.get("outline_shadow_distance"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(5.0) as f32;
+
+                    let outline_shadow_angle = settings_obj
+                        .get("outlineShadowAngle")
+                        .or_else(|| settings_obj.get("outline_shadow_angle"))
+                        .and_then(|v| v.as_f64())
+                        .unwrap_or(-45.0) as f32;
+
                     let export_with_subtitles = settings_obj
                         .get("exportWithSubtitles")
                         .or_else(|| settings_obj.get("export_with_subtitles"))
@@ -1779,6 +1829,43 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                             })
                         });
 
+                    let track_positions = settings_obj
+                        .get("trackPositions")
+                        .or_else(|| settings_obj.get("track_positions"))
+                        .and_then(|value| value.as_array())
+                        .map(|entries| {
+                            entries
+                                .iter()
+                                .filter_map(|entry| {
+                                    let track_id = entry
+                                        .get("trackId")
+                                        .or_else(|| entry.get("track_id"))?
+                                        .as_str()?
+                                        .to_string();
+                                    let position = entry
+                                        .get("position")
+                                        .and_then(|value| value.as_str())
+                                        .unwrap_or("bottom-center")
+                                        .to_string();
+                                    let manual_position = entry
+                                        .get("manualPosition")
+                                        .or_else(|| entry.get("manual_position"))
+                                        .and_then(|value| {
+                                            Some(cap_project::XY {
+                                                x: value.get("x")?.as_f64()? as f32,
+                                                y: value.get("y")?.as_f64()? as f32,
+                                            })
+                                        });
+                                    Some(cap_project::CaptionTrackPosition {
+                                        track_id,
+                                        position,
+                                        manual_position,
+                                    })
+                                })
+                                .collect()
+                        })
+                        .unwrap_or_default();
+
                     cap_project::CaptionSettings {
                         enabled,
                         font,
@@ -1799,6 +1886,12 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         shadow_blur,
                         shadow_distance,
                         shadow_angle,
+                        outline_shadow,
+                        outline_shadow_color,
+                        outline_shadow_opacity,
+                        outline_shadow_blur,
+                        outline_shadow_distance,
+                        outline_shadow_angle,
                         export_with_subtitles,
                         highlight_color,
                         fade_duration,
@@ -1806,6 +1899,7 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         word_transition_duration,
                         active_word_highlight,
                         manual_position,
+                        track_positions,
                         preset,
                         animation,
                         highlight_style,
@@ -1828,6 +1922,19 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
     }
 }
 
+fn load_embedded_project_captions(project_path: &Path) -> Result<Option<CaptionData>, String> {
+    if !project_path.is_dir() || !project_path.join("project-config.json").is_file() {
+        return Ok(None);
+    }
+
+    let config = cap_project::ProjectConfiguration::load(project_path)
+        .map_err(|error| format!("Failed to load project captions: {error}"))?;
+    Ok(config.captions.map(|captions| CaptionData {
+        segments: captions.segments,
+        settings: Some(captions.settings),
+    }))
+}
+
 #[tauri::command]
 #[specta::specta]
 #[instrument(skip(app))]
@@ -1837,6 +1944,15 @@ pub async fn load_captions(
 ) -> Result<Option<CaptionData>, String> {
     tracing::info!("=== LOAD CAPTIONS START ===");
     tracing::info!("Loading captions for video_id: {}", video_id);
+
+    if let Some(captions) = load_embedded_project_captions(Path::new(&video_id))? {
+        tracing::info!(
+            "Loaded {} caption segments from project-config.json",
+            captions.segments.len()
+        );
+        tracing::info!("=== LOAD CAPTIONS END (project config) ===");
+        return Ok(Some(captions));
+    }
 
     let captions_dir = app_captions_dir(&app, &video_id)?;
     let captions_path = captions_dir.join("captions.json");
@@ -2715,9 +2831,9 @@ fn mix_samples(dest: &mut [f32], source: &[f32]) -> usize {
 #[cfg(test)]
 mod tests {
     use super::{
-        AudioExtractionSource, CaptionWord, caption_text_from_words, caption_word_chunks,
-        caption_settings_json, normalize_caption_words, parse_captions_json,
-        resolve_audio_extraction_source, resolve_path_with_base,
+        AudioExtractionSource, CaptionWord, caption_settings_json, caption_text_from_words,
+        caption_word_chunks, load_embedded_project_captions, normalize_caption_words,
+        parse_captions_json, resolve_audio_extraction_source, resolve_path_with_base,
     };
     use tempfile::tempdir;
 
@@ -2804,6 +2920,39 @@ mod tests {
     }
 
     #[test]
+    fn embedded_project_captions_are_the_primary_caption_source() {
+        let dir = tempdir().unwrap();
+        let project_dir = dir.path().join("recording.cap");
+        std::fs::create_dir_all(&project_dir).unwrap();
+
+        let mut config = cap_project::ProjectConfiguration::default();
+        config.captions = Some(cap_project::CaptionsData {
+            segments: vec![cap_project::CaptionSegment {
+                id: "caption-1".to_string(),
+                start: 1.0,
+                end: 2.0,
+                text: "工程内字幕".to_string(),
+                words: vec![],
+            }],
+            settings: cap_project::CaptionSettings {
+                enabled: true,
+                ..Default::default()
+            },
+            source_timed: true,
+            display_mode: Default::default(),
+        });
+        config.write(&project_dir).unwrap();
+
+        let captions = load_embedded_project_captions(&project_dir)
+            .unwrap()
+            .expect("embedded captions should load");
+
+        assert_eq!(captions.segments.len(), 1);
+        assert_eq!(captions.segments[0].text, "工程内字幕");
+        assert!(captions.settings.unwrap().enabled);
+    }
+
+    #[test]
     fn normalize_caption_words_attaches_punctuation() {
         let words = normalize_caption_words(vec![
             word("test", 0),
@@ -2814,6 +2963,20 @@ mod tests {
 
         assert_eq!(caption_text_from_words(&words), "test, test.");
         assert_eq!(words.len(), 2);
+    }
+
+    #[test]
+    fn caption_text_does_not_insert_spaces_between_cjk_tokens() {
+        let words = vec![
+            word("字", 0),
+            word("幕", 1),
+            word("要", 2),
+            word("连", 3),
+            word("起", 4),
+            word("来", 5),
+        ];
+
+        assert_eq!(caption_text_from_words(&words), "字幕要连起来");
     }
 
     #[test]

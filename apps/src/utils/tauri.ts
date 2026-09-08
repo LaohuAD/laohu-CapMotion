@@ -62,6 +62,9 @@ async takeScreenshot(target: ScreenCaptureTarget) : Promise<string> {
 async importCurrentDesktopBackground(projectPath: string) : Promise<string> {
     return await TAURI_INVOKE("import_current_desktop_background", { projectPath });
 },
+async importProjectBackgroundImage(projectPath: string, fileName: string, data: number[]) : Promise<string> {
+    return await TAURI_INVOKE("import_project_background_image", { projectPath, fileName, data });
+},
 async listCameras() : Promise<CameraInfo[]> {
     return await TAURI_INVOKE("list_cameras");
 },
@@ -600,8 +603,9 @@ export type AutomationTestReport = { ruleId: string; ruleName: string; actionChe
 export type AutomationsStore = { version?: number; rules?: AutomationRule[] }
 export type BackgroundBlurConfig = { mode: BackgroundBlurMode }
 export type BackgroundBlurMode = "off" | "light" | "heavy"
-export type BackgroundConfiguration = { source: BackgroundSource; blur: number; padding: number; rounding: number; roundingType: CornerStyle; inset: number; crop: Crop | null; shadow: number; advancedShadow: ShadowConfiguration | null; border: BorderConfiguration | null }
+export type BackgroundConfiguration = { source: BackgroundSource; sourceBinding?: BackgroundSourceBinding | null; blur: number; padding: number; rounding: number; roundingType: CornerStyle; inset: number; crop: Crop | null; shadow: number; advancedShadow: ShadowConfiguration | null; border: BorderConfiguration | null }
 export type BackgroundSource = { type: "wallpaper"; path: string | null } | { type: "image"; path: string | null } | { type: "color"; value: [number, number, number]; alpha?: number } | { type: "gradient"; from: [number, number, number]; to: [number, number, number]; angle?: number; noise_intensity?: number | null; noise_scale?: number | null; animated?: boolean | null; animation_speed?: number | null }
+export type BackgroundSourceBinding = "currentDesktop"
 export type BorderConfiguration = { enabled: boolean; width: number; color: [number, number, number]; opacity: number }
 export type Camera = { hide: boolean; mirror: boolean; position: CameraPosition; size: number; zoomSize: number | null; rounding: number; shadow: number; advancedShadow: ShadowConfiguration | null; shape: CameraShape; roundingType: CornerStyle; scaleDuringZoom?: number; backgroundBlur?: BackgroundBlurConfig }
 export type CameraDeviceSettings = { width: number | null; height: number | null; frameRate: number | null }
@@ -616,8 +620,8 @@ export type CameraXPosition = "left" | "center" | "right"
 export type CameraYPosition = "top" | "bottom"
 export type CaptionData = { segments: CaptionSegment[]; settings: CaptionSettings | null }
 export type CaptionSegment = { id: string; start: number; end: number; text: string; words?: CaptionWord[] }
-export type CaptionSettings = { enabled: boolean; font: string; size: number; color: string; backgroundColor: string; backgroundOpacity: number; position: string; italic: boolean; fontWeight: number; outline: boolean; outlineColor: string; exportWithSubtitles: boolean; highlightColor: string; fadeDuration: number; lingerDuration: number; wordTransitionDuration: number; activeWordHighlight: boolean; manualPosition: XY<number> | null; preset: string; animation: string; highlightStyle: string; uppercase: boolean }
-export type CaptionTrackSegment = { id: string; start: number; end: number; text: string; words?: CaptionWord[]; fadeDurationOverride?: number | null; lingerDurationOverride?: number | null; positionOverride?: string | null; colorOverride?: string | null; backgroundColorOverride?: string | null; fontSizeOverride?: number | null }
+export type CaptionSettings = { enabled: boolean; font: string; size: number; color: string; backgroundColor: string; backgroundOpacity: number; position: string; italic: boolean; fontWeight: number; letterSpacing: number; outline: boolean; outlineColor: string; outlineWidth: number; shadow: boolean; shadowColor: string; shadowOpacity: number; shadowBlur: number; shadowDistance: number; shadowAngle: number; outlineShadow: boolean; outlineShadowColor: string; outlineShadowOpacity: number; outlineShadowBlur: number; outlineShadowDistance: number; outlineShadowAngle: number; exportWithSubtitles: boolean; highlightColor: string; fadeDuration: number; lingerDuration: number; wordTransitionDuration: number; activeWordHighlight: boolean; manualPosition: XY<number> | null; preset: string; animation: string; highlightStyle: string; uppercase: boolean }
+export type CaptionTrackSegment = { id: string; trackId?: string | null; trackLabel?: string | null; language?: string | null; pairId?: string | null; start: number; end: number; text: string; words?: CaptionWord[]; fadeDurationOverride?: number | null; lingerDurationOverride?: number | null; positionOverride?: string | null; colorOverride?: string | null; backgroundColorOverride?: string | null; fontSizeOverride?: number | null; manualPositionOverride?: XY<number> | null }
 export type CaptionWord = { text: string; start: number; end: number }
 export type CaptionsData = { segments: CaptionSegment[]; settings: CaptionSettings; 
 /**
@@ -628,7 +632,8 @@ export type CaptionsData = { segments: CaptionSegment[]; settings: CaptionSettin
  * projects (false) stored segments in already-edited output time and are
  * migrated to source time on first load.
  */
-sourceTimed?: boolean }
+sourceTimed?: boolean; displayMode?: CaptionDisplayMode }
+export type CaptionDisplayMode = "autoProject" | "materialized"
 export type CaptureDisplay = { id: DisplayId; name: string; refresh_rate: number }
 export type CaptureDisplayWithThumbnail = { id: DisplayId; name: string; refresh_rate: number; thumbnail: string | null }
 export type CaptureTargetKind = "display" | "window" | "area"
@@ -745,7 +750,7 @@ export type Platform = "MacOS" | "Windows" | "Linux"
 export type PostDeletionBehaviour = "doNothing" | "reopenRecordingWindow"
 export type PostStudioRecordingBehaviour = "openEditor" | "showOverlay"
 export type Preset = { name: string; config: ProjectConfiguration }
-export type PresetsStore = { presets: Preset[]; default: number | null }
+export type PresetsStore = { presets: Preset[]; default: number | null; revision: number }
 export type ProjectConfiguration = { aspectRatio: AspectRatio | null; background: BackgroundConfiguration; camera: Camera; audio: AudioConfiguration; cursor: CursorConfiguration; hotkeys: HotkeysConfiguration; timeline: TimelineConfiguration | null; captions: CaptionsData | null; keyboard: KeyboardData | null; clips: ClipConfiguration[]; annotations: Annotation[]; screenMotionBlur?: number; screenMovementSpring?: ScreenMovementSpring }
 export type ProjectRecordingsMeta = { segments: SegmentRecordings[] }
 export type RecordingAction = "Started" | "InvalidAuthentication" | "UpgradeRequired"

@@ -2,7 +2,7 @@ use serde::Serialize;
 
 use crate::{OutputFormat, write_json};
 
-const GUIDE_SCHEMA_VERSION: u32 = 3;
+const GUIDE_SCHEMA_VERSION: u32 = 5;
 
 /// Machine-readable capability + schema manifest. `cap guide --json` is the single document an agent
 /// can fetch to learn the output convention, env vars, exit codes, and the per-command output shape
@@ -137,6 +137,12 @@ fn build() -> Guide {
                 required: false,
                 used_by: "install-cli.sh, install-cli.ps1, update",
                 description: "Force the installer scripts to replace Cap Desktop before linking the CLI.",
+            },
+            EnvVar {
+                name: "CAP_PRESETS_STORE",
+                required: false,
+                used_by: "presets, project preset apply",
+                description: "Overrides the CapMotion user preset store path. Defaults to the com.laohu.capmotion application data directory.",
             },
         ],
         exit_codes: vec![
@@ -374,6 +380,30 @@ fn build() -> Guide {
             cmd(
                 "project config get|set",
                 "Read/replace a project's editor configuration (project-config.json).",
+                OutputMode::SingleJson,
+                &[],
+            ),
+            cmd(
+                "project captions import|materialize|style",
+                "Keep source-timed ASR as the traceable master, materialize two linked editable display tracks, or patch caption appearance.",
+                OutputMode::SingleJson,
+                &[],
+            ),
+            cmd(
+                "project presentation",
+                "Patch aspect ratio, portable desktop background binding and display position without replacing edits, captions or overlays.",
+                OutputMode::SingleJson,
+                &[],
+            ),
+            cmd(
+                "presets schema|list|inspect|save|captions-style|agent-profile",
+                "Read or transactionally update user-owned presentation presets. Writes require the current preset-store revision.",
+                OutputMode::SingleJson,
+                &[],
+            ),
+            cmd(
+                "project preset apply",
+                "Apply a named user preset through a reusable-field whitelist while preserving project media, edits, captions and overlays.",
                 OutputMode::SingleJson,
                 &[],
             ),

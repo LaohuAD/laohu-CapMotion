@@ -516,6 +516,7 @@ export function applyCaptionResultToProject<
 
 	captions.segments = rawSegments;
 	captions.sourceTimed = true;
+	captions.displayMode = "autoProject";
 	timeline.captionSegments = deriveCaptionTrackSegments(
 		rawSegments,
 		timeline.segments,

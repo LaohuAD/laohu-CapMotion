@@ -70,9 +70,9 @@ Remotion 是动画生成器，不是 Cap 的主时间线：
 
 ## 5. 仓库定位与迁移
 
-当前仓库 `LaohuAD/laohu-Voice2MotionFrameCut` 视为用户已经 Fork 的 Cap 产品仓库：
+当前仓库 `LaohuAD/laohu-CapMotion` 视为用户已经 Fork 的 Cap 产品仓库：
 
-- `origin` 继续指向 `git@github.com:LaohuAD/laohu-Voice2MotionFrameCut.git`。
+- `origin` 继续指向 `git@github.com:LaohuAD/laohu-CapMotion.git`。
 - 新增 `upstream` 指向 `https://github.com/CapSoftware/Cap.git`。
 - Cap 源码迁移到仓库根目录。
 - 现有 `.agents/skills/`、`规范/`、`知识沉淀/`、`模板/`、`作品/` 等目录保留。

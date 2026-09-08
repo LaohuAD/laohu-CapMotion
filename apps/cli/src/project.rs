@@ -29,6 +29,31 @@ struct CaptionImportDocument {
     source_timed: bool,
 }
 
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct CaptionTracksDocument {
+    schema: String,
+    tracks: Vec<CaptionTrackDocument>,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct CaptionTrackDocument {
+    id: String,
+    label: String,
+    language: String,
+    style: CaptionTrackStyle,
+    segments: Vec<cap_project::CaptionTrackSegment>,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct CaptionTrackStyle {
+    font_size: u32,
+    position: String,
+    manual_position: cap_project::XY<f32>,
+}
+
 pub fn captions_import(
     project_path: PathBuf,
     expected_revision: u64,
@@ -63,6 +88,137 @@ pub fn captions_import(
     Ok(())
 }
 
+pub fn captions_style(
+    project_path: PathBuf,
+    expected_revision: u64,
+    style_json: &Path,
+    format: OutputFormat,
+) -> Result<(), String> {
+    let input = std::fs::read_to_string(style_json)
+        .map_err(|e| format!("Failed to read caption style JSON: {e}"))?;
+    let patch: cap_project::CaptionStylePatch =
+        serde_json::from_str(&input).map_err(|e| format!("Invalid caption style JSON: {e}"))?;
+    let updated = cap_project::update_caption_style(project_path, expected_revision, patch)
+        .map_err(|e| format!("Failed to update caption style: {e}"))?;
+
+    match format {
+        OutputFormat::Text => println!(
+            "Updated caption style\nrevision: {}",
+            updated.project_revision
+        ),
+        OutputFormat::Json => crate::write_json(&serde_json::json!({
+            "ok": true,
+            "revision": updated.project_revision,
+        }))?,
+    }
+    Ok(())
+}
+
+pub fn captions_materialize(
+    project_path: PathBuf,
+    expected_revision: u64,
+    tracks_json: &Path,
+    format: OutputFormat,
+) -> Result<(), String> {
+    let input = std::fs::read_to_string(tracks_json)
+        .map_err(|e| format!("Failed to read caption tracks JSON: {e}"))?;
+    let document: CaptionTracksDocument =
+        serde_json::from_str(&input).map_err(|e| format!("Invalid caption tracks JSON: {e}"))?;
+    if document.schema != "laohu.cap-caption-tracks/1" {
+        return Err(format!(
+            "Unsupported caption track schema: {}",
+            document.schema
+        ));
+    }
+    let track_count = document.tracks.len();
+    let mut segments = Vec::new();
+    for track in document.tracks {
+        for mut segment in track.segments {
+            segment.track_id = Some(track.id.clone());
+            segment.track_label = Some(track.label.clone());
+            segment.language = Some(track.language.clone());
+            segment.font_size_override = Some(track.style.font_size);
+            segment.position_override = Some(track.style.position.clone());
+            segment.manual_position_override = Some(track.style.manual_position);
+            segments.push(segment);
+        }
+    }
+    let caption_count = segments.len();
+    let updated =
+        cap_project::materialize_caption_tracks(project_path, expected_revision, segments)
+            .map_err(|e| format!("Failed to materialize caption tracks: {e}"))?;
+
+    match format {
+        OutputFormat::Text => println!(
+            "Materialized {caption_count} caption segments across {track_count} tracks\nrevision: {}",
+            updated.project_revision
+        ),
+        OutputFormat::Json => crate::write_json(&serde_json::json!({
+            "ok": true,
+            "revision": updated.project_revision,
+            "captionTrackCount": track_count,
+            "captionSegmentCount": caption_count,
+            "displayMode": "materialized",
+        }))?,
+    }
+    Ok(())
+}
+
+pub fn presentation_patch(
+    project_path: PathBuf,
+    expected_revision: u64,
+    patch_json: &Path,
+    format: OutputFormat,
+) -> Result<(), String> {
+    let input = std::fs::read_to_string(patch_json)
+        .map_err(|e| format!("Failed to read presentation patch JSON: {e}"))?;
+    let patch: cap_project::ProjectPresentationPatch = serde_json::from_str(&input)
+        .map_err(|e| format!("Invalid presentation patch JSON: {e}"))?;
+    let updated = cap_project::update_project_presentation(project_path, expected_revision, patch)
+        .map_err(|e| format!("Failed to update project presentation: {e}"))?;
+
+    match format {
+        OutputFormat::Text => println!(
+            "Updated project presentation\nrevision: {}",
+            updated.project_revision
+        ),
+        OutputFormat::Json => crate::write_json(&serde_json::json!({
+            "ok": true,
+            "revision": updated.project_revision,
+        }))?,
+    }
+    Ok(())
+}
+
+pub fn preset_apply(
+    project_path: PathBuf,
+    expected_revision: u64,
+    name: &str,
+    store_path: Option<PathBuf>,
+    format: OutputFormat,
+) -> Result<(), String> {
+    let store_path = store_path
+        .map(Ok)
+        .unwrap_or_else(crate::presets::default_store_path)?;
+    let preset = crate::presets::get_preset(&store_path, name)?;
+    let updated =
+        cap_project::apply_reusable_preset(&project_path, expected_revision, preset.config)
+            .map_err(|error| format!("Failed to apply preset: {error}"))?;
+
+    match format {
+        OutputFormat::Json => crate::write_json(&serde_json::json!({
+            "ok": true,
+            "preset": name,
+            "revision": updated.project_revision,
+        }))?,
+        OutputFormat::Text => {
+            println!("applied preset: {name}");
+            println!("revision: {}", updated.project_revision);
+        }
+    }
+    Ok(())
+}
+
 pub fn config_get(project_path: PathBuf) -> Result<(), String> {
     let config = match cap_project::ProjectConfiguration::load(&project_path) {
         Ok(config) => config,
@@ -82,12 +238,17 @@ pub fn config_set(
 ) -> Result<(), String> {
     let config: cap_project::ProjectConfiguration = serde_json::from_str(settings_json)
         .map_err(|e| format!("Invalid project config JSON: {e}"))?;
-    // write() validates internally before its atomic temp-file-then-rename.
-    config
-        .write(&project_path)
-        .map_err(|e| format!("Failed to write project config: {e}"))?;
-    if let OutputFormat::Json = format {
-        crate::write_json(&serde_json::json!({ "ok": true }))?;
+    let updated = cap_project::replace_project_configuration(project_path, config)
+        .map_err(|e| format!("Failed to replace project config: {e}"))?;
+    match format {
+        OutputFormat::Text => println!(
+            "Replaced project configuration\nrevision: {}",
+            updated.project_revision
+        ),
+        OutputFormat::Json => crate::write_json(&serde_json::json!({
+            "ok": true,
+            "revision": updated.project_revision,
+        }))?,
     }
     Ok(())
 }

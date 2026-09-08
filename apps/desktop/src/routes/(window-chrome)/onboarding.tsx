@@ -19,14 +19,11 @@ import {
 import { createStore } from "solid-js/store";
 import { type TranslationKey, useI18n } from "~/i18n";
 import { generalSettingsStore } from "~/store";
-import {
-	isPermissionGranted as isPermitted,
-	requestAndVerifyPermission,
-} from "~/utils/os-permissions";
+import { isPermissionGranted as isPermitted } from "~/utils/os-permissions";
 import {
 	commands,
 	type OSPermission,
-	type OSPermissionStatus,
+	type OSPermissionsCheck,
 } from "~/utils/tauri";
 import IconCapCaretDown from "~icons/cap/caret-down";
 import IconCapCursorMacos from "~icons/cap/cursor-macos";
@@ -56,6 +53,12 @@ import cloud2 from "../../assets/illustrations/cloud-2.png";
 import cloud3 from "../../assets/illustrations/cloud-3.png";
 import startupAudio from "../../assets/tears-and-fireflies-adi-goldstein.mp3";
 import { WindowChromeHeader } from "./Context";
+import {
+	areRequiredOnboardingPermissionsGranted,
+	claimAfterSettingsChoice,
+	type PermissionClaimState,
+	resolvePermissionGate,
+} from "./onboarding-permissions";
 
 type ModeId = "instant" | "studio" | "screenshot";
 
@@ -209,6 +212,15 @@ const setupPermissions: readonly SetupPermission[] = [
 		optional: true,
 	},
 ];
+
+const EMPTY_PERMISSIONS_CHECK: OSPermissionsCheck = {
+	screenRecording: "empty",
+	accessibility: "empty",
+	microphone: "empty",
+	camera: "empty",
+};
+
+const PERMISSION_RESTART_MARKER = "cap.onboarding.permissionRestartRequested";
 
 function createLoopingPhase(
 	active: () => boolean,
@@ -433,7 +445,8 @@ function OnboardingFlow() {
 	const [isExiting, setIsExiting] = createSignal(false);
 	const [permissionsNeeded, setPermissionsNeeded] = createSignal(false);
 	const [permsGranted, setPermsGranted] = createSignal(false);
-	const [corePermsGranted, setCorePermsGranted] = createSignal(false);
+	const [initialPermissions, setInitialPermissions] =
+		createSignal<OSPermissionsCheck>();
 	const [ready, setReady] = createSignal(false);
 
 	const settings = generalSettingsStore.createQuery();
@@ -455,7 +468,6 @@ function OnboardingFlow() {
 		ready();
 		if (!isMacOS()) {
 			setPermsGranted(true);
-			setCorePermsGranted(true);
 		}
 	});
 
@@ -474,15 +486,21 @@ function OnboardingFlow() {
 		const s = settings.data;
 		if (s === undefined || ready()) return;
 
-		commands.doPermissionsCheck(true).then((check) => {
-			const coreOk =
-				isPermitted(check.screenRecording) && isPermitted(check.accessibility);
-			const needs = !coreOk;
-			setPermissionsNeeded(needs);
-			setPermsGranted(coreOk);
-			setCorePermsGranted(coreOk);
-			setReady(true);
-		});
+		commands
+			.doPermissionsCheck(true)
+			.then((check) => {
+				const requiredGranted = areRequiredOnboardingPermissionsGranted(check);
+				setInitialPermissions(check);
+				setPermissionsNeeded(!requiredGranted);
+				setPermsGranted(requiredGranted);
+			})
+			.catch((error) => {
+				console.error("Error checking onboarding permissions", error);
+				setInitialPermissions(EMPTY_PERMISSIONS_CHECK);
+				setPermissionsNeeded(true);
+				setPermsGranted(false);
+			})
+			.finally(() => setReady(true));
 	});
 
 	const goToStep = (target: number) => {
@@ -543,7 +561,7 @@ function OnboardingFlow() {
 	const nextDisabled = () => isMacOS() && step() === 0 && !permsGranted();
 
 	const handleSkipOnboarding = () => {
-		if (!corePermsGranted() || permissionsOnly()) return;
+		if (!permsGranted() || permissionsOnly()) return;
 		handleFinish();
 	};
 
@@ -621,8 +639,8 @@ function OnboardingFlow() {
 							<StepPanel active={step() === 0} index={0} currentStep={step()}>
 								<PermissionsStep
 									active={step() === 0 && !showStartupOverlay()}
+									initialPermissions={initialPermissions()}
 									onPermissionsChanged={setPermsGranted}
-									onCorePermissionsChanged={setCorePermsGranted}
 								/>
 							</StepPanel>
 						</Show>
@@ -675,9 +693,7 @@ function OnboardingFlow() {
 							showBack={step() > minStep()}
 							nextDisabled={nextDisabled()}
 							showSkipOnboarding={
-								corePermsGranted() &&
-								!permissionsOnly() &&
-								!showStartupOverlay()
+								permsGranted() && !permissionsOnly() && !showStartupOverlay()
 							}
 							onSkip={handleSkipOnboarding}
 						/>
@@ -2083,23 +2099,25 @@ function StartupOverlay(props: {
 
 function PermissionsStep(props: {
 	active: boolean;
+	initialPermissions?: OSPermissionsCheck;
 	onPermissionsChanged: (allRequired: boolean) => void;
-	onCorePermissionsChanged: (granted: boolean) => void;
 }) {
 	const { t } = useI18n();
 	const [visible, setVisible] = createSignal(false);
-	const [initialCheck, setInitialCheck] = createSignal(true);
-	const [check, setCheck] = createSignal<
-		Record<string, OSPermissionStatus> | undefined
-	>(undefined);
-
-	const fetchPermissions = async () => {
-		const result = await commands.doPermissionsCheck(initialCheck());
-		setCheck(result as unknown as Record<string, OSPermissionStatus>);
-	};
+	const [check, setCheck] = createSignal<OSPermissionsCheck>(
+		props.initialPermissions ?? EMPTY_PERMISSIONS_CHECK,
+	);
+	const [claimed, setClaimed] = createSignal<PermissionClaimState>({});
+	const [restartedForPermissions, setRestartedForPermissions] =
+		createSignal(false);
+	const [busy, setBusy] = createSignal(false);
+	const [errorKey, setErrorKey] = createSignal<TranslationKey>();
 
 	onMount(() => {
-		fetchPermissions();
+		if (localStorage.getItem(PERMISSION_RESTART_MARKER) === "1") {
+			localStorage.removeItem(PERMISSION_RESTART_MARKER);
+			setRestartedForPermissions(true);
+		}
 	});
 
 	createEffect(() => {
@@ -2113,83 +2131,122 @@ function PermissionsStep(props: {
 	});
 
 	createEffect(() => {
-		if (props.active && !initialCheck()) {
-			const interval = setInterval(fetchPermissions, 250);
-			onCleanup(() => clearInterval(interval));
-		}
-	});
-
-	createEffect(() => {
-		const c = check();
-		if (!c) return;
-		const allRequired = setupPermissions
-			.filter((p) => !p.optional)
-			.every((p) => isPermitted(c[p.key]));
-		props.onPermissionsChanged(allRequired);
-		props.onCorePermissionsChanged(
-			isPermitted(c.screenRecording) && isPermitted(c.accessibility),
+		props.onPermissionsChanged(
+			areRequiredOnboardingPermissionsGranted(check()),
 		);
 	});
 
-	const maybePromptRestartForPermission = async (permission: OSPermission) => {
-		const message =
-			permission === "accessibility"
-				? "After enabling Accessibility for Cap in System Settings, macOS may keep showing it as denied until you restart the app."
-				: "After adding Cap in System Settings, you'll need to restart the app for the permission to take effect.";
-		const shouldRestart = await ask(message, {
-			title: "Restart Required",
-			kind: "info",
-			okLabel: "Restart, I've granted permission",
-			cancelLabel: "No, I still need to add it",
-		});
-		if (shouldRestart) {
-			await relaunch();
+	const gate = createMemo(() =>
+		resolvePermissionGate(check(), claimed(), restartedForPermissions()),
+	);
+
+	const checkOnce = async () => {
+		try {
+			const result = await commands.doPermissionsCheck(false);
+			setCheck(result);
+			setErrorKey(undefined);
+			return result;
+		} catch (error) {
+			console.error("Error checking permissions", error);
+			setErrorKey("onboarding.permissions.checkFailed");
+			return undefined;
 		}
 	};
 
-	const [requestingPermission, setRequestingPermission] = createSignal(false);
+	const confirmAfterSettings = async (permission: OSPermission) => {
+		const shouldCheck = await ask(
+			t("onboarding.permissions.confirmDescription"),
+			{
+				title: t("onboarding.permissions.confirmTitle"),
+				kind: "info",
+				okLabel: t("onboarding.permissions.confirmGranted"),
+				cancelLabel: t("onboarding.permissions.continueSetting"),
+			},
+		);
+		if (!shouldCheck) {
+			setClaimed((current) =>
+				claimAfterSettingsChoice(current, permission, false),
+			);
+			return;
+		}
+
+		const result = await checkOnce();
+		if (result) {
+			setClaimed((current) =>
+				claimAfterSettingsChoice(
+					current,
+					permission,
+					true,
+					result[permission],
+				),
+			);
+		}
+	};
 
 	const requestPermission = async (permission: OSPermission) => {
-		if (requestingPermission()) return;
-		setRequestingPermission(true);
+		if (busy()) return;
+		setBusy(true);
 		try {
-			const status = check()?.[permission] as OSPermissionStatus | undefined;
-			setInitialCheck(false);
-			const result = await requestAndVerifyPermission(
-				commands,
-				permission,
-				status,
-			);
-			setCheck(result.check as unknown as Record<string, OSPermissionStatus>);
-			if (
-				result.openedSettings &&
-				(permission === "screenRecording" || permission === "accessibility")
-			) {
-				await maybePromptRestartForPermission(permission);
+			await commands.requestPermission(permission);
+			const result = await checkOnce();
+			if (result && !isPermitted(result[permission])) {
+				await confirmAfterSettings(permission);
 			}
-		} catch (err) {
-			console.error(`Error requesting permission: ${err}`);
-			fetchPermissions().catch(() => {});
+		} catch (error) {
+			console.error(`Error requesting permission: ${error}`);
+			setErrorKey("onboarding.permissions.checkFailed");
 		} finally {
-			setRequestingPermission(false);
+			setBusy(false);
 		}
 	};
 
 	const openSettings = async (permission: OSPermission) => {
-		if (requestingPermission()) return;
-		setRequestingPermission(true);
+		if (busy()) return;
+		setBusy(true);
 		try {
 			await commands.openPermissionSettings(permission);
-			if (permission === "screenRecording" || permission === "accessibility") {
-				await maybePromptRestartForPermission(permission);
-			}
-			setInitialCheck(false);
-			fetchPermissions();
-		} catch (err) {
-			console.error(`Error opening permission settings: ${err}`);
+			setErrorKey(undefined);
+			await confirmAfterSettings(permission);
+		} catch (error) {
+			console.error(`Error opening permission settings: ${error}`);
+			setErrorKey("onboarding.permissions.openSettingsFailed");
 		} finally {
-			setRequestingPermission(false);
+			setBusy(false);
 		}
+	};
+
+	const recheckPermissions = async () => {
+		if (busy()) return;
+		setBusy(true);
+		try {
+			await checkOnce();
+		} finally {
+			setBusy(false);
+		}
+	};
+
+	const restartForPermissions = async () => {
+		if (busy()) return;
+		setBusy(true);
+		localStorage.setItem(PERMISSION_RESTART_MARKER, "1");
+		try {
+			await relaunch();
+		} catch (error) {
+			localStorage.removeItem(PERMISSION_RESTART_MARKER);
+			setBusy(false);
+			console.error("Error restarting after permission setup", error);
+			setErrorKey("onboarding.permissions.checkFailed");
+		}
+	};
+
+	const isClaimed = (permission: OSPermission) => {
+		if (permission === "screenRecording") {
+			return claimed().screenRecording === true;
+		}
+		if (permission === "accessibility") {
+			return claimed().accessibility === true;
+		}
+		return false;
 	};
 
 	return (
@@ -2222,8 +2279,7 @@ function PermissionsStep(props: {
 			>
 				<For each={setupPermissions}>
 					{(permission, index) => {
-						const permStatus = () =>
-							check()?.[permission.key] as OSPermissionStatus | undefined;
+						const permStatus = () => check()[permission.key];
 
 						return (
 							<Show when={permStatus() !== "notNeeded"}>
@@ -2240,7 +2296,14 @@ function PermissionsStep(props: {
 											<span class="text-[13px] font-medium text-gray-12">
 												{t(permission.nameKey)}
 											</span>
-											<Show when={permission.optional}>
+											<Show
+												when={permission.optional}
+												fallback={
+													<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-3 text-blue-10">
+														{t("onboarding.permissions.required")}
+													</span>
+												}
+											>
 												<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-2 dark:bg-gray-4 text-gray-9">
 													{t("onboarding.permissions.optional")}
 												</span>
@@ -2259,34 +2322,91 @@ function PermissionsStep(props: {
 											</div>
 										}
 									>
-										<Button
-											data-tauri-drag-region="false"
-											size="sm"
-											variant="gray"
-											class="shrink-0"
-											disabled={requestingPermission()}
-											onClick={() =>
-												permission.requiresManualGrant ||
-												permStatus() === "denied"
-													? openSettings(permission.key)
-													: requestPermission(permission.key)
+										<Show
+											when={!isClaimed(permission.key)}
+											fallback={
+												<div class="px-3 py-1.5 rounded-lg bg-amber-3 border border-amber-5 text-amber-11 text-[12px] font-medium shrink-0">
+													{t("onboarding.permissions.pendingRestart")}
+												</div>
 											}
 										>
-											{permission.requiresManualGrant ||
-											permStatus() === "denied"
-												? t("onboarding.permissions.openSettings")
-												: t("onboarding.permissions.grant")}
-										</Button>
+											<Button
+												data-tauri-drag-region="false"
+												size="sm"
+												variant="gray"
+												class="shrink-0"
+												disabled={busy()}
+												onClick={() =>
+													void (permission.requiresManualGrant ||
+													permStatus() === "denied"
+														? openSettings(permission.key)
+														: requestPermission(permission.key))
+												}
+											>
+												{busy()
+													? t("onboarding.permissions.checking")
+													: permission.requiresManualGrant ||
+															permStatus() === "denied"
+														? t("onboarding.permissions.openSettings")
+														: t("onboarding.permissions.grant")}
+											</Button>
+										</Show>
 									</Show>
 								</div>
 							</Show>
 						);
 					}}
 				</For>
+
+				<Show when={errorKey()}>
+					{(key) => (
+						<div class="rounded-xl border border-red-5 bg-red-3 px-4 py-3 text-[12px] text-red-11">
+							{t(key())}
+						</div>
+					)}
+				</Show>
+
+				<Show when={gate() === "restart"}>
+					<Button
+						class="mt-2 w-full"
+						disabled={busy()}
+						onClick={() => void restartForPermissions()}
+					>
+						<IconCapRestart class="size-4" />
+						{t("onboarding.permissions.restartOnce")}
+					</Button>
+				</Show>
+
+				<Show when={gate() === "recovery"}>
+					<div class="mt-2 rounded-xl border border-amber-5 bg-amber-3 p-4">
+						<div class="text-[13px] font-semibold text-amber-12">
+							{t("onboarding.permissions.recoveryTitle")}
+						</div>
+						<p class="mt-1 text-[12px] leading-relaxed text-amber-11">
+							{t("onboarding.permissions.recoveryDescription")}
+						</p>
+						<Button
+							class="mt-3"
+							size="sm"
+							variant="gray"
+							disabled={busy()}
+							onClick={() => void recheckPermissions()}
+						>
+							{busy()
+								? t("onboarding.permissions.checking")
+								: t("onboarding.permissions.recheck")}
+						</Button>
+					</div>
+				</Show>
 			</div>
 		</div>
 	);
 }
+
+/*
+	Permission checks intentionally happen only after an explicit user action or
+	at app startup. Avoid polling macOS TCC while System Settings is open.
+*/
 
 function ScreenshotMockup(props: { active: boolean }) {
 	const { text } = useI18n();

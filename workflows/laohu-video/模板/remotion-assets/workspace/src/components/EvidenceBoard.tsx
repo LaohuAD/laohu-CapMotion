@@ -16,7 +16,7 @@ export const EvidenceBoard: React.FC<{config: ComponentConfig}> = ({config}) => 
       <div style={{display: "grid", gridTemplateColumns: "0.78fr 1.22fr", gap: 40, marginTop: 28, height: 620}}>
         <Surface theme={theme} active style={{padding: 42, display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <div style={{fontSize: 30, color: theme.accent, fontWeight: 900}}>核心判断</div>
-          <div style={{fontSize: 66, lineHeight: 1.16, fontWeight: 950, marginTop: 24}}>{config.title}</div>
+          <div style={{fontSize: 66, lineHeight: 1.16, fontWeight: 900, marginTop: 24}}>{config.title}</div>
           {config.subtitle ? (
             <div style={{fontSize: 32, lineHeight: 1.4, color: theme.muted, marginTop: 28}}>{config.subtitle}</div>
           ) : null}
@@ -33,7 +33,13 @@ export const EvidenceBoard: React.FC<{config: ComponentConfig}> = ({config}) => 
                 style={{
                   padding: "18px 24px",
                   minHeight: 108,
-                  opacity: enterProgress(frame, index, config.items.length, timing.buildEnd),
+                  opacity: enterProgress(
+                    frame,
+                    index,
+                    config.items.length,
+                    timing.buildEnd,
+                    item.revealAtFrame,
+                  ),
                 }}
               >
                 <div style={{fontSize: compactTypography.item, lineHeight: 1.12, fontWeight: 900}}>{item.label}</div>

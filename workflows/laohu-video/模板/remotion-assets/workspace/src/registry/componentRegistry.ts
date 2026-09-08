@@ -165,6 +165,17 @@ const manifests = [
 		minDurationSeconds: 7,
 		maxItems: 8,
 	},
+	{
+		id: "EditorialOverlayShell",
+		displayName: "编辑型连续叠层",
+		purpose: "在真人、数字人、AI视频和证据底画之间持续维护章节状态、准确标签与注意力方向",
+		modes: ["progress-rail", "evidence-dock", "label-stack", "value-callout", "bridge"],
+		communicationGoals: ["guide", "explain", "prove", "remember"],
+		emotionalTones: ["clear", "confident", "futuristic"],
+		informationShapes: ["sequence", "hierarchy", "transformation"],
+		minDurationSeconds: 3,
+		maxItems: 8,
+	},
 ] as const;
 
 export const componentRegistry: Manifest[] = manifests.map((manifest) => {
@@ -205,7 +216,29 @@ export const componentRegistry: Manifest[] = manifests.map((manifest) => {
 			informationShape: manifest.informationShapes[0],
 			motionIntensity: "medium",
 			stylePreset: manifest.id === "RiskActionLoop" ? "warning" : "clear",
-			renderMode: "standalone",
+			renderMode: manifest.id === "EditorialOverlayShell" ? "asset" : "standalone",
+			presentation: manifest.id === "EditorialOverlayShell" ? "overlay" : "stage",
+			placement: "left",
+			overlayContinuity: manifest.id === "EditorialOverlayShell" ? {
+				groupId: "default-editorial-overlay",
+				order: 1,
+				role: "NAVIGATION",
+				hostCarrier: "BASE",
+				persistence: "SEGMENT",
+				stateBefore: "本段尚未开始",
+				stateUpdate: "当前步骤进入激活态",
+				stateAfter: "当前步骤完成",
+				contrastMode: "LOCAL_BACKPLATE",
+				contrastReason: "局部底板保证文字在不同底画上稳定可读，同时保留底画主体",
+				attentionPlan: [{
+					spokenCue: "本段开始",
+					focusOwner: "OVERLAY",
+					target: "当前步骤",
+					reason: "先建立章节方向",
+				}],
+				protectedRegions: [{target: "SUBTITLES", description: "底部字幕安全区"}],
+				handoff: "完成态交给下一段",
+			} : undefined,
 			durationInFrames: Math.max(180, manifest.minDurationSeconds * 30),
 			items,
 			links: items.slice(0, -1).map((item, index) => ({

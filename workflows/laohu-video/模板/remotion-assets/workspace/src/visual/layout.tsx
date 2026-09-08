@@ -3,20 +3,98 @@ import {AbsoluteFill, Easing, interpolate, useCurrentFrame} from "remotion";
 import type {ComponentConfig, VisualItem} from "../schemas/components";
 import {buildSceneTiming} from "../utils/timing";
 import {enterProgress} from "./motion";
-import {getVisualTheme, typography, type VisualTheme} from "./theme";
+import {
+  fontFamilies,
+  getVisualTheme,
+  resolveSemanticAccent,
+  splitBilingualLabel,
+  typography,
+  typeStyles,
+  type VisualTheme,
+} from "./theme";
 
-export const FONT_FAMILY =
-  '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif';
+export const FONT_FAMILY = fontFamilies.body;
 
 export const surfaceBaseStyle: React.CSSProperties = {
   boxSizing: "border-box",
   borderRadius: 8,
 };
 
+export const getOverlayGeometry = (placement: string) => {
+  const shared = {top: 76, bottom: 150, width: 760};
+  if (placement === "right") return {...shared, right: 88};
+  if (placement === "center") return {...shared, left: 580};
+  return {...shared, left: 88};
+};
+
+export const getStageScrimStyle = (
+  renderMode: string | undefined,
+  contrastMode: string | undefined,
+): React.CSSProperties | null =>
+  renderMode === "asset" && contrastMode === "FULL_SCRIM"
+    ? {position: "absolute", inset: 0, background: "rgba(4, 7, 12, 0.62)"}
+    : null;
+
+export const OverlayRegion: React.FC<
+  React.PropsWithChildren<{config: ComponentConfig; style?: React.CSSProperties}>
+> = ({config, style, children}) => {
+  const geometry = getOverlayGeometry(config.placement ?? "left");
+  return (
+    <div
+      style={{
+        position: "absolute",
+        ...geometry,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const MicroLabel: React.FC<{
+  config: ComponentConfig;
+  children: React.ReactNode;
+}> = ({config, children}) => {
+  const accent = resolveSemanticAccent(config.stylePreset, config.accentRole ?? "info");
+  const label = splitBilingualLabel(String(children));
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        color: accent,
+      }}
+    >
+      <span style={{width: 28, height: 3, background: accent}} />
+      <div>
+        <div style={{...typeStyles.microLabel, fontSize: 18}}>{label.primary}</div>
+        {label.secondary ? (
+          <div
+            style={{
+              ...typeStyles.microChinese,
+              marginTop: 7,
+              color: config.stylePreset === "editorial-dark" ? "#F7F8FA" : "currentColor",
+              fontSize: 17,
+            }}
+          >
+            {label.secondary}
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+};
+
 export const SceneStage: React.FC<
   React.PropsWithChildren<{config: ComponentConfig}>
 > = ({config, children}) => {
   const theme = getVisualTheme(config.stylePreset);
+  const fullScrimStyle = getStageScrimStyle(config.renderMode, config.overlayContinuity?.contrastMode);
   return (
     <AbsoluteFill
       style={{
@@ -27,6 +105,12 @@ export const SceneStage: React.FC<
         overflow: "hidden",
       }}
     >
+      {fullScrimStyle ? (
+        <div
+          data-overlay-contrast="full-scrim"
+          style={fullScrimStyle}
+        />
+      ) : null}
       {config.renderMode !== "asset" ? (
         <div
           style={{
@@ -34,7 +118,7 @@ export const SceneStage: React.FC<
             inset: 0,
             backgroundImage: `linear-gradient(${theme.line}33 1px, transparent 1px), linear-gradient(90deg, ${theme.line}33 1px, transparent 1px)`,
             backgroundSize: "64px 64px",
-            opacity: config.stylePreset === "tech" ? 0.28 : 0.12,
+            opacity: config.stylePreset === "tech" || config.stylePreset === "editorial-dark" ? 0.28 : 0.12,
           }}
         />
       ) : null}
@@ -57,27 +141,18 @@ export const SceneHeader: React.FC<{
   return (
     <header style={{opacity, minHeight: 170}}>
       <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 14,
-          color: theme.accent,
-          fontSize: typography.label,
-          fontWeight: 800,
-          lineHeight: 1,
-        }}
+        style={{color: theme.accent}}
       >
-        <span style={{width: 42, height: 5, background: theme.accent}} />
-        {kicker ?? config.communicationGoal.toUpperCase()}
+        <MicroLabel config={config}>
+          {kicker ?? config.kicker ?? config.communicationGoal.toUpperCase()}
+        </MicroLabel>
       </div>
       <div
         style={{
+          ...typeStyles.title,
           marginTop: 18,
           fontSize: typography.title,
-          lineHeight: 1.08,
-          fontWeight: 900,
           maxWidth: 1540,
-          letterSpacing: 0,
         }}
       >
         {config.title}
@@ -85,11 +160,10 @@ export const SceneHeader: React.FC<{
       {config.subtitle ? (
         <div
           style={{
+            ...typeStyles.body,
             marginTop: 16,
             color: theme.muted,
             fontSize: typography.subtitle,
-            lineHeight: 1.35,
-            fontWeight: 550,
             maxWidth: 1520,
           }}
         >
@@ -113,6 +187,7 @@ export const Surface: React.FC<
       background: active ? theme.surfaceAlt : theme.surface,
       border: `2px solid ${active ? theme.accent : theme.line}`,
       boxShadow: `0 18px 50px ${theme.shadow}`,
+      backdropFilter: "blur(18px)",
       ...style,
     }}
   >
@@ -130,7 +205,7 @@ export const ItemCard: React.FC<{
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
   const timing = buildSceneTiming(config.durationInFrames);
-  const progress = enterProgress(frame, index, count, timing.buildEnd);
+  const progress = enterProgress(frame, index, count, timing.buildEnd, item.revealAtFrame);
   const color =
     item.status === "negative"
       ? theme.danger
@@ -162,16 +237,16 @@ export const ItemCard: React.FC<{
             background: color,
           }}
         />
-        <div style={{fontSize: typography.item, lineHeight: 1.12, fontWeight: 850, color}}>
+        <div style={{...typeStyles.cardTitle, fontSize: typography.item, color}}>
           {item.label}
         </div>
       </div>
       {item.description ? (
         <div
           style={{
+            ...typeStyles.body,
             marginTop: 16,
             fontSize: typography.body,
-            lineHeight: 1.38,
             color: theme.muted,
           }}
         >
@@ -207,8 +282,7 @@ export const ConclusionBar: React.FC<{config: ComponentConfig}> = ({config}) => 
         background: theme.accent,
         color: config.stylePreset === "clear" || config.stylePreset === "editorial" ? "#FFFFFF" : "#08100F",
         fontSize: typography.conclusion,
-        fontWeight: 900,
-        lineHeight: 1.2,
+        ...typeStyles.cardTitle,
         opacity: progress,
         scale: interpolate(progress, [0, 1], [0.96, 1]),
       }}

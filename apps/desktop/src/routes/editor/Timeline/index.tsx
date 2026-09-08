@@ -32,10 +32,12 @@ import { defaultKeyboardSettings } from "~/store/keyboard";
 import {
 	EDITOR_SHORTCUT_ACTIONS,
 	editorShortcutMatches,
+	keyboardEventTargetsEditableContent,
 	normalizeEditorShortcuts,
 } from "~/utils/editor-shortcuts";
 import { commands } from "~/utils/tauri";
 import type { AudioTrackSegment } from "../audio";
+import { groupCaptionSegmentsByTrack } from "../caption-tracks";
 import {
 	applyCaptionResultToProject,
 	getCaptionGenerationErrorMessage,
@@ -243,6 +245,14 @@ export function Timeline(props: {
 		(type === "microphone" ? meta().hasMicrophone : meta().hasSystemAudio) &&
 		!sourceTrackExpanded(type);
 	const captionTrackVisible = () => trackState().caption;
+	const captionTrackGroups = createMemo(() => {
+		const groups = groupCaptionSegmentsByTrack(
+			project.timeline?.captionSegments ?? [],
+		);
+		return groups.length > 0
+			? groups
+			: [{ id: "default", label: "Captions", entries: [] }];
+	});
 	const keyboardTrackVisible = () => trackState().keyboard;
 	const threeDTrackVisible = () => trackState()["3d"];
 	const trackOptions = createMemo(() =>
@@ -313,7 +323,7 @@ export function Timeline(props: {
 			2 +
 			(project.audio.microphoneTrack.expanded ? 1 : 0) +
 			(project.audio.systemAudioTrack.expanded ? 1 : 0) +
-			(captionTrackVisible() ? 1 : 0) +
+			(captionTrackVisible() ? captionTrackGroups().length : 0) +
 			(keyboardTrackVisible() ? 1 : 0) +
 			textTrackRows().length +
 			maskTrackRows().length +
@@ -1038,12 +1048,7 @@ export function Timeline(props: {
 	createEventListener(window, "keydown", (e) => {
 		const hasNoModifiers = !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey;
 
-		if (
-			document.activeElement instanceof HTMLInputElement ||
-			document.activeElement instanceof HTMLTextAreaElement
-		) {
-			return;
-		}
+		if (keyboardEventTargetsEditableContent(e, document.activeElement)) return;
 
 		if (e.code === "Backspace" || (e.code === "Delete" && hasNoModifiers)) {
 			const selection = editorState.timeline.selection;
@@ -1475,21 +1480,36 @@ export function Timeline(props: {
 								</TrackRow>
 							</Show>
 							<Show when={captionTrackVisible()}>
-								<TrackRow
-									icon={trackIcons.caption}
-									label="Captions"
-									type="caption"
-									onDelete={() => handleDeleteSingleTrack("caption")}
-								>
-									<CaptionsTrack
-										onDragStateChanged={(v) => {
-											captionSegmentDragState = v;
-										}}
-										handleUpdatePlayhead={handleUpdatePlayhead}
-										onGenerate={generateCaptionsFromTrack}
-										isGenerating={editorState.captions.isGenerating}
-									/>
-								</TrackRow>
+								<For each={captionTrackGroups()}>
+									{(group) => (
+										<TrackRow
+											icon={trackIcons.caption}
+											label={group.label}
+											type="caption"
+											onDelete={() => {
+												if (
+													group.id === "default" &&
+													captionTrackGroups().length === 1
+												)
+													handleDeleteSingleTrack("caption");
+												else
+													projectActions.deleteCaptionSegments(
+														group.entries.map(({ index }) => index),
+													);
+											}}
+										>
+											<CaptionsTrack
+												trackId={group.id}
+												onDragStateChanged={(v) => {
+													captionSegmentDragState = v;
+												}}
+												handleUpdatePlayhead={handleUpdatePlayhead}
+												onGenerate={generateCaptionsFromTrack}
+												isGenerating={editorState.captions.isGenerating}
+											/>
+										</TrackRow>
+									)}
+								</For>
 							</Show>
 							<Show when={keyboardTrackVisible()}>
 								<TrackRow

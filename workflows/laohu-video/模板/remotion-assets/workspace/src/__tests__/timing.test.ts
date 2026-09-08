@@ -1,5 +1,6 @@
 import {describe, expect, it} from "vitest";
 import {buildSceneTiming} from "../utils/timing";
+import {enterProgress} from "../visual/motion";
 
 describe("buildSceneTiming", () => {
   it("keeps at least 20 percent for the final readable state", () => {
@@ -16,5 +17,19 @@ describe("buildSceneTiming", () => {
 
   it("rejects scenes too short for a readable animation", () => {
     expect(() => buildSceneTiming(59)).toThrow(/at least 60 frames/);
+  });
+});
+
+describe("enterProgress", () => {
+  it("uses an explicit semantic reveal frame when one is provided", () => {
+    expect(enterProgress(59, 3, 4, 180, 60)).toBe(0);
+    expect(enterProgress(69, 3, 4, 180, 60)).toBeGreaterThan(0);
+    expect(enterProgress(78, 3, 4, 180, 60)).toBe(1);
+  });
+
+  it("keeps the existing automatic stagger when no reveal frame is provided", () => {
+    expect(enterProgress(0, 0, 4, 180)).toBe(0);
+    expect(enterProgress(18, 0, 4, 180)).toBe(1);
+    expect(enterProgress(30, 3, 4, 180)).toBe(0);
   });
 });

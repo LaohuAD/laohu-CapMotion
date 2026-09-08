@@ -6,6 +6,8 @@ import {componentRegistry} from "./registry/componentRegistry";
 import {getComponentManifest} from "./registry/componentRegistry";
 import type {ComponentConfig} from "./schemas/components";
 import {scene001Examples} from "./configs/examples/scene001Examples";
+import {editorialOverlayExamples} from "./configs/examples/editorialOverlayExamples";
+import {h3TutorialConfigs} from "./configs/works/h3Tutorial";
 
 const RegisteredScene: React.FC<ComponentConfig> = (props) => (
   <ComponentScene config={props} />
@@ -44,6 +46,44 @@ export const Root: React.FC = () => {
             <Composition
               key={sceneId}
               id={`Demo-${sceneId}`}
+              component={RegisteredScene}
+              durationInFrames={config.durationInFrames}
+              fps={30}
+              width={1920}
+              height={1080}
+              schema={manifest.schema as ZodType<ComponentConfig>}
+              defaultProps={config}
+              calculateMetadata={calculateMetadata}
+            />
+          );
+        })}
+      </Folder>
+      <Folder name="Demo-Editorial-Overlay">
+        {Object.entries(editorialOverlayExamples).map(([sceneId, config]) => {
+          const manifest = getComponentManifest(config.component);
+          return (
+            <Composition
+              key={sceneId}
+              id={`Editorial-${sceneId}`}
+              component={RegisteredScene}
+              durationInFrames={config.durationInFrames}
+              fps={30}
+              width={1920}
+              height={1080}
+              schema={manifest.schema as ZodType<ComponentConfig>}
+              defaultProps={config}
+              calculateMetadata={calculateMetadata}
+            />
+          );
+        })}
+      </Folder>
+      <Folder name="Work-015-H3-Tutorial">
+        {Object.entries(h3TutorialConfigs).map(([sceneId, config]) => {
+          const manifest = getComponentManifest(config.component);
+          return (
+            <Composition
+              key={sceneId}
+              id={`H3-${sceneId}`}
               component={RegisteredScene}
               durationInFrames={config.durationInFrames}
               fps={30}

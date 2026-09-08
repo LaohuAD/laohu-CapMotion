@@ -12,6 +12,7 @@ for (let index = 2; index < process.argv.length; index += 2) {
 
 const rawPath = args.get("raw");
 const srtPath = args.get("srt");
+const excludeRangesPath = args.get("exclude-ranges");
 if (!rawPath || !srtPath) throw new Error("Required: --raw PATH --srt PATH");
 
 const parseTime = (value) => {
@@ -29,15 +30,28 @@ const cues = (await readFile(srtPath, "utf8")).trim().split(/\r?\n\s*\r?\n/).map
 
 const raw = JSON.parse(await readFile(rawPath, "utf8"));
 const result = Array.isArray(raw.result) ? raw.result[0] : raw.result;
-const words = (result?.utterances ?? []).flatMap((utterance) => utterance.words ?? []).filter((word) =>
+const allWords = (result?.utterances ?? []).flatMap((utterance) => utterance.words ?? []).filter((word) =>
   String(word.text ?? "").trim() && Number.isFinite(Number(word.start_time)) && Number(word.end_time) > Number(word.start_time)
 );
+const exclusionDocument = excludeRangesPath ? JSON.parse(await readFile(excludeRangesPath, "utf8")) : null;
+const exclusions = (exclusionDocument?.events ?? exclusionDocument?.ranges ?? []).map((range) => ({
+  startMs: Number(range.targetStart ?? range.start ?? range[0]) * 1000,
+  endMs: Number(range.targetEnd ?? range.end ?? range[1]) * 1000,
+})).filter((range) => Number.isFinite(range.startMs) && range.endMs > range.startMs);
+const isExcluded = (word) => exclusions.some((range) =>
+  Number(word.end_time) > range.startMs && Number(word.start_time) < range.endMs
+);
+const excludedWords = allWords.filter(isExcluded);
+const words = allWords.filter((word) => !isExcluded(word));
 
 const uncovered = words.filter((word) => !cues.some((cue) => Number(word.end_time) > cue.startMs && Number(word.start_time) < cue.endMs));
 const report = {
   raw: rawPath,
   srt: srtPath,
-  timedWordCount: words.length,
+  excludeRanges: excludeRangesPath ?? null,
+  timedWordCount: allWords.length,
+  excludedWordCount: excludedWords.length,
+  requiredWordCount: words.length,
   coveredWordCount: words.length - uncovered.length,
   uncoveredWordCount: uncovered.length,
   uncovered: uncovered.slice(0, 20).map((word) => ({text: word.text, startMs: Number(word.start_time), endMs: Number(word.end_time)})),

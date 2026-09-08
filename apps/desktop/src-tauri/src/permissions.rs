@@ -22,6 +22,14 @@ static MACOS_DOCK_VISIBILITY_SYNC_GENERATION: AtomicU64 = AtomicU64::new(0);
 #[cfg(target_os = "macos")]
 static MACOS_PENDING_PANEL_WINDOWS: AtomicU32 = AtomicU32::new(0);
 #[cfg(target_os = "macos")]
+const MACOS_DOCK_VISIBILITY_UNKNOWN: u8 = 0;
+#[cfg(target_os = "macos")]
+const MACOS_DOCK_VISIBILITY_HIDDEN: u8 = 1;
+#[cfg(target_os = "macos")]
+const MACOS_DOCK_VISIBILITY_VISIBLE: u8 = 2;
+#[cfg(target_os = "macos")]
+static MACOS_DOCK_VISIBILITY_STATE: AtomicU8 = AtomicU8::new(MACOS_DOCK_VISIBILITY_UNKNOWN);
+#[cfg(target_os = "macos")]
 static MACOS_SCK_PERMISSION_MISMATCH_LOGGED: AtomicBool = AtomicBool::new(false);
 #[cfg(target_os = "macos")]
 static MACOS_SCK_DISPLAYS_VALIDATED: AtomicBool = AtomicBool::new(false);
@@ -148,14 +156,36 @@ fn macos_focus_permission_window(app: &tauri::AppHandle) {
 }
 
 #[cfg(target_os = "macos")]
-fn macos_activate_permission_request(app: &tauri::AppHandle) {
-    if let Err(err) = app.set_dock_visibility(true) {
-        tracing::warn!("Failed to show dock icon for permission request: {err}");
+fn macos_dock_visibility_state(visible: bool) -> u8 {
+    if visible {
+        MACOS_DOCK_VISIBILITY_VISIBLE
+    } else {
+        MACOS_DOCK_VISIBILITY_HIDDEN
+    }
+}
+
+#[cfg(target_os = "macos")]
+fn macos_dock_visibility_needs_update(current: u8, visible: bool) -> bool {
+    current != macos_dock_visibility_state(visible)
+}
+
+#[cfg(target_os = "macos")]
+fn macos_set_dock_visibility(app: &tauri::AppHandle, visible: bool) {
+    let desired = macos_dock_visibility_state(visible);
+    let previous = MACOS_DOCK_VISIBILITY_STATE.swap(desired, Ordering::AcqRel);
+    if !macos_dock_visibility_needs_update(previous, visible) {
+        return;
     }
 
-    if let Err(err) = app.set_activation_policy(tauri::ActivationPolicy::Regular) {
-        tracing::warn!("Failed to set activation policy to Regular: {err}");
+    if let Err(err) = app.set_dock_visibility(visible) {
+        MACOS_DOCK_VISIBILITY_STATE.store(MACOS_DOCK_VISIBILITY_UNKNOWN, Ordering::Release);
+        tracing::warn!("Failed to update dock visibility: {err}");
     }
+}
+
+#[cfg(target_os = "macos")]
+fn macos_activate_permission_request(app: &tauri::AppHandle) {
+    macos_set_dock_visibility(app, true);
 
     macos_focus_permission_window(app);
 
@@ -166,19 +196,6 @@ fn macos_activate_permission_request(app: &tauri::AppHandle) {
             current_app
                 .activateWithOptions(NSApplicationActivationOptions::ActivateIgnoringOtherApps);
         }
-    }
-}
-
-#[cfg(target_os = "macos")]
-fn macos_sync_activation_policy(app: &tauri::AppHandle, should_show_dock: bool) {
-    let policy = if should_show_dock {
-        tauri::ActivationPolicy::Regular
-    } else {
-        tauri::ActivationPolicy::Accessory
-    };
-
-    if let Err(err) = app.set_activation_policy(policy) {
-        tracing::warn!("Failed to update activation policy: {err}");
     }
 }
 
@@ -202,6 +219,8 @@ pub(crate) fn prepare_macos_panel_window(
     if prev == 0 && !macos_any_window_fullscreen(app) {
         if let Err(err) = app.set_activation_policy(tauri::ActivationPolicy::Accessory) {
             tracing::warn!("Failed to prepare macOS panel activation policy: {err}");
+        } else {
+            MACOS_DOCK_VISIBILITY_STATE.store(MACOS_DOCK_VISIBILITY_UNKNOWN, Ordering::Release);
         }
     }
 
@@ -241,11 +260,7 @@ pub(crate) fn sync_macos_dock_visibility(app: &tauri::AppHandle) {
 
     let should_show_dock = !should_hide_dock || has_visible_dock_window;
 
-    macos_sync_activation_policy(app, should_show_dock);
-
-    if let Err(err) = app.set_dock_visibility(should_show_dock) {
-        tracing::warn!("Failed to update dock visibility: {err}");
-    }
+    macos_set_dock_visibility(app, should_show_dock);
 }
 
 #[cfg(target_os = "macos")]
@@ -731,6 +746,27 @@ mod tests {
             macos_permission_settings_url(&OSPermission::Microphone),
             "x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone"
         );
+    }
+
+    #[cfg(target_os = "macos")]
+    #[test]
+    fn dock_visibility_updates_are_idempotent() {
+        assert!(macos_dock_visibility_needs_update(
+            MACOS_DOCK_VISIBILITY_UNKNOWN,
+            true
+        ));
+        assert!(!macos_dock_visibility_needs_update(
+            MACOS_DOCK_VISIBILITY_VISIBLE,
+            true
+        ));
+        assert!(!macos_dock_visibility_needs_update(
+            MACOS_DOCK_VISIBILITY_HIDDEN,
+            false
+        ));
+        assert!(macos_dock_visibility_needs_update(
+            MACOS_DOCK_VISIBILITY_HIDDEN,
+            true
+        ));
     }
 
     #[cfg(target_os = "macos")]

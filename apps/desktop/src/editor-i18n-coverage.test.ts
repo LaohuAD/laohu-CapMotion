@@ -15,9 +15,14 @@ describe("editor localization coverage", () => {
 
 	it("routes the editor header and preset menu through the active language", () => {
 		expect(readEditorSource("Header.tsx")).toContain('text("Export")');
-		expect(readEditorSource("PresetsDropdown.tsx")).toContain(
-			'text("Save settings to preset")',
+		const presets = readEditorSource("PresetsDropdown.tsx");
+		expect(presets).toContain('text("Save changed settings")');
+		expect(presets).toContain('text("Reset unsaved changes")');
+		const presetSubmenuTrigger = presets.slice(
+			presets.indexOf("as={KDropdownMenu.SubTrigger}"),
+			presets.indexOf("</MenuItem>", presets.indexOf("as={KDropdownMenu.SubTrigger}")),
 		);
+		expect(presetSubmenuTrigger).not.toContain("applyPreset()");
 	});
 
 	it("routes player and track-manager copy through the active language", () => {
@@ -43,5 +48,20 @@ describe("editor localization coverage", () => {
 		expect(readEditorSource("Timeline/SceneTrack.tsx")).toContain(
 			'text("Click to add scene segment")',
 		);
+	});
+
+	it("stores imported backgrounds in the project instead of the app-data root", () => {
+		const editorBackground = readEditorSource("ConfigSidebar.tsx");
+		const screenshotBackground = readFileSync(
+			new URL(
+				"./routes/screenshot-editor/popovers/BackgroundSettingsPopover.tsx",
+				import.meta.url,
+			),
+			"utf8",
+		);
+		for (const source of [editorBackground, screenshotBackground]) {
+			expect(source).toContain("commands.importProjectBackgroundImage");
+			expect(source).not.toContain("BaseDirectory.AppData");
+		}
 	});
 });

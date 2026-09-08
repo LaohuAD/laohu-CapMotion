@@ -1,4 +1,4 @@
-use cap_project::{ProjectConfiguration, TimelineConfiguration};
+use cap_project::{AgentEditingProfile, ProjectConfiguration, TimelineConfiguration};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use specta::Type;
@@ -11,6 +11,8 @@ use tracing::error;
 pub struct PresetsStore {
     presets: Vec<Preset>,
     default: Option<u32>,
+    #[serde(default)]
+    revision: u64,
 }
 
 #[derive(Serialize, Deserialize, Type, Debug, Clone)]
@@ -18,6 +20,8 @@ pub struct PresetsStore {
 pub struct Preset {
     name: String,
     pub config: ProjectConfiguration,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub agent_profile: Option<AgentEditingProfile>,
 }
 
 impl PresetsStore {
@@ -73,6 +77,7 @@ impl PresetsStore {
 
         let mut settings = Self::get(app)?.unwrap_or_default();
         update(&mut settings);
+        settings.revision += 1;
         store.set("presets", json!(settings));
         store.save().map_err(|e| e.to_string())
     }
@@ -84,5 +89,26 @@ impl Preset {
         let mut ret = self.config.clone();
         ret.timeline = Some(timeline);
         ret
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use cap_project::AgentEditingProfile;
+
+    use super::Preset;
+
+    #[test]
+    fn legacy_visible_preset_has_no_agent_profile_until_the_user_sets_one() {
+        let mut preset: Preset = serde_json::from_value(serde_json::json!({
+            "name": "Example",
+            "config": cap_project::ProjectConfiguration::default()
+        }))
+        .unwrap();
+        assert!(preset.agent_profile.is_none());
+
+        preset.agent_profile = Some(AgentEditingProfile::default());
+        let value = serde_json::to_value(preset).unwrap();
+        assert_eq!(value["agentProfile"]["schemaVersion"], 1);
     }
 }

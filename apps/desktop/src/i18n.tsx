@@ -10,6 +10,12 @@ import { translateLiteral } from "./i18n-literals";
 
 export type AppLanguage = "en" | "zh-CN";
 
+export function hasSelectedAppLanguage(
+	language: AppLanguage | null | undefined,
+): language is AppLanguage {
+	return language === "en" || language === "zh-CN";
+}
+
 export type EditorSelectionKind =
 	| "caption"
 	| "keyboard"
@@ -136,8 +142,9 @@ const en = {
 	"settings.projectName.target": "Target",
 	"settings.projectName.dateTime": "Date & time",
 	"settings.projectName.targetNameHint": "Monitor name or window title.",
-	"settings.storage.title": "Storage",
-	"settings.storage.description": "Where Cap saves your recordings.",
+	"settings.storage.title": "Project & Media Storage",
+	"settings.storage.description":
+		"Where Cap saves new recording projects, screenshot projects, and their media.",
 	"settings.storage.default": "Default (Application Support)",
 	"settings.storage.reset": "Reset to Default",
 	"settings.excludedWindows.title": "Excluded windows",
@@ -431,10 +438,28 @@ const en = {
 	"onboarding.permissions.camera.name": "Camera",
 	"onboarding.permissions.camera.description":
 		"Optional permission for recording your camera",
+	"onboarding.permissions.required": "Required",
 	"onboarding.permissions.optional": "Optional",
 	"onboarding.permissions.granted": "Granted",
 	"onboarding.permissions.grant": "Grant",
 	"onboarding.permissions.openSettings": "Open settings",
+	"onboarding.permissions.confirmTitle": "Check permission",
+	"onboarding.permissions.confirmDescription":
+		"After changing this permission in System Settings, return here and check it once.",
+	"onboarding.permissions.confirmGranted": "I've granted access — check once",
+	"onboarding.permissions.continueSetting":
+		"Continue setting other permissions",
+	"onboarding.permissions.pendingRestart": "Waiting for restart",
+	"onboarding.permissions.restartOnce": "Finish permissions and restart",
+	"onboarding.permissions.recoveryTitle": "Permission still isn't active",
+	"onboarding.permissions.recoveryDescription":
+		"Turn CapMotion off and on in System Settings. If it still fails, remove the old entry and add the current CapMotion again.",
+	"onboarding.permissions.recheck": "Check again",
+	"onboarding.permissions.checking": "Checking…",
+	"onboarding.permissions.openSettingsFailed":
+		"Couldn't open System Settings. Please try again.",
+	"onboarding.permissions.checkFailed":
+		"Couldn't check permissions. Please try again.",
 	"onboarding.modes.title": "Three ways to capture",
 	"onboarding.modes.description":
 		"Choose the workflow that matches what you are making",
@@ -583,8 +608,9 @@ const zhCN: Record<keyof typeof en, string> = {
 	"settings.projectName.target": "录制目标",
 	"settings.projectName.dateTime": "日期与时间",
 	"settings.projectName.targetNameHint": "显示器名称或窗口标题",
-	"settings.storage.title": "存储位置",
-	"settings.storage.description": "设置 Cap 保存录制文件的位置",
+	"settings.storage.title": "工程与媒体存储位置",
+	"settings.storage.description":
+		"设置 Cap 保存新录制工程、截图工程及其媒体文件的位置",
 	"settings.storage.default": "默认（Application Support）",
 	"settings.storage.reset": "恢复默认位置",
 	"settings.excludedWindows.title": "排除的窗口",
@@ -856,10 +882,25 @@ const zhCN: Record<keyof typeof en, string> = {
 	"onboarding.permissions.microphone.description": "用于录制你的声音，可选",
 	"onboarding.permissions.camera.name": "摄像头",
 	"onboarding.permissions.camera.description": "用于录制摄像头画面，可选",
+	"onboarding.permissions.required": "必选",
 	"onboarding.permissions.optional": "可选",
 	"onboarding.permissions.granted": "已授权",
 	"onboarding.permissions.grant": "授权",
 	"onboarding.permissions.openSettings": "打开系统设置",
+	"onboarding.permissions.confirmTitle": "检查权限",
+	"onboarding.permissions.confirmDescription":
+		"在系统设置中完成这项权限后，返回这里检查一次。",
+	"onboarding.permissions.confirmGranted": "我已授权，检查一次",
+	"onboarding.permissions.continueSetting": "继续设置其他权限",
+	"onboarding.permissions.pendingRestart": "等待重启生效",
+	"onboarding.permissions.restartOnce": "完成授权并重启",
+	"onboarding.permissions.recoveryTitle": "权限仍未生效",
+	"onboarding.permissions.recoveryDescription":
+		"请在系统设置中关闭再开启 CapMotion。仍无效时，移除旧条目后重新添加当前 CapMotion。",
+	"onboarding.permissions.recheck": "重新检查",
+	"onboarding.permissions.checking": "正在检查…",
+	"onboarding.permissions.openSettingsFailed": "无法打开系统设置，请重试。",
+	"onboarding.permissions.checkFailed": "无法检查权限，请重试。",
 	"onboarding.modes.title": "三种捕捉方式",
 	"onboarding.modes.description": "根据你要制作的内容选择合适流程",
 	"onboarding.modes.overviewTitle": "一个应用，覆盖所有工作流",
@@ -954,10 +995,15 @@ export function I18nProvider(props: ParentProps) {
 	const settings = generalSettingsStore.createQuery();
 	const [optimisticLanguage, setOptimisticLanguage] =
 		createSignal<AppLanguage>();
-	const language = (): AppLanguage =>
-		optimisticLanguage() ?? settings.data?.uiLanguage ?? "en";
+	const language = (): AppLanguage => {
+		const optimistic = optimisticLanguage();
+		if (optimistic) return optimistic;
+		const persisted = settings.data?.uiLanguage;
+		return hasSelectedAppLanguage(persisted) ? persisted : "en";
+	};
 	const languageSelected = () =>
-		optimisticLanguage() !== undefined || settings.data?.uiLanguage != null;
+		optimisticLanguage() !== undefined ||
+		hasSelectedAppLanguage(settings.data?.uiLanguage);
 
 	createEffect(() => {
 		document.documentElement.lang = language();

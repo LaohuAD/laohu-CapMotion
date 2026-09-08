@@ -1788,8 +1788,8 @@ function createUpdateCheck() {
 		let shouldUpdate: boolean | undefined;
 		try {
 			shouldUpdate = await dialog.confirm(
-				`Version ${update.version} of Cap is available, would you like to install it?`,
-				{ title: "Update Cap", okLabel: "Update", cancelLabel: "Ignore" },
+				`CapMotion ${update.version} 已发布，是否打开下载页面？`,
+				{ title: "发现新版本", okLabel: "打开下载页", cancelLabel: "稍后" },
 			);
 		} catch (e) {
 			console.error("Failed to show update dialog:", e);
@@ -1797,7 +1797,8 @@ function createUpdateCheck() {
 		}
 
 		if (!shouldUpdate) return;
-		navigate("/update");
+		if (update.downloadUrl) await shell.open(update.downloadUrl);
+		else navigate("/update");
 	});
 }
 

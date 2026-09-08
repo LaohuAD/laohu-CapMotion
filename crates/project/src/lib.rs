@@ -8,6 +8,8 @@ mod manual_zoom;
 mod meta;
 mod motion;
 mod motion_operations;
+mod presentation_operations;
+mod preset_operations;
 mod transaction;
 
 pub use animated_gradient::*;
@@ -20,6 +22,8 @@ pub use manual_zoom::*;
 pub use meta::*;
 pub use motion::*;
 pub use motion_operations::*;
+pub use presentation_operations::*;
+pub use preset_operations::*;
 pub use transaction::*;
 
 use serde::{Deserialize, Serialize};

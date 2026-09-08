@@ -520,6 +520,61 @@ fn project_config_get_without_file_returns_default() {
 }
 
 #[test]
+fn project_presentation_patch_updates_only_whitelisted_fields() {
+    let dir = tempfile::tempdir().unwrap();
+    let project = dir.path().join("recording.cap");
+    write_single_segment_meta(&project);
+    std::fs::create_dir_all(project.join("assets")).unwrap();
+    std::fs::write(
+        project.join("assets/current-desktop-background.jpg"),
+        b"snapshot",
+    )
+    .unwrap();
+    let mut config = cap_project::ProjectConfiguration::default();
+    config.captions.get_or_insert_default().segments.push(
+        serde_json::from_value(serde_json::json!({
+            "id": "caption-1",
+            "start": 1.0,
+            "end": 2.0,
+            "text": "keep me",
+            "words": []
+        }))
+        .unwrap(),
+    );
+    config.write(&project).unwrap();
+    let patch_path = dir.path().join("presentation.json");
+    std::fs::write(
+        &patch_path,
+        serde_json::to_vec(&serde_json::json!({
+            "aspectRatio": "wide",
+            "background": {
+                "sourceBinding": "currentDesktop",
+                "displayPosition": {"x": 0.5, "y": 0.47}
+            }
+        }))
+        .unwrap(),
+    )
+    .unwrap();
+
+    let output = run(&[
+        "project",
+        "presentation",
+        project.to_str().unwrap(),
+        "--expected-revision",
+        "0",
+        "--patch-json",
+        patch_path.to_str().unwrap(),
+        "--format",
+        "json",
+    ]);
+    assert!(output.status.success(), "stderr: {}", stderr(&output));
+    assert_eq!(parse_json(&output)["revision"], 1);
+    let updated = cap_project::ProjectConfiguration::load(&project).unwrap();
+    assert_eq!(updated.captions.unwrap().segments[0].text, "keep me");
+    assert_eq!(updated.background.display_position.unwrap().y, 0.47);
+}
+
+#[test]
 fn project_captions_import_writes_source_timed_segments_revision_safely() {
     let dir = tempfile::tempdir().unwrap();
     let project = dir.path().join("recording.cap");

@@ -2070,12 +2070,17 @@ pub fn derive_caption_track_segments(
     recording_durations: &[f64],
 ) -> Vec<CaptionTrackSegment> {
     struct TrackOverrides {
+        track_id: Option<String>,
+        track_label: Option<String>,
+        language: Option<String>,
+        pair_id: Option<String>,
         fade_duration: Option<f32>,
         linger_duration: Option<f32>,
         position: Option<String>,
         color: Option<String>,
         background_color: Option<String>,
         font_size: Option<u32>,
+        manual_position: Option<cap_project::XY<f32>>,
     }
 
     let mut overrides_by_source_id: HashMap<String, TrackOverrides> = HashMap::new();
@@ -2083,12 +2088,17 @@ pub fn derive_caption_track_segments(
         overrides_by_source_id
             .entry(source_caption_id(&segment.id).to_string())
             .or_insert_with(|| TrackOverrides {
+                track_id: segment.track_id.clone(),
+                track_label: segment.track_label.clone(),
+                language: segment.language.clone(),
+                pair_id: segment.pair_id.clone(),
                 fade_duration: segment.fade_duration_override,
                 linger_duration: segment.linger_duration_override,
                 position: segment.position_override.clone(),
                 color: segment.color_override.clone(),
                 background_color: segment.background_color_override.clone(),
                 font_size: segment.font_size_override,
+                manual_position: segment.manual_position_override,
             });
     }
 
@@ -2102,6 +2112,10 @@ pub fn derive_caption_track_segments(
             let overrides = overrides_by_source_id.get(source_caption_id(&segment.id));
             CaptionTrackSegment {
                 id: segment.id.clone(),
+                track_id: overrides.and_then(|o| o.track_id.clone()),
+                track_label: overrides.and_then(|o| o.track_label.clone()),
+                language: overrides.and_then(|o| o.language.clone()),
+                pair_id: overrides.and_then(|o| o.pair_id.clone()),
                 start: segment.start,
                 end: segment.end,
                 text: segment.text,
@@ -2112,6 +2126,7 @@ pub fn derive_caption_track_segments(
                 color_override: overrides.and_then(|o| o.color.clone()),
                 background_color_override: overrides.and_then(|o| o.background_color.clone()),
                 font_size_override: overrides.and_then(|o| o.font_size),
+                manual_position_override: overrides.and_then(|o| o.manual_position),
             }
         })
         .collect()
@@ -2312,6 +2327,7 @@ pub fn apply_caption_result(
         segments,
         settings,
         source_timed: true,
+        display_mode: Default::default(),
     });
 }
 
@@ -2633,6 +2649,7 @@ mod tests {
                 ..CaptionSettings::default()
             },
             source_timed: false,
+            display_mode: Default::default(),
         });
 
         apply_caption_result(

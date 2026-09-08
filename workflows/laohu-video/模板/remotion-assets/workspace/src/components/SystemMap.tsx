@@ -21,7 +21,7 @@ export const SystemMap: React.FC<{config: ComponentConfig}> = ({config}) => {
         <svg width="100%" height="100%" style={{position: "absolute", inset: 0}}>
           {config.items.map((item, index) => {
             const [x, y] = positions[index] ?? positions[index % positions.length];
-            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd);
+            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
             return (
               <line
                 key={`line-${item.id}`}
@@ -55,14 +55,14 @@ export const SystemMap: React.FC<{config: ComponentConfig}> = ({config}) => {
             textAlign: "center",
             fontSize: 58,
             lineHeight: 1.12,
-            fontWeight: 950,
+            fontWeight: 900,
           }}
         >
           {config.title}
         </Surface>
         {config.items.map((item, index) => {
           const [x, y] = positions[index] ?? positions[index % positions.length];
-          const progress = enterProgress(frame, index, config.items.length, timing.buildEnd);
+          const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
           return (
             <Surface
               key={item.id}

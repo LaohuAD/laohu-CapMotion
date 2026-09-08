@@ -45,3 +45,36 @@ describe("spoken-video acceptance examples", () => {
     ]);
   });
 });
+
+describe("editorial overlay examples", () => {
+  it("provides reusable transparent overlays plus the five continuity modes", async () => {
+    const module = await import("../configs/examples/editorialOverlayExamples");
+    const examples = module.editorialOverlayExamples;
+
+    expect(Object.keys(examples)).toEqual([
+      "fourLayerAnchor",
+      "evolutionProof",
+      "fourLayerStack",
+      "surfaceVsSystem",
+      "chapterProgress",
+      "evidenceCheckpoint",
+      "conceptLabels",
+      "headlineValue",
+      "carrierBridge",
+    ]);
+
+    expect(Object.values(examples)
+      .filter((config) => config.component === "EditorialOverlayShell")
+      .map((config) => config.mode))
+      .toEqual(["progress-rail", "evidence-dock", "label-stack", "value-callout", "bridge"]);
+
+    for (const config of Object.values(examples)) {
+      const manifest = getComponentManifest(config.component);
+      expect(() => manifest.schema.parse(config)).not.toThrow();
+      expect(config.renderMode).toBe("asset");
+      expect(config.presentation).toBe("overlay");
+      expect(config.stylePreset).toBe("editorial-dark");
+      expect(config.items.every((item) => item.source.type !== "illustrative")).toBe(true);
+    }
+  });
+});

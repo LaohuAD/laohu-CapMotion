@@ -33,5 +33,15 @@
     "name": "technical-pass-is-not-peak-quality",
     "prompt": "Zod、TypeScript 和渲染都通过了，画面也没有遮挡，可以直接交付了吧？",
     "expected": "技术通过只过底线门；还要观看比较焦点、关系增益、节奏、前后承接和已知高影响改法，不能自动宣布质量完成。"
+  },
+  {
+    "name": "understand-requires-knowledge-visual-contract",
+    "prompt": "这段口播在讲资料经过筛选后变成可复用工具，脚本只写了做 Remotion 动画。",
+    "expected": "返回 KNOWLEDGE_VISUAL_CONTRACT_INCOMPLETE；要求补齐主张、语义对象、初态、作用、状态变化、结果、口播语义锚点、中文大标签计划与静音/声画同步验收，不靠后期猜。"
+  },
+  {
+    "name": "semantic-anchors-drive-visible-state-changes",
+    "prompt": "合同已经写清口播说到输入、筛选和可复用结果的三个语义锚点，请制作透明 Remotion 叠层。",
+    "expected": "把三个 spokenCue 分别映射为对象建立、作用路径和结果锁定的可见状态变化；用少量中文大标签就近标注，默认灰黑半透明蒙版，并完成静音理解和声画同步验收。"
   }
 ]

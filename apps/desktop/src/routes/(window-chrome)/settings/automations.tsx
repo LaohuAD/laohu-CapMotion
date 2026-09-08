@@ -14,6 +14,11 @@ import {
 import { createStore, produce } from "solid-js/store";
 import { Dynamic } from "solid-js/web";
 import toast from "solid-toast";
+import {
+	AUTOMATION_TRIGGER_PHRASE,
+	localizedAutomationRuleName,
+	localizedAutomationRuleSummary,
+} from "~/automation-copy";
 import { Toggle } from "~/components/Toggle";
 import { useI18n } from "~/i18n";
 import { presetsStore } from "~/store";
@@ -111,60 +116,6 @@ const TRIGGER_ICONS: Record<Trigger, IconComponent> = {
 	uploadCompleted: IconLucideCloudUpload,
 	videoImported: IconLucideImport,
 	recordingDeleted: IconLucideTrash2,
-};
-
-const TRIGGER_PHRASE: Record<Trigger, string> = {
-	screenshotTaken: "Screenshot taken",
-	studioRecordingFinished: "Studio recording ends",
-	instantRecordingFinished: "Instant recording ends",
-	recordingStarted: "Recording starts",
-	uploadCompleted: "Upload completes",
-	videoImported: "Video imported",
-	recordingDeleted: "Recording deleted",
-};
-
-const ACTION_SHORT: Record<ActionType, string> = {
-	copyToClipboard: "Copy to clipboard",
-	saveToLocation: "Save to folder",
-	export: "Export",
-	upload: "Upload & copy link",
-	revealInFileManager: "Reveal in file manager",
-	openFile: "Open file",
-	recognizeTextToClipboard: "Copy text (OCR)",
-	notify: "Notify",
-	openEditor: "Open editor",
-	skipEditor: "Skip editor",
-	applyPreset: "Apply preset",
-	runCommand: "Run command",
-	webhook: "Send webhook",
-	deleteLocalFiles: "Delete local files",
-};
-
-const TRIGGER_NOUN: Record<Trigger, string> = {
-	screenshotTaken: "Screenshot",
-	studioRecordingFinished: "Studio recording",
-	instantRecordingFinished: "Instant recording",
-	recordingStarted: "Recording start",
-	uploadCompleted: "Upload",
-	videoImported: "Import",
-	recordingDeleted: "Deletion",
-};
-
-const ACTION_NOUN: Record<ActionType, string> = {
-	copyToClipboard: "Clipboard",
-	saveToLocation: "Folder",
-	export: "Export",
-	upload: "Upload",
-	revealInFileManager: "Reveal",
-	openFile: "Open",
-	recognizeTextToClipboard: "Text",
-	notify: "Notify",
-	openEditor: "Editor",
-	skipEditor: "Skip editor",
-	applyPreset: "Preset",
-	runCommand: "Command",
-	webhook: "Webhook",
-	deleteLocalFiles: "Delete",
 };
 
 const FPS_PRESETS = [15, 30, 60] as const;
@@ -316,24 +267,6 @@ const TEMPLATES: Template[] = [
 	},
 ];
 
-function ruleSummary(rule: AutomationRule): string {
-	const trigger = TRIGGER_PHRASE[rule.trigger];
-	if (rule.actions.length === 0) return `${trigger} → no actions yet`;
-	const actions = rule.actions.map((a) => ACTION_SHORT[a.type]).join(", ");
-	return `${trigger} → ${actions}`;
-}
-
-function autoRuleName(rule: AutomationRule): string {
-	const trigger = TRIGGER_NOUN[rule.trigger];
-	const first = rule.actions[0];
-	if (!first) return `${trigger} automation`;
-	return `${trigger} → ${ACTION_NOUN[first.type]}`;
-}
-
-function ruleDisplayName(rule: AutomationRule): string {
-	return rule.name.trim() || autoRuleName(rule);
-}
-
 const inputClass =
 	"w-full px-2.5 h-8 text-[13px] rounded-lg bg-gray-1 border border-gray-3 text-gray-12 outline-none transition-colors focus:border-gray-6 placeholder:text-gray-9";
 
@@ -448,7 +381,7 @@ function RowButton(props: {
 }
 
 export default function AutomationsSettings() {
-	const { text } = useI18n();
+	const { text, language } = useI18n();
 	const [store, setStore] = createStore<AutomationsStore>({
 		version: 1,
 		rules: [],
@@ -495,7 +428,7 @@ export default function AutomationsSettings() {
 
 	const addFromTemplate = (template: Template) => {
 		addRule(template.build());
-		toast.success(`Added "${template.name}"`);
+		toast.success(`${text("Added")} "${text(template.name)}"`);
 	};
 
 	const removeRule = (id: string) => {
@@ -514,10 +447,17 @@ export default function AutomationsSettings() {
 			if (unsupported.length === 0) {
 				toast.success(text("All actions supported on this device"));
 			} else {
+				const actions = unsupported
+					.map((check) =>
+						text(
+							ACTION_LABELS[check.actionType as ActionType] ?? check.actionType,
+						),
+					)
+					.join(", ");
 				toast(
-					`${unsupported.length} action(s) not supported here: ${unsupported
-						.map((c) => c.actionType)
-						.join(", ")}`,
+					language() === "zh-CN"
+						? `当前设备不支持 ${unsupported.length} 个动作：${actions}`
+						: `${unsupported.length} action(s) not supported here: ${actions}`,
 				);
 			}
 		} catch (e) {
@@ -690,11 +630,11 @@ function RuleCard(props: {
 							props.rule.enabled ? "text-gray-12" : "text-gray-10",
 						)}
 					>
-						{ruleDisplayName(props.rule)}
+						{localizedAutomationRuleName(props.rule, text)}
 					</p>
 					<Show when={props.rule.name.trim()}>
 						<p class="text-[11px] truncate text-gray-10">
-							{ruleSummary(props.rule)}
+							{localizedAutomationRuleSummary(props.rule, text)}
 						</p>
 					</Show>
 				</button>
@@ -771,7 +711,10 @@ function RuleEditorBody(props: {
 			<Field label="Name">
 				<TextInput
 					value={props.rule.name}
-					placeholder={autoRuleName(props.rule)}
+					placeholder={localizedAutomationRuleName(
+						{ ...props.rule, name: "" },
+						text,
+					)}
 					onInput={(v) =>
 						props.onChange((r) => {
 							r.name = v;
@@ -825,7 +768,7 @@ function RuleEditorBody(props: {
 					fallback={
 						<p class="text-xs text-gray-9">
 							{text("Runs for every")}{" "}
-							{text(TRIGGER_PHRASE[props.rule.trigger].toLowerCase())}.
+							{text(AUTOMATION_TRIGGER_PHRASE[props.rule.trigger])}.
 						</p>
 					}
 				>

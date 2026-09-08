@@ -2,8 +2,7 @@ import { Popover } from "@kobalte/core/popover";
 import { RadioGroup as KRadioGroup } from "@kobalte/core/radio-group";
 import { Tabs as KTabs } from "@kobalte/core/tabs";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
-import { appDataDir, resolveResource } from "@tauri-apps/api/path";
-import { BaseDirectory, writeFile } from "@tauri-apps/plugin-fs";
+import { resolveResource } from "@tauri-apps/api/path";
 import {
 	batch,
 	createMemo,
@@ -13,7 +12,7 @@ import {
 	Show,
 } from "solid-js";
 import { useI18n } from "~/i18n";
-import type { BackgroundSource } from "~/utils/tauri";
+import { type BackgroundSource, commands } from "~/utils/tauri";
 import IconCapBgBlur from "~icons/cap/bg-blur";
 import IconCapCircleX from "~icons/cap/circle-x";
 import IconCapImage from "~icons/cap/image";
@@ -149,6 +148,7 @@ export function BackgroundSettingsPopover() {
 	const {
 		project,
 		setProject,
+		path: projectPath,
 		projectHistory,
 		activePopover,
 		setActivePopover,
@@ -438,11 +438,12 @@ export function BackgroundSettingsPopover() {
 											const arrayBuffer = await file.arrayBuffer();
 											const uint8Array = new Uint8Array(arrayBuffer);
 
-											const fullPath = `${await appDataDir()}/${fileName}`;
-
-											await writeFile(fileName, uint8Array, {
-												baseDir: BaseDirectory.AppData,
-											});
+											const fullPath =
+												await commands.importProjectBackgroundImage(
+													projectPath,
+													fileName,
+													Array.from(uint8Array),
+												);
 
 											setProjectSource({
 												type: "image",

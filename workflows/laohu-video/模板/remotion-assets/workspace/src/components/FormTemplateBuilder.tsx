@@ -16,7 +16,7 @@ export const FormTemplateBuilder: React.FC<{config: ComponentConfig}> = ({config
       <div style={{display: "grid", gridTemplateColumns: "1.35fr 0.65fr", gap: 42, marginTop: 24, height: 620}}>
         <Surface theme={theme} style={{padding: "28px 34px"}}>
           {config.items.map((item, index) => {
-            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd);
+            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
             const typed = Math.max(0, Math.floor((item.description?.length ?? 0) * progress));
             return (
               <div key={item.id} style={{display: "grid", gridTemplateColumns: "260px 1fr 54px", gap: 22, alignItems: "center", minHeight: 106, borderBottom: `2px solid ${theme.line}`, opacity: progress}}>
@@ -34,7 +34,7 @@ export const FormTemplateBuilder: React.FC<{config: ComponentConfig}> = ({config
         </Surface>
         <Surface theme={theme} active style={{padding: 38, display: "flex", flexDirection: "column", justifyContent: "center"}}>
           <div style={{fontSize: 31, color: theme.accent, fontWeight: 900}}>最终产出</div>
-          <div style={{fontSize: 58, lineHeight: 1.16, fontWeight: 950, marginTop: 26}}>
+          <div style={{fontSize: 58, lineHeight: 1.16, fontWeight: 900, marginTop: 26}}>
             {config.conclusion ?? "一张可以直接执行的模板"}
           </div>
           <div style={{height: 6, background: theme.line, marginTop: 36}}>

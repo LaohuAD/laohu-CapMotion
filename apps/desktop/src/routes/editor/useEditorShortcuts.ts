@@ -1,4 +1,5 @@
 import { createEventListener } from "@solid-primitives/event-listener";
+import { keyboardEventTargetsEditableContent } from "~/utils/editor-shortcuts";
 
 export type ShortcutBinding = {
 	combo: string; // e.g. "Mod+=", "Mod+-", "Space", "S", "C"
@@ -40,6 +41,7 @@ export function useEditorShortcuts(
 	createEventListener(document, "keydown", async (e: KeyboardEvent) => {
 		// Basic guards
 		if (!getScopeActive()) return;
+		if (keyboardEventTargetsEditableContent(e, document.activeElement)) return;
 		if (e.repeat) return;
 
 		const binding = map.get(normalizeCombo(e));

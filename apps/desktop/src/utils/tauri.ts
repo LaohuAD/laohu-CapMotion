@@ -91,6 +91,14 @@ async takeScreenshot(target: ScreenCaptureTarget) : Promise<string> {
 async importCurrentDesktopBackground(projectPath: string) : Promise<string> {
     return await TAURI_INVOKE("import_current_desktop_background", { projectPath });
 },
+/**
+ * Store imported backgrounds inside the `.cap` bundle that owns them. This
+ * makes the user's one storage-location setting authoritative for both the
+ * project and all project-owned media.
+ */
+async importProjectBackgroundImage(projectPath: string, fileName: string, data: number[]) : Promise<string> {
+    return await TAURI_INVOKE("import_project_background_image", { projectPath, fileName, data });
+},
 async listCameras() : Promise<CameraInfo[]> {
     return await TAURI_INVOKE("list_cameras");
 },
@@ -605,6 +613,17 @@ videoImportProgress: "video-import-progress"
 /** user-defined types **/
 
 export type Action = { type: "copyToClipboard"; source?: ClipboardSource } | { type: "saveToLocation"; dir: string; filenameTemplate?: string | null } | { type: "export"; profile: ExportProfile; destination?: ExportDestination } | { type: "upload"; organizationId?: string | null; copyLink?: boolean; openInBrowser?: boolean } | { type: "revealInFileManager" } | { type: "openFile" } | { type: "runCommand"; program: string; args?: string[]; cwd?: string | null; env?: { [key in string]: string }; useShell?: boolean } | { type: "webhook"; url: string; method?: string; headers?: { [key in string]: string }; bodyTemplate?: string | null } | { type: "recognizeTextToClipboard" } | { type: "notify"; titleTemplate?: string; bodyTemplate?: string } | { type: "openEditor" } | { type: "skipEditor" } | { type: "applyPreset"; name: string } | { type: "deleteLocalFiles" }
+export type AgentActiveScreenDemoPolicy = "avoidOverlay" | "allowOverlay"
+export type AgentCaptionLanguageMode = "source" | "bilingual"
+export type AgentCaptionPreferences = { languageMode: AgentCaptionLanguageMode; segmentation: AgentCaptionSegmentation; rewriteForReadability: boolean; maxLines: number }
+export type AgentCaptionSegmentation = "sourceTimed" | "semanticUnits"
+export type AgentCutPreferences = { pausePolicy: AgentPausePolicy; preservePersonalExpression: boolean; removeStandaloneFillers: boolean; retakePolicy: AgentRetakePolicy }
+export type AgentEditingProfile = { schemaVersion: number; captions: AgentCaptionPreferences; editing: AgentCutPreferences; motion: AgentMotionPreferences }
+export type AgentMotionBackdrop = "dimFullFrame" | "transparent" | "noBackdrop"
+export type AgentMotionEngine = "remotion"
+export type AgentMotionPreferences = { engine: AgentMotionEngine; activeScreenDemo: AgentActiveScreenDemoPolicy; backdrop: AgentMotionBackdrop }
+export type AgentPausePolicy = "adaptive" | "preserve" | "tight"
+export type AgentRetakePolicy = "preferLaterComplete" | "preserveAll" | "ask"
 export type AnimatedGradientCatalog = { defaultConfig: AnimatedGradientConfig; templates: AnimatedGradientPreset[]; controls: AnimatedGradientControl[] }
 export type AnimatedGradientConfig = { colorStops: AnimatedGradientStop[]; direction: number; flowScale: number; flowStrength: number; curvature: number; detail: number; relief: number; light: number; shade: number; ripples: number; grainAmount: number; grainSize: number; exposure: number; contrast: number; vibrance: number; motionSpeed: number; seed: number }
 export type AnimatedGradientControl = { key: AnimatedGradientParameter; label: string; group: string; min: number; max: number; step: number }
@@ -673,7 +692,7 @@ export type AutomationTestReport = { ruleId: string; ruleName: string; actionChe
 export type AutomationsStore = { version?: number; rules?: AutomationRule[] }
 export type BackgroundBlurConfig = { mode: BackgroundBlurMode }
 export type BackgroundBlurMode = "off" | "light" | "heavy"
-export type BackgroundConfiguration = { source: BackgroundSource; blur: number; padding: number; rounding: number; roundingType: CornerStyle; inset: number; crop: Crop | null;
+export type BackgroundConfiguration = { source: BackgroundSource; sourceBinding?: BackgroundSourceBinding | null; blur: number; padding: number; rounding: number; roundingType: CornerStyle; inset: number; crop: Crop | null;
 /**
  * Normalized (0-1) center of the display rect in output-frame space.
  * `None` keeps the display centered. When a frame is active this is the
@@ -692,6 +711,12 @@ frame: FrameConfiguration | null;
  */
 notch: NotchConfiguration | null }
 export type BackgroundSource = { type: "wallpaper"; path: string | null } | { type: "image"; path: string | null } | { type: "color"; value: [number, number, number]; alpha?: number } | { type: "gradient"; from: [number, number, number]; to: [number, number, number]; angle?: number; noise_intensity?: number | null; noise_scale?: number | null; animated?: boolean | null; animation_speed?: number | null } | { type: "animatedGradient"; config: AnimatedGradientConfig }
+/**
+ * Portable intent for a file-backed background. A project keeps its own
+ * snapshot path in `source`; a reusable preset keeps this binding instead of
+ * leaking a path from the project where the preset was saved.
+ */
+export type BackgroundSourceBinding = "currentDesktop"
 export type BorderConfiguration = { enabled: boolean; width: number; color: [number, number, number]; opacity: number }
 export type Camera = { hide: boolean; mirror: boolean; position: CameraPosition;
 /**
@@ -818,9 +843,11 @@ export type CameraWithFormats = { deviceId: string; displayName: string; modelId
 export type CameraXPosition = "left" | "center" | "right"
 export type CameraYPosition = "top" | "bottom"
 export type CaptionData = { segments: CaptionSegment[]; settings: CaptionSettings | null }
+export type CaptionDisplayMode = "autoProject" | "materialized"
 export type CaptionSegment = { id: string; start: number; end: number; text: string; words?: CaptionWord[] }
-export type CaptionSettings = { enabled: boolean; font: string; size: number; color: string; backgroundColor: string; backgroundOpacity: number; position: string; italic: boolean; fontWeight: number; letterSpacing: number; outline: boolean; outlineColor: string; outlineWidth: number; shadow: boolean; shadowColor: string; shadowOpacity: number; shadowBlur: number; shadowDistance: number; shadowAngle: number; exportWithSubtitles: boolean; highlightColor: string; fadeDuration: number; lingerDuration: number; wordTransitionDuration: number; activeWordHighlight: boolean; manualPosition: XY<number> | null; preset: string; animation: string; highlightStyle: string; uppercase: boolean }
-export type CaptionTrackSegment = { id: string; start: number; end: number; text: string; words?: CaptionWord[]; fadeDurationOverride?: number | null; lingerDurationOverride?: number | null; positionOverride?: string | null; colorOverride?: string | null; backgroundColorOverride?: string | null; fontSizeOverride?: number | null }
+export type CaptionSettings = { enabled: boolean; font: string; size: number; color: string; backgroundColor: string; backgroundOpacity: number; position: string; italic: boolean; fontWeight: number; letterSpacing: number; outline: boolean; outlineColor: string; outlineWidth: number; shadow: boolean; shadowColor: string; shadowOpacity: number; shadowBlur: number; shadowDistance: number; shadowAngle: number; outlineShadow: boolean; outlineShadowColor: string; outlineShadowOpacity: number; outlineShadowBlur: number; outlineShadowDistance: number; outlineShadowAngle: number; exportWithSubtitles: boolean; highlightColor: string; fadeDuration: number; lingerDuration: number; wordTransitionDuration: number; activeWordHighlight: boolean; manualPosition: XY<number> | null; trackPositions?: CaptionTrackPosition[]; preset: string; animation: string; highlightStyle: string; uppercase: boolean }
+export type CaptionTrackPosition = { trackId: string; position: string; manualPosition: XY<number> | null }
+export type CaptionTrackSegment = { id: string; trackId?: string | null; trackLabel?: string | null; language?: string | null; pairId?: string | null; start: number; end: number; text: string; words?: CaptionWord[]; fadeDurationOverride?: number | null; lingerDurationOverride?: number | null; positionOverride?: string | null; colorOverride?: string | null; backgroundColorOverride?: string | null; fontSizeOverride?: number | null; manualPositionOverride?: XY<number> | null }
 export type CaptionWord = { text: string; start: number; end: number }
 export type CaptionsData = { segments: CaptionSegment[]; settings: CaptionSettings;
 /**
@@ -831,7 +858,7 @@ export type CaptionsData = { segments: CaptionSegment[]; settings: CaptionSettin
  * projects (false) stored segments in already-edited output time and are
  * migrated to source time on first load.
  */
-sourceTimed?: boolean }
+sourceTimed?: boolean; displayMode?: CaptionDisplayMode }
 export type CaptureDisplay = { id: DisplayId; name: string; refresh_rate: number }
 export type CaptureDisplayWithThumbnail = { id: DisplayId; name: string; refresh_rate: number; thumbnail: string | null }
 export type CaptureTargetKind = "display" | "window" | "area"
@@ -1137,8 +1164,8 @@ export type Plan = { upgraded: boolean; manual: boolean; last_checked: number }
 export type Platform = "MacOS" | "Windows" | "Linux"
 export type PostDeletionBehaviour = "doNothing" | "reopenRecordingWindow"
 export type PostStudioRecordingBehaviour = "openEditor" | "showOverlay"
-export type Preset = { name: string; config: ProjectConfiguration }
-export type PresetsStore = { presets: Preset[]; default: number | null }
+export type Preset = { name: string; config: ProjectConfiguration; agentProfile?: AgentEditingProfile | null }
+export type PresetsStore = { presets: Preset[]; default: number | null; revision?: number }
 export type ProjectConfiguration = { projectRevision: number; aspectRatio: AspectRatio | null; background: BackgroundConfiguration; camera: Camera; audio: AudioConfiguration; cursor: CursorConfiguration; hotkeys: HotkeysConfiguration; timeline: TimelineConfiguration | null; captions: CaptionsData | null; keyboard: KeyboardData | null; clips: ClipConfiguration[]; annotations: Annotation[]; motion: MotionConfiguration; screenMotionBlur?: number; screenMovementSpring?: ScreenMovementSpring;
 /**
  * Per-layer cinematic color grades. Field-level default keeps old
@@ -1274,7 +1301,7 @@ export type TranscriptionEngine = "Whisper" | "Parakeet"
 export type Trigger = "screenshotTaken" | "studioRecordingFinished" | "instantRecordingFinished" | "recordingStarted" | "uploadCompleted" | "videoImported" | "recordingDeleted"
 export type TypedJsonValue<T> = [T]
 export type UpdateChannel = "stable" | "nightly"
-export type UpdateCheckResult = { version: string; notes: string | null; channel: UpdateChannel }
+export type UpdateCheckResult = { version: string; notes: string | null; channel: UpdateChannel; downloadUrl: string | null }
 export type UpdateDownloadProgress = { downloaded: number; total: number | null }
 export type UpdateReady = { version: string; installed: boolean }
 export type UploadMeta = { state: "MultipartUpload"; video_id: string; file_path: string; pre_created_video: VideoUploadInfo; recording_dir: string } | { state: "SinglePartUpload"; video_id: string; recording_dir: string; file_path: string; screenshot_path: string } | { state: "SegmentUpload"; video_id: string; pre_created_video: VideoUploadInfo; recording_dir: string } | { state: "Failed"; error: string } | { state: "Complete" }

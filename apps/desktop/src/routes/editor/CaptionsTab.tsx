@@ -25,6 +25,8 @@ import {
 	type CaptionStylePreset,
 	defaultCaptionSettings,
 	type EditorCaptionSettings,
+	getUserCaptionStylePresets,
+	normalizeCaptionSettings,
 } from "~/store/captions";
 import type { OrganizationBrandColorSwatch } from "~/utils/organization-branding";
 import { commands, events } from "~/utils/tauri";
@@ -33,6 +35,18 @@ import IconCapCircleCheck from "~icons/cap/circle-check";
 import IconLucideDownload from "~icons/lucide/download";
 import IconLucideInfo from "~icons/lucide/info";
 import IconLucideTrash2 from "~icons/lucide/trash-2";
+import {
+	captionTrackId,
+	centeredPixelsToNormalized,
+	normalizedToCenteredPixels,
+	resolveCaptionTrackPosition,
+	setCaptionTrackPosition,
+} from "./caption-position";
+import {
+	captionTrackPositionLabel,
+	groupCaptionSegmentsByTrack,
+	shouldMirrorCaptionEditToSource,
+} from "./caption-tracks";
 import {
 	applyCaptionResultToProject,
 	CAPTION_MODEL_FOLDER,
@@ -54,9 +68,10 @@ import {
 	CAPTION_HIGHLIGHT_STYLE_OPTIONS,
 	CAPTION_POSITION_OPTIONS,
 	FONT_OPTIONS,
+	getCaptionWeightOptions,
 	getTextWeightLabel,
 	HexColorInput,
-	TEXT_WEIGHT_OPTIONS,
+	normalizeCaptionFontWeight,
 } from "./text-style";
 import {
 	Field,
@@ -252,8 +267,18 @@ export function CaptionsTab(props: {
 	brandColorSwatches: OrganizationBrandColorSwatch[];
 }) {
 	const { text, language } = useI18n();
-	const { project, setProject, editorInstance, editorState, setEditorState } =
-		useEditorContext();
+	const {
+		project,
+		setProject,
+		editorInstance,
+		editorState,
+		setEditorState,
+		presets,
+	} = useEditorContext();
+	const captionStylePresets = createMemo(() => [
+		...CAPTION_STYLE_PRESETS,
+		...getUserCaptionStylePresets(presets.query.data),
+	]);
 
 	const selectedCaptionIndex = () =>
 		editorState.timeline.selection?.type === "caption" &&
@@ -281,6 +306,10 @@ export function CaptionsTab(props: {
 				// Apply the edit to the rendered (output-time) segment so style
 				// overrides take effect immediately and survive re-derivation.
 				update(timelineSegment);
+				if (
+					!shouldMirrorCaptionEditToSource(currentProject.captions?.displayMode)
+				)
+					return;
 
 				// Route content/timing onto the source-time caption master so the
 				// edit persists across future clip changes. Style overrides stay on
@@ -327,7 +356,7 @@ export function CaptionsTab(props: {
 	const getSetting = <K extends keyof EditorCaptionSettings>(
 		key: K,
 	): NonNullable<EditorCaptionSettings[K]> =>
-		(project?.captions?.settings?.[key] ??
+		(normalizeCaptionSettings(project?.captions?.settings)[key] ??
 			defaultCaptionSettings[key]) as NonNullable<EditorCaptionSettings[K]>;
 
 	const updateCaptionSetting = <K extends keyof EditorCaptionSettings>(
@@ -340,13 +369,37 @@ export function CaptionsTab(props: {
 			"captions",
 			"settings",
 			produce((settings) => {
+				Object.assign(settings, normalizeCaptionSettings(settings));
 				settings[key] = value;
+				if (key === "shadow" && value === false) {
+					settings.outlineShadow = false;
+				}
 				if (STYLE_PRESET_KEYS.has(key)) {
 					settings.preset = "custom";
 				}
 			}),
 		);
 	};
+
+	const updateCaptionFont = (font: string) => {
+		if (!project?.captions) return;
+		setProject(
+			"captions",
+			"settings",
+			produce((settings) => {
+				Object.assign(settings, normalizeCaptionSettings(settings));
+				settings.font = font;
+				settings.fontWeight = normalizeCaptionFontWeight(
+					font,
+					settings.fontWeight,
+				);
+				settings.preset = "custom";
+			}),
+		);
+	};
+
+	const captionWeightOptions = () =>
+		getCaptionWeightOptions(getSetting("font"));
 
 	const selectedPresetId = () => getSetting("preset");
 
@@ -358,6 +411,7 @@ export function CaptionsTab(props: {
 			"settings",
 			produce((settings) => {
 				Object.assign(settings, preset.style);
+				Object.assign(settings, normalizeCaptionSettings(settings));
 				settings.preset = preset.id;
 			}),
 		);
@@ -381,18 +435,83 @@ export function CaptionsTab(props: {
 		}
 	};
 
-	const updateCaptionPosition = (position: string) => {
+	const captionPositionTracks = createMemo(() =>
+		groupCaptionSegmentsByTrack(project.timeline?.captionSegments ?? []),
+	);
+
+	const captionPositionForTrack = (trackId: string) =>
+		resolveCaptionTrackPosition(getSetting("trackPositions"), trackId, {
+			position: getSetting("position"),
+			manualPosition: getSetting("manualPosition"),
+		});
+
+	const updateCaptionPosition = (trackId: string, position: string) => {
 		if (!project?.captions) return;
 
-		const previousPosition = getSetting("position");
+		const previous = captionPositionForTrack(trackId);
 		setProject(
-			"captions",
-			"settings",
-			produce((settings) => {
-				settings.position = position;
-				if (position === "manual" && !settings.manualPosition) {
-					settings.manualPosition = captionPositionCenter(previousPosition);
+			produce((currentProject: typeof project) => {
+				const settings = currentProject.captions?.settings;
+				if (!settings) return;
+				const manualPosition =
+					position === "manual"
+						? (previous.manualPosition ??
+							captionPositionCenter(previous.position))
+						: previous.manualPosition;
+				settings.trackPositions = setCaptionTrackPosition(
+					settings.trackPositions,
+					trackId,
+					{ position, manualPosition },
+				);
+				for (const segment of currentProject.timeline?.captionSegments ?? []) {
+					if (captionTrackId(segment.trackId) !== trackId) continue;
+					segment.positionOverride = null;
+					segment.manualPositionOverride = null;
 				}
+			}),
+		);
+	};
+
+	const updateCaptionManualPosition = (
+		trackId: string,
+		position: { x: number; y: number },
+	) => {
+		if (!project?.captions) return;
+		setProject(
+			produce((currentProject: typeof project) => {
+				const settings = currentProject.captions?.settings;
+				if (!settings) return;
+				settings.trackPositions = setCaptionTrackPosition(
+					settings.trackPositions,
+					trackId,
+					{ position: "manual", manualPosition: position },
+				);
+				for (const segment of currentProject.timeline?.captionSegments ?? []) {
+					if (captionTrackId(segment.trackId) !== trackId) continue;
+					segment.positionOverride = null;
+					segment.manualPositionOverride = null;
+				}
+			}),
+		);
+	};
+
+	const manualPositionPixels = (trackId: string) =>
+		normalizedToCenteredPixels(
+			captionPositionForTrack(trackId).manualPosition ?? { x: 0.5, y: 0.5 },
+		);
+
+	const updateManualCoordinate = (
+		trackId: string,
+		axis: "x" | "y",
+		raw: string,
+	) => {
+		const value = Number.parseFloat(raw);
+		if (!Number.isFinite(value)) return;
+		updateCaptionManualPosition(
+			trackId,
+			centeredPixelsToNormalized({
+				...manualPositionPixels(trackId),
+				[axis]: value,
 			}),
 		);
 	};
@@ -1058,7 +1177,7 @@ export function CaptionsTab(props: {
 					>
 						<Field name="Style" icon={<IconCapMessageBubble />}>
 							<div class="grid grid-cols-2 gap-2">
-								<For each={CAPTION_STYLE_PRESETS}>
+								<For each={captionStylePresets()}>
 									{(preset) => (
 										<button
 											type="button"
@@ -1103,7 +1222,7 @@ export function CaptionsTab(props: {
 										value={getSetting("font")}
 										onChange={(value) => {
 											if (value === null) return;
-											updateCaptionSetting("font", value);
+											updateCaptionFont(value);
 										}}
 										disabled={!hasCaptions()}
 										itemComponent={(props) => (
@@ -1298,56 +1417,113 @@ export function CaptionsTab(props: {
 						</Field>
 
 						<Field name="Position" icon={<IconCapMessageBubble />}>
-							<KSelect<string>
-								options={CAPTION_POSITION_OPTIONS.map((p) => p.value)}
-								value={getSetting("position")}
-								onChange={(value) => {
-									if (value === null) return;
-									updateCaptionPosition(value);
-								}}
-								disabled={!hasCaptions()}
-								itemComponent={(props) => (
-									<MenuItem<typeof KSelect.Item>
-										as={KSelect.Item}
-										item={props.item}
-									>
-										<KSelect.ItemLabel class="flex-1">
-											{text(
-												CAPTION_POSITION_OPTIONS.find(
-													(p) => p.value === props.item.rawValue,
-												)?.label ?? props.item.rawValue,
-											)}
-										</KSelect.ItemLabel>
-									</MenuItem>
-								)}
-							>
-								<KSelect.Trigger class="w-full flex items-center justify-between rounded-lg px-3 py-2 bg-gray-2 border border-gray-3 text-gray-12 hover:border-gray-4 hover:bg-gray-3 focus:border-blue-9 focus:ring-1 focus:ring-blue-9 transition-colors">
-									<KSelect.Value<string>>
-										{(state) => (
-											<span>
-												{text(
-													CAPTION_POSITION_OPTIONS.find(
-														(p) => p.value === state.selectedOption(),
-													)?.label ?? state.selectedOption(),
-												)}
+							<div class="space-y-4">
+								<For each={captionPositionTracks()}>
+									{(track) => (
+										<div class="space-y-3 rounded-lg border border-gray-3 bg-gray-2/40 p-3">
+											<span class="text-sm font-medium text-gray-12">
+												{text(captionTrackPositionLabel(track.id, track.label))}
 											</span>
-										)}
-									</KSelect.Value>
-									<KSelect.Icon>
-										<IconCapChevronDown />
-									</KSelect.Icon>
-								</KSelect.Trigger>
-								<KSelect.Portal>
-									<PopperContent<typeof KSelect.Content>
-										as={KSelect.Content}
-										class={topLeftAnimateClasses}
-									>
-										<MenuItemList<typeof KSelect.Listbox>
-											as={KSelect.Listbox}
-										/>
-									</PopperContent>
-								</KSelect.Portal>
-							</KSelect>
+											<KSelect<string>
+												options={CAPTION_POSITION_OPTIONS.map((p) => p.value)}
+												value={captionPositionForTrack(track.id).position}
+												onChange={(value) => {
+													if (value === null) return;
+													updateCaptionPosition(track.id, value);
+												}}
+												disabled={!hasCaptions()}
+												itemComponent={(props) => (
+													<MenuItem<typeof KSelect.Item>
+														as={KSelect.Item}
+														item={props.item}
+													>
+														<KSelect.ItemLabel class="flex-1">
+															{text(
+																CAPTION_POSITION_OPTIONS.find(
+																	(p) => p.value === props.item.rawValue,
+																)?.label ?? props.item.rawValue,
+															)}
+														</KSelect.ItemLabel>
+													</MenuItem>
+												)}
+											>
+												<KSelect.Trigger class="w-full flex items-center justify-between rounded-lg px-3 py-2 bg-gray-2 border border-gray-3 text-gray-12 hover:border-gray-4 hover:bg-gray-3 focus:border-blue-9 focus:ring-1 focus:ring-blue-9 transition-colors">
+													<KSelect.Value<string>>
+														{(state) => (
+															<span>
+																{text(
+																	CAPTION_POSITION_OPTIONS.find(
+																		(p) => p.value === state.selectedOption(),
+																	)?.label ?? state.selectedOption(),
+																)}
+															</span>
+														)}
+													</KSelect.Value>
+													<KSelect.Icon>
+														<IconCapChevronDown />
+													</KSelect.Icon>
+												</KSelect.Trigger>
+												<KSelect.Portal>
+													<PopperContent<typeof KSelect.Content>
+														as={KSelect.Content}
+														class={topLeftAnimateClasses}
+													>
+														<MenuItemList<typeof KSelect.Listbox>
+															as={KSelect.Listbox}
+														/>
+													</PopperContent>
+												</KSelect.Portal>
+											</KSelect>
+											<Show
+												when={
+													captionPositionForTrack(track.id).position ===
+													"manual"
+												}
+											>
+												<div class="grid grid-cols-2 gap-3">
+													<Subfield name="X">
+														<Input
+															type="number"
+															value={manualPositionPixels(track.id).x}
+															step="1"
+															min={-960}
+															max={960}
+															onChange={(event) =>
+																updateManualCoordinate(
+																	track.id,
+																	"x",
+																	event.currentTarget.value,
+																)
+															}
+														/>
+													</Subfield>
+													<Subfield name="Y">
+														<Input
+															type="number"
+															value={manualPositionPixels(track.id).y}
+															step="1"
+															min={-540}
+															max={540}
+															onChange={(event) =>
+																updateManualCoordinate(
+																	track.id,
+																	"y",
+																	event.currentTarget.value,
+																)
+															}
+														/>
+													</Subfield>
+												</div>
+												<p class="text-xs text-gray-10">
+													{text(
+														"Coordinates use the caption center; the frame center is 0, 0",
+													)}
+												</p>
+											</Show>
+										</div>
+									)}
+								</For>
+							</div>
 						</Field>
 
 						<Field name="Animation" icon={<IconCapMessageBubble />}>
@@ -1420,35 +1596,40 @@ export function CaptionsTab(props: {
 										}
 									/>
 								</div>
-								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">
-										{text("Fade Duration")}
-									</span>
-									<Slider
-										value={[getSetting("fadeDuration") * 100]}
-										onChange={(v) =>
-											updateCaptionSetting("fadeDuration", v[0] / 100)
-										}
-										minValue={0}
-										maxValue={50}
-										step={1}
-										disabled={!hasCaptions()}
-									/>
-									<span class="text-xs text-gray-11 text-right">
-										{(getSetting("fadeDuration") * 1000).toFixed(0)}ms
-									</span>
-								</div>
+								<Show when={getSetting("animation") !== "none"}>
+									<div class="flex flex-col gap-2">
+										<span class="text-gray-11 text-sm">
+											{text("Entry Duration")}
+										</span>
+										<Slider
+											value={[getSetting("fadeDuration") * 100]}
+											onChange={(v) =>
+												updateCaptionSetting("fadeDuration", v[0] / 100)
+											}
+											minValue={0}
+											maxValue={50}
+											step={1}
+											disabled={!hasCaptions()}
+										/>
+										<span class="text-xs text-gray-11 text-right">
+											{(getSetting("fadeDuration") * 1000).toFixed(0)}ms
+										</span>
+									</div>
+								</Show>
 							</div>
 						</Field>
 
 						<Field name="Font Weight" icon={<IconCapMessageBubble />}>
 							<KSelect
-								options={TEXT_WEIGHT_OPTIONS}
+								options={captionWeightOptions()}
 								optionValue="value"
 								optionTextValue="label"
 								value={{
-									label: "Custom",
-									value: getSetting("fontWeight"),
+									label: getTextWeightLabel(getSetting("fontWeight")),
+									value: normalizeCaptionFontWeight(
+										getSetting("font"),
+										getSetting("fontWeight"),
+									),
 								}}
 								onChange={(value) => {
 									if (!value) return;
@@ -1570,6 +1751,11 @@ export function CaptionsTab(props: {
 										disabled={!hasCaptions()}
 									/>
 								</div>
+								<p class="text-xs leading-5 text-gray-10">
+									{text(
+										"When an outline is enabled, the shadow expands from the outline edge.",
+									)}
+								</p>
 								<Show when={getSetting("shadow")}>
 									<div class="space-y-3">
 										<div class="flex flex-col gap-2">
@@ -1637,10 +1823,7 @@ export function CaptionsTab(props: {
 					>
 						{(() => {
 							return (
-								<Field
-									name="Selected Caption Override"
-									icon={<IconCapMessageBubble />}
-								>
+								<Field name="Selected Caption" icon={<IconCapMessageBubble />}>
 									<Show when={selectedCaptionSegment()}>
 										{(seg) => (
 											<div class="space-y-3">
@@ -1687,22 +1870,6 @@ export function CaptionsTab(props: {
 																);
 															})
 														}
-													/>
-												</Subfield>
-												<Subfield name="Fade Duration Override">
-													<Slider
-														value={[
-															(seg().fadeDurationOverride ??
-																getSetting("fadeDuration")) * 100,
-														]}
-														onChange={(v) =>
-															updateSelectedCaption((segment) => {
-																segment.fadeDurationOverride = v[0] / 100;
-															})
-														}
-														minValue={0}
-														maxValue={50}
-														step={1}
 													/>
 												</Subfield>
 											</div>

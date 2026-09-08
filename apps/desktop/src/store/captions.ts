@@ -4,10 +4,11 @@ import {
 	type CaptionSegment,
 	type CaptionSettings,
 	commands,
+	type PresetsStore,
 } from "~/utils/tauri";
 
 export type CaptionManualPosition = { x: number; y: number };
-export type CaptionAnimation = "none" | "bounce" | "pop";
+export type CaptionAnimation = "none" | "fade" | "bounce" | "pop";
 export type CaptionHighlightStyle = "color" | "pill";
 export type EditorCaptionSettings = CaptionSettings & {
 	manualPosition?: CaptionManualPosition | null;
@@ -28,7 +29,8 @@ export type CaptionStylePresetId =
 	| "karaoke"
 	| "highlight"
 	| "pop"
-	| "minimal";
+	| "minimal"
+	| `user:${string}`;
 
 export type CaptionPresetStyle = {
 	font: string;
@@ -45,6 +47,15 @@ export type CaptionPresetStyle = {
 	animation: CaptionAnimation;
 	uppercase: boolean;
 	fadeDuration: number;
+	letterSpacing?: number;
+	outlineWidth?: number;
+	shadow?: boolean;
+	shadowColor?: string;
+	shadowOpacity?: number;
+	shadowBlur?: number;
+	shadowDistance?: number;
+	shadowAngle?: number;
+	position?: string;
 };
 
 export type CaptionStylePreset = {
@@ -165,6 +176,7 @@ export const CAPTION_STYLE_PRESETS: CaptionStylePreset[] = [
 const classicPreset = CAPTION_STYLE_PRESETS[0];
 const captionAnimations: readonly CaptionAnimation[] = [
 	"none",
+	"fade",
 	"bounce",
 	"pop",
 ];
@@ -185,13 +197,61 @@ export const defaultCaptionSettings: EditorCaptionSettings = {
 	shadowBlur: 15,
 	shadowDistance: 5,
 	shadowAngle: -45,
+	outlineShadow: false,
+	outlineShadowColor: "#000000",
+	outlineShadowOpacity: 75,
+	outlineShadowBlur: 15,
+	outlineShadowDistance: 5,
+	outlineShadowAngle: -45,
 	exportWithSubtitles: false,
 	lingerDuration: 0.4,
 	wordTransitionDuration: 0.25,
 	manualPosition: null,
+	trackPositions: [],
 	preset: classicPreset.id,
 	...classicPreset.style,
 };
+
+export function getUserCaptionStylePresets(
+	store: PresetsStore | null | undefined,
+): CaptionStylePreset[] {
+	return (store?.presets ?? []).flatMap((preset) => {
+		if (!preset.config.captions?.settings) return [];
+		const settings = normalizeCaptionSettings(preset.config.captions.settings);
+		return [
+			{
+				id: `user:${preset.name}` as const,
+				label: preset.name,
+				description: `User preset: ${preset.name}`,
+				style: {
+					font: settings.font,
+					fontWeight: settings.fontWeight,
+					size: settings.size,
+					color: settings.color,
+					backgroundColor: settings.backgroundColor,
+					backgroundOpacity: settings.backgroundOpacity,
+					outline: settings.outline,
+					outlineColor: settings.outlineColor,
+					outlineWidth: settings.outlineWidth,
+					shadow: settings.shadow,
+					shadowColor: settings.shadowColor,
+					shadowOpacity: settings.shadowOpacity,
+					shadowBlur: settings.shadowBlur,
+					shadowDistance: settings.shadowDistance,
+					shadowAngle: settings.shadowAngle,
+					letterSpacing: settings.letterSpacing,
+					position: settings.position,
+					highlightColor: settings.highlightColor,
+					activeWordHighlight: settings.activeWordHighlight,
+					highlightStyle: settings.highlightStyle,
+					animation: settings.animation,
+					uppercase: settings.uppercase,
+					fadeDuration: settings.fadeDuration,
+				},
+			},
+		];
+	});
+}
 
 function isCaptionAnimation(value: unknown): value is CaptionAnimation {
 	return captionAnimations.includes(value as CaptionAnimation);
@@ -212,13 +272,37 @@ export function normalizeCaptionSettings(
 	const highlightStyle = isCaptionHighlightStyle(settings?.highlightStyle)
 		? settings.highlightStyle
 		: defaultCaptionSettings.highlightStyle;
+	const preset =
+		settings?.preset === "laohu"
+			? "user:Laohu"
+			: (settings?.preset ?? "classic");
 
-	return {
+	const normalized: EditorCaptionSettings = {
 		...defaultCaptionSettings,
 		...settings,
 		animation,
 		highlightStyle,
+		preset,
+		trackPositions: settings?.trackPositions ?? [],
 	};
+
+	// Older CapMotion builds exposed a second, disconnected "outline shadow"
+	// effect. Preserve those projects by folding that legacy effect into the
+	// single shadow model. The renderer now expands this shadow from the outline
+	// whenever outlining is enabled.
+	if (normalized.outline && normalized.outlineShadow) {
+		if (!normalized.shadow) {
+			normalized.shadow = true;
+			normalized.shadowColor = normalized.outlineShadowColor;
+			normalized.shadowOpacity = normalized.outlineShadowOpacity;
+			normalized.shadowBlur = normalized.outlineShadowBlur;
+			normalized.shadowDistance = normalized.outlineShadowDistance;
+			normalized.shadowAngle = normalized.outlineShadowAngle;
+		}
+		normalized.outlineShadow = false;
+	}
+
+	return normalized;
 }
 
 function createCaptionsStore() {
@@ -338,6 +422,12 @@ function createCaptionsStore() {
 						shadowBlur: state.settings.shadowBlur,
 						shadowDistance: state.settings.shadowDistance,
 						shadowAngle: state.settings.shadowAngle,
+						outlineShadow: state.settings.outlineShadow,
+						outlineShadowColor: state.settings.outlineShadowColor,
+						outlineShadowOpacity: state.settings.outlineShadowOpacity,
+						outlineShadowBlur: state.settings.outlineShadowBlur,
+						outlineShadowDistance: state.settings.outlineShadowDistance,
+						outlineShadowAngle: state.settings.outlineShadowAngle,
 						exportWithSubtitles: state.settings.exportWithSubtitles,
 						highlightColor: state.settings.highlightColor,
 						fadeDuration: state.settings.fadeDuration,
@@ -345,6 +435,7 @@ function createCaptionsStore() {
 						wordTransitionDuration: state.settings.wordTransitionDuration,
 						activeWordHighlight: state.settings.activeWordHighlight,
 						manualPosition: state.settings.manualPosition,
+						trackPositions: state.settings.trackPositions,
 						preset: state.settings.preset,
 						animation: state.settings.animation,
 						highlightStyle: state.settings.highlightStyle,

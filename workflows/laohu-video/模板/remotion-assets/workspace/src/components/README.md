@@ -21,3 +21,5 @@ TopicForm.tsx
 ```
 
 组件内部应优先读取结构化 props，而不是解析自然语言提示词。
+
+所有组件的 `items` 都支持可选 `revealAtFrame`。它是当前 composition 内的相对帧，用于让对象在对应口播语义点进入并在后续论证中保持可见；未提供时继续使用原有自动错峰。`revealAtFrame` 必须小于 `durationInFrames`，不能用绝对成片时码，也不能为了制造热闹给每个词都设触发帧。

@@ -3,6 +3,7 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { devicesSnapshot } from "~/utils/devices";
 import { requestAndVerifyPermission } from "~/utils/os-permissions";
 import { commands, type OSPermissionStatus } from "~/utils/tauri";
+import { runPermissionRequestWithWindowYield } from "./permission-window";
 
 export default function useRequestPermission() {
 	const queryClient = useQueryClient();
@@ -13,12 +14,9 @@ export default function useRequestPermission() {
 	) {
 		try {
 			const window = getCurrentWindow();
-			await window.setAlwaysOnTop(false);
-			try {
-				await requestAndVerifyPermission(commands, type, currentStatus);
-			} finally {
-				await window.setAlwaysOnTop(true);
-			}
+			await runPermissionRequestWithWindowYield(window, () =>
+				requestAndVerifyPermission(commands, type, currentStatus),
+			);
 			await queryClient.refetchQueries(devicesSnapshot);
 		} catch (error) {
 			console.error(`Failed to get ${type} permission:`, error);

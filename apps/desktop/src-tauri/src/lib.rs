@@ -253,6 +253,36 @@ mod tests {
     }
 
     #[test]
+    fn camera_window_origin_is_clamped_inside_capture_bounds() {
+        let capture = scap_targets::bounds::LogicalBounds::new(
+            scap_targets::bounds::LogicalPosition::new(100.0, 200.0),
+            scap_targets::bounds::LogicalSize::new(800.0, 500.0),
+        );
+
+        assert_eq!(
+            clamp_camera_window_origin((50.0, 160.0), (240.0, 200.0), capture),
+            (100.0, 200.0)
+        );
+        assert_eq!(
+            clamp_camera_window_origin((850.0, 650.0), (240.0, 200.0), capture),
+            (660.0, 500.0)
+        );
+    }
+
+    #[test]
+    fn camera_window_origin_stays_unchanged_when_already_inside_capture_bounds() {
+        let capture = scap_targets::bounds::LogicalBounds::new(
+            scap_targets::bounds::LogicalPosition::new(-500.0, 40.0),
+            scap_targets::bounds::LogicalSize::new(900.0, 700.0),
+        );
+
+        assert_eq!(
+            clamp_camera_window_origin((-300.0, 160.0), (240.0, 200.0), capture),
+            (-300.0, 160.0)
+        );
+    }
+
+    #[test]
     fn active_recording_snapshot_contains_recoverable_clock_fields() {
         let fields = current_recording_clock_fields(Some(recording::RecordingSessionSnapshot {
             session_id: "session-one".to_string(),
@@ -4355,38 +4385,35 @@ async fn delete_recording_directory(app: AppHandle, path: PathBuf) -> Result<(),
 #[specta::specta]
 #[instrument(skip(app))]
 fn list_screenshots(app: AppHandle) -> Result<Vec<(PathBuf, ScreenshotMetaWithMetadata)>, String> {
-    let screenshots_dir = screenshots_path(&app);
-
-    let mut result = std::fs::read_dir(&screenshots_dir)
-        .map_err(|e| format!("Failed to read screenshots directory: {e}"))?
-        .filter_map(|entry| {
+    let mut result = Vec::new();
+    for screenshots_dir in recordings_locations::known_screenshots_dirs(&app) {
+        let Ok(entries) = std::fs::read_dir(&screenshots_dir) else {
+            continue;
+        };
+        result.extend(entries.filter_map(|entry| {
             let entry = entry.ok()?;
             let path = entry.path();
-            if path.is_dir() && path.extension().and_then(|s| s.to_str()) == Some("cap") {
-                let meta = match get_recording_meta(path.clone(), FileType::Screenshot) {
-                    Ok(meta) => meta.inner,
-                    Err(_) => return None,
-                };
-
-                let png_path = std::fs::read_dir(&path)
-                    .ok()?
-                    .filter_map(|e| e.ok())
-                    .find(|e| e.path().extension().and_then(|s| s.to_str()) == Some("png"))
-                    .map(|e| e.path())?;
-
-                let sort_time_millis = media_sort_time_millis(&png_path);
-                Some((
-                    png_path,
-                    ScreenshotMetaWithMetadata {
-                        inner: meta,
-                        sort_time_millis,
-                    },
-                ))
-            } else {
-                None
+            if !path.is_dir() || path.extension().and_then(|s| s.to_str()) != Some("cap") {
+                return None;
             }
-        })
-        .collect::<Vec<_>>();
+            let meta = get_recording_meta(path.clone(), FileType::Screenshot)
+                .ok()?
+                .inner;
+            let png_path = std::fs::read_dir(&path)
+                .ok()?
+                .filter_map(|e| e.ok())
+                .find(|e| e.path().extension().and_then(|s| s.to_str()) == Some("png"))
+                .map(|e| e.path())?;
+            let sort_time_millis = media_sort_time_millis(&png_path);
+            Some((
+                png_path,
+                ScreenshotMetaWithMetadata {
+                    inner: meta,
+                    sort_time_millis,
+                },
+            ))
+        }));
+    }
 
     result.sort_by(|(_, a), (_, b)| b.sort_time_millis.total_cmp(&a.sort_time_millis));
 
@@ -4927,11 +4954,81 @@ fn set_camera_window_position(app: AppHandle, x: f64, y: f64) -> Result<(), Stri
         return Ok(());
     }
 
+    let (x, y) = constrained_camera_window_origin(&app, x, y).unwrap_or((x, y));
+
     GeneralSettingsStore::update(&app, |settings| {
         update_camera_window_position_settings(settings, x, y, None);
     })?;
 
     Ok(())
+}
+
+fn clamp_camera_window_origin(
+    origin: (f64, f64),
+    window_size: (f64, f64),
+    capture_bounds: scap_targets::bounds::LogicalBounds,
+) -> (f64, f64) {
+    let left = capture_bounds.position().x();
+    let top = capture_bounds.position().y();
+    let max_x = (left + capture_bounds.size().width() - window_size.0).max(left);
+    let max_y = (top + capture_bounds.size().height() - window_size.1).max(top);
+    (origin.0.clamp(left, max_x), origin.1.clamp(top, max_y))
+}
+
+fn camera_capture_target_bounds(
+    target: &ScreenCaptureTarget,
+) -> Option<scap_targets::bounds::LogicalBounds> {
+    use scap_targets::{Window, bounds::LogicalPosition};
+
+    match target {
+        ScreenCaptureTarget::Window { id } => Window::from_id(id)?.raw_handle().logical_bounds(),
+        ScreenCaptureTarget::Area { screen, bounds } => {
+            let display_bounds = Display::from_id(screen)?.raw_handle().logical_bounds()?;
+            Some(scap_targets::bounds::LogicalBounds::new(
+                LogicalPosition::new(
+                    display_bounds.position().x() + bounds.position().x(),
+                    display_bounds.position().y() + bounds.position().y(),
+                ),
+                bounds.size(),
+            ))
+        }
+        ScreenCaptureTarget::Display { .. } | ScreenCaptureTarget::CameraOnly => None,
+    }
+}
+
+fn camera_position_capture_target(app: &AppHandle) -> Option<ScreenCaptureTarget> {
+    if let Some(state) = app.try_state::<ArcLock<App>>()
+        && let Ok(state) = state.try_read()
+    {
+        match &state.recording_state {
+            RecordingState::Pending { target, .. } => return Some(target.clone()),
+            RecordingState::Active(recording) => return Some(recording.capture_target().clone()),
+            RecordingState::None => {}
+        }
+    }
+
+    recording_settings::RecordingSettingsStore::get(app)
+        .ok()
+        .flatten()
+        .and_then(|settings| settings.target)
+}
+
+fn constrained_camera_window_origin(app: &AppHandle, x: f64, y: f64) -> Option<(f64, f64)> {
+    let target = camera_position_capture_target(app)?;
+    let capture_bounds = camera_capture_target_bounds(&target)?;
+    let window = CapWindowId::Camera.get(app)?;
+    let scale_factor = window.scale_factor().ok()?;
+    let size = window.outer_size().ok()?.to_logical::<f64>(scale_factor);
+    let clamped = clamp_camera_window_origin((x, y), (size.width, size.height), capture_bounds);
+
+    if (clamped.0 - x).abs() > 0.5 || (clamped.1 - y).abs() > 0.5 {
+        if let Some(guard) = app.try_state::<CameraWindowPositionGuard>() {
+            guard.ignore_for(500);
+        }
+        let _ = window.set_position(tauri::LogicalPosition::new(clamped.0, clamped.1));
+    }
+
+    Some(clamped)
 }
 
 #[tauri::command]
@@ -5217,6 +5314,7 @@ fn specta_builder() -> tauri_specta::Builder {
             recording::delete_recording,
             recording::take_screenshot,
             recording::import_current_desktop_background,
+            recording::import_project_background_image,
             recording::list_cameras,
             recording::get_camera_formats,
             recording::get_microphone_info,
@@ -5519,7 +5617,13 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
     tauri::async_runtime::set(tokio::runtime::Handle::current());
 
     #[allow(unused_mut)]
-    let mut builder = tauri::Builder::default();
+    let mut builder = tauri::Builder::default()
+        // File-open requests can arrive through the single-instance plugin before
+        // `.setup()` runs. Keep every registry used by those callbacks available
+        // from the moment the builder starts accepting plugin events.
+        .manage(EditorWindowIds::default())
+        .manage(ScreenshotEditorWindowIds::default())
+        .manage(EditorRecordingTarget::default());
 
     // The Linux single-instance plugin establishes its D-Bus connection through a
     // blocking zbus call, which panics ("Cannot start a runtime from within a
@@ -5677,9 +5781,6 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
             configure_camera_blur_recovery(&app, previous_termination);
             fake_window::init(&app);
             app.manage(target_select_overlay::WindowFocusManager::default());
-            app.manage(EditorWindowIds::default());
-            app.manage(ScreenshotEditorWindowIds::default());
-            app.manage(EditorRecordingTarget::default());
             #[cfg(target_os = "macos")]
             app.manage(crate::platform::ScreenCapturePrewarmer::default());
             #[cfg(target_os = "macos")]
@@ -7178,16 +7279,6 @@ fn recordings_path(app: &AppHandle) -> PathBuf {
 
 // fn recording_path(app: &AppHandle, recording_id: &str) -> PathBuf {
 //     recordings_path(app).join(format!("{recording_id}.cap"))
-// }
-
-fn screenshots_path(app: &AppHandle) -> PathBuf {
-    let path = app.path().app_data_dir().unwrap().join("screenshots");
-    std::fs::create_dir_all(&path).unwrap_or_default();
-    path
-}
-
-// fn screenshot_path(app: &AppHandle, screenshot_id: &str) -> PathBuf {
-//     screenshots_path(app).join(format!("{screenshot_id}.cap"))
 // }
 
 #[tauri::command]

@@ -2,14 +2,18 @@ use bytemuck::{Pod, Zeroable};
 use cap_project::XY;
 use glyphon::cosmic_text::LayoutRunIter;
 use glyphon::{
-    Attrs, Buffer, Cache, Color, FontSystem, Metrics, Resolution, Shaping, SwashCache,
-    TextArea, TextAtlas, TextBounds, TextRenderer, Viewport, Weight,
+    Attrs, Buffer, Cache, Color, FontSystem, Metrics, Resolution, Shaping, Style, SwashCache,
+    TextArea, TextAtlas, TextBounds, TextRenderer, Viewport,
 };
 use log::warn;
 use wgpu::{Device, Queue, include_wgsl, util::DeviceExt};
 
+use super::caption_style::{
+    caption_effect_extent, caption_family_for_text, caption_letter_spacing_em,
+    caption_weight_for_text, outline_offsets, outline_shadow_offsets, resolve_caption_shadow,
+    shadow_offset, smooth_outline_offsets,
+};
 use crate::{DecodedSegmentFrames, ProjectUniforms, RenderVideoConstants, parse_color_component};
-use super::caption_style::{caption_family, outline_offsets, shadow_offset};
 
 #[derive(Debug, Clone)]
 pub struct CaptionWord {
@@ -137,6 +141,7 @@ fn ease_out_back(t: f64) -> f64 {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum CaptionAnimation {
     None,
+    Fade,
     Bounce,
     Pop,
 }
@@ -145,32 +150,32 @@ impl CaptionAnimation {
     fn from_str(s: &str) -> Self {
         match s {
             "none" => Self::None,
+            "fade" => Self::Fade,
             "pop" => Self::Pop,
             _ => Self::Bounce,
         }
     }
 }
 
-fn calculate_caption_pop_scale(current_time: f64, start: f64, end: f64, fade_duration: f64) -> f64 {
+fn effective_caption_animation_duration(animation: &str, configured_duration: f32) -> f32 {
+    if CaptionAnimation::from_str(animation) == CaptionAnimation::None {
+        0.0
+    } else {
+        configured_duration.max(0.0)
+    }
+}
+
+fn calculate_caption_pop_scale(current_time: f64, start: f64, fade_duration: f64) -> f64 {
     if fade_duration <= 0.0 {
         return 1.0;
     }
 
     let time_from_start = current_time - start;
-    let time_to_end = end - current_time;
-
     if time_from_start < fade_duration {
         let progress = (time_from_start / fade_duration).clamp(0.0, 1.0);
         return POP_MIN_SCALE + (1.0 - POP_MIN_SCALE) * ease_out_back(progress);
     }
-
-    if time_to_end >= 0.0 {
-        return 1.0;
-    }
-
-    let past_end = -time_to_end;
-    let progress = (past_end / fade_duration).clamp(0.0, 1.0);
-    POP_MIN_SCALE + (1.0 - POP_MIN_SCALE) * (1.0 - ease_in_cubic(progress as f32) as f64)
+    1.0
 }
 
 fn find_active_word_index(current_time: f32, words: &[CaptionWord]) -> Option<usize> {
@@ -276,6 +281,7 @@ pub struct CaptionsLayer {
     text_atlas: TextAtlas,
     text_renderer: TextRenderer,
     text_buffer: Buffer,
+    effect_buffer: Buffer,
     current_text: Option<String>,
     current_segment_start: f32,
     current_segment_end: f32,
@@ -316,6 +322,7 @@ impl CaptionsLayer {
 
         let metrics = Metrics::new(24.0, 24.0 * 1.2);
         let text_buffer = Buffer::new_empty(metrics);
+        let effect_buffer = Buffer::new_empty(metrics);
 
         let background_uniforms = CaptionBackgroundUniforms {
             rect: [0.0; 4],
@@ -418,6 +425,7 @@ impl CaptionsLayer {
             text_atlas,
             text_renderer,
             text_buffer,
+            effect_buffer,
             current_text: None,
             current_segment_start: 0.0,
             current_segment_end: 0.0,
@@ -453,6 +461,8 @@ impl CaptionsLayer {
         _segment_frames: &DecodedSegmentFrames,
         output_size: XY<u32>,
         constants: &RenderVideoConstants,
+        track_id: Option<&str>,
+        track_enabled: bool,
     ) {
         self.has_caption = false;
         self.active_layout = None;
@@ -460,6 +470,11 @@ impl CaptionsLayer {
         self.highlight_scissor = None;
         self.has_highlight = false;
         self.output_size = (output_size.x, output_size.y);
+
+        if !track_enabled {
+            self.current_text = None;
+            return;
+        }
 
         let Some(caption_data) = &uniforms.project.captions else {
             self.current_text = None;
@@ -485,20 +500,30 @@ impl CaptionsLayer {
         }
 
         let current_time = uniforms.frame_number as f64 / uniforms.frame_rate as f64;
-        let default_fade = caption_data.settings.fade_duration;
+        let animation = CaptionAnimation::from_str(&caption_data.settings.animation);
+        let default_fade = effective_caption_animation_duration(
+            &caption_data.settings.animation,
+            caption_data.settings.fade_duration,
+        );
         let word_transition_duration = caption_data.settings.word_transition_duration;
 
-        let Some(active) =
-            find_active_caption_segment(current_time, &timeline.caption_segments, default_fade)
-        else {
+        let Some(active) = find_active_caption_segment_for_track(
+            current_time,
+            &timeline.caption_segments,
+            default_fade,
+            track_id,
+        ) else {
             self.current_text = None;
             return;
         };
 
-        let segment_fade = active
-            .segment
-            .fade_duration_override
-            .unwrap_or(default_fade) as f64;
+        let segment_fade = effective_caption_animation_duration(
+            &caption_data.settings.animation,
+            active
+                .segment
+                .fade_duration_override
+                .unwrap_or(caption_data.settings.fade_duration),
+        ) as f64;
 
         let effective_end = caption_segment_effective_end(active.segment);
 
@@ -530,37 +555,25 @@ impl CaptionsLayer {
             })
             .collect();
 
-        let fade_opacity = calculate_caption_fade(
-            current_time,
-            active.segment.start,
-            effective_end,
-            segment_fade,
-        ) * uniforms.takeover_overlay_fade();
+        let entry_opacity = if animation == CaptionAnimation::Fade {
+            calculate_caption_fade(current_time, active.segment.start, segment_fade)
+        } else {
+            1.0
+        };
+        let fade_opacity = entry_opacity * uniforms.takeover_overlay_fade();
         if fade_opacity <= 0.0 {
             self.current_text = None;
             return;
         }
 
-        let animation = CaptionAnimation::from_str(&caption_data.settings.animation);
-
         let bounce_offset = if animation == CaptionAnimation::Bounce {
-            calculate_caption_bounce(
-                current_time,
-                active.segment.start,
-                effective_end,
-                segment_fade,
-            )
+            calculate_caption_bounce(current_time, active.segment.start, segment_fade)
         } else {
             0.0
         };
 
         let pop_scale = if animation == CaptionAnimation::Pop {
-            calculate_caption_pop_scale(
-                current_time,
-                active.segment.start,
-                effective_end,
-                segment_fade,
-            )
+            calculate_caption_pop_scale(current_time, active.segment.start, segment_fade)
         } else {
             1.0
         };
@@ -583,10 +596,17 @@ impl CaptionsLayer {
         let device = &constants.device;
         let queue = &constants.queue;
 
+        let resolved_track_id = track_id.unwrap_or("default");
+        let track_position = caption_data
+            .settings
+            .track_positions
+            .iter()
+            .find(|entry| entry.track_id == resolved_track_id);
         let position = active
             .segment
             .position_override
             .as_deref()
+            .or_else(|| track_position.map(|entry| entry.position.as_str()))
             .map(CaptionPosition::from_str)
             .unwrap_or_else(|| CaptionPosition::from_str(&caption_data.settings.position));
         let margin = width as f32 * 0.05;
@@ -619,7 +639,11 @@ impl CaptionsLayer {
             * fade_opacity)
             .clamp(0.0, 1.0);
 
-        let font_size = caption_data.settings.size as f32 * (height as f32 / 1080.0);
+        let font_size = active
+            .segment
+            .font_size_override
+            .unwrap_or(caption_data.settings.size) as f32
+            * (height as f32 / 1080.0);
         let metrics = Metrics::new(font_size, font_size * 1.2);
 
         let mut updated_buffer = Buffer::new(&mut self.font_system, metrics);
@@ -627,9 +651,21 @@ impl CaptionsLayer {
         updated_buffer.set_size(&mut self.font_system, Some(wrap_width), None);
         updated_buffer.set_wrap(&mut self.font_system, glyphon::Wrap::None);
 
-        let font_family = caption_family(&caption_data.settings.font);
-        let weight = Weight(caption_data.settings.font_weight.clamp(100, 900) as u16);
-        let letter_spacing = caption_data.settings.letter_spacing;
+        let font_family = caption_family_for_text(&caption_data.settings.font, &caption_text);
+        let weight = caption_weight_for_text(
+            &caption_data.settings.font,
+            caption_data.settings.font_weight,
+            &caption_text,
+        );
+        let letter_spacing = caption_letter_spacing_em(
+            caption_data.settings.letter_spacing,
+            caption_data.settings.size,
+        );
+        let font_style = if caption_data.settings.italic {
+            Style::Italic
+        } else {
+            Style::Normal
+        };
 
         let base_alpha = (fade_opacity * BASE_TEXT_OPACITY).clamp(0.0, 1.0);
         let highlight_alpha = fade_opacity.clamp(0.0, 1.0);
@@ -655,6 +691,7 @@ impl CaptionsLayer {
                             Attrs::new()
                                 .family(font_family)
                                 .weight(weight)
+                                .style(font_style)
                                 .letter_spacing(letter_spacing)
                                 .color(Color::rgba(
                                     (base_color[0] * 255.0) as u8,
@@ -688,6 +725,7 @@ impl CaptionsLayer {
                         Attrs::new()
                             .family(font_family)
                             .weight(weight)
+                            .style(font_style)
                             .letter_spacing(letter_spacing)
                             .color(Color::rgba(
                                 (blended_color[0] * 255.0) as u8,
@@ -706,6 +744,7 @@ impl CaptionsLayer {
                     Attrs::new()
                         .family(font_family)
                         .weight(weight)
+                        .style(font_style)
                         .letter_spacing(letter_spacing)
                         .color(Color::rgba(
                             (base_color[0] * 255.0) as u8,
@@ -722,6 +761,7 @@ impl CaptionsLayer {
                 &Attrs::new()
                     .family(font_family)
                     .weight(weight)
+                    .style(font_style)
                     .letter_spacing(letter_spacing),
                 Shaping::Advanced,
                 None,
@@ -736,6 +776,7 @@ impl CaptionsLayer {
             let attrs = Attrs::new()
                 .family(font_family)
                 .weight(weight)
+                .style(font_style)
                 .letter_spacing(letter_spacing)
                 .color(color);
             updated_buffer.set_text(
@@ -802,10 +843,13 @@ impl CaptionsLayer {
         let box_width = (text_width + padding * 2.0).min(available_width).max(1.0);
         let box_height = (text_height + padding * 2.0).min(height as f32).max(1.0);
 
+        let manual_position = active
+            .segment
+            .manual_position_override
+            .or_else(|| track_position.and_then(|entry| entry.manual_position))
+            .or(caption_data.settings.manual_position);
         let background_left = if position == CaptionPosition::Manual {
-            caption_data
-                .settings
-                .manual_position
+            manual_position
                 .map(|manual_position| {
                     (manual_position.x.clamp(0.0, 1.0) * width as f32 - box_width / 2.0)
                         .clamp(0.0, (width as f32 - box_width).max(0.0))
@@ -825,9 +869,7 @@ impl CaptionsLayer {
         };
 
         let center_y = if position == CaptionPosition::Manual {
-            caption_data
-                .settings
-                .manual_position
+            manual_position
                 .map(|manual_position| manual_position.y.clamp(0.0, 1.0) * height as f32)
                 .unwrap_or_else(|| height as f32 * CaptionPosition::BottomCenter.y_factor())
         } else {
@@ -852,14 +894,64 @@ impl CaptionsLayer {
         let text_left = draw_box_left + padding * anim_scale;
         let text_top = draw_box_top + padding * anim_scale;
 
+        let use_legacy_outline_shadow = !caption_data.settings.shadow
+            && caption_data.settings.outline
+            && caption_data.settings.outline_shadow;
+        let shadow_distance = if use_legacy_outline_shadow {
+            caption_data.settings.outline_shadow_distance
+        } else {
+            caption_data.settings.shadow_distance
+        };
+        let shadow_blur = if use_legacy_outline_shadow {
+            caption_data.settings.outline_shadow_blur
+        } else {
+            caption_data.settings.shadow_blur
+        };
+        let shadow_geometry = resolve_caption_shadow(
+            caption_data.settings.outline,
+            caption_data.settings.outline_width,
+            caption_data.settings.shadow,
+            caption_data.settings.outline_shadow,
+            shadow_distance,
+            shadow_blur * 0.15,
+        );
+        let effect_extent = caption_effect_extent(
+            if caption_data.settings.outline {
+                caption_data.settings.outline_width
+            } else {
+                0.0
+            },
+            shadow_geometry,
+            render_scale,
+        ) + 2.0;
         let bounds = TextBounds {
-            left: (text_left - 2.0).floor() as i32,
-            top: (text_top - 2.0).floor() as i32,
-            right: (text_left + draw_text_width + 2.0).ceil() as i32,
-            bottom: (text_top + draw_text_height + 2.0).ceil() as i32,
+            left: (text_left - effect_extent).floor() as i32,
+            top: (text_top - effect_extent).floor() as i32,
+            right: (text_left + draw_text_width + effect_extent).ceil() as i32,
+            bottom: (text_top + draw_text_height + effect_extent).ceil() as i32,
         };
 
+        // glyphon's TextArea::default_color only applies to glyph runs that do
+        // not already carry a span color. The visible caption buffer uses span
+        // colors for base/highlight text, so reusing it for shadow/outline
+        // paints displaced copies of the white caption. Keep a geometry-
+        // equivalent, uncoloured buffer for effect passes so their requested
+        // black color is authoritative.
+        let mut effect_buffer = Buffer::new(&mut self.font_system, metrics);
+        effect_buffer.set_size(&mut self.font_system, Some(wrap_width), None);
+        effect_buffer.set_wrap(&mut self.font_system, glyphon::Wrap::None);
+        effect_buffer.set_text(
+            &mut self.font_system,
+            caption_text.as_str(),
+            &Attrs::new()
+                .family(font_family)
+                .weight(weight)
+                .letter_spacing(letter_spacing),
+            Shaping::Advanced,
+        );
+
         self.text_buffer = updated_buffer;
+        self.effect_buffer = effect_buffer;
         self.viewport.update(queue, Resolution { width, height });
 
         let mut text_areas = Vec::new();
@@ -871,21 +963,34 @@ impl CaptionsLayer {
             (fade_opacity * 255.0) as u8,
         );
 
-        if caption_data.settings.shadow {
+        if let Some(shadow_geometry) = shadow_geometry {
+            let (shadow_color_value, shadow_opacity, shadow_angle) = if use_legacy_outline_shadow {
+                (
+                    &caption_data.settings.outline_shadow_color,
+                    caption_data.settings.outline_shadow_opacity,
+                    caption_data.settings.outline_shadow_angle,
+                )
+            } else {
+                (
+                    &caption_data.settings.shadow_color,
+                    caption_data.settings.shadow_opacity,
+                    caption_data.settings.shadow_angle,
+                )
+            };
             let shadow_color_rgb = [
-                parse_color_component(&caption_data.settings.shadow_color, 0),
-                parse_color_component(&caption_data.settings.shadow_color, 1),
-                parse_color_component(&caption_data.settings.shadow_color, 2),
+                parse_color_component(shadow_color_value, 0),
+                parse_color_component(shadow_color_value, 1),
+                parse_color_component(shadow_color_value, 2),
             ];
-            let [shadow_x, shadow_y] = shadow_offset(
-                caption_data.settings.shadow_distance * render_scale,
-                caption_data.settings.shadow_angle,
-            );
-            let shadow_alpha = (caption_data.settings.shadow_opacity / 100.0)
-                .clamp(0.0, 1.0)
-                * fade_opacity;
-            let blur_radius = caption_data.settings.shadow_blur.max(0.0) * render_scale * 0.15;
-            let samples = outline_offsets(blur_radius);
+            let [shadow_x, shadow_y] =
+                shadow_offset(shadow_geometry.distance * render_scale, shadow_angle);
+            let shadow_alpha = (shadow_opacity / 100.0).clamp(0.0, 1.0) * fade_opacity;
+            let blur_radius = shadow_geometry.blur * render_scale;
+            let samples = if shadow_geometry.outline_width > 0.0 {
+                outline_shadow_offsets(shadow_geometry.outline_width * render_scale, blur_radius)
+            } else {
+                outline_offsets(blur_radius)
+            };
             let sample_count = samples.len().max(1) as f32;
             let shadow_color = Color::rgba(
                 (shadow_color_rgb[0] * 255.0) as u8,
@@ -895,7 +1000,7 @@ impl CaptionsLayer {
             );
             if samples.is_empty() {
                 text_areas.push(TextArea {
-                    buffer: &self.text_buffer,
+                    buffer: &self.effect_buffer,
                     left: text_left + shadow_x,
                     top: text_top + shadow_y,
                     scale: render_scale,
@@ -906,7 +1011,7 @@ impl CaptionsLayer {
             } else {
                 for [blur_x, blur_y] in samples {
                     text_areas.push(TextArea {
-                        buffer: &self.text_buffer,
+                        buffer: &self.effect_buffer,
                         left: text_left + shadow_x + blur_x,
                         top: text_top + shadow_y + blur_y,
                         scale: render_scale,
@@ -920,9 +1025,9 @@ impl CaptionsLayer {
 
         if caption_data.settings.outline {
             let outline_thickness = caption_data.settings.outline_width.max(0.0) * render_scale;
-            for [offset_x, offset_y] in outline_offsets(outline_thickness) {
+            for [offset_x, offset_y] in smooth_outline_offsets(outline_thickness) {
                 text_areas.push(TextArea {
-                    buffer: &self.text_buffer,
+                    buffer: &self.effect_buffer,
                     left: text_left + offset_x,
                     top: text_top + offset_y,
                     scale: render_scale,
@@ -1144,10 +1249,11 @@ fn caption_segment_effective_end(segment: &cap_project::CaptionTrackSegment) -> 
     }
 }
 
+#[cfg(test)]
 fn find_active_caption_segment<'a>(
     time: f64,
     segments: &'a [cap_project::CaptionTrackSegment],
-    default_fade_duration: f32,
+    _default_fade_duration: f32,
 ) -> Option<ActiveCaptionSegment<'a>> {
     for segment in segments {
         if time >= segment.start && time < caption_segment_effective_end(segment) {
@@ -1155,59 +1261,58 @@ fn find_active_caption_segment<'a>(
         }
     }
 
-    for segment in segments {
-        let effective_end = caption_segment_effective_end(segment);
-        let fade = segment
-            .fade_duration_override
-            .unwrap_or(default_fade_duration) as f64;
-        if time >= effective_end && time < effective_end + fade {
-            return Some(ActiveCaptionSegment { segment });
-        }
-    }
-
     None
 }
 
-fn calculate_caption_fade(current_time: f64, start: f64, end: f64, fade_duration: f64) -> f32 {
-    if fade_duration <= 0.0 {
-        if current_time >= start && current_time < end {
-            return 1.0;
+fn find_active_caption_segment_for_track<'a>(
+    time: f64,
+    segments: &'a [cap_project::CaptionTrackSegment],
+    _default_fade_duration: f32,
+    track_id: Option<&str>,
+) -> Option<ActiveCaptionSegment<'a>> {
+    let matching =
+        |segment: &&cap_project::CaptionTrackSegment| segment.track_id.as_deref() == track_id;
+    for segment in segments.iter().filter(matching) {
+        if time >= segment.start && time < caption_segment_effective_end(segment) {
+            return Some(ActiveCaptionSegment { segment });
         }
-        return 0.0;
     }
-
-    let time_from_start = current_time - start;
-    let time_to_end = end - current_time;
-
-    let fade_in = (time_from_start / fade_duration).clamp(0.0, 1.0) as f32;
-
-    let fade_out = if time_to_end >= 0.0 {
-        1.0
-    } else {
-        let past_end = -time_to_end;
-        (1.0 - past_end / fade_duration).clamp(0.0, 1.0) as f32
-    };
-
-    fade_in.min(fade_out)
+    None
 }
 
-fn calculate_caption_bounce(current_time: f64, start: f64, end: f64, fade_duration: f64) -> f64 {
+pub(crate) fn caption_track_ids(
+    segments: &[cap_project::CaptionTrackSegment],
+) -> Vec<Option<&str>> {
+    let mut result = Vec::new();
+    for segment in segments {
+        let id = segment.track_id.as_deref();
+        if !result.contains(&id) {
+            result.push(id);
+        }
+    }
+    result
+}
+
+fn calculate_caption_fade(current_time: f64, start: f64, fade_duration: f64) -> f32 {
+    if fade_duration <= 0.0 {
+        return 1.0;
+    }
+
+    let time_from_start = current_time - start;
+    (time_from_start / fade_duration).clamp(0.0, 1.0) as f32
+}
+
+fn calculate_caption_bounce(current_time: f64, start: f64, fade_duration: f64) -> f64 {
     if fade_duration <= 0.0 {
         return 0.0;
     }
 
     let time_from_start = current_time - start;
-    let time_to_end = end - current_time;
-
     let fade_in_progress = (time_from_start / fade_duration).clamp(0.0, 1.0);
-    let fade_out_progress = (time_to_end / fade_duration).clamp(0.0, 1.0);
 
     if fade_in_progress < 1.0 {
         let ease = 1.0 - fade_in_progress;
         -(ease * ease) * BOUNCE_OFFSET_PIXELS as f64
-    } else if fade_out_progress < 1.0 {
-        let ease = 1.0 - fade_out_progress;
-        (ease * ease) * BOUNCE_OFFSET_PIXELS as f64
     } else {
         0.0
     }
@@ -1215,12 +1320,20 @@ fn calculate_caption_bounce(current_time: f64, start: f64, end: f64, fade_durati
 
 #[cfg(test)]
 mod tests {
-    use super::{caption_segment_effective_end, find_active_caption_segment};
+    use super::{
+        calculate_caption_bounce, calculate_caption_fade, calculate_caption_pop_scale,
+        caption_segment_effective_end, caption_track_ids, effective_caption_animation_duration,
+        find_active_caption_segment,
+    };
     use cap_project::{CaptionTrackSegment, CaptionWord};
 
     fn segment(start: f64, end: f64, words: Vec<CaptionWord>) -> CaptionTrackSegment {
         CaptionTrackSegment {
             id: "seg".to_string(),
+            track_id: None,
+            track_label: None,
+            language: None,
+            pair_id: None,
             start,
             end,
             text: "text".to_string(),
@@ -1231,6 +1344,7 @@ mod tests {
             color_override: None,
             background_color_override: None,
             font_size_override: None,
+            manual_position_override: None,
         }
     }
 
@@ -1240,6 +1354,21 @@ mod tests {
             start,
             end,
         }
+    }
+
+    #[test]
+    fn bilingual_segments_expose_two_render_tracks_while_legacy_stays_default() {
+        let mut chinese = segment(1.0, 2.0, vec![]);
+        chinese.track_id = Some("zh-CN".into());
+        let mut english = segment(1.0, 2.0, vec![]);
+        english.track_id = Some("en".into());
+        let legacy = segment(3.0, 4.0, vec![]);
+
+        assert_eq!(
+            caption_track_ids(&[chinese, english]),
+            vec![Some("zh-CN"), Some("en")]
+        );
+        assert_eq!(caption_track_ids(&[legacy]), vec![None]);
     }
 
     #[test]
@@ -1264,5 +1393,29 @@ mod tests {
         assert!(find_active_caption_segment(41.0, &segments, 0.2).is_none());
         // Still active while the (capped) word is on screen.
         assert!(find_active_caption_segment(37.0, &segments, 0.2).is_some());
+    }
+
+    #[test]
+    fn none_animation_has_no_hidden_fade_duration() {
+        assert_eq!(effective_caption_animation_duration("none", 0.25), 0.0);
+        assert_eq!(effective_caption_animation_duration("fade", 0.25), 0.25);
+        assert_eq!(effective_caption_animation_duration("bounce", 0.25), 0.25);
+        assert_eq!(effective_caption_animation_duration("pop", 0.25), 0.25);
+    }
+
+    #[test]
+    fn caption_animations_are_entry_only_and_visually_distinct() {
+        assert_eq!(calculate_caption_fade(1.0, 1.0, 0.2), 0.0);
+        assert_eq!(calculate_caption_fade(1.2, 1.0, 0.2), 1.0);
+        assert!(calculate_caption_bounce(1.0, 1.0, 0.2) < 0.0);
+        assert!(calculate_caption_bounce(1.2, 1.0, 0.2).abs() < 1e-9);
+        assert!(calculate_caption_pop_scale(1.0, 1.0, 0.2) < 1.0);
+        assert!((calculate_caption_pop_scale(1.2, 1.0, 0.2) - 1.0).abs() < 1e-9);
+    }
+
+    #[test]
+    fn animation_does_not_keep_a_caption_alive_after_its_end() {
+        let segments = vec![segment(1.0, 2.0, vec![])];
+        assert!(find_active_caption_segment(2.01, &segments, 0.25).is_none());
     }
 }

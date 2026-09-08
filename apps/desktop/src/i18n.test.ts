@@ -1,13 +1,43 @@
 import { describe, expect, it } from "vitest";
-import { formatEditorSelection, translate } from "./i18n";
+import {
+	formatEditorSelection,
+	hasSelectedAppLanguage,
+	translate,
+} from "./i18n";
+import { translateLiteral } from "./i18n-literals";
 
 describe("i18n", () => {
+	it("treats only a persisted supported language as an existing choice", () => {
+		expect(hasSelectedAppLanguage(undefined)).toBe(false);
+		expect(hasSelectedAppLanguage(null)).toBe(false);
+		expect(hasSelectedAppLanguage("zh-CN")).toBe(true);
+		expect(hasSelectedAppLanguage("en")).toBe(true);
+	});
+
 	it("returns the English message", () => {
 		expect(translate("en", "settings.nav.shortcuts")).toBe("Shortcuts");
 	});
 
 	it("returns the Simplified Chinese message", () => {
 		expect(translate("zh-CN", "settings.nav.shortcuts")).toBe("快捷键");
+	});
+
+	it("localizes every permission confirmation and recovery action", () => {
+		expect(translate("zh-CN", "onboarding.permissions.confirmGranted")).toBe(
+			"我已授权，检查一次",
+		);
+		expect(translate("zh-CN", "onboarding.permissions.continueSetting")).toBe(
+			"继续设置其他权限",
+		);
+		expect(translate("zh-CN", "onboarding.permissions.restartOnce")).toBe(
+			"完成授权并重启",
+		);
+		expect(translate("en", "onboarding.permissions.confirmGranted")).toBe(
+			"I've granted access — check once",
+		);
+		expect(translate("en", "onboarding.permissions.recheck")).toBe(
+			"Check again",
+		);
 	});
 
 	it("localizes the settings shell and every shortcut action", () => {
@@ -45,6 +75,19 @@ describe("i18n", () => {
 		expect(translate("zh-CN", "capture.cameraOnly")).toBe("仅摄像头");
 		expect(translate("zh-CN", "capture.noSystemAudio")).toBe("不录制系统声音");
 		expect(translate("zh-CN", "capture.mode.instant")).toBe("快速录制");
+	});
+
+	it("localizes bundled font names without changing their stored identifiers", () => {
+		expect(translateLiteral("zh-CN", "Source Han Sans CN VF")).toBe(
+			"思源黑体（简体中文）",
+		);
+		expect(translateLiteral("zh-CN", "Source Han Serif CN VF")).toBe(
+			"思源宋体（简体中文）",
+		);
+		expect(translateLiteral("zh-CN", "LXGW WenKai")).toBe("霞鹜文楷");
+		expect(translateLiteral("en", "Source Han Sans CN VF")).toBe(
+			"Source Han Sans CN VF",
+		);
 	});
 
 	it("localizes each camera failure category instead of reporting every failure as permission", () => {

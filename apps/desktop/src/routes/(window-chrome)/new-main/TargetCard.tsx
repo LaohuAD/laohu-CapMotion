@@ -5,7 +5,15 @@ import { remove } from "@tauri-apps/plugin-fs";
 import * as shell from "@tauri-apps/plugin-shell";
 import { cx } from "cva";
 import type { ComponentProps } from "solid-js";
-import { createMemo, createSignal, Show, splitProps } from "solid-js";
+import {
+	createEffect,
+	createMemo,
+	createSignal,
+	onCleanup,
+	onMount,
+	Show,
+	splitProps,
+} from "solid-js";
 import toast from "solid-toast";
 import Tooltip from "~/components/Tooltip";
 import { useI18n } from "~/i18n";
@@ -34,6 +42,7 @@ import IconLucideSave from "~icons/lucide/save";
 import IconLucideSquarePlay from "~icons/lucide/square-play";
 import IconMdiMonitor from "~icons/mdi/monitor";
 import IconPhWarningBold from "~icons/ph/warning-bold";
+import { isTextTruncated } from "./target-card-title";
 
 export type RecordingWithPath = RecordingMetaWithMetadata & { path: string };
 export type ScreenshotWithPath = ScreenshotMetaWithMetadata & { path: string };
@@ -94,6 +103,28 @@ export default function TargetCard(props: TargetCardProps) {
 	const [isSharingScreenshot, setIsSharingScreenshot] = createSignal(false);
 	const [screenshotShareStatus, setScreenshotShareStatus] =
 		createSignal<ScreenshotExportStatus>("idle");
+	const [titleTruncated, setTitleTruncated] = createSignal(false);
+	let titleRef: HTMLParagraphElement | undefined;
+
+	const updateTitleOverflow = () => {
+		if (local.variant !== "recording" || !titleRef) {
+			setTitleTruncated(false);
+			return;
+		}
+
+		setTitleTruncated(
+			isTextTruncated(titleRef.scrollWidth, titleRef.clientWidth),
+		);
+	};
+
+	onMount(() => {
+		updateTitleOverflow();
+
+		if (!titleRef || typeof ResizeObserver === "undefined") return;
+		const observer = new ResizeObserver(updateTitleOverflow);
+		observer.observe(titleRef);
+		onCleanup(() => observer.disconnect());
+	});
 
 	const recordingProps = () => {
 		if (local.variant !== "recording") return undefined;
@@ -140,6 +171,11 @@ export default function TargetCard(props: TargetCardProps) {
 		if (recording) return recording.pretty_name;
 		const screenshot = screenshotTarget();
 		return screenshot?.pretty_name;
+	});
+
+	createEffect(() => {
+		label();
+		queueMicrotask(updateTitleOverflow);
 	});
 
 	const subtitle = createMemo(() => {
@@ -428,9 +464,27 @@ export default function TargetCard(props: TargetCardProps) {
 			<div class="flex flex-col w-full">
 				<div class="flex flex-row items-start gap-2 px-2 py-1.5">
 					<div class="flex-1 min-w-0">
-						<p class="truncate text-[11px] font-medium text-gray-12">
-							{highlight(label())}
-						</p>
+						<Show
+							when={local.variant === "recording"}
+							fallback={
+								<p class="truncate text-[11px] font-medium text-gray-12">
+									{highlight(label())}
+								</p>
+							}
+						>
+							<Tooltip
+								content={label()}
+								disabled={!titleTruncated()}
+								childClass="w-full min-w-0"
+							>
+								<p
+									ref={titleRef}
+									class="truncate text-[11px] font-medium text-gray-12"
+								>
+									{highlight(label())}
+								</p>
+							</Tooltip>
+						</Show>
 						<Show when={subtitle()}>
 							<p class="truncate text-[11px] text-gray-11">
 								{highlight(subtitle())}

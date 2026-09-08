@@ -26,7 +26,7 @@ import {
 	Suspense,
 	Switch,
 } from "solid-js";
-import { createStore } from "solid-js/store";
+import { createStore, reconcile } from "solid-js/store";
 import toast from "solid-toast";
 import { Transition } from "solid-transition-group";
 import {
@@ -48,6 +48,7 @@ import {
 	EditorInstanceContextProvider,
 	FPS,
 	isModalDialog,
+	normalizeProject,
 	serializeProjectConfiguration,
 	useEditorContext,
 	useEditorInstanceContext,
@@ -56,6 +57,7 @@ import { EditorErrorScreen } from "./EditorErrorScreen";
 import { Header } from "./Header";
 import { ImportProgress } from "./ImportProgress";
 import { PlayerContent } from "./Player";
+import { mergePresetIntoProject } from "./preset-config";
 import { Timeline } from "./Timeline";
 import { Dialog, DialogContent, EditorButton, Input, Subfield } from "./ui";
 
@@ -825,7 +827,8 @@ function Inner() {
 
 function Dialogs() {
 	const { text } = useI18n();
-	const { dialog, setDialog, presets, project } = useEditorContext();
+	const { dialog, setDialog, presets, project, setProject } =
+		useEditorContext();
 
 	const isDialogType = () => isModalDialog(dialog());
 
@@ -946,7 +949,19 @@ function Dialogs() {
 							{(dialog) => {
 								const deletePreset = createMutation(() => ({
 									mutationFn: async () => {
-										await presets.deletePreset(dialog().presetIndex);
+										const result = await presets.deletePreset(
+											dialog().presetIndex,
+										);
+										if (result.selectedPreset) {
+											const normalizedConfig = normalizeProject(
+												mergePresetIntoProject(
+													project,
+													result.selectedPreset.config,
+												),
+											);
+											setProject(reconcile(normalizedConfig));
+											presets.captureProjectBaseline(normalizedConfig);
+										}
 										await presets.query.refetch();
 									},
 									onSuccess: () => {

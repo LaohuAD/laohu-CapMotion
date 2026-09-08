@@ -27,6 +27,58 @@ pub fn default_recordings_dir(app: &AppHandle<Wry>) -> PathBuf {
     app.path().app_data_dir().unwrap().join("recordings")
 }
 
+pub fn default_screenshots_dir(app: &AppHandle<Wry>) -> PathBuf {
+    app.path().app_data_dir().unwrap().join("screenshots")
+}
+
+fn screenshots_dir_for_recordings(
+    recordings_dir: &Path,
+    default_recordings_dir: &Path,
+    default_screenshots_dir: &Path,
+) -> PathBuf {
+    if recordings_dir == default_recordings_dir {
+        default_screenshots_dir.to_path_buf()
+    } else {
+        recordings_dir.join("screenshots")
+    }
+}
+
+/// Screenshot projects follow the same user-selected storage root as recording
+/// projects. The legacy Application Support layout remains unchanged when the
+/// default storage location is active.
+pub fn screenshots_dir(app: &AppHandle<Wry>) -> PathBuf {
+    let path = screenshots_dir_for_recordings(
+        &GeneralSettingsStore::recordings_dir(app),
+        &default_recordings_dir(app),
+        &default_screenshots_dir(app),
+    );
+    std::fs::create_dir_all(&path).unwrap_or_default();
+    path
+}
+
+/// Active, default, and previously selected screenshot locations. This keeps
+/// old projects visible after the user changes the storage setting.
+pub fn known_screenshots_dirs(app: &AppHandle<Wry>) -> Vec<PathBuf> {
+    let default_recordings = default_recordings_dir(app);
+    let default_screenshots = default_screenshots_dir(app);
+    let mut dirs = vec![screenshots_dir(app), default_screenshots.clone()];
+
+    if let Ok(Some(settings)) = GeneralSettingsStore::get(app) {
+        dirs.extend(
+            settings
+                .previous_recordings_paths
+                .iter()
+                .map(PathBuf::from)
+                .filter(|p| p.is_absolute())
+                .map(|p| {
+                    screenshots_dir_for_recordings(&p, &default_recordings, &default_screenshots)
+                }),
+        );
+    }
+
+    dedupe_existing_dirs(dirs)
+}
+
 /// Every directory that may contain recordings: the active directory first,
 /// then the default location and any previously used custom folders.
 /// Deduplicated by canonical path; directories that don't exist are skipped.
@@ -621,6 +673,29 @@ mod tests {
         ]);
 
         assert_eq!(deduped, vec![a, b]);
+    }
+
+    #[test]
+    fn screenshots_follow_custom_storage_without_changing_legacy_default() {
+        let default_recordings = Path::new("/system/recordings");
+        let default_screenshots = Path::new("/system/screenshots");
+
+        assert_eq!(
+            screenshots_dir_for_recordings(
+                default_recordings,
+                default_recordings,
+                default_screenshots,
+            ),
+            default_screenshots,
+        );
+        assert_eq!(
+            screenshots_dir_for_recordings(
+                Path::new("/external/CapMotion"),
+                default_recordings,
+                default_screenshots,
+            ),
+            Path::new("/external/CapMotion/screenshots"),
+        );
     }
 
     #[test]

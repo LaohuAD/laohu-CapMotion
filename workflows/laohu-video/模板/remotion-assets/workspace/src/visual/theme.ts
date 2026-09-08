@@ -1,11 +1,81 @@
 import type {ComponentConfig} from "../schemas/components";
 
+export const fontFamilies = {
+  display:
+    '"Montserrat", "Arial Black", "Noto Sans CJK SC", "Source Han Sans CN VF", "PingFang SC", sans-serif',
+  body:
+    '"Noto Sans CJK SC", "Source Han Sans CN VF", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',
+  number:
+    '"Roboto Condensed", "DIN Condensed", "DIN Alternate", "Arial Narrow", "Noto Sans CJK SC", sans-serif',
+  micro:
+    '"Montserrat", "Avenir Next", "Helvetica Neue", "Noto Sans CJK SC", sans-serif',
+} as const;
+
+export const typeStyles = {
+  hero: {
+    fontFamily: fontFamilies.display,
+    fontWeight: 900,
+    lineHeight: 0.96,
+    letterSpacing: "-0.035em",
+  },
+  title: {
+    fontFamily: fontFamilies.display,
+    fontWeight: 900,
+    lineHeight: 1.02,
+    letterSpacing: "-0.025em",
+  },
+  cardTitle: {
+    fontFamily: fontFamilies.body,
+    fontWeight: 700,
+    lineHeight: 1.12,
+    letterSpacing: "-0.012em",
+  },
+  body: {
+    fontFamily: fontFamilies.body,
+    fontWeight: 500,
+    lineHeight: 1.38,
+    letterSpacing: "0em",
+  },
+  number: {
+    fontFamily: fontFamilies.number,
+    fontWeight: 700,
+    lineHeight: 0.92,
+    letterSpacing: "-0.02em",
+    fontVariantNumeric: "tabular-nums",
+  },
+  microLabel: {
+    fontFamily: fontFamilies.micro,
+    fontWeight: 800,
+    lineHeight: 1,
+    letterSpacing: "0.2em",
+    textTransform: "uppercase",
+  },
+  microChinese: {
+    fontFamily: fontFamilies.body,
+    fontWeight: 700,
+    lineHeight: 1.08,
+    letterSpacing: "0.02em",
+  },
+} as const;
+
+export const splitBilingualLabel = (label: string) => {
+  const separator = label.lastIndexOf(" / ");
+  if (separator < 0) return {primary: label, secondary: undefined};
+  const primary = label.slice(0, separator).trim();
+  const secondary = label.slice(separator + 3).trim();
+  if (!/[\u3400-\u9fff]/u.test(secondary)) {
+    return {primary: label, secondary: undefined};
+  }
+  return {primary, secondary};
+};
+
 export const visualPresetNames = [
   "clear",
   "editorial",
   "tech",
   "momentum",
   "warning",
+  "editorial-dark",
 ] as const;
 
 export type VisualPresetName = (typeof visualPresetNames)[number];
@@ -90,10 +160,47 @@ const themes: Record<VisualPresetName, VisualTheme> = {
     line: "#684135",
     shadow: "rgba(0, 0, 0, 0.38)",
   },
+  "editorial-dark": {
+    background: "#090B0F",
+    surface: "rgba(15, 18, 24, 0.90)",
+    surfaceAlt: "rgba(24, 29, 38, 0.94)",
+    text: "#F7F8FA",
+    muted: "#9CA6B5",
+    accent: "#2F80FF",
+    accent2: "#F5B83D",
+    danger: "#FF4D5E",
+    success: "#39E75F",
+    line: "#303744",
+    shadow: "rgba(0, 0, 0, 0.48)",
+  },
 };
 
 export const getVisualTheme = (preset: ComponentConfig["stylePreset"]) =>
   themes[preset];
+
+export const resolveSemanticAccent = (
+  preset: ComponentConfig["stylePreset"],
+  role: NonNullable<ComponentConfig["accentRole"]> = "info",
+) => {
+  const theme = getVisualTheme(preset);
+  if (preset === "editorial-dark") {
+    return {
+      info: "#2F80FF",
+      success: "#39E75F",
+      warning: "#F5B83D",
+      danger: "#FF4D5E",
+      technical: "#A96BFF",
+    }[role];
+  }
+
+  return {
+    info: theme.accent,
+    success: theme.success,
+    warning: theme.accent2,
+    danger: theme.danger,
+    technical: theme.accent,
+  }[role];
+};
 
 const channel = (value: number) => {
   const normalized = value / 255;

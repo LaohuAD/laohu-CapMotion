@@ -31,6 +31,7 @@ import {
 import { defaultKeyboardSettings } from "~/store/keyboard";
 import { createTauriEventListener } from "~/utils/createEventListener";
 import { createPresets } from "~/utils/createPresets";
+import { keyboardEventTargetsEditableContent } from "~/utils/editor-shortcuts";
 import { createCustomDomainQuery } from "~/utils/queries";
 import {
 	type CanvasControls,
@@ -63,6 +64,7 @@ import {
 	createAudioTrackSegment,
 	MIN_AUDIO_SEGMENT_DURATION,
 } from "./audio";
+import { captionTrackId, pruneCaptionTrackPositions } from "./caption-position";
 import { deriveCaptionTrackSegments, mapEditedTimeToSource } from "./captions";
 import {
 	type ClipTransition,
@@ -402,6 +404,7 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 		const [project, setProject] = createStore<EditorProjectConfiguration>(
 			normalizeProject(props.editorInstance.savedProjectConfig),
 		);
+		editorInstanceContext.presets.captureProjectBaseline(project);
 
 		const setClipTransition = (
 			segmentIndex: number,
@@ -1408,9 +1411,8 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 			deleteCaptionSegments: (segmentIndices: number[]) => {
 				batch(() => {
 					setProject(
-						"timeline",
-						"captionSegments",
-						produce((segments) => {
+						produce((currentProject: typeof project) => {
+							const segments = currentProject.timeline?.captionSegments;
 							if (!segments) return;
 							const sorted = [...new Set(segmentIndices)]
 								.filter(
@@ -1418,6 +1420,17 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 								)
 								.sort((a, b) => b - a);
 							for (const i of sorted) segments.splice(i, 1);
+
+							const remainingCaptionTrackIds = new Set(
+								segments.map((segment) => captionTrackId(segment.trackId)),
+							);
+							const settings = currentProject.captions?.settings;
+							if (settings) {
+								settings.trackPositions = pruneCaptionTrackPositions(
+									settings.trackPositions,
+									remainingCaptionTrackIds,
+								);
+							}
 						}),
 					);
 					setEditorState("timeline", "selection", null);
@@ -2127,6 +2140,7 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 				() => {
 					const segments = project.captions?.segments;
 					const timeline = project.timeline;
+					if (project.captions?.displayMode === "materialized") return null;
 					if (!segments || segments.length === 0 || !timeline) return null;
 					const captionsSig = segments
 						.map(
@@ -2155,7 +2169,8 @@ export const [EditorContextProvider, useEditorContext] = createContextProvider(
 						.join(",");
 					return `${captionsSig}@@${timelineSig}@@${transitionSig}@@${holdSig}`;
 				},
-				() => {
+				(signature) => {
+					if (signature === null) return;
 					const timeline = project.timeline;
 					const segments = project.captions?.segments;
 					if (!timeline || !segments) return;
@@ -2426,6 +2441,8 @@ function createStoreHistory<T extends Static>(
 	});
 
 	createEventListener(window, "keydown", (e) => {
+		if (keyboardEventTargetsEditableContent(e, document.activeElement)) return;
+
 		switch (e.code) {
 			case "KeyZ": {
 				if (!(e.ctrlKey || e.metaKey)) return;

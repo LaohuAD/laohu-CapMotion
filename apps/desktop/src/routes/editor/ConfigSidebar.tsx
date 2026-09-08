@@ -15,13 +15,8 @@ import { createEventListenerMap } from "@solid-primitives/event-listener";
 import { createWritableMemo } from "@solid-primitives/memo";
 import { createQuery } from "@tanstack/solid-query";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { appDataDir, resolveResource } from "@tauri-apps/api/path";
-import {
-	BaseDirectory,
-	exists,
-	readDir,
-	writeFile,
-} from "@tauri-apps/plugin-fs";
+import { resolveResource } from "@tauri-apps/api/path";
+import { exists, readDir } from "@tauri-apps/plugin-fs";
 import { type as ostype } from "@tauri-apps/plugin-os";
 import { cx } from "cva";
 import {
@@ -127,6 +122,7 @@ import {
 	CursorStylePicker,
 	isExplicitCursorFamily,
 } from "./CursorStylePicker";
+import { shouldMirrorCaptionEditToSource } from "./caption-tracks";
 import { syncCaptionWordsWithText } from "./captions";
 import { type ClipTransition, clipSourceTimeAt } from "./clip-transitions";
 import { getColorPreviewBorderColor, hexToRgb, RgbInput } from "./color-utils";
@@ -2682,11 +2678,11 @@ function BackgroundConfig(props: {
 									const arrayBuffer = await file.arrayBuffer();
 									const uint8Array = new Uint8Array(arrayBuffer);
 
-									const fullPath = `${await appDataDir()}/${fileName}`;
-
-									await writeFile(fileName, uint8Array, {
-										baseDir: BaseDirectory.AppData,
-									});
+									const fullPath = await commands.importProjectBackgroundImage(
+										editorInstance.path,
+										fileName,
+										Array.from(uint8Array),
+									);
 
 									setProject("background", "source", {
 										type: "image",
@@ -4413,6 +4409,8 @@ function CaptionSegmentConfig(props: {
 				if (!timelineSegment) return;
 
 				fn(timelineSegment);
+				if (!shouldMirrorCaptionEditToSource(project.captions?.displayMode))
+					return;
 
 				const captionSegment = project.captions?.segments?.[props.segmentIndex];
 				if (!captionSegment) return;

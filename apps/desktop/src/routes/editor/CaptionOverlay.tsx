@@ -1,4 +1,7 @@
-import { createEventListenerMap } from "@solid-primitives/event-listener";
+import {
+	createEventListener,
+	createEventListenerMap,
+} from "@solid-primitives/event-listener";
 import { throttle } from "@solid-primitives/scheduled";
 import {
 	createEffect,
@@ -11,7 +14,14 @@ import {
 import { produce } from "solid-js/store";
 import { defaultCaptionSettings } from "~/store/captions";
 import type { CaptionTrackSegment } from "~/utils/tauri";
+import { keyboardEventTargetsEditableContent } from "~/utils/editor-shortcuts";
 import { useCanvasSnapTargets } from "./CanvasElementsOverlay";
+import {
+	captionTrackId,
+	CAPTION_POSITION_COORDINATE_SIZE,
+	resolveCaptionTrackPosition,
+	setCaptionTrackPosition,
+} from "./caption-position";
 import { FPS, useEditorContext } from "./context";
 import { SNAP_PX, type SnapTargets, snapMovingRect } from "./snapping";
 
@@ -68,6 +78,19 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 		if (!settings().enabled) return null;
 		const time = currentAbsoluteTime();
 		const segments = project.timeline?.captionSegments ?? [];
+		const selection = editorState.timeline.selection;
+		const selectedIndex =
+			selection?.type === "caption" ? selection.indices[0] : undefined;
+		const selected =
+			selectedIndex === undefined ? undefined : segments[selectedIndex];
+		if (
+			selectedIndex !== undefined &&
+			selected &&
+			time >= selected.start &&
+			time < selected.end
+		) {
+			return { index: selectedIndex, segment: selected };
+		}
 		const index = segments.findIndex(
 			(segment) => time >= segment.start && time < segment.end,
 		);
@@ -80,8 +103,28 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 	const text = createMemo(() => activeCaption()?.segment.text ?? "");
 
 	const scaledFontSize = createMemo(() =>
-		Math.max(settings().size * (props.size.height / 1080), 1),
+		Math.max(
+			(activeCaption()?.segment.fontSizeOverride ?? settings().size) *
+				(props.size.height / 1080),
+			1,
+		),
 	);
+
+	const presentation = createMemo(() => {
+		const segment = activeCaption()?.segment;
+		const track = resolveCaptionTrackPosition(
+			settings().trackPositions,
+			captionTrackId(segment?.trackId),
+			{
+				position: settings().position,
+				manualPosition: settings().manualPosition,
+			},
+		);
+		return {
+			position: segment?.positionOverride ?? track.position,
+			manualPosition: segment?.manualPositionOverride ?? track.manualPosition,
+		};
+	});
 
 	const margin = createMemo(() => props.size.width * 0.05);
 	const availableWidth = createMemo(() =>
@@ -133,7 +176,7 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 			measuredSize().height * fitScale() + padding * 2,
 			Math.max(props.size.height, 1),
 		);
-		const currentSettings = settings();
+		const currentSettings = presentation();
 		let left: number;
 		let top: number;
 
@@ -184,16 +227,50 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 
 	const updateManualPosition = (position: { x: number; y: number }) => {
 		if (!project.captions) return;
-
+		const active = activeCaption();
+		const trackId = captionTrackId(active?.segment.trackId);
 		setProject(
-			"captions",
-			"settings",
-			produce((captionSettings) => {
-				captionSettings.position = "manual";
-				captionSettings.manualPosition = position;
+			produce((currentProject: typeof project) => {
+				const captionSettings = currentProject.captions?.settings;
+				if (!captionSettings) return;
+				captionSettings.trackPositions = setCaptionTrackPosition(
+					captionSettings.trackPositions,
+					trackId,
+					{ position: "manual", manualPosition: position },
+				);
+				for (const segment of currentProject.timeline?.captionSegments ?? []) {
+					if (captionTrackId(segment.trackId) !== trackId) continue;
+					segment.positionOverride = null;
+					segment.manualPositionOverride = null;
+				}
 			}),
 		);
 	};
+
+	// Caption nudging is deliberately outside the generic shortcut helper so
+	// native key-repeat keeps moving while an arrow key is held.
+	createEventListener(document, "keydown", (event: KeyboardEvent) => {
+		if (!activeCaption() || selectedCaptionIndex() === null) return;
+		if (keyboardEventTargetsEditableContent(event, document.activeElement))
+			return;
+		const direction: Record<string, [number, number]> = {
+			ArrowLeft: [-1, 0],
+			ArrowRight: [1, 0],
+			ArrowUp: [0, -1],
+			ArrowDown: [0, 1],
+		};
+		const delta = direction[event.key];
+		if (!delta) return;
+		event.preventDefault();
+		const current = presentation().manualPosition ?? {
+			x: (rect().left + rect().width / 2) / props.size.width,
+			y: (rect().top + rect().height / 2) / props.size.height,
+		};
+		updateManualPosition({
+			x: clamp(current.x + delta[0] / CAPTION_POSITION_COORDINATE_SIZE.x, 0, 1),
+			y: clamp(current.y + delta[1] / CAPTION_POSITION_COORDINATE_SIZE.y, 0, 1),
+		});
+	});
 
 	const createMouseDownDrag = (
 		setup: () => {
@@ -248,7 +325,7 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 	const onMove = createMouseDownDrag(
 		() => {
 			const currentRect = rect();
-			const currentSettings = settings();
+			const currentSettings = presentation();
 			const center =
 				currentSettings.position === "manual" && currentSettings.manualPosition
 					? { ...currentSettings.manualPosition }

@@ -172,9 +172,7 @@ struct PreviousItemsCache {
 }
 
 fn screenshots_path(app: &AppHandle) -> PathBuf {
-    let path = app.path().app_data_dir().unwrap().join("screenshots");
-    std::fs::create_dir_all(&path).unwrap_or_default();
-    path
+    crate::recordings_locations::screenshots_dir(app)
 }
 
 fn truncate_title(title: &str) -> String {
@@ -297,15 +295,17 @@ fn load_all_previous_items(app: &AppHandle, load_thumbnails: bool) -> Vec<Cached
         }
     }
 
-    if screenshots_dir.exists()
-        && let Ok(entries) = std::fs::read_dir(&screenshots_dir)
-    {
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.extension().and_then(|s| s.to_str()) == Some("cap")
-                && let Some(item) = load_single_item(&path, &screenshots_dir, load_thumbnails)
-            {
-                items.push(item);
+    for screenshots_dir in crate::recordings_locations::known_screenshots_dirs(app) {
+        if screenshots_dir.exists()
+            && let Ok(entries) = std::fs::read_dir(&screenshots_dir)
+        {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.extension().and_then(|s| s.to_str()) == Some("cap")
+                    && let Some(item) = load_single_item(&path, &screenshots_dir, load_thumbnails)
+                {
+                    items.push(item);
+                }
             }
         }
     }

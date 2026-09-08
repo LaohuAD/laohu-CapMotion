@@ -19,6 +19,26 @@ const REQUIRED_INTENT_FIELDS = ["audience", "promise", "mainLine", "primaryWin",
 const REQUIRED_NARRATIVE_FIELDS = ["purpose", "viewerBefore", "viewerAfter", "whyThisMedium", "handoffIn", "handoffOut"];
 const REQUIRED_ACTIVATION_FIELDS = ["asset", "trigger", "judgment", "changedDecision", "resultLocation", "unusedBoundary"];
 const NARRATIVE_PURPOSES = ["UNDERSTAND", "TRUST", "ACT", "FEEL", "TRANSITION"];
+const REQUIRED_KNOWLEDGE_VISUAL_FIELDS = [
+  "contractId",
+  "segmentId",
+  "spokenClaim",
+  "viewerBefore",
+  "viewerAfter",
+  "initialState",
+  "interaction",
+  "resultState",
+  "viewerInference",
+  "cameraPurpose",
+  "silentTest",
+  "audioSyncTest",
+];
+const KNOWLEDGE_TYPES = ["DEFINITION", "CAUSE", "PROCESS", "COMPARE", "HIERARCHY", "FEEDBACK", "BOUNDARY"];
+const LABEL_RESPONSIBILITIES = ["身份", "动作", "结果", "边界"];
+const EXPECTED_KNOWLEDGE_CARRIER = {
+  REMOTION: "REMOTION_OVERLAY",
+  AI_VIDEO: "AI_VIDEO_FULL",
+};
 const OVERLAY_ROLE_BY_TASK_TYPE = {
   REMOTION: "animation",
   AVATAR: "avatar",
@@ -33,11 +53,115 @@ const DEFAULT_Z_INDEX_BY_OVERLAY_ROLE = {
   avatar: 40,
   animation: 50,
 };
+const REQUIRED_OVERLAY_CONTINUITY_FIELDS = [
+  "groupId",
+  "stateBefore",
+  "stateUpdate",
+  "stateAfter",
+  "contrastReason",
+  "handoff",
+];
+const OVERLAY_ROLES = ["NAVIGATION", "EXPLANATION", "EVIDENCE", "CONCLUSION", "BRIDGE"];
+const HOST_CARRIERS = ["BASE", "SCREEN_RECORDING", "AVATAR", "EVIDENCE", "AI_VIDEO_FULL"];
+const OVERLAY_PERSISTENCE = ["SEGMENT", "ACROSS_CUT", "UNTIL_SECTION_END"];
+const CONTRAST_MODES = ["NONE", "LOCAL_BACKPLATE", "REGIONAL_SCRIM", "FULL_SCRIM"];
+const FOCUS_OWNERS = ["HOST", "OVERLAY", "EVIDENCE"];
+const PROTECTED_TARGETS = ["FACE", "HANDS", "SUBTITLES", "SOURCE_UI", "AI_VISUAL_ANCHOR"];
+const REQUIRED_AI_HOST_COMPATIBILITY_FIELDS = [
+  "visualAnchor",
+  "stableNegativeSpace",
+  "luminanceProfile",
+  "motionLoad",
+  "attentionHandoff",
+];
 
 const error = (code, path, message) => ({code, path, message});
 const nonEmpty = (value) => typeof value === "string" && value.trim().length > 0;
 const validRange = (range) =>
   range && Number.isFinite(range.start) && Number.isFinite(range.end) && range.start >= 0 && range.end > range.start;
+
+function knowledgeVisualContractIssues(contract, {expectedCarrier, taskId} = {}) {
+  if (!contract || typeof contract !== "object") return ["KnowledgeVisualContract 缺失"];
+  const issues = REQUIRED_KNOWLEDGE_VISUAL_FIELDS
+    .filter((field) => !nonEmpty(contract[field]))
+    .map((field) => `缺少 ${field}`);
+  if (!KNOWLEDGE_TYPES.includes(contract.knowledgeType)) issues.push("knowledgeType 不受支持");
+  if (!Array.isArray(contract.entities) || contract.entities.length < 1 || !contract.entities.every(nonEmpty)) {
+    issues.push("entities 必须包含至少一个语义对象");
+  }
+  if (!Array.isArray(contract.stateChanges) || contract.stateChanges.length < 1 || !contract.stateChanges.every(nonEmpty)) {
+    issues.push("stateChanges 必须包含至少一次可见状态变化");
+  }
+  if (
+    !Array.isArray(contract.semanticAnchors)
+    || contract.semanticAnchors.length < 1
+    || contract.semanticAnchors.some((anchor) => !nonEmpty(anchor?.spokenCue) || !nonEmpty(anchor?.visualEvent))
+  ) {
+    issues.push("semanticAnchors 必须建立口播触发与画面事件的对应");
+  }
+  if (
+    !Array.isArray(contract.labelPlan)
+    || contract.labelPlan.some((label) => (
+      !nonEmpty(label?.text)
+      || !nonEmpty(label?.target)
+      || !LABEL_RESPONSIBILITIES.includes(label?.responsibility)
+    ))
+  ) {
+    issues.push("labelPlan 必须是可为空的合法标签数组");
+  }
+  if (expectedCarrier && contract.carrierDecision !== expectedCarrier) {
+    issues.push(`carrierDecision 必须为 ${expectedCarrier}`);
+  }
+  if (taskId && contract.segmentId !== taskId) issues.push("segmentId 必须与任务 id 一致");
+  return issues;
+}
+
+function overlayContinuityIssues(contract) {
+  if (!contract || typeof contract !== "object") return ["overlay continuity contract 缺失"];
+  const issues = REQUIRED_OVERLAY_CONTINUITY_FIELDS
+    .filter((field) => !nonEmpty(contract[field]))
+    .map((field) => `缺少 ${field}`);
+  if (!Number.isInteger(contract.order) || contract.order < 1) issues.push("order 必须为正整数");
+  if (!OVERLAY_ROLES.includes(contract.role)) issues.push("role 不受支持");
+  if (!HOST_CARRIERS.includes(contract.hostCarrier)) issues.push("hostCarrier 不受支持");
+  if (!OVERLAY_PERSISTENCE.includes(contract.persistence)) issues.push("persistence 不受支持");
+  if (!CONTRAST_MODES.includes(contract.contrastMode)) issues.push("contrastMode 不受支持");
+  if (
+    !Array.isArray(contract.attentionPlan)
+    || contract.attentionPlan.length < 1
+    || contract.attentionPlan.some((item) => (
+      !nonEmpty(item?.spokenCue)
+      || !FOCUS_OWNERS.includes(item?.focusOwner)
+      || !nonEmpty(item?.target)
+      || !nonEmpty(item?.reason)
+    ))
+  ) {
+    issues.push("attentionPlan 必须逐语义点指定唯一焦点及原因");
+  }
+  if (
+    !Array.isArray(contract.protectedRegions)
+    || contract.protectedRegions.some((region) => (
+      !PROTECTED_TARGETS.includes(region?.target) || !nonEmpty(region?.description)
+    ))
+  ) {
+    issues.push("protectedRegions 必须是合法安全区数组");
+  }
+  return issues;
+}
+
+function aiHostCompatibilityIssues(contract) {
+  if (!contract || typeof contract !== "object") return ["AI host compatibility contract 缺失"];
+  const issues = REQUIRED_AI_HOST_COMPATIBILITY_FIELDS
+    .filter((field) => !nonEmpty(contract[field]))
+    .map((field) => `缺少 ${field}`);
+  if (!Array.isArray(contract.forbiddenOverlayWindows) || !contract.forbiddenOverlayWindows.every(nonEmpty)) {
+    issues.push("forbiddenOverlayWindows 必须是合法字符串数组");
+  }
+  if (!["PENDING", "PASS", "FAIL"].includes(contract.actualPixelReview)) {
+    issues.push("actualPixelReview 必须为 PENDING / PASS / FAIL");
+  }
+  return issues;
+}
 
 export function validatePostproductionPackage(value) {
   const errors = [];
@@ -78,6 +202,12 @@ export function validatePostproductionPackage(value) {
   } else if (!isAbsolute(value.capProject.path)) {
     errors.push(error("CAP_PROJECT_PATH_NOT_ABSOLUTE", "capProject.path", "Cap 工程路径必须是绝对路径"));
   }
+  if (!nonEmpty(value.capProject?.sourcePath) || !isAbsolute(value.capProject?.sourcePath ?? "")) {
+    errors.push(error("CAP_SOURCE_PROJECT_REQUIRED", "capProject.sourcePath", "必须给出只读保留的原始 Cap 工程绝对路径"));
+  }
+  if (value.capProject?.nonDestructiveCopy !== true || value.capProject?.sourcePath === value.capProject?.path) {
+    errors.push(error("CAP_NON_DESTRUCTIVE_COPY_REQUIRED", "capProject", "后期必须写入独立的新 Cap 工程，不能修改原始录制工程"));
+  }
   if (!nonEmpty(value.sources?.secondPassAsr) || !nonEmpty(value.sources?.productionScript) || !nonEmpty(value.sources?.finalMainAudio)) {
     errors.push(error("SOURCE_INPUT_INCOMPLETE", "sources", "必须给出第二遍 ASR、完整制作脚本和最终主音频"));
   } else if (![value.sources.secondPassAsr, value.sources.productionScript, value.sources.finalMainAudio].every(isAbsolute)) {
@@ -92,6 +222,61 @@ export function validatePostproductionPackage(value) {
     errors.push(error("EDIT_MAPPING_INCOMPLETE", "edit", "必须给出最终 EDL 与 S2→T2 映射"));
   } else if (![value.edit.edlPath, value.edit.sourceToFinalMapPath].every(isAbsolute)) {
     errors.push(error("EDIT_PATH_NOT_ABSOLUTE", "edit", "EDL 与 S2→T2 映射必须使用绝对路径"));
+  }
+  const captionTracks = value.edit?.captionTracks;
+  if (
+    captionTracks?.mode !== "SEPARATE_BILINGUAL"
+    || !nonEmpty(captionTracks?.sourceMasterPath)
+    || !nonEmpty(captionTracks?.displayTracksPath)
+    || ![captionTracks?.sourceMasterPath, captionTracks?.displayTracksPath].every((path) => nonEmpty(path) && isAbsolute(path))
+    || !Array.isArray(captionTracks?.tracks)
+    || captionTracks.tracks.length !== 2
+    || !captionTracks.tracks.includes("zh-CN")
+    || !captionTracks.tracks.includes("en")
+  ) {
+    errors.push(error(
+      "BILINGUAL_CAPTION_TRACKS_REQUIRED",
+      "edit.captionTracks",
+      "必须同时给出源字幕主稿，以及可独立编辑且通过 pairId 配对的中文轨和英文轨",
+    ));
+  }
+  const preEditReview = value.edit?.preEditReview;
+  if (!preEditReview || !nonEmpty(preEditReview.documentPath)) {
+    errors.push(error("PRE_EDIT_REVIEW_REQUIRED", "edit.preEditReview", "剪辑前必须提供覆盖整片的预剪辑字幕审稿文档"));
+  } else {
+    if (!isAbsolute(preEditReview.documentPath)) {
+      errors.push(error("PRE_EDIT_REVIEW_PATH_NOT_ABSOLUTE", "edit.preEditReview.documentPath", "预剪辑字幕审稿文档必须使用绝对路径"));
+    }
+    if (preEditReview.fullTimelineCovered !== true || preEditReview.segmentBoundariesIncluded !== true) {
+      errors.push(error("PRE_EDIT_REVIEW_INCOMPLETE", "edit.preEditReview", "审稿文档必须覆盖整片并按每个候选剪辑片段列出源时码、字幕和处理意见"));
+    }
+    if (
+      preEditReview.virtualRoughCutComplete !== true
+      || preEditReview.virtualFineCutComplete !== true
+      || preEditReview.provisionalFinalTimelineIncluded !== true
+    ) {
+      errors.push(error(
+        "PRE_EDIT_VIRTUAL_EDIT_INCOMPLETE",
+        "edit.preEditReview",
+        "预剪辑必须在文档中走完虚拟初剪、虚拟精剪，并给出带预期成片时码的最终字幕时间轴",
+      ));
+    }
+    if (
+      preEditReview.crossCueSemanticReviewComplete !== true
+      || preEditReview.atomicTermsPreserved !== true
+    ) {
+      errors.push(error(
+        "PRE_EDIT_CAPTION_REVIEW_INCOMPLETE",
+        "edit.preEditReview",
+        "最终拟用字幕必须跨 ASR 条目恢复完整表达，并确认模型名、版本号和术语组合未被拆开",
+      ));
+    }
+    if (preEditReview.uncertaintiesResolved !== true) {
+      errors.push(error("PRE_EDIT_UNCERTAINTIES_UNRESOLVED", "edit.preEditReview.uncertaintiesResolved", "剪辑、字幕文字、专名、参数、字体或样式疑难未确认时不得进入剪辑"));
+    }
+    if (preEditReview.userApproval?.status !== "APPROVED" || !nonEmpty(preEditReview.userApproval?.reference)) {
+      errors.push(error("PRE_EDIT_REVIEW_NOT_APPROVED", "edit.preEditReview.userApproval", "必须记录用户对整份预剪辑字幕审稿文档的明确批准"));
+    }
   }
   if (!Array.isArray(value.tasks)) errors.push(error("TASKS_ARRAY_REQUIRED", "tasks", "tasks 必须是数组"));
   const ids = new Set();
@@ -110,6 +295,22 @@ export function validatePostproductionPackage(value) {
     } else if (!NARRATIVE_PURPOSES.includes(task.narrative.purpose)) {
       errors.push(error("TASK_PURPOSE_INVALID", `${path}.narrative.purpose`, `不支持 ${task.narrative.purpose}`));
     }
+    if (
+      task.narrative?.purpose === "UNDERSTAND"
+      && ["REMOTION", "AI_VIDEO"].includes(task.type)
+    ) {
+      const issues = knowledgeVisualContractIssues(task.knowledgeVisual, {
+        expectedCarrier: EXPECTED_KNOWLEDGE_CARRIER[task.type],
+        taskId: task.id,
+      });
+      if (issues.length) {
+        errors.push(error(
+          "KNOWLEDGE_VISUAL_CONTRACT_INCOMPLETE",
+          `${path}.knowledgeVisual`,
+          issues.join("；"),
+        ));
+      }
+    }
     if (task.type === "REMOTION") {
       const missing = REQUIRED_REMOTION_FIELDS.filter((field) => {
         const candidate = task.annotation?.[field];
@@ -117,6 +318,24 @@ export function validatePostproductionPackage(value) {
       });
       if (missing.length) {
         errors.push(error("REMOTION_ANNOTATION_INCOMPLETE", `${path}.annotation`, `缺少 ${missing.join(", ")}`));
+      }
+      const continuityIssues = overlayContinuityIssues(task.overlayContinuity);
+      if (continuityIssues.length) {
+        errors.push(error(
+          "OVERLAY_CONTINUITY_INCOMPLETE",
+          `${path}.overlayContinuity`,
+          continuityIssues.join("；"),
+        ));
+      }
+      if (task.overlayContinuity?.hostCarrier === "AI_VIDEO_FULL") {
+        const compatibilityIssues = aiHostCompatibilityIssues(task.overlayContinuity.hostCompatibility);
+        if (compatibilityIssues.length) {
+          errors.push(error(
+            "AI_HOST_COMPATIBILITY_INCOMPLETE",
+            `${path}.overlayContinuity.hostCompatibility`,
+            compatibilityIssues.join("；"),
+          ));
+        }
       }
     } else if (task.type === "AVATAR") {
       if (validRange(task.finalRange) && task.finalRange.end - task.finalRange.start > 40 + 1e-6) {
@@ -152,6 +371,42 @@ export function validatePostproductionPackage(value) {
           "OVERLAY_ROLE_OVERLAP",
           `tasks[${second.index}].finalRange`,
           `同一覆盖职责 ${second.role} 不能与 tasks[${first.index}] 重叠`,
+        ));
+      }
+    }
+  }
+  const continuityGroups = new Map();
+  for (const [index, task] of (value.tasks ?? []).entries()) {
+    if (task.type !== "REMOTION" || !task.overlayContinuity || !validRange(task.finalRange)) continue;
+    const groupId = task.overlayContinuity.groupId;
+    if (!nonEmpty(groupId)) continue;
+    if (!continuityGroups.has(groupId)) continuityGroups.set(groupId, []);
+    continuityGroups.get(groupId).push({task, index});
+  }
+  for (const entries of continuityGroups.values()) {
+    entries.sort((left, right) => left.task.overlayContinuity.order - right.task.overlayContinuity.order);
+    for (let index = 1; index < entries.length; index += 1) {
+      const previous = entries[index - 1];
+      const current = entries[index];
+      if (current.task.overlayContinuity.order !== previous.task.overlayContinuity.order + 1) {
+        errors.push(error(
+          "OVERLAY_CONTINUITY_ORDER_INVALID",
+          `tasks[${current.index}].overlayContinuity.order`,
+          "同一连续组必须使用无缺口顺序",
+        ));
+      }
+      if (current.task.overlayContinuity.stateBefore !== previous.task.overlayContinuity.stateAfter) {
+        errors.push(error(
+          "OVERLAY_STATE_DISCONTINUITY",
+          `tasks[${current.index}].overlayContinuity.stateBefore`,
+          "跨底画覆盖组的前态必须接住上一段后态",
+        ));
+      }
+      if (current.task.finalRange.start < previous.task.finalRange.end) {
+        errors.push(error(
+          "OVERLAY_CONTINUITY_TIME_INVALID",
+          `tasks[${current.index}].finalRange`,
+          "同一连续组的顺序必须与冻结时间轴一致",
         ));
       }
     }
@@ -279,6 +534,10 @@ export function buildOverlayCommandPlan(value, assets) {
         role: OVERLAY_ROLE_BY_TASK_TYPE[task.type],
         track: asset.track ?? 0,
         zIndex: asset.zIndex ?? DEFAULT_Z_INDEX_BY_OVERLAY_ROLE.animation,
+        props: {
+          ...(asset.props ?? {}),
+          overlayContinuity: structuredClone(task.overlayContinuity),
+        },
       });
     } else {
       if (

@@ -1,0 +1,83 @@
+{
+  "symptom": "Cap 每发现一个工程或界面问题就重新打包独立版，把开发排错与发布验收混成同一步；同时包版本、应用内更新日志和 GitHub 发布记录没有统一权威，界面仍显示上游 Cap 内容",
+  "triggerScope": "PROJECT_CAPABILITY",
+  "earliestFailure": "本地应用规则只限制了何时允许打包，没有要求开发版先完成真实链路，也没有把版本号、双语更新记录、应用内展示和 GitHub Release 绑定成同一次发布事务",
+  "rootLayer": "STRUCTURE",
+  "hypothesis": "将开发版真实工程闭环设为发布打包前置门，并以本地双语发布记录绑定唯一包版本、应用内展示和后续 GitHub Release，再在打包前自动校验，可以减少重复打包并阻止漏加版本、跳版本和显示上游日志",
+  "protection": [
+    "不替换、删除或审计用户明确排除的旧废工程",
+    "原始录制工程只读，所有剪辑只写入新建工作工程",
+    "保留 revision、工程锁、字段校验和原子写入",
+    "开发版闭环不替代签名、TCC 权限、包标识和安装路径的独立版专属回归",
+    "不在用户正在使用 CapMotion 时强制关闭或替换应用",
+    "同一版本的失败重试和重新签名不重复增加版本号",
+    "CLI 命令、路径、Webhook 方法、配置键和占位符不因界面本地化而改写"
+  ],
+  "authorityPath": "AGENTS.md",
+  "change": "在本地应用开发规则中增加开发版全链路验收门；新增 0.0.1 十进制进位规则、CapMotion 双语发布历史、包版本与更新记录一致性校验、现有安装版本连续性校验，并让更新日志页面和提醒脱离上游 Cap API",
+  "decisionChanges": [
+    "代码变更后先启动开发版，完整验证打开、剪辑、字幕、预设、保存与重开",
+    "开发版排错期间不反复构建和替换独立版",
+    "EDL 源段边界从未剪原工程读取，待编辑工程只作为当前 revision 的写入目标",
+    "发布时只打包一次，独立版直接打开开发版已验证的同一 `.cap` 工程",
+    "只有签名、权限、包标识或安装路径问题才必须在打包环境单独诊断",
+    "每次真正交付的更新只递增一次 0.0.1，0.1.9 的下一版是 0.2.0",
+    "本地双语更新记录在上传 GitHub 前就是应用内权威，发布时复用同一内容",
+    "打包前拒绝包版本与最新记录不一致，也拒绝相对本机已安装版跳号或降级",
+    "自动化只翻译用户界面文案，用户自定义名称和执行所需技术值保持原样"
+  ],
+  "regressions": {
+    "current": [
+      "开发版能通过文件打开已剪新工程，不因 single-instance 回调早于 setup 而崩溃",
+      "同一新工程包含 296 个可返工剪辑段、211 组中英对齐字幕和两条可编辑字幕轨",
+      "已剪工程不会被当成原始 1966 秒源时间轴重建 EDL",
+      "0.1.1 包配置与最新双语更新记录一致",
+      "自动化模板、触发器、条件、动作和自动摘要均通过中文覆盖测试",
+      "更新日志页面与入口提醒不再调用上游 Cap changelog API",
+      "CLI 安装共享模块 13 项 Rust 测试通过"
+    ],
+    "legacy": [
+      "只有用户明确要求打包时才更新 `/Users/a1/Applications/CapMotion.app`",
+      "独立版仍使用持久签名证书并校验权限兼容的 designated requirement",
+      "用户正在测试独立版时不自动关闭或替换",
+      "同一版本打包失败后的重试允许沿用原版本号"
+    ],
+    "adjacent": [
+      "纯前端 HMR 仍可在开发窗口中热更新，不需要因此启动打包",
+      "必须在包环境才能复现的签名与 TCC 问题仍保留独立版回归",
+      "简单 CLI 字段校验和单元测试不要求启动 GUI 或构建安装包",
+      "POST、URL、文件路径、JSON 和 {share_link} 等自动化技术内容保持原值",
+      "GitHub 尚未发布 Release 时，本地更新日志仍可离线显示当前版本记录"
+    ]
+  },
+  "evidence": [
+    "node --test scripts/build-cap-local.test.mjs scripts/cap-project-package.test.mjs scripts/cap-project-edl.test.mjs",
+    "cargo check -p cap-desktop --bin cap-desktop",
+    "pnpm --dir apps/desktop dev:tauri",
+    "开发版打开、关闭并重开 MiniMax H3真正用法｜老胡剪辑工程",
+    "target/debug/cap-cli project validate <working-project> --format json",
+    "node --test scripts/check-cap-local-release.test.mjs scripts/build-cap-local.test.mjs",
+    "pnpm --dir apps/desktop exec vitest run：48 个测试文件、315 项测试",
+    "pnpm --dir apps/desktop exec tsc --noEmit",
+    "pnpm --dir apps/desktop build",
+    "cargo test -p cap-cli-install：13 项通过"
+    ,"./scripts/build-cap-local.sh：0.1.1 release 构建、应用束生成、持久证书签名、权限兼容校验和本地安装成功"
+    ,"安装后检查：版本 0.1.1、bundle id com.laohu.capmotion、codesign 深度严格验证和内置 CLI schema 均通过"
+  ],
+  "rollback": "若开发版无法复现只在独立包出现的必要问题，保留开发版全链路门并把该问题标记为打包专属回归；若本地发布记录阻断合法跨版本安装，保留版本与日志一致性校验，仅将连续版本检查改为核对完整历史；不得回退到上游 Cap 日志或无记录打包",
+  "validation": {
+    "STRUCTURE": "PASS",
+    "ROUTE": "PASS",
+    "BEHAVIOR": "OBSERVE",
+    "QUALITY": "UNKNOWN"
+  },
+  "decision": "OBSERVE",
+  "knowledgeActivation": {
+    "asset": ".agents/skills/laohu-video-evolution/SKILL.md + references/四层能力进化与保真.md",
+    "trigger": "用户明确要求把版本递增、更新记录和后续 GitHub 发布沉淀为长期项目规则",
+    "judgment": "最早失效点在发布链权威分裂，而不只是更新日志页面的几段英文",
+    "changedDecision": "版本配置、双语更新记录、应用内展示和 GitHub Release 改为同一发布链；打包前自动拒绝不一致与跳号",
+    "resultLocation": "AGENTS.md、apps/desktop/src/capmotion-changelog.json、scripts/check-cap-local-release.mjs 及对应测试",
+    "unusedBoundary": "本轮不创建 GitHub Release、不安装实际用户 CLI、不把受控 EDL 脚本迁移为新 CLI 子命令"
+  }
+}

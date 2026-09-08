@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schema.tauri.app/config/2",
+	"productName": "CapMotion",
+	"mainBinaryName": "CapMotion",
+	"version": "0.1.2",
+	"identifier": "com.laohu.capmotion",
+	"plugins": {
+		"updater": {
+			"active": false,
+			"pubkey": ""
+		}
+	},
+	"bundle": {
+		"createUpdaterArtifacts": false,
+		"targets": ["app"],
+		"shortDescription": "Screen recording built for AI-driven timeline editing.",
+		"longDescription": "Screen capture that lets AI Agents edit captions, animations, and media directly on the timeline."
+	}
+}

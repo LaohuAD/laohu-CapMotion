@@ -21,15 +21,39 @@ use std::sync::OnceLock;
 const BUNDLED_CAPTION_FONTS: &[&[u8]] = &[
     include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/assets/caption-fonts/SourceHanSansCN-VF.ttf"
+        "/assets/caption-fonts/SourceHanSansSC-Regular.otf"
     )),
     include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/assets/caption-fonts/SourceHanSerifCN-VF.ttf"
+        "/assets/caption-fonts/SourceHanSansSC-Medium.otf"
+    )),
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/SourceHanSansSC-Bold.otf"
+    )),
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/SourceHanSerifSC-Regular.otf"
+    )),
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/SourceHanSerifSC-Medium.otf"
+    )),
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/SourceHanSerifSC-Bold.otf"
+    )),
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/LXGWWenKai-Light.ttf"
     )),
     include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
         "/assets/caption-fonts/LXGWWenKai-Regular.ttf"
+    )),
+    include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/assets/caption-fonts/LXGWWenKai-Medium.ttf"
     )),
 ];
 
@@ -128,7 +152,6 @@ mod font_tests {
                 let families = id
                     .and_then(|id| font_system.db().face(id))
                     .map(|face| face.families.clone());
-                println!("{family:?} weight {weight}: {families:?}");
                 assert!(
                     families.is_some(),
                     "{family:?} (weight {weight}) resolved to no font"
@@ -139,13 +162,15 @@ mod font_tests {
 
     #[test]
     fn bundled_caption_families_resolve() {
-        let font_system = new_font_system();
-        for name in [
-            "Source Han Sans CN VF",
-            "Source Han Serif CN VF",
-            "LXGW WenKai",
+        let mut font_system = new_font_system();
+        let mut resolved = Vec::new();
+        for (name, weights) in [
+            ("Source Han Sans SC", &[400u16, 500, 700][..]),
+            ("Source Han Serif SC", &[400u16, 500, 700][..]),
+            ("LXGW WenKai", &[300u16, 400, 500][..]),
         ] {
-            for weight in [400u16, 700] {
+            let mut family_faces = Vec::new();
+            for &weight in weights {
                 let query = glyphon::fontdb::Query {
                     families: &[glyphon::fontdb::Family::Name(name)],
                     weight: glyphon::fontdb::Weight(weight),
@@ -153,7 +178,127 @@ mod font_tests {
                 };
                 let id = font_system.db().query(&query);
                 assert!(id.is_some(), "{name} weight {weight} did not resolve");
+                assert!(
+                    font_system.get_font(id.unwrap()).is_some(),
+                    "{name} weight {weight} resolved in fontdb but failed to load for shaping"
+                );
+                let id = id.unwrap();
+                assert_eq!(
+                    font_system.db().face(id).unwrap().weight.0,
+                    weight,
+                    "{name} did not resolve the exact exposed weight"
+                );
+                family_faces.push(id);
             }
+            family_faces.dedup();
+            assert_eq!(
+                family_faces.len(),
+                weights.len(),
+                "{name} exposes weight choices that resolve to the same face"
+            );
+            resolved.push((name, family_faces[0]));
+        }
+        assert_ne!(
+            resolved[0].1, resolved[1].1,
+            "sans and serif resolved to the same face"
+        );
+        assert_ne!(
+            resolved[0].1, resolved[2].1,
+            "sans and WenKai resolved to the same face"
+        );
+    }
+
+    #[test]
+    fn bundled_caption_families_shape_cjk_with_distinct_faces() {
+        fn shaped_face(
+            project_family: &str,
+            bundled_family: &str,
+            requested_weight: u16,
+        ) -> (glyphon::fontdb::ID, glyphon::fontdb::ID) {
+            let mut font_system = new_font_system();
+            let expected = font_system
+                .db()
+                .query(&glyphon::fontdb::Query {
+                    families: &[glyphon::Family::Name(bundled_family)],
+                    weight: glyphon::fontdb::Weight(requested_weight),
+                    ..Default::default()
+                })
+                .expect("named family should resolve");
+            assert_eq!(
+                font_system.db().face(expected).unwrap().weight.0,
+                requested_weight,
+                "named family must expose an exact requested weight for cosmic-text"
+            );
+            let mut buffer =
+                glyphon::Buffer::new(&mut font_system, glyphon::Metrics::new(64.0, 76.8));
+            buffer.set_text(
+                &mut font_system,
+                "人物的停顿情绪和重音",
+                &glyphon::Attrs::new()
+                    .family(super::caption_style::caption_family(project_family))
+                    .weight(glyphon::Weight(requested_weight)),
+                glyphon::Shaping::Advanced,
+            );
+            let actual = glyphon::cosmic_text::LayoutRunIter::new(&buffer)
+                .flat_map(|run| run.glyphs.iter().map(|glyph| glyph.font_id))
+                .next()
+                .expect("sample text should shape at least one glyph");
+            (expected, actual)
+        }
+
+        let sans = shaped_face("Source Han Sans CN VF", "Source Han Sans SC", 700);
+        let serif = shaped_face("Source Han Serif CN VF", "Source Han Serif SC", 700);
+        let wenkai = shaped_face("LXGW WenKai", "LXGW WenKai", 500);
+        assert_eq!(sans.0, sans.1, "CJK sans ignored the requested family");
+        assert_eq!(serif.0, serif.1, "CJK serif ignored the requested family");
+        assert_eq!(
+            wenkai.0, wenkai.1,
+            "CJK WenKai ignored the requested family"
+        );
+        assert_ne!(
+            sans.1, serif.1,
+            "CJK sans and serif shaped with the same face"
+        );
+        assert_ne!(
+            sans.1, wenkai.1,
+            "CJK sans and WenKai shaped with the same face"
+        );
+    }
+
+    #[test]
+    fn system_caption_aliases_shape_chinese_with_the_selected_cjk_family() {
+        let mut font_system = new_font_system();
+        for project_family in ["System Sans-Serif", "System Serif", "System Monospace"] {
+            let expected_family =
+                super::caption_style::caption_family_for_text(project_family, "人物的停顿");
+            let expected_weight =
+                super::caption_style::caption_weight_for_text(project_family, 400, "人物的停顿");
+            let expected = font_system
+                .db()
+                .query(&glyphon::fontdb::Query {
+                    families: &[expected_family],
+                    weight: expected_weight,
+                    ..Default::default()
+                })
+                .expect("CJK system caption family should resolve");
+            let mut buffer =
+                glyphon::Buffer::new(&mut font_system, glyphon::Metrics::new(64.0, 76.8));
+            buffer.set_text(
+                &mut font_system,
+                "人物的停顿",
+                &glyphon::Attrs::new()
+                    .family(expected_family)
+                    .weight(expected_weight),
+                glyphon::Shaping::Advanced,
+            );
+            let actual = glyphon::cosmic_text::LayoutRunIter::new(&buffer)
+                .flat_map(|run| run.glyphs.iter().map(|glyph| glyph.font_id))
+                .next()
+                .expect("Chinese sample should shape");
+            assert_eq!(
+                actual, expected,
+                "{project_family} used an unrelated fallback"
+            );
         }
     }
 }

@@ -32,7 +32,7 @@ export const TimelineRoadmap: React.FC<{config: ComponentConfig}> = ({config}) =
         </div>
         <div style={{display: "grid", gridTemplateColumns: `repeat(${config.items.length}, 1fr)`, gap: 20}}>
           {config.items.map((item, index) => {
-            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd);
+            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
             return (
               <div key={item.id} style={{textAlign: "center", opacity: progress}}>
                 <div style={{fontSize: 30, fontWeight: 900, color: theme.accent}}>

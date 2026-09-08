@@ -10,12 +10,24 @@ import { TextInput } from "./TextInput";
 import type { TextAnimation } from "./text";
 
 export const FONT_OPTIONS = [
-	{ value: "System Sans-Serif", label: "System Sans-Serif" },
-	{ value: "System Serif", label: "System Serif" },
-	{ value: "System Monospace", label: "System Monospace" },
-	{ value: "Source Han Sans CN VF", label: "Source Han Sans CN VF" },
-	{ value: "Source Han Serif CN VF", label: "Source Han Serif CN VF" },
-	{ value: "LXGW WenKai", label: "LXGW WenKai" },
+	{
+		value: "System Sans-Serif",
+		label: "System Sans-Serif",
+		weights: [400, 700],
+	},
+	{ value: "System Serif", label: "System Serif", weights: [400, 700] },
+	{ value: "System Monospace", label: "System Monospace", weights: [400, 700] },
+	{
+		value: "Source Han Sans CN VF",
+		label: "Source Han Sans CN VF",
+		weights: [400, 500, 700],
+	},
+	{
+		value: "Source Han Serif CN VF",
+		label: "Source Han Serif CN VF",
+		weights: [400, 500, 700],
+	},
+	{ value: "LXGW WenKai", label: "LXGW WenKai", weights: [300, 400, 500] },
 ];
 
 export const CAPTION_POSITION_OPTIONS = [
@@ -38,10 +50,32 @@ export const KEYBOARD_POSITION_OPTIONS = [
 ];
 
 export const TEXT_WEIGHT_OPTIONS = [
+	{ label: "Light Weight", value: 300 },
 	{ label: "Normal", value: 400 },
 	{ label: "Medium", value: 500 },
 	{ label: "Bold", value: 700 },
 ];
+
+export function getCaptionWeightOptions(font: string) {
+	const supported = FONT_OPTIONS.find((option) => option.value === font)
+		?.weights ?? [400, 700];
+	return supported.map(
+		(weight) =>
+			TEXT_WEIGHT_OPTIONS.find((option) => option.value === weight) ?? {
+				label: `Custom (${weight})`,
+				value: weight,
+			},
+	);
+}
+
+export function normalizeCaptionFontWeight(font: string, weight: number) {
+	const supported = getCaptionWeightOptions(font).map((option) => option.value);
+	return supported.reduce((nearest, candidate) =>
+		Math.abs(candidate - weight) < Math.abs(nearest - weight)
+			? candidate
+			: nearest,
+	);
+}
 
 export const TEXT_SEGMENT_WEIGHT_OPTIONS = [
 	{ label: "Light", value: 300 },
@@ -58,7 +92,7 @@ export const TEXT_ANIMATION_OPTIONS: {
 	label: string;
 }[] = [
 	{ value: "none", label: "None" },
-	{ value: "fade", label: "Fade" },
+	{ value: "fade", label: "Gradual Reveal" },
 	{ value: "slideUp", label: "Slide up" },
 	{ value: "slideDown", label: "Slide down" },
 	{ value: "pop", label: "Pop" },
@@ -67,8 +101,9 @@ export const TEXT_ANIMATION_OPTIONS: {
 
 export const CAPTION_ANIMATION_OPTIONS = [
 	{ value: "none", label: "None" },
-	{ value: "bounce", label: "Bounce" },
-	{ value: "pop", label: "Pop" },
+	{ value: "fade", label: "Fade" },
+	{ value: "bounce", label: "Rise In" },
+	{ value: "pop", label: "Pop In" },
 ];
 
 export const CAPTION_HIGHLIGHT_STYLE_OPTIONS = [

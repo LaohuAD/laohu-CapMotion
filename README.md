@@ -1,4 +1,4 @@
-# Laohu Voice2Motion FrameCut
+# laohu-CapMotion
 
 一套以 [Cap](https://github.com/CapSoftware/Cap) 为桌面产品基底、由 Codex 驱动内容剪辑与动画制作的口播视频工作台。
 
@@ -62,7 +62,7 @@ workflows/laohu-video/        口播剪辑与动画工作流
 ## 上游关系
 
 ```text
-origin    git@github.com:LaohuAD/laohu-Voice2MotionFrameCut.git
+origin    git@github.com:LaohuAD/laohu-CapMotion.git
 upstream  https://github.com/CapSoftware/Cap.git
 ```
 

@@ -11,6 +11,9 @@ use crate::general_settings::GeneralSettingsStore;
 
 const UPDATE_ENDPOINT: &str =
     "https://cdn.crabnebula.app/update/cap/cap/{{target}}/{{current_version}}";
+const LAOHU_BUNDLE_IDENTIFIER: &str = "com.laohu.capmotion";
+const LAOHU_GITHUB_LATEST_RELEASE_API: &str =
+    "https://api.github.com/repos/LaohuAD/laohu-CapMotion/releases/latest";
 
 const FIRST_CHECK_DELAY: Duration = Duration::from_secs(60);
 const CHECK_INTERVAL: Duration = Duration::from_secs(2 * 60 * 60);
@@ -32,6 +35,69 @@ pub struct UpdateCheckResult {
     pub version: String,
     pub notes: Option<String>,
     pub channel: UpdateChannel,
+    pub download_url: Option<String>,
+}
+
+#[derive(Deserialize)]
+struct GithubRelease {
+    tag_name: String,
+    body: Option<String>,
+    html_url: String,
+}
+
+fn is_laohu_local_identifier(identifier: &str) -> bool {
+    identifier == LAOHU_BUNDLE_IDENTIFIER
+}
+
+fn normalize_release_tag(tag: &str) -> String {
+    tag.trim()
+        .strip_prefix('v')
+        .or_else(|| tag.trim().strip_prefix("release-"))
+        .unwrap_or(tag.trim())
+        .to_string()
+}
+
+async fn check_laohu_github_release(
+    current_version: &semver::Version,
+) -> Result<Option<UpdateCheckResult>, String> {
+    let response = reqwest::Client::new()
+        .get(LAOHU_GITHUB_LATEST_RELEASE_API)
+        .header(reqwest::header::USER_AGENT, "CapMotion")
+        .header(reqwest::header::ACCEPT, "application/vnd.github+json")
+        .send()
+        .await
+        .map_err(|error| format!("GitHub Releases request failed: {error}"))?;
+
+    if response.status() == reqwest::StatusCode::NOT_FOUND {
+        // GitHub returns 404 when the repository does not have a release yet.
+        return Ok(None);
+    }
+
+    let release = response
+        .error_for_status()
+        .map_err(|error| format!("GitHub Releases returned an error: {error}"))?
+        .json::<GithubRelease>()
+        .await
+        .map_err(|error| format!("GitHub Releases response was invalid: {error}"))?;
+
+    let remote_version = semver::Version::parse(&normalize_release_tag(&release.tag_name))
+        .map_err(|error| {
+            format!(
+                "Unsupported GitHub release tag {}: {error}",
+                release.tag_name
+            )
+        })?;
+
+    if remote_version <= *current_version {
+        return Ok(None);
+    }
+
+    Ok(Some(UpdateCheckResult {
+        version: remote_version.to_string(),
+        notes: release.body,
+        channel: UpdateChannel::Stable,
+        download_url: Some(release.html_url),
+    }))
 }
 
 #[derive(Serialize, Type, tauri_specta::Event, Clone, Debug)]
@@ -222,17 +288,28 @@ async fn is_busy(app: &AppHandle) -> bool {
 #[tauri::command]
 #[specta::specta]
 pub async fn updates_check(app: AppHandle) -> Result<Option<UpdateCheckResult>, String> {
+    if is_laohu_local_identifier(&app.config().identifier) {
+        return check_laohu_github_release(&app.package_info().version).await;
+    }
+
     let channel = current_channel(&app);
     Ok(check(&app).await?.map(|update| UpdateCheckResult {
         version: update.version.clone(),
         notes: update.body.clone(),
         channel,
+        download_url: None,
     }))
 }
 
 #[tauri::command]
 #[specta::specta]
 pub async fn updates_download_and_install(app: AppHandle) -> Result<(), String> {
+    if is_laohu_local_identifier(&app.config().identifier) {
+        return Err(
+            "CapMotion 第一阶段只打开 GitHub Releases 下载页面，不执行应用内安装".to_string(),
+        );
+    }
+
     let state = app.state::<UpdatesState>();
     let _install = state.install.lock().await;
 
@@ -287,8 +364,8 @@ pub fn updates_channel_changed(app: AppHandle) -> Result<(), String> {
 }
 
 pub fn spawn_background_loop(app: AppHandle) {
-    // Never auto-update dev builds.
-    if cfg!(debug_assertions) {
+    // Never auto-update dev builds or the independently distributed Laohu build.
+    if cfg!(debug_assertions) || is_laohu_local_identifier(&app.config().identifier) {
         return;
     }
 
@@ -397,4 +474,23 @@ pub fn spawn_background_loop(app: AppHandle) {
             *state.announced_version.lock().await = Some(version);
         }
     });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{is_laohu_local_identifier, normalize_release_tag};
+
+    #[test]
+    fn only_the_laohu_bundle_uses_the_local_release_channel() {
+        assert!(is_laohu_local_identifier("com.laohu.capmotion"));
+        assert!(!is_laohu_local_identifier("so.cap.desktop"));
+        assert!(!is_laohu_local_identifier("so.cap.desktop.dev"));
+    }
+
+    #[test]
+    fn github_release_tags_are_normalized_before_version_comparison() {
+        assert_eq!(normalize_release_tag("v0.6.1"), "0.6.1");
+        assert_eq!(normalize_release_tag("0.6.1"), "0.6.1");
+        assert_eq!(normalize_release_tag(" release-0.6.1 "), "0.6.1");
+    }
 }

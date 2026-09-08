@@ -17,6 +17,7 @@ mod library;
 mod mcp;
 mod notifications;
 mod organizations;
+mod presets;
 mod project;
 mod record;
 mod recordings;
@@ -195,6 +196,8 @@ enum Commands {
     ExportPreview(ExportPreview),
     /// Inspect or validate a '.cap' project
     Project(ProjectArgs),
+    /// Read and update user-owned presentation presets
+    Presets(PresetsArgs),
     /// Safely create and edit motion animation instances in a '.cap' project
     Motion(cap_motion_cli::MotionArgs),
     /// Start a recording or list available capture targets and devices
@@ -346,6 +349,50 @@ enum ProjectCommands {
     Config(ProjectConfigArgs),
     /// Import or inspect project captions
     Captions(ProjectCaptionsArgs),
+    /// Patch canvas and background presentation without replacing project content
+    Presentation(ProjectPresentationPatch),
+    /// Apply a named user presentation preset without replacing project content
+    Preset(ProjectPresetArgs),
+}
+
+#[derive(Args)]
+struct ProjectPresentationPatch {
+    project_path: PathBuf,
+    /// Current project revision; stale writers are rejected
+    #[arg(long)]
+    expected_revision: u64,
+    /// JSON file containing a partial ProjectPresentationPatch (camelCase keys)
+    #[arg(long)]
+    patch_json: PathBuf,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Args)]
+struct ProjectPresetArgs {
+    #[command(subcommand)]
+    command: ProjectPresetCommands,
+}
+
+#[derive(Subcommand)]
+enum ProjectPresetCommands {
+    /// Apply a named user preset to a project
+    Apply(ProjectPresetApply),
+}
+
+#[derive(Args)]
+struct ProjectPresetApply {
+    project_path: PathBuf,
+    #[arg(long)]
+    name: String,
+    /// Current project revision; stale writers are rejected
+    #[arg(long)]
+    expected_revision: u64,
+    /// Override the CapMotion user store (or set CAP_PRESETS_STORE)
+    #[arg(long)]
+    store_path: Option<PathBuf>,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
 }
 
 #[derive(Args)]
@@ -365,7 +412,7 @@ struct ProjectConfigArgs {
 enum ProjectConfigCommands {
     /// Print the project's editor configuration as JSON
     Get(ProjectTarget),
-    /// Replace the project's editor configuration from a full JSON document
+    /// Transactionally replace the full editor configuration; the document's projectRevision must match
     Set(ProjectConfigSet),
 }
 
@@ -389,6 +436,10 @@ struct ProjectCaptionsArgs {
 enum ProjectCaptionsCommands {
     /// Import source-timed ASR caption segments without replacing other tracks
     Import(ProjectCaptionsImport),
+    /// Materialize linked bilingual captions as two editable final-time tracks
+    Materialize(ProjectCaptionsMaterialize),
+    /// Patch reusable caption style fields without replacing caption content or other tracks
+    Style(ProjectCaptionsStyle),
 }
 
 #[derive(Args)]
@@ -402,6 +453,121 @@ struct ProjectCaptionsImport {
     captions_json: PathBuf,
     #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
     format: OutputFormat,
+}
+
+#[derive(Args)]
+struct ProjectCaptionsStyle {
+    project_path: PathBuf,
+    /// Current project revision; stale writers are rejected
+    #[arg(long)]
+    expected_revision: u64,
+    /// JSON file containing a partial CaptionStylePatch (camelCase keys)
+    #[arg(long)]
+    style_json: PathBuf,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Args)]
+struct ProjectCaptionsMaterialize {
+    project_path: PathBuf,
+    /// Current project revision; stale writers are rejected
+    #[arg(long)]
+    expected_revision: u64,
+    /// JSON file using the laohu.cap-caption-tracks/1 schema
+    #[arg(long)]
+    tracks_json: PathBuf,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Args)]
+struct PresetsArgs {
+    #[command(subcommand)]
+    command: PresetsCommands,
+}
+
+#[derive(Subcommand)]
+enum PresetsCommands {
+    /// Print the public preset field schema and ownership boundary
+    Schema(PresetsSchema),
+    /// List user presets and the current preset-store revision
+    List(PresetsList),
+    /// Inspect one named user preset
+    Inspect(PresetsInspect),
+    /// Save reusable presentation settings from a project
+    Save(PresetsSave),
+    /// Patch caption appearance in one user preset
+    CaptionsStyle(PresetsCaptionsStyle),
+    /// Replace the typed Agent editing preferences linked to one visible preset
+    AgentProfile(PresetsAgentProfile),
+}
+
+#[derive(Args)]
+struct PresetsSchema {
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Args)]
+struct PresetsTarget {
+    /// Override the CapMotion user store (or set CAP_PRESETS_STORE)
+    #[arg(long)]
+    store_path: Option<PathBuf>,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Args)]
+struct PresetsList {
+    #[command(flatten)]
+    target: PresetsTarget,
+}
+
+#[derive(Args)]
+struct PresetsInspect {
+    name: String,
+    #[command(flatten)]
+    target: PresetsTarget,
+}
+
+#[derive(Args)]
+struct PresetsSave {
+    name: String,
+    project_path: PathBuf,
+    /// Current preset-store revision; stale writers are rejected
+    #[arg(long)]
+    expected_revision: u64,
+    #[arg(long)]
+    set_default: bool,
+    #[command(flatten)]
+    target: PresetsTarget,
+}
+
+#[derive(Args)]
+struct PresetsCaptionsStyle {
+    name: String,
+    /// Current preset-store revision; stale writers are rejected
+    #[arg(long)]
+    expected_revision: u64,
+    /// JSON file containing a partial CaptionStylePatch (camelCase keys)
+    #[arg(long)]
+    style_json: PathBuf,
+    #[command(flatten)]
+    target: PresetsTarget,
+}
+
+#[derive(Args)]
+struct PresetsAgentProfile {
+    name: String,
+    /// Current preset-store revision; stale writers are rejected
+    #[arg(long)]
+    expected_revision: u64,
+    /// JSON file containing an AgentEditingProfile (camelCase keys)
+    #[arg(long)]
+    profile_json: PathBuf,
+    #[command(flatten)]
+    target: PresetsTarget,
 }
 
 #[derive(Args)]
@@ -593,6 +759,10 @@ async fn run(cli: Cli) -> Result<(), String> {
         Commands::ExportPreview(e) => e.run().await,
         Commands::Selftest(args) => args.run(json).await,
         Commands::Project(args) => args.run(json),
+        Commands::Presets(args) => {
+            let format = args.output_format(json);
+            finish_json(format, args.run(json))
+        }
         Commands::Motion(args) => run_motion(args, json),
         Commands::Record(RecordArgs { command, args }) => match command {
             Some(RecordCommands::Start(args)) => args.run(json).await,
@@ -796,7 +966,218 @@ impl ProjectArgs {
                         ),
                     )
                 }
+                ProjectCaptionsCommands::Style(args) => {
+                    let format = resolve_format(json, args.format);
+                    finish_json(
+                        format,
+                        project::captions_style(
+                            args.project_path,
+                            args.expected_revision,
+                            &args.style_json,
+                            format,
+                        ),
+                    )
+                }
+                ProjectCaptionsCommands::Materialize(args) => {
+                    let format = resolve_format(json, args.format);
+                    finish_json(
+                        format,
+                        project::captions_materialize(
+                            args.project_path,
+                            args.expected_revision,
+                            &args.tracks_json,
+                            format,
+                        ),
+                    )
+                }
             },
+            ProjectCommands::Presentation(args) => {
+                let format = resolve_format(json, args.format);
+                finish_json(
+                    format,
+                    project::presentation_patch(
+                        args.project_path,
+                        args.expected_revision,
+                        &args.patch_json,
+                        format,
+                    ),
+                )
+            }
+            ProjectCommands::Preset(ProjectPresetArgs { command }) => match command {
+                ProjectPresetCommands::Apply(args) => {
+                    let format = resolve_format(json, args.format);
+                    finish_json(
+                        format,
+                        project::preset_apply(
+                            args.project_path,
+                            args.expected_revision,
+                            &args.name,
+                            args.store_path,
+                            format,
+                        ),
+                    )
+                }
+            },
+        }
+    }
+}
+
+impl PresetsArgs {
+    fn output_format(&self, json: bool) -> OutputFormat {
+        let local = match &self.command {
+            PresetsCommands::Schema(args) => args.format,
+            PresetsCommands::List(args) => args.target.format,
+            PresetsCommands::Inspect(args) => args.target.format,
+            PresetsCommands::Save(args) => args.target.format,
+            PresetsCommands::CaptionsStyle(args) => args.target.format,
+            PresetsCommands::AgentProfile(args) => args.target.format,
+        };
+        resolve_format(json, local)
+    }
+
+    fn run(self, json: bool) -> Result<(), String> {
+        match self.command {
+            PresetsCommands::Schema(args) => {
+                let format = resolve_format(json, args.format);
+                let schema = presets::preset_schema();
+                match format {
+                    OutputFormat::Json => write_json(&schema),
+                    OutputFormat::Text => {
+                        println!("Cap user preset schema v{}", schema["schemaVersion"]);
+                        println!("Run `cap presets schema --json` for machine-readable fields.");
+                        Ok(())
+                    }
+                }
+            }
+            PresetsCommands::List(args) => {
+                let format = resolve_format(json, args.target.format);
+                let path = args
+                    .target
+                    .store_path
+                    .map(Ok)
+                    .unwrap_or_else(presets::default_store_path)?;
+                let store = presets::list_presets(&path)?;
+                match format {
+                    OutputFormat::Json => write_json(&serde_json::json!({
+                        "ok": true,
+                        "revision": store.revision,
+                        "default": store.default,
+                        "presets": store.presets.iter().enumerate().map(|(index, preset)| {
+                            serde_json::json!({
+                                "name": preset.name,
+                                "default": store.default == Some(index),
+                            })
+                        }).collect::<Vec<_>>()
+                    })),
+                    OutputFormat::Text => {
+                        println!("revision: {}", store.revision);
+                        for (index, preset) in store.presets.iter().enumerate() {
+                            let marker = if store.default == Some(index) {
+                                " (default)"
+                            } else {
+                                ""
+                            };
+                            println!("{}{}", preset.name, marker);
+                        }
+                        Ok(())
+                    }
+                }
+            }
+            PresetsCommands::Inspect(args) => {
+                let format = resolve_format(json, args.target.format);
+                let path = args
+                    .target
+                    .store_path
+                    .map(Ok)
+                    .unwrap_or_else(presets::default_store_path)?;
+                let store = presets::list_presets(&path)?;
+                let preset = presets::get_preset(&path, &args.name)?;
+                match format {
+                    OutputFormat::Json => write_json(&serde_json::json!({
+                        "ok": true,
+                        "revision": store.revision,
+                        "preset": preset,
+                    })),
+                    OutputFormat::Text => {
+                        println!("preset: {}", preset.name);
+                        println!("revision: {}", store.revision);
+                        Ok(())
+                    }
+                }
+            }
+            PresetsCommands::Save(args) => {
+                let format = resolve_format(json, args.target.format);
+                let path = args
+                    .target
+                    .store_path
+                    .map(Ok)
+                    .unwrap_or_else(presets::default_store_path)?;
+                let project = cap_project::ProjectConfiguration::load(&args.project_path)
+                    .map_err(|error| format!("Failed to load project configuration: {error}"))?;
+                let receipt = presets::save_project_preset(
+                    &path,
+                    args.expected_revision,
+                    &args.name,
+                    &project,
+                    args.set_default,
+                )?;
+                match format {
+                    OutputFormat::Json => write_json(&receipt),
+                    OutputFormat::Text => {
+                        println!("saved preset: {}", receipt.preset);
+                        println!("revision: {}", receipt.revision);
+                        Ok(())
+                    }
+                }
+            }
+            PresetsCommands::CaptionsStyle(args) => {
+                let format = resolve_format(json, args.target.format);
+                let path = args
+                    .target
+                    .store_path
+                    .map(Ok)
+                    .unwrap_or_else(presets::default_store_path)?;
+                let input = std::fs::read_to_string(&args.style_json)
+                    .map_err(|error| format!("Failed to read caption style JSON: {error}"))?;
+                let patch: cap_project::CaptionStylePatch = serde_json::from_str(&input)
+                    .map_err(|error| format!("Invalid caption style JSON: {error}"))?;
+                let receipt = presets::patch_preset_caption_style(
+                    &path,
+                    args.expected_revision,
+                    &args.name,
+                    patch,
+                )?;
+                match format {
+                    OutputFormat::Json => write_json(&receipt),
+                    OutputFormat::Text => {
+                        println!("updated preset: {}", receipt.preset);
+                        println!("revision: {}", receipt.revision);
+                        Ok(())
+                    }
+                }
+            }
+            PresetsCommands::AgentProfile(args) => {
+                let format = resolve_format(json, args.target.format);
+                let path = args
+                    .target
+                    .store_path
+                    .map(Ok)
+                    .unwrap_or_else(presets::default_store_path)?;
+                let input = std::fs::read_to_string(&args.profile_json)
+                    .map_err(|error| format!("Failed to read Agent profile JSON: {error}"))?;
+                let profile: cap_project::AgentEditingProfile = serde_json::from_str(&input)
+                    .map_err(|error| format!("Invalid Agent profile JSON: {error}"))?;
+                let receipt =
+                    presets::set_agent_profile(&path, args.expected_revision, &args.name, profile)?;
+                match format {
+                    OutputFormat::Json => write_json(&receipt),
+                    OutputFormat::Text => {
+                        println!("updated Agent profile: {}", receipt.preset);
+                        println!("revision: {}", receipt.revision);
+                        Ok(())
+                    }
+                }
+            }
         }
     }
 }
@@ -904,4 +1285,69 @@ pub fn write_json_line<T: Serialize>(value: &T) -> Result<(), String> {
     serde_json::to_writer(&mut stdout, value).map_err(|e| e.to_string())?;
     writeln!(&mut stdout).map_err(|e| e.to_string())?;
     stdout.flush().map_err(|e| e.to_string())
+}
+
+#[cfg(test)]
+mod personal_preset_command_tests {
+    use super::*;
+
+    #[test]
+    fn parses_user_preset_and_project_apply_commands() {
+        assert!(Cli::try_parse_from(["cap", "presets", "list"]).is_ok());
+        assert!(Cli::try_parse_from(["cap", "presets", "schema"]).is_ok());
+        assert!(
+            Cli::try_parse_from([
+                "cap",
+                "presets",
+                "captions-style",
+                "Laohu",
+                "--expected-revision",
+                "3",
+                "--style-json",
+                "/tmp/style.json"
+            ])
+            .is_ok()
+        );
+        assert!(
+            Cli::try_parse_from([
+                "cap",
+                "project",
+                "preset",
+                "apply",
+                "/tmp/example.cap",
+                "--name",
+                "Laohu",
+                "--expected-revision",
+                "8"
+            ])
+            .is_ok()
+        );
+        assert!(
+            Cli::try_parse_from([
+                "cap",
+                "presets",
+                "agent-profile",
+                "Laohu",
+                "--expected-revision",
+                "4",
+                "--profile-json",
+                "/tmp/profile.json"
+            ])
+            .is_ok()
+        );
+        assert!(
+            Cli::try_parse_from([
+                "cap",
+                "project",
+                "captions",
+                "materialize",
+                "/tmp/example.cap",
+                "--expected-revision",
+                "9",
+                "--tracks-json",
+                "/tmp/final-bilingual-cap-tracks.json"
+            ])
+            .is_ok()
+        );
+    }
 }

@@ -1,7 +1,8 @@
+import {fontFamilies} from "../visual/theme";
+
 export const laohuPresets = {
   default: {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif',
+    fontFamily: fontFamilies.body,
     colors: {
       background: "#101216",
       panel: "#171B22",

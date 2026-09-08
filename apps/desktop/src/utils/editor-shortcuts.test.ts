@@ -4,6 +4,7 @@ import {
 	editorShortcutConflict,
 	editorShortcutDisplayKeys,
 	editorShortcutMatches,
+	keyboardEventTargetsEditableContent,
 	normalizeEditorShortcuts,
 } from "./editor-shortcuts";
 
@@ -84,5 +85,49 @@ describe("editor shortcuts", () => {
 				shift: true,
 			}),
 		).toEqual(["⌘", "⌃", "⌥", "⇧", "E"]);
+	});
+
+	it("treats the keyboard event target as editable even when activeElement is stale", () => {
+		const textarea = { tagName: "TEXTAREA" };
+
+		expect(
+			keyboardEventTargetsEditableContent(
+				{
+					target: textarea,
+					composedPath: () => [textarea],
+				},
+				{ tagName: "BODY" },
+			),
+		).toBe(true);
+	});
+
+	it("protects descendants of contenteditable and textbox controls", () => {
+		const contentEditable = {
+			tagName: "DIV",
+			isContentEditable: true,
+		};
+		const child = { tagName: "SPAN", parentElement: contentEditable };
+		const textbox = {
+			tagName: "DIV",
+			getAttribute: (name: string) => (name === "role" ? "textbox" : null),
+		};
+
+		expect(keyboardEventTargetsEditableContent({ target: child }, null)).toBe(
+			true,
+		);
+		expect(keyboardEventTargetsEditableContent({ target: textbox }, null)).toBe(
+			true,
+		);
+	});
+
+	it("allows timeline shortcuts for non-editable targets", () => {
+		const button = { tagName: "BUTTON" };
+
+		expect(
+			keyboardEventTargetsEditableContent(
+				{ target: button },
+				{ tagName: "BODY" },
+			),
+		).toBe(false);
 	});
 });

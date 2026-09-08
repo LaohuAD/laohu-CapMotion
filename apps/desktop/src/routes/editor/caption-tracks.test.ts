@@ -1,0 +1,58 @@
+import { describe, expect, it } from "vitest";
+import {
+	captionTrackPositionLabel,
+	groupCaptionSegmentsByTrack,
+	shouldMirrorCaptionEditToSource,
+} from "./caption-tracks";
+
+describe("groupCaptionSegmentsByTrack", () => {
+	it("keeps linked Chinese and English captions in two stable timeline rows", () => {
+		const groups = groupCaptionSegmentsByTrack([
+			{
+				id: "zh-1",
+				trackId: "zh-CN",
+				pairId: "caption-1",
+				start: 1,
+				end: 2,
+				text: "中文",
+			},
+			{
+				id: "en-1",
+				trackId: "en",
+				pairId: "caption-1",
+				start: 1,
+				end: 2,
+				text: "English",
+			},
+			{ id: "legacy", start: 3, end: 4, text: "旧字幕" },
+		] as never);
+
+		expect(
+			groups.map(({ id, label, entries }) => ({
+				id,
+				label,
+				indices: entries.map((entry) => entry.index),
+			})),
+		).toEqual([
+			{ id: "zh-CN", label: "中文字幕", indices: [0] },
+			{ id: "en", label: "English Captions", indices: [1] },
+			{ id: "default", label: "Captions", indices: [2] },
+		]);
+	});
+
+	it("does not mirror materialized translation edits into the source ASR master", () => {
+		expect(shouldMirrorCaptionEditToSource("materialized")).toBe(false);
+		expect(shouldMirrorCaptionEditToSource("autoProject")).toBe(true);
+		expect(shouldMirrorCaptionEditToSource(undefined)).toBe(true);
+	});
+
+	it("labels each visible position control by its own caption track", () => {
+		expect(captionTrackPositionLabel("zh-CN", "中文字幕")).toBe(
+			"Chinese Position",
+		);
+		expect(captionTrackPositionLabel("en", "English Captions")).toBe(
+			"English Position",
+		);
+		expect(captionTrackPositionLabel("ja", "日本語")).toBe("日本語 Position");
+	});
+});

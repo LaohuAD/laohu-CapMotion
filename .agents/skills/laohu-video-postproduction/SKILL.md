@@ -15,7 +15,11 @@ description: 第二遍 Cap 正式录制完成后，接收单条教学视频制�
 - 第二遍正式录制后，每条视频建立一个独立 Codex 任务。上游只创建并发送首份任务包，之后由老胡直接在该任务返工。
 - `S2` 是第二遍源时间，`T2` 是冻结 EDL 后的成片时间。所有覆盖任务只写 `T2`；第一遍 `F1` 永不进入成片映射。
 - 任务包唯一契约和状态见 [handoff-contract.md](references/handoff-contract.md)。先运行 `node scripts/postproduction-package.mjs validate <package.json>`。
+- 任务明确指定用户命名预设时，在做剪辑、字幕和动画判断前用 `cap presets inspect <name> --json` 读取同一条目的 `agentProfile`，并把当时的预设 store revision 记入任务记录。没有 `agentProfile` 时使用本 Skill 的项目规则，不猜用户偏好；预设与用户当轮明确指令冲突时，当轮指令优先。
 - 任务包必须先写 `intent`、`knowledgeActivations` 和每个覆盖任务的 `narrative`。没有观众变化、媒介理由和前后交接的任务，即使时码与接口正确，也不能进入制作。
+- `narrative.purpose=UNDERSTAND` 且任务类型为 `REMOTION / AI_VIDEO` 时，任务必须带完整 `KnowledgeVisualContract`。它要说清口播主张、语义对象、起始状态、作用、状态变化、结果、口播触发、少量中文大标签及静音 / 声画同步验收；不承担知识证明的 `TRANSITION`任务不强行增加。
+- 每个 `REMOTION` 任务必须带 `OverlayContinuityContract`，明确连续组、顺序、宿主载体、前后状态、唯一焦点、保护区、最低充分对比方式和交接。跨载体组必须满足前一任务 `stateAfter =` 后一任务 `stateBefore`，否则返回 `OVERLAY_STATE_DISCONTINUITY`。
+- 当 Remotion 覆盖在 `AI_VIDEO_FULL` 上时，必须携带 `hostCompatibility`，并在真实生成视频到位后复核视觉锚点、稳定负空间、亮度与运动负荷。上游建议不替代真实像素验收；不因有动画而默认全幅蒙版。
 
 ## 按需读取知识
 
@@ -30,20 +34,39 @@ description: 第二遍 Cap 正式录制完成后，接收单条教学视频制�
 
 ```text
 RECEIVED
+→ 原 Cap 工程只读校验并建立非破坏工作副本
+→ 读取并应用 Laohu 预设（16:9、当前桌面背景绑定、画面上移、字幕公共样式）
 → 第二遍 Cap 新 ASR
 → 观众、承诺、主线、主胜负手与视觉策略
+→ 文档内完成虚拟初剪、虚拟精剪、字幕切分与顺句
+→ 全片预剪辑字幕审稿文档（逐候选片段 + 预期成片字幕时间轴 + 全部疑难）
+→ 用户确认文字、剪口、音频分类、字体与样式
+→ PRE_EDIT_REVIEW_APPROVED
 → 粗剪 EDL
 → 内容导演精剪 EDL
-→ 剪辑疑难确认
 → EDL_FROZEN（Cap revision + EDL hash + S2→T2 hash）
 → Remotion / 数字人 / 录屏 / 证据 / AI 视频并行制作
 → Cap Motion 上层覆盖写入
-→ 修正 SRT 与展示字幕
+→ 修正 SRT 与中英双展示字幕轨物化
 → REVIEW
 → DELIVERED 或 FAILED
 ```
 
 任一步都必须给下一步留下可验证产物。EDL 或 Cap revision 改变时，旧覆盖计划作废并重新映射；不得在过期时间轴上“挪一挪继续用”。
+
+用户直接交付正式录制 `.cap` 时，`capProject.sourcePath` 是只读原工程，`capProject.path` 必须是不同路径的新工作工程，且 `nonDestructiveCopy=true`。目标已存在时不覆盖，而是继续使用任务记录里已建立的同一工作工程；不得在每次反馈时制造 `_v2 / _最终版`。建立工作工程后先验证媒体、源音轨和 revision，再把任务明确指定的用户预设应用到工作工程。对于 `Laohu`，可渲染结果必须同时满足：画布 `16:9`；背景保存为 `currentDesktop` 语义绑定并解析到本工程的桌面快照；录屏等比完整保留并整体上移；字幕公共样式为思源黑体粗体、白字黑描边、黑色阴影、无实心底框。预设不能携带字幕正文、EDL、源媒体路径或覆盖轨。
+
+全片预剪辑字幕审稿文档是剪辑授权，不是可选分析附件。执行 AI 必须先在文档中走完虚拟初剪、虚拟精剪、字幕切分和字幕顺句，再交付“按此方案剪完后”的预期成片字幕时间轴；每条同时带源时码和连续计算的目标时码。拟用字幕必须先跨相邻 ASR 条目恢复连续词流，再按完整意群重新切分；每条能独立顺读，上一句的句尾不遗落到下一条，模型名、版本号和术语组合不从中间拆开。文档还必须覆盖源视频首尾，逐个候选剪辑片段写明 ASR 原文、建议状态和理由，并集中列出会影响剪口、字幕文字、专名、字体或样式的疑难。录制音频只分麦克风声音和系统声音；外部录音归入麦克风声音。两者都无有效声音才进入气口候选；系统声音持续存在时，才结合画面和语境判断作品播放或操作演示。证据不足时只能标 `待确认`，不得用“可能是动画”直接保护或删除。只有用户明确批准且疑难清零后，任务包才能进入真实 EDL 与媒体执行阶段。
+
+初剪与精剪职责必须分开。初剪只处理已确认的气口、空白和无意义等待；精剪才处理失败起头、前后重录和可证明的语义重复，默认保留后面更完整的一版。精剪冻结后再以最终保留语音和词级时码重新切分展示字幕，在不改变事实、观点和语气含义的前提下改善书面语序；切分后反查句尾残词、跨条目承接和专名完整性。上下文唯一的术语错词直接修正并记录，存在两个以上合理候选才询问用户。除系统声音演示外，每段有效人物讲话都必须有字幕覆盖，并沿用用户已确认的双语字体与样式。
+
+重复试说必须按“最小重复语义单元”删除，不能按整条 ASR 或整句话粗删。后一版只替换前一版中的谓语、形容词或局部说法时，前一版独有的主语、对象、条件和句架仍是唯一信息，必须保留并与后一版自然拼接。例如“然后你又发现你创作出来的人物的脸很油的”后接“很油腻的话”，只能删除前版“很油的”和后版无必要的“的话”，保留前版完整句架并接后版“很油腻”。冻结前为每条润色字幕保存 `sourceRanges`，并做字幕语义支持审计：字幕中的主语、对象、判断和结论都必须能在这些可听源区间中找到，不得用只剩一个谓语的音频承载一整句字幕。
+
+剪辑范围必须先由任务包和当前作品控制文档限定。原录制已有清楚主线时，默认做保守顺序剪辑：只删除波形确认的长静音中段、独立语气声、失败起头、紧邻自我纠正和可证明的重复试说；不得把“内容导演”自动扩张成章节重排、表达改写或个人语感清除。每个拼接处保留约 `0.1–0.2` 秒真实气口，剪口依据波形与试听，不直接采用 ASR 词级边界。冻结前必须生成内容覆盖审计：除明确排除项外，每个有效 ASR 词都应仍映射到至少一个 EDL 保留区间，未覆盖即失败。
+
+气口精修同时检查片段内部和每个保留片段的首尾，不能只删片段内部静音。静音检测只能提出候选，实际剪除调用 `workflows/laohu-video/模板/video-editing/safe-speech-gap-refinement.mjs`：候选区内所有保留词都扩成禁剪区，剪刀只能取禁剪区之间的安全内核；片头默认至少保留下一词约 `0.14` 秒起音余量，片尾至少保留上一词约 `0.10` 秒收音余量。任何新 EDL 必须与上一个已确认 EDL 做词级差分，除明确列入删除清单的词外，`lostWords` 必须为 `0`。
+
+Cap 字幕写入必须同时维护两个层级：`captions.segments` 是可重新派生的源字幕权威，`timeline.captionSegments` 是当前冻结 EDL 上的展示轨。只写展示轨会在工程重载或重新派生时被清空；只写源字幕则不能证明当前展示断句和 T2 映射正确。双语展示字幕调用 `cap project captions materialize`，按 `trackId=zh-CN` 与 `trackId=en` 建成两条可编辑轨；同一屏中英两段共享 `pairId` 与 T2 起止，中文字幕使用老胡预设的大字号主行，英文使用较小字号副行。写入后 `captions.displayMode` 必须为 `materialized`，防止编辑器用源 ASR 自动投影覆盖翻译和顺句结果。EDL 一旦改变，两条展示轨必须重新物化。写入完成后必须关闭或重载解析一次，再验证源字幕非空、展示轨恰好两条、每个 pair 两侧齐全、数量和 T2 时码符合预期。
 
 整条视频还必须有一条可复述的观看路径。相邻任务的 `handoffOut` 必须能被下一任务的 `handoffIn` 接住；同一种信息已经由录屏或证据承担时，不再用动画重复解释。删除、调换或替换一个覆盖任务而不影响理解，说明它只是装饰，不是章法的一部分。
 
@@ -53,11 +76,11 @@ RECEIVED
 | --- | --- | --- | --- | --- |
 | `SCREEN_RECORDING` | 看清真实操作 | 第二遍录屏、操作语句、指针状态 | 先定位界面，再完成动作，最后停在结果 | 乱序会让操作状态断裂 |
 | `EVIDENCE` | 相信结论 | 截图、数据、出处与引用位置 | 先提出判断，再显证据，最后回扣结论 | 无出处会把推测伪装成事实 |
-| `REMOTION` | 看懂对象关系与变化 | 完整批注、ASR、前后文、素材 | 承接前镜、逐步变化、停在可读收束帧 | 平均铺效果会喧宾夺主 |
+| `REMOTION` | 看懂对象关系与变化，或跨载体维持章节 / 证据 / 结论状态 | 完整批注、ASR、前后文、素材、`OverlayContinuityContract` | 承接前镜、更新同一状态、停在可读收束帧并交给下一载体 | 平均铺效果、换底画就归零或默认全屏压暗都会喧宾夺主 |
 | `AVATAR` | 保持人物讲述连续性 | T2 对应的最终真实音频、连续组 | 延续前姿态、完成一段语义、在自然边界收束 | 按 40 秒机械截断会断句和跳姿态 |
-| `AI_VIDEO` | 建立情绪或场景入口 | 已验收外部成片与用途 | 清楚进入、服务主线、及时退出 | 漂亮但无关系会抢走信息焦点 |
+| `AI_VIDEO` | 建立情绪、场景入口或完整覆盖的知识状态变化 | 用户手动生成并已验收的外部成片、用途；承担理解时还要有 `KnowledgeVisualContract` | 清楚进入、按语义锚点变化、留下结果停点、及时退出 | 漂亮但无关系会抢走信息焦点 |
 
-`REMOTION` 必须调用 `laohu-animation-director`；`AVATAR` 必须调用 `runninghub-avatar`；字幕分别调用 `correct-srt-subtitles` 和 `burn-subtitles`。
+`REMOTION` 必须调用 `laohu-animation-director`；`AVATAR` 必须调用 `runninghub-avatar`。字幕文字校对调用 `correct-srt-subtitles`；交付可返工 Cap 工程时，使用 `cap project captions materialize` 写入两条展示轨并由 Cap 导出时渲染，不再额外调用 ffmpeg 烧录。只有任务明确交付仓库外的直接 MP4 且不要求可编辑字幕轨时，才调用 `burn-subtitles`。
 
 每个任务都要说明：它承接什么、要把观众从什么状态带到什么状态、为什么当前媒介比口播或现有画面更合适、把什么结果交给下一段。技法名称、任务类型和时间范围不能代替这些判断。
 
@@ -65,8 +88,13 @@ RECEIVED
 
 - 输入任务包必须是 `laohu.video-postproduction-handoff/1`，phase 固定 `SECOND_PASS_POSTPRODUCTION`。
 - 底层原始录制与最终主音频必须保留；媒体在仓库外，仓库内只存文字记录和索引。
+- 保守剪辑必须提交词级内容覆盖审计；任何不在明确排除清单中的有效词丢失，返回失败而不是静默缩短成片。
+- 最终 ASR 必须在最后一次 EDL 精修和最终媒体渲染完成后重新生成。此后 EDL、媒体、ASR JSON 或 SRT 任一文件变化，旧验收立即作废；用 `validate-final-asr-provenance.mjs create` 生成哈希回执，并在交付前以 `validate` 复核，禁止把精修前 ASR 复制成“最终验证”。
+- 字幕覆盖检查对显式标注的系统声音演示使用 `--exclude-ranges` 排除；其余词级麦克风人声必须 `uncoveredWordCount=0`。时间重叠通过只证明字幕在场，还必须抽查字幕文字是否由对应 `sourceRanges` 的可听语义支持。
+- Cap 工程字幕验收必须同时通过源字幕、展示轨和重载持久性三项检查；界面暂时看见字幕不等于工程已经可靠保存。
 - 程序动画唯一引擎是 Remotion；外部数字人和 AI 视频是覆盖素材，不冒充 Remotion 源动画。
-- 上层写入前用 `verifyFrozenPackageFiles()` 复核 EDL 与映射哈希，再用 `buildOverlayCommandPlan()` 和 `executeOverlayCommandPlan()` 执行 revision-safe Motion 命令；revision 冲突立即失败，不覆盖新修改。
+- 本项目不调用 AI 视频生成接口。`AI_VIDEO` 只负责验收、导入和组装用户手动生成的成片；资产缺失时返回缺口，不擅自生成或替换。
+- 上层写入前用 `verifyFrozenPackageFiles()` 复核 EDL 与映射哈希，再用 `buildOverlayCommandPlan()` 和 `executeOverlayCommandPlan()` 执行 revision-safe Motion 命令；revision 冲突立即失败，不覆盖新修改。同一 `groupId` 必须按 `order` 连续写入，并把合同作为组件 props 保留到渲染和返工阶段。
 - 硬校验通过只证明规格成立。还必须观看检查口播自然、节奏、焦点、动画克制和数字人连续性。
 - 底线门检查可播放、可追溯、时码与接口正确；巅峰门检查主线、观众变化、关键材料、跨段承接、专业知识增益和最强段落。两道门必须分别给出结论。
 - 关键段落存在真实表达取舍时，比较至少两个方向不同的候选；只换颜色、词序和组件皮肤不算候选。
@@ -75,7 +103,7 @@ RECEIVED
 
 ## 失败回传
 
-使用稳定错误码，不隐瞒缺口：`WRONG_PHASE`、`CAP_REVISION_CONFLICT`、`EDL_NOT_FROZEN`、`MAPPING_STALE`、`REMOTION_ANNOTATION_INCOMPLETE`、`AVATAR_SEGMENT_TOO_LONG`、`RUNNINGHUB_FAILED`、`MEDIA_QA_FAILED`。只重试失败资产，不整批无脑重跑。
+使用稳定错误码，不隐瞒缺口：`WRONG_PHASE`、`PRE_EDIT_REVIEW_REQUIRED`、`PRE_EDIT_REVIEW_INCOMPLETE`、`PRE_EDIT_VIRTUAL_EDIT_INCOMPLETE`、`PRE_EDIT_UNCERTAINTIES_UNRESOLVED`、`PRE_EDIT_REVIEW_NOT_APPROVED`、`CAP_REVISION_CONFLICT`、`EDL_NOT_FROZEN`、`MAPPING_STALE`、`REMOTION_ANNOTATION_INCOMPLETE`、`KNOWLEDGE_VISUAL_CONTRACT_INCOMPLETE`、`OVERLAY_CONTINUITY_INCOMPLETE`、`OVERLAY_STATE_DISCONTINUITY`、`AI_HOST_COMPATIBILITY_INCOMPLETE`、`AVATAR_SEGMENT_TOO_LONG`、`RUNNINGHUB_FAILED`、`MEDIA_QA_FAILED`。只重试失败资产，不整批无脑重跑。
 
 ## 反馈进化
 

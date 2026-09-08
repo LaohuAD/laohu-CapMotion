@@ -5,6 +5,7 @@ import {
   emotionalToneSchema,
   informationShapeSchema,
   motionIntensitySchema,
+  overlayContinuitySchema,
   timeRangeSchema,
 } from "./director";
 
@@ -21,6 +22,7 @@ export const componentIds = [
   "FormTemplateBuilder",
   "ScreenExplainer",
   "RiskActionLoop",
+  "EditorialOverlayShell",
 ] as const;
 
 export const stylePresetSchema = z.enum([
@@ -29,7 +31,23 @@ export const stylePresetSchema = z.enum([
   "tech",
   "momentum",
   "warning",
+  "editorial-dark",
 ]);
+
+export const presentationSchema = z.enum(["stage", "overlay"]);
+export const placementSchema = z.enum(["left", "right", "center"]);
+export const accentRoleSchema = z.enum([
+  "info",
+  "success",
+  "warning",
+  "danger",
+  "technical",
+]);
+
+export const titleLineSchema = z.object({
+  text: z.string().min(1).max(30),
+  tone: z.enum(["primary", "accent", "muted", "success", "warning", "danger"]),
+});
 
 export const visualItemSchema = z.object({
   id: z.string().min(1),
@@ -38,6 +56,7 @@ export const visualItemSchema = z.object({
   result: z.string().max(28).optional(),
   value: z.number().optional(),
   secondaryValue: z.number().optional(),
+  revealAtFrame: z.number().int().min(0).optional(),
   status: z.enum(["default", "positive", "negative", "active", "muted"]).default("default"),
   source: contentSourceSchema,
 });
@@ -58,6 +77,11 @@ const baseFields = {
   motionIntensity: motionIntensitySchema.default("medium"),
   stylePreset: stylePresetSchema.default("clear"),
   renderMode: z.enum(["standalone", "asset", "still"]).default("standalone"),
+  presentation: presentationSchema.default("stage"),
+  placement: placementSchema.default("left"),
+  accentRole: accentRoleSchema.default("info"),
+  kicker: z.string().max(48).optional(),
+  titleLines: z.array(titleLineSchema).min(1).max(4).default([]),
   durationInFrames: z.number().int().min(60),
   sourceTimeRange: timeRangeSchema.optional(),
   items: z.array(visualItemSchema).min(1),
@@ -65,6 +89,7 @@ const baseFields = {
   highlightOrder: z.array(z.string()).default([]),
   supportingLabels: z.array(z.string().min(1).max(16)).max(8).default([]),
   mediaSrc: z.string().optional(),
+  overlayContinuity: overlayContinuitySchema.optional(),
 };
 
 export const createComponentSchema = <
@@ -76,6 +101,23 @@ export const createComponentSchema = <
     mode: z.enum(modes),
     ...baseFields,
     items: baseFields.items.max(maxItems),
+  }).superRefine((config, context) => {
+    if (config.presentation === "overlay" && !config.overlayContinuity) {
+      context.addIssue({
+        code: "custom",
+        path: ["overlayContinuity"],
+        message: "overlay presentation requires an overlay continuity contract",
+      });
+    }
+    config.items.forEach((item, index) => {
+      if (item.revealAtFrame !== undefined && item.revealAtFrame >= config.durationInFrames) {
+        context.addIssue({
+          code: "custom",
+          path: ["items", index, "revealAtFrame"],
+          message: "revealAtFrame must be inside durationInFrames",
+        });
+      }
+    });
   });
 
 export type VisualItem = z.infer<typeof visualItemSchema>;
@@ -92,6 +134,11 @@ export type ComponentConfig = {
   motionIntensity: z.infer<typeof motionIntensitySchema>;
   stylePreset: z.infer<typeof stylePresetSchema>;
   renderMode: "standalone" | "asset" | "still";
+  presentation?: z.infer<typeof presentationSchema>;
+  placement?: z.infer<typeof placementSchema>;
+  accentRole?: z.infer<typeof accentRoleSchema>;
+  kicker?: string;
+  titleLines?: Array<z.infer<typeof titleLineSchema>>;
   durationInFrames: number;
   sourceTimeRange?: {start: number; end: number};
   items: VisualItem[];
@@ -99,4 +146,5 @@ export type ComponentConfig = {
   highlightOrder: string[];
   supportingLabels?: string[];
   mediaSrc?: string;
+  overlayContinuity?: z.infer<typeof overlayContinuitySchema>;
 };

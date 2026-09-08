@@ -3,6 +3,7 @@ import { cx } from "cva";
 import { createMemo, createRoot, For } from "solid-js";
 import { useI18n } from "~/i18n";
 
+import { groupCaptionSegmentsByTrack } from "../caption-tracks";
 import { useEditorContext } from "../context";
 import { useTimelineContext } from "./context";
 import {
@@ -22,6 +23,7 @@ const MIN_SEGMENT_SECS = 0.5;
 const MIN_SEGMENT_PIXELS = 40;
 
 export function CaptionsTrack(props: {
+	trackId: string;
 	onDragStateChanged: (v: CaptionSegmentDragState) => void;
 	handleUpdatePlayhead: (e: MouseEvent) => void;
 	onGenerate: () => void | Promise<void>;
@@ -42,10 +44,12 @@ export function CaptionsTrack(props: {
 	const minDuration = () =>
 		Math.max(MIN_SEGMENT_SECS, secsPerPixel() * MIN_SEGMENT_PIXELS);
 
-	const captionSegments = createMemo(() =>
-		(project.timeline?.captionSegments ?? []).filter(
-			(s) => s.start < totalDuration(),
-		),
+	const captionEntries = createMemo(
+		() =>
+			groupCaptionSegmentsByTrack(project.timeline?.captionSegments ?? [])
+				.find((group) => group.id === props.trackId)
+				?.entries.filter(({ segment }) => segment.start < totalDuration()) ??
+			[],
 	);
 	const selectedCaptionIndices = createMemo(() => {
 		const selection = editorState.timeline.selection;
@@ -53,11 +57,11 @@ export function CaptionsTrack(props: {
 		return new Set(selection.indices);
 	});
 
-	const neighborBounds = (index: number) => {
-		const segments = captionSegments();
+	const neighborBounds = (localIndex: number) => {
+		const entries = captionEntries();
 		return {
-			prevEnd: segments[index - 1]?.end ?? 0,
-			nextStart: segments[index + 1]?.start ?? totalDuration(),
+			prevEnd: entries[localIndex - 1]?.segment.end ?? 0,
+			nextStart: entries[localIndex + 1]?.segment.start ?? totalDuration(),
 		};
 	};
 
@@ -144,7 +148,7 @@ export function CaptionsTrack(props: {
 			onMouseLeave={() => setEditorState("timeline", "hoveredTrack", null)}
 		>
 			<For
-				each={captionSegments()}
+				each={captionEntries()}
 				fallback={
 					<div class="text-center text-sm text-(--text-tertiary) flex flex-col gap-2 justify-center items-center inset-0 w-full bg-gray-3/20 dark:bg-gray-3/10 rounded-xl">
 						<div>{text("No captions")}</div>
@@ -164,11 +168,13 @@ export function CaptionsTrack(props: {
 					</div>
 				}
 			>
-				{(segment, i) => {
+				{(entry, localIndex) => {
+					const segment = entry.segment;
+					const segmentIndex = () => entry.index;
 					const isSelected = createMemo(() => {
 						const indices = selectedCaptionIndices();
 						if (!indices) return false;
-						return indices.has(i());
+						return indices.has(segmentIndex());
 					});
 
 					const segmentWidth = () =>
@@ -187,7 +193,7 @@ export function CaptionsTrack(props: {
 					return (
 						<SegmentRoot
 							data-caption-segment
-							data-index={i()}
+							data-index={segmentIndex()}
 							segColor="var(--track-caption)"
 							class={cx(
 								"border duration-200 transition-colors group",
@@ -205,16 +211,16 @@ export function CaptionsTrack(props: {
 									const rect = e.currentTarget.getBoundingClientRect();
 									const fraction = (e.clientX - rect.left) / rect.width;
 									const splitTime = fraction * segmentWidth();
-									projectActions.splitCaptionSegment(i(), splitTime);
+									projectActions.splitCaptionSegment(segmentIndex(), splitTime);
 								}
 							}}
 						>
 							<SegmentHandle
 								position="start"
 								onMouseDown={createMouseDownDrag(
-									i,
+									segmentIndex,
 									() => {
-										const bounds = neighborBounds(i());
+										const bounds = neighborBounds(localIndex());
 										const start = segment.start;
 										const minValue = bounds.prevEnd;
 										const maxValue = Math.max(
@@ -235,7 +241,7 @@ export function CaptionsTrack(props: {
 										setProject(
 											"timeline",
 											"captionSegments",
-											i(),
+											segmentIndex(),
 											"start",
 											next,
 										);
@@ -245,10 +251,10 @@ export function CaptionsTrack(props: {
 							<SegmentContent
 								class="flex justify-center items-center cursor-grab px-2 overflow-hidden"
 								onMouseDown={createMouseDownDrag(
-									i,
+									segmentIndex,
 									() => {
 										const original = { ...segment };
-										const bounds = neighborBounds(i());
+										const bounds = neighborBounds(localIndex());
 										const minDelta = bounds.prevEnd - original.start;
 										const maxDelta = bounds.nextStart - original.end;
 										return { original, minDelta, maxDelta };
@@ -261,7 +267,7 @@ export function CaptionsTrack(props: {
 											upperBound,
 											Math.max(lowerBound, delta),
 										);
-										setProject("timeline", "captionSegments", i(), {
+										setProject("timeline", "captionSegments", segmentIndex(), {
 											...value.original,
 											start: value.original.start + clampedDelta,
 											end: value.original.end + clampedDelta,
@@ -278,9 +284,9 @@ export function CaptionsTrack(props: {
 							<SegmentHandle
 								position="end"
 								onMouseDown={createMouseDownDrag(
-									i,
+									segmentIndex,
 									() => {
-										const bounds = neighborBounds(i());
+										const bounds = neighborBounds(localIndex());
 										const end = segment.end;
 										const minValue = segment.start + minDuration();
 										const maxValue = Math.max(minValue, bounds.nextStart);
@@ -292,7 +298,13 @@ export function CaptionsTrack(props: {
 											value.minValue,
 											Math.min(value.maxValue, value.end + delta),
 										);
-										setProject("timeline", "captionSegments", i(), "end", next);
+										setProject(
+											"timeline",
+											"captionSegments",
+											segmentIndex(),
+											"end",
+											next,
+										);
 									},
 								)}
 							/>

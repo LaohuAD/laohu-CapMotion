@@ -31,7 +31,13 @@ export const RiskActionLoop: React.FC<{config: ComponentConfig}> = ({config}) =>
         </div>
         <div style={{display: "grid", gap: 12}}>
           {rows.map((row, index) => {
-            const progress = enterProgress(frame, index, rows.length, timing.buildEnd);
+            const progress = enterProgress(
+              frame,
+              index,
+              rows.length,
+              timing.buildEnd,
+              config.items[index].revealAtFrame,
+            );
             return (
               <div key={config.items[index].id} style={{display: "grid", gridTemplateColumns: "1fr 54px 1fr 54px 0.8fr", gap: 14, alignItems: "center", opacity: progress}}>
                 <Surface theme={theme} style={{padding: "18px 22px", minHeight: 92}}>
@@ -39,7 +45,7 @@ export const RiskActionLoop: React.FC<{config: ComponentConfig}> = ({config}) =>
                 </Surface>
                 <div style={{fontSize: 44, color: theme.accent, textAlign: "center"}}>→</div>
                 <Surface theme={theme} active={index === 0} style={{padding: "18px 22px", minHeight: 92}}>
-                  <div style={{fontSize: 34, lineHeight: 1.2, fontWeight: 850}}>{row.action}</div>
+                  <div style={{fontSize: 34, lineHeight: 1.2, fontWeight: 800}}>{row.action}</div>
                 </Surface>
                 <div style={{fontSize: 44, color: theme.accent2, textAlign: "center"}}>→</div>
                 <Surface theme={theme} style={{padding: "18px 20px", minHeight: 92, display: "flex", alignItems: "center", gap: 16}}>

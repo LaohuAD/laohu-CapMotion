@@ -1,0 +1,89 @@
+{
+  "symptom": "MP4 成片流程与 Cap 可返工工程脱节；进一步实帧测试发现中文字幕异常空格、部分字体或字重切换后最终像素不变、字间距失真、斜体只保存不渲染、粗描边不均和效果裁切；阴影与描边阴影被拆成两套控件，“无动画”仍会淡入淡出",
+  "triggerScope": "PROJECT_CAPABILITY",
+  "earliestFailure": "展示字幕生成链没有区分中文误带空格与英文必要空格；字体下拉框未声明各字体真实字重，系统字体又把中文交给不可控 fallback；霞鹜文楷只随包常规体却接受粗体；字幕斜体未接入 shaping，字间距像素值被误当成 EM，未实现的 lingerDuration 仍出现在公共 schema；阴影在 schema、界面和渲染层被错分成字形阴影与描边阴影；动画选择‘无’只关闭了弹跳/缩放，公共淡入淡出链仍在运行",
+  "rootLayer": "STRUCTURE",
+  "hypothesis": "让每个字体选项只提供真实字重，把中文系统字体和字重解析为明确字体面，将阴影收口为随描边外缘扩展的单一效果链，并令‘无动画’把所有动画时长置零，可以消除界面值存在但最终渲染不变的同类问题",
+  "protection": [
+    "不覆盖现有未提交用户改动",
+    "不修改工程时间轴、字幕正文、源音轨编辑、Remotion 轨道和素材路径",
+    "开发排错期间不反复打包；只有用户明确授权且 CapMotion 已退出时才更新独立版",
+    "不将老胡个人数值写入公共默认",
+    "旧单轨字幕和旧 outlineShadow 工程仍可读可渲染",
+    "原始录制 Cap 工程只读保留，后期只写不同路径的工作工程"
+  ],
+  "authorityPath": "workflows/laohu-video/规范/Cap Agent 工程接口.md",
+  "change": "保留中文展示空格规范化、六种字体名称本地化、密集描边采样及动态效果边界；思源黑体/宋体使用 400/500/700 静态字重，霞鹜文楷增加 300/500 真实字体面，系统字体遇到中文时绑定可验证的 CJK 字体与字重；旧斜体字段接入 shaping，字间距从设计像素正确换算为 EM，无法保证中文生效的 italic 与未实现的 lingerDuration 从公共 schema 撤下；界面、用户预设、CLI 和渲染层收口为单一 shadow 语义，旧 outlineShadow 自动迁移；无动画时不再执行淡入淡出",
+  "decisionChanges": [
+    "个人数值只从当前操作系统用户的预设 store 读取",
+    "Agent 普通写操作使用局部 patch 或白名单应用，不整份替换 project-config.json",
+    "同一可见预设的 config 只作用于渲染参数，agentProfile 只向 Agent 提供稳定偏好",
+    "最终中英字幕使用两条可编辑轨，共享 pairId 与 T2 时码",
+    "displayMode=materialized 的展示轨不被源 ASR 自动投影覆盖",
+    "字幕正文里的 ASCII 空格、字体 family 和 letterSpacing 分开诊断",
+    "字幕对用户只有一套阴影；开启描边时，阴影自动从描边外缘扩展，旧 outlineShadow 只做兼容迁移",
+    "工程内临时字体测试不写回用户预设，只有显式保存改动才更新预设",
+    "字体生效必须验证实际 shape 字体面和最终像素，不把工程字段已更新当作渲染已生效",
+    "动画选择无时，全局和单条淡入淡出均不参与渲染或延长活跃区间",
+    "只有真正贯通界面、预设、CLI 和渲染的字幕字段才能留在公共能力 schema；历史兼容字段不冒充可用能力",
+    "预设菜单只负责导航，不得隐式应用；保存只合并当前会话真正改动的可复用字段，agentProfile 始终保留",
+    "同轨字幕只有一个统一位置；中英轨可分别定位，单条视觉覆盖不再对外暴露",
+    "字幕动画只有入场阶段，无动画、渐显、上移显现和弹入的渲染变量彼此独立",
+    "一个工程与媒体存储位置同时支配新录制、截图工程和工程自有背景素材"
+  ],
+  "regressions": {
+    "current": [
+      "公共字幕列表不含 Laohu，用户预设仍可派生个人字幕卡",
+      "只显示所选字体的可用字重，霞鹜文楷使用 300/400/500 真实字体面",
+      "系统无衬线、衬线和等宽字体的中文 shape 命中各自确定的 CJK 字体面",
+      "旧斜体字段参与字幕 shaping，字间距由 1080p 设计像素换算为 EM；公共 schema 不再暴露无法保证中文生效的 italic 或未实现的 lingerDuration",
+      "描边开启时单一阴影根据描边宽度向外扩展，效果边界同步扩大",
+      "动画为无时淡入淡出时长归零，界面不显示无效的时长控件",
+      "打开预设子菜单不再触发应用，字段差量保存保留未改值和 Agent 配置",
+      "中英字幕轨可分别保存统一 X/Y 位置，单条字幕样式控件已移除",
+      "四种字幕入场动画不再执行出场延时",
+      "自定义根下新建截图工程，背景素材写入所属 .cap/assets/backgrounds"
+    ],
+    "legacy": [
+      "旧 preset=laohu 可规范化为 user:Laohu",
+      "旧 ProjectConfiguration 格式的预设仍可反序列化",
+      "旧单轨 CaptionTrackSegment 缺少 trackId、pairId 和 displayMode 时仍按原默认行为渲染",
+      "旧工程中只开启 outlineShadow 时仍能按旧参数显示，并在界面、预设或 CLI 下次修改时合并为 shadow"
+    ],
+    "adjacent": [
+      "字幕局部 patch 不改字幕文本与 Remotion 定义",
+      "工程 revision 冲突和预设 store revision 冲突均会拒绝过期写入",
+      "预设应用不替换目标工程的字幕正文、EDL、音轨和 Remotion 覆盖",
+      "中文字体名称只改变界面显示，工程仍保存稳定英文 family ID",
+      "字幕效果边界按描边宽度与单一阴影的距离、模糊外扩值计算"
+    ]
+  },
+  "evidence": [
+    "pnpm --dir apps/desktop exec vitest run src/routes/editor/text-style.test.ts src/routes/editor/caption-controls-source.test.ts src/store/captions.test.ts",
+    "pnpm --dir apps/desktop exec tsc --noEmit",
+    "node --test scripts/setup-caption-fonts.test.mjs",
+    "cargo test -p cap-project legacy_outline_shadow_patch_migrates_to_the_unified_shadow -- --nocapture",
+    "cargo test -p cap-rendering caption_ -- --nocapture",
+    "cargo test --manifest-path apps/desktop/src-tauri/Cargo.toml recordings_locations::tests::screenshots_follow_custom_storage_without_changing_legacy_default -- --nocapture",
+    "pnpm --dir apps/desktop exec vitest run src/routes/editor/preset-config.test.ts src/routes/editor/caption-position.test.ts src/routes/editor/caption-controls-source.test.ts src/editor-i18n-coverage.test.ts",
+    "既有实帧证据：Source Han Sans 700、Source Han Serif 700 和 Source Han Sans 400 的同帧导出哈希均不同",
+    "./scripts/build-cap-local.sh：release 构建、持久证书签名、权限兼容 requirement 校验和 /Users/a1/Applications/CapMotion.app 安装成功",
+    "安装后核验：CFBundleShortVersionString=0.1.1、CFBundleIdentifier=com.laohu.capmotion、codesign --verify --deep --strict 通过、内置 cap-cli presets schema 可解析"
+  ],
+  "rollback": "若新统一阴影在更多字号上出现异常，保留旧 outlineShadow 读取兼容并回退新 shadow 几何；若中文系统字体在目标平台不存在，回退为随包思源字体；若中文空格规则误伤中英边界，回退展示轨规范化并重新物化，源 ASR 主稿不受影响。独立版已更新到 0.1.1，但本轮未修改用户真实预设或工程",
+  "validation": {
+    "STRUCTURE": "PASS",
+    "ROUTE": "PASS",
+    "BEHAVIOR": "OBSERVE",
+    "QUALITY": "UNKNOWN"
+  },
+  "decision": "OBSERVE",
+  "knowledgeActivation": {
+    "asset": ".agents/skills/laohu-video-evolution/SKILL.md + references/四层能力进化与保真.md",
+    "trigger": "用户明确要求不是只修当前现象，而是沉淀预设、字幕和存储的长期项目行为",
+    "judgment": "最早失效点分别位于预设菜单隐式应用、单条字幕持有视觉位置、动画入出场共用和存储路径解析分裂，不是单个按钮或数值错误",
+    "changedDecision": "改为会话基线差量保存、轨级字幕坐标、无出场阶段的独立入场动画，以及一个用户存储根覆盖所有新工程大文件",
+    "resultLocation": "AGENTS.md、本进化记录、preset-config.ts、CaptionOverlay.tsx、CaptionsTab.tsx、captions.rs 与 recordings_locations.rs",
+    "unusedBoundary": "本轮不打包独立版，不迁移用户已有工程，不改写视频剪辑内容规则"
+  }
+}

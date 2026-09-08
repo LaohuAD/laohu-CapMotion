@@ -60,6 +60,15 @@ pub enum BackgroundSource {
     },
 }
 
+/// Portable intent for a file-backed background. A project keeps its own
+/// snapshot path in `source`; a reusable preset keeps this binding instead of
+/// leaking a path from the project where the preset was saved.
+#[derive(Type, Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub enum BackgroundSourceBinding {
+    CurrentDesktop,
+}
+
 fn default_gradient_angle() -> u16 {
     90
 }
@@ -348,6 +357,8 @@ impl NotchConfiguration {
 #[serde(rename_all = "camelCase", default)]
 pub struct BackgroundConfiguration {
     pub source: BackgroundSource,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source_binding: Option<BackgroundSourceBinding>,
     pub blur: f64,
     pub padding: f64,
     pub rounding: f64,
@@ -385,6 +396,7 @@ impl Default for BackgroundConfiguration {
     fn default() -> Self {
         Self {
             source: BackgroundSource::default(),
+            source_binding: None,
             blur: 0.0,
             padding: 0.0,
             rounding: 0.0,
@@ -1808,6 +1820,14 @@ pub enum TimelineFrameMapping<'a> {
 #[serde(rename_all = "camelCase")]
 pub struct CaptionTrackSegment {
     pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub track_id: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub track_label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub language: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub pair_id: Option<String>,
     pub start: f64,
     pub end: f64,
     pub text: String,
@@ -1825,6 +1845,8 @@ pub struct CaptionTrackSegment {
     pub background_color_override: Option<String>,
     #[serde(default)]
     pub font_size_override: Option<u32>,
+    #[serde(default)]
+    pub manual_position_override: Option<XY<f32>>,
 }
 
 impl TimelineConfiguration {
@@ -2172,6 +2194,18 @@ pub struct CaptionSettings {
     pub shadow_distance: f32,
     #[serde(alias = "shadowAngle")]
     pub shadow_angle: f32,
+    #[serde(alias = "outlineShadow")]
+    pub outline_shadow: bool,
+    #[serde(alias = "outlineShadowColor")]
+    pub outline_shadow_color: String,
+    #[serde(alias = "outlineShadowOpacity")]
+    pub outline_shadow_opacity: f32,
+    #[serde(alias = "outlineShadowBlur")]
+    pub outline_shadow_blur: f32,
+    #[serde(alias = "outlineShadowDistance")]
+    pub outline_shadow_distance: f32,
+    #[serde(alias = "outlineShadowAngle")]
+    pub outline_shadow_angle: f32,
     #[serde(alias = "exportWithSubtitles")]
     pub export_with_subtitles: bool,
     #[serde(alias = "highlightColor")]
@@ -2186,11 +2220,21 @@ pub struct CaptionSettings {
     pub active_word_highlight: bool,
     #[serde(alias = "manualPosition")]
     pub manual_position: Option<XY<f32>>,
+    #[serde(default, alias = "trackPositions")]
+    pub track_positions: Vec<CaptionTrackPosition>,
     pub preset: String,
     pub animation: String,
     #[serde(alias = "highlightStyle")]
     pub highlight_style: String,
     pub uppercase: bool,
+}
+
+#[derive(Type, Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct CaptionTrackPosition {
+    pub track_id: String,
+    pub position: String,
+    pub manual_position: Option<XY<f32>>,
 }
 
 impl CaptionSettings {
@@ -2253,6 +2297,12 @@ impl Default for CaptionSettings {
             shadow_blur: 15.0,
             shadow_distance: 5.0,
             shadow_angle: -45.0,
+            outline_shadow: false,
+            outline_shadow_color: "#000000".to_string(),
+            outline_shadow_opacity: 75.0,
+            outline_shadow_blur: 15.0,
+            outline_shadow_distance: 5.0,
+            outline_shadow_angle: -45.0,
             export_with_subtitles: false,
             highlight_color: Self::default_highlight_color(),
             fade_duration: Self::default_fade_duration(),
@@ -2260,6 +2310,7 @@ impl Default for CaptionSettings {
             word_transition_duration: Self::default_word_transition_duration(),
             active_word_highlight: Self::default_active_word_highlight(),
             manual_position: None,
+            track_positions: Vec::new(),
             preset: Self::default_preset(),
             animation: Self::default_animation(),
             highlight_style: Self::default_highlight_style(),
@@ -2281,6 +2332,16 @@ pub struct CaptionsData {
     /// migrated to source time on first load.
     #[serde(default)]
     pub source_timed: bool,
+    #[serde(default)]
+    pub display_mode: CaptionDisplayMode,
+}
+
+#[derive(Type, Serialize, Deserialize, Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub enum CaptionDisplayMode {
+    #[default]
+    AutoProject,
+    Materialized,
 }
 
 #[derive(Type, Serialize, Deserialize, Clone, Debug)]
@@ -3377,6 +3438,36 @@ mod tests {
 
         assert_eq!(loaded.camera.manual_position, Some(XY::new(0.25, 0.75)));
         assert_eq!(loaded.background.display_position, Some(XY::new(0.5, 0.4)));
+    }
+
+    #[test]
+    fn caption_track_positions_round_trip_independently() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut config = ProjectConfiguration::default();
+        let captions = config.captions.get_or_insert_default();
+        captions.settings.track_positions = vec![
+            CaptionTrackPosition {
+                track_id: "zh-CN".into(),
+                position: "manual".into(),
+                manual_position: Some(XY::new(0.5, 0.8)),
+            },
+            CaptionTrackPosition {
+                track_id: "en".into(),
+                position: "manual".into(),
+                manual_position: Some(XY::new(0.5, 0.9)),
+            },
+        ];
+        std::fs::write(
+            dir.path().join("project-config.json"),
+            serde_json::to_string(&config).unwrap(),
+        )
+        .unwrap();
+
+        let loaded = ProjectConfiguration::load(dir.path()).unwrap();
+        let positions = &loaded.captions.unwrap().settings.track_positions;
+        assert_eq!(positions.len(), 2);
+        assert_eq!(positions[0].track_id, "zh-CN");
+        assert_eq!(positions[1].manual_position, Some(XY::new(0.5, 0.9)));
     }
 
     fn write_config_with_text_segment(

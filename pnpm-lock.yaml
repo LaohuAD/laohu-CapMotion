@@ -316,6 +316,9 @@ importers:
       '@webgpu/types':
         specifier: ^0.1.44
         version: 0.1.71
+      autoprefixer:
+        specifier: ^10.5.2
+        version: 10.5.2(postcss@8.5.16)
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3

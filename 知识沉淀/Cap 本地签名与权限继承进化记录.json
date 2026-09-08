@@ -1,0 +1,63 @@
+{
+  "symptom": "macOS 系统设置中已经允许 CapMotion 使用屏幕录制与辅助功能，但重新编译安装后，应用仍把两项必选权限判断为未授权，并要求用户反复进入设置和重启",
+  "triggerScope": "PROJECT_CAPABILITY",
+  "earliestFailure": "AGENTS.md 与 scripts/build-cap-local.sh 把每次本地包固定为 ad-hoc 签名；ad-hoc 签名的身份会随二进制版本变化，macOS TCC 无法把新构建稳定识别为此前已获授权的同一个应用",
+  "rootLayer": "STRUCTURE",
+  "hypothesis": "固定 bundle id、安装路径和持久代码签名证书，并在替换旧包前双向验证新旧 designated requirement 兼容，可以让一次授权在同一证书签出的后续版本中继承；从旧 ad-hoc 包迁移时只需重新授权一次",
+  "protection": [
+    "保持 com.laohu.capmotion、/Users/a1/Applications/CapMotion.app、版本号和独立数据目录不变",
+    "不清理其他应用的 TCC 权限，只迁移 CapMotion 自身的 ScreenCapture 与 Accessibility 记录",
+    "签名私钥只保存在当前 macOS 用户登录钥匙串，不写入项目、日志或安装包",
+    "保留现有分阶段安装、失败回滚、嵌套代码签名和 deep strict 验证",
+    "本地自签名只解决同一发布者后续构建的权限身份连续性，不宣称替代 Developer ID、公证或 Gatekeeper 公共分发",
+    "麦克风与摄像头继续保持可选权限，不恢复持续轮询检测"
+  ],
+  "authorityPath": "scripts/build-cap-local.sh",
+  "change": "本地打包改用登录钥匙串中的持久 CapMotion Local Code Signing 身份；缺少或更换原身份时立即失败；更新前验证已安装包与待安装包能双向满足彼此的 designated requirement；旧 ad-hoc 包只允许一次迁移；同时修复授权页选择继续设置下一项时未记住当前必选权限的问题，并把签名连续性写入 AGENTS.md",
+  "decisionChanges": [
+    "禁止用 codesign --sign - 或手写 identifier-only requirement 生成可更新的本地正式包",
+    "构建机找不到原 CapMotion Local Code Signing 身份时停止打包，不允许临时生成同名新证书冒充更新",
+    "非 ad-hoc 已安装包与新包的 designated requirement 任一方向不兼容时拒绝替换，优先保护既有权限和用户数据",
+    "授权流程允许用户依次完成两项必选设置，最后统一检测并按系统实际状态决定直接进入或重启",
+    "需要交给普通外部用户无警告安装时，另行采用 Apple Developer ID Application 签名与 notarization，不能把本地自签名包当作公共发行方案"
+  ],
+  "regressions": {
+    "current": [
+      "旧 ad-hoc 权限记录重置后，两项必选权限可重新加入持久签名的 CapMotion",
+      "权限生效后重启应用直接进入 Cap 主界面，不再返回授权引导",
+      "选择继续设置其他权限时会记住当前项目，完成两项后只需一次统一确认或重启",
+      "包含前端授权修复的新完整构建替换旧证书签名包后仍继承权限"
+    ],
+    "legacy": [
+      "应用名称、bundle id、安装位置、版本号和旧数据迁移规则保持不变",
+      "framework、sidecar 和外层 app 仍全部签名，codesign --verify --deep --strict 通过",
+      "首次遇到旧 ad-hoc 已安装包时允许明确的一次性迁移，不把历史用户永久锁死"
+    ],
+    "adjacent": [
+      "麦克风与摄像头仍为可选项，缺少它们不阻止进入 Cap",
+      "权限页没有恢复持续轮询，用户返回后由明确操作触发一次检测",
+      "两个内容与 CDHash 不同、但使用相同 bundle id 和证书签名的测试 app 能双向满足彼此的 designated requirement",
+      "缺少、替换或不兼容签名身份时构建脚本在覆盖现有应用前失败"
+    ]
+  },
+  "evidence": [
+    "Apple TN3127: https://developer.apple.com/documentation/technotes/tn3127-inside-code-signing-requirements",
+    "Apple Code Signing Tasks: https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/Procedures/Procedures.html",
+    "node --test scripts/build-cap-local.test.mjs",
+    "pnpm --dir apps/desktop exec vitest run src/routes/(window-chrome)/onboarding-permissions.test.ts",
+    "pnpm --dir apps/desktop exec tsc --noEmit",
+    "bash -n scripts/build-cap-local.sh",
+    "./scripts/build-cap-local.sh：完整重新编译后输出 Verified permission-compatible CapMotion update identity，并安全替换已安装应用",
+    "codesign --verify --deep --strict /Users/a1/Applications/CapMotion.app",
+    "真实更新回归：新完整构建的 CDHash 已变化，但证书与 designated requirement 保持兼容，启动后直接进入 Cap 主界面而非授权引导",
+    "不同 CDHash 的同证书测试 app 使用 codesign --verify --strict -R 完成双向 designated requirement 验证"
+  ],
+  "rollback": "若真实证书兼容更新仍丢失 TCC 权限，立即停止把自签名包用于分发，保留旧应用与用户数据并转为 Developer ID Application + notarization；不得回退到 ad-hoc，也不得通过弱化 designated requirement 绕过签名身份检查",
+  "validation": {
+    "STRUCTURE": "PASS",
+    "ROUTE": "PASS",
+    "BEHAVIOR": "OBSERVE",
+    "QUALITY": "UNKNOWN"
+  },
+  "decision": "OBSERVE"
+}

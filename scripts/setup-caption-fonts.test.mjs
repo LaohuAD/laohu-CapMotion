@@ -5,7 +5,35 @@ import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { ensureCaptionFont } from "./setup-caption-fonts.mjs";
+import {
+	CAPTION_FONTS,
+	ensureCaptionFont,
+} from "./setup-caption-fonts.mjs";
+
+test("bundles exact Source Han caption weights instead of one variable face", () => {
+	for (const family of ["Source Han Sans CN VF", "Source Han Serif CN VF"]) {
+		assert.deepEqual(
+			CAPTION_FONTS.filter((font) => font.family === family).map(
+				(font) => font.weight,
+			),
+			[400, 500, 700],
+		);
+	}
+	assert.ok(
+		CAPTION_FONTS.filter((font) => font.family.startsWith("Source Han")).every(
+			(font) => font.fileName.endsWith(".otf"),
+		),
+	);
+});
+
+test("bundles every real LXGW WenKai weight offered by the editor", () => {
+	assert.deepEqual(
+		CAPTION_FONTS.filter((font) => font.family === "LXGW WenKai").map(
+			(font) => font.weight,
+		),
+		[300, 400, 500],
+	);
+});
 
 test("downloads, caches and verifies a caption font", async (t) => {
 	const payload = Buffer.from("test-font-bytes");

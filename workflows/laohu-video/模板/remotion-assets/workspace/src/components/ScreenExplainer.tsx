@@ -50,7 +50,13 @@ export const ScreenExplainer: React.FC<{config: ComponentConfig}> = ({config}) =
               style={{
                 padding: "18px 22px",
                 minHeight: 108,
-                opacity: enterProgress(frame, index, config.items.length, timing.buildEnd),
+                opacity: enterProgress(
+                  frame,
+                  index,
+                  config.items.length,
+                  timing.buildEnd,
+                  item.revealAtFrame,
+                ),
               }}
             >
               <div style={{fontSize: compactTypography.item, lineHeight: 1.12, fontWeight: 900}}>{item.label}</div>

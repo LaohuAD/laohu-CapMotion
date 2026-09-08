@@ -5,6 +5,7 @@ import { reconcile } from "solid-js/store";
 import toast from "solid-toast";
 import { useI18n } from "~/i18n";
 import { normalizeProject, useEditorContext } from "./context";
+import { mergePresetIntoProject } from "./preset-config";
 import {
 	DropdownItem,
 	dropdownContainerClasses,
@@ -48,12 +49,11 @@ export function PresetsDropdown() {
 							>
 								{(preset, i) => {
 									function applyPreset() {
-										const normalizedConfig = normalizeProject({
-											...preset.config,
-											timeline: project.timeline ?? null,
-											clips: project.clips,
-										});
+										const normalizedConfig = normalizeProject(
+											mergePresetIntoProject(project, preset.config),
+										);
 										setProject(reconcile(normalizedConfig));
+										presets.captureProjectBaseline(normalizedConfig);
 									}
 
 									return (
@@ -61,9 +61,6 @@ export function PresetsDropdown() {
 											<MenuItem<typeof KDropdownMenu.SubTrigger>
 												as={KDropdownMenu.SubTrigger}
 												class="h-10"
-												onClick={() => {
-													applyPreset();
-												}}
 											>
 												<span class="mr-auto">{preset.name}</span>
 												<Show when={presets.query.data?.default === i()}>
@@ -90,13 +87,31 @@ export function PresetsDropdown() {
 													</DropdownItem>
 													<DropdownItem
 														onSelect={async () => {
-															await presets.saveToPreset(i(), project);
+															try {
+																await presets.saveToPreset(i(), project);
+																toast.success(
+																	`${text("Saved changed settings to")} "${preset.name}"`,
+																);
+															} catch (error) {
+																toast.error(
+																	error instanceof Error
+																		? error.message
+																		: text("Failed to save preset"),
+																);
+															}
+														}}
+													>
+														{text("Save changed settings")}
+													</DropdownItem>
+													<DropdownItem
+														onSelect={() => {
+															applyPreset();
 															toast.success(
-																`${text("Saved settings to")} "${preset.name}"`,
+																`${text("Reset changes from")} "${preset.name}"`,
 															);
 														}}
 													>
-														{text("Save settings to preset")}
+														{text("Reset unsaved changes")}
 													</DropdownItem>
 													<DropdownItem
 														onSelect={() => presets.setDefault(i())}

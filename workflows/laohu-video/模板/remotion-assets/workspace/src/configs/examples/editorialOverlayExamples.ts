@@ -1,0 +1,251 @@
+import type {ComponentConfig, VisualItem} from "../../schemas/components";
+
+const sourcePath =
+  "workflows/laohu-video/模板/remotion-assets/workspace/src/configs/examples/source-material.md";
+
+const sourcedItems = (
+  section: string,
+  items: Array<Omit<VisualItem, "source" | "status"> & {status?: VisualItem["status"]}>,
+): VisualItem[] =>
+  items.map((item) => ({
+    status: "default",
+    ...item,
+    source: {
+      type: "source-doc",
+      confidence: "confirmed",
+      ref: `${sourcePath}#${section}`,
+    },
+  }));
+
+const overlayBase: Pick<
+  ComponentConfig,
+  "motionIntensity" | "renderMode" | "presentation" | "stylePreset" | "links" | "overlayContinuity"
+> = {
+  motionIntensity: "medium",
+  renderMode: "asset",
+  presentation: "overlay",
+  stylePreset: "editorial-dark",
+  links: [],
+  overlayContinuity: {
+    groupId: "editorial-demo",
+    order: 1,
+    role: "EXPLANATION",
+    hostCarrier: "BASE",
+    persistence: "SEGMENT",
+    stateBefore: "关系尚未建立",
+    stateUpdate: "核心对象与关系逐步进入",
+    stateAfter: "结论已经稳定可读",
+    contrastMode: "LOCAL_BACKPLATE",
+    contrastReason: "局部底板只衬托文字，不机械压暗整张底画",
+    attentionPlan: [{spokenCue: "本段开始", focusOwner: "OVERLAY", target: "核心关系", reason: "先让观众认清本段解释对象"}],
+    protectedRegions: [{target: "SUBTITLES", description: "底部双语字幕安全区"}],
+    handoff: "结论完成后交给下一段底画",
+  },
+};
+
+export const editorialOverlayExamples: Record<
+  | "fourLayerAnchor"
+  | "evolutionProof"
+  | "fourLayerStack"
+  | "surfaceVsSystem"
+  | "chapterProgress"
+  | "evidenceCheckpoint"
+  | "conceptLabels"
+  | "headlineValue"
+  | "carrierBridge",
+  ComponentConfig
+> = {
+  fourLayerAnchor: {
+    ...overlayBase,
+    component: "KineticStatement",
+    mode: "claim",
+    placement: "left",
+    accentRole: "success",
+    kicker: "FOUR LAYERS / 能力进化",
+    title: "声音定路\n画面作证",
+    titleLines: [
+      {text: "声音定路", tone: "primary"},
+      {text: "画面作证", tone: "accent"},
+    ],
+    subtitle: "动画不是铺满效果，而是让观众看见关系、证据和下一步",
+    conclusion: "一条视频，只带观众走一条路",
+    communicationGoal: "remember",
+    emotionalTone: "confident",
+    informationShape: "transformation",
+    durationInFrames: 240,
+    items: sourcedItems("编辑型信息叠层：四层锚点", [
+      {id: "soul", label: "灵魂定向"},
+      {id: "structure", label: "筋骨成篇"},
+      {id: "material", label: "血肉生变"},
+      {id: "form", label: "表皮成形"},
+    ]),
+    highlightOrder: ["soul", "structure", "material", "form"],
+  },
+  evolutionProof: {
+    ...overlayBase,
+    component: "DataStoryChart",
+    mode: "bars",
+    placement: "right",
+    accentRole: "info",
+    kicker: "CAPABILITY / VERIFIED",
+    title: "从整屏组件到侧边叠层",
+    subtitle: "保留 12 个语义家族，只升级四个高频家族的呈现方式",
+    conclusion: "升级呈现，不复制组件",
+    communicationGoal: "prove",
+    emotionalTone: "confident",
+    informationShape: "quantitative",
+    durationInFrames: 270,
+    items: sourcedItems("编辑型信息叠层：能力变化", [
+      {id: "before", label: "升级前", description: "可复用叠层家族", value: 0, result: "0"},
+      {id: "after", label: "本轮", description: "可复用叠层家族", value: 4, result: "4", status: "positive"},
+    ]),
+    highlightOrder: ["before", "after"],
+  },
+  fourLayerStack: {
+    ...overlayBase,
+    component: "FlowNodeGraph",
+    mode: "linear",
+    placement: "right",
+    accentRole: "technical",
+    kicker: "SYSTEM / FOUR LAYERS",
+    title: "四层不是口号，是运行链",
+    subtitle: "前一步必须给后一步留下能继续工作的中间结果",
+    conclusion: "反馈回到最早失效点，再验证",
+    communicationGoal: "explain",
+    emotionalTone: "futuristic",
+    informationShape: "sequence",
+    durationInFrames: 300,
+    items: sourcedItems("编辑型信息叠层：四层运行链", [
+      {id: "soul", label: "灵魂｜确定取舍", description: "观众变化与主胜负手", revealAtFrame: 26},
+      {id: "structure", label: "筋骨｜建立章法", description: "输入、状态、顺序与交接", revealAtFrame: 62},
+      {id: "material", label: "血肉｜组织材料", description: "证据、录屏、动画与声音", revealAtFrame: 98},
+      {id: "form", label: "表皮｜完成法度", description: "硬规格与观看分寸", status: "active", revealAtFrame: 134},
+    ]),
+    links: [
+      {from: "soul", to: "structure"},
+      {from: "structure", to: "material"},
+      {from: "material", to: "form"},
+    ],
+    highlightOrder: ["soul", "structure", "material", "form"],
+  },
+  surfaceVsSystem: {
+    ...overlayBase,
+    component: "CompareTransform",
+    mode: "myth-fact",
+    placement: "right",
+    accentRole: "warning",
+    kicker: "EVOLUTION / DECISION",
+    title: "只改表皮，不算进化",
+    subtitle: "真正的优化必须改变判断、调用链和验收行为",
+    conclusion: "先修最早失效点，再谈漂亮",
+    communicationGoal: "compare",
+    emotionalTone: "clear",
+    informationShape: "comparison",
+    durationInFrames: 270,
+    items: sourcedItems("编辑型信息叠层：表皮与系统", [
+      {id: "color", label: "只换颜色", status: "negative"},
+      {id: "effect", label: "只堆特效", status: "negative"},
+      {id: "chain", label: "打通调用链", status: "positive"},
+      {id: "qa", label: "行为回归", status: "positive"},
+    ]),
+    highlightOrder: ["color", "effect", "chain", "qa"],
+  },
+  chapterProgress: {
+    ...overlayBase,
+    component: "EditorialOverlayShell",
+    mode: "progress-rail",
+    placement: "left",
+    accentRole: "technical",
+    kicker: "CHAPTER / 02",
+    title: "同一进度，跨画面继续",
+    conclusion: "底画切换，学习状态不归零",
+    communicationGoal: "guide",
+    emotionalTone: "clear",
+    informationShape: "sequence",
+    durationInFrames: 240,
+    items: sourcedItems("可复用编辑叠层：章节进度", [
+      {id: "source", label: "01 原始资料", status: "positive"},
+      {id: "read", label: "02 AI读取", status: "active"},
+      {id: "method", label: "03 方法拆解"},
+      {id: "tool", label: "04 形成工具"},
+    ]),
+    highlightOrder: ["source", "read", "method", "tool"],
+  },
+  evidenceCheckpoint: {
+    ...overlayBase,
+    component: "EditorialOverlayShell",
+    mode: "evidence-dock",
+    placement: "right",
+    accentRole: "info",
+    kicker: "EVIDENCE / CHECK",
+    title: "证据出现，结论才成立",
+    conclusion: "看见来源，再接受判断",
+    communicationGoal: "prove",
+    emotionalTone: "confident",
+    informationShape: "hierarchy",
+    durationInFrames: 210,
+    items: sourcedItems("可复用编辑叠层：证据停靠", [
+      {id: "claim", label: "主张", status: "positive"},
+      {id: "source", label: "来源", status: "active"},
+      {id: "boundary", label: "适用边界"},
+    ]),
+    highlightOrder: ["claim", "source", "boundary"],
+  },
+  conceptLabels: {
+    ...overlayBase,
+    component: "EditorialOverlayShell",
+    mode: "label-stack",
+    placement: "right",
+    accentRole: "success",
+    kicker: "STATE / LABELS",
+    title: "只标承担关系的词",
+    conclusion: "大标签负责指认，长解释留给口播与字幕",
+    communicationGoal: "explain",
+    emotionalTone: "clear",
+    informationShape: "hierarchy",
+    durationInFrames: 180,
+    items: sourcedItems("可复用编辑叠层：概念标签", [
+      {id: "input", label: "输入"},
+      {id: "process", label: "处理", status: "active"},
+      {id: "result", label: "结果", status: "positive"},
+    ]),
+    highlightOrder: ["input", "process", "result"],
+  },
+  headlineValue: {
+    ...overlayBase,
+    component: "EditorialOverlayShell",
+    mode: "value-callout",
+    placement: "left",
+    accentRole: "warning",
+    kicker: "RESULT / VALUE",
+    title: "把结果钉在屏幕上",
+    conclusion: "数值或结论只在兑现后出现",
+    communicationGoal: "remember",
+    emotionalTone: "confident",
+    informationShape: "quantitative",
+    durationInFrames: 150,
+    items: sourcedItems("可复用编辑叠层：结果大字", [
+      {id: "result", label: "可重复使用的选题Agent", result: "1 个", status: "positive"},
+    ]),
+    highlightOrder: ["result"],
+  },
+  carrierBridge: {
+    ...overlayBase,
+    component: "EditorialOverlayShell",
+    mode: "bridge",
+    placement: "right",
+    accentRole: "info",
+    kicker: "HANDOFF / NEXT",
+    title: "把已理解的结果交给下一幕",
+    conclusion: "不是重新开场，而是继续推进",
+    communicationGoal: "guide",
+    emotionalTone: "clear",
+    informationShape: "transformation",
+    durationInFrames: 120,
+    items: sourcedItems("可复用编辑叠层：载体桥接", [
+      {id: "known", label: "AI已读完资料", status: "positive"},
+      {id: "next", label: "开始拆方法", status: "active"},
+    ]),
+    highlightOrder: ["known", "next"],
+  },
+};

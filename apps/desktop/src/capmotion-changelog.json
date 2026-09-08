@@ -1,0 +1,26 @@
+[
+	{
+		"version": "0.1.2",
+		"publishedAt": "2026-09-05T19:15:00+08:00",
+		"title": {
+			"en": "Reliable presets and independent bilingual caption placement",
+			"zh-CN": "更可靠的预设与中英字幕独立位置控制"
+		},
+		"content": {
+			"en": "### New and improved\n\n- The Position panel now shows independent controls for every caption track that actually exists. Chinese and English positions can be viewed and edited at the same time without a hidden track switch.\n- Canvas dragging, centered X/Y coordinates, and arrow-key nudging now update the whole selected language track while leaving the other language unchanged.\n- Removing the last caption from a language track also removes that track's stale position settings.\n\n### Fixes\n\n- Saving changes to a named preset no longer requires applying it first and no longer fails when the editor state contains reactive values. Only fields changed in the current editing session are merged, while Agent-only preferences remain intact.\n- Deleting a preset now selects the nearest remaining preset and applies it safely instead of leaving an invalid selection or preventing the recording from opening.\n- Native helper-window state is now idempotent, preventing one CapMotion session from appearing as duplicate Dock icons.",
+			"zh-CN": "### 新增与改进\n\n- “位置”面板现在会为工程中实际存在的每条字幕轨道显示独立设置；中文和英文位置可以同时查看和修改，不再依赖隐藏的轨道切换。\n- 画布拖动、以画面中心为原点的 X/Y 坐标与方向键微调，现在会更新选中字幕所属的整条语言轨道，不影响另一条轨道。\n- 删除某语言轨道的最后一条字幕时，会同步清理该轨道遗留的位置设置。\n\n### 修复\n\n- 命名预设现在可以直接保存当前更改，无需先应用预设；同时修复了编辑器响应式数据导致的“对象无法克隆”错误。保存时只合并本次编辑会话实际修改的字段，Agent 专用偏好保持不变。\n- 删除预设后会安全选择并应用最近的剩余预设，不再留下无效选中状态，也不再导致录制工程无法打开。\n- 原生辅助窗口状态改为幂等处理，避免同一个 CapMotion 会话在 Dock 中显示两个图标。"
+		}
+	},
+	{
+		"version": "0.1.1",
+		"publishedAt": "2026-09-05T00:00:00+08:00",
+		"title": {
+			"en": "Reliable Cap Agent workflow and localized desktop experience",
+			"zh-CN": "更可靠的 Cap Agent 工作流与完整中文体验"
+		},
+		"content": {
+			"en": "### New and improved\n\n- Added a language-first onboarding flow. Your language choice persists across restarts and app updates.\n- Reworked permission checks so existing grants are recognized, required and optional permissions are separated, and restart recovery is explicit.\n- Added CapMotion CLI installation status, repair, removal, and PATH guidance for terminals and Agents.\n- Added editable Cap project operations for EDL, bilingual caption tracks, presentation settings, and named personal presets.\n- Added Source Han Sans support plus outline, shadow, and outline-shadow controls for caption styling.\n- Added full-title hover previews for truncated recording project names.\n- Localized automation templates, generated summaries, actions, conditions, and editor labels.\n- Replaced the upstream Cap changelog with CapMotion's own bilingual release history.\n\n### Reliability\n\n- Local packages keep the same application identifier and persistent signing identity so macOS permissions can survive compatible updates.\n- Packaging now verifies that the package version and newest bundled release note agree before installation.",
+			"zh-CN": "### 新增与改进\n\n- 新增先选语言的首次使用流程；语言选择会在重启和覆盖更新后继续保留。\n- 重做权限检测：能够识别已有授权，区分必选与可选权限，并明确处理需要重启的情况。\n- 新增 CapMotion CLI 的安装状态、修复、移除及终端 PATH 指引，供终端和 Agent 使用。\n- 新增可返工的 Cap 工程操作，覆盖 EDL、中英双字幕轨、画面设置和命名个人预设。\n- 新增思源黑体支持，以及字幕描边、阴影和描边阴影控制。\n- 录制工程标题被截断时，鼠标悬停可查看完整标题。\n- 自动化模板、自动生成摘要、动作、条件和编辑标签随界面语言切换。\n- 更新日志改为 CapMotion 自己维护的中英双语版本记录，不再显示上游 Cap 内容。\n\n### 可靠性\n\n- 本地安装包保持固定应用标识和持久签名身份，使兼容覆盖更新能够继承 macOS 权限。\n- 打包安装前会校验包版本与最新更新记录是否一致，避免漏改版本号或漏写更新日志。"
+		}
+	}
+]

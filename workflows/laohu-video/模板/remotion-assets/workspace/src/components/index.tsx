@@ -12,6 +12,7 @@ import {RiskActionLoop} from "./RiskActionLoop";
 import {ScreenExplainer} from "./ScreenExplainer";
 import {SystemMap} from "./SystemMap";
 import {TimelineRoadmap} from "./TimelineRoadmap";
+import {EditorialOverlayShell} from "./EditorialOverlayShell";
 
 export const componentRenderers: Record<
   ComponentConfig["component"],
@@ -29,6 +30,7 @@ export const componentRenderers: Record<
   FormTemplateBuilder,
   ScreenExplainer,
   RiskActionLoop,
+  EditorialOverlayShell,
 };
 
 export const ComponentScene: React.FC<{config: ComponentConfig}> = ({config}) => {

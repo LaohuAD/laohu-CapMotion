@@ -35,7 +35,7 @@ expect(mergeChangedPresetFields(saved, baseline, current)).toEqual({
 
 - [ ] **Step 2: Run the focused test and confirm it fails for the missing no-apply behavior**
 
-Run: `pnpm --dir apps/desktop vitest run src/routes/editor/preset-config.test.ts`
+Run: `pnpm -C apps/desktop exec vitest run src/routes/editor/preset-config.test.ts`
 
 Expected: the new integration expectation fails until `createPresets` no longer requires an applied preset name.
 
@@ -59,7 +59,7 @@ Capture the initial normalized project in `EditorContextProvider`; refresh it af
 
 - [ ] **Step 5: Run preset tests**
 
-Run: `pnpm --dir apps/desktop vitest run src/routes/editor/preset-config.test.ts src/editor-i18n-coverage.test.ts`
+Run: `pnpm -C apps/desktop exec vitest run src/routes/editor/preset-config.test.ts src/editor-i18n-coverage.test.ts`
 
 Expected: PASS.
 
@@ -142,7 +142,7 @@ expect(
 ]);
 ```
 
-Run: `pnpm --dir apps/desktop vitest run src/routes/editor/caption-position.test.ts src/routes/editor/caption-tracks.test.ts`
+Run: `pnpm -C apps/desktop exec vitest run src/routes/editor/caption-position.test.ts src/routes/editor/caption-tracks.test.ts`
 
 Expected: FAIL because `pruneCaptionTrackPositions` is not implemented yet.
 
@@ -196,7 +196,7 @@ Resolve position in this order: legacy segment override, matching track setting,
 
 - [ ] **Step 9: Run caption and localization tests**
 
-Run: `pnpm --dir apps/desktop vitest run src/routes/editor/caption-position.test.ts src/routes/editor/caption-tracks.test.ts src/editor-i18n-coverage.test.ts src/i18n-literals.test.ts`
+Run: `pnpm -C apps/desktop exec vitest run src/routes/editor/caption-position.test.ts src/routes/editor/caption-tracks.test.ts src/editor-i18n-coverage.test.ts src/i18n-literals.test.ts`
 
 Run: `rg -n "activeCaptionTrackId|activeCaptionPosition" apps/desktop/src/routes/editor/CaptionsTab.tsx`
 
@@ -243,7 +243,7 @@ Rename “Fade Duration” to “Entry Duration”.
 
 Run: `cargo test -p cap-rendering caption -- --nocapture`
 
-Run: `pnpm --dir apps/desktop vitest run src/editor-i18n-coverage.test.ts src/i18n-literals.test.ts`
+Run: `pnpm -C apps/desktop exec vitest run src/editor-i18n-coverage.test.ts src/i18n-literals.test.ts`
 
 Expected: PASS.
 
@@ -303,7 +303,7 @@ Document that preset saves are field-differential, track position is track-owned
 Run the tests from Tasks 1–4 plus:
 
 ```bash
-pnpm --dir apps/desktop typecheck
+pnpm exec tsc -b apps/desktop/tsconfig.json --pretty false
 cargo check -p cap-desktop --features custom-protocol
 ```
 

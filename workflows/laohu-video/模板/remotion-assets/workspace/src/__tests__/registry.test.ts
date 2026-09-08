@@ -14,10 +14,11 @@ const expectedIds = [
   "FormTemplateBuilder",
   "ScreenExplainer",
   "RiskActionLoop",
+  "EditorialOverlayShell",
 ];
 
 describe("component registry", () => {
-  it("registers exactly the 12 public component families", () => {
+  it("registers exactly the 13 public component families", () => {
     expect(componentRegistry.map((item) => item.id)).toEqual(expectedIds);
   });
 

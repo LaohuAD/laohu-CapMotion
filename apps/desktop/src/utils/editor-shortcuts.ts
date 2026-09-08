@@ -79,6 +79,65 @@ type KeyboardEventLike = Pick<
 	"code" | "metaKey" | "ctrlKey" | "altKey" | "shiftKey"
 >;
 
+type KeyboardEventTargetLike = {
+	target?: unknown;
+	composedPath?: () => unknown[];
+};
+
+type EditableTargetLike = {
+	tagName?: unknown;
+	isContentEditable?: unknown;
+	getAttribute?: (name: string) => string | null;
+	parentElement?: unknown;
+};
+
+function isEditableTarget(target: unknown): boolean {
+	const visited = new Set<unknown>();
+	let current = target;
+
+	while (current && typeof current === "object" && !visited.has(current)) {
+		visited.add(current);
+		const element = current as EditableTargetLike;
+		const tagName =
+			typeof element.tagName === "string"
+				? element.tagName.toUpperCase()
+				: undefined;
+
+		if (tagName === "INPUT" || tagName === "TEXTAREA" || tagName === "SELECT")
+			return true;
+		if (element.isContentEditable === true) return true;
+		if (element.getAttribute?.("role") === "textbox") return true;
+
+		const contentEditable = element.getAttribute?.("contenteditable");
+		if (
+			contentEditable === "" ||
+			contentEditable === "true" ||
+			contentEditable === "plaintext-only"
+		)
+			return true;
+
+		current = element.parentElement;
+	}
+
+	return false;
+}
+
+/**
+ * Global editor shortcuts must yield to text editing. Inspect the event path
+ * as the primary evidence and activeElement as a fallback because reactive UI
+ * updates can make activeElement stale before a window-level listener runs.
+ */
+export function keyboardEventTargetsEditableContent(
+	event: KeyboardEventTargetLike,
+	activeElement: unknown = typeof document === "undefined"
+		? null
+		: document.activeElement,
+): boolean {
+	if (isEditableTarget(event.target)) return true;
+	if (event.composedPath?.().some(isEditableTarget)) return true;
+	return isEditableTarget(activeElement);
+}
+
 export function editorShortcutMatches(
 	binding: EditorShortcutBinding | null | undefined,
 	event: KeyboardEventLike,
