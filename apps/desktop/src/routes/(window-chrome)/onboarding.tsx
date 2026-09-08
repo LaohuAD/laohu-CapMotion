@@ -19,6 +19,7 @@ import {
 import { createStore } from "solid-js/store";
 import { type TranslationKey, useI18n } from "~/i18n";
 import { generalSettingsStore } from "~/store";
+import { StorageLocationControl } from "~/components/StorageLocationControl";
 import { isPermissionGranted as isPermitted } from "~/utils/os-permissions";
 import {
 	commands,
@@ -374,12 +375,47 @@ function OnboardingAmbientBackdrop() {
 
 export default function OnboardingPage() {
 	const i18n = useI18n();
+	const settings = generalSettingsStore.createQuery();
+	const [storageConfirmed, setStorageConfirmed] = createSignal(false);
 	return (
 		<Show when={i18n.ready()}>
 			<Show when={i18n.languageSelected()} fallback={<LanguageSelectionPage />}>
-				<OnboardingFlow />
+				<Show when={!settings.isLoading}>
+					<Show
+						when={storageConfirmed() || settings.data?.storageLocationConfirmed}
+						fallback={
+							<StorageSelectionPage
+								onConfirmed={() => setStorageConfirmed(true)}
+							/>
+						}
+					>
+						<OnboardingFlow />
+					</Show>
+				</Show>
 			</Show>
 		</Show>
+	);
+}
+
+function StorageSelectionPage(props: { onConfirmed: () => void }) {
+	const { t } = useI18n();
+	return (
+		<>
+			<WindowChromeHeader hideMaximize>
+				<div class="flex-1" data-tauri-drag-region />
+			</WindowChromeHeader>
+			<div class="relative flex flex-col flex-1 items-center justify-center overflow-y-auto bg-gray-1 px-8 py-6">
+				<div class="w-full max-w-[620px]">
+					<h1 class="text-3xl font-bold text-gray-12">
+						{t("onboarding.storage.title")}
+					</h1>
+					<p class="mt-3 mb-6 text-sm leading-6 text-gray-10">
+						{t("onboarding.storage.description")}
+					</p>
+					<StorageLocationControl onboarding onSaved={props.onConfirmed} />
+				</div>
+			</div>
+		</>
 	);
 }
 
@@ -2173,12 +2209,7 @@ function PermissionsStep(props: {
 		const result = await checkOnce();
 		if (result) {
 			setClaimed((current) =>
-				claimAfterSettingsChoice(
-					current,
-					permission,
-					true,
-					result[permission],
-				),
+				claimAfterSettingsChoice(current, permission, true, result[permission]),
 			);
 		}
 	};

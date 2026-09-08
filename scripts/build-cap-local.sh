@@ -8,6 +8,9 @@ export TMPDIR="${CAP_BUILD_TMPDIR:-$repo_root/target/capmotion-release/tmp}"
 mkdir -p "$TMPDIR"
 source_app="$repo_root/target/release/bundle/macos/CapMotion.app"
 destination_app="${CAP_LOCAL_APP_DEST:-$HOME/Applications/CapMotion.app}"
+if [[ -L "$destination_app" ]]; then
+	destination_app="$(node -e 'process.stdout.write(require("node:fs").realpathSync(process.argv[1]))' "$destination_app")"
+fi
 signing_identity="${CAP_LOCAL_SIGNING_IDENTITY:-CapMotion Local Code Signing}"
 legacy_data_dir="$HOME/Library/Application Support/so.cap.desktop.dev"
 local_data_dir="$HOME/Library/Application Support/com.laohu.capmotion"

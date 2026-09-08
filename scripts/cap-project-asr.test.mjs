@@ -63,8 +63,8 @@ test("builds the first-pass microphone index in recording order, not filename or
   assert.equal(index.projectRevision, 7);
   assert.equal(index.orderPolicy, "recording-meta-segments");
   assert.deepEqual(index.segments.map((segment) => segment.recordingSegment), [0, 1]);
-  assert.match(index.segments[0].microphonePath, /later-name\/mic\.ogg$/);
-  assert.match(index.segments[1].microphonePath, /earlier-name\/mic\.ogg$/);
+  assert.match(index.segments[0].microphonePath, /later-name[\\/]mic\.ogg$/);
+  assert.match(index.segments[1].microphonePath, /earlier-name[\\/]mic\.ogg$/);
   assert.deepEqual(index.timeline.map((segment) => segment.recordingSegment), [1, 0]);
   assert.equal(index.segments[0].sourceTimelineOffsetSeconds, 0.2);
   assert.equal(index.segments[1].sourceTimelineOffsetSeconds, 0);

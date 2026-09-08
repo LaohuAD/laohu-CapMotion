@@ -407,6 +407,12 @@ async setPrettyName(prettyName: string) : Promise<null> {
 async setServerUrl(serverUrl: string) : Promise<null> {
     return await TAURI_INVOKE("set_server_url", { serverUrl });
 },
+async getStorageLocation() : Promise<StorageLocationInfo> {
+    return await TAURI_INVOKE("get_storage_location");
+},
+async setRecordingsFolder(path: string | null) : Promise<null> {
+    return await TAURI_INVOKE("set_recordings_folder", { path });
+},
 async pickRecordingsFolder() : Promise<string | null> {
     return await TAURI_INVOKE("pick_recordings_folder");
 },
@@ -1052,7 +1058,7 @@ uiLanguage?: AppLanguage | null; commercialLicense?: CommercialLicense | null; l
  * display. From then on it is the user's preference and nothing re-reads
  * the hardware, so moving between machines can't silently flip it.
  */
-macbookNotchOverlay?: boolean | null; captureKeyboardEvents?: boolean; postDeletionBehaviour?: PostDeletionBehaviour; excludedWindows?: WindowExclusion[]; deleteInstantRecordingsAfterUpload?: boolean; instantModeMaxResolution?: number; defaultProjectNameTemplate?: string | null; crashRecoveryRecording?: boolean; maxFps?: number; transcriptionHints?: string[]; editorPreviewQuality?: EditorPreviewQuality; studioRecordingQuality?: StudioRecordingQuality; mainWindowPosition?: WindowPosition | null; cameraWindowPosition?: WindowPosition | null; cameraWindowPositionsByMonitorName?: { [key in string]: WindowPosition }; hasCompletedOnboarding?: boolean; enableTelemetry?: boolean; outOfProcessMuxer?: boolean; recordingsPath?: string | null;
+macbookNotchOverlay?: boolean | null; captureKeyboardEvents?: boolean; postDeletionBehaviour?: PostDeletionBehaviour; excludedWindows?: WindowExclusion[]; deleteInstantRecordingsAfterUpload?: boolean; instantModeMaxResolution?: number; defaultProjectNameTemplate?: string | null; crashRecoveryRecording?: boolean; maxFps?: number; transcriptionHints?: string[]; editorPreviewQuality?: EditorPreviewQuality; studioRecordingQuality?: StudioRecordingQuality; mainWindowPosition?: WindowPosition | null; cameraWindowPosition?: WindowPosition | null; cameraWindowPositionsByMonitorName?: { [key in string]: WindowPosition }; hasCompletedOnboarding?: boolean; enableTelemetry?: boolean; outOfProcessMuxer?: boolean; recordingsPath?: string | null; storageLocationConfirmed?: boolean;
 /**
  * Custom recordings folders that were used before; recordings left in
  * them stay visible in the library. Most recent last.
@@ -1381,3 +1387,5 @@ function __makeEvents__<T extends Record<string, any>>(
 		},
 	);
 }
+
+export type StorageLocationInfo = { path: string; defaultPath: string; availableBytes: number | null; exists: boolean };

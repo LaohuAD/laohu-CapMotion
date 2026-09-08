@@ -1,3 +1,4 @@
+import { StorageLocationControl } from "~/components/StorageLocationControl";
 import { Button } from "@cap/ui-solid";
 import { createWritableMemo } from "@solid-primitives/memo";
 import {
@@ -773,33 +774,19 @@ function Inner(props: {
 					</SectionRows>
 				</Section>
 
-				<StorageSection
-					recordingsPath={settings.recordingsPath ?? null}
-					onPick={async () => {
-						try {
-							const path = await commands.pickRecordingsFolder();
-							if (path !== null) {
+				<Section
+					title={i18n.t("settings.storage.title")}
+					description={i18n.t("settings.storage.description")}
+				>
+					<SectionCard padded>
+						<StorageLocationControl
+							onSaved={async (path) => {
 								setSettings("recordingsPath", path);
 								await offerRecordingsMigration();
-							}
-						} catch (e) {
-							toast.error(
-								`Failed to choose recordings folder: ${e instanceof Error ? e.message : String(e)}`,
-							);
-						}
-					}}
-					onReset={async () => {
-						try {
-							await commands.resetRecordingsFolder();
-							setSettings("recordingsPath", null);
-							await offerRecordingsMigration();
-						} catch (e) {
-							toast.error(
-								`Failed to reset recordings folder: ${e instanceof Error ? e.message : String(e)}`,
-							);
-						}
-					}}
-				/>
+							}}
+						/>
+					</SectionCard>
+				</Section>
 
 				<DefaultProjectNameCard
 					onChange={(value) =>
@@ -912,44 +899,6 @@ async function offerRecordingsMigration() {
 	} finally {
 		unlisten?.();
 	}
-}
-
-function StorageSection(props: {
-	recordingsPath: string | null;
-	onPick: () => Promise<void>;
-	onReset: () => Promise<void>;
-}) {
-	const { t } = useI18n();
-	const defaultLabel = t("settings.storage.default");
-	const displayPath = () => props.recordingsPath ?? defaultLabel;
-	const isCustom = () => props.recordingsPath !== null;
-
-	return (
-		<Section
-			title={t("settings.storage.title")}
-			description={t("settings.storage.description")}
-		>
-			<SectionCard padded>
-				<div class="flex flex-col gap-3">
-					<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-3 border border-gray-4 min-w-0">
-						<span class="flex-1 text-xs text-gray-12 truncate font-mono">
-							{displayPath()}
-						</span>
-					</div>
-					<div class="flex justify-end gap-2">
-						<Show when={isCustom()}>
-							<Button size="sm" variant="gray" onClick={props.onReset}>
-								{t("settings.storage.reset")}
-							</Button>
-						</Show>
-						<Button size="sm" variant="dark" onClick={props.onPick}>
-							{t("common.chooseFolder")}
-						</Button>
-					</div>
-				</div>
-			</SectionCard>
-		</Section>
-	);
 }
 
 function TelemetryCard(props: {

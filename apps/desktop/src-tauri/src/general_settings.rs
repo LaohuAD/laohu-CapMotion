@@ -252,6 +252,8 @@ pub struct GeneralSettingsStore {
     pub out_of_process_muxer: bool,
     #[serde(default)]
     pub recordings_path: Option<String>,
+    #[serde(default)]
+    pub storage_location_confirmed: bool,
     /// Custom recordings folders that were used before; recordings left in
     /// them stay visible in the library. Most recent last.
     #[serde(default)]
@@ -371,6 +373,7 @@ impl Default for GeneralSettingsStore {
             enable_telemetry: true,
             out_of_process_muxer: cap_recording::DEFAULT_OUT_OF_PROCESS_MUXER,
             recordings_path: None,
+            storage_location_confirmed: false,
             previous_recordings_paths: Vec::new(),
             camera_blur_disabled_by_crash: None,
             update_channel: UpdateChannel::Stable,
@@ -390,37 +393,12 @@ pub enum AppTheme {
 
 impl GeneralSettingsStore {
     pub fn recordings_dir(app: &AppHandle<Wry>) -> std::path::PathBuf {
-        let custom = Self::get(app)
-            .map_err(|e| tracing::warn!("Failed to read general settings for recordings_dir: {e}"))
+        Self::get(app)
             .ok()
             .flatten()
             .and_then(|s| s.recordings_path)
-            .and_then(|p| {
-                let path = std::path::PathBuf::from(&p);
-                if path.is_absolute() { Some(path) } else { None }
-            });
-
-        // A custom folder can become unavailable (unplugged drive, deleted
-        // path). Recording must keep working, so fall back to the default
-        // location instead of failing; the library lists recordings from
-        // every known folder, so nothing goes missing when this happens.
-        if let Some(path) = custom {
-            match std::fs::create_dir_all(&path) {
-                Ok(()) => return path,
-                Err(e) => {
-                    tracing::warn!(
-                        ?path, %e,
-                        "Custom recordings directory unavailable; falling back to default"
-                    );
-                }
-            }
-        }
-
-        let path = app.path().app_data_dir().unwrap().join("recordings");
-        if let Err(e) = std::fs::create_dir_all(&path) {
-            tracing::warn!(?path, %e, "Failed to create recordings directory");
-        }
-        path
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|| app.path().app_data_dir().unwrap().join("recordings"))
     }
 
     // The effective value: the native preview is macOS-only; it is not
@@ -446,7 +424,8 @@ impl GeneralSettingsStore {
                     Err(e) => Err(format!("Failed to deserialize general settings store: {e}")),
                 }
             }
-            _ => Ok(None),
+            Ok(None) => Ok(None),
+            Err(e) => Err(format!("Failed to open general settings: {e}")),
         }
     }
 

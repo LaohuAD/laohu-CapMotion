@@ -52,8 +52,31 @@ pub fn screenshots_dir(app: &AppHandle<Wry>) -> PathBuf {
         &default_recordings_dir(app),
         &default_screenshots_dir(app),
     );
-    std::fs::create_dir_all(&path).unwrap_or_default();
     path
+}
+
+/// All media writers must validate the configured root. Reads never create it.
+pub fn writable_recordings_dir(app: &AppHandle<Wry>) -> Result<PathBuf, String> {
+    let settings = GeneralSettingsStore::get(app)?;
+    let custom = settings
+        .as_ref()
+        .and_then(|s| s.recordings_path.as_deref())
+        .map(Path::new);
+    cap_utils::storage::prepare_media_root(custom, &default_recordings_dir(app))
+        .map_err(|e| e.to_string())
+}
+
+pub fn writable_screenshots_dir(app: &AppHandle<Wry>) -> Result<PathBuf, String> {
+    writable_recordings_dir(app)?;
+    let dir = screenshots_dir(app);
+    std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    Ok(dir)
+}
+
+pub fn exports_dir(app: &AppHandle<Wry>) -> Result<PathBuf, String> {
+    let dir = writable_recordings_dir(app)?.join("exports");
+    std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    Ok(dir)
 }
 
 /// Active, default, and previously selected screenshot locations. This keeps
@@ -240,7 +263,7 @@ pub async fn migrate_recordings_to_current_dir(
     }
     let _lock = MigrationLockGuard;
 
-    let dest = GeneralSettingsStore::recordings_dir(&app);
+    let dest = writable_recordings_dir(&app)?;
 
     // Leftover staging from an interrupted previous run: the copies in there
     // are incomplete by definition (their source was kept), so remove them.

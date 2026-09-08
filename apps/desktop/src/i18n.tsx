@@ -142,9 +142,21 @@ const en = {
 	"settings.projectName.target": "Target",
 	"settings.projectName.dateTime": "Date & time",
 	"settings.projectName.targetNameHint": "Monitor name or window title.",
+	"onboarding.storage.title": "Choose where your media is saved",
+	"onboarding.storage.description":
+		"The app and your media can live on different disks. Keep the app on your system disk and save large files on an external drive if you prefer. You can change this later in Settings.",
+	"onboarding.storage.continue": "Use this location and continue",
+	"settings.storage.pathLabel": "Media folder (type a path or browse)",
+	"settings.storage.freeSpace": "Available space:",
+	"settings.storage.layout":
+		"Recordings and imported video projects use this folder. Screenshot projects go in screenshots; exported files default to exports. Existing projects move only when you choose to migrate them.",
+	"settings.storage.offline":
+		"If this folder or drive is unavailable, saving stops with an error. CapMotion will not switch to your system disk.",
+	"settings.storage.useDefault": "Choose default location",
+	"settings.storage.save": "Save location",
 	"settings.storage.title": "Project & Media Storage",
 	"settings.storage.description":
-		"Where Cap saves new recording projects, screenshot projects, and their media.",
+		"Choose where CapMotion saves projects, screenshots, imported media and exported results.",
 	"settings.storage.default": "Default (Application Support)",
 	"settings.storage.reset": "Reset to Default",
 	"settings.excludedWindows.title": "Excluded windows",
@@ -613,9 +625,21 @@ const zhCN: Record<keyof typeof en, string> = {
 	"settings.projectName.target": "录制目标",
 	"settings.projectName.dateTime": "日期与时间",
 	"settings.projectName.targetNameHint": "显示器名称或窗口标题",
+	"onboarding.storage.title": "选择工程与媒体保存位置",
+	"onboarding.storage.description":
+		"软件安装位置和媒体保存位置互相独立。软件可以装在系统盘，工程和大文件可以放在外接硬盘；以后仍可在设置中修改。",
+	"onboarding.storage.continue": "使用这个位置并继续",
+	"settings.storage.pathLabel": "媒体目录（输入路径或选择文件夹）",
+	"settings.storage.freeSpace": "可用空间：",
+	"settings.storage.layout":
+		"录制与导入的视频工程保存在此目录；截图工程放在 screenshots，导出结果默认放在 exports。已有工程只有在你选择迁移时才搬动。",
+	"settings.storage.offline":
+		"如果目录或硬盘不可用，CapMotion 会停止保存并提示，不会自动改存系统盘。",
+	"settings.storage.useDefault": "选择默认位置",
+	"settings.storage.save": "保存位置",
 	"settings.storage.title": "工程与媒体存储位置",
 	"settings.storage.description":
-		"设置 Cap 保存新录制工程、截图工程及其媒体文件的位置",
+		"设置 CapMotion 保存工程、截图、导入媒体和导出结果的位置",
 	"settings.storage.default": "默认（Application Support）",
 	"settings.storage.reset": "恢复默认位置",
 	"settings.excludedWindows.title": "排除的窗口",

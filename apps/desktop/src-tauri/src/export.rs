@@ -1289,6 +1289,7 @@ async fn show_export_save_dialog(
     app.dialog()
         .file()
         .set_title("Save File")
+        .set_directory(crate::recordings_locations::exports_dir(app)?)
         .set_file_name(file_name)
         .add_filter(name, &[extension])
         .save_file(move |path| {

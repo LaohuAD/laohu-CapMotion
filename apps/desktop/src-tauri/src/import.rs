@@ -1372,7 +1372,7 @@ fn transcode_video(
 pub async fn start_video_import(app: AppHandle, source_path: PathBuf) -> Result<PathBuf, String> {
     info!("Starting video import from: {:?}", source_path);
 
-    let recordings_dir = crate::general_settings::GeneralSettingsStore::recordings_dir(&app);
+    let recordings_dir = crate::recordings_locations::writable_recordings_dir(&app)?;
 
     let project_name = generate_project_name(&source_path);
     let sanitized_name = sanitize_filename(&project_name);
@@ -1946,7 +1946,7 @@ pub async fn start_image_import(app: AppHandle, source_path: PathBuf) -> Result<
         .await
         .map_err(|e| format!("Failed to import image: {e}"))??;
 
-    let screenshots_dir = crate::recordings_locations::screenshots_dir(&app);
+    let screenshots_dir = crate::recordings_locations::writable_screenshots_dir(&app)?;
     std::fs::create_dir_all(&screenshots_dir)
         .map_err(|e| format!("Failed to create screenshots directory: {e}"))?;
 

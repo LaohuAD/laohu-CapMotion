@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/solid-query";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { LogicalPosition } from "@tauri-apps/api/dpi";
 import { Menu, MenuItem } from "@tauri-apps/api/menu";
-import { appDataDir, join } from "@tauri-apps/api/path";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { open } from "@tauri-apps/plugin-dialog";
 import { type as ostype } from "@tauri-apps/plugin-os";
@@ -540,7 +539,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 	};
 
 	const pickCapRecording = async () => {
-		const recordingsPath = await join(await appDataDir(), "recordings");
+		const recordingsPath = (await commands.getStorageLocation()).path;
 		const path = await open(
 			getExistingRecordingPickerOptions(ostype(), recordingsPath),
 		);

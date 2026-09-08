@@ -4178,6 +4178,7 @@ async fn save_file_dialog_inner(
     app.dialog()
         .file()
         .set_title("Save File")
+        .set_directory(recordings_locations::exports_dir(&app)?)
         .set_file_name(file_name)
         .add_filter(name, &[extension])
         .save_file(move |path| {
@@ -4883,6 +4884,47 @@ async fn set_server_url(app: MutableState<'_, App>, server_url: String) -> Resul
     Ok(())
 }
 
+#[derive(serde::Serialize, specta::Type)]
+#[serde(rename_all = "camelCase")]
+struct StorageLocationInfo {
+    path: String,
+    default_path: String,
+    available_bytes: Option<u64>,
+    exists: bool,
+}
+
+#[tauri::command]
+#[specta::specta]
+fn get_storage_location(app: AppHandle) -> Result<StorageLocationInfo, String> {
+    let settings = general_settings::GeneralSettingsStore::get(&app)?;
+    let default = recordings_locations::default_recordings_dir(&app);
+    let path = settings
+        .and_then(|s| s.recordings_path)
+        .map(PathBuf::from)
+        .unwrap_or_else(|| default.clone());
+    Ok(StorageLocationInfo {
+        available_bytes: cap_utils::disk_space::free_bytes_for_path(&path).ok(),
+        exists: path.is_dir(),
+        path: path.to_string_lossy().into_owned(),
+        default_path: default.to_string_lossy().into_owned(),
+    })
+}
+
+#[tauri::command]
+#[specta::specta]
+fn set_recordings_folder(app: AppHandle, path: Option<String>) -> Result<(), String> {
+    cap_utils::storage::prepare_media_root(
+        path.as_deref().map(Path::new),
+        &recordings_locations::default_recordings_dir(&app),
+    )
+    .map_err(|e| e.to_string())?;
+    general_settings::GeneralSettingsStore::update(&app, |s| {
+        let previous = std::mem::replace(&mut s.recordings_path, path.clone());
+        recordings_locations::remember_previous_recordings_path(s, previous, path.as_deref());
+        s.storage_location_confirmed = true;
+    })
+}
+
 #[tauri::command]
 #[specta::specta]
 #[instrument(skip(app))]
@@ -4905,10 +4947,7 @@ async fn pick_recordings_folder(app: AppHandle) -> Result<Option<String>, String
 
     let result = rx.await.map_err(|e| e.to_string())?;
     if let Some(ref path) = result {
-        general_settings::GeneralSettingsStore::update(&app, |s| {
-            let previous = s.recordings_path.replace(path.clone());
-            recordings_locations::remember_previous_recordings_path(s, previous, Some(path));
-        })?;
+        set_recordings_folder(app, Some(path.clone()))?;
     }
     Ok(result)
 }
@@ -4917,10 +4956,7 @@ async fn pick_recordings_folder(app: AppHandle) -> Result<Option<String>, String
 #[specta::specta]
 #[instrument(skip(app))]
 async fn reset_recordings_folder(app: AppHandle) -> Result<(), String> {
-    general_settings::GeneralSettingsStore::update(&app, |s| {
-        let previous = s.recordings_path.take();
-        recordings_locations::remember_previous_recordings_path(s, previous, None);
-    })
+    set_recordings_folder(app, None)
 }
 
 #[tauri::command]
@@ -5416,6 +5452,8 @@ fn specta_builder() -> tauri_specta::Builder {
             delete_recording_directory,
             set_pretty_name,
             set_server_url,
+            get_storage_location,
+            set_recordings_folder,
             pick_recordings_folder,
             reset_recordings_folder,
             recordings_locations::count_recordings_to_migrate,

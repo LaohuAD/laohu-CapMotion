@@ -1926,7 +1926,10 @@ async fn start_recording_with_camera_lock(
     let filename = project_name.replace(":", ".");
     let filename = format!("{}.cap", sanitize_filename::sanitize(&filename));
 
-    let recordings_base_dir = GeneralSettingsStore::recordings_dir(&app);
+    let recordings_base_dir = pending_try!(
+        crate::recordings_locations::writable_recordings_dir(&app),
+        |e| e
+    );
 
     pending_try!(ensure_dir(&recordings_base_dir), |e| format!(
         "Failed to create recordings directory: {e}"
@@ -3345,7 +3348,7 @@ pub async fn take_screenshot(
     let filename = project_name.replace(":", ".");
     let filename = format!("{}.cap", sanitize_filename::sanitize(&filename));
 
-    let screenshots_base_dir = crate::recordings_locations::screenshots_dir(&app);
+    let screenshots_base_dir = crate::recordings_locations::writable_screenshots_dir(&app)?;
 
     let project_file_path = screenshots_base_dir.join(&cap_utils::ensure_unique_filename(
         &filename,

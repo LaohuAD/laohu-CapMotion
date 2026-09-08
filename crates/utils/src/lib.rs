@@ -10,6 +10,7 @@ use aho_corasick::{AhoCorasickBuilder, MatchKind};
 use tracing::Instrument;
 
 pub mod disk_space;
+pub mod storage;
 #[cfg(any(target_os = "linux", test))]
 pub mod linux_package;
 #[cfg(target_os = "macos")]
