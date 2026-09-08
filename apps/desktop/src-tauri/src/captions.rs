@@ -18,7 +18,6 @@ use std::sync::Arc;
 use std::time::Duration;
 use tauri::{AppHandle, Manager};
 use tauri_specta::Event;
-use tempfile::tempdir;
 use tokio::io::AsyncWriteExt;
 use tokio::sync::{Mutex, Notify};
 use tracing::instrument;
@@ -1356,7 +1355,11 @@ pub async fn transcribe_audio(
 
     let model_path = validated_model_path.to_string_lossy().to_string();
 
-    let temp_dir = tempdir().map_err(|e| format!("Failed to create temporary directory: {e}"))?;
+    let media_root = crate::recordings_locations::writable_recordings_dir(&app)?;
+    let temp_dir = tempfile::Builder::new()
+        .prefix(".capmotion-transcription-")
+        .tempdir_in(media_root)
+        .map_err(|e| format!("Failed to create temporary directory: {e}"))?;
     let audio_path = temp_dir.path().join("audio.wav");
     log::info!("Temp audio path: {:?}", audio_path);
 
