@@ -96,7 +96,11 @@ fn main() {
             #[cfg(not(target_os = "macos"))]
             let path = dirs::data_local_dir()
                 .unwrap()
-                .join("so.cap.desktop")
+                .join(if cfg!(cap_laohu_local_build) {
+                    "com.laohu.capmotion"
+                } else {
+                    "so.cap.desktop"
+                })
                 .join("logs");
 
             path

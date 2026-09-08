@@ -37,7 +37,9 @@ impl MotionRenderRunner for RemotionCliRunner {
     fn render(&self, request: &MotionRenderRequest) -> Result<(), String> {
         // Invoke the JavaScript entry with Node on both platforms. A Windows
         // .cmd shim would otherwise send JSON props through cmd.exe parsing.
-        let executable = request.workspace.join("node_modules/@remotion/cli/remotion-cli.js");
+        let executable = request
+            .workspace
+            .join("node_modules/@remotion/cli/remotion-cli.js");
 
         if !executable.is_file() {
             return Err(format!(

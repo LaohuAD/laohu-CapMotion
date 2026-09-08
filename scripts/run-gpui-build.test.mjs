@@ -48,3 +48,21 @@ test("release bundling is mandatory on every supported desktop platform", () => 
 	}
 	assert.equal(shouldBundleGpui("freebsd", {}, "release", true), false);
 });
+
+test("CapMotion local distributions use only the Tauri interface on both systems", () => {
+	for (const platform of ["darwin", "win32"]) {
+		assert.equal(
+			shouldBuildGpui(platform, { CAP_LAOHU_LOCAL_BUILD: "1" }, "release"),
+			false,
+		);
+		assert.equal(
+			shouldBundleGpui(
+				platform,
+				{ CAP_LAOHU_LOCAL_BUILD: "1" },
+				"release",
+				true,
+			),
+			false,
+		);
+	}
+});

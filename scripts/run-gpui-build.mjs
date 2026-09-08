@@ -10,6 +10,7 @@ export function shouldBuildGpui(
 	developmentWorkspaceAvailable = true,
 ) {
 	if (!["darwin", "win32", "linux"].includes(platform)) return false;
+	if (environment.CAP_LAOHU_LOCAL_BUILD) return false;
 	if (profile === "release") return true;
 	return (
 		platform === "darwin" &&

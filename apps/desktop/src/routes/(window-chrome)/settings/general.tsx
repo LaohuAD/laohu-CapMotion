@@ -550,18 +550,20 @@ function Inner(props: {
 					}}
 				/>
 
-				{ostype === "macos" && (
+				{(ostype === "macos" || ostype === "windows") && (
 					<Section
 						title={i18n.t("settings.app.title")}
 						description={i18n.t("settings.app.description")}
 					>
 						<SectionRows>
-							<ToggleSettingItem
-								label={i18n.t("settings.app.dockIcon")}
-								description={i18n.t("settings.app.dockIconDescription")}
-								value={!settings.hideDockIcon}
-								onChange={(v) => handleChange("hideDockIcon", !v)}
-							/>
+							<Show when={ostype === "macos"}>
+								<ToggleSettingItem
+									label={i18n.t("settings.app.dockIcon")}
+									description={i18n.t("settings.app.dockIconDescription")}
+									value={!settings.hideDockIcon}
+									onChange={(v) => handleChange("hideDockIcon", !v)}
+								/>
+							</Show>
 							<ToggleSettingItem
 								label={i18n.t("settings.app.notifications")}
 								description={i18n.t("settings.app.notificationsDescription")}
@@ -580,6 +582,28 @@ function Inner(props: {
 						</SectionRows>
 					</Section>
 				)}
+
+				<Show when={ostype === "windows"}>
+					<Section
+						title={i18n.t("settings.windowsPrivacy.title")}
+						description={i18n.t("settings.windowsPrivacy.description")}
+					>
+						<SectionRows>
+							<Button
+								variant="gray"
+								onClick={() => commands.openPermissionSettings("camera")}
+							>
+								{i18n.t("settings.windowsPrivacy.camera")}
+							</Button>
+							<Button
+								variant="gray"
+								onClick={() => commands.openPermissionSettings("microphone")}
+							>
+								{i18n.t("settings.windowsPrivacy.microphone")}
+							</Button>
+						</SectionRows>
+					</Section>
+				</Show>
 
 				<CapProSection
 					hasCapPro={hasCapPro()}

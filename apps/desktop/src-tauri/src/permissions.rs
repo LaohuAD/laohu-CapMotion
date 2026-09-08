@@ -613,9 +613,32 @@ pub enum OSPermission {
     Accessibility,
 }
 
+#[cfg(any(target_os = "windows", test))]
+fn windows_permission_settings_url(permission: &OSPermission) -> &'static str {
+    match permission {
+        OSPermission::Camera => "ms-settings:privacy-webcam",
+        OSPermission::Microphone => "ms-settings:privacy-microphone",
+        OSPermission::ScreenRecording => "ms-settings:privacy",
+        OSPermission::Accessibility => "ms-settings:easeofaccess-display",
+    }
+}
+
+#[cfg(target_os = "windows")]
+fn windows_open_permission_settings(app: &tauri::AppHandle, permission: &OSPermission) {
+    use tauri_plugin_opener::OpenerExt;
+    if let Err(error) = app
+        .opener()
+        .open_url(windows_permission_settings_url(permission), None::<&str>)
+    {
+        tracing::error!("Failed to open Windows privacy settings: {error}");
+    }
+}
+
 #[tauri::command(async)]
 #[specta::specta]
 pub fn open_permission_settings(_app: tauri::AppHandle, _permission: OSPermission) {
+    #[cfg(target_os = "windows")]
+    windows_open_permission_settings(&_app, &_permission);
     #[cfg(target_os = "macos")]
     {
         macos_activate_permission_request(&_app);
@@ -627,6 +650,8 @@ pub fn open_permission_settings(_app: tauri::AppHandle, _permission: OSPermissio
 #[specta::specta]
 #[instrument(skip(_app))]
 pub async fn request_permission(_app: tauri::AppHandle, _permission: OSPermission) {
+    #[cfg(target_os = "windows")]
+    windows_open_permission_settings(&_app, &_permission);
     #[cfg(target_os = "macos")]
     {
         macos_activate_permission_request(&_app);
@@ -717,6 +742,17 @@ pub fn do_permissions_check(_initial_check: bool) -> OSPermissionsCheck {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn windows_privacy_links_target_the_correct_devices() {
+        assert_eq!(
+            super::windows_permission_settings_url(&super::OSPermission::Camera),
+            "ms-settings:privacy-webcam"
+        );
+        assert_eq!(
+            super::windows_permission_settings_url(&super::OSPermission::Microphone),
+            "ms-settings:privacy-microphone"
+        );
+    }
     use super::*;
 
     #[test]

@@ -4,7 +4,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 desktop_dir="$repo_root/apps/desktop"
 source_app="$repo_root/target/release/bundle/macos/CapMotion.app"
-destination_app="${CAP_LOCAL_APP_DEST:-/Users/a1/Applications/CapMotion.app}"
+destination_app="${CAP_LOCAL_APP_DEST:-$HOME/Applications/CapMotion.app}"
 signing_identity="${CAP_LOCAL_SIGNING_IDENTITY:-CapMotion Local Code Signing}"
 legacy_data_dir="$HOME/Library/Application Support/so.cap.desktop.dev"
 local_data_dir="$HOME/Library/Application Support/com.laohu.capmotion"
@@ -32,7 +32,7 @@ if ! /usr/bin/security find-identity -v -p codesigning | /usr/bin/grep -Fq "\"$s
 	exit 1
 fi
 
-if pgrep -f "$destination_app/Contents/MacOS/CapMotion" >/dev/null 2>&1; then
+if [[ -z "${CAP_LOCAL_PACKAGE_OUTPUT:-}" ]] && pgrep -f "$destination_app/Contents/MacOS/CapMotion" >/dev/null 2>&1; then
 	echo "error: CapMotion is running; quit it before replacing the local app" >&2
 	exit 1
 fi
@@ -150,6 +150,18 @@ verify_update_identity() {
 
 if [[ -d "$destination_app" ]]; then
 	verify_update_identity "$destination_app"
+fi
+
+if [[ -n "${CAP_LOCAL_PACKAGE_OUTPUT:-}" ]]; then
+    if [[ -e "$CAP_LOCAL_PACKAGE_OUTPUT" ]]; then
+        echo "error: package output already exists: $CAP_LOCAL_PACKAGE_OUTPUT" >&2
+        exit 1
+    fi
+    mkdir -p "$(dirname "$CAP_LOCAL_PACKAGE_OUTPUT")"
+    /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$staged_app" "$CAP_LOCAL_PACKAGE_OUTPUT"
+    /usr/bin/shasum -a 256 "$CAP_LOCAL_PACKAGE_OUTPUT"
+    echo "Created signed release archive without replacing the running app: $CAP_LOCAL_PACKAGE_OUTPUT"
+    exit 0
 fi
 
 mkdir -p "$(dirname "$destination_app")"

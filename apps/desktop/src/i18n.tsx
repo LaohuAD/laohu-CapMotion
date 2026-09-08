@@ -159,6 +159,11 @@ const en = {
 	"settings.excludedWindows.empty": "No windows are currently excluded.",
 	"settings.excludedWindows.remove": "Remove excluded window",
 	"settings.app.title": "App",
+	"settings.windowsPrivacy.title": "Windows device privacy",
+	"settings.windowsPrivacy.description":
+		"If a camera or microphone is unavailable, allow desktop apps to use it in Windows Settings, then refresh the device list.",
+	"settings.windowsPrivacy.camera": "Camera privacy settings",
+	"settings.windowsPrivacy.microphone": "Microphone privacy settings",
 	"settings.app.description": "Choose how Cap shows up on your system.",
 	"settings.app.dockIcon": "Always show dock icon",
 	"settings.app.dockIconDescription":
@@ -625,6 +630,11 @@ const zhCN: Record<keyof typeof en, string> = {
 	"settings.excludedWindows.empty": "当前没有排除任何窗口",
 	"settings.excludedWindows.remove": "移除排除窗口",
 	"settings.app.title": "应用",
+	"settings.windowsPrivacy.title": "Windows 设备隐私",
+	"settings.windowsPrivacy.description":
+		"摄像头或麦克风不可用时，请在 Windows 设置中允许桌面应用访问该设备，再刷新设备列表。",
+	"settings.windowsPrivacy.camera": "摄像头隐私设置",
+	"settings.windowsPrivacy.microphone": "麦克风隐私设置",
 	"settings.app.description": "设置 Cap 在系统中的显示方式",
 	"settings.app.dockIcon": "始终显示程序坞图标",
 	"settings.app.dockIconDescription":
