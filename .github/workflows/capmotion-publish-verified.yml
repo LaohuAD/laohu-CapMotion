@@ -1,0 +1,47 @@
+name: Publish verified CapMotion Windows package
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful CapMotion Windows run ID
+        required: true
+      tag:
+        description: Existing release tag
+        required: true
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RUN_ID: ${{ inputs.run_id }}
+      RELEASE_TAG: ${{ inputs.tag }}
+    steps:
+      - name: Verify source run and download verified artifact
+        run: |
+          set -euo pipefail
+          gh api "repos/$GH_REPO/actions/runs/$RUN_ID" > run.json
+          jq -e '.conclusion == "success" and .path == ".github/workflows/capmotion-windows.yml"' run.json
+          gh run download "$RUN_ID" -n capmotion-windows-verified -D package
+      - name: Verify installer checksum and publish
+        run: |
+          set -euo pipefail
+          python3 - <<'PYTHON'
+          import hashlib,json,os,pathlib,subprocess
+          root=pathlib.Path('package')
+          reports=list(root.rglob('capmotion-windows-verification.json'))
+          installers=list(root.rglob('*.exe'))
+          assert len(reports)==len(installers)==1
+          report=json.loads(reports[0].read_text(encoding='utf-8-sig'))
+          run=json.loads(pathlib.Path('run.json').read_text())
+          assert report['commit']==run['head_sha']
+          assert 'v'+report['version']==os.environ['RELEASE_TAG']
+          installer=installers[0]
+          assert installer.name==report['installer']
+          digest=hashlib.file_digest(installer.open('rb'),'sha256').hexdigest()
+          assert digest==report['sha256'].lower()
+          subprocess.run(['gh','release','upload',os.environ['RELEASE_TAG'],str(installer),str(reports[0])],check=True)
+          PYTHON
