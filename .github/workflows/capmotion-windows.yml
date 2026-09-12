@@ -52,6 +52,13 @@ jobs:
       - name: Build Windows installer
         shell: pwsh
         run: ./scripts/build-cap-windows.ps1 -SkipSetup
+      - name: Preserve installer for diagnosis before verification
+        uses: actions/upload-artifact@v4
+        with:
+          name: capmotion-windows-unverified
+          path: target/x86_64-pc-windows-msvc/release/bundle/nsis/*.exe
+          retention-days: 7
+          if-no-files-found: error
       - name: Install and verify artifact
         shell: pwsh
         run: ./scripts/verify-cap-windows.ps1
