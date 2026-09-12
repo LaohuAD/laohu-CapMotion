@@ -407,7 +407,15 @@ impl FfmpegDecoder {
                 };
                 let _ = ready_tx.send(Ok(sw_init_result));
 
-                while let Ok(r) = rx.recv() {
+                loop {
+                    let r = match rx.recv_timeout(super::DECODER_IDLE_TIMEOUT) {
+                        Ok(message) => message,
+                        Err(mpsc::RecvTimeoutError::Disconnected) => break,
+                        Err(mpsc::RecvTimeoutError::Timeout) => {
+                            sw_cache.clear();
+                            continue;
+                        }
+                    };
                     let mut pending_requests: Vec<PendingRequest> = Vec::with_capacity(8);
                     let mut push_request =
                         |requested_time: f32, reply: oneshot::Sender<DecodedFrame>| {
@@ -857,7 +865,15 @@ impl FfmpegDecoder {
             };
             let _ = ready_tx.send(Ok(init_result));
 
-            while let Ok(r) = rx.recv() {
+            loop {
+                let r = match rx.recv_timeout(super::DECODER_IDLE_TIMEOUT) {
+                    Ok(message) => message,
+                    Err(mpsc::RecvTimeoutError::Disconnected) => break,
+                    Err(mpsc::RecvTimeoutError::Timeout) => {
+                        cache.clear();
+                        continue;
+                    }
+                };
                 let mut pending_requests: Vec<PendingRequest> = Vec::with_capacity(8);
                 let mut push_request =
                     |requested_time: f32, reply: oneshot::Sender<DecodedFrame>| {

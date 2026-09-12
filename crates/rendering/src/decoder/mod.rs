@@ -628,6 +628,7 @@ pub fn pts_to_frame(pts: i64, time_base: Rational, fps: u32) -> u32 {
 }
 
 pub const FRAME_CACHE_SIZE: usize = 90;
+pub(super) const DECODER_IDLE_TIMEOUT: Duration = Duration::from_secs(2);
 const DEFAULT_MAX_FALLBACK_DISTANCE: u32 = 90;
 
 /// Records a pts hole discovered from a decode-order vend jump (frames vend

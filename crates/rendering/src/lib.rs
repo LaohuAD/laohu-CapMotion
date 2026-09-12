@@ -7132,15 +7132,5 @@ mod initial_decode_recovery_tests {
     }
 }
 
-/// Cocoa autoreleased graphics objects must drain on the thread that created
-/// them. A pool across `.await` is unsafe because Tokio may resume elsewhere.
-/// Scope each poll instead, so pending GPU work does not retain every frame
-/// until a long-lived worker thread exits.
-pub async fn with_autorelease_pool<F: std::future::Future>(future: F) -> F::Output {
-    let mut future = std::pin::pin!(future);
-    std::future::poll_fn(move |cx| {
-        #[cfg(target_os = "macos")]
-        let _pool = cidre::objc::AutoreleasePoolPage::push();
-        future.as_mut().poll(cx)
-    }).await
-}
+#[cfg(test)]
+mod memory_probe;

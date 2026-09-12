@@ -629,8 +629,34 @@ impl AVAssetReaderDecoder {
                     }
                 }
             } else {
-                let Ok(message) = rx.recv() else {
-                    break;
+                let message = match rx.recv_timeout(super::DECODER_IDLE_TIMEOUT) {
+                    Ok(message) => message,
+                    Err(mpsc::RecvTimeoutError::Disconnected) => break,
+                    Err(mpsc::RecvTimeoutError::Timeout) => {
+                        // Each source owns its own reader pool. Keeping every
+                        // visited source warm multiplies hardware surfaces by
+                        // the number of recording segments in a merged project.
+                        cache.clear();
+                        cache_bytes = 0;
+                        // Preserve VFR hold evidence, but detach the few retained
+                        // fallback frames from the native decoder's buffer pools.
+                        for frame in [&first_ever_frame, &last_sent_frame] {
+                            if let Some(frame) = frame.borrow().as_ref() {
+                                let _ = frame.frame.data();
+                            }
+                        }
+                        if let Some(frame) = &gap_hold {
+                            let _ = frame.frame.data();
+                        }
+                        if !this.decoders.is_empty() {
+                            tracing::debug!(
+                                readers = this.decoders.len(),
+                                "Releasing idle video decoder pool"
+                            );
+                            this.decoders.clear();
+                        }
+                        continue;
+                    }
                 };
                 match message {
                     VideoDecoderMessage::GetFrame(
@@ -670,6 +696,27 @@ impl AVAssetReaderDecoder {
             }
 
             pending_requests.sort_by_key(|r| r.frame);
+            if this.decoders.is_empty() && !pending_requests.is_empty() {
+                let config = this.pool_manager.config();
+                let time = pending_requests[0].frame as f32 / fps as f32;
+                match DecoderInstance::new(
+                    config.path.clone(),
+                    config.tokio_handle.clone(),
+                    time,
+                    config.keyframe_index.clone(),
+                ) {
+                    Ok(decoder) => {
+                        let position = decoder.current_position();
+                        this.decoders.push(decoder);
+                        this.active_decoder_idx = 0;
+                        this.pool_manager.update_decoder_position(0, position);
+                    }
+                    Err(error) => {
+                        tracing::error!(%error, "Failed to resume idle decoder");
+                        continue;
+                    }
+                }
+            }
 
             if !processing_deferred
                 && let Some(split_index) = pending_requests

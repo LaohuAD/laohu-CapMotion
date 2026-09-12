@@ -1662,7 +1662,6 @@ dependencies = [
  "cap-rendering",
  "cap-utils",
  "chrono",
- "cidre",
  "clap",
  "directories 6.0.0",
  "ffmpeg-next",

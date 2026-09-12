@@ -284,8 +284,6 @@ impl Mp4ExportSettings {
                 .into_iter()
                 .chain(std::iter::from_fn(|| frame_rx.recv().ok()));
             for input in frames {
-                #[cfg(target_os = "macos")]
-                let _pool = cidre::objc::AutoreleasePoolPage::push();
                 if encoded_frames == 0
                     && let Some(audio) = &mut audio_renderer
                 {
@@ -901,7 +899,7 @@ async fn export_render_to_channel(
             Ok::<_, cap_rendering::RenderingError>(())
         };
 
-        tokio::try_join!(cap_rendering::with_autorelease_pool(render_future), forward_future)
+        tokio::try_join!(render_future, forward_future)
     };
 
     render_result?;

@@ -248,7 +248,16 @@ impl MFDecoder {
                 sender: oneshot::Sender<DecodedFrame>,
             }
 
-            while let Ok(r) = rx.recv() {
+            loop {
+                let r = match rx.recv_timeout(super::DECODER_IDLE_TIMEOUT) {
+                    Ok(message) => message,
+                    Err(mpsc::RecvTimeoutError::Disconnected) => break,
+                    Err(mpsc::RecvTimeoutError::Timeout) => {
+                        cache.clear();
+                        cache_bytes = 0;
+                        continue;
+                    }
+                };
                 let mut pending_requests: Vec<PendingRequest> = Vec::with_capacity(8);
 
                 let mut push_request =

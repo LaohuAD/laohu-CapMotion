@@ -42,6 +42,3 @@ tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
 
 [lints]
 workspace = true
-
-[target.'cfg(target_os = "macos")'.dependencies]
-cidre.workspace = true

@@ -442,6 +442,14 @@ impl AVAssetReaderDecoder {
     }
 }
 
+// A parked reader can still have asynchronous read-ahead work. Explicitly
+// cancel before releasing the output/reader pair, including idle eviction.
+impl Drop for AVAssetReaderDecoder {
+    fn drop(&mut self) {
+        self.reader.cancel_reading();
+    }
+}
+
 pub struct FramesIter<'a> {
     track_output: &'a mut av::AssetReaderTrackOutput,
 }
