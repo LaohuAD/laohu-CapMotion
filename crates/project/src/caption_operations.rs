@@ -49,6 +49,8 @@ pub struct CaptionStylePatch {
     pub word_transition_duration: Option<f32>,
     pub active_word_highlight: Option<bool>,
     pub manual_position: Option<XY<f32>>,
+    pub track_positions: Option<Vec<crate::CaptionTrackPosition>>,
+    pub track_styles: Option<Vec<crate::CaptionTrackStyle>>,
     pub preset: Option<String>,
     pub animation: Option<String>,
     pub highlight_style: Option<String>,
@@ -128,6 +130,8 @@ pub fn patch_caption_settings(
     if let Some(value) = patch.manual_position {
         settings.manual_position = Some(value);
     }
+    assign!(track_positions);
+    assign!(track_styles);
     assign!(preset);
     assign!(animation);
     assign!(highlight_style);
@@ -155,6 +159,45 @@ pub fn patch_caption_settings(
 }
 
 fn validate_style_patch(patch: &CaptionStylePatch) -> Result<(), String> {
+    if let Some(styles) = &patch.track_styles {
+        let mut ids = HashSet::new();
+        for style in styles {
+            if style.track_id.trim().is_empty()
+                || !ids.insert(&style.track_id)
+                || !(1..=400).contains(&style.font_size)
+            {
+                return Err("invalid or duplicate caption track style".into());
+            }
+        }
+    }
+    if let Some(positions) = &patch.track_positions {
+        let mut ids = HashSet::new();
+        for entry in positions {
+            if entry.track_id.trim().is_empty()
+                || !ids.insert(&entry.track_id)
+                || ![
+                    "manual",
+                    "top",
+                    "top-left",
+                    "top-center",
+                    "top-right",
+                    "bottom",
+                    "bottom-left",
+                    "bottom-center",
+                    "bottom-right",
+                ]
+                .contains(&entry.position.as_str())
+                || entry.manual_position.is_some_and(|p| {
+                    !p.x.is_finite()
+                        || !p.y.is_finite()
+                        || !(0.0..=1.0).contains(&p.x)
+                        || !(0.0..=1.0).contains(&p.y)
+                })
+            {
+                return Err("invalid or duplicate caption track position".into());
+            }
+        }
+    }
     if patch
         .font
         .as_ref()
@@ -256,6 +299,87 @@ pub fn materialize_caption_tracks(
             .ok_or_else(|| "caption tracks require an existing editable timeline".to_string())?;
         timeline.caption_segments = segments;
         let captions = project.captions.get_or_insert_default();
+        // Migrate uniform legacy per-cue imports into reusable track settings.
+        // Existing user track choices are authoritative on rematerialization.
+        let ids: HashSet<String> = timeline
+            .caption_segments
+            .iter()
+            .filter_map(|s| s.track_id.clone())
+            .collect();
+        for id in ids {
+            let rows: Vec<_> = timeline
+                .caption_segments
+                .iter()
+                .filter(|s| s.track_id.as_deref() == Some(&id))
+                .collect();
+            let first = rows[0];
+            let size = first
+                .font_size_override
+                .filter(|size| rows.iter().all(|s| s.font_size_override == Some(*size)));
+            let position = first.position_override.clone().filter(|pos| {
+                rows.iter().all(|s| {
+                    s.position_override.as_ref() == Some(pos)
+                        && s.manual_position_override == first.manual_position_override
+                })
+            });
+            let manual = first.manual_position_override;
+            if !captions
+                .settings
+                .track_styles
+                .iter()
+                .any(|s| s.track_id == id)
+            {
+                if let Some(font_size) = size {
+                    captions
+                        .settings
+                        .track_styles
+                        .push(crate::CaptionTrackStyle {
+                            track_id: id.clone(),
+                            font_size,
+                        });
+                }
+            }
+            if !captions
+                .settings
+                .track_positions
+                .iter()
+                .any(|s| s.track_id == id)
+            {
+                if let Some(position) = position {
+                    captions
+                        .settings
+                        .track_positions
+                        .push(crate::CaptionTrackPosition {
+                            track_id: id.clone(),
+                            position,
+                            manual_position: manual,
+                        });
+                }
+            }
+            for row in timeline
+                .caption_segments
+                .iter_mut()
+                .filter(|s| s.track_id.as_deref() == Some(&id))
+            {
+                if captions
+                    .settings
+                    .track_styles
+                    .iter()
+                    .any(|s| s.track_id == id)
+                {
+                    row.font_size_override = None;
+                }
+                if captions
+                    .settings
+                    .track_positions
+                    .iter()
+                    .any(|s| s.track_id == id)
+                {
+                    row.position_override = None;
+                    row.manual_position_override = None;
+                }
+            }
+        }
         captions.settings.enabled = true;
         captions.display_mode = CaptionDisplayMode::Materialized;
         Ok(())

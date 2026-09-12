@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
 	captionTrackPositionLabel,
+	visibleCaptionEntries,
 	groupCaptionSegmentsByTrack,
 	shouldMirrorCaptionEditToSource,
 } from "./caption-tracks";
@@ -54,5 +55,18 @@ describe("groupCaptionSegmentsByTrack", () => {
 			"English Position",
 		);
 		expect(captionTrackPositionLabel("ja", "日本語")).toBe("日本語 Position");
+	});
+});
+
+describe("caption viewport", () => {
+	it("keeps original indices and the active drag while removing offscreen entries", () => {
+		const entries = Array.from({ length: 1000 }, (_, index) => ({
+			index,
+			segment: { start: index * 2, end: index * 2 + 1 },
+		}));
+		const visible = visibleCaptionEntries(entries as never, 100, 104, 900);
+		expect(visible.map((e) => e.index)).toEqual([50, 51, 52, 900]);
+		expect(visible[0]).toBe(entries[50]);
+		expect(visibleCaptionEntries(entries as never, 3000, 3001)).toEqual([]);
 	});
 });

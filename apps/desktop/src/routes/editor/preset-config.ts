@@ -1,5 +1,9 @@
 import type { Preset, PresetsStore, ProjectConfiguration } from "~/utils/tauri";
 import type { EditorProjectConfiguration } from "./context";
+import {
+	captionTrackId,
+	resolveCaptionTrackFontSize,
+} from "./caption-position";
 
 const emptySourceAudioTrack = () => ({
 	expanded: false,
@@ -194,6 +198,21 @@ export function createReusablePresetConfig(
 	reusable.audio.microphoneTrack = emptySourceAudioTrack();
 	reusable.audio.systemAudioTrack = emptySourceAudioTrack();
 	if (reusable.captions) {
+		const rows = project.timeline?.captionSegments ?? [];
+		const settings = reusable.captions.settings;
+		const ids = new Set(rows.map((s) => captionTrackId(s.trackId)));
+		settings.trackStyles = [
+			...(settings.trackStyles ?? []).filter((s) => !ids.has(s.trackId)),
+			...[...ids].map((trackId) => ({
+				trackId,
+				fontSize: resolveCaptionTrackFontSize(
+					settings.trackStyles,
+					trackId,
+					rows,
+					settings.size,
+				),
+			})),
+		];
 		reusable.captions.segments = [];
 		reusable.captions.sourceTimed = true;
 	}

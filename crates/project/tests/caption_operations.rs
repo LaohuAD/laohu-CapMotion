@@ -299,3 +299,24 @@ fn materializes_linked_bilingual_tracks_without_replacing_the_source_master() {
     assert_eq!(display[1].track_id.as_deref(), Some("en"));
     assert_eq!(display[0].pair_id, display[1].pair_id);
 }
+
+#[test]
+fn track_styles_and_positions_survive_roundtrip_and_validate() {
+    let mut settings = CaptionSettings::default();
+    let patch: CaptionStylePatch = serde_json::from_value(serde_json::json!({
+        "fontWeight":500,
+        "trackStyles":[{"trackId":"zh-CN","fontSize":52},{"trackId":"en","fontSize":34}],
+        "trackPositions":[{"trackId":"zh-CN","position":"manual","manualPosition":{"x":0.5,"y":0.91}}]
+    })).unwrap();
+    patch_caption_settings(&mut settings, patch).unwrap();
+    let loaded: CaptionSettings =
+        serde_json::from_value(serde_json::to_value(&settings).unwrap()).unwrap();
+    assert_eq!(loaded.track_styles[0].font_size, 52);
+    assert_eq!(loaded.track_styles[1].font_size, 34);
+    assert_eq!(loaded.track_positions[0].position, "manual");
+    let bad: CaptionStylePatch =
+        serde_json::from_value(serde_json::json!({"trackStyles":[{"trackId":"en","fontSize":0}]}))
+            .unwrap();
+    assert!(patch_caption_settings(&mut settings, bad).is_err());
+    assert_eq!(settings.track_styles[1].font_size, 34);
+}

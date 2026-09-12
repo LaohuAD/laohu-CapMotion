@@ -602,11 +602,9 @@ impl CaptionsLayer {
             .track_positions
             .iter()
             .find(|entry| entry.track_id == resolved_track_id);
-        let position = active
-            .segment
-            .position_override
-            .as_deref()
-            .or_else(|| track_position.map(|entry| entry.position.as_str()))
+        let position = track_position
+            .map(|entry| entry.position.as_str())
+            .or(active.segment.position_override.as_deref())
             .map(CaptionPosition::from_str)
             .unwrap_or_else(|| CaptionPosition::from_str(&caption_data.settings.position));
         let margin = width as f32 * 0.05;
@@ -639,9 +637,13 @@ impl CaptionsLayer {
             * fade_opacity)
             .clamp(0.0, 1.0);
 
-        let font_size = active
-            .segment
-            .font_size_override
+        let font_size = caption_data
+            .settings
+            .track_styles
+            .iter()
+            .find(|style| style.track_id == resolved_track_id)
+            .map(|style| style.font_size)
+            .or(active.segment.font_size_override)
             .unwrap_or(caption_data.settings.size) as f32
             * (height as f32 / 1080.0);
         let metrics = Metrics::new(font_size, font_size * 1.2);
@@ -843,10 +845,9 @@ impl CaptionsLayer {
         let box_width = (text_width + padding * 2.0).min(available_width).max(1.0);
         let box_height = (text_height + padding * 2.0).min(height as f32).max(1.0);
 
-        let manual_position = active
-            .segment
-            .manual_position_override
-            .or_else(|| track_position.and_then(|entry| entry.manual_position))
+        let manual_position = track_position
+            .and_then(|entry| entry.manual_position)
+            .or(active.segment.manual_position_override)
             .or(caption_data.settings.manual_position);
         let background_left = if position == CaptionPosition::Manual {
             manual_position

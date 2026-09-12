@@ -40,6 +40,8 @@ import {
 	centeredPixelsToNormalized,
 	normalizedToCenteredPixels,
 	resolveCaptionTrackPosition,
+	resolveCaptionTrackFontSize,
+	setCaptionTrackFontSize,
 	setCaptionTrackPosition,
 } from "./caption-position";
 import {
@@ -439,10 +441,41 @@ export function CaptionsTab(props: {
 		groupCaptionSegmentsByTrack(project.timeline?.captionSegments ?? []),
 	);
 
+	const captionSizeForTrack = (trackId: string) =>
+		resolveCaptionTrackFontSize(
+			getSetting("trackStyles"),
+			trackId,
+			project.timeline?.captionSegments ?? [],
+			getSetting("size"),
+		);
+	const updateCaptionTrackSize = (trackId: string, fontSize: number) => {
+		setProject(
+			produce((current: typeof project) => {
+				if (!current.captions) return;
+				current.captions.settings.trackStyles = setCaptionTrackFontSize(
+					current.captions.settings.trackStyles,
+					trackId,
+					fontSize,
+				);
+				current.captions.settings.preset = "custom";
+				for (const segment of current.timeline?.captionSegments ?? []) {
+					if (captionTrackId(segment.trackId) === trackId)
+						segment.fontSizeOverride = null;
+				}
+			}),
+		);
+	};
+
 	const captionPositionForTrack = (trackId: string) =>
 		resolveCaptionTrackPosition(getSetting("trackPositions"), trackId, {
-			position: getSetting("position"),
-			manualPosition: getSetting("manualPosition"),
+			position:
+				project.timeline?.captionSegments?.find(
+					(s) => captionTrackId(s.trackId) === trackId,
+				)?.positionOverride ?? getSetting("position"),
+			manualPosition:
+				project.timeline?.captionSegments?.find(
+					(s) => captionTrackId(s.trackId) === trackId,
+				)?.manualPositionOverride ?? getSetting("manualPosition"),
 		});
 
 	const updateCaptionPosition = (trackId: string, position: string) => {
@@ -1268,17 +1301,24 @@ export function CaptionsTab(props: {
 									</KSelect>
 								</div>
 
-								<div class="flex flex-col gap-2">
-									<span class="text-gray-11 text-sm">{text("Size")}</span>
-									<Slider
-										value={[getSetting("size")]}
-										onChange={(v) => updateCaptionSetting("size", v[0])}
-										minValue={12}
-										maxValue={100}
-										step={1}
-										disabled={!hasCaptions()}
-									/>
-								</div>
+								<For each={captionPositionTracks()}>
+									{(track) => (
+										<div class="flex flex-col gap-2">
+											<span class="text-gray-11 text-sm">
+												{text(track.label)} · {text("Size")} (
+												{captionSizeForTrack(track.id)})
+											</span>
+											<Slider
+												value={[captionSizeForTrack(track.id)]}
+												onChange={(v) => updateCaptionTrackSize(track.id, v[0])}
+												minValue={12}
+												maxValue={100}
+												step={1}
+												disabled={!hasCaptions()}
+											/>
+										</div>
+									)}
+								</For>
 
 								<div class="flex items-center justify-between">
 									<span class="text-gray-11 text-sm">{text("Uppercase")}</span>

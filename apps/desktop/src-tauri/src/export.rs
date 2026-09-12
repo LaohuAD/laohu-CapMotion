@@ -589,6 +589,7 @@ async fn run_out_of_process_export_attempt(
         .ok_or_else(|| "Export worker stderr was not captured".to_string())?;
     let stderr_task = tokio::spawn(collect_exporter_stderr_tail(stderr));
 
+    let mut last_memory_sample = std::time::Instant::now() - std::time::Duration::from_secs(30);
     let mut completed_path = None;
     let mut stdout_lines = tokio::io::BufReader::new(stdout).lines();
 
@@ -608,6 +609,11 @@ async fn run_out_of_process_export_attempt(
                 rendered_count,
                 total_frames,
             }) => {
+                if last_memory_sample.elapsed() >= std::time::Duration::from_secs(30) {
+                    if let Some(pid) = child.id() { cap_utils::process_memory::log_snapshot(pid, "export-worker"); }
+                    cap_utils::process_memory::log_snapshot(std::process::id(), "editor-during-export");
+                    last_memory_sample = std::time::Instant::now();
+                }
                 if !progress_forwarder.send(rendered_count, total_frames) {
                     let _ = child.kill().await;
                     return Err("Export cancelled".to_string());

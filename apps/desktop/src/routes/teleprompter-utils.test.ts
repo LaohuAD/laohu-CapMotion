@@ -4,9 +4,28 @@ import {
 	calculatePlaybackSpeed,
 	clamp,
 	countWords,
+	resizeScriptEditor,
 } from "./teleprompter-utils";
 
 describe("teleprompter utilities", () => {
+	it("preserves the reading position when textarea measurement collapses the viewport", () => {
+		const viewport = { scrollTop: 720 } as HTMLDivElement;
+		let height = "1800px";
+		const editor = {
+			style: {
+				get height() { return height; },
+				set height(value: string) {
+					height = value;
+					if (value === "0px") viewport.scrollTop = 0;
+				},
+			},
+			scrollHeight: 1850,
+		} as HTMLTextAreaElement;
+		resizeScriptEditor(editor, viewport);
+		expect(viewport.scrollTop).toBe(720);
+		expect(editor.style.height).toBe("1850px");
+	});
+
 	it("counts words in pasted scripts", () => {
 		expect(countWords("  One   two\nthree ")).toBe(3);
 		expect(countWords(" ")).toBe(0);

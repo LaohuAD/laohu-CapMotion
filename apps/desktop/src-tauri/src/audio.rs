@@ -39,33 +39,57 @@ impl AppSounds {
     }
 }
 
-pub fn get_waveform(audio: &AudioData) -> Vec<f32> {
-    const CHUNK_SIZE: usize = (cap_audio::AudioData::SAMPLE_RATE as usize) / 10; // ~100ms
+/// Waveforms use the video/source clock, exactly as playback does. Positive
+/// offsets skip early audio; negative offsets insert leading silence.
+pub fn get_waveform(audio: &AudioData, offset_secs: f32) -> Vec<f32> {
+    waveform_samples(audio.samples(), audio.channels() as usize, offset_secs)
+}
 
-    let channels = audio.channels() as usize;
-    let samples = audio.samples();
+fn waveform_samples(samples: &[f32], channels: usize, offset_secs: f32) -> Vec<f32> {
+    const RATE: usize = cap_audio::AudioData::SAMPLE_RATE as usize;
+    const CHUNK: usize = RATE / 10;
+    if channels == 0 || samples.is_empty() || !offset_secs.is_finite() {
+        return Vec::new();
+    }
+    let offset = (offset_secs * RATE as f32).round() as isize;
+    let frames = samples.len() / channels;
+    let output_frames = (frames as isize - offset).max(0) as usize;
     let mut waveform = Vec::new();
-
-    let mut i = 0;
-    while i < samples.len() {
-        let end = (i + CHUNK_SIZE * channels).min(samples.len());
+    for start in (0..output_frames).step_by(CHUNK) {
+        let end = (start + CHUNK).min(output_frames);
         let mut sum = 0.0f32;
-        for s in &samples[i..end] {
-            sum += s.abs();
+        for frame in start..end {
+            let source = frame as isize + offset;
+            if source >= 0 && source < frames as isize {
+                for c in 0..channels {
+                    sum += samples[source as usize * channels + c].abs();
+                }
+            }
         }
-        let avg = if end > i { sum / (end - i) as f32 } else { 0.0 };
-        waveform.push(avg);
-        i += CHUNK_SIZE * channels;
+        let avg = sum / ((end - start) * channels) as f32;
+        waveform.push(if avg > 0.0 { 20.0 * avg.log10() } else { -60.0 });
     }
-
-    // Convert to absolute dBFS (0 dBFS = digital full scale)
-    for v in waveform.iter_mut() {
-        *v = if *v > 0.0 {
-            20.0 * v.log10() // Absolute dBFS relative to 1.0
-        } else {
-            -60.0 // Set silence to -60dBFS instead of -∞ for practical use
-        };
-    }
-
     waveform
+}
+
+#[cfg(test)]
+mod waveform_tests {
+    use super::*;
+    #[test]
+    fn waveform_matches_positive_and_negative_playback_offsets() {
+        let mut samples = vec![0.0; 4800];
+        samples.extend(vec![1.0; 4800]);
+        assert_eq!(waveform_samples(&samples, 1, 0.0), vec![-60.0, 0.0]);
+        assert_eq!(waveform_samples(&samples, 1, 0.1), vec![0.0]);
+        assert_eq!(waveform_samples(&samples, 1, -0.1), vec![-60.0, -60.0, 0.0]);
+        assert!(waveform_samples(&samples, 1, 1.0).is_empty());
+    }
+    #[test]
+    fn waveform_offsets_count_frames_not_stereo_samples() {
+        let mut samples = vec![0.0; 9600];
+        samples.extend(vec![0.5; 9600]);
+        let v = waveform_samples(&samples, 2, 0.1);
+        assert_eq!(v.len(), 1);
+        assert!((v[0] + 6.0206).abs() < 0.001);
+    }
 }

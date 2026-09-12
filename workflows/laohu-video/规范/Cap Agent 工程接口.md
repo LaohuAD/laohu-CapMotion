@@ -118,3 +118,10 @@ cap project captions materialize /absolute/working.cap \
 - 不把渲染后 MP4 当成可返工工程的替代品。
 
 界面中尚未出现某个参数，不代表 Agent 不能使用；只要它已经属于稳定 schema 和渲染器，便可先通过受控接口开放。反过来，schema 中不存在的能力不能靠塞入自造字段实现，必须先开发底层能力。
+
+
+## 字幕轨字号与物化兼容（开发源码，待打包）
+
+`captions.settings.trackStyles` 按 `trackId` 保存 `fontSize`；`trackPositions` 按同一个 `trackId` 保存位置。中英轨分别调整，轨设置优先于旧 `fontSizeOverride / positionOverride`，未配置轨字号的旧工程仍按单条覆盖、公共 size 依次回退。界面与原生导出共用这一优先级。
+
+物化先保留已有人为轨级设置，再把统一的旧单条覆盖升级为轨设置并清除对应旧覆盖；不能反过来用脚本默认值覆盖用户已调好的位置。命名预设及字幕预设均保存、恢复轨字号与手动位置。当前旧发布版不理解 `trackStyles`，本轮作品中文去除单条字号覆盖后继承公共 size，英文保留旧单条字号作为兼容；独立双轨字号控件待未来明确授权打包后才进入发布版。

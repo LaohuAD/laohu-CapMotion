@@ -1,5 +1,17 @@
 [
 	{
+		"version": "0.1.4",
+		"publishedAt": "2026-09-13T00:00:00+08:00",
+		"title": {
+			"en": "Long-project memory and independent caption sizing",
+			"zh-CN": "长工程内存优化与双语字幕独立字号"
+		},
+		"content": {
+			"en": "### Performance and reliability\n\n- Long decoded audio spills to temporary storage beside the source, with read-only mapped playback and bounded preparation concurrency. Cache files are removed when readers close; unavailable source storage produces an error instead of falling back to the system disk.\n- Scopes macOS export graphics autorelease lifetimes to each asynchronous poll, avoiding pools across thread switches.\n- Renders only visible timeline captions while retaining the active drag and original neighbor constraints.\n- Adds physical-footprint accounting on macOS and private-memory accounting on Windows, including separate editor/exporter samples. These metrics are explicitly distinguished from the whole application group.\n\n### Captions and editing\n\n- Chinese and English caption tracks have independent font sizes, preserved by named presets and used consistently in preview and export.\n- Manual track positions are reflected correctly in the controls; waveform positions follow the same source audio offsets as playback.\n- Preserves script-editor scroll position when resizing text.\n\n### Project tooling and delivery\n\n- Records compact speech-gap preferences and multi-project audio/video offset completeness checks in the repository workflow, with original source timelines retained for EDL rebuilds.\n- Keeps installer builds manually triggered and includes audio dependencies in sidecar freshness checks. Project skills and personal presets remain separate from public installers.",
+			"zh-CN": "### 性能与可靠性\n\n- 长音轨解码后分块写入源文件同盘临时缓存，通过只读映射供播放与导出读取，并限制音频准备并发，减少整份音频数组常驻。关闭读取者后删除缓存；源盘不可用时报告错误，不回退系统盘。\n- Mac 导出按每次异步执行释放图形临时对象，避免资源池跨线程等待。\n- 字幕时间轴只绘制可见范围，同时保留正在拖动的字幕和原始相邻边界约束。\n- 增加 Mac physical footprint 与 Windows private memory 监测，分别记录编辑器和导出器，明确区分进程与应用总内存。\n\n### 字幕与编辑\n\n- 中文字幕、英文字幕支持轨级独立字号，命名预设保存该设置，预览与导出使用一致规则。\n- 手动字幕位置正确反映在控件中，波形使用与播放相同的源音频偏移。\n- 修复提词稿编辑时调整文本高度导致滚动位置变化的问题。\n\n### 项目工具与交付\n\n- 仓库流程补齐紧凑气口偏好、多工程合并音画同步完整性检查，并保留 EDL 重建所需的原始源时间轴。\n- 安装包构建保持手动触发，sidecar 更新检查纳入音频依赖。项目 Skill 和个人预设与公共安装包分开保存。"
+		}
+	},
+	{
 		"version": "0.1.3",
 		"publishedAt": "2026-09-08T00:00:00+08:00",
 		"title": {

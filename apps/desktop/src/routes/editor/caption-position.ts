@@ -64,3 +64,30 @@ export function resolveCaptionTrackPosition(
 ) {
 	return getCaptionTrackPosition(positions, trackId) ?? fallback;
 }
+
+/** Track-level styles win; old materialized files remain readable. */
+export function resolveCaptionTrackFontSize(
+	styles: { trackId: string; fontSize: number }[] | null | undefined,
+	trackId: string,
+	segments: { trackId?: string | null; fontSizeOverride?: number | null }[],
+	fallback: number,
+) {
+	return (
+		styles?.find((s) => s.trackId === trackId)?.fontSize ??
+		segments.find(
+			(s) =>
+				captionTrackId(s.trackId) === trackId && s.fontSizeOverride != null,
+		)?.fontSizeOverride ??
+		fallback
+	);
+}
+export function setCaptionTrackFontSize(
+	styles: { trackId: string; fontSize: number }[] | null | undefined,
+	trackId: string,
+	fontSize: number,
+) {
+	return [
+		...(styles ?? []).filter((s) => s.trackId !== trackId),
+		{ trackId, fontSize },
+	];
+}

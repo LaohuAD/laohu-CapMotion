@@ -20,6 +20,7 @@ import {
 	captionTrackId,
 	CAPTION_POSITION_COORDINATE_SIZE,
 	resolveCaptionTrackPosition,
+	resolveCaptionTrackFontSize,
 	setCaptionTrackPosition,
 } from "./caption-position";
 import { FPS, useEditorContext } from "./context";
@@ -104,7 +105,12 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 
 	const scaledFontSize = createMemo(() =>
 		Math.max(
-			(activeCaption()?.segment.fontSizeOverride ?? settings().size) *
+			resolveCaptionTrackFontSize(
+				settings().trackStyles,
+				captionTrackId(activeCaption()?.segment.trackId),
+				activeCaption() ? [activeCaption()!.segment] : [],
+				settings().size,
+			) *
 				(props.size.height / 1080),
 			1,
 		),
@@ -116,13 +122,14 @@ export function CaptionOverlay(props: CaptionOverlayProps) {
 			settings().trackPositions,
 			captionTrackId(segment?.trackId),
 			{
-				position: settings().position,
-				manualPosition: settings().manualPosition,
+				position: segment?.positionOverride ?? settings().position,
+				manualPosition:
+					segment?.manualPositionOverride ?? settings().manualPosition,
 			},
 		);
 		return {
-			position: segment?.positionOverride ?? track.position,
-			manualPosition: segment?.manualPositionOverride ?? track.manualPosition,
+			position: track.position,
+			manualPosition: track.manualPosition ?? segment?.manualPositionOverride,
 		};
 	});
 

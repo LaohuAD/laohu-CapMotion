@@ -123,8 +123,11 @@ const remapTrack = (items, sequence) => {
 
 export const applyEdlToProjectConfig = (config, edl) => {
   if (!config?.timeline || !Array.isArray(config.timeline.segments)) throw new Error("project has no editable timeline");
-  const sequence = resolveSequence(config, edl);
-  const timeline = {...config.timeline};
+  // A refit must resolve recording-local ranges against the original uncut
+  // timeline, never reinterpret an already edited timeline as source time.
+  const sourceConfig = edl.sourceTimeline ? {...config, timeline: edl.sourceTimeline} : config;
+  const sequence = resolveSequence(sourceConfig, edl);
+  const timeline = {...sourceConfig.timeline};
   timeline.segments = sequence.map((range) => ({
     recordingSegment: range.recordingSegment,
     timescale: range.sourceWindow.timescale,
@@ -132,7 +135,7 @@ export const applyEdlToProjectConfig = (config, edl) => {
     end: range.sourceEnd,
     name: range.sourceWindow.name ?? null,
   }));
-  for (const key of TRACK_KEYS) timeline[key] = remapTrack(config.timeline[key] ?? [], sequence);
+  for (const key of TRACK_KEYS) timeline[key] = remapTrack(sourceConfig.timeline[key] ?? [], sequence);
   timeline.captionSegments = [];
   return {...config, timeline};
 };

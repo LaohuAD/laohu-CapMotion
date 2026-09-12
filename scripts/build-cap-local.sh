@@ -10,7 +10,7 @@ mkdir -p "$TMPDIR"
 # fat LTO: it can exceed this machine's RAM without changing video quality.
 export CARGO_PROFILE_RELEASE_DEBUG="${CARGO_PROFILE_RELEASE_DEBUG:-0}"
 source_app="$repo_root/target/release/bundle/macos/CapMotion.app"
-destination_app="${CAP_LOCAL_APP_DEST:-$HOME/Applications/CapMotion.app}"
+destination_app="${CAP_LOCAL_APP_DEST:-/Applications/CapMotion.app}"
 if [[ -L "$destination_app" ]]; then
 	destination_app="$(node -e 'process.stdout.write(require("node:fs").realpathSync(process.argv[1]))' "$destination_app")"
 fi

@@ -40,3 +40,15 @@ export function groupCaptionSegmentsByTrack(
 export const shouldMirrorCaptionEditToSource = (
 	displayMode: "autoProject" | "materialized" | undefined,
 ) => displayMode !== "materialized";
+
+export function visibleCaptionEntries(
+	entries: CaptionTrackGroup["entries"],
+	start: number,
+	end: number,
+	draggedIndex?: number,
+): CaptionTrackGroup["entries"] {
+	return entries.filter(
+		({ index, segment }) =>
+			index === draggedIndex || (segment.end >= start && segment.start <= end),
+	);
+}

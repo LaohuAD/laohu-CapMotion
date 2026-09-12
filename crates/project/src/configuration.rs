@@ -2222,6 +2222,8 @@ pub struct CaptionSettings {
     pub manual_position: Option<XY<f32>>,
     #[serde(default, alias = "trackPositions")]
     pub track_positions: Vec<CaptionTrackPosition>,
+    #[serde(default, alias = "trackStyles")]
+    pub track_styles: Vec<CaptionTrackStyle>,
     pub preset: String,
     pub animation: String,
     #[serde(alias = "highlightStyle")]
@@ -2235,6 +2237,13 @@ pub struct CaptionTrackPosition {
     pub track_id: String,
     pub position: String,
     pub manual_position: Option<XY<f32>>,
+}
+
+#[derive(Type, Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct CaptionTrackStyle {
+    pub track_id: String,
+    pub font_size: u32,
 }
 
 impl CaptionSettings {
@@ -2311,6 +2320,7 @@ impl Default for CaptionSettings {
             active_word_highlight: Self::default_active_word_highlight(),
             manual_position: None,
             track_positions: Vec::new(),
+            track_styles: Vec::new(),
             preset: Self::default_preset(),
             animation: Self::default_animation(),
             highlight_style: Self::default_highlight_style(),

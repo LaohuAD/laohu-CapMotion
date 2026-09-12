@@ -206,3 +206,12 @@ test("caption-track transaction materializes linked Chinese and English as two e
     await rm(directory, {recursive: true, force: true});
   }
 });
+
+test("refit uses original source windows and tracks while retaining current presentation", () => {
+ const original = baseConfig();
+ const current = applyEdlToProjectConfig(original, edl);
+ current.captions = {settings:{fontWeight:500,trackPositions:[{trackId:"en",position:"manual"}]}};
+ const again = applyEdlToProjectConfig(current, {...edl, sourceTimeline: original.timeline});
+ assert.deepEqual(again.timeline, applyEdlToProjectConfig(original, edl).timeline);
+ assert.deepEqual(again.captions, current.captions);
+});

@@ -1,8 +1,6 @@
 name: CapMotion Windows
 on:
   workflow_dispatch:
-  push:
-    branches: [codex/windows-release]
 permissions:
   contents: read
 concurrency:
@@ -48,7 +46,9 @@ jobs:
         run: pnpm --dir apps/desktop exec vitest run src/routes/editor/existing-recording-picker.test.ts src/routes/editor/timeline-wheel.test.ts src/routes/editor/preset-config.test.ts src/routes/editor/caption-tracks.test.ts src/routes/editor/caption-position.test.ts src/store/captions.test.ts src/i18n.test.ts src/utils/os-permissions.test.ts 'src/routes/(window-chrome)/onboarding-permissions.test.ts'
         shell: bash
       - name: Test native project and CLI operations
-        run: cargo test -p cap-motion-cli -p cap-cli-install -p cap-utils --tests
+        run: cargo test -p cap-motion-cli -p cap-cli-install -p cap-utils -p cap-audio --tests
+      - name: Build desktop frontend with full diagnostics
+        run: pnpm turbo build --filter @cap/desktop --output-logs=full
       - name: Build Windows installer
         shell: pwsh
         run: ./scripts/build-cap-windows.ps1 -SkipSetup

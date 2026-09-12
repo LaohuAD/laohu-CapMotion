@@ -536,6 +536,7 @@ where
 }
 
 fn log_process_memory_snapshot(stage: &'static str) {
+    cap_utils::process_memory::log_snapshot(std::process::id(), stage);
     let Ok(pid) = sysinfo::get_current_pid() else {
         return;
     };
@@ -4725,11 +4726,18 @@ async fn get_display_frame_for_cropping(
 async fn get_mic_waveforms(editor_instance: WindowEditorInstance) -> Result<Vec<Vec<f32>>, String> {
     let mut out = Vec::new();
 
-    for segment in editor_instance.segment_medias.iter() {
+    let clips = editor_instance.project_config.1.borrow().clips.clone();
+    for (index, segment) in editor_instance.segment_medias.iter().enumerate() {
+        let offset = clips
+            .iter()
+            .find(|c| c.index == index as u32)
+            .map(|c| c.offsets.mic)
+            .unwrap_or_default()
+            + segment.audio_timing_repair.mic_offset_secs;
         // Waits for the background decode; a failed track just renders as an
         // empty waveform (playback/export surface the actual error).
         match segment.audio.get().await {
-            Ok(Some(audio)) => out.push(audio::get_waveform(&audio)),
+            Ok(Some(audio)) => out.push(audio::get_waveform(&audio, offset)),
             Ok(None) => out.push(Vec::new()),
             Err(error) => {
                 warn!(%error, "Mic audio failed to load; returning empty waveform");
@@ -4749,9 +4757,16 @@ async fn get_system_audio_waveforms(
 ) -> Result<Vec<Vec<f32>>, String> {
     let mut out = Vec::new();
 
-    for segment in editor_instance.segment_medias.iter() {
+    let clips = editor_instance.project_config.1.borrow().clips.clone();
+    for (index, segment) in editor_instance.segment_medias.iter().enumerate() {
+        let offset = clips
+            .iter()
+            .find(|c| c.index == index as u32)
+            .map(|c| c.offsets.system_audio)
+            .unwrap_or_default()
+            + segment.audio_timing_repair.system_audio_offset_secs;
         match segment.system_audio.get().await {
-            Ok(Some(audio)) => out.push(audio::get_waveform(&audio)),
+            Ok(Some(audio)) => out.push(audio::get_waveform(&audio, offset)),
             Ok(None) => out.push(Vec::new()),
             Err(error) => {
                 warn!(%error, "System audio failed to load; returning empty waveform");

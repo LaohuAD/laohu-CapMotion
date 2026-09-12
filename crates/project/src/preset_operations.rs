@@ -143,6 +143,43 @@ impl AgentEditingProfile {
 /// existing presets continue to deserialize across upgrades.
 pub fn reusable_preset_configuration(project: &ProjectConfiguration) -> ProjectConfiguration {
     let mut preset = project.clone();
+    if let (Some(captions), Some(timeline)) = (preset.captions.as_mut(), project.timeline.as_ref())
+    {
+        for row in &timeline.caption_segments {
+            let id = row.track_id.as_deref().unwrap_or("default");
+            if !captions
+                .settings
+                .track_styles
+                .iter()
+                .any(|s| s.track_id == id)
+            {
+                captions
+                    .settings
+                    .track_styles
+                    .push(crate::CaptionTrackStyle {
+                        track_id: id.to_string(),
+                        font_size: row.font_size_override.unwrap_or(captions.settings.size),
+                    });
+            }
+            if !captions
+                .settings
+                .track_positions
+                .iter()
+                .any(|s| s.track_id == id)
+            {
+                if let Some(position) = &row.position_override {
+                    captions
+                        .settings
+                        .track_positions
+                        .push(crate::CaptionTrackPosition {
+                            track_id: id.to_string(),
+                            position: position.clone(),
+                            manual_position: row.manual_position_override,
+                        });
+                }
+            }
+        }
+    }
     preset.project_revision = 0;
     preset.timeline = None;
     preset.clips.clear();

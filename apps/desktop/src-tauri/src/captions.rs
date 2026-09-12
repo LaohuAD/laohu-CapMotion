@@ -1869,6 +1869,15 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         })
                         .unwrap_or_default();
 
+                    let track_styles = settings_obj
+                        .get("trackStyles")
+                        .or_else(|| settings_obj.get("track_styles"))
+                        .and_then(|v| {
+                            serde_json::from_value::<Vec<cap_project::CaptionTrackStyle>>(v.clone())
+                                .ok()
+                        })
+                        .unwrap_or_default();
+
                     cap_project::CaptionSettings {
                         enabled,
                         font,
@@ -1903,6 +1912,7 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         active_word_highlight,
                         manual_position,
                         track_positions,
+                        track_styles,
                         preset,
                         animation,
                         highlight_style,

@@ -60,3 +60,13 @@ test("speech segment edges lose acoustic blank space without touching word guard
   assert.ok(trimmed.start <= 20.9 - 0.14 + Number.EPSILON);
   assert.ok(trimmed.end >= 22.9 + 0.1 - Number.EPSILON);
 });
+
+test("tight waveform cuts remove short blank cores without touching retained words", () => {
+  const words = [{start:0,end:.4},{start:.7,end:1}];
+  const core = findSafeSilenceCore({silence:{start:.41,end:.69},words,
+    silenceHeadGuardSeconds:.025,silenceTailGuardSeconds:.025,
+    keepTailSeconds:.02,keepPrerollSeconds:.025,minCutSeconds:.08});
+  assert.ok(core);
+  assert.ok(core.start >= .4 && core.end <= .7);
+  assert.ok(core.end-core.start > .2);
+});

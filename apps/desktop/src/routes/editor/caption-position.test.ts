@@ -5,6 +5,8 @@ import {
 	normalizedToCenteredPixels,
 	pruneCaptionTrackPositions,
 	setCaptionTrackPosition,
+	resolveCaptionTrackFontSize,
+	setCaptionTrackFontSize,
 } from "./caption-position";
 
 describe("caption position coordinates", () => {
@@ -55,4 +57,18 @@ describe("caption position coordinates", () => {
 			positions[0],
 		]);
 	});
+});
+
+it("changes Chinese size without changing English or its manual position", () => {
+	const rows = [
+		{ trackId: "zh-CN", fontSizeOverride: 64 },
+		{ trackId: "en", fontSizeOverride: 34 },
+	];
+	const styles = setCaptionTrackFontSize([], "zh-CN", 52);
+	expect(resolveCaptionTrackFontSize(styles, "zh-CN", rows, 32)).toBe(52);
+	expect(resolveCaptionTrackFontSize(styles, "en", rows, 32)).toBe(34);
+	const both = setCaptionTrackFontSize(styles, "en", 30);
+	expect(resolveCaptionTrackFontSize(both, "zh-CN", rows, 32)).toBe(52);
+	expect(resolveCaptionTrackFontSize(both, "en", rows, 32)).toBe(30);
+	expect(resolveCaptionTrackFontSize([], "default", [], 32)).toBe(32);
 });

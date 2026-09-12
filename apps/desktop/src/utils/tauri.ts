@@ -851,9 +851,10 @@ export type CameraYPosition = "top" | "bottom"
 export type CaptionData = { segments: CaptionSegment[]; settings: CaptionSettings | null }
 export type CaptionDisplayMode = "autoProject" | "materialized"
 export type CaptionSegment = { id: string; start: number; end: number; text: string; words?: CaptionWord[] }
-export type CaptionSettings = { enabled: boolean; font: string; size: number; color: string; backgroundColor: string; backgroundOpacity: number; position: string; italic: boolean; fontWeight: number; letterSpacing: number; outline: boolean; outlineColor: string; outlineWidth: number; shadow: boolean; shadowColor: string; shadowOpacity: number; shadowBlur: number; shadowDistance: number; shadowAngle: number; outlineShadow: boolean; outlineShadowColor: string; outlineShadowOpacity: number; outlineShadowBlur: number; outlineShadowDistance: number; outlineShadowAngle: number; exportWithSubtitles: boolean; highlightColor: string; fadeDuration: number; lingerDuration: number; wordTransitionDuration: number; activeWordHighlight: boolean; manualPosition: XY<number> | null; trackPositions?: CaptionTrackPosition[]; preset: string; animation: string; highlightStyle: string; uppercase: boolean }
+export type CaptionSettings = { enabled: boolean; font: string; size: number; color: string; backgroundColor: string; backgroundOpacity: number; position: string; italic: boolean; fontWeight: number; letterSpacing: number; outline: boolean; outlineColor: string; outlineWidth: number; shadow: boolean; shadowColor: string; shadowOpacity: number; shadowBlur: number; shadowDistance: number; shadowAngle: number; outlineShadow: boolean; outlineShadowColor: string; outlineShadowOpacity: number; outlineShadowBlur: number; outlineShadowDistance: number; outlineShadowAngle: number; exportWithSubtitles: boolean; highlightColor: string; fadeDuration: number; lingerDuration: number; wordTransitionDuration: number; activeWordHighlight: boolean; manualPosition: XY<number> | null; trackPositions?: CaptionTrackPosition[]; trackStyles?: CaptionTrackStyle[]; preset: string; animation: string; highlightStyle: string; uppercase: boolean }
 export type CaptionTrackPosition = { trackId: string; position: string; manualPosition: XY<number> | null }
 export type CaptionTrackSegment = { id: string; trackId?: string | null; trackLabel?: string | null; language?: string | null; pairId?: string | null; start: number; end: number; text: string; words?: CaptionWord[]; fadeDurationOverride?: number | null; lingerDurationOverride?: number | null; positionOverride?: string | null; colorOverride?: string | null; backgroundColorOverride?: string | null; fontSizeOverride?: number | null; manualPositionOverride?: XY<number> | null }
+export type CaptionTrackStyle = { trackId: string; fontSize: number }
 export type CaptionWord = { text: string; start: number; end: number }
 export type CaptionsData = { segments: CaptionSegment[]; settings: CaptionSettings;
 /**
@@ -1257,6 +1258,7 @@ export type SourceAudioTrackConfiguration = { expanded: boolean; mutedRanges: So
 export type SplitLayout = { screenZoom: number; screenPosition: XY<number>; cameraZoom: number; cameraPosition: XY<number> }
 export type StartRecordingInputs = { capture_target: ScreenCaptureTarget; capture_system_audio?: boolean; mode: RecordingMode; organization_id?: string | null }
 export type StereoMode = "stereo" | "monoL" | "monoR"
+export type StorageLocationInfo = { path: string; defaultPath: string; availableBytes: number | null; exists: boolean }
 export type StudioRecordingMeta = { segment: SingleSegment } | { inner: MultipleSegments }
 export type StudioRecordingQuality = "compatibility" | "balanced" | "ultra"
 export type StudioRecordingStatus = { status: "InProgress" } | { status: "NeedsRemux" } | { status: "Failed"; error: string } | { status: "Complete" }
@@ -1387,5 +1389,3 @@ function __makeEvents__<T extends Record<string, any>>(
 		},
 	);
 }
-
-export type StorageLocationInfo = { path: string; defaultPath: string; availableBytes: number | null; exists: boolean };

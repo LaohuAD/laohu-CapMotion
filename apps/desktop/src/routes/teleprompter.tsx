@@ -40,6 +40,7 @@ import {
 	calculatePlaybackSpeed,
 	clamp,
 	countWords,
+	resizeScriptEditor,
 } from "./teleprompter-utils";
 
 function ToolButton(props: {
@@ -218,8 +219,7 @@ export default function Teleprompter() {
 	function resizeEditor() {
 		const element = editorElement;
 		if (!element) return;
-		element.style.height = "0px";
-		element.style.height = `${element.scrollHeight}px`;
+		resizeScriptEditor(element, scrollElement);
 	}
 
 	function stopPlayback() {

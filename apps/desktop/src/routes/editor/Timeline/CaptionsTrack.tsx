@@ -1,9 +1,12 @@
 import { createEventListenerMap } from "@solid-primitives/event-listener";
 import { cx } from "cva";
-import { createMemo, createRoot, For } from "solid-js";
+import { createMemo, createRoot, createSignal, For, Show } from "solid-js";
 import { useI18n } from "~/i18n";
 
-import { groupCaptionSegmentsByTrack } from "../caption-tracks";
+import {
+	groupCaptionSegmentsByTrack,
+	visibleCaptionEntries,
+} from "../caption-tracks";
 import { useEditorContext } from "../context";
 import { useTimelineContext } from "./context";
 import {
@@ -39,7 +42,8 @@ export function CaptionsTrack(props: {
 		projectHistory,
 		projectActions,
 	} = useEditorContext();
-	const { secsPerPixel } = useTimelineContext();
+	const { secsPerPixel, visibleTimeRange } = useTimelineContext();
+	const [draggedIndex, setDraggedIndex] = createSignal<number>();
 
 	const minDuration = () =>
 		Math.max(MIN_SEGMENT_SECS, secsPerPixel() * MIN_SEGMENT_PIXELS);
@@ -57,8 +61,19 @@ export function CaptionsTrack(props: {
 		return new Set(selection.indices);
 	});
 
-	const neighborBounds = (localIndex: number) => {
+	const visibleEntries = createMemo(() => {
+		const range = visibleTimeRange();
+		return visibleCaptionEntries(
+			captionEntries(),
+			range.start,
+			range.end,
+			draggedIndex(),
+		);
+	});
+
+	const neighborBounds = (index: number) => {
 		const entries = captionEntries();
+		const localIndex = entries.findIndex((entry) => entry.index === index);
 		return {
 			prevEnd: entries[localIndex - 1]?.segment.end ?? 0,
 			nextStart: entries[localIndex + 1]?.segment.start ?? totalDuration(),
@@ -74,6 +89,7 @@ export function CaptionsTrack(props: {
 			if (editorState.timeline.interactMode !== "seek") return;
 			downEvent.stopPropagation();
 			const initial = setup();
+			setDraggedIndex(segmentIndex());
 			let moved = false;
 			let initialMouseX: number | null = null;
 
@@ -115,6 +131,7 @@ export function CaptionsTrack(props: {
 					props.handleUpdatePlayhead(e);
 				}
 				props.onDragStateChanged({ type: "idle" });
+				setDraggedIndex(undefined);
 			}
 
 			function handleUpdate(event: MouseEvent) {
@@ -148,27 +165,29 @@ export function CaptionsTrack(props: {
 			onMouseLeave={() => setEditorState("timeline", "hoveredTrack", null)}
 		>
 			<For
-				each={captionEntries()}
+				each={visibleEntries()}
 				fallback={
-					<div class="text-center text-sm text-(--text-tertiary) flex flex-col gap-2 justify-center items-center inset-0 w-full bg-gray-3/20 dark:bg-gray-3/10 rounded-xl">
-						<div>{text("No captions")}</div>
-						<button
-							class="h-8 px-3 rounded-lg border border-green-7/50 bg-green-6/15 text-green-11 text-xs font-medium transition-colors hover:bg-green-6/25 disabled:opacity-50 disabled:cursor-not-allowed"
-							disabled={props.isGenerating}
-							onMouseDown={(e) => e.stopPropagation()}
-							onClick={(e) => {
-								e.stopPropagation();
-								void props.onGenerate();
-							}}
-						>
-							{props.isGenerating
-								? text("Generating...")
-								: text("Generate captions")}
-						</button>
-					</div>
+					<Show when={captionEntries().length === 0}>
+						<div class="text-center text-sm text-(--text-tertiary) flex flex-col gap-2 justify-center items-center inset-0 w-full bg-gray-3/20 dark:bg-gray-3/10 rounded-xl">
+							<div>{text("No captions")}</div>
+							<button
+								class="h-8 px-3 rounded-lg border border-green-7/50 bg-green-6/15 text-green-11 text-xs font-medium transition-colors hover:bg-green-6/25 disabled:opacity-50 disabled:cursor-not-allowed"
+								disabled={props.isGenerating}
+								onMouseDown={(e) => e.stopPropagation()}
+								onClick={(e) => {
+									e.stopPropagation();
+									void props.onGenerate();
+								}}
+							>
+								{props.isGenerating
+									? text("Generating...")
+									: text("Generate captions")}
+							</button>
+						</div>
+					</Show>
 				}
 			>
-				{(entry, localIndex) => {
+				{(entry) => {
 					const segment = entry.segment;
 					const segmentIndex = () => entry.index;
 					const isSelected = createMemo(() => {
@@ -220,7 +239,7 @@ export function CaptionsTrack(props: {
 								onMouseDown={createMouseDownDrag(
 									segmentIndex,
 									() => {
-										const bounds = neighborBounds(localIndex());
+										const bounds = neighborBounds(segmentIndex());
 										const start = segment.start;
 										const minValue = bounds.prevEnd;
 										const maxValue = Math.max(
@@ -254,7 +273,7 @@ export function CaptionsTrack(props: {
 									segmentIndex,
 									() => {
 										const original = { ...segment };
-										const bounds = neighborBounds(localIndex());
+										const bounds = neighborBounds(segmentIndex());
 										const minDelta = bounds.prevEnd - original.start;
 										const maxDelta = bounds.nextStart - original.end;
 										return { original, minDelta, maxDelta };
@@ -286,7 +305,7 @@ export function CaptionsTrack(props: {
 								onMouseDown={createMouseDownDrag(
 									segmentIndex,
 									() => {
-										const bounds = neighborBounds(localIndex());
+										const bounds = neighborBounds(segmentIndex());
 										const end = segment.end;
 										const minValue = segment.start + minDuration();
 										const maxValue = Math.max(minValue, bounds.nextStart);

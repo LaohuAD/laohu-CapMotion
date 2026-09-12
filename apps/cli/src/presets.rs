@@ -70,10 +70,12 @@ pub fn preset_schema() -> Value {
                     "shadowDistance", "shadowAngle", "exportWithSubtitles",
                     "highlightColor", "fadeDuration", "wordTransitionDuration",
                     "activeWordHighlight",
-                    "manualPosition", "animation", "highlightStyle", "uppercase"
+                    "manualPosition", "trackPositions", "trackStyles", "animation", "highlightStyle", "uppercase"
                 ],
                 "constraints": {
                     "size": "1..400",
+                    "trackStyles": "unique trackId; fontSize 1..400; overrides legacy per-cue size",
+                    "trackPositions": "unique trackId; named or manual position; normalized coordinates 0..1",
                     "fontWeight": "100..900",
                     "opacity": "0..100",
                     "dimensions": "non-negative finite numbers",

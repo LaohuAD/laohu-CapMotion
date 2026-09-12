@@ -10,10 +10,104 @@ use crate::cast_bytes_to_f32_slice;
 
 // F32 Packed 48kHz audio
 pub struct AudioData {
-    samples: Vec<f32>,
+    samples: SampleStorage,
     channels: u16,
     source_start_sample: usize,
     covered_source_end_sample: usize,
+}
+
+// Long PCM is file-backed: the OS may reclaim clean pages instead of compressing
+// gigabytes of private heap. The temporary file lives beside its source and is
+// removed after the last reader drops it; never fall back to the system disk.
+const MAX_HEAP_SAMPLE_BYTES: usize = 8 * 1024 * 1024;
+
+enum SampleStorage {
+    Heap(Vec<f32>),
+    Mapped {
+        map: memmap2::Mmap,
+        _file: std::fs::File,
+    },
+}
+
+impl SampleStorage {
+    fn as_slice(&self) -> &[f32] {
+        match self {
+            Self::Heap(samples) => samples,
+            Self::Mapped { map, .. } => {
+                // The file contains only native f32 bytes, its length is a multiple
+                // of four, and mmap is page-aligned. No writable handle escapes.
+                unsafe { std::slice::from_raw_parts(map.as_ptr().cast(), map.len() / 4) }
+            }
+        }
+    }
+}
+
+struct SampleSink {
+    path: std::path::PathBuf,
+    file: Option<std::io::BufWriter<std::fs::File>>,
+}
+
+impl SampleSink {
+    fn new(path: &Path) -> Self {
+        Self {
+            path: path.to_owned(),
+            file: None,
+        }
+    }
+
+    fn spill(&mut self, samples: &mut Vec<f32>) -> Result<(), String> {
+        use std::io::Write;
+        if self.file.is_none() && samples.len() * 4 <= MAX_HEAP_SAMPLE_BYTES {
+            return Ok(());
+        }
+        if self.file.is_none() {
+            let parent = self
+                .path
+                .parent()
+                .filter(|p| !p.as_os_str().is_empty())
+                .unwrap_or(Path::new("."));
+            let dir = parent.join(".cap-audio-cache");
+            // create_dir (not create_dir_all) fails when the source disk disappears.
+            match std::fs::create_dir(&dir) {
+                Ok(()) => {}
+                Err(e) if e.kind() == std::io::ErrorKind::AlreadyExists && dir.is_dir() => {}
+                Err(e) => return Err(format!("Audio cache directory / {e}")),
+            }
+            // Anonymous/unlinked on Unix; DELETE_ON_CLOSE on Windows. The OS
+            // also cleans up if an exporter is force-cancelled or crashes.
+            let file =
+                tempfile::tempfile_in(&dir).map_err(|e| format!("Audio cache file / {e}"))?;
+            self.file = Some(std::io::BufWriter::with_capacity(256 * 1024, file));
+        }
+        let bytes = unsafe { crate::cast_f32_slice_to_bytes(samples) };
+        self.file
+            .as_mut()
+            .unwrap()
+            .write_all(bytes)
+            .map_err(|e| format!("Audio cache write / {e}"))?;
+        samples.clear();
+        // Drop the initial large buffer; subsequent resampler chunks stay small.
+        if samples.capacity() * 4 > MAX_HEAP_SAMPLE_BYTES {
+            samples.shrink_to(0);
+        }
+        Ok(())
+    }
+
+    fn finish(mut self, mut samples: Vec<f32>) -> Result<SampleStorage, String> {
+        self.spill(&mut samples)?;
+        if let Some(writer) = self.file {
+            let file = writer
+                .into_inner()
+                .map_err(|e| format!("Audio cache flush / {e}"))?;
+            // Map is read-only; _file keeps the file alive (also on Windows).
+            let map = unsafe { memmap2::Mmap::map(&file) }
+                .map_err(|e| format!("Audio cache map / {e}"))?;
+            Ok(SampleStorage::Mapped { map, _file: file })
+        } else {
+            samples.shrink_to_fit();
+            Ok(SampleStorage::Heap(samples))
+        }
+    }
 }
 
 impl AudioData {
@@ -99,6 +193,7 @@ impl AudioData {
 
         let mut decoded_frame = ffmpeg::frame::Audio::empty();
         let mut samples = Vec::new();
+        let mut sample_sink = SampleSink::new(path);
         let mut resampled_samples = Vec::new();
         let mut next_source_sample = if sought { None } else { Some(0usize) };
         let mut complete = source_start_sample == covered_source_end_sample;
@@ -118,6 +213,7 @@ impl AudioData {
             while decoder.receive_frame(&mut decoded_frame).is_ok() {
                 if range.is_none() {
                     run_resampler(&mut resampler, &decoded_frame, &mut samples)?;
+                    sample_sink.spill(&mut samples)?;
                     continue;
                 }
 
@@ -147,6 +243,7 @@ impl AudioData {
                     source_start_sample,
                     covered_source_end_sample,
                 );
+                sample_sink.spill(&mut samples)?;
                 if complete {
                     break 'packets;
                 }
@@ -159,6 +256,7 @@ impl AudioData {
             while decoder.receive_frame(&mut decoded_frame).is_ok() {
                 if range.is_none() {
                     run_resampler(&mut resampler, &decoded_frame, &mut samples)?;
+                    sample_sink.spill(&mut samples)?;
                     continue;
                 }
 
@@ -172,6 +270,7 @@ impl AudioData {
                     source_start_sample,
                     covered_source_end_sample,
                 );
+                sample_sink.spill(&mut samples)?;
                 if complete {
                     break;
                 }
@@ -196,7 +295,7 @@ impl AudioData {
         }
 
         Ok(AudioData {
-            samples,
+            samples: sample_sink.finish(samples)?,
             channels: target_channels,
             source_start_sample,
             covered_source_end_sample,
@@ -212,7 +311,7 @@ impl AudioData {
     }
 
     pub fn sample_count(&self) -> usize {
-        self.samples.len() / self.channels as usize
+        self.samples.as_slice().len() / self.channels as usize
     }
 
     pub fn source_start_sample(&self) -> usize {
@@ -231,7 +330,7 @@ impl AudioData {
     #[cfg(test)]
     pub(crate) fn from_raw_f32(samples: Vec<f32>, channels: u16) -> Self {
         Self {
-            samples,
+            samples: SampleStorage::Heap(samples),
             channels,
             source_start_sample: 0,
             covered_source_end_sample: usize::MAX,
@@ -395,6 +494,28 @@ mod tests {
         }
         let sum_sq: f64 = samples.iter().map(|s| f64::from(*s) * f64::from(*s)).sum();
         (sum_sq / samples.len() as f64).sqrt() as f32
+    }
+
+    #[test]
+    fn long_audio_spills_next_to_source_and_releases_cache_without_changing_samples() {
+        let temp = tempfile::tempdir().unwrap();
+        let path = temp.path().join("long.wav");
+        write_pcm_wav(&path, 48_000, 48_000 * 30, &[2_000, -3_000]);
+        let data = AudioData::from_file(&path).unwrap();
+        let cache = temp.path().join(".cap-audio-cache");
+        assert!(
+            cache.exists(),
+            "long PCM must not remain a private heap allocation"
+        );
+        assert!(matches!(data.samples, SampleStorage::Mapped { .. }));
+        assert_eq!(data.sample_count(), 48_000 * 30);
+        let reference = AudioData::from_file_range(&path, 48_000 * 20, 48_000 * 21).unwrap();
+        assert_eq!(
+            &data.samples()[48_000 * 20 * 2..48_000 * 21 * 2],
+            reference.samples()
+        );
+        drop(data);
+        assert_eq!(std::fs::read_dir(&cache).unwrap().count(), 0);
     }
 
     #[test]

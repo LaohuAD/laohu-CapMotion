@@ -56,6 +56,9 @@ export type CaptionPresetStyle = {
 	shadowDistance?: number;
 	shadowAngle?: number;
 	position?: string;
+	manualPosition?: CaptionSettings["manualPosition"];
+	trackPositions?: CaptionSettings["trackPositions"];
+	trackStyles?: CaptionSettings["trackStyles"];
 };
 
 export type CaptionStylePreset = {
@@ -208,6 +211,7 @@ export const defaultCaptionSettings: EditorCaptionSettings = {
 	wordTransitionDuration: 0.25,
 	manualPosition: null,
 	trackPositions: [],
+	trackStyles: [],
 	preset: classicPreset.id,
 	...classicPreset.style,
 };
@@ -227,6 +231,10 @@ export function getUserCaptionStylePresets(
 					font: settings.font,
 					fontWeight: settings.fontWeight,
 					size: settings.size,
+					position: settings.position,
+					manualPosition: settings.manualPosition,
+					trackPositions: settings.trackPositions,
+					trackStyles: settings.trackStyles,
 					color: settings.color,
 					backgroundColor: settings.backgroundColor,
 					backgroundOpacity: settings.backgroundOpacity,
@@ -240,7 +248,6 @@ export function getUserCaptionStylePresets(
 					shadowDistance: settings.shadowDistance,
 					shadowAngle: settings.shadowAngle,
 					letterSpacing: settings.letterSpacing,
-					position: settings.position,
 					highlightColor: settings.highlightColor,
 					activeWordHighlight: settings.activeWordHighlight,
 					highlightStyle: settings.highlightStyle,
@@ -284,6 +291,7 @@ export function normalizeCaptionSettings(
 		highlightStyle,
 		preset,
 		trackPositions: settings?.trackPositions ?? [],
+		trackStyles: settings?.trackStyles ?? [],
 	};
 
 	// Older CapMotion builds exposed a second, disconnected "outline shadow"
@@ -436,6 +444,7 @@ function createCaptionsStore() {
 						activeWordHighlight: state.settings.activeWordHighlight,
 						manualPosition: state.settings.manualPosition,
 						trackPositions: state.settings.trackPositions,
+						trackStyles: state.settings.trackStyles,
 						preset: state.settings.preset,
 						animation: state.settings.animation,
 						highlightStyle: state.settings.highlightStyle,
