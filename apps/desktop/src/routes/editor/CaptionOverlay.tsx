@@ -13,14 +13,14 @@ import {
 } from "solid-js";
 import { produce } from "solid-js/store";
 import { defaultCaptionSettings } from "~/store/captions";
-import type { CaptionTrackSegment } from "~/utils/tauri";
 import { keyboardEventTargetsEditableContent } from "~/utils/editor-shortcuts";
+import type { CaptionTrackSegment } from "~/utils/tauri";
 import { useCanvasSnapTargets } from "./CanvasElementsOverlay";
 import {
-	captionTrackId,
 	CAPTION_POSITION_COORDINATE_SIZE,
-	resolveCaptionTrackPosition,
+	captionTrackId,
 	resolveCaptionTrackFontSize,
+	resolveCaptionTrackPosition,
 	setCaptionTrackPosition,
 } from "./caption-position";
 import { FPS, useEditorContext } from "./context";

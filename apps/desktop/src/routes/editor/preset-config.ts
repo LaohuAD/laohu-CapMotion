@@ -1,9 +1,9 @@
 import type { Preset, PresetsStore, ProjectConfiguration } from "~/utils/tauri";
-import type { EditorProjectConfiguration } from "./context";
 import {
 	captionTrackId,
 	resolveCaptionTrackFontSize,
 } from "./caption-position";
+import type { EditorProjectConfiguration } from "./context";
 
 const emptySourceAudioTrack = () => ({
 	expanded: false,

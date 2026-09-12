@@ -12,9 +12,7 @@
 	},
 	"bundle": {
 		"createUpdaterArtifacts": false,
-		"targets": [
-			"app"
-		],
+		"targets": ["app"],
 		"shortDescription": "Screen recording built for AI-driven timeline editing.",
 		"longDescription": "Screen capture that lets AI Agents edit captions, animations, and media directly on the timeline."
 	}

@@ -13,7 +13,9 @@ describe("teleprompter utilities", () => {
 		let height = "1800px";
 		const editor = {
 			style: {
-				get height() { return height; },
+				get height() {
+					return height;
+				},
 				set height(value: string) {
 					height = value;
 					if (value === "0px") viewport.scrollTop = 0;

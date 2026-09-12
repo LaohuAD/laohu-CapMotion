@@ -610,8 +610,13 @@ async fn run_out_of_process_export_attempt(
                 total_frames,
             }) => {
                 if last_memory_sample.elapsed() >= std::time::Duration::from_secs(30) {
-                    if let Some(pid) = child.id() { cap_utils::process_memory::log_snapshot(pid, "export-worker"); }
-                    cap_utils::process_memory::log_snapshot(std::process::id(), "editor-during-export");
+                    if let Some(pid) = child.id() {
+                        cap_utils::process_memory::log_snapshot(pid, "export-worker");
+                    }
+                    cap_utils::process_memory::log_snapshot(
+                        std::process::id(),
+                        "editor-during-export",
+                    );
                     last_memory_sample = std::time::Instant::now();
                 }
                 if !progress_forwarder.send(rendered_count, total_frames) {

@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
 	captionTrackPositionLabel,
-	visibleCaptionEntries,
 	groupCaptionSegmentsByTrack,
 	shouldMirrorCaptionEditToSource,
+	visibleCaptionEntries,
 } from "./caption-tracks";
 
 describe("groupCaptionSegmentsByTrack", () => {

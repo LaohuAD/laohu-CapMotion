@@ -272,21 +272,38 @@ mod lifetime_tests {
     fn imported_texture_releases_native_ownership_after_gpu_poll() {
         objc2::rc::autoreleasepool(|_| {
             let instance = crate::create_wgpu_instance_sync();
-            let adapter = pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default())).unwrap();
-            let (device, queue) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default())).unwrap();
+            let adapter = pollster::block_on(
+                instance.request_adapter(&wgpu::RequestAdapterOptions::default()),
+            )
+            .unwrap();
+            let (device, queue) =
+                pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default()))
+                    .unwrap();
             let metal_device = mtl::Device::sys_default().unwrap();
             let descriptor = mtl::TextureDesc::new_2d(mtl::PixelFormat::R8UNorm, 16, 16, false);
             let texture = metal_device.new_texture(&descriptor).unwrap();
             let before = texture.as_type_ref().retain_count();
             for _ in 0..100 {
-                let imported = import_metal_texture_to_wgpu(&device, &texture, wgpu::TextureFormat::R8Unorm, 16, 16, None).unwrap();
+                let imported = import_metal_texture_to_wgpu(
+                    &device,
+                    &texture,
+                    wgpu::TextureFormat::R8Unorm,
+                    16,
+                    16,
+                    None,
+                )
+                .unwrap();
                 let view = imported.create_view(&Default::default());
                 drop(view);
                 drop(imported);
                 queue.submit([]);
                 device.poll(wgpu::PollType::Wait).unwrap();
             }
-            assert_eq!(texture.as_type_ref().retain_count(), before, "imported Metal textures must not accumulate owners");
+            assert_eq!(
+                texture.as_type_ref().retain_count(),
+                before,
+                "imported Metal textures must not accumulate owners"
+            );
         });
     }
 }

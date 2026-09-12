@@ -1043,18 +1043,26 @@ impl AudioLoader {
         // A merged recording may contain dozens of tracks. Queue preparation
         // instead of allocating a decoder/resampler and heap buffer for every
         // track simultaneously, and abandon queued work when its editor closes.
-        static DECODE_SLOTS: std::sync::OnceLock<Arc<tokio::sync::Semaphore>> = std::sync::OnceLock::new();
-        let slots = DECODE_SLOTS.get_or_init(|| Arc::new(tokio::sync::Semaphore::new(2))).clone();
+        static DECODE_SLOTS: std::sync::OnceLock<Arc<tokio::sync::Semaphore>> =
+            std::sync::OnceLock::new();
+        let slots = DECODE_SLOTS
+            .get_or_init(|| Arc::new(tokio::sync::Semaphore::new(2)))
+            .clone();
         tokio::spawn(async move {
-            let Ok(permit) = slots.acquire_owned().await else { return; };
-            if tx.is_closed() { return; }
+            let Ok(permit) = slots.acquire_owned().await else {
+                return;
+            };
+            if tx.is_closed() {
+                return;
+            }
             let _ = tokio::task::spawn_blocking(move || {
                 let _permit = permit;
                 let result = AudioData::from_file(&path)
                     .map(|data| Some(Arc::new(data)))
                     .map_err(|e| format!("{label} / {e}"));
                 let _ = tx.send(Some(result));
-            }).await;
+            })
+            .await;
         });
         Self { rx }
     }

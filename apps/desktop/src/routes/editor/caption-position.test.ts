@@ -4,9 +4,9 @@ import {
 	getCaptionTrackPosition,
 	normalizedToCenteredPixels,
 	pruneCaptionTrackPositions,
-	setCaptionTrackPosition,
 	resolveCaptionTrackFontSize,
 	setCaptionTrackFontSize,
+	setCaptionTrackPosition,
 } from "./caption-position";
 
 describe("caption position coordinates", () => {

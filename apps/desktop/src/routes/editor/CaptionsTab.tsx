@@ -39,8 +39,8 @@ import {
 	captionTrackId,
 	centeredPixelsToNormalized,
 	normalizedToCenteredPixels,
-	resolveCaptionTrackPosition,
 	resolveCaptionTrackFontSize,
+	resolveCaptionTrackPosition,
 	setCaptionTrackFontSize,
 	setCaptionTrackPosition,
 } from "./caption-position";
