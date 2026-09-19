@@ -1,0 +1,63 @@
+{
+  "symptom": "字幕独立字号与轨位置问题；后续紧凑气口返修过度拆分句内静音，用户指出衔接变差且波形前空后断",
+  "triggerScope": "PROJECT_CAPABILITY",
+  "earliestFailure": "气口执行脚本在确定意群剪辑边界前扫描每个短静音，词级覆盖审计被错误当作自然度证明；另波形未使用播放音轨offset",
+  "rootLayer": "CHAIN",
+  "hypothesis": "以用户真实试听认可的B为基准，移除句内及句间思考空白、保留实际字音，改善连贯度；最终整片听感仍需用户检验",
+  "protection": [
+    "完整保留字音与语义",
+    "有声演示与音乐空拍不得按讲话静音切碎",
+    "不改已批准章节顺序",
+    "保留用户手动中英位置",
+    "旧工程单条字号兼容",
+    "不替换发布版或触碰其他未提交修改"
+  ],
+  "authorityPath": ".agents/skills/laohu-video-postproduction/SKILL.md",
+  "change": "用户试听明确确认B档20ms；句内句间犹豫空白同样处理，保留实际发声及拖音。全片工作工程revision45，893片段、1691.043秒；Laohu预设revision7 tight，具体声学尺度由主Skill记录。此前句内保守恢复方案被用户否决，不再作为当前节奏标准。",
+  "decisionChanges": [
+    "静音检测不等于已剪，安全候选必须写入EDL",
+    "检查片段内部与跨片段累计空白",
+    "轨字号优先于旧单条覆盖，保存预设不保存字幕正文",
+    "已调好位置不被物化脚本重置",
+    "自然承接优先，几十毫秒偏差可接受；短残片时长本身不触发返剪，停止毫秒级过度优化",
+    "静音检测只能在语义边界之后使用，字幕换条不直接授权音频切割",
+    "不以统一毫秒阈值或梯形外形验收自然度",
+    "原气口tight改adaptive，句内短停顿默认保留",
+    "B档两个真实片段获用户听感认可，约20ms总余量成为此次及后续同类口播的个人基准",
+    "词时码与静音重叠单独审计，整字实际消失与ASR时码缩短分开判断"
+  ],
+  "regressions": {
+    "current": [
+      "两个实录试听B获用户明确确认",
+      "全片1691.043秒、998字幕，ASR静音时间重叠748处已记录，整词完全未映射0",
+      "六个部分实际切点与B试听一致"
+    ],
+    "legacy": [
+      "旧工程无trackStyles继续回退单条字号及全局字号",
+      "17项project Rust回归与4项预设CLI测试通过",
+      "静音核心包含保留词时不得裁断测试通过"
+    ],
+    "adjacent": [
+      "源字幕导入不替换其他轨道与样式",
+      "EDL返修从原始未剪时间轴重建，不以已剪工程充当源时间",
+      "双语轨同步且源主稿仍在，未引入动画"
+    ]
+  },
+  "evidence": [
+    "作品/016_三工程口播虚拟剪辑/输出/工程验收.json",
+    "作品/016_三工程口播虚拟剪辑/输出/开发版字幕回归.json",
+    "作品/016_三工程口播虚拟剪辑/制作/气口返修映射.json",
+    "apps/desktop/src/routes/editor/caption-position.test.ts",
+    "scripts/cap-project-edl.test.mjs",
+    "apps/desktop/src-tauri/src/audio.rs",
+    "https://research.google/pubs/a-study-of-raters-sensitivity-to-inter-sentence-pause-durations-in-american-english-speech/"
+  ],
+  "rollback": "用户继续指出自然度不佳时，按具体意群和源声音返修，不能重启逐字静音清零；新源码尚需GUI与Windows实际回归再考虑打包",
+  "validation": {
+    "STRUCTURE": "PASS",
+    "ROUTE": "PASS",
+    "BEHAVIOR": "OBSERVE",
+    "QUALITY": "OBSERVE"
+  },
+  "decision": "OBSERVE"
+}

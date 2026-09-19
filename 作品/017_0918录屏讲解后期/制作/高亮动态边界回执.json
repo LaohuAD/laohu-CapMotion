@@ -1,0 +1,10 @@
+{
+  "schema": "laohu.native-track-receipt/1",
+  "previousRevision": 50,
+  "newRevision": 51,
+  "beforeSHA256": "94e0b9c11f07894cdec4fbd3e3cf67ac2a342c0d7736e7c59eb032a20e3c6b3c",
+  "afterSHA256": "ebbfacaba3140635087e79521af3e2c7f5bad4c51edc93900f7938c61ef4f7d9",
+  "addedHighlights": 3,
+  "addedTexts": 0,
+  "removedMotionIds": []
+}

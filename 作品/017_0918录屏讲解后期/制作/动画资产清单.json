@@ -1,0 +1,72 @@
+{
+  "V03-1": {
+    "definitionId": "work017-v03-1",
+    "definitionVersion": 1,
+    "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/works/Work017.tsx",
+    "compositionId": "Work017Overlay",
+    "props": {
+      "kind": "factors",
+      "durationInFrames": 669,
+      "events": [
+        {
+          "id": "e0",
+          "frame": 0,
+          "label": "视觉风格",
+          "target": "整体质感",
+          "targetFrame": 87,
+          "linkFrame": 24
+        },
+        {
+          "id": "e1",
+          "frame": 97,
+          "label": "人物造型",
+          "target": "皮肤纹理",
+          "targetFrame": 167,
+          "linkFrame": 130
+        },
+        {
+          "id": "e2",
+          "frame": 220,
+          "label": "摄影呈现",
+          "target": "光线表现",
+          "targetFrame": 324,
+          "linkFrame": 247
+        }
+      ]
+    },
+    "track": 0,
+    "zIndex": 100
+  },
+  "V09-1": {
+    "definitionId": "work017-v09-1",
+    "definitionVersion": 1,
+    "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/works/Work017.tsx",
+    "compositionId": "Work017Overlay",
+    "props": {
+      "kind": "process",
+      "durationInFrames": 301,
+      "events": [
+        {
+          "id": "e0",
+          "frame": 63,
+          "label": "发现问题",
+          "target": "镜面高光"
+        },
+        {
+          "id": "e1",
+          "frame": 129,
+          "label": "理解原因",
+          "target": "光线表现"
+        },
+        {
+          "id": "e2",
+          "frame": 181,
+          "label": "写对应约束",
+          "target": "皮肤 / 光线"
+        }
+      ]
+    },
+    "track": 0,
+    "zIndex": 100
+  }
+}

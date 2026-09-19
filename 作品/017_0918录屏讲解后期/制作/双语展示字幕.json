@@ -1,0 +1,2067 @@
+{
+  "schema": "laohu.cap-caption-tracks/1",
+  "tracks": [
+    {
+      "id": "zh-CN",
+      "label": "中文字幕",
+      "language": "zh-CN",
+      "style": {
+        "fontSize": 52,
+        "position": "manual",
+        "manualPosition": {
+          "x": 0.5,
+          "y": 0.9347715987099542
+        }
+      },
+      "segments": [
+        {
+          "id": "C001-zh-CN",
+          "pairId": "C001",
+          "start": 0.15,
+          "end": 1.970458,
+          "text": "这可能是你做的",
+          "words": []
+        },
+        {
+          "id": "C003-zh-CN",
+          "pairId": "C003",
+          "start": 1.970458,
+          "end": 3.2575,
+          "text": "人物资产图油腻",
+          "words": []
+        },
+        {
+          "id": "C005-zh-CN",
+          "pairId": "C005",
+          "start": 3.341104,
+          "end": 5.339099,
+          "text": "这是我做的人物资产图",
+          "words": []
+        },
+        {
+          "id": "C005A-zh-CN",
+          "pairId": "C005A",
+          "start": 5.349099,
+          "end": 5.806458,
+          "text": "真实",
+          "words": []
+        },
+        {
+          "id": "C007-zh-CN",
+          "pairId": "C007",
+          "start": 5.824995,
+          "end": 10.007312,
+          "text": "他们都是从一张图片里面提取出来的一个人物资产",
+          "words": []
+        },
+        {
+          "id": "C009-zh-CN",
+          "pairId": "C009",
+          "start": 10.118282,
+          "end": 12.939166,
+          "text": "区别不同的只是里面的提示词而已",
+          "words": []
+        },
+        {
+          "id": "C013-zh-CN",
+          "pairId": "C013",
+          "start": 13.023253,
+          "end": 15.423253,
+          "text": "这个提示词是我花了几百块钱",
+          "words": []
+        },
+        {
+          "id": "C015-zh-CN",
+          "pairId": "C015",
+          "start": 15.672378,
+          "end": 18.832,
+          "text": "做了这么多尝试以及对应的测试之后",
+          "words": []
+        },
+        {
+          "id": "C016-zh-CN",
+          "pairId": "C016",
+          "start": 18.854956,
+          "end": 21.054956,
+          "text": "得出来的一个比较稳定的版本",
+          "words": []
+        },
+        {
+          "id": "C018-zh-CN",
+          "pairId": "C018",
+          "start": 21.219179,
+          "end": 24.292642,
+          "text": "起因是上一次的人物资产设计",
+          "words": []
+        },
+        {
+          "id": "C019-zh-CN",
+          "pairId": "C019",
+          "start": 24.407215,
+          "end": 26.881011,
+          "text": "在这个环节制作人物资产的时候",
+          "words": []
+        },
+        {
+          "id": "C021-zh-CN",
+          "pairId": "C021",
+          "start": 27.180208,
+          "end": 29.408666,
+          "text": "当时写的提示词非常简单",
+          "words": []
+        },
+        {
+          "id": "C022-zh-CN",
+          "pairId": "C022",
+          "start": 29.408666,
+          "end": 30.592157,
+          "text": "就是这样的一个提示词",
+          "words": []
+        },
+        {
+          "id": "C024-zh-CN",
+          "pairId": "C024",
+          "start": 30.653902,
+          "end": 33.561266,
+          "text": "结果导致人物的脸显得非常的油啊",
+          "words": []
+        },
+        {
+          "id": "C026-zh-CN",
+          "pairId": "C026",
+          "start": 33.722371,
+          "end": 37.367273,
+          "text": "现在用我的新提示词做出来的人物脸",
+          "words": []
+        },
+        {
+          "id": "C027-zh-CN",
+          "pairId": "C027",
+          "start": 37.407273,
+          "end": 39.954292,
+          "text": "质感是非常好的",
+          "words": []
+        },
+        {
+          "id": "C028-zh-CN",
+          "pairId": "C028",
+          "start": 39.954292,
+          "end": 42.8621,
+          "text": "网上估计也有很多类似的提示词",
+          "words": []
+        },
+        {
+          "id": "C029-zh-CN",
+          "pairId": "C029",
+          "start": 43.162163,
+          "end": 44.602163,
+          "text": "他们会直接给你一个结论",
+          "words": []
+        },
+        {
+          "id": "C030-zh-CN",
+          "pairId": "C030",
+          "start": 44.677163,
+          "end": 48.312163,
+          "text": "但是不会告诉你怎么处理这个东西的底层逻辑",
+          "words": []
+        },
+        {
+          "id": "C031-zh-CN",
+          "pairId": "C031",
+          "start": 48.387502,
+          "end": 50.187502,
+          "text": "当你换个场景换个画面",
+          "words": []
+        },
+        {
+          "id": "C032-zh-CN",
+          "pairId": "C032",
+          "start": 50.235146,
+          "end": 51.78796,
+          "text": "该不会的还是不会",
+          "words": []
+        },
+        {
+          "id": "C033-zh-CN",
+          "pairId": "C033",
+          "start": 51.877996,
+          "end": 54.357996,
+          "text": "所以这一期视频我会手把手教你",
+          "words": []
+        },
+        {
+          "id": "C034-zh-CN",
+          "pairId": "C034",
+          "start": 54.432996,
+          "end": 56.472996,
+          "text": "如何解决类似的问题",
+          "words": []
+        },
+        {
+          "id": "C035-zh-CN",
+          "pairId": "C035",
+          "start": 56.552996,
+          "end": 59.072996,
+          "text": "下一次遇到这种问题应该如何去思考",
+          "words": []
+        },
+        {
+          "id": "C036-zh-CN",
+          "pairId": "C036",
+          "start": 59.297794,
+          "end": 60.977794,
+          "text": "视频可能稍微有点长",
+          "words": []
+        },
+        {
+          "id": "C037-zh-CN",
+          "pairId": "C037",
+          "start": 61.012792,
+          "end": 62.107336,
+          "text": "我会尽量压缩",
+          "words": []
+        },
+        {
+          "id": "C038-zh-CN",
+          "pairId": "C038",
+          "start": 62.203143,
+          "end": 64.363143,
+          "text": "你也可以直接滑到视频的末尾",
+          "words": []
+        },
+        {
+          "id": "C039-zh-CN",
+          "pairId": "C039",
+          "start": 64.438143,
+          "end": 67.033143,
+          "text": "拿我给大家准备好的提示词",
+          "words": []
+        },
+        {
+          "id": "C041-zh-CN",
+          "pairId": "C041",
+          "start": 67.19975,
+          "end": 69.966313,
+          "text": "上期视频给大家讲了一张好看的图片",
+          "words": []
+        },
+        {
+          "id": "C042-zh-CN",
+          "pairId": "C042",
+          "start": 69.966313,
+          "end": 71.796479,
+          "text": "是由 6 个元素构成的",
+          "words": []
+        },
+        {
+          "id": "C043-zh-CN",
+          "pairId": "C043",
+          "start": 71.875037,
+          "end": 74.25777,
+          "text": "影响人物皮肤状态的",
+          "words": []
+        },
+        {
+          "id": "C044-zh-CN",
+          "pairId": "C044",
+          "start": 74.25777,
+          "end": 79.601723,
+          "text": "就是视觉风格、人物造型以及摄影呈现这三个要素",
+          "words": []
+        },
+        {
+          "id": "C045-zh-CN",
+          "pairId": "C045",
+          "start": 79.692675,
+          "end": 82.941373,
+          "text": "视觉风格关乎画面的质感",
+          "words": []
+        },
+        {
+          "id": "C046-zh-CN",
+          "pairId": "C046",
+          "start": 82.941373,
+          "end": 86.86192,
+          "text": "人物造型描述了人物皮肤的状态和纹理",
+          "words": []
+        },
+        {
+          "id": "C047-zh-CN",
+          "pairId": "C047",
+          "start": 87.020779,
+          "end": 91.123431,
+          "text": "摄影呈现决定了皮肤反映出来的光线",
+          "words": []
+        },
+        {
+          "id": "C048-zh-CN",
+          "pairId": "C048",
+          "start": 91.244363,
+          "end": 95.929009,
+          "text": "如果没有特别描述皮肤的光影",
+          "words": []
+        },
+        {
+          "id": "C049-zh-CN",
+          "pairId": "C049",
+          "start": 95.929009,
+          "end": 100.638812,
+          "text": "很容易把皮肤做成一个镜面高光的状态",
+          "words": []
+        },
+        {
+          "id": "C050-zh-CN",
+          "pairId": "C050",
+          "start": 100.638812,
+          "end": 101.971597,
+          "text": "所以就会显得很油腻",
+          "words": []
+        },
+        {
+          "id": "C051-zh-CN",
+          "pairId": "C051",
+          "start": 102.046597,
+          "end": 104.406597,
+          "text": "那么一张图片到底有什么样的问题",
+          "words": []
+        },
+        {
+          "id": "C052-zh-CN",
+          "pairId": "C052",
+          "start": 104.492123,
+          "end": 107.340577,
+          "text": "这些问题我们怎么能够发现呢",
+          "words": []
+        },
+        {
+          "id": "C053-zh-CN",
+          "pairId": "C053",
+          "start": 107.35679,
+          "end": 109.491041,
+          "text": "我们作为一个小白怎么能够知道呢",
+          "words": []
+        },
+        {
+          "id": "C054-zh-CN",
+          "pairId": "C054",
+          "start": 109.491041,
+          "end": 112.513853,
+          "text": "这就要用到上一次视频给大家的一个思路",
+          "words": []
+        },
+        {
+          "id": "C061-zh-CN",
+          "pairId": "C061",
+          "start": 112.623241,
+          "end": 113.863241,
+          "text": "我们可以截一张图",
+          "words": []
+        },
+        {
+          "id": "C063-zh-CN",
+          "pairId": "C063",
+          "start": 113.929946,
+          "end": 114.769946,
+          "text": "然后丢给豆包",
+          "words": []
+        },
+        {
+          "id": "C065-zh-CN",
+          "pairId": "C065",
+          "start": 114.88402,
+          "end": 116.196863,
+          "text": "并且发出这个指令",
+          "words": []
+        },
+        {
+          "id": "C066-zh-CN",
+          "pairId": "C066",
+          "start": 116.271863,
+          "end": 120.031863,
+          "text": "请解释一下这张图上的人物的脸为什么这么油腻",
+          "words": []
+        },
+        {
+          "id": "C067-zh-CN",
+          "pairId": "C067",
+          "start": 120.166493,
+          "end": 121.992708,
+          "text": "有哪些元素造成的",
+          "words": []
+        },
+        {
+          "id": "C068-zh-CN",
+          "pairId": "C068",
+          "start": 121.992708,
+          "end": 124.020167,
+          "text": "请从底层逻辑给我解释一下",
+          "words": []
+        },
+        {
+          "id": "C070-zh-CN",
+          "pairId": "C070",
+          "start": 124.123717,
+          "end": 127.083717,
+          "text": "然后豆包就会给你很多的一些分析",
+          "words": []
+        },
+        {
+          "id": "C071-zh-CN",
+          "pairId": "C071",
+          "start": 127.28389,
+          "end": 129.912098,
+          "text": "比如说脸颊有过度的镜面反射",
+          "words": []
+        },
+        {
+          "id": "C072-zh-CN",
+          "pairId": "C072",
+          "start": 130.112098,
+          "end": 131.985459,
+          "text": "削弱了皮肤的哑光质感",
+          "words": []
+        },
+        {
+          "id": "C074-zh-CN",
+          "pairId": "C074",
+          "start": 131.985459,
+          "end": 134.053646,
+          "text": "比如说硬主光过强",
+          "words": []
+        },
+        {
+          "id": "C075-zh-CN",
+          "pairId": "C075",
+          "start": 134.213646,
+          "end": 135.944021,
+          "text": "主光源亮度太高",
+          "words": []
+        },
+        {
+          "id": "C077-zh-CN",
+          "pairId": "C077",
+          "start": 136.087875,
+          "end": 137.6145,
+          "text": "缺少柔和补光",
+          "words": []
+        },
+        {
+          "id": "C079-zh-CN",
+          "pairId": "C079",
+          "start": 137.629009,
+          "end": 140.330592,
+          "text": "没有环境漫射光柔化高光",
+          "words": []
+        },
+        {
+          "id": "C081-zh-CN",
+          "pairId": "C081",
+          "start": 140.332208,
+          "end": 143.039112,
+          "text": "就会给出很多这样的分析",
+          "words": []
+        },
+        {
+          "id": "C082-zh-CN",
+          "pairId": "C082",
+          "start": 143.159112,
+          "end": 146.986175,
+          "text": "那你就针对它的缺点去写对应的提示词就行了",
+          "words": []
+        },
+        {
+          "id": "C084-zh-CN",
+          "pairId": "C084",
+          "start": 147.243002,
+          "end": 150.819523,
+          "text": "假设现在你写好了一个生图片的提示词",
+          "words": []
+        },
+        {
+          "id": "C086-zh-CN",
+          "pairId": "C086",
+          "start": 151.004242,
+          "end": 152.404242,
+          "text": "并且你使用 Midjourney",
+          "words": []
+        },
+        {
+          "id": "C088-zh-CN",
+          "pairId": "C088",
+          "start": 152.63665,
+          "end": 155.507764,
+          "text": "生成了这样一张非常好看的图片",
+          "words": []
+        },
+        {
+          "id": "C089-zh-CN",
+          "pairId": "C089",
+          "start": 155.52156,
+          "end": 159.376096,
+          "text": "然后你就想把它制作成一张人物资产图",
+          "words": []
+        },
+        {
+          "id": "C090-zh-CN",
+          "pairId": "C090",
+          "start": 159.376096,
+          "end": 161.236895,
+          "text": "方便后面进行复用",
+          "words": []
+        },
+        {
+          "id": "C092-zh-CN",
+          "pairId": "C092",
+          "start": 161.236895,
+          "end": 165.599109,
+          "text": "这里我就重新设计了一下提取资产图的提示词结构",
+          "words": []
+        },
+        {
+          "id": "C093-zh-CN",
+          "pairId": "C093",
+          "start": 165.709096,
+          "end": 168.600421,
+          "text": "这里大概给大家讲解一下我设计的思路",
+          "words": []
+        },
+        {
+          "id": "C094-zh-CN",
+          "pairId": "C094",
+          "start": 168.675421,
+          "end": 170.555421,
+          "text": "首先是这个人物的资产图",
+          "words": []
+        },
+        {
+          "id": "C095-zh-CN",
+          "pairId": "C095",
+          "start": 170.555421,
+          "end": 173.312921,
+          "text": "我给它设计成了四宫格的布局",
+          "words": []
+        },
+        {
+          "id": "C097-zh-CN",
+          "pairId": "C097",
+          "start": 173.756193,
+          "end": 178.286276,
+          "text": "正常大家看的比较多的可能是这种 16:9 的布局",
+          "words": []
+        },
+        {
+          "id": "C098-zh-CN",
+          "pairId": "C098",
+          "start": 178.389364,
+          "end": 180.384364,
+          "text": "但是 16:9 比例的一个问题是",
+          "words": []
+        },
+        {
+          "id": "C099-zh-CN",
+          "pairId": "C099",
+          "start": 180.511734,
+          "end": 182.75388,
+          "text": "相对一个图片的大小来说",
+          "words": []
+        },
+        {
+          "id": "C101-zh-CN",
+          "pairId": "C101",
+          "start": 182.827025,
+          "end": 184.821067,
+          "text": "里面的分辨率会更低",
+          "words": []
+        },
+        {
+          "id": "C102-zh-CN",
+          "pairId": "C102",
+          "start": 184.994135,
+          "end": 188.402101,
+          "text": "所以有效信息就会更少",
+          "words": []
+        },
+        {
+          "id": "C104-zh-CN",
+          "pairId": "C104",
+          "start": 188.473135,
+          "end": 192.928371,
+          "text": "很多空间被这种无意义的背景占据了",
+          "words": []
+        },
+        {
+          "id": "C106-zh-CN",
+          "pairId": "C106",
+          "start": 193.043622,
+          "end": 195.433761,
+          "text": "但是我这种设计的话就会非常合理",
+          "words": []
+        },
+        {
+          "id": "C108-zh-CN",
+          "pairId": "C108",
+          "start": 195.47899,
+          "end": 199.706282,
+          "text": "你能够很明显地感觉到上半部分就是人脸的一个参考",
+          "words": []
+        },
+        {
+          "id": "C109-zh-CN",
+          "pairId": "C109",
+          "start": 199.761032,
+          "end": 203.401032,
+          "text": "下半部分就是人的服装以及姿态的一个参考",
+          "words": []
+        },
+        {
+          "id": "C110-zh-CN",
+          "pairId": "C110",
+          "start": 203.527703,
+          "end": 207.747104,
+          "text": "然后这四个宫格的人物的姿势我也有对应的讲究",
+          "words": []
+        },
+        {
+          "id": "C111-zh-CN",
+          "pairId": "C111",
+          "start": 207.830546,
+          "end": 211.191712,
+          "text": "第一个宫格是一个低角度的侧写镜头",
+          "words": []
+        },
+        {
+          "id": "C112-zh-CN",
+          "pairId": "C112",
+          "start": 211.276707,
+          "end": 216.763389,
+          "text": "能够很清楚地看到这个人物的侧面和整个人物的下颌线",
+          "words": []
+        },
+        {
+          "id": "C113-zh-CN",
+          "pairId": "C113",
+          "start": 216.838389,
+          "end": 218.617309,
+          "text": "第二幅图就是人物的正面",
+          "words": []
+        },
+        {
+          "id": "C115-zh-CN",
+          "pairId": "C115",
+          "start": 218.667139,
+          "end": 223.271019,
+          "text": "能够很清楚地看见人物脸部的轮廓、五官、皮肤色彩",
+          "words": []
+        },
+        {
+          "id": "C116-zh-CN",
+          "pairId": "C116",
+          "start": 223.402492,
+          "end": 225.901956,
+          "text": "以及头发、头饰、妆容这些",
+          "words": []
+        },
+        {
+          "id": "C117-zh-CN",
+          "pairId": "C117",
+          "start": 225.976956,
+          "end": 227.336956,
+          "text": "下半部分",
+          "words": []
+        },
+        {
+          "id": "C118-zh-CN",
+          "pairId": "C118",
+          "start": 227.457721,
+          "end": 229.292721,
+          "text": "是全身的姿态和服装",
+          "words": []
+        },
+        {
+          "id": "C119-zh-CN",
+          "pairId": "C119",
+          "start": 229.384414,
+          "end": 233.829579,
+          "text": "然后我特别对下半部分人物的脸部进行了模糊处理",
+          "words": []
+        },
+        {
+          "id": "C121-zh-CN",
+          "pairId": "C121",
+          "start": 233.832601,
+          "end": 235.472601,
+          "text": "这样在做 AI 视频时",
+          "words": []
+        },
+        {
+          "id": "C122-zh-CN",
+          "pairId": "C122",
+          "start": 235.472601,
+          "end": 238.991247,
+          "text": "就不会学到错误的五官",
+          "words": []
+        },
+        {
+          "id": "C123-zh-CN",
+          "pairId": "C123",
+          "start": 239.191247,
+          "end": 243.496829,
+          "text": "而是去找正确的五官进行参考",
+          "words": []
+        },
+        {
+          "id": "C125-zh-CN",
+          "pairId": "C125",
+          "start": 243.567196,
+          "end": 245.167196,
+          "text": "关于提示词的部分",
+          "words": []
+        },
+        {
+          "id": "C126-zh-CN",
+          "pairId": "C126",
+          "start": 245.287196,
+          "end": 248.357586,
+          "text": "我进行了一个引导式的书写",
+          "words": []
+        },
+        {
+          "id": "C128-zh-CN",
+          "pairId": "C128",
+          "start": 248.485283,
+          "end": 253.285283,
+          "text": "比如说排除图片原本照射在人物脸部的光影氛围",
+          "words": []
+        },
+        {
+          "id": "C129-zh-CN",
+          "pairId": "C129",
+          "start": 253.45178,
+          "end": 255.972971,
+          "text": "消除硬光光源产生的皮肤效果",
+          "words": []
+        },
+        {
+          "id": "C130-zh-CN",
+          "pairId": "C130",
+          "start": 256.012971,
+          "end": 257.229787,
+          "text": "进行重新打光",
+          "words": []
+        },
+        {
+          "id": "C132-zh-CN",
+          "pairId": "C132",
+          "start": 257.386253,
+          "end": 259.826253,
+          "text": "类似的这种引导式指令",
+          "words": []
+        },
+        {
+          "id": "C133-zh-CN",
+          "pairId": "C133",
+          "start": 259.901253,
+          "end": 262.155315,
+          "text": "因为 GPT 2.5 生图",
+          "words": []
+        },
+        {
+          "id": "C134-zh-CN",
+          "pairId": "C134",
+          "start": 262.293998,
+          "end": 264.249904,
+          "text": "它背后是有一个思考模型的",
+          "words": []
+        },
+        {
+          "id": "C135-zh-CN",
+          "pairId": "C135",
+          "start": 264.249904,
+          "end": 266.57045,
+          "text": "是有一个 Agent 在指挥的",
+          "words": []
+        },
+        {
+          "id": "C136-zh-CN",
+          "pairId": "C136",
+          "start": 266.681549,
+          "end": 272.30182,
+          "text": "所以我们要充分调动生图模型背后的思考链路",
+          "words": []
+        },
+        {
+          "id": "C138-zh-CN",
+          "pairId": "C138",
+          "start": 272.365945,
+          "end": 277.139382,
+          "text": "引导 AI 往什么方向去思考、往什么方向去处理",
+          "words": []
+        },
+        {
+          "id": "C139-zh-CN",
+          "pairId": "C139",
+          "start": 277.214382,
+          "end": 280.128736,
+          "text": "这也是未来人与 AI 进行协作的时候",
+          "words": []
+        },
+        {
+          "id": "C140-zh-CN",
+          "pairId": "C140",
+          "start": 280.168736,
+          "end": 281.205779,
+          "text": "最重要的一个能力",
+          "words": []
+        },
+        {
+          "id": "C141-zh-CN",
+          "pairId": "C141",
+          "start": 281.205779,
+          "end": 282.763528,
+          "text": "就是指挥 AI 的能力",
+          "words": []
+        },
+        {
+          "id": "C142-zh-CN",
+          "pairId": "C142",
+          "start": 282.838528,
+          "end": 285.118528,
+          "text": "如果你不清楚一些底层逻辑的话",
+          "words": []
+        },
+        {
+          "id": "C143-zh-CN",
+          "pairId": "C143",
+          "start": 285.118528,
+          "end": 287.244807,
+          "text": "你是没办法去指挥 AI 的",
+          "words": []
+        },
+        {
+          "id": "C145-zh-CN",
+          "pairId": "C145",
+          "start": 287.244807,
+          "end": 288.824592,
+          "text": "用类似的思路",
+          "words": []
+        },
+        {
+          "id": "C146-zh-CN",
+          "pairId": "C146",
+          "start": 288.864592,
+          "end": 292.545353,
+          "text": "我也创作出了制作条形码色卡的提示词",
+          "words": []
+        },
+        {
+          "id": "C148-zh-CN",
+          "pairId": "C148",
+          "start": 292.682823,
+          "end": 295.421068,
+          "text": "以及提取场景资产的提示词",
+          "words": []
+        },
+        {
+          "id": "C149-zh-CN",
+          "pairId": "C149",
+          "start": 295.589782,
+          "end": 296.629782,
+          "text": "这也是一个四宫格",
+          "words": []
+        },
+        {
+          "id": "C150-zh-CN",
+          "pairId": "C150",
+          "start": 296.869782,
+          "end": 301.240558,
+          "text": "我也对每一个宫格的内容进行了一个详细的区分",
+          "words": []
+        },
+        {
+          "id": "C151-zh-CN",
+          "pairId": "C151",
+          "start": 301.390558,
+          "end": 302.44605,
+          "text": "这个是正视图",
+          "words": []
+        },
+        {
+          "id": "C152-zh-CN",
+          "pairId": "C152",
+          "start": 302.44605,
+          "end": 303.991954,
+          "text": "这个是侧视图",
+          "words": []
+        },
+        {
+          "id": "C153-zh-CN",
+          "pairId": "C153",
+          "start": 304.033946,
+          "end": 305.957704,
+          "text": "这个是低角度远视图",
+          "words": []
+        },
+        {
+          "id": "C154-zh-CN",
+          "pairId": "C154",
+          "start": 305.957716,
+          "end": 308.153349,
+          "text": "这个是高角度俯视图",
+          "words": []
+        },
+        {
+          "id": "C155-zh-CN",
+          "pairId": "C155",
+          "start": 308.228349,
+          "end": 310.268349,
+          "text": "这几个视图的联合",
+          "words": []
+        },
+        {
+          "id": "C156-zh-CN",
+          "pairId": "C156",
+          "start": 310.429236,
+          "end": 314.404667,
+          "text": "能够让 AI 视频参考这个场景中",
+          "words": []
+        },
+        {
+          "id": "C157-zh-CN",
+          "pairId": "C157",
+          "start": 314.404667,
+          "end": 316.559667,
+          "text": "各个方位的内容",
+          "words": []
+        },
+        {
+          "id": "C159-zh-CN",
+          "pairId": "C159",
+          "start": 317.017606,
+          "end": 319.737606,
+          "text": "也给大家准备了道具相关的提示词",
+          "words": []
+        },
+        {
+          "id": "C161-zh-CN",
+          "pairId": "C161",
+          "start": 321.77437,
+          "end": 325.678245,
+          "text": "所有提示词都已经放到了这个画布的左下角区域",
+          "words": []
+        },
+        {
+          "id": "C162-zh-CN",
+          "pairId": "C162",
+          "start": 325.802006,
+          "end": 327.964112,
+          "text": "我也往我的文档里面放了一份",
+          "words": []
+        },
+        {
+          "id": "C164-zh-CN",
+          "pairId": "C164",
+          "start": 328.083776,
+          "end": 329.104578,
+          "text": "大家可以自行获取",
+          "words": []
+        },
+        {
+          "id": "C166-zh-CN",
+          "pairId": "C166",
+          "start": 329.104578,
+          "end": 329.676723,
+          "text": "获取的方式",
+          "words": []
+        },
+        {
+          "id": "C167-zh-CN",
+          "pairId": "C167",
+          "start": 329.676723,
+          "end": 331.30087,
+          "text": "你可以在评论区里面找一下",
+          "words": []
+        },
+        {
+          "id": "C169-zh-CN",
+          "pairId": "C169",
+          "start": 331.30087,
+          "end": 333.760065,
+          "text": "我这些提示词肯定还有一些局限性",
+          "words": []
+        },
+        {
+          "id": "C170-zh-CN",
+          "pairId": "C170",
+          "start": 333.86694,
+          "end": 336.90557,
+          "text": "如果你发现还有一些问题你不能解决的",
+          "words": []
+        },
+        {
+          "id": "C171-zh-CN",
+          "pairId": "C171",
+          "start": 336.90557,
+          "end": 338.099967,
+          "text": "那么欢迎留言",
+          "words": []
+        },
+        {
+          "id": "C172-zh-CN",
+          "pairId": "C172",
+          "start": 338.14732,
+          "end": 338.871488,
+          "text": "我来解决",
+          "words": []
+        },
+        {
+          "id": "C173-zh-CN",
+          "pairId": "C173",
+          "start": 338.946488,
+          "end": 340.762904,
+          "text": "好那么本期视频到这里",
+          "words": []
+        },
+        {
+          "id": "C174-zh-CN",
+          "pairId": "C174",
+          "start": 340.762904,
+          "end": 342.396718,
+          "text": "咱们下期视频再见拜拜",
+          "words": []
+        }
+      ]
+    },
+    {
+      "id": "en",
+      "label": "English Captions",
+      "language": "en",
+      "style": {
+        "fontSize": 26,
+        "position": "manual",
+        "manualPosition": {
+          "x": 0.5,
+          "y": 0.987037062645
+        }
+      },
+      "segments": [
+        {
+          "id": "C001-en",
+          "pairId": "C001",
+          "start": 0.15,
+          "end": 1.970458,
+          "text": "This may be what you created",
+          "words": []
+        },
+        {
+          "id": "C003-en",
+          "pairId": "C003",
+          "start": 1.970458,
+          "end": 3.2575,
+          "text": "The character asset image looks greasy",
+          "words": []
+        },
+        {
+          "id": "C005-en",
+          "pairId": "C005",
+          "start": 3.341104,
+          "end": 5.339099,
+          "text": "This is the character asset image I made",
+          "words": []
+        },
+        {
+          "id": "C005A-en",
+          "pairId": "C005A",
+          "start": 5.349099,
+          "end": 5.806458,
+          "text": "Real",
+          "words": []
+        },
+        {
+          "id": "C007-en",
+          "pairId": "C007",
+          "start": 5.824995,
+          "end": 10.007312,
+          "text": "They are all character assets extracted from a single image",
+          "words": []
+        },
+        {
+          "id": "C009-en",
+          "pairId": "C009",
+          "start": 10.118282,
+          "end": 12.939166,
+          "text": "The only difference is the prompt inside",
+          "words": []
+        },
+        {
+          "id": "C013-en",
+          "pairId": "C013",
+          "start": 13.023253,
+          "end": 15.423253,
+          "text": "This prompt cost me several hundred yuan",
+          "words": []
+        },
+        {
+          "id": "C015-en",
+          "pairId": "C015",
+          "start": 15.672378,
+          "end": 18.832,
+          "text": "After all these attempts and corresponding tests",
+          "words": []
+        },
+        {
+          "id": "C016-en",
+          "pairId": "C016",
+          "start": 18.854956,
+          "end": 21.054956,
+          "text": "I arrived at a relatively stable version",
+          "words": []
+        },
+        {
+          "id": "C018-en",
+          "pairId": "C018",
+          "start": 21.219179,
+          "end": 24.292642,
+          "text": "The cause was the previous character asset design",
+          "words": []
+        },
+        {
+          "id": "C019-en",
+          "pairId": "C019",
+          "start": 24.407215,
+          "end": 26.881011,
+          "text": "When creating the character assets at that stage",
+          "words": []
+        },
+        {
+          "id": "C021-en",
+          "pairId": "C021",
+          "start": 27.180208,
+          "end": 29.408666,
+          "text": "The prompt I wrote then was very simple",
+          "words": []
+        },
+        {
+          "id": "C022-en",
+          "pairId": "C022",
+          "start": 29.408666,
+          "end": 30.592157,
+          "text": "It was a prompt like this",
+          "words": []
+        },
+        {
+          "id": "C024-en",
+          "pairId": "C024",
+          "start": 30.653902,
+          "end": 33.561266,
+          "text": "As a result the character's face looked extremely greasy",
+          "words": []
+        },
+        {
+          "id": "C026-en",
+          "pairId": "C026",
+          "start": 33.722371,
+          "end": 37.367273,
+          "text": "With my new prompt the generated character's face",
+          "words": []
+        },
+        {
+          "id": "C027-en",
+          "pairId": "C027",
+          "start": 37.407273,
+          "end": 39.954292,
+          "text": "has a much better texture",
+          "words": []
+        },
+        {
+          "id": "C028-en",
+          "pairId": "C028",
+          "start": 39.954292,
+          "end": 42.8621,
+          "text": "There are probably many similar prompts online",
+          "words": []
+        },
+        {
+          "id": "C029-en",
+          "pairId": "C029",
+          "start": 43.162163,
+          "end": 44.602163,
+          "text": "They give you a conclusion directly",
+          "words": []
+        },
+        {
+          "id": "C030-en",
+          "pairId": "C030",
+          "start": 44.677163,
+          "end": 48.312163,
+          "text": "But they won't tell you how to handle the underlying logic",
+          "words": []
+        },
+        {
+          "id": "C031-en",
+          "pairId": "C031",
+          "start": 48.387502,
+          "end": 50.187502,
+          "text": "When you change the scene or the image",
+          "words": []
+        },
+        {
+          "id": "C032-en",
+          "pairId": "C032",
+          "start": 50.235146,
+          "end": 51.78796,
+          "text": "you still won't know how if you didn't before",
+          "words": []
+        },
+        {
+          "id": "C033-en",
+          "pairId": "C033",
+          "start": 51.877996,
+          "end": 54.357996,
+          "text": "So in this episode I'll teach you step by step",
+          "words": []
+        },
+        {
+          "id": "C034-en",
+          "pairId": "C034",
+          "start": 54.432996,
+          "end": 56.472996,
+          "text": "how to solve similar problems",
+          "words": []
+        },
+        {
+          "id": "C035-en",
+          "pairId": "C035",
+          "start": 56.552996,
+          "end": 59.072996,
+          "text": "and how to think about them next time",
+          "words": []
+        },
+        {
+          "id": "C036-en",
+          "pairId": "C036",
+          "start": 59.297794,
+          "end": 60.977794,
+          "text": "The video may be a little long",
+          "words": []
+        },
+        {
+          "id": "C037-en",
+          "pairId": "C037",
+          "start": 61.012792,
+          "end": 62.107336,
+          "text": "I'll keep it as concise as possible",
+          "words": []
+        },
+        {
+          "id": "C038-en",
+          "pairId": "C038",
+          "start": 62.203143,
+          "end": 64.363143,
+          "text": "You can also skip straight to the end",
+          "words": []
+        },
+        {
+          "id": "C039-en",
+          "pairId": "C039",
+          "start": 64.438143,
+          "end": 67.033143,
+          "text": "and take the prompts I prepared for you",
+          "words": []
+        },
+        {
+          "id": "C041-en",
+          "pairId": "C041",
+          "start": 67.19975,
+          "end": 69.966313,
+          "text": "In the previous video I explained what makes a good-looking image",
+          "words": []
+        },
+        {
+          "id": "C042-en",
+          "pairId": "C042",
+          "start": 69.966313,
+          "end": 71.796479,
+          "text": "It is made up of six elements",
+          "words": []
+        },
+        {
+          "id": "C043-en",
+          "pairId": "C043",
+          "start": 71.875037,
+          "end": 74.25777,
+          "text": "The factors that affect the character's skin",
+          "words": []
+        },
+        {
+          "id": "C044-en",
+          "pairId": "C044",
+          "start": 74.25777,
+          "end": 79.601723,
+          "text": "are visual style, character design, and photographic presentation",
+          "words": []
+        },
+        {
+          "id": "C045-en",
+          "pairId": "C045",
+          "start": 79.692675,
+          "end": 82.941373,
+          "text": "Visual style concerns the image's texture",
+          "words": []
+        },
+        {
+          "id": "C046-en",
+          "pairId": "C046",
+          "start": 82.941373,
+          "end": 86.86192,
+          "text": "Character design describes the character's skin condition and texture",
+          "words": []
+        },
+        {
+          "id": "C047-en",
+          "pairId": "C047",
+          "start": 87.020779,
+          "end": 91.123431,
+          "text": "Photographic presentation determines how light is reflected on the skin",
+          "words": []
+        },
+        {
+          "id": "C048-en",
+          "pairId": "C048",
+          "start": 91.244363,
+          "end": 95.929009,
+          "text": "If you don't specifically describe the light and shadow on the skin",
+          "words": []
+        },
+        {
+          "id": "C049-en",
+          "pairId": "C049",
+          "start": 95.929009,
+          "end": 100.638812,
+          "text": "it is easy to turn the skin into a mirror-like highlight",
+          "words": []
+        },
+        {
+          "id": "C050-en",
+          "pairId": "C050",
+          "start": 100.638812,
+          "end": 101.971597,
+          "text": "so it looks very greasy",
+          "words": []
+        },
+        {
+          "id": "C051-en",
+          "pairId": "C051",
+          "start": 102.046597,
+          "end": 104.406597,
+          "text": "So what exactly is wrong with an image",
+          "words": []
+        },
+        {
+          "id": "C052-en",
+          "pairId": "C052",
+          "start": 104.492123,
+          "end": 107.340577,
+          "text": "How can we identify these problems",
+          "words": []
+        },
+        {
+          "id": "C053-en",
+          "pairId": "C053",
+          "start": 107.35679,
+          "end": 109.491041,
+          "text": "How can a beginner like us know",
+          "words": []
+        },
+        {
+          "id": "C054-en",
+          "pairId": "C054",
+          "start": 109.491041,
+          "end": 112.513853,
+          "text": "This is where the idea from the previous video comes in",
+          "words": []
+        },
+        {
+          "id": "C061-en",
+          "pairId": "C061",
+          "start": 112.623241,
+          "end": 113.863241,
+          "text": "We can take a screenshot",
+          "words": []
+        },
+        {
+          "id": "C063-en",
+          "pairId": "C063",
+          "start": 113.929946,
+          "end": 114.769946,
+          "text": "then send it to Doubao",
+          "words": []
+        },
+        {
+          "id": "C065-en",
+          "pairId": "C065",
+          "start": 114.88402,
+          "end": 116.196863,
+          "text": "and issue this instruction",
+          "words": []
+        },
+        {
+          "id": "C066-en",
+          "pairId": "C066",
+          "start": 116.271863,
+          "end": 120.031863,
+          "text": "Please explain why the character's face in this image looks so greasy",
+          "words": []
+        },
+        {
+          "id": "C067-en",
+          "pairId": "C067",
+          "start": 120.166493,
+          "end": 121.992708,
+          "text": "What elements caused it",
+          "words": []
+        },
+        {
+          "id": "C068-en",
+          "pairId": "C068",
+          "start": 121.992708,
+          "end": 124.020167,
+          "text": "Please explain it to me from the underlying logic",
+          "words": []
+        },
+        {
+          "id": "C070-en",
+          "pairId": "C070",
+          "start": 124.123717,
+          "end": 127.083717,
+          "text": "Then Doubao will give you various analyses",
+          "words": []
+        },
+        {
+          "id": "C071-en",
+          "pairId": "C071",
+          "start": 127.28389,
+          "end": 129.912098,
+          "text": "For example excessive mirror-like reflection on the cheeks",
+          "words": []
+        },
+        {
+          "id": "C072-en",
+          "pairId": "C072",
+          "start": 130.112098,
+          "end": 131.985459,
+          "text": "weakens the skin's matte texture",
+          "words": []
+        },
+        {
+          "id": "C074-en",
+          "pairId": "C074",
+          "start": 131.985459,
+          "end": 134.053646,
+          "text": "For example the hard key light is too strong",
+          "words": []
+        },
+        {
+          "id": "C075-en",
+          "pairId": "C075",
+          "start": 134.213646,
+          "end": 135.944021,
+          "text": "The key light source is too bright",
+          "words": []
+        },
+        {
+          "id": "C077-en",
+          "pairId": "C077",
+          "start": 136.087875,
+          "end": 137.6145,
+          "text": "There is not enough soft fill light",
+          "words": []
+        },
+        {
+          "id": "C079-en",
+          "pairId": "C079",
+          "start": 137.629009,
+          "end": 140.330592,
+          "text": "There is no ambient diffused light to soften the highlights",
+          "words": []
+        },
+        {
+          "id": "C081-en",
+          "pairId": "C081",
+          "start": 140.332208,
+          "end": 143.039112,
+          "text": "It will give you many analyses like these",
+          "words": []
+        },
+        {
+          "id": "C082-en",
+          "pairId": "C082",
+          "start": 143.159112,
+          "end": 146.986175,
+          "text": "Then just write prompts that address its shortcomings",
+          "words": []
+        },
+        {
+          "id": "C084-en",
+          "pairId": "C084",
+          "start": 147.243002,
+          "end": 150.819523,
+          "text": "Suppose you've written a prompt for a generated image",
+          "words": []
+        },
+        {
+          "id": "C086-en",
+          "pairId": "C086",
+          "start": 151.004242,
+          "end": 152.404242,
+          "text": "and you use Midjourney",
+          "words": []
+        },
+        {
+          "id": "C088-en",
+          "pairId": "C088",
+          "start": 152.63665,
+          "end": 155.507764,
+          "text": "to generate a very attractive image like this",
+          "words": []
+        },
+        {
+          "id": "C089-en",
+          "pairId": "C089",
+          "start": 155.52156,
+          "end": 159.376096,
+          "text": "Then you want to turn it into a character asset sheet",
+          "words": []
+        },
+        {
+          "id": "C090-en",
+          "pairId": "C090",
+          "start": 159.376096,
+          "end": 161.236895,
+          "text": "to make it easier to reuse later",
+          "words": []
+        },
+        {
+          "id": "C092-en",
+          "pairId": "C092",
+          "start": 161.236895,
+          "end": 165.599109,
+          "text": "Here I redesigned the prompt structure for extracting assets",
+          "words": []
+        },
+        {
+          "id": "C093-en",
+          "pairId": "C093",
+          "start": 165.709096,
+          "end": 168.600421,
+          "text": "Let me explain the thinking behind my design",
+          "words": []
+        },
+        {
+          "id": "C094-en",
+          "pairId": "C094",
+          "start": 168.675421,
+          "end": 170.555421,
+          "text": "First this character asset image",
+          "words": []
+        },
+        {
+          "id": "C095-en",
+          "pairId": "C095",
+          "start": 170.555421,
+          "end": 173.312921,
+          "text": "is designed as a four-panel layout",
+          "words": []
+        },
+        {
+          "id": "C097-en",
+          "pairId": "C097",
+          "start": 173.756193,
+          "end": 178.286276,
+          "text": "Normally most people use a 16:9 layout like this",
+          "words": []
+        },
+        {
+          "id": "C098-en",
+          "pairId": "C098",
+          "start": 178.389364,
+          "end": 180.384364,
+          "text": "But 16:9 has one problem",
+          "words": []
+        },
+        {
+          "id": "C099-en",
+          "pairId": "C099",
+          "start": 180.511734,
+          "end": 182.75388,
+          "text": "compared with the size of a single image",
+          "words": []
+        },
+        {
+          "id": "C101-en",
+          "pairId": "C101",
+          "start": 182.827025,
+          "end": 184.821067,
+          "text": "the resolution inside each panel is lower",
+          "words": []
+        },
+        {
+          "id": "C102-en",
+          "pairId": "C102",
+          "start": 184.994135,
+          "end": 188.402101,
+          "text": "So there is less useful information",
+          "words": []
+        },
+        {
+          "id": "C104-en",
+          "pairId": "C104",
+          "start": 188.473135,
+          "end": 192.928371,
+          "text": "A lot of space is occupied by meaningless background",
+          "words": []
+        },
+        {
+          "id": "C106-en",
+          "pairId": "C106",
+          "start": 193.043622,
+          "end": 195.433761,
+          "text": "But this design of mine makes much better use of the space",
+          "words": []
+        },
+        {
+          "id": "C108-en",
+          "pairId": "C108",
+          "start": 195.47899,
+          "end": 199.706282,
+          "text": "You can clearly see that the upper half is a facial reference",
+          "words": []
+        },
+        {
+          "id": "C109-en",
+          "pairId": "C109",
+          "start": 199.761032,
+          "end": 203.401032,
+          "text": "the lower half is a reference for clothing and pose",
+          "words": []
+        },
+        {
+          "id": "C110-en",
+          "pairId": "C110",
+          "start": 203.527703,
+          "end": 207.747104,
+          "text": "Then each pose in the four panels has its own purpose",
+          "words": []
+        },
+        {
+          "id": "C111-en",
+          "pairId": "C111",
+          "start": 207.830546,
+          "end": 211.191712,
+          "text": "The first panel is a low-angle side-profile shot",
+          "words": []
+        },
+        {
+          "id": "C112-en",
+          "pairId": "C112",
+          "start": 211.276707,
+          "end": 216.763389,
+          "text": "so you can clearly see the character's profile and jawline",
+          "words": []
+        },
+        {
+          "id": "C113-en",
+          "pairId": "C113",
+          "start": 216.838389,
+          "end": 218.617309,
+          "text": "The second image is the character's front view",
+          "words": []
+        },
+        {
+          "id": "C115-en",
+          "pairId": "C115",
+          "start": 218.667139,
+          "end": 223.271019,
+          "text": "so you can clearly see the facial contour features and skin tone",
+          "words": []
+        },
+        {
+          "id": "C116-en",
+          "pairId": "C116",
+          "start": 223.402492,
+          "end": 225.901956,
+          "text": "as well as the hair headwear and makeup",
+          "words": []
+        },
+        {
+          "id": "C117-en",
+          "pairId": "C117",
+          "start": 225.976956,
+          "end": 227.336956,
+          "text": "the lower half",
+          "words": []
+        },
+        {
+          "id": "C118-en",
+          "pairId": "C118",
+          "start": 227.457721,
+          "end": 229.292721,
+          "text": "shows the full-body pose and clothing",
+          "words": []
+        },
+        {
+          "id": "C119-en",
+          "pairId": "C119",
+          "start": 229.384414,
+          "end": 233.829579,
+          "text": "Then I specifically blurred the faces of the characters in the lower half",
+          "words": []
+        },
+        {
+          "id": "C121-en",
+          "pairId": "C121",
+          "start": 233.832601,
+          "end": 235.472601,
+          "text": "When making AI videos this way",
+          "words": []
+        },
+        {
+          "id": "C122-en",
+          "pairId": "C122",
+          "start": 235.472601,
+          "end": 238.991247,
+          "text": "it won't learn the wrong facial features",
+          "words": []
+        },
+        {
+          "id": "C123-en",
+          "pairId": "C123",
+          "start": 239.191247,
+          "end": 243.496829,
+          "text": "instead it will find the correct facial features to use as reference",
+          "words": []
+        },
+        {
+          "id": "C125-en",
+          "pairId": "C125",
+          "start": 243.567196,
+          "end": 245.167196,
+          "text": "As for the prompt",
+          "words": []
+        },
+        {
+          "id": "C126-en",
+          "pairId": "C126",
+          "start": 245.287196,
+          "end": 248.357586,
+          "text": "I wrote it as a guided instruction",
+          "words": []
+        },
+        {
+          "id": "C128-en",
+          "pairId": "C128",
+          "start": 248.485283,
+          "end": 253.285283,
+          "text": "for example exclude the original lighting and shadow atmosphere on the image",
+          "words": []
+        },
+        {
+          "id": "C129-en",
+          "pairId": "C129",
+          "start": 253.45178,
+          "end": 255.972971,
+          "text": "remove the skin effect caused by hard light",
+          "words": []
+        },
+        {
+          "id": "C130-en",
+          "pairId": "C130",
+          "start": 256.012971,
+          "end": 257.229787,
+          "text": "relight the subject",
+          "words": []
+        },
+        {
+          "id": "C132-en",
+          "pairId": "C132",
+          "start": 257.386253,
+          "end": 259.826253,
+          "text": "Instructions like this guide the model",
+          "words": []
+        },
+        {
+          "id": "C133-en",
+          "pairId": "C133",
+          "start": 259.901253,
+          "end": 262.155315,
+          "text": "Because GPT 2.5 generates images",
+          "words": []
+        },
+        {
+          "id": "C134-en",
+          "pairId": "C134",
+          "start": 262.293998,
+          "end": 264.249904,
+          "text": "there is a reasoning model behind it",
+          "words": []
+        },
+        {
+          "id": "C135-en",
+          "pairId": "C135",
+          "start": 264.249904,
+          "end": 266.57045,
+          "text": "with an Agent directing it",
+          "words": []
+        },
+        {
+          "id": "C136-en",
+          "pairId": "C136",
+          "start": 266.681549,
+          "end": 272.30182,
+          "text": "so we should fully engage the reasoning chain behind the image-generation model",
+          "words": []
+        },
+        {
+          "id": "C138-en",
+          "pairId": "C138",
+          "start": 272.365945,
+          "end": 277.139382,
+          "text": "guide AI on what direction to think in and how to process it",
+          "words": []
+        },
+        {
+          "id": "C139-en",
+          "pairId": "C139",
+          "start": 277.214382,
+          "end": 280.128736,
+          "text": "This is also the most important ability",
+          "words": []
+        },
+        {
+          "id": "C140-en",
+          "pairId": "C140",
+          "start": 280.168736,
+          "end": 281.205779,
+          "text": "when people collaborate with AI in the future",
+          "words": []
+        },
+        {
+          "id": "C141-en",
+          "pairId": "C141",
+          "start": 281.205779,
+          "end": 282.763528,
+          "text": "the ability to direct AI",
+          "words": []
+        },
+        {
+          "id": "C142-en",
+          "pairId": "C142",
+          "start": 282.838528,
+          "end": 285.118528,
+          "text": "If you don't understand some underlying logic",
+          "words": []
+        },
+        {
+          "id": "C143-en",
+          "pairId": "C143",
+          "start": 285.118528,
+          "end": 287.244807,
+          "text": "you won't be able to direct AI",
+          "words": []
+        },
+        {
+          "id": "C145-en",
+          "pairId": "C145",
+          "start": 287.244807,
+          "end": 288.824592,
+          "text": "Using a similar approach",
+          "words": []
+        },
+        {
+          "id": "C146-en",
+          "pairId": "C146",
+          "start": 288.864592,
+          "end": 292.545353,
+          "text": "I also created prompts for making barcode color cards",
+          "words": []
+        },
+        {
+          "id": "C148-en",
+          "pairId": "C148",
+          "start": 292.682823,
+          "end": 295.421068,
+          "text": "as well as prompts for extracting scene assets",
+          "words": []
+        },
+        {
+          "id": "C149-en",
+          "pairId": "C149",
+          "start": 295.589782,
+          "end": 296.629782,
+          "text": "This is also a four-panel layout",
+          "words": []
+        },
+        {
+          "id": "C150-en",
+          "pairId": "C150",
+          "start": 296.869782,
+          "end": 301.240558,
+          "text": "I also clearly separated the content of each panel",
+          "words": []
+        },
+        {
+          "id": "C151-en",
+          "pairId": "C151",
+          "start": 301.390558,
+          "end": 302.44605,
+          "text": "This is the front view",
+          "words": []
+        },
+        {
+          "id": "C152-en",
+          "pairId": "C152",
+          "start": 302.44605,
+          "end": 303.991954,
+          "text": "This is the side view",
+          "words": []
+        },
+        {
+          "id": "C153-en",
+          "pairId": "C153",
+          "start": 304.033946,
+          "end": 305.957704,
+          "text": "This is the low-angle long shot",
+          "words": []
+        },
+        {
+          "id": "C154-en",
+          "pairId": "C154",
+          "start": 305.957716,
+          "end": 308.153349,
+          "text": "This is the high-angle overhead shot",
+          "words": []
+        },
+        {
+          "id": "C155-en",
+          "pairId": "C155",
+          "start": 308.228349,
+          "end": 310.268349,
+          "text": "Together these views",
+          "words": []
+        },
+        {
+          "id": "C156-en",
+          "pairId": "C156",
+          "start": 310.429236,
+          "end": 314.404667,
+          "text": "allow the AI video to reference",
+          "words": []
+        },
+        {
+          "id": "C157-en",
+          "pairId": "C157",
+          "start": 314.404667,
+          "end": 316.559667,
+          "text": "content from different directions in the scene",
+          "words": []
+        },
+        {
+          "id": "C159-en",
+          "pairId": "C159",
+          "start": 317.017606,
+          "end": 319.737606,
+          "text": "I also prepared prompts for props",
+          "words": []
+        },
+        {
+          "id": "C161-en",
+          "pairId": "C161",
+          "start": 321.77437,
+          "end": 325.678245,
+          "text": "All the prompts have been placed in the lower-left area of this canvas",
+          "words": []
+        },
+        {
+          "id": "C162-en",
+          "pairId": "C162",
+          "start": 325.802006,
+          "end": 327.964112,
+          "text": "I also put a copy in my document",
+          "words": []
+        },
+        {
+          "id": "C164-en",
+          "pairId": "C164",
+          "start": 328.083776,
+          "end": 329.104578,
+          "text": "You can get them yourself",
+          "words": []
+        },
+        {
+          "id": "C166-en",
+          "pairId": "C166",
+          "start": 329.104578,
+          "end": 329.676723,
+          "text": "How to get them",
+          "words": []
+        },
+        {
+          "id": "C167-en",
+          "pairId": "C167",
+          "start": 329.676723,
+          "end": 331.30087,
+          "text": "You can look in the comments",
+          "words": []
+        },
+        {
+          "id": "C169-en",
+          "pairId": "C169",
+          "start": 331.30087,
+          "end": 333.760065,
+          "text": "These prompts certainly still have limitations",
+          "words": []
+        },
+        {
+          "id": "C170-en",
+          "pairId": "C170",
+          "start": 333.86694,
+          "end": 336.90557,
+          "text": "If you find problems you can't solve",
+          "words": []
+        },
+        {
+          "id": "C171-en",
+          "pairId": "C171",
+          "start": 336.90557,
+          "end": 338.099967,
+          "text": "feel free to leave a comment",
+          "words": []
+        },
+        {
+          "id": "C172-en",
+          "pairId": "C172",
+          "start": 338.14732,
+          "end": 338.871488,
+          "text": "I'll solve them",
+          "words": []
+        },
+        {
+          "id": "C173-en",
+          "pairId": "C173",
+          "start": 338.946488,
+          "end": 340.762904,
+          "text": "Alright that's all for this episode",
+          "words": []
+        },
+        {
+          "id": "C174-en",
+          "pairId": "C174",
+          "start": 340.762904,
+          "end": 342.396718,
+          "text": "See you next time bye-bye",
+          "words": []
+        }
+      ]
+    }
+  ]
+}

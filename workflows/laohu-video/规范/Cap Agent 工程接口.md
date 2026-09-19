@@ -58,6 +58,7 @@ Agent 默认只能修改作品层数据：剪辑 EDL、轨道片段、字幕正�
 | 用户预设 | `cap presets list / inspect / save / captions-style` | 已实现 | store revision + 文件锁 + 原子替换；新建和保存都使用白名单投影；外部写入的运行中刷新尚未完成 |
 | Agent 制作偏好 | `cap presets agent-profile` | 已实现 | 与可见预设同条存储；类型化字幕/剪辑/Remotion 偏好；不直接写入工程时间轴 |
 | 预设应用 | `cap project preset apply` | 已实现 | project revision + 工程锁；不替换轨道、字幕内容和素材路径 |
+| 原生高亮与文字 | `scripts/cap-project-native-tracks.py` | 窄事务适配 | 工程锁、revision、字段白名单、原子写；不接收整份配置 |
 | 全配置替换 | `cap project config set` | 仅调试/迁移 | 普通 Agent 禁用，遗漏字段会重置 |
 
 字幕样式对用户和新 Agent 只暴露一套 `shadow*` 参数。未开启描边时，阴影从字形轮廓向外生长；开启描边时，同一阴影自动从“字形＋描边”的外缘继续扩展，颜色、透明度、模糊、距离和角度均沿用 `shadow*`。旧工程和旧调用中的 `outlineShadow*` 只作为兼容输入；读取或下次修改时必须将其合并到 `shadow*` 并关闭旧开关，不得再在界面或预设中显示两组彼此割裂的阴影。描边采样与效果边界属于渲染器公共能力，不能用某个用户预设中的数值替代；命名预设只保存用户选择的开关和参数。
@@ -79,7 +80,7 @@ Agent 默认只能修改作品层数据：剪辑 EDL、轨道片段、字幕正�
 - `timeline.captionSegments` 保存冻结 EDL 后的 T2 展示字幕，`captions.displayMode` 固定为 `materialized`，避免编辑器再次用源 ASR 自动投影并覆盖人工确认结果。
 - 中文字幕轨固定 `trackId=zh-CN`、`language=zh-CN`、`trackLabel=中文字幕`；英文轨固定 `trackId=en`、`language=en`、`trackLabel=English Captions`。
 - 同一屏的一中一英共享 `pairId`、`start` 和 `end`。任何一侧缺失、跨轨错位或重复 ID 都拒绝写入。
-- 老胡预设当前轨级布局为中文 `64px / y=0.92`、英文 `34px / y=0.972`；每段以 `fontSizeOverride` 和 `manualPositionOverride` 保存，因此两轨可分别编辑，公共描边、阴影、字体族等仍由同一字幕样式控制。
+- 两轨字号与位置从当前命名预设的 `trackStyles / trackPositions` 一起读取，不在接口文档固化个人数值，不以英文固定比例补猜缺项。优先保存轨级配置；只有旧版本确实不支持时才使用逐条覆盖并记录限制。公共描边、阴影、字体族由同一字幕样式控制；实际字形间距按最新用户确认的画面验收。
 - 中文字幕物化前必须规范化展示文本：只删除相邻汉字之间误带入的 ASCII 空格，不压缩英文单词空格，不改源 ASR 主稿。字体、字距和字幕文本空格是三种不同来源，不能把文本中的真实空格误诊为字体字距失效。
 - EDL 改变后必须重新生成并再次调用 `materialize`，旧 T2 展示轨不得继续沿用。
 

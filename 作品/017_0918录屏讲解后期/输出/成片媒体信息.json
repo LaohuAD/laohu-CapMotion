@@ -1,0 +1,30 @@
+{
+  "programs": [],
+  "stream_groups": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "duration": "521.800000"
+    },
+    {
+      "codec_name": "aac",
+      "codec_type": "audio",
+      "sample_rate": "48000",
+      "channels": 2,
+      "r_frame_rate": "0/0",
+      "duration": "521.790000"
+    }
+  ],
+  "format": {
+    "duration": "521.800000",
+    "size": "648229915"
+  },
+  "currentDeliveryApplicability": {
+    "status": "STALE_PREVIOUS_DELIVERY",
+    "reason": "2026-09-20 EDL已重新剪辑；用户要求自行检查，本轮未重新执行此验收"
+  }
+}

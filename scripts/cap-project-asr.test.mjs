@@ -116,7 +116,7 @@ test("builds the first-pass microphone index in recording order, not filename or
 		index.timeline.map((segment) => segment.recordingSegment),
 		[1, 0],
 	);
-	assert.equal(index.segments[0].sourceTimelineOffsetSeconds, 0.2);
+	assert.equal(index.segments[0].sourceTimelineOffsetSeconds, -0.2);
 	assert.equal(index.segments[1].sourceTimelineOffsetSeconds, 0);
 	assert.deepEqual(
 		index.segments.map((segment) => segment.globalOffsetSeconds),
@@ -186,4 +186,13 @@ test("merges per-segment ASR with display-based offsets and preserves source tim
 			{ start: 5.25, end: 6.25, text: "第二段" },
 		],
 	);
+});
+
+// Work017: microphone began before display. Preserve raw words but align them
+// to the timeline used by Cap's positive microphone seek offset.
+test("early microphone timestamps invert native seek offset", () => {
+ const merged = mergeSegmentTranscripts({projectPath:"/external/work017.cap",projectRevision:4,segments:[{recordingSegment:0,globalOffsetSeconds:0,sourceTimelineOffsetSeconds:-0.192734541}]}, [{rawJson:"raw.json",payload:{result:{utterances:[{start_time:32479.833,end_time:32938.333,text:"真实",words:[{start_time:32479.833,end_time:32938.333,text:"真实"}]}]}}}]);
+ assert.equal(merged.raw.utterances[0].globalStartMs,32287);
+ assert.equal(merged.raw.utterances[0].sourceStartMs,32479.833);
+ assert.equal(merged.captionImport.segments[0].words[0].start,32.287);
 });

@@ -1,0 +1,2306 @@
+{
+  "schema": "laohu.semantic-edit-review-draft/1",
+  "id": "017-semantic-review-draft",
+  "title": "作品017全片语义剪辑审稿初稿",
+  "revision": 1,
+  "status": "DRAFT_NOT_APPROVED",
+  "scope": {
+    "task": "语义剪辑审稿与字幕分组",
+    "mediaEdit": false,
+    "sourceBasis": "连续口播语义 + 原始 ASR 词级时间；未进行波形/画面判定",
+    "approval": "本阶段无整体批准；不得据此执行媒体剪辑、动画或渲染"
+  },
+  "source": {
+    "rawJsonPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/cap-asr.raw.json",
+    "srtPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/cap-asr.srt",
+    "rawSchema": "laohu.cap-asr-transcript/1",
+    "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap",
+    "projectRevision": 4,
+    "timeBasis": "raw-recording-display-timeline",
+    "recordingSegmentCount": 1,
+    "utteranceCount": 148,
+    "sourceStartMs": 15093,
+    "sourceEndMs": 1598933,
+    "wordRefConvention": "utteranceId is 1-based; wordStart and wordEndExclusive are 0-based half-open indices into raw JSON utterances[].words",
+    "modelNamePolicy": "Midjourney, GPT 2.5, Agent and 16:9 are kept as atomic candidates; unresolved recognition terms remain QUESTION"
+  },
+  "groups": [
+    {
+      "id": "G001",
+      "utteranceIds": [
+        1
+      ],
+      "sourceRangeMs": {
+        "start": 15093,
+        "end": 17573
+      },
+      "displayText": "这可能是你做的。",
+      "originalText": "这可能是你做的。",
+      "decision": "KEEP",
+      "reason": "开场先保留示例判断，建立观众正在看的对象。",
+      "wordRefs": [
+        {
+          "utteranceId": 1,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ]
+    },
+    {
+      "id": "G002",
+      "utteranceIds": [
+        2
+      ],
+      "sourceRangeMs": {
+        "start": 20113,
+        "end": 22113
+      },
+      "displayText": "人物资产图油腻。",
+      "originalText": "人物资产图油腻",
+      "decision": "KEEP",
+      "reason": "核心问题钩子，明确本片要解决的视觉问题。",
+      "wordRefs": [
+        {
+          "utteranceId": 2,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ]
+    },
+    {
+      "id": "G003",
+      "utteranceIds": [
+        3
+      ],
+      "sourceRangeMs": {
+        "start": 28963,
+        "end": 31003
+      },
+      "displayText": "这是我做的人物资产图。",
+      "originalText": "这是我做的人物资产图",
+      "decision": "KEEP",
+      "reason": "交代示例画面与讲解对象。",
+      "wordRefs": [
+        {
+          "utteranceId": 3,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ]
+    },
+    {
+      "id": "G004",
+      "utteranceIds": [
+        4,
+        5
+      ],
+      "sourceRangeMs": {
+        "start": 77893,
+        "end": 85283
+      },
+      "displayText": "他们都是从一张图片里面提取出来的一个人物资产。",
+      "originalText": "他们都是从 / 一张图片里面提取出来的一个人物的资产。",
+      "decision": "KEEP",
+      "reason": "说明人物资产图的来源和用途；跨条目补齐主语与宾语。",
+      "wordRefs": [
+        {
+          "utteranceId": 4,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 5,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        }
+      ]
+    },
+    {
+      "id": "G005",
+      "utteranceIds": [
+        6
+      ],
+      "sourceRangeMs": {
+        "start": 94433,
+        "end": 97513
+      },
+      "displayText": "区别不同的只是里面的提示词而已。",
+      "originalText": "区别不同的只是里面的提示词而已。",
+      "decision": "KEEP",
+      "reason": "给出示例之间的关键差异。",
+      "wordRefs": [
+        {
+          "utteranceId": 6,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ]
+    },
+    {
+      "id": "G006",
+      "utteranceIds": [
+        7
+      ],
+      "sourceRangeMs": {
+        "start": 105483,
+        "end": 108283
+      },
+      "displayText": "这个题不会。这个题是什么？",
+      "originalText": "这个题不会。这个题是什么？",
+      "decision": "QUESTION",
+      "reason": "语义与前后文不闭合，疑似口误或 ASR 错词；保留原声定位，需试听/画面确认后再决定。",
+      "wordRefs": [
+        {
+          "utteranceId": 7,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ]
+    },
+    {
+      "id": "G007",
+      "utteranceIds": [
+        8,
+        9
+      ],
+      "sourceRangeMs": {
+        "start": 140513,
+        "end": 146063
+      },
+      "displayText": "这个提示词是我花了几百块钱，做了这么多尝试。",
+      "originalText": "这个提示词是我花了几百块钱 / 做了这么多尝试",
+      "decision": "KEEP",
+      "reason": "交代提示词经过投入和多次尝试，属于可信度信息。",
+      "wordRefs": [
+        {
+          "utteranceId": 8,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        },
+        {
+          "utteranceId": 9,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ]
+    },
+    {
+      "id": "G008",
+      "utteranceIds": [
+        10,
+        11
+      ],
+      "sourceRangeMs": {
+        "start": 149163,
+        "end": 156323
+      },
+      "displayText": "以及对应的测试之后，得出一个比较稳定的版本。",
+      "originalText": "做了这么多尝试以及对应的测试之后 / 得出来的一个比较稳定的一个版本。",
+      "decision": "KEEP",
+      "reason": "u10 前半重复上一条“做了这么多尝试”，只保留新增的“对应测试之后”及完整结论。",
+      "wordRefs": [
+        {
+          "utteranceId": 10,
+          "wordStart": 7,
+          "wordEndExclusive": 16
+        },
+        {
+          "utteranceId": 11,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "excludedWordRefs": [
+        {
+          "utteranceId": 10,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ]
+    },
+    {
+      "id": "G009",
+      "utteranceIds": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "sourceRangeMs": {
+        "start": 165513,
+        "end": 179323
+      },
+      "displayText": "起因是上一次的人物资产设计，在制作人物资产的这个环节。",
+      "originalText": "起因是上一次的 / 人物资产设计 / 在这个环节 / 制作人物资产的时候",
+      "decision": "KEEP",
+      "reason": "交代问题来源和回溯位置，不能只保留后面的失败结论。",
+      "wordRefs": [
+        {
+          "utteranceId": 12,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        },
+        {
+          "utteranceId": 13,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 14,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 15,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ]
+    },
+    {
+      "id": "G010",
+      "utteranceIds": [
+        16
+      ],
+      "sourceRangeMs": {
+        "start": 181333,
+        "end": 181773
+      },
+      "displayText": null,
+      "originalText": "当时",
+      "decision": "DELETE",
+      "reason": "独立“当时”是组织语言的重复，紧邻下一条已完整说出“当时写的提示词”。",
+      "wordRefs": [],
+      "deletedWordRefs": [
+        {
+          "utteranceId": 16,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        }
+      ]
+    },
+    {
+      "id": "G011",
+      "utteranceIds": [
+        17,
+        18
+      ],
+      "sourceRangeMs": {
+        "start": 183293,
+        "end": 189662
+      },
+      "displayText": "当时写的提示词非常简单，就是这样的一个提示词。",
+      "originalText": "当时写的提示词非常的简单。 / 就是这样的一个提示词。",
+      "decision": "KEEP",
+      "reason": "保留失败版本的原因与画面指认。",
+      "wordRefs": [
+        {
+          "utteranceId": 17,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        },
+        {
+          "utteranceId": 18,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ]
+    },
+    {
+      "id": "G012",
+      "utteranceIds": [
+        19,
+        20
+      ],
+      "sourceRangeMs": {
+        "start": 191923,
+        "end": 200473
+      },
+      "displayText": "结果导致人物的脸显得非常的油啊。",
+      "originalText": "结果导致 / 人物的脸显得非常的油啊。",
+      "decision": "KEEP",
+      "reason": "保留失败结果和问题表述；语气词可在后续字幕顺句中轻量处理。",
+      "wordRefs": [
+        {
+          "utteranceId": 19,
+          "wordStart": 0,
+          "wordEndExclusive": 4
+        },
+        {
+          "utteranceId": 20,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ]
+    },
+    {
+      "id": "G013",
+      "utteranceIds": [
+        21,
+        22,
+        23
+      ],
+      "sourceRangeMs": {
+        "start": 202813,
+        "end": 218943
+      },
+      "displayText": "然后现在用我的新提示词做出来的人物脸可以看，人物质感是非常好的。",
+      "originalText": "然后 / 现在用我的这个新的提示词，做出来的人物的脸可以看。 / 他的人物质感是非常好的。",
+      "decision": "KEEP",
+      "reason": "保留前后版本对比；“然后”作为承接可在展示稿中弱化但不删音频。",
+      "wordRefs": [
+        {
+          "utteranceId": 21,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        },
+        {
+          "utteranceId": 22,
+          "wordStart": 0,
+          "wordEndExclusive": 23
+        },
+        {
+          "utteranceId": 23,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ]
+    },
+    {
+      "id": "G014",
+      "utteranceIds": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "sourceRangeMs": {
+        "start": 236693,
+        "end": 254203
+      },
+      "displayText": "网上估计也有很多类似的提示词，他们会直接给你一个结论，但是不会告诉你怎么处理这个东西的底层逻辑。",
+      "originalText": "网上估计也有很多类似的一些 / 提词词 / 他们会直接给你一个结论。 / 但是不会告诉你 / 怎么处理这个东西的底层逻辑",
+      "decision": "KEEP",
+      "reason": "保留对常见教程缺口的批评和本片差异；上下文唯一合理术语将“提词词”顺为“提示词”。",
+      "wordRefs": [
+        {
+          "utteranceId": 24,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        },
+        {
+          "utteranceId": 25,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        },
+        {
+          "utteranceId": 26,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        },
+        {
+          "utteranceId": 27,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        },
+        {
+          "utteranceId": 28,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        }
+      ]
+    },
+    {
+      "id": "G015",
+      "utteranceIds": [
+        29
+      ],
+      "sourceRangeMs": {
+        "start": 255533,
+        "end": 259093
+      },
+      "displayText": "当你换个场景换个画面，该不会的还是不会。",
+      "originalText": "当你换个场景换个画面你该不会的还是不会。",
+      "decision": "KEEP",
+      "reason": "主张的适用边界：只给结论不能迁移到新场景。",
+      "wordRefs": [
+        {
+          "utteranceId": 29,
+          "wordStart": 0,
+          "wordEndExclusive": 19
+        }
+      ]
+    },
+    {
+      "id": "G016",
+      "utteranceIds": [
+        30,
+        31
+      ],
+      "sourceRangeMs": {
+        "start": 263903,
+        "end": 272283
+      },
+      "displayText": "所以这一期视频我会手把手教你，如何解决类似的问题，下一次遇到这种问题应该如何去思考。",
+      "originalText": "所以这一期视频我会教你，手把手。 / 如何解决类似的问题下一次遇到这种问题应该如何去思考",
+      "decision": "KEEP",
+      "reason": "本片观看承诺和方法目标，必须保留完整句尾。",
+      "wordRefs": [
+        {
+          "utteranceId": 30,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        },
+        {
+          "utteranceId": 31,
+          "wordStart": 0,
+          "wordEndExclusive": 25
+        }
+      ]
+    },
+    {
+      "id": "G017",
+      "utteranceIds": [
+        32,
+        33,
+        34
+      ],
+      "sourceRangeMs": {
+        "start": 296403,
+        "end": 308583
+      },
+      "displayText": "当然你也可以，视频可能稍微有点长，我会尽量压缩。",
+      "originalText": "当然你也可以 / 视频可能稍微有点长 / 我会尽量压缩。",
+      "decision": "KEEP",
+      "reason": "保留对观看成本的预期管理；不是独立知识但影响观看路径。",
+      "wordRefs": [
+        {
+          "utteranceId": 32,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 33,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        },
+        {
+          "utteranceId": 34,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ]
+    },
+    {
+      "id": "G018",
+      "utteranceIds": [
+        35,
+        36,
+        37
+      ],
+      "sourceRangeMs": {
+        "start": 312053,
+        "end": 321383
+      },
+      "displayText": "你也可以直接滑到视频的末尾，直接拿我给大家准备好的提示词。",
+      "originalText": "你也可以直接滑到视频的末尾。 / 直接拿我给大家准备好的。 / 提词器",
+      "decision": "QUESTION",
+      "reason": "“提词器”与后文反复出现的“提示词”冲突，疑似 ASR 错词；需确认原声后再确定字幕/剪辑。",
+      "wordRefs": [
+        {
+          "utteranceId": 35,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        },
+        {
+          "utteranceId": 36,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        },
+        {
+          "utteranceId": 37,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        }
+      ]
+    },
+    {
+      "id": "G019",
+      "utteranceIds": [
+        38
+      ],
+      "sourceRangeMs": {
+        "start": 330753,
+        "end": 335513
+      },
+      "displayText": "上期视频给大家讲了一张好看的图片，是由 6 个元素构成的。",
+      "originalText": "上一期视频给大家讲了一张好看的图片是由6个元素构成的。",
+      "decision": "KEEP",
+      "reason": "承接前期课程框架，为后面的三项因素铺垫。",
+      "wordRefs": [
+        {
+          "utteranceId": 38,
+          "wordStart": 0,
+          "wordEndExclusive": 26
+        }
+      ]
+    },
+    {
+      "id": "G020",
+      "utteranceIds": [
+        39,
+        40
+      ],
+      "sourceRangeMs": {
+        "start": 337073,
+        "end": 349273
+      },
+      "displayText": "影响人物皮肤状态的，就是视觉风格、人物造型、场景以及摄影呈现这三个要素。",
+      "originalText": "提升影响人物皮肤状态的 / 就是这视觉风格、人物造型以及场以及摄影呈现这三个要素",
+      "decision": "QUESTION",
+      "reason": "u39“提升影响”疑似识别异常，且 u40 的枚举与“这三个要素”数量可能不一致；不静默改成三项或四项。",
+      "wordRefs": [
+        {
+          "utteranceId": 39,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        },
+        {
+          "utteranceId": 40,
+          "wordStart": 0,
+          "wordEndExclusive": 25
+        }
+      ]
+    },
+    {
+      "id": "G021",
+      "utteranceIds": [
+        41,
+        42
+      ],
+      "sourceRangeMs": {
+        "start": 362453,
+        "end": 374713
+      },
+      "displayText": "视觉风格关乎画面的质感，人物造型描述了人物皮肤的状态和纹理。",
+      "originalText": "视觉风格关乎着这个图片的画面的质感，人物造型呢 / 描述了这个人物的皮肤的状态纹理",
+      "decision": "KEEP",
+      "reason": "把两个因素的职责连成完整意群；“状态纹理”仅作书面顺句为“状态和纹理”。",
+      "wordRefs": [
+        {
+          "utteranceId": 41,
+          "wordStart": 0,
+          "wordEndExclusive": 22
+        },
+        {
+          "utteranceId": 42,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ]
+    },
+    {
+      "id": "G022",
+      "utteranceIds": [
+        43
+      ],
+      "sourceRangeMs": {
+        "start": 378743,
+        "end": 383783
+      },
+      "displayText": "摄影呈现决定了皮肤反映出来的光线。",
+      "originalText": "摄影呈现决定了这个皮肤反映出来的光线。",
+      "decision": "KEEP",
+      "reason": "保留第三个因素的作用。",
+      "wordRefs": [
+        {
+          "utteranceId": 43,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        }
+      ]
+    },
+    {
+      "id": "G023",
+      "utteranceIds": [
+        44,
+        45,
+        46
+      ],
+      "sourceRangeMs": {
+        "start": 398453,
+        "end": 421613
+      },
+      "displayText": "如果没有特别描述皮肤的光影，很容易把皮肤做成一个镜面高光的状态，所以就会显得很油腻。",
+      "originalText": "比如说，如果你没有特别的描述皮肤的这个光影的话。 / 很容易把皮肤 / 做成一个镜面高光的一个状态，所以就会显得很油腻。",
+      "decision": "KEEP",
+      "reason": "保留从缺少光影描述到油腻结果的因果链。",
+      "wordRefs": [
+        {
+          "utteranceId": 44,
+          "wordStart": 0,
+          "wordEndExclusive": 22
+        },
+        {
+          "utteranceId": 45,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 46,
+          "wordStart": 0,
+          "wordEndExclusive": 22
+        }
+      ]
+    },
+    {
+      "id": "G024",
+      "utteranceIds": [
+        47
+      ],
+      "sourceRangeMs": {
+        "start": 430993,
+        "end": 434433
+      },
+      "displayText": "那么一张图片到底有什么样的问题？",
+      "originalText": "那么一个图片到底有什么样的问题？这些问题",
+      "decision": "KEEP",
+      "reason": "保留问题入口；u47 尾部“这些问题”与后续问句重复，列为微删而不是整条删除。",
+      "wordRefs": [
+        {
+          "utteranceId": 47,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "excludedWordRefs": [
+        {
+          "utteranceId": 47,
+          "wordStart": 15,
+          "wordEndExclusive": 19
+        }
+      ]
+    },
+    {
+      "id": "G025",
+      "utteranceIds": [
+        48
+      ],
+      "sourceRangeMs": {
+        "start": 435913,
+        "end": 437793
+      },
+      "displayText": null,
+      "originalText": "我们怎么能够发现呢？",
+      "decision": "DELETE",
+      "reason": "与 u49 的“小白怎么能够知道”重复，后一句更完整，删除独立重复问句。",
+      "wordRefs": [],
+      "deletedWordRefs": [
+        {
+          "utteranceId": 48,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ]
+    },
+    {
+      "id": "G026",
+      "utteranceIds": [
+        49,
+        50,
+        51,
+        52
+      ],
+      "sourceRangeMs": {
+        "start": 438033,
+        "end": 452573
+      },
+      "displayText": "我们作为一个小白怎么能够知道呢？这就要用到上一次视频给大家的一个思路：把图片丢给豆包，然后直接向豆包提问。",
+      "originalText": "我们作为一个小白怎么能够知道呢？ / 这就要用到我们上一次 / 视频给大家一个思路 / 我们可以将我们的图片丢给我们的豆包，然后直接向豆包提问。",
+      "decision": "KEEP",
+      "reason": "保留从小白困惑到可执行方法的完整过渡。",
+      "wordRefs": [
+        {
+          "utteranceId": 49,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        },
+        {
+          "utteranceId": 50,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        },
+        {
+          "utteranceId": 51,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        },
+        {
+          "utteranceId": 52,
+          "wordStart": 0,
+          "wordEndExclusive": 26
+        }
+      ]
+    },
+    {
+      "id": "G027",
+      "utteranceIds": [
+        53,
+        54,
+        55
+      ],
+      "sourceRangeMs": {
+        "start": 455043,
+        "end": 461963
+      },
+      "displayText": "为什么这个图片显得这么油腻？到底有哪些元素造成的？从底层逻辑给我拆解一下。",
+      "originalText": "为什么这个图片显得这么油腻？ / 到底有哪些元素构成的？ / 从底层逻辑给我拆解一下。",
+      "decision": "KEEP",
+      "reason": "这是给豆包的核心提问，三个问句共同构成任务要求。",
+      "wordRefs": [
+        {
+          "utteranceId": 53,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        },
+        {
+          "utteranceId": 54,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        },
+        {
+          "utteranceId": 55,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ]
+    },
+    {
+      "id": "G028",
+      "utteranceIds": [
+        56,
+        57,
+        58
+      ],
+      "sourceRangeMs": {
+        "start": 532553,
+        "end": 543873
+      },
+      "displayText": "我们可以截一张图，然后丢给豆包，并且发出这个指令。",
+      "originalText": "我们可以截一张图。 / 然后丢给豆包。 / 并且发出这个指令",
+      "decision": "KEEP",
+      "reason": "保留操作顺序和指令进入点，便于画面同步。",
+      "wordRefs": [
+        {
+          "utteranceId": 56,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        },
+        {
+          "utteranceId": 57,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 58,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ]
+    },
+    {
+      "id": "G029",
+      "utteranceIds": [
+        59,
+        60,
+        61
+      ],
+      "sourceRangeMs": {
+        "start": 545733,
+        "end": 556313
+      },
+      "displayText": "请解释一下这张图上的人物的脸为什么这么油腻？有哪些元素造成的？请从底层逻辑给我解释一下。",
+      "originalText": "请解释一下这张图上的人物的脸为什么这么油腻？ / 有哪些元素造成的？ / 请从底层逻辑给我解释一下。",
+      "decision": "KEEP",
+      "reason": "保留可直接复用的完整指令，不把后半句误删为重复。",
+      "wordRefs": [
+        {
+          "utteranceId": 59,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        },
+        {
+          "utteranceId": 60,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        },
+        {
+          "utteranceId": 61,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        }
+      ]
+    },
+    {
+      "id": "G030",
+      "utteranceIds": [
+        62,
+        63,
+        64
+      ],
+      "sourceRangeMs": {
+        "start": 638173,
+        "end": 666583
+      },
+      "displayText": "然后豆包就会给你很多的一些分析，比如说脸颊有过度的镜面反射，削弱了皮肤的哑光质感。",
+      "originalText": "然后豆包就会给你很多的一些分析。 / 比如说 / 脸颊有过度的镜面反射削弱了皮肤的哑光质感",
+      "decision": "KEEP",
+      "reason": "保留分析输出的入口和第一条具体证据。",
+      "wordRefs": [
+        {
+          "utteranceId": 62,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        },
+        {
+          "utteranceId": 63,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        },
+        {
+          "utteranceId": 64,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ]
+    },
+    {
+      "id": "G031",
+      "utteranceIds": [
+        65,
+        66,
+        67,
+        68
+      ],
+      "sourceRangeMs": {
+        "start": 673203,
+        "end": 689823
+      },
+      "displayText": "又比如说硬主光过强，主光源亮度太高，缺少柔和补光，没有环境漫反射光柔化高光。",
+      "originalText": "又比如说硬主光过强，主光源亮度太高。 / 缺少柔和补光 / 没有环境漫 / 色光柔化高光",
+      "decision": "QUESTION",
+      "reason": "u67“没有环境漫”与 u68“色光柔化高光”无法仅凭 ASR 确认完整术语；候选按上下文拼接，但需试听/画面确认。",
+      "wordRefs": [
+        {
+          "utteranceId": 65,
+          "wordStart": 0,
+          "wordEndExclusive": 16
+        },
+        {
+          "utteranceId": 66,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 67,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 68,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ]
+    },
+    {
+      "id": "G032",
+      "utteranceIds": [
+        69,
+        70
+      ],
+      "sourceRangeMs": {
+        "start": 694993,
+        "end": 702353
+      },
+      "displayText": "就会给出很多这样的分析，那你就针对它的缺点去写对应的提示词就行了。",
+      "originalText": "就会给出来这样很多的一些分析。 / 那你就针对它的缺点去写对应的提示词就行了。",
+      "decision": "KEEP",
+      "reason": "从分析回扣到提示词改写方法，保留行动结论。",
+      "wordRefs": [
+        {
+          "utteranceId": 69,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        },
+        {
+          "utteranceId": 70,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ]
+    },
+    {
+      "id": "G033",
+      "utteranceIds": [
+        71,
+        72
+      ],
+      "sourceRangeMs": {
+        "start": 711033,
+        "end": 716203
+      },
+      "displayText": "假设现在你写好了一个生图片的提示词。",
+      "originalText": "假设现在你 / 写好了一个生图片的一个提示词。",
+      "decision": "KEEP",
+      "reason": "进入下一步案例，保留假设前提。",
+      "wordRefs": [
+        {
+          "utteranceId": 71,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 72,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        }
+      ]
+    },
+    {
+      "id": "G034",
+      "utteranceIds": [
+        73,
+        74
+      ],
+      "sourceRangeMs": {
+        "start": 728403,
+        "end": 734493
+      },
+      "displayText": "并请你使用 Midjourney 去生成这样一张非常好看的图片。",
+      "originalText": "并请你使用 Midjourney / 去生成出来了这样一张非常好看的图片。",
+      "decision": "KEEP",
+      "reason": "保留工具名和生成结果；Midjourney 作为不可拆原子。",
+      "wordRefs": [
+        {
+          "utteranceId": 73,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        },
+        {
+          "utteranceId": 74,
+          "wordStart": 0,
+          "wordEndExclusive": 17
+        }
+      ]
+    },
+    {
+      "id": "G035",
+      "utteranceIds": [
+        75,
+        76
+      ],
+      "sourceRangeMs": {
+        "start": 740243,
+        "end": 747723
+      },
+      "displayText": "然后你就想把它制作成一张人物资产图，方便后面进行复用。",
+      "originalText": "然后你就想把他给 / 制作成一张人物的资产图，可以方便后面进行复用。",
+      "decision": "KEEP",
+      "reason": "说明从单张生图到资产图的动机和用途。",
+      "wordRefs": [
+        {
+          "utteranceId": 75,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        },
+        {
+          "utteranceId": 76,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        }
+      ]
+    },
+    {
+      "id": "G036",
+      "utteranceIds": [
+        77
+      ],
+      "sourceRangeMs": {
+        "start": 766323,
+        "end": 771443
+      },
+      "displayText": "这里我就重新设计了一下提取资产图的提示词结构。",
+      "originalText": "这里我就重新设计了一下这个提取资产图的一个提示词的结构",
+      "decision": "KEEP",
+      "reason": "进入本片原创结构设计，不能只留后面的四宫格结论。",
+      "wordRefs": [
+        {
+          "utteranceId": 77,
+          "wordStart": 0,
+          "wordEndExclusive": 27
+        }
+      ]
+    },
+    {
+      "id": "G037",
+      "utteranceIds": [
+        78
+      ],
+      "sourceRangeMs": {
+        "start": 774523,
+        "end": 781083
+      },
+      "displayText": "这里大概给大家讲解一下我设计的思路。",
+      "originalText": "这里大概给他，大，这里大家，这里大概给大家讲解一下我设计的思路。",
+      "decision": "KEEP",
+      "reason": "删除连续自我修正，只保留 u78 最后一次完整表达。",
+      "wordRefs": [
+        {
+          "utteranceId": 78,
+          "wordStart": 11,
+          "wordEndExclusive": 28
+        }
+      ],
+      "excludedWordRefs": [
+        {
+          "utteranceId": 78,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ]
+    },
+    {
+      "id": "G038",
+      "utteranceIds": [
+        79
+      ],
+      "sourceRangeMs": {
+        "start": 783103,
+        "end": 788223
+      },
+      "displayText": "首先是这个人物的资产图，我给它设计成了四宫格的布局。",
+      "originalText": "首先是这个人物的资产图，我给它设计成了四宫格的一个布局。",
+      "decision": "KEEP",
+      "reason": "确立四宫格总体方案。",
+      "wordRefs": [
+        {
+          "utteranceId": 79,
+          "wordStart": 0,
+          "wordEndExclusive": 26
+        }
+      ]
+    },
+    {
+      "id": "G039",
+      "utteranceIds": [
+        80
+      ],
+      "sourceRangeMs": {
+        "start": 801253,
+        "end": 801293
+      },
+      "displayText": null,
+      "originalText": "正",
+      "decision": "DELETE",
+      "reason": "单字“正”是未完成起头，后面的 u81 已重新完整起句。",
+      "wordRefs": [],
+      "deletedWordRefs": [
+        {
+          "utteranceId": 80,
+          "wordStart": 0,
+          "wordEndExclusive": 1
+        }
+      ]
+    },
+    {
+      "id": "G040",
+      "utteranceIds": [
+        81
+      ],
+      "sourceRangeMs": {
+        "start": 804893,
+        "end": 809613
+      },
+      "displayText": "正常大家看的比较多的可能是这种 16:9 的布局。",
+      "originalText": "正常大家看的比较多的可能是这种16:9的一个布局。",
+      "decision": "KEEP",
+      "reason": "建立 16:9 常规方案作为对比基准；比例值保持原子。",
+      "wordRefs": [
+        {
+          "utteranceId": 81,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        }
+      ]
+    },
+    {
+      "id": "G041",
+      "utteranceIds": [
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88
+      ],
+      "sourceRangeMs": {
+        "start": 820413,
+        "end": 859233
+      },
+      "displayText": "但是 16:9 比例的一个问题是，相对一个图片的大小来说，里面的分辨率会更低，所以有效信息就会更少。",
+      "originalText": "但是16 / 比酒的一个问题是 / 相对 / 一个图片的大小来说。 / 里面的分辨率它会更低 / 所以它的这个有效信息 / 就会更少哦。",
+      "decision": "QUESTION",
+      "reason": "u83“比酒”高度疑似“比例”，但没有音频/画面证据不能直接固化；保留完整因果链并挂疑问。",
+      "wordRefs": [
+        {
+          "utteranceId": 82,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        },
+        {
+          "utteranceId": 83,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        },
+        {
+          "utteranceId": 84,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        },
+        {
+          "utteranceId": 85,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        },
+        {
+          "utteranceId": 86,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        },
+        {
+          "utteranceId": 87,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        },
+        {
+          "utteranceId": 88,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        }
+      ]
+    },
+    {
+      "id": "G042",
+      "utteranceIds": [
+        89,
+        90,
+        91
+      ],
+      "sourceRangeMs": {
+        "start": 879343,
+        "end": 895243
+      },
+      "displayText": "很多空间被这种无意义的背景占据了，但是我这种设计的话就会非常合理。",
+      "originalText": "很多的空间被这种无意义的背景 / 给占据了 / 但是我这种设计的话就会非常合理。",
+      "decision": "KEEP",
+      "reason": "保留对 16:9 空间浪费的批评和四宫格方案的转折。",
+      "wordRefs": [
+        {
+          "utteranceId": 89,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        },
+        {
+          "utteranceId": 90,
+          "wordStart": 0,
+          "wordEndExclusive": 4
+        },
+        {
+          "utteranceId": 91,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ]
+    },
+    {
+      "id": "G043",
+      "utteranceIds": [
+        92,
+        93
+      ],
+      "sourceRangeMs": {
+        "start": 904873,
+        "end": 915263
+      },
+      "displayText": "你能够很明显地感觉到上半部分就是人脸的一个参考，下半部分就是人的服装以及姿态的一个参考。",
+      "originalText": "你能够很明显的感觉到上半部分就是人脸的一个 / 参考下半部分就是人的一个服装以及姿态的一个参考",
+      "decision": "KEEP",
+      "reason": "说明四宫格上下区域各自承担的参考职责。",
+      "wordRefs": [
+        {
+          "utteranceId": 92,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        },
+        {
+          "utteranceId": 93,
+          "wordStart": 0,
+          "wordEndExclusive": 23
+        }
+      ]
+    },
+    {
+      "id": "G044",
+      "utteranceIds": [
+        94
+      ],
+      "sourceRangeMs": {
+        "start": 922273,
+        "end": 927673
+      },
+      "displayText": "然后这四个宫格的人物的姿势我也有对应的讲究。",
+      "originalText": "然后这四个宫格的人物的姿势我也有对应的讲究。",
+      "decision": "KEEP",
+      "reason": "进入四个宫格的逐格解释。",
+      "wordRefs": [
+        {
+          "utteranceId": 94,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        }
+      ]
+    },
+    {
+      "id": "G045",
+      "utteranceIds": [
+        95,
+        96,
+        97,
+        98
+      ],
+      "sourceRangeMs": {
+        "start": 930653,
+        "end": 962043
+      },
+      "displayText": "第一个宫格是一个低角度的侧写镜头，能够很清楚地看到这个人物的侧面和整个人物的下颌线。",
+      "originalText": "第一个宫格呢是一个低角度的一个侧写镜头。 / 能够很清楚的看到这个人物的侧面 / 整个人物的 / 下颌线",
+      "decision": "KEEP",
+      "reason": "保留第一个格子的镜头角度和可见信息。",
+      "wordRefs": [
+        {
+          "utteranceId": 95,
+          "wordStart": 0,
+          "wordEndExclusive": 19
+        },
+        {
+          "utteranceId": 96,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        },
+        {
+          "utteranceId": 97,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 98,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        }
+      ]
+    },
+    {
+      "id": "G046",
+      "utteranceIds": [
+        99,
+        100,
+        101,
+        102,
+        103
+      ],
+      "sourceRangeMs": {
+        "start": 968163,
+        "end": 998903
+      },
+      "displayText": "第二幅图就是人物的正面，能够很清楚地看见人物脸部的轮廓、五官、皮肤色彩，以及头发、头饰、妆容这些。",
+      "originalText": "第二幅图就是人物的正面。 / 能够很清楚的看见人物的脸部的轮廓 / 五官皮肤色彩 / 以及 / 头发、头饰、妆容这些",
+      "decision": "KEEP",
+      "reason": "保留第二个格子的正面信息；“这些”先保留，后续可按试听处理句尾。",
+      "wordRefs": [
+        {
+          "utteranceId": 99,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        },
+        {
+          "utteranceId": 100,
+          "wordStart": 0,
+          "wordEndExclusive": 16
+        },
+        {
+          "utteranceId": 101,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 102,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        },
+        {
+          "utteranceId": 103,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ]
+    },
+    {
+      "id": "G047",
+      "utteranceIds": [
+        104
+      ],
+      "sourceRangeMs": {
+        "start": 1007743,
+        "end": 1009103
+      },
+      "displayText": null,
+      "originalText": "我很喜欢听周杰伦的歌。",
+      "decision": "DELETE",
+      "reason": "与人物资产图/四宫格讲解无关，是明显离题插入，删除整条。",
+      "wordRefs": [],
+      "deletedWordRefs": [
+        {
+          "utteranceId": 104,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ]
+    },
+    {
+      "id": "G048",
+      "utteranceIds": [
+        105,
+        106,
+        107,
+        108
+      ],
+      "sourceRangeMs": {
+        "start": 1011463,
+        "end": 1026443
+      },
+      "displayText": "下半部分是全身的姿态、服装，然后我特别对下半部分的人物的脸部进行了模糊处理。",
+      "originalText": "是全身的姿态 / 服装 / 然后我特别 / 对下半部分的人物的脸部进行了一个模糊处理。",
+      "decision": "KEEP",
+      "reason": "补齐四宫格下半部分的内容，并解释模糊脸部的设计。",
+      "wordRefs": [
+        {
+          "utteranceId": 105,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 106,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        },
+        {
+          "utteranceId": 107,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 108,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ]
+    },
+    {
+      "id": "G049",
+      "utteranceIds": [
+        109,
+        110,
+        111
+      ],
+      "sourceRangeMs": {
+        "start": 1065913,
+        "end": 1082053
+      },
+      "displayText": "这样的话在 AI 视频的时候它就不会去学习到一个错误的五官，而是会去找一个正确的五官去进行学习参考。",
+      "originalText": "这样的话在 AI 视频的时候它就不会去 / 学习到一个错误的一个五官，而是会去找一个正确的五官去进行学习。 / 参考",
+      "decision": "KEEP",
+      "reason": "保留模糊处理对 AI 视频参考的因果解释。",
+      "wordRefs": [
+        {
+          "utteranceId": 109,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        },
+        {
+          "utteranceId": 110,
+          "wordStart": 0,
+          "wordEndExclusive": 29
+        },
+        {
+          "utteranceId": 111,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        }
+      ]
+    },
+    {
+      "id": "G050",
+      "utteranceIds": [
+        112,
+        113
+      ],
+      "sourceRangeMs": {
+        "start": 1114913,
+        "end": 1132973
+      },
+      "displayText": "关于提示词的部分，我进行了一个引导式的书写。",
+      "originalText": "然后关于提示词的部分，我进行了一个引导式的一个 / 书写",
+      "decision": "KEEP",
+      "reason": "进入提示词结构的写法。",
+      "wordRefs": [
+        {
+          "utteranceId": 112,
+          "wordStart": 0,
+          "wordEndExclusive": 22
+        },
+        {
+          "utteranceId": 113,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        }
+      ]
+    },
+    {
+      "id": "G051",
+      "utteranceIds": [
+        114,
+        115
+      ],
+      "sourceRangeMs": {
+        "start": 1137903,
+        "end": 1159653
+      },
+      "displayText": "比如说排除图片原本照射在人物脸部的光影氛围，消除硬光光源产生的皮肤效果，进行重新打光，类似的这种引导式指令。",
+      "originalText": "比如说排除这个图片原本照射在人物脸部的光影氛围，消除硬光光源产生的皮肤效果，进行重新打光。 / 类似的这种引导式的一个指令。",
+      "decision": "KEEP",
+      "reason": "保留引导式提示词的具体动作链。",
+      "wordRefs": [
+        {
+          "utteranceId": 114,
+          "wordStart": 0,
+          "wordEndExclusive": 42
+        },
+        {
+          "utteranceId": 115,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        }
+      ]
+    },
+    {
+      "id": "G052",
+      "utteranceIds": [
+        116,
+        117
+      ],
+      "sourceRangeMs": {
+        "start": 1171903,
+        "end": 1180603
+      },
+      "displayText": "因为 GPT 2.5 生图，它背后是有一个思考模型的，是有一个 Agent 在……",
+      "originalText": "因为 GPT 2.5生图。 / 它背后是有一个思考模型的，是有一个 Agent 在",
+      "decision": "QUESTION",
+      "reason": "模型名与句尾均需按原声确认；先保留，不因句尾未完成而删除。GPT 2.5、Agent 不拆。",
+      "wordRefs": [
+        {
+          "utteranceId": 116,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        },
+        {
+          "utteranceId": 117,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ]
+    },
+    {
+      "id": "G053",
+      "utteranceIds": [
+        118
+      ],
+      "sourceRangeMs": {
+        "start": 1183983,
+        "end": 1184543
+      },
+      "displayText": "紫灰的",
+      "originalText": "紫灰的",
+      "decision": "QUESTION",
+      "reason": "与前后句不构成可确认语义，疑似 ASR 错词或口误；不能凭猜测替换或删除。",
+      "wordRefs": [
+        {
+          "utteranceId": 118,
+          "wordStart": 0,
+          "wordEndExclusive": 1
+        }
+      ]
+    },
+    {
+      "id": "G054",
+      "utteranceIds": [
+        119,
+        120,
+        121
+      ],
+      "sourceRangeMs": {
+        "start": 1185893,
+        "end": 1200773
+      },
+      "displayText": "所以我们要充分调动生图模型背后的思考链路，引导 AI 往什么方向去思考、往什么方向去处理？",
+      "originalText": "所以呢我们要充分的调动这个深图模型背后的一个思考的一个链路。 / 引导 AI 应该往什么方向去思考？ / 往什么方向去进行处理？",
+      "decision": "QUESTION",
+      "reason": "u119“深图”疑似“生图”，其余为完整方法结论；需确认专词后再定字幕。",
+      "wordRefs": [
+        {
+          "utteranceId": 119,
+          "wordStart": 0,
+          "wordEndExclusive": 29
+        },
+        {
+          "utteranceId": 120,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        },
+        {
+          "utteranceId": 121,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ]
+    },
+    {
+      "id": "G055",
+      "utteranceIds": [
+        122,
+        123
+      ],
+      "sourceRangeMs": {
+        "start": 1222063,
+        "end": 1230713
+      },
+      "displayText": "这也是未来人与 AI 进行协作的时候，最重要的一个能力，就是指挥 AI 的能力。",
+      "originalText": "这也是未来 / 人与 AI 进行协作的时候，最重要的一个能力就是指挥 AI 的能力。",
+      "decision": "KEEP",
+      "reason": "保留本段上升到协作方法论的结论。",
+      "wordRefs": [
+        {
+          "utteranceId": 122,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 123,
+          "wordStart": 0,
+          "wordEndExclusive": 30
+        }
+      ]
+    },
+    {
+      "id": "G056",
+      "utteranceIds": [
+        124
+      ],
+      "sourceRangeMs": {
+        "start": 1238763,
+        "end": 1243363
+      },
+      "displayText": "如果你不清楚一些底层逻辑的话，你是没办法去指挥 AI 的。",
+      "originalText": "如果你不清楚一些底层逻辑的话，你是没办法去指挥 AI 的。",
+      "decision": "KEEP",
+      "reason": "保留结论的必要条件，不能只保留上一条口号。",
+      "wordRefs": [
+        {
+          "utteranceId": 124,
+          "wordStart": 0,
+          "wordEndExclusive": 26
+        }
+      ]
+    },
+    {
+      "id": "G057",
+      "utteranceIds": [
+        125,
+        126,
+        127,
+        128,
+        129
+      ],
+      "sourceRangeMs": {
+        "start": 1282283,
+        "end": 1300653
+      },
+      "displayText": "然后用类似的思路我也创作出来了制作条形码色卡的提示词，以及提取人物资产的提示词。",
+      "originalText": "然后用类似的思路我也创作出来了 / 制作 / 条形码色卡的提示词 / 以及提取 / 净资产的提示词",
+      "decision": "QUESTION",
+      "reason": "u125–128 是连续组织语言；u129“净资产”与上下文冲突，候选为“人物资产”，需试听/画面确认。",
+      "wordRefs": [
+        {
+          "utteranceId": 125,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        },
+        {
+          "utteranceId": 126,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        },
+        {
+          "utteranceId": 127,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        },
+        {
+          "utteranceId": 128,
+          "wordStart": 0,
+          "wordEndExclusive": 4
+        },
+        {
+          "utteranceId": 129,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ]
+    },
+    {
+      "id": "G058",
+      "utteranceIds": [
+        130,
+        131
+      ],
+      "sourceRangeMs": {
+        "start": 1304263,
+        "end": 1314073
+      },
+      "displayText": "这也是一个四宫格，我也对每一个宫格的内容进行了一个详细的区分。",
+      "originalText": "这也是一个四宫格我也对 / 每一个宫格的内容进行了一个详细的区分",
+      "decision": "KEEP",
+      "reason": "说明另一套资产提示词同样采用四宫格并逐格区分。",
+      "wordRefs": [
+        {
+          "utteranceId": 130,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        },
+        {
+          "utteranceId": 131,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        }
+      ]
+    },
+    {
+      "id": "G059",
+      "utteranceIds": [
+        132
+      ],
+      "sourceRangeMs": {
+        "start": 1316333,
+        "end": 1317453
+      },
+      "displayText": null,
+      "originalText": "这个是正视图",
+      "decision": "DELETE",
+      "reason": "u133 紧邻完整重复“这个是正视图”，删除前一个重复起头。",
+      "wordRefs": [],
+      "deletedWordRefs": [
+        {
+          "utteranceId": 132,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ]
+    },
+    {
+      "id": "G060",
+      "utteranceIds": [
+        133
+      ],
+      "sourceRangeMs": {
+        "start": 1320083,
+        "end": 1328723
+      },
+      "displayText": "这个是正视图，这个是侧视图，这个是低角度远视图，这个是高角度俯视图。",
+      "originalText": "这个是正视图，这个是侧视图，这个是低角度远视图，这个是高角度俯视图。",
+      "decision": "KEEP",
+      "reason": "保留四个视角的完整清单。",
+      "wordRefs": [
+        {
+          "utteranceId": 133,
+          "wordStart": 0,
+          "wordEndExclusive": 30
+        }
+      ]
+    },
+    {
+      "id": "G061",
+      "utteranceIds": [
+        134,
+        135,
+        136
+      ],
+      "sourceRangeMs": {
+        "start": 1337493,
+        "end": 1351703
+      },
+      "displayText": "这几个视图的联合能够很容易地让 AI 视频参考这个场景当中出现的各个方位的内容。",
+      "originalText": "这几个视图的联合能够很容易的让 AI 视频参考这个 / 场景当中出现的 / 各个方位的内容并且",
+      "decision": "KEEP",
+      "reason": "保留多视角联合对 AI 视频参考的作用。",
+      "wordRefs": [
+        {
+          "utteranceId": 134,
+          "wordStart": 0,
+          "wordEndExclusive": 24
+        },
+        {
+          "utteranceId": 135,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        },
+        {
+          "utteranceId": 136,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ]
+    },
+    {
+      "id": "G062",
+      "utteranceIds": [
+        137,
+        138,
+        139,
+        140
+      ],
+      "sourceRangeMs": {
+        "start": 1367413,
+        "end": 1391503
+      },
+      "displayText": "以及也给大家准备了一个关于道具的提示词，所有的提示词我都已经放到了这个画布的左下角区域。",
+      "originalText": "以及 / 也给大家准备了一个关于道具的一个 / 所有的提示词我都已经放到了这个画布的 / 左下角区域",
+      "decision": "QUESTION",
+      "reason": "u137“以及”与 u138 的起句可能有重复或 ASR 错词；道具提示词和画布左下角位置本身应保留，需听音确认连接。",
+      "wordRefs": [
+        {
+          "utteranceId": 137,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        },
+        {
+          "utteranceId": 138,
+          "wordStart": 0,
+          "wordEndExclusive": 16
+        },
+        {
+          "utteranceId": 139,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        },
+        {
+          "utteranceId": 140,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        }
+      ]
+    },
+    {
+      "id": "G063",
+      "utteranceIds": [
+        141,
+        142
+      ],
+      "sourceRangeMs": {
+        "start": 1412313,
+        "end": 1420613
+      },
+      "displayText": "我也往我的文档里面放了一份，大家可以自行获取。",
+      "originalText": "我也往我的文档里面放了一份。 / 大家可以自行获取。",
+      "decision": "KEEP",
+      "reason": "保留第二个获取渠道。",
+      "wordRefs": [
+        {
+          "utteranceId": 141,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        },
+        {
+          "utteranceId": 142,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ]
+    },
+    {
+      "id": "G064",
+      "utteranceIds": [
+        143
+      ],
+      "sourceRangeMs": {
+        "start": 1453373,
+        "end": 1455373
+      },
+      "displayText": null,
+      "originalText": "获取的方式你可以看评论区。",
+      "decision": "DELETE",
+      "reason": "与 u144 同义重复，u144 给出更完整的“在评论区里面找一下”。",
+      "wordRefs": [],
+      "deletedWordRefs": [
+        {
+          "utteranceId": 143,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        }
+      ]
+    },
+    {
+      "id": "G065",
+      "utteranceIds": [
+        144
+      ],
+      "sourceRangeMs": {
+        "start": 1469933,
+        "end": 1472253
+      },
+      "displayText": "获取的方式，你可以在评论区里面找一下。",
+      "originalText": "获取的方式，你可以在评论区里面找一下。",
+      "decision": "KEEP",
+      "reason": "保留最终明确的获取方式。",
+      "wordRefs": [
+        {
+          "utteranceId": 144,
+          "wordStart": 0,
+          "wordEndExclusive": 17
+        }
+      ]
+    },
+    {
+      "id": "G066",
+      "utteranceIds": [
+        145
+      ],
+      "sourceRangeMs": {
+        "start": 1569213,
+        "end": 1571813
+      },
+      "displayText": "我这些提示词肯定还有一些局限性。",
+      "originalText": "我这些提示词肯定还有一些局限性。",
+      "decision": "KEEP",
+      "reason": "保留边界声明，避免把提示词宣传成无条件有效。",
+      "wordRefs": [
+        {
+          "utteranceId": 145,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ]
+    },
+    {
+      "id": "G067",
+      "utteranceIds": [
+        146,
+        147
+      ],
+      "sourceRangeMs": {
+        "start": 1582853,
+        "end": 1592653
+      },
+      "displayText": "如果你发现还有一些问题你不能解决的，那么欢迎留言，我来解决。",
+      "originalText": "如果你发现还有一些问题你 / 不能解决的，那么欢迎留言，我来解决。",
+      "decision": "KEEP",
+      "reason": "保留反馈入口和作者承诺；跨条目恢复完整条件句。",
+      "wordRefs": [
+        {
+          "utteranceId": 146,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        },
+        {
+          "utteranceId": 147,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ]
+    },
+    {
+      "id": "G068",
+      "utteranceIds": [
+        148
+      ],
+      "sourceRangeMs": {
+        "start": 1594853,
+        "end": 1598933
+      },
+      "displayText": "好，那么本期视频到这里，咱们下期视频再见，拜拜。",
+      "originalText": "好，那么本期视频到这里，咱们下期视频再见，拜拜。",
+      "decision": "KEEP",
+      "reason": "完整收束，保留结尾礼貌和节目节奏。",
+      "wordRefs": [
+        {
+          "utteranceId": 148,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q_006",
+      "status": "OPEN",
+      "groupId": "G006",
+      "utteranceIds": [
+        7
+      ],
+      "question": "语义与前后文不闭合，疑似口误或 ASR 错词；保留原声定位，需试听/画面确认后再决定。"
+    },
+    {
+      "id": "Q_018",
+      "status": "OPEN",
+      "groupId": "G018",
+      "utteranceIds": [
+        35,
+        36,
+        37
+      ],
+      "question": "“提词器”与后文反复出现的“提示词”冲突，疑似 ASR 错词；需确认原声后再确定字幕/剪辑。"
+    },
+    {
+      "id": "Q_020",
+      "status": "OPEN",
+      "groupId": "G020",
+      "utteranceIds": [
+        39,
+        40
+      ],
+      "question": "u39“提升影响”疑似识别异常，且 u40 的枚举与“这三个要素”数量可能不一致；不静默改成三项或四项。"
+    },
+    {
+      "id": "Q_031",
+      "status": "OPEN",
+      "groupId": "G031",
+      "utteranceIds": [
+        65,
+        66,
+        67,
+        68
+      ],
+      "question": "u67“没有环境漫”与 u68“色光柔化高光”无法仅凭 ASR 确认完整术语；候选按上下文拼接，但需试听/画面确认。"
+    },
+    {
+      "id": "Q_041",
+      "status": "OPEN",
+      "groupId": "G041",
+      "utteranceIds": [
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88
+      ],
+      "question": "u83“比酒”高度疑似“比例”，但没有音频/画面证据不能直接固化；保留完整因果链并挂疑问。"
+    },
+    {
+      "id": "Q_052",
+      "status": "OPEN",
+      "groupId": "G052",
+      "utteranceIds": [
+        116,
+        117
+      ],
+      "question": "模型名与句尾均需按原声确认；先保留，不因句尾未完成而删除。GPT 2.5、Agent 不拆。"
+    },
+    {
+      "id": "Q_053",
+      "status": "OPEN",
+      "groupId": "G053",
+      "utteranceIds": [
+        118
+      ],
+      "question": "与前后句不构成可确认语义，疑似 ASR 错词或口误；不能凭猜测替换或删除。"
+    },
+    {
+      "id": "Q_054",
+      "status": "OPEN",
+      "groupId": "G054",
+      "utteranceIds": [
+        119,
+        120,
+        121
+      ],
+      "question": "u119“深图”疑似“生图”，其余为完整方法结论；需确认专词后再定字幕。"
+    },
+    {
+      "id": "Q_057",
+      "status": "OPEN",
+      "groupId": "G057",
+      "utteranceIds": [
+        125,
+        126,
+        127,
+        128,
+        129
+      ],
+      "question": "u125–128 是连续组织语言；u129“净资产”与上下文冲突，候选为“人物资产”，需试听/画面确认。"
+    },
+    {
+      "id": "Q_062",
+      "status": "OPEN",
+      "groupId": "G062",
+      "utteranceIds": [
+        137,
+        138,
+        139,
+        140
+      ],
+      "question": "u137“以及”与 u138 的起句可能有重复或 ASR 错词；道具提示词和画布左下角位置本身应保留，需听音确认连接。"
+    }
+  ],
+  "audit": {
+    "sourceUtteranceCount": 148,
+    "groupCount": 68,
+    "coveredUtteranceIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148
+    ],
+    "missingUtteranceIds": [],
+    "duplicateUtteranceIds": [],
+    "wordRefIssues": [],
+    "wordCoverageIssues": [],
+    "decisionCounts": {
+      "KEEP": 52,
+      "DELETE": 6,
+      "QUESTION": 10
+    },
+    "deletions": [
+      {
+        "utteranceIds": [
+          10
+        ],
+        "wordRange": "wordStart 0–6",
+        "reason": "重复“做了这么多尝试”，保留该条新增的测试信息"
+      },
+      {
+        "utteranceIds": [
+          16
+        ],
+        "reason": "独立重复起头"
+      },
+      {
+        "utteranceIds": [
+          47
+        ],
+        "wordRange": "wordStart 15–18",
+        "reason": "“这些问题”与后续提问重复"
+      },
+      {
+        "utteranceIds": [
+          48
+        ],
+        "reason": "与 u49 重复问句"
+      },
+      {
+        "utteranceIds": [
+          78
+        ],
+        "wordRange": "wordStart 0–10",
+        "reason": "连续自我修正，只保留最后完整表达"
+      },
+      {
+        "utteranceIds": [
+          80
+        ],
+        "reason": "未完成单字起头"
+      },
+      {
+        "utteranceIds": [
+          104
+        ],
+        "reason": "离题插入"
+      },
+      {
+        "utteranceIds": [
+          132
+        ],
+        "reason": "被 u133 完整视角清单覆盖"
+      },
+      {
+        "utteranceIds": [
+          143
+        ],
+        "reason": "与 u144 重复"
+      }
+    ],
+    "verificationBasis": [
+      "所有148个1-based utteranceId均进入至少一个审稿组；本稿不生成T2时间。",
+      "每条展示文字的wordRefs均直接来自raw JSON词级数组；不按字符数平均反推时码。",
+      "删除项仅按语义重复、未完成起头或离题插入标记；波形、画面和系统声音仍需另一worker核查。",
+      "QUESTION项不授权静默改词或删除。"
+    ]
+  }
+}

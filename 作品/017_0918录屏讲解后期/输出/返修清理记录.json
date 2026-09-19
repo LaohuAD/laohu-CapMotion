@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/previous-delivery.mp4",
+    "bytes": 712933407,
+    "reason": "上一基线备份；已验证新导出，下一次仅字幕位置修正将保留当前成片作为替换前备份"
+  },
+  {
+    "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/previous-delivery.mp4",
+    "bytes": 649351742,
+    "reason": "已由本轮通过验证的成片/主音频/原生轨替代的生成媒体；原录制与当前引用资产不动"
+  },
+  {
+    "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/previous-main-audio.flac",
+    "bytes": 33162857,
+    "reason": "已由本轮通过验证的成片/主音频/原生轨替代的生成媒体；原录制与当前引用资产不动"
+  },
+  {
+    "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/final-asr.mp3",
+    "bytes": 4175571,
+    "reason": "已由本轮通过验证的成片/主音频/原生轨替代的生成媒体；原录制与当前引用资产不动"
+  }
+]

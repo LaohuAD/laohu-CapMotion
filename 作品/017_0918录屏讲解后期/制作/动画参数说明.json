@@ -1,0 +1,251 @@
+{
+  "compositionId": "Work017Overlay",
+  "entry": "workflows/laohu-video/模板/remotion-assets/workspace/src/index.ts",
+  "remotionVersion": "4.0.489",
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "background": "transparent"
+  },
+  "timingStatus": "EXAMPLE_RELATIVE_NOT_FROZEN",
+  "timingNote": "以下 frame 只用于首版渲染和接口验收；正式接入时由 Astra 依据冻结 T2 与实际 Cap 预览替换，不把示例帧当作最终剪辑授权。",
+  "coordinateContract": "local.events[].rect 使用相对于最终 1920x1080 成片帧的 normalized 坐标，x/y/width/height 均为 0..1；不得直接填 raw display 坐标。",
+  "propsContract": {
+    "kind": [
+      "factors",
+      "process",
+      "local"
+    ],
+    "durationInFrames": "positive integer, also used by calculateMetadata",
+    "events": {
+      "frame": "integer inside durationInFrames",
+      "endFrame": "optional integer; local events otherwise end at the next event",
+      "label": "short visible Chinese label",
+      "target": "optional short relation/result label",
+      "rect": "required for local annotations; normalized frame coordinates"
+    }
+  },
+  "propsExamples": {
+    "factors": {
+      "sourceVisual": "V03 / C045-C050",
+      "sourceRangeSeconds": {
+        "start": 118.764828,
+        "end": 142.649833
+      },
+      "kind": "factors",
+      "durationInFrames": 720,
+      "events": [
+        {
+          "id": "visual-style",
+          "frame": 0,
+          "label": "视觉风格",
+          "target": "整体质感"
+        },
+        {
+          "id": "character-form",
+          "frame": 191,
+          "label": "人物造型",
+          "target": "皮肤纹理"
+        },
+        {
+          "id": "photography",
+          "frame": 244,
+          "label": "摄影呈现",
+          "target": "光线表现",
+          "role": "warning"
+        }
+      ]
+    },
+    "process": {
+      "sourceVisual": "V09 / C139-C144",
+      "sourceRangeSeconds": {
+        "start": 446.550233,
+        "end": 457.941006
+      },
+      "kind": "process",
+      "durationInFrames": 342,
+      "events": [
+        {
+          "id": "problem",
+          "frame": 64,
+          "label": "发现问题",
+          "target": "镜面高光",
+          "role": "danger"
+        },
+        {
+          "id": "cause",
+          "frame": 137,
+          "label": "理解原因",
+          "target": "光线表现"
+        },
+        {
+          "id": "constraint",
+          "frame": 188,
+          "label": "写对应约束",
+          "target": "皮肤 / 光线",
+          "role": "success"
+        }
+      ]
+    },
+    "localV02": {
+      "sourceVisual": "V02 / C041-C044",
+      "sourceRangeSeconds": [
+        105.216277,
+        115.213875
+      ],
+      "kind": "local",
+      "durationInFrames": 90,
+      "events": [
+        {
+          "id": "v02-style",
+          "frame": 0,
+          "endFrame": 30,
+          "label": "视觉风格",
+          "target": "已有栏目",
+          "rect": {
+            "x": 0.13,
+            "y": 0.2,
+            "width": 0.3,
+            "height": 0.14
+          }
+        },
+        {
+          "id": "v02-character",
+          "frame": 30,
+          "endFrame": 60,
+          "label": "人物造型",
+          "target": "已有栏目",
+          "rect": {
+            "x": 0.13,
+            "y": 0.35,
+            "width": 0.3,
+            "height": 0.2
+          }
+        },
+        {
+          "id": "v02-photo",
+          "frame": 60,
+          "label": "摄影呈现",
+          "target": "已有栏目",
+          "rect": {
+            "x": 0.66,
+            "y": 0.49,
+            "width": 0.3,
+            "height": 0.22
+          }
+        }
+      ]
+    },
+    "localV06": {
+      "sourceVisual": "V06 / C094-C110",
+      "sourceRangeSeconds": [
+        299.380559,
+        350.693129
+      ],
+      "kind": "local",
+      "durationInFrames": 150,
+      "events": [
+        {
+          "id": "v06-grid",
+          "frame": 0,
+          "endFrame": 42,
+          "label": "四宫格",
+          "rect": {
+            "x": 0.35,
+            "y": 0.1,
+            "width": 0.27,
+            "height": 0.8
+          }
+        },
+        {
+          "id": "v06-background",
+          "frame": 42,
+          "endFrame": 84,
+          "label": "无意义的背景",
+          "rect": {
+            "x": 0.79,
+            "y": 0.14,
+            "width": 0.18,
+            "height": 0.52
+          }
+        },
+        {
+          "id": "v06-face",
+          "frame": 84,
+          "endFrame": 116,
+          "label": "脸部参考",
+          "rect": {
+            "x": 0.36,
+            "y": 0.11,
+            "width": 0.25,
+            "height": 0.36
+          }
+        },
+        {
+          "id": "v06-clothing",
+          "frame": 116,
+          "label": "服装 / 姿态",
+          "rect": {
+            "x": 0.36,
+            "y": 0.47,
+            "width": 0.25,
+            "height": 0.4
+          }
+        }
+      ]
+    },
+    "localV07": {
+      "sourceVisual": "V07 / C111-C124",
+      "sourceRangeSeconds": [
+        362.301055,
+        387.725909
+      ],
+      "kind": "local",
+      "durationInFrames": 120,
+      "events": [
+        {
+          "id": "v07-side",
+          "frame": 0,
+          "endFrame": 40,
+          "label": "侧面 / 下颌线",
+          "rect": {
+            "x": 0.08,
+            "y": 0.12,
+            "width": 0.37,
+            "height": 0.58
+          }
+        },
+        {
+          "id": "v07-front",
+          "frame": 40,
+          "endFrame": 80,
+          "label": "正面轮廓",
+          "rect": {
+            "x": 0.4,
+            "y": 0.12,
+            "width": 0.38,
+            "height": 0.58
+          }
+        },
+        {
+          "id": "v07-blur",
+          "frame": 80,
+          "label": "降低干扰的设计意图",
+          "target": "清晰脸部参考",
+          "rect": {
+            "x": 0.24,
+            "y": 0.12,
+            "width": 0.3,
+            "height": 0.66
+          }
+        }
+      ]
+    }
+  },
+  "handoff": {
+    "compositionId": "Work017Overlay",
+    "props": "传入上方任一 propsExamples 对象；正式时只替换冻结 frame 与 local rect，不改变 kind 语义。",
+    "renderOutput": "透明叠层媒体暂存 target/capmotion-release/017-review，不在作品目录写二进制。"
+  }
+}

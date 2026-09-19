@@ -1,0 +1,2606 @@
+{
+  "schema": "laohu.source-to-final/1",
+  "approval": {
+    "status": "APPROVED",
+    "scope": "EDIT_AND_VISUALS",
+    "reviewRevision": 3,
+    "reference": "用户确认：Q01废弃重复，删除C011 C012对应声音；Q02原话下半部分是，替换C117错误周杰伦识别，注意与C118是全身的姿态和服装顺句；Q03确定GPT 2.5名称；Q04有效像素；Q05原音频32到33秒是真实，保留及相邻字音；其他暂无问题，授权先制作动画看效果。"
+  },
+  "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+  "sourceDuration": 1604.285,
+  "targetDuration": 342.57968135599805,
+  "sequence": [
+    {
+      "sourceStart": 14.55753092,
+      "sourceEnd": 15.83928092,
+      "targetStart": 0,
+      "targetEnd": 1.28175
+    },
+    {
+      "sourceStart": 16.40275992,
+      "sourceEnd": 17.091467920000003,
+      "targetStart": 1.28175,
+      "targetEnd": 1.970458
+    },
+    {
+      "sourceStart": 19.769509919999997,
+      "sourceEnd": 20.751822919999995,
+      "targetStart": 1.970458,
+      "targetEnd": 2.9527709999999994
+    },
+    {
+      "sourceStart": 21.422801919999998,
+      "sourceEnd": 21.811134919999997,
+      "targetStart": 2.9527709999999994,
+      "targetEnd": 3.3411039999999996
+    },
+    {
+      "sourceStart": 28.619535754000005,
+      "sourceEnd": 30.627530919999998,
+      "targetStart": 3.3411039999999996,
+      "targetEnd": 5.349099165999997
+    },
+    {
+      "sourceStart": 32.27709892,
+      "sourceEnd": 32.734457754000005,
+      "targetStart": 5.349099165999995,
+      "targetEnd": 5.806457999999999
+    },
+    {
+      "sourceStart": 77.488993754,
+      "sourceEnd": 78.67699446,
+      "targetStart": 5.806457999999999,
+      "targetEnd": 6.994458705999996
+    },
+    {
+      "sourceStart": 80.382267337,
+      "sourceEnd": 80.392287631,
+      "targetStart": 6.994458705999996,
+      "targetEnd": 7.004478999999993
+    },
+    {
+      "sourceStart": 81.639120631,
+      "sourceEnd": 82.770766631,
+      "targetStart": 7.004478999999993,
+      "targetEnd": 8.136124999999993
+    },
+    {
+      "sourceStart": 82.96343363099999,
+      "sourceEnd": 84.83462063099999,
+      "targetStart": 8.136124999999993,
+      "targetEnd": 10.007312000000002
+    },
+    {
+      "sourceStart": 93.93656083999997,
+      "sourceEnd": 95.42689383999996,
+      "targetStart": 10.007312000000002,
+      "targetEnd": 11.497645000000006
+    },
+    {
+      "sourceStart": 95.64197783999998,
+      "sourceEnd": 97.08349883999998,
+      "targetStart": 11.497645000000006,
+      "targetEnd": 12.939166
+    },
+    {
+      "sourceStart": 106.64844388199998,
+      "sourceEnd": 106.65753092000003,
+      "targetStart": 12.939166000000004,
+      "targetEnd": 12.948253038000054
+    },
+    {
+      "sourceStart": 107.89753092000001,
+      "sourceEnd": 107.92253092000001,
+      "targetStart": 12.948253038000058,
+      "targetEnd": 12.973253038000067
+    },
+    {
+      "sourceStart": 140.07753092,
+      "sourceEnd": 142.59082745999999,
+      "targetStart": 12.97325303800007,
+      "targetEnd": 15.486549578000059
+    },
+    {
+      "sourceStart": 143.52767737899998,
+      "sourceEnd": 143.53771080099992,
+      "targetStart": 15.486549578000062,
+      "targetEnd": 15.496583000000008
+    },
+    {
+      "sourceStart": 144.34566880099993,
+      "sourceEnd": 144.35753092,
+      "targetStart": 15.496583000000008,
+      "targetEnd": 15.508445119000065
+    },
+    {
+      "sourceStart": 145.67753091999998,
+      "sourceEnd": 145.81018980099992,
+      "targetStart": 15.508445119000065,
+      "targetEnd": 15.641104000000013
+    },
+    {
+      "sourceStart": 148.7462564259999,
+      "sourceEnd": 151.9371524259999,
+      "targetStart": 15.641104000000013,
+      "targetEnd": 18.832
+    },
+    {
+      "sourceStart": 153.7145753839999,
+      "sourceEnd": 155.96253092,
+      "targetStart": 18.832,
+      "targetEnd": 21.07995553600015
+    },
+    {
+      "sourceStart": 164.63289062899997,
+      "sourceEnd": 164.71628909299983,
+      "targetStart": 21.07995553600015,
+      "targetEnd": 21.163354000000012
+    },
+    {
+      "sourceStart": 165.07170609299982,
+      "sourceEnd": 167.15099446,
+      "targetStart": 21.163354000000012,
+      "targetEnd": 23.24264236700016
+    },
+    {
+      "sourceStart": 171.24753091999997,
+      "sourceEnd": 172.39026546,
+      "targetStart": 23.24264236700016,
+      "targetEnd": 24.385376907000172
+    },
+    {
+      "sourceStart": 173.26979662899998,
+      "sourceEnd": 173.2797947219998,
+      "targetStart": 24.385376907000172,
+      "targetEnd": 24.395374999999973
+    },
+    {
+      "sourceStart": 173.5756907219998,
+      "sourceEnd": 174.70660672199978,
+      "targetStart": 24.39537499999998,
+      "targetEnd": 25.526290999999986
+    },
+    {
+      "sourceStart": 177.58281105499975,
+      "sourceEnd": 178.94341505499978,
+      "targetStart": 25.52629099999998,
+      "targetEnd": 26.88689500000001
+    },
+    {
+      "sourceStart": 180.93756105499978,
+      "sourceEnd": 180.94753091999996,
+      "targetStart": 26.88689500000001,
+      "targetEnd": 26.896864865000218
+    },
+    {
+      "sourceStart": 181.38753092000002,
+      "sourceEnd": 181.63149905499978,
+      "targetStart": 26.896864865000218,
+      "targetEnd": 27.140833
+    },
+    {
+      "sourceStart": 181.8489150549998,
+      "sourceEnd": 181.8882900549998,
+      "targetStart": 27.140833000000008,
+      "targetEnd": 27.180208000000007
+    },
+    {
+      "sourceStart": 182.9099990549998,
+      "sourceEnd": 185.13845705499978,
+      "targetStart": 27.180208000000007,
+      "targetEnd": 29.408666000000004
+    },
+    {
+      "sourceStart": 188.0930400549998,
+      "sourceEnd": 189.30153092,
+      "targetStart": 29.408666000000004,
+      "targetEnd": 30.61715686500022
+    },
+    {
+      "sourceStart": 190.38424387899997,
+      "sourceEnd": 190.39427401399976,
+      "targetStart": 30.61715686500021,
+      "targetEnd": 30.627186999999992
+    },
+    {
+      "sourceStart": 190.67906601399974,
+      "sourceEnd": 190.69956601399977,
+      "targetStart": 30.627187,
+      "targetEnd": 30.647687000000005
+    },
+    {
+      "sourceStart": 191.53131601399977,
+      "sourceEnd": 192.61964901399972,
+      "targetStart": 30.647686999999998,
+      "targetEnd": 31.736019999999947
+    },
+    {
+      "sourceStart": 193.14198201399972,
+      "sourceEnd": 193.15052442,
+      "targetStart": 31.736019999999947,
+      "targetEnd": 31.744562406000234
+    },
+    {
+      "sourceStart": 198.27082746,
+      "sourceEnd": 200.11253092000004,
+      "targetStart": 31.74456240600024,
+      "targetEnd": 33.586265866000275
+    },
+    {
+      "sourceStart": 201.98585129499997,
+      "sourceEnd": 201.99554342899967,
+      "targetStart": 33.58626586600028,
+      "targetEnd": 33.59595799999999
+    },
+    {
+      "sourceStart": 202.41756342899967,
+      "sourceEnd": 202.42753091999995,
+      "targetStart": 33.59595799999999,
+      "targetEnd": 33.60592549100027
+    },
+    {
+      "sourceStart": 202.78753092,
+      "sourceEnd": 202.87950142899973,
+      "targetStart": 33.60592549100028,
+      "targetEnd": 33.697895999999986
+    },
+    {
+      "sourceStart": 209.5530559289997,
+      "sourceEnd": 210.7017849289997,
+      "targetStart": 33.697895999999986,
+      "targetEnd": 34.84662499999998
+    },
+    {
+      "sourceStart": 210.89638892899973,
+      "sourceEnd": 211.96703645999997,
+      "targetStart": 34.84662499999998,
+      "targetEnd": 35.91727253100027
+    },
+    {
+      "sourceStart": 212.28753092000002,
+      "sourceEnd": 214.44253092000005,
+      "targetStart": 35.917272531000265,
+      "targetEnd": 38.072272531000266
+    },
+    {
+      "sourceStart": 216.62753091999997,
+      "sourceEnd": 218.50955038899968,
+      "targetStart": 38.072272531000266,
+      "targetEnd": 39.95429199999998
+    },
+    {
+      "sourceStart": 236.33784238899972,
+      "sourceEnd": 238.77253092000007,
+      "targetStart": 39.95429199999998,
+      "targetEnd": 42.38898053100033
+    },
+    {
+      "sourceStart": 240.15441145999998,
+      "sourceEnd": 240.83393245999994,
+      "targetStart": 42.38898053100033,
+      "targetEnd": 43.06850153100032
+    },
+    {
+      "sourceStart": 243.24386946000004,
+      "sourceEnd": 244.80253092000004,
+      "targetStart": 43.06850153100032,
+      "targetEnd": 44.62716299100029
+    },
+    {
+      "sourceStart": 247.33753091999998,
+      "sourceEnd": 248.53253092000003,
+      "targetStart": 44.62716299100029,
+      "targetEnd": 45.82216299100031
+    },
+    {
+      "sourceStart": 251.32753092000002,
+      "sourceEnd": 253.84286945999992,
+      "targetStart": 45.82216299100031,
+      "targetEnd": 48.33750153100027
+    },
+    {
+      "sourceStart": 255.09753091999994,
+      "sourceEnd": 256.99517538899954,
+      "targetStart": 48.33750153100027,
+      "targetEnd": 50.23514599999989
+    },
+    {
+      "sourceStart": 257.1547173889996,
+      "sourceEnd": 258.73253092,
+      "targetStart": 50.23514599999989,
+      "targetEnd": 51.81295953100029
+    },
+    {
+      "sourceStart": 263.45249446,
+      "sourceEnd": 266.02253092,
+      "targetStart": 51.81295953100029,
+      "targetEnd": 54.38299599100024
+    },
+    {
+      "sourceStart": 267.20753091999995,
+      "sourceEnd": 271.92253092,
+      "targetStart": 54.38299599100024,
+      "targetEnd": 59.0979959910003
+    },
+    {
+      "sourceStart": 295.96753091999994,
+      "sourceEnd": 296.01753092,
+      "targetStart": 59.0979959910003,
+      "targetEnd": 59.14799599100034
+    },
+    {
+      "sourceStart": 297.33753092000006,
+      "sourceEnd": 297.43732846,
+      "targetStart": 59.14799599100034,
+      "targetEnd": 59.24779353100031
+    },
+    {
+      "sourceStart": 302.83753091999995,
+      "sourceEnd": 304.59253091999994,
+      "targetStart": 59.24779353100031,
+      "targetEnd": 61.00279353100028
+    },
+    {
+      "sourceStart": 306.90753092,
+      "sourceEnd": 306.9175293889997,
+      "targetStart": 61.00279353100028,
+      "targetEnd": 61.01279199999995
+    },
+    {
+      "sourceStart": 307.10298738899974,
+      "sourceEnd": 308.22253092000005,
+      "targetStart": 61.01279199999996,
+      "targetEnd": 62.13233553100028
+    },
+    {
+      "sourceStart": 311.59672346,
+      "sourceEnd": 313.85253091999994,
+      "targetStart": 62.132335531000294,
+      "targetEnd": 64.38814299100024
+    },
+    {
+      "sourceStart": 316.01753092,
+      "sourceEnd": 318.17253092000004,
+      "targetStart": 64.38814299100024,
+      "targetEnd": 66.54314299100024
+    },
+    {
+      "sourceStart": 320.5075309199999,
+      "sourceEnd": 321.1541194599999,
+      "targetStart": 66.54314299100024,
+      "targetEnd": 67.18973153100025
+    },
+    {
+      "sourceStart": 326.584511129,
+      "sourceEnd": 326.5945295979998,
+      "targetStart": 67.18973153100025,
+      "targetEnd": 67.19974999999998
+    },
+    {
+      "sourceStart": 330.40096759799974,
+      "sourceEnd": 334.99769659799966,
+      "targetStart": 67.19975,
+      "targetEnd": 71.79647899999989
+    },
+    {
+      "sourceStart": 335.1515715979997,
+      "sourceEnd": 335.15253091999995,
+      "targetStart": 71.7964789999999,
+      "targetEnd": 71.79743832200016
+    },
+    {
+      "sourceStart": 336.60993246,
+      "sourceEnd": 339.07026413799986,
+      "targetStart": 71.79743832200015,
+      "targetEnd": 74.25777
+    },
+    {
+      "sourceStart": 341.4611391379998,
+      "sourceEnd": 342.2494101379997,
+      "targetStart": 74.25777000000001,
+      "targetEnd": 75.04604099999993
+    },
+    {
+      "sourceStart": 342.5383691379998,
+      "sourceEnd": 343.4570351379998,
+      "targetStart": 75.04604099999992,
+      "targetEnd": 75.96470699999992
+    },
+    {
+      "sourceStart": 343.73051513799976,
+      "sourceEnd": 345.28753092000005,
+      "targetStart": 75.96470699999992,
+      "targetEnd": 77.52172278200021
+    },
+    {
+      "sourceStart": 346.80753092,
+      "sourceEnd": 348.91253091999994,
+      "targetStart": 77.5217227820002,
+      "targetEnd": 79.62672278200019
+    },
+    {
+      "sourceStart": 362.00157846,
+      "sourceEnd": 364.57253091999996,
+      "targetStart": 79.62672278200019,
+      "targetEnd": 82.1976752420001
+    },
+    {
+      "sourceStart": 365.13753092,
+      "sourceEnd": 365.14447867799976,
+      "targetStart": 82.1976752420001,
+      "targetEnd": 82.20462299999987
+    },
+    {
+      "sourceStart": 365.3887706779998,
+      "sourceEnd": 366.1255206779998,
+      "targetStart": 82.20462299999988,
+      "targetEnd": 82.94137299999988
+    },
+    {
+      "sourceStart": 366.67710367799975,
+      "sourceEnd": 367.69253091999997,
+      "targetStart": 82.94137299999988,
+      "targetEnd": 83.9568002420001
+    },
+    {
+      "sourceStart": 371.4224114599999,
+      "sourceEnd": 374.4363904599999,
+      "targetStart": 83.95680024200009,
+      "targetEnd": 86.97077924200012
+    },
+    {
+      "sourceStart": 378.30753092,
+      "sourceEnd": 379.21018246000006,
+      "targetStart": 86.97077924200012,
+      "targetEnd": 87.87343078200017
+    },
+    {
+      "sourceStart": 380.14753092,
+      "sourceEnd": 383.42253092,
+      "targetStart": 87.87343078200017,
+      "targetEnd": 91.14843078200018
+    },
+    {
+      "sourceStart": 397.97159846000005,
+      "sourceEnd": 399.05856167799976,
+      "targetStart": 91.14843078200018,
+      "targetEnd": 92.23539399999994
+    },
+    {
+      "sourceStart": 399.41391567799974,
+      "sourceEnd": 403.5325309199999,
+      "targetStart": 92.23539399999994,
+      "targetEnd": 96.35400924200009
+    },
+    {
+      "sourceStart": 406.53349446000004,
+      "sourceEnd": 407.52474445999997,
+      "targetStart": 96.35400924200009,
+      "targetEnd": 97.34525924200004
+    },
+    {
+      "sourceStart": 407.86753091999987,
+      "sourceEnd": 407.8775406779998,
+      "targetStart": 97.34525924200004,
+      "targetEnd": 97.3552689999999
+    },
+    {
+      "sourceStart": 408.0972496779998,
+      "sourceEnd": 408.86372345999996,
+      "targetStart": 97.3552689999999,
+      "targetEnd": 98.12174278200006
+    },
+    {
+      "sourceStart": 416.53753092,
+      "sourceEnd": 419.05460013799996,
+      "targetStart": 98.12174278200006,
+      "targetEnd": 100.63881199999999
+    },
+    {
+      "sourceStart": 419.8947461379999,
+      "sourceEnd": 421.25253091999986,
+      "targetStart": 100.638812,
+      "targetEnd": 101.99659678199998
+    },
+    {
+      "sourceStart": 430.55753092,
+      "sourceEnd": 433.0530571379999,
+      "targetStart": 101.99659678199998,
+      "targetEnd": 104.49212299999988
+    },
+    {
+      "sourceStart": 433.3203691379998,
+      "sourceEnd": 434.17924445999995,
+      "targetStart": 104.49212299999988,
+      "targetEnd": 105.35099832199998
+    },
+    {
+      "sourceStart": 435.41795246000004,
+      "sourceEnd": 437.42374413799985,
+      "targetStart": 105.35099832199998,
+      "targetEnd": 107.35678999999985
+    },
+    {
+      "sourceStart": 437.7864101379999,
+      "sourceEnd": 439.92066113799996,
+      "targetStart": 107.35678999999985,
+      "targetEnd": 109.491041
+    },
+    {
+      "sourceStart": 441.2788281380001,
+      "sourceEnd": 442.92576546,
+      "targetStart": 109.491041,
+      "targetEnd": 111.13797832199992
+    },
+    {
+      "sourceStart": 444.36003645999995,
+      "sourceEnd": 445.735911138,
+      "targetStart": 111.13797832199992,
+      "targetEnd": 112.51385299999998
+    },
+    {
+      "sourceStart": 532.0581430990011,
+      "sourceEnd": 533.460768099001,
+      "targetStart": 112.51385299999998,
+      "targetEnd": 113.91647799999998
+    },
+    {
+      "sourceStart": 538.6440629740011,
+      "sourceEnd": 539.6116049740008,
+      "targetStart": 113.91647799999996,
+      "targetEnd": 114.88401999999957
+    },
+    {
+      "sourceStart": 542.174687974001,
+      "sourceEnd": 543.51253092,
+      "targetStart": 114.8840199999996,
+      "targetEnd": 116.22186294599868
+    },
+    {
+      "sourceStart": 545.29753092,
+      "sourceEnd": 549.19216146,
+      "targetStart": 116.22186294599865,
+      "targetEnd": 120.1164934859986
+    },
+    {
+      "sourceStart": 551.6775309200001,
+      "sourceEnd": 553.5537454340014,
+      "targetStart": 120.1164934859986,
+      "targetEnd": 121.99270799999991
+    },
+    {
+      "sourceStart": 553.7940574340014,
+      "sourceEnd": 555.8215164340014,
+      "targetStart": 121.99270799999994,
+      "targetEnd": 124.02016699999993
+    },
+    {
+      "sourceStart": 556.1645574340015,
+      "sourceEnd": 556.2285994340015,
+      "targetStart": 124.02016699999993,
+      "targetEnd": 124.08420899999993
+    },
+    {
+      "sourceStart": 637.7480224340015,
+      "sourceEnd": 640.8977034599999,
+      "targetStart": 124.0842089999999,
+      "targetEnd": 127.23389002599819
+    },
+    {
+      "sourceStart": 657.9575309200001,
+      "sourceEnd": 658.7092178940013,
+      "targetStart": 127.23389002599822,
+      "targetEnd": 127.98557699999947
+    },
+    {
+      "sourceStart": 662.1110098940014,
+      "sourceEnd": 666.1108918940018,
+      "targetStart": 127.98557699999944,
+      "targetEnd": 131.9854589999999
+    },
+    {
+      "sourceStart": 672.8195731030019,
+      "sourceEnd": 673.6955941030019,
+      "targetStart": 131.98545899999988,
+      "targetEnd": 132.8614799999999
+    },
+    {
+      "sourceStart": 673.9053651030018,
+      "sourceEnd": 676.9879061030018,
+      "targetStart": 132.86147999999986,
+      "targetEnd": 135.94402099999985
+    },
+    {
+      "sourceStart": 678.2536771030019,
+      "sourceEnd": 679.9241561030019,
+      "targetStart": 135.94402099999985,
+      "targetEnd": 137.61449999999982
+    },
+    {
+      "sourceStart": 685.433022187002,
+      "sourceEnd": 686.6155364599998,
+      "targetStart": 137.61449999999985,
+      "targetEnd": 138.7970142729977
+    },
+    {
+      "sourceStart": 687.9039534599999,
+      "sourceEnd": 689.4391471870019,
+      "targetStart": 138.7970142729977,
+      "targetEnd": 140.33220799999987
+    },
+    {
+      "sourceStart": 694.6206271030022,
+      "sourceEnd": 697.9872241030016,
+      "targetStart": 140.33220799999984,
+      "targetEnd": 143.69880499999925
+    },
+    {
+      "sourceStart": 698.2080991030017,
+      "sourceEnd": 699.7891201030017,
+      "targetStart": 143.69880499999925,
+      "targetEnd": 145.27982599999925
+    },
+    {
+      "sourceStart": 700.2611821030016,
+      "sourceEnd": 701.9925309199998,
+      "targetStart": 145.27982599999925,
+      "targetEnd": 147.01117481699754
+    },
+    {
+      "sourceStart": 703.638362837,
+      "sourceEnd": 703.7356250200023,
+      "targetStart": 147.01117481699754,
+      "targetEnd": 147.10843699999984
+    },
+    {
+      "sourceStart": 705.5106670200024,
+      "sourceEnd": 705.5133628369999,
+      "targetStart": 147.10843699999984,
+      "targetEnd": 147.1111328169974
+    },
+    {
+      "sourceStart": 710.5156614599999,
+      "sourceEnd": 711.7724324599999,
+      "targetStart": 147.11113281699738,
+      "targetEnd": 148.36790381699734
+    },
+    {
+      "sourceStart": 713.3659114599999,
+      "sourceEnd": 715.97805746,
+      "targetStart": 148.3679038169973,
+      "targetEnd": 150.9800498169973
+    },
+    {
+      "sourceStart": 717.0162117120001,
+      "sourceEnd": 717.0262238950027,
+      "targetStart": 150.98004981699734,
+      "targetEnd": 150.9900619999998
+    },
+    {
+      "sourceStart": 728.0033509780028,
+      "sourceEnd": 729.6469339780028,
+      "targetStart": 150.99006199999982,
+      "targetEnd": 152.6336449999998
+    },
+    {
+      "sourceStart": 731.2245256860031,
+      "sourceEnd": 734.0986446860022,
+      "targetStart": 152.6336449999998,
+      "targetEnd": 155.5077639999991
+    },
+    {
+      "sourceStart": 739.8437349780023,
+      "sourceEnd": 741.3625309199999,
+      "targetStart": 155.50776399999913,
+      "targetEnd": 157.02655994199677
+    },
+    {
+      "sourceStart": 742.62299446,
+      "sourceEnd": 743.64253092,
+      "targetStart": 157.02655994199674,
+      "targetEnd": 158.0460964019968
+    },
+    {
+      "sourceStart": 744.04753092,
+      "sourceEnd": 747.238329518003,
+      "targetStart": 158.04609640199678,
+      "targetEnd": 161.23689499999978
+    },
+    {
+      "sourceStart": 765.9974003100032,
+      "sourceEnd": 768.0203513100026,
+      "targetStart": 161.2368949999998,
+      "targetEnd": 163.25984599999913
+    },
+    {
+      "sourceStart": 768.7182683100028,
+      "sourceEnd": 771.0825309199998,
+      "targetStart": 163.25984599999916,
+      "targetEnd": 165.62410860999626
+    },
+    {
+      "sourceStart": 774.0875309199998,
+      "sourceEnd": 774.13753092,
+      "targetStart": 165.62410860999628,
+      "targetEnd": 165.6741086099962
+    },
+    {
+      "sourceStart": 776.89753092,
+      "sourceEnd": 776.9225309200001,
+      "targetStart": 165.67410860999624,
+      "targetEnd": 165.6991086099963
+    },
+    {
+      "sourceStart": 777.5675309200001,
+      "sourceEnd": 777.5775183100029,
+      "targetStart": 165.69910860999633,
+      "targetEnd": 165.70909599999914
+    },
+    {
+      "sourceStart": 777.8062063100028,
+      "sourceEnd": 780.7225309199998,
+      "targetStart": 165.70909599999916,
+      "targetEnd": 168.62542060999624
+    },
+    {
+      "sourceStart": 782.6675309200002,
+      "sourceEnd": 786.9825309200003,
+      "targetStart": 168.6254206099962,
+      "targetEnd": 172.94042060999624
+    },
+    {
+      "sourceStart": 787.2675309200001,
+      "sourceEnd": 787.2685603100033,
+      "targetStart": 172.94042060999627,
+      "targetEnd": 172.9414499999993
+    },
+    {
+      "sourceStart": 787.4660603100032,
+      "sourceEnd": 787.93428646,
+      "targetStart": 172.94144999999926,
+      "targetEnd": 173.40967614999624
+    },
+    {
+      "sourceStart": 795.2429091700001,
+      "sourceEnd": 795.2527940200036,
+      "targetStart": 173.40967614999622,
+      "targetEnd": 173.41956099999976
+    },
+    {
+      "sourceStart": 800.7761700200037,
+      "sourceEnd": 800.86753092,
+      "targetStart": 173.4195609999998,
+      "targetEnd": 173.510921899996
+    },
+    {
+      "sourceStart": 800.90753092,
+      "sourceEnd": 801.1009820200036,
+      "targetStart": 173.51092189999602,
+      "targetEnd": 173.70437299999975
+    },
+    {
+      "sourceStart": 804.4557110200037,
+      "sourceEnd": 807.4390440200036,
+      "targetStart": 173.70437299999978,
+      "targetEnd": 176.6877059999997
+    },
+    {
+      "sourceStart": 807.6289610200038,
+      "sourceEnd": 809.2806194599998,
+      "targetStart": 176.68770599999974,
+      "targetEnd": 178.3393644399959
+    },
+    {
+      "sourceStart": 819.9775309200002,
+      "sourceEnd": 820.6525309200001,
+      "targetStart": 178.33936443999588,
+      "targetEnd": 179.01436443999597
+    },
+    {
+      "sourceStart": 825.6475309199998,
+      "sourceEnd": 827.0425309199998,
+      "targetStart": 179.01436443999594,
+      "targetEnd": 180.40936443999595
+    },
+    {
+      "sourceStart": 828.9051614599998,
+      "sourceEnd": 829.7403074599999,
+      "targetStart": 180.40936443999593,
+      "targetEnd": 181.24451043999596
+    },
+    {
+      "sourceStart": 838.3681614599998,
+      "sourceEnd": 839.9280650200035,
+      "targetStart": 181.24451043999593,
+      "targetEnd": 182.80441399999967
+    },
+    {
+      "sourceStart": 843.504920020004,
+      "sourceEnd": 844.6734750200033,
+      "targetStart": 182.8044139999997,
+      "targetEnd": 183.97296899999907
+    },
+    {
+      "sourceStart": 845.679433020003,
+      "sourceEnd": 846.6505990039996,
+      "targetStart": 183.9729689999991,
+      "targetEnd": 184.94413498399564
+    },
+    {
+      "sourceStart": 851.1175309199998,
+      "sourceEnd": 852.5450729360032,
+      "targetStart": 184.94413498399567,
+      "targetEnd": 186.371676999999
+    },
+    {
+      "sourceStart": 852.7268019360034,
+      "sourceEnd": 853.7247654600002,
+      "targetStart": 186.37167699999898,
+      "targetEnd": 187.3696405239957
+    },
+    {
+      "sourceStart": 857.7575309200001,
+      "sourceEnd": 858.7899913960043,
+      "targetStart": 187.36964052399568,
+      "targetEnd": 188.40210099999973
+    },
+    {
+      "sourceStart": 876.2635155210044,
+      "sourceEnd": 876.2734300450002,
+      "targetStart": 188.4021009999997,
+      "targetEnd": 188.41201552399536
+    },
+    {
+      "sourceStart": 878.8964114599999,
+      "sourceEnd": 880.0979069360037,
+      "targetStart": 188.41201552399534,
+      "targetEnd": 189.61351099999905
+    },
+    {
+      "sourceStart": 880.3291149360039,
+      "sourceEnd": 882.0110319360037,
+      "targetStart": 189.61351099999908,
+      "targetEnd": 191.29542799999905
+    },
+    {
+      "sourceStart": 882.4322189360037,
+      "sourceEnd": 883.1751614599998,
+      "targetStart": 191.29542799999908,
+      "targetEnd": 192.03837052399518
+    },
+    {
+      "sourceStart": 888.5875309200002,
+      "sourceEnd": 889.5927823960047,
+      "targetStart": 192.03837052399516,
+      "targetEnd": 193.0436219999997
+    },
+    {
+      "sourceStart": 892.4673920620049,
+      "sourceEnd": 894.8797460620048,
+      "targetStart": 193.04362199999966,
+      "targetEnd": 195.45597599999962
+    },
+    {
+      "sourceStart": 904.464517062005,
+      "sourceEnd": 906.203267062005,
+      "targetStart": 195.45597599999965,
+      "targetEnd": 197.19472599999966
+    },
+    {
+      "sourceStart": 906.4909750620051,
+      "sourceEnd": 908.5525309199999,
+      "targetStart": 197.19472599999963,
+      "targetEnd": 199.25628185799462
+    },
+    {
+      "sourceStart": 910.4675309200001,
+      "sourceEnd": 910.9518230620041,
+      "targetStart": 199.25628185799465,
+      "targetEnd": 199.74057399999867
+    },
+    {
+      "sourceStart": 911.2170730620041,
+      "sourceEnd": 914.95420246,
+      "targetStart": 199.74057399999865,
+      "targetEnd": 203.47770339799462
+    },
+    {
+      "sourceStart": 921.8375309200001,
+      "sourceEnd": 923.8503484600001,
+      "targetStart": 203.47770339799465,
+      "targetEnd": 205.49052093799463
+    },
+    {
+      "sourceStart": 924.7575309199999,
+      "sourceEnd": 924.767479982004,
+      "targetStart": 205.49052093799466,
+      "targetEnd": 205.50046999999887
+    },
+    {
+      "sourceStart": 925.0408969820044,
+      "sourceEnd": 927.32097346,
+      "targetStart": 205.5004699999989,
+      "targetEnd": 207.7805464779945
+    },
+    {
+      "sourceStart": 930.21753092,
+      "sourceEnd": 933.0955644420051,
+      "targetStart": 207.78054647799453,
+      "targetEnd": 210.65857999999963
+    },
+    {
+      "sourceStart": 933.2943984420051,
+      "sourceEnd": 933.8525309199999,
+      "targetStart": 210.6585799999996,
+      "targetEnd": 211.21671247799452
+    },
+    {
+      "sourceStart": 936.02753646,
+      "sourceEnd": 938.79253092,
+      "targetStart": 211.2167124779945,
+      "targetEnd": 213.9817069379945
+    },
+    {
+      "sourceStart": 955.2523074600001,
+      "sourceEnd": 955.9778074599999,
+      "targetStart": 213.98170693799452,
+      "targetEnd": 214.70720693799439
+    },
+    {
+      "sourceStart": 957.9563484599998,
+      "sourceEnd": 959.28253092,
+      "targetStart": 214.7072069379944,
+      "targetEnd": 216.03338939799454
+    },
+    {
+      "sourceStart": 960.92753092,
+      "sourceEnd": 961.6825309200001,
+      "targetStart": 216.03338939799457,
+      "targetEnd": 216.78838939799454
+    },
+    {
+      "sourceStart": 967.7275309200002,
+      "sourceEnd": 969.5564505220052,
+      "targetStart": 216.78838939799456,
+      "targetEnd": 218.61730899999958
+    },
+    {
+      "sourceStart": 970.2039295220052,
+      "sourceEnd": 970.2348255220052,
+      "targetStart": 218.61730899999955,
+      "targetEnd": 218.64820499999956
+    },
+    {
+      "sourceStart": 972.4685965220051,
+      "sourceEnd": 974.3368185220047,
+      "targetStart": 218.64820499999954,
+      "targetEnd": 220.51642699999917
+    },
+    {
+      "sourceStart": 974.6390485220049,
+      "sourceEnd": 975.8408074600002,
+      "targetStart": 220.51642699999914,
+      "targetEnd": 221.7181859379944
+    },
+    {
+      "sourceStart": 984.19753092,
+      "sourceEnd": 984.8092089820047,
+      "targetStart": 221.71818593799438,
+      "targetEnd": 222.3298639999992
+    },
+    {
+      "sourceStart": 985.1863759820051,
+      "sourceEnd": 986.1525309199999,
+      "targetStart": 222.32986399999922,
+      "targetEnd": 223.29601893799418
+    },
+    {
+      "sourceStart": 991.7010574599998,
+      "sourceEnd": 992.3946404599998,
+      "targetStart": 223.29601893799415,
+      "targetEnd": 223.98960193799417
+    },
+    {
+      "sourceStart": 995.0612654600001,
+      "sourceEnd": 995.5352845220053,
+      "targetStart": 223.98960193799414,
+      "targetEnd": 224.46362099999953
+    },
+    {
+      "sourceStart": 996.1450555220055,
+      "sourceEnd": 996.72264046,
+      "targetStart": 224.4636209999995,
+      "targetEnd": 225.04120593799416
+    },
+    {
+      "sourceStart": 997.46753092,
+      "sourceEnd": 997.477479982005,
+      "targetStart": 225.04120593799414,
+      "targetEnd": 225.0511549999992
+    },
+    {
+      "sourceStart": 997.6667299820053,
+      "sourceEnd": 998.5425309200002,
+      "targetStart": 225.05115499999917,
+      "targetEnd": 225.92695593799408
+    },
+    {
+      "sourceStart": 1007.3075309200001,
+      "sourceEnd": 1008.74253092,
+      "targetStart": 225.92695593799405,
+      "targetEnd": 227.3619559379939
+    },
+    {
+      "sourceStart": 1010.9817654599998,
+      "sourceEnd": 1012.38253092,
+      "targetStart": 227.36195593799388,
+      "targetEnd": 228.76272139799414
+    },
+    {
+      "sourceStart": 1014.0675309200002,
+      "sourceEnd": 1014.6392234599999,
+      "targetStart": 228.7627213979941,
+      "targetEnd": 229.334413937994
+    },
+    {
+      "sourceStart": 1016.3375309200001,
+      "sourceEnd": 1017.4747654599996,
+      "targetStart": 229.33441393799396,
+      "targetEnd": 230.47164847799377
+    },
+    {
+      "sourceStart": 1022.6442864599999,
+      "sourceEnd": 1026.0022169820056,
+      "targetStart": 230.47164847799374,
+      "targetEnd": 233.8295789999995
+    },
+    {
+      "sourceStart": 1065.524508982006,
+      "sourceEnd": 1068.56730746,
+      "targetStart": 233.82957899999948,
+      "targetEnd": 236.8723774779936
+    },
+    {
+      "sourceStart": 1072.93866146,
+      "sourceEnd": 1077.1361049820055,
+      "targetStart": 236.87237747799358,
+      "targetEnd": 241.06982099999914
+    },
+    {
+      "sourceStart": 1077.6298549820053,
+      "sourceEnd": 1079.6395309200002,
+      "targetStart": 241.0698209999991,
+      "targetEnd": 243.07949693799367
+    },
+    {
+      "sourceStart": 1081.19474446,
+      "sourceEnd": 1081.6120765220057,
+      "targetStart": 243.0794969379937,
+      "targetEnd": 243.49682899999942
+    },
+    {
+      "sourceStart": 1114.457164273005,
+      "sourceEnd": 1118.9525309200003,
+      "targetStart": 243.49682899999945,
+      "targetEnd": 247.99219564699473
+    },
+    {
+      "sourceStart": 1132.22214046,
+      "sourceEnd": 1132.68972346,
+      "targetStart": 247.99219564699476,
+      "targetEnd": 248.45977864699483
+    },
+    {
+      "sourceStart": 1135.204172795,
+      "sourceEnd": 1135.2097851480046,
+      "targetStart": 248.45977864699486,
+      "targetEnd": 248.46539099999944
+    },
+    {
+      "sourceStart": 1137.4976391480045,
+      "sourceEnd": 1142.4840281480042,
+      "targetStart": 248.4653909999994,
+      "targetEnd": 253.45177999999908
+    },
+    {
+      "sourceStart": 1142.7963401480042,
+      "sourceEnd": 1146.5743471480046,
+      "targetStart": 253.45177999999905,
+      "targetEnd": 257.22978699999936
+    },
+    {
+      "sourceStart": 1147.9120351480046,
+      "sourceEnd": 1147.9195691700002,
+      "targetStart": 257.2297869999994,
+      "targetEnd": 257.23732102199506
+    },
+    {
+      "sourceStart": 1156.67859846,
+      "sourceEnd": 1159.2925309200002,
+      "targetStart": 257.237321021995,
+      "targetEnd": 259.8512534819951
+    },
+    {
+      "sourceStart": 1171.4675309200002,
+      "sourceEnd": 1172.412994438004,
+      "targetStart": 259.8512534819951,
+      "targetEnd": 260.796716999999
+    },
+    {
+      "sourceStart": 1173.0389324380044,
+      "sourceEnd": 1174.42253092,
+      "targetStart": 260.79671699999903,
+      "targetEnd": 262.1803154819951
+    },
+    {
+      "sourceStart": 1175.66384846,
+      "sourceEnd": 1177.733436978004,
+      "targetStart": 262.180315481995,
+      "targetEnd": 264.24990399999893
+    },
+    {
+      "sourceStart": 1178.687082978004,
+      "sourceEnd": 1180.2425309200003,
+      "targetStart": 264.249903999999,
+      "targetEnd": 265.80535194199524
+    },
+    {
+      "sourceStart": 1183.3924324600002,
+      "sourceEnd": 1184.1825309200003,
+      "targetStart": 265.80535194199524,
+      "targetEnd": 266.5954504019953
+    },
+    {
+      "sourceStart": 1185.4214324600002,
+      "sourceEnd": 1187.686698058004,
+      "targetStart": 266.5954504019953,
+      "targetEnd": 268.860715999999
+    },
+    {
+      "sourceStart": 1188.4664270580038,
+      "sourceEnd": 1191.9325309200003,
+      "targetStart": 268.860715999999,
+      "targetEnd": 272.32681986199555
+    },
+    {
+      "sourceStart": 1193.5645309200004,
+      "sourceEnd": 1193.572310058004,
+      "targetStart": 272.32681986199555,
+      "targetEnd": 272.33459899999946
+    },
+    {
+      "sourceStart": 1195.1561850580042,
+      "sourceEnd": 1196.0486770580037,
+      "targetStart": 272.3345989999994,
+      "targetEnd": 273.2270909999989
+    },
+    {
+      "sourceStart": 1196.4752400580037,
+      "sourceEnd": 1200.41253092,
+      "targetStart": 273.22709099999895,
+      "targetEnd": 277.1643818619955
+    },
+    {
+      "sourceStart": 1221.6275309200003,
+      "sourceEnd": 1222.76597346,
+      "targetStart": 277.1643818619954,
+      "targetEnd": 278.3028244019951
+    },
+    {
+      "sourceStart": 1225.30161946,
+      "sourceEnd": 1228.2045740580038,
+      "targetStart": 278.3028244019951,
+      "targetEnd": 281.2057789999989
+    },
+    {
+      "sourceStart": 1228.7697820580036,
+      "sourceEnd": 1230.3525309200002,
+      "targetStart": 281.2057789999989,
+      "targetEnd": 282.78852786199553
+    },
+    {
+      "sourceStart": 1238.32753092,
+      "sourceEnd": 1242.7838100580038,
+      "targetStart": 282.7885278619955,
+      "targetEnd": 287.24480699999935
+    },
+    {
+      "sourceStart": 1281.957745975004,
+      "sourceEnd": 1285.2154459750034,
+      "targetStart": 287.24480699999935,
+      "targetEnd": 290.50250699999884
+    },
+    {
+      "sourceStart": 1286.6843419750035,
+      "sourceEnd": 1286.80753092,
+      "targetStart": 290.5025069999989,
+      "targetEnd": 290.6256959449956
+    },
+    {
+      "sourceStart": 1287.08753092,
+      "sourceEnd": 1287.2347169750035,
+      "targetStart": 290.6256959449955,
+      "targetEnd": 290.7728819999989
+    },
+    {
+      "sourceStart": 1289.1350602250031,
+      "sourceEnd": 1291.0074222250037,
+      "targetStart": 290.7728819999989,
+      "targetEnd": 292.64524399999937
+    },
+    {
+      "sourceStart": 1294.8199520580035,
+      "sourceEnd": 1296.119111058003,
+      "targetStart": 292.64524399999937,
+      "targetEnd": 293.94440299999883
+    },
+    {
+      "sourceStart": 1296.6305480580031,
+      "sourceEnd": 1296.6395309200002,
+      "targetStart": 293.9444029999989,
+      "targetEnd": 293.95338586199597
+    },
+    {
+      "sourceStart": 1298.79984846,
+      "sourceEnd": 1300.38624446,
+      "targetStart": 293.95338586199597,
+      "targetEnd": 295.5397818619959
+    },
+    {
+      "sourceStart": 1303.82753092,
+      "sourceEnd": 1306.03036946,
+      "targetStart": 295.5397818619959,
+      "targetEnd": 297.7426204019958
+    },
+    {
+      "sourceStart": 1309.6375309200002,
+      "sourceEnd": 1312.6051055180035,
+      "targetStart": 297.7426204019958,
+      "targetEnd": 300.7101949999989
+    },
+    {
+      "sourceStart": 1313.1571675180035,
+      "sourceEnd": 1313.7125309200005,
+      "targetStart": 300.71019499999886,
+      "targetEnd": 301.2655584019958
+    },
+    {
+      "sourceStart": 1315.8975309200002,
+      "sourceEnd": 1315.9475309200002,
+      "targetStart": 301.2655584019958,
+      "targetEnd": 301.31555840199576
+    },
+    {
+      "sourceStart": 1317.06753092,
+      "sourceEnd": 1317.0925309200002,
+      "targetStart": 301.31555840199576,
+      "targetEnd": 301.34055840199585
+    },
+    {
+      "sourceStart": 1319.6475309200002,
+      "sourceEnd": 1320.7530225180033,
+      "targetStart": 301.34055840199585,
+      "targetEnd": 302.4460499999989
+    },
+    {
+      "sourceStart": 1321.548876518003,
+      "sourceEnd": 1322.392647518003,
+      "targetStart": 302.4460499999989,
+      "targetEnd": 303.28982099999894
+    },
+    {
+      "sourceStart": 1322.5953975180032,
+      "sourceEnd": 1323.3395225180032,
+      "targetStart": 303.2898209999989,
+      "targetEnd": 304.03394599999893
+    },
+    {
+      "sourceStart": 1323.6937725180032,
+      "sourceEnd": 1325.6175425180031,
+      "targetStart": 304.0339459999989,
+      "targetEnd": 305.95771599999887
+    },
+    {
+      "sourceStart": 1326.1418975180031,
+      "sourceEnd": 1328.3625309200002,
+      "targetStart": 305.95771599999887,
+      "targetEnd": 308.1783494019959
+    },
+    {
+      "sourceStart": 1337.0575309200003,
+      "sourceEnd": 1339.29845346,
+      "targetStart": 308.1783494019959,
+      "targetEnd": 310.4192719419958
+    },
+    {
+      "sourceStart": 1339.5775309199998,
+      "sourceEnd": 1339.5874949780032,
+      "targetStart": 310.4192719419958,
+      "targetEnd": 310.4292359999989
+    },
+    {
+      "sourceStart": 1339.796682978003,
+      "sourceEnd": 1340.97464046,
+      "targetStart": 310.42923599999887,
+      "targetEnd": 311.6071934819958
+    },
+    {
+      "sourceStart": 1341.4575309200002,
+      "sourceEnd": 1341.4673854380032,
+      "targetStart": 311.6071934819958,
+      "targetEnd": 311.6170479999989
+    },
+    {
+      "sourceStart": 1341.7756354380033,
+      "sourceEnd": 1343.6925309200003,
+      "targetStart": 311.6170479999989,
+      "targetEnd": 313.533943481996
+    },
+    {
+      "sourceStart": 1345.7168074600002,
+      "sourceEnd": 1347.4525309200003,
+      "targetStart": 313.53394348199595,
+      "targetEnd": 315.2696669419961
+    },
+    {
+      "sourceStart": 1348.82753092,
+      "sourceEnd": 1350.1425309200001,
+      "targetStart": 315.2696669419961,
+      "targetEnd": 316.58466694199615
+    },
+    {
+      "sourceStart": 1350.6675309200002,
+      "sourceEnd": 1350.7175309200002,
+      "targetStart": 316.58466694199615,
+      "targetEnd": 316.6346669419961
+    },
+    {
+      "sourceStart": 1351.31753092,
+      "sourceEnd": 1351.3425309200002,
+      "targetStart": 316.6346669419961,
+      "targetEnd": 316.6596669419962
+    },
+    {
+      "sourceStart": 1362.83501467,
+      "sourceEnd": 1362.844737728003,
+      "targetStart": 316.6596669419962,
+      "targetEnd": 316.66938999999934
+    },
+    {
+      "sourceStart": 1366.953424728003,
+      "sourceEnd": 1367.0275309200001,
+      "targetStart": 316.66938999999934,
+      "targetEnd": 316.74349619199637
+    },
+    {
+      "sourceStart": 1367.34753092,
+      "sourceEnd": 1367.5828484600002,
+      "targetStart": 316.74349619199637,
+      "targetEnd": 316.9788137319965
+    },
+    {
+      "sourceStart": 1368.161893087,
+      "sourceEnd": 1368.1718653550029,
+      "targetStart": 316.97881373199647,
+      "targetEnd": 316.9887859999993
+    },
+    {
+      "sourceStart": 1372.0987111880027,
+      "sourceEnd": 1374.8774611880026,
+      "targetStart": 316.9887859999993,
+      "targetEnd": 319.76753599999927
+    },
+    {
+      "sourceStart": 1375.8377111880027,
+      "sourceEnd": 1375.8470477950002,
+      "targetStart": 319.76753599999927,
+      "targetEnd": 319.77687260699673
+    },
+    {
+      "sourceStart": 1377.01047346,
+      "sourceEnd": 1378.4695538530025,
+      "targetStart": 319.77687260699673,
+      "targetEnd": 321.2359529999992
+    },
+    {
+      "sourceStart": 1378.7389288530026,
+      "sourceEnd": 1379.2773458530025,
+      "targetStart": 321.23595299999926,
+      "targetEnd": 321.77436999999924
+    },
+    {
+      "sourceStart": 1380.9465748530024,
+      "sourceEnd": 1383.923941853002,
+      "targetStart": 321.77436999999924,
+      "targetEnd": 324.7517369999988
+    },
+    {
+      "sourceStart": 1390.1910226440018,
+      "sourceEnd": 1391.1912920870004,
+      "targetStart": 324.75173699999874,
+      "targetEnd": 325.7520064429972
+    },
+    {
+      "sourceStart": 1411.87753092,
+      "sourceEnd": 1414.089636477002,
+      "targetStart": 325.75200644299713,
+      "targetEnd": 327.96411199999864
+    },
+    {
+      "sourceStart": 1419.027866477002,
+      "sourceEnd": 1420.1683324770024,
+      "targetStart": 327.9641119999987,
+      "targetEnd": 329.10457799999926
+    },
+    {
+      "sourceStart": 1469.6153858520015,
+      "sourceEnd": 1471.8116778520016,
+      "targetStart": 329.1045779999992,
+      "targetEnd": 331.3008699999992
+    },
+    {
+      "sourceStart": 1568.9683356440007,
+      "sourceEnd": 1571.4525309200005,
+      "targetStart": 331.3008699999992,
+      "targetEnd": 333.7850652759988
+    },
+    {
+      "sourceStart": 1572.5724324600003,
+      "sourceEnd": 1572.60430746,
+      "targetStart": 333.7850652759989,
+      "targetEnd": 333.8169402759986
+    },
+    {
+      "sourceStart": 1582.4175309200002,
+      "sourceEnd": 1584.58014046,
+      "targetStart": 333.81694027599855,
+      "targetEnd": 335.9795498159983
+    },
+    {
+      "sourceStart": 1588.8175309199999,
+      "sourceEnd": 1589.7435511039996,
+      "targetStart": 335.97954981599827,
+      "targetEnd": 336.9055699999981
+    },
+    {
+      "sourceStart": 1589.9131341039997,
+      "sourceEnd": 1591.1548841039998,
+      "targetStart": 336.90556999999814,
+      "targetEnd": 338.1473199999981
+    },
+    {
+      "sourceStart": 1591.543363104,
+      "sourceEnd": 1592.29253092,
+      "targetStart": 338.14731999999805,
+      "targetEnd": 338.8964878159983
+    },
+    {
+      "sourceStart": 1594.4175309200004,
+      "sourceEnd": 1596.2839471040002,
+      "targetStart": 338.8964878159982,
+      "targetEnd": 340.762903999998
+    },
+    {
+      "sourceStart": 1596.9137171040002,
+      "sourceEnd": 1598.73049446,
+      "targetStart": 340.76290399999806,
+      "targetEnd": 342.579681355998
+    }
+  ],
+  "cuts": [
+    {
+      "start": 0,
+      "end": 14.55753092
+    },
+    {
+      "start": 15.83928092,
+      "end": 16.40275992
+    },
+    {
+      "start": 17.091467920000003,
+      "end": 19.769509919999997
+    },
+    {
+      "start": 20.751822919999995,
+      "end": 21.422801919999998
+    },
+    {
+      "start": 21.811134919999997,
+      "end": 28.619535754000005
+    },
+    {
+      "start": 30.627530919999998,
+      "end": 32.27709892
+    },
+    {
+      "start": 32.734457754000005,
+      "end": 77.488993754
+    },
+    {
+      "start": 78.67699446,
+      "end": 80.382267337
+    },
+    {
+      "start": 80.392287631,
+      "end": 81.639120631
+    },
+    {
+      "start": 82.770766631,
+      "end": 82.96343363099999
+    },
+    {
+      "start": 84.83462063099999,
+      "end": 93.93656083999997
+    },
+    {
+      "start": 95.42689383999996,
+      "end": 95.64197783999998
+    },
+    {
+      "start": 97.08349883999998,
+      "end": 106.64844388199998
+    },
+    {
+      "start": 106.65753092000003,
+      "end": 107.89753092000001
+    },
+    {
+      "start": 107.92253092000001,
+      "end": 140.07753092
+    },
+    {
+      "start": 142.59082745999999,
+      "end": 143.52767737899998
+    },
+    {
+      "start": 143.53771080099992,
+      "end": 144.34566880099993
+    },
+    {
+      "start": 144.35753092,
+      "end": 145.67753091999998
+    },
+    {
+      "start": 145.81018980099992,
+      "end": 148.7462564259999
+    },
+    {
+      "start": 151.9371524259999,
+      "end": 153.7145753839999
+    },
+    {
+      "start": 155.96253092,
+      "end": 164.63289062899997
+    },
+    {
+      "start": 164.71628909299983,
+      "end": 165.07170609299982
+    },
+    {
+      "start": 167.15099446,
+      "end": 171.24753091999997
+    },
+    {
+      "start": 172.39026546,
+      "end": 173.26979662899998
+    },
+    {
+      "start": 173.2797947219998,
+      "end": 173.5756907219998
+    },
+    {
+      "start": 174.70660672199978,
+      "end": 177.58281105499975
+    },
+    {
+      "start": 178.94341505499978,
+      "end": 180.93756105499978
+    },
+    {
+      "start": 180.94753091999996,
+      "end": 181.38753092000002
+    },
+    {
+      "start": 181.63149905499978,
+      "end": 181.8489150549998
+    },
+    {
+      "start": 181.8882900549998,
+      "end": 182.9099990549998
+    },
+    {
+      "start": 185.13845705499978,
+      "end": 188.0930400549998
+    },
+    {
+      "start": 189.30153092,
+      "end": 190.38424387899997
+    },
+    {
+      "start": 190.39427401399976,
+      "end": 190.67906601399974
+    },
+    {
+      "start": 190.69956601399977,
+      "end": 191.53131601399977
+    },
+    {
+      "start": 192.61964901399972,
+      "end": 193.14198201399972
+    },
+    {
+      "start": 193.15052442,
+      "end": 198.27082746
+    },
+    {
+      "start": 200.11253092000004,
+      "end": 201.98585129499997
+    },
+    {
+      "start": 201.99554342899967,
+      "end": 202.41756342899967
+    },
+    {
+      "start": 202.42753091999995,
+      "end": 202.78753092
+    },
+    {
+      "start": 202.87950142899973,
+      "end": 209.5530559289997
+    },
+    {
+      "start": 210.7017849289997,
+      "end": 210.89638892899973
+    },
+    {
+      "start": 211.96703645999997,
+      "end": 212.28753092000002
+    },
+    {
+      "start": 214.44253092000005,
+      "end": 216.62753091999997
+    },
+    {
+      "start": 218.50955038899968,
+      "end": 236.33784238899972
+    },
+    {
+      "start": 238.77253092000007,
+      "end": 240.15441145999998
+    },
+    {
+      "start": 240.83393245999994,
+      "end": 243.24386946000004
+    },
+    {
+      "start": 244.80253092000004,
+      "end": 247.33753091999998
+    },
+    {
+      "start": 248.53253092000003,
+      "end": 251.32753092000002
+    },
+    {
+      "start": 253.84286945999992,
+      "end": 255.09753091999994
+    },
+    {
+      "start": 256.99517538899954,
+      "end": 257.1547173889996
+    },
+    {
+      "start": 258.73253092,
+      "end": 263.45249446
+    },
+    {
+      "start": 266.02253092,
+      "end": 267.20753091999995
+    },
+    {
+      "start": 271.92253092,
+      "end": 295.96753091999994
+    },
+    {
+      "start": 296.01753092,
+      "end": 297.33753092000006
+    },
+    {
+      "start": 297.43732846,
+      "end": 302.83753091999995
+    },
+    {
+      "start": 304.59253091999994,
+      "end": 306.90753092
+    },
+    {
+      "start": 306.9175293889997,
+      "end": 307.10298738899974
+    },
+    {
+      "start": 308.22253092000005,
+      "end": 311.59672346
+    },
+    {
+      "start": 313.85253091999994,
+      "end": 316.01753092
+    },
+    {
+      "start": 318.17253092000004,
+      "end": 320.5075309199999
+    },
+    {
+      "start": 321.1541194599999,
+      "end": 326.584511129
+    },
+    {
+      "start": 326.5945295979998,
+      "end": 330.40096759799974
+    },
+    {
+      "start": 334.99769659799966,
+      "end": 335.1515715979997
+    },
+    {
+      "start": 335.15253091999995,
+      "end": 336.60993246
+    },
+    {
+      "start": 339.07026413799986,
+      "end": 341.4611391379998
+    },
+    {
+      "start": 342.2494101379997,
+      "end": 342.5383691379998
+    },
+    {
+      "start": 343.4570351379998,
+      "end": 343.73051513799976
+    },
+    {
+      "start": 345.28753092000005,
+      "end": 346.80753092
+    },
+    {
+      "start": 348.91253091999994,
+      "end": 362.00157846
+    },
+    {
+      "start": 364.57253091999996,
+      "end": 365.13753092
+    },
+    {
+      "start": 365.14447867799976,
+      "end": 365.3887706779998
+    },
+    {
+      "start": 366.1255206779998,
+      "end": 366.67710367799975
+    },
+    {
+      "start": 367.69253091999997,
+      "end": 371.4224114599999
+    },
+    {
+      "start": 374.4363904599999,
+      "end": 378.30753092
+    },
+    {
+      "start": 379.21018246000006,
+      "end": 380.14753092
+    },
+    {
+      "start": 383.42253092,
+      "end": 397.97159846000005
+    },
+    {
+      "start": 399.05856167799976,
+      "end": 399.41391567799974
+    },
+    {
+      "start": 403.5325309199999,
+      "end": 406.53349446000004
+    },
+    {
+      "start": 407.52474445999997,
+      "end": 407.86753091999987
+    },
+    {
+      "start": 407.8775406779998,
+      "end": 408.0972496779998
+    },
+    {
+      "start": 408.86372345999996,
+      "end": 416.53753092
+    },
+    {
+      "start": 419.05460013799996,
+      "end": 419.8947461379999
+    },
+    {
+      "start": 421.25253091999986,
+      "end": 430.55753092
+    },
+    {
+      "start": 433.0530571379999,
+      "end": 433.3203691379998
+    },
+    {
+      "start": 434.17924445999995,
+      "end": 435.41795246000004
+    },
+    {
+      "start": 437.42374413799985,
+      "end": 437.7864101379999
+    },
+    {
+      "start": 439.92066113799996,
+      "end": 441.2788281380001
+    },
+    {
+      "start": 442.92576546,
+      "end": 444.36003645999995
+    },
+    {
+      "start": 445.735911138,
+      "end": 532.0581430990011
+    },
+    {
+      "start": 533.460768099001,
+      "end": 538.6440629740011
+    },
+    {
+      "start": 539.6116049740008,
+      "end": 542.174687974001
+    },
+    {
+      "start": 543.51253092,
+      "end": 545.29753092
+    },
+    {
+      "start": 549.19216146,
+      "end": 551.6775309200001
+    },
+    {
+      "start": 553.5537454340014,
+      "end": 553.7940574340014
+    },
+    {
+      "start": 555.8215164340014,
+      "end": 556.1645574340015
+    },
+    {
+      "start": 556.2285994340015,
+      "end": 637.7480224340015
+    },
+    {
+      "start": 640.8977034599999,
+      "end": 657.9575309200001
+    },
+    {
+      "start": 658.7092178940013,
+      "end": 662.1110098940014
+    },
+    {
+      "start": 666.1108918940018,
+      "end": 672.8195731030019
+    },
+    {
+      "start": 673.6955941030019,
+      "end": 673.9053651030018
+    },
+    {
+      "start": 676.9879061030018,
+      "end": 678.2536771030019
+    },
+    {
+      "start": 679.9241561030019,
+      "end": 685.433022187002
+    },
+    {
+      "start": 686.6155364599998,
+      "end": 687.9039534599999
+    },
+    {
+      "start": 689.4391471870019,
+      "end": 694.6206271030022
+    },
+    {
+      "start": 697.9872241030016,
+      "end": 698.2080991030017
+    },
+    {
+      "start": 699.7891201030017,
+      "end": 700.2611821030016
+    },
+    {
+      "start": 701.9925309199998,
+      "end": 703.638362837
+    },
+    {
+      "start": 703.7356250200023,
+      "end": 705.5106670200024
+    },
+    {
+      "start": 705.5133628369999,
+      "end": 710.5156614599999
+    },
+    {
+      "start": 711.7724324599999,
+      "end": 713.3659114599999
+    },
+    {
+      "start": 715.97805746,
+      "end": 717.0162117120001
+    },
+    {
+      "start": 717.0262238950027,
+      "end": 728.0033509780028
+    },
+    {
+      "start": 729.6469339780028,
+      "end": 731.2245256860031
+    },
+    {
+      "start": 734.0986446860022,
+      "end": 739.8437349780023
+    },
+    {
+      "start": 741.3625309199999,
+      "end": 742.62299446
+    },
+    {
+      "start": 743.64253092,
+      "end": 744.04753092
+    },
+    {
+      "start": 747.238329518003,
+      "end": 765.9974003100032
+    },
+    {
+      "start": 768.0203513100026,
+      "end": 768.7182683100028
+    },
+    {
+      "start": 771.0825309199998,
+      "end": 774.0875309199998
+    },
+    {
+      "start": 774.13753092,
+      "end": 776.89753092
+    },
+    {
+      "start": 776.9225309200001,
+      "end": 777.5675309200001
+    },
+    {
+      "start": 777.5775183100029,
+      "end": 777.8062063100028
+    },
+    {
+      "start": 780.7225309199998,
+      "end": 782.6675309200002
+    },
+    {
+      "start": 786.9825309200003,
+      "end": 787.2675309200001
+    },
+    {
+      "start": 787.2685603100033,
+      "end": 787.4660603100032
+    },
+    {
+      "start": 787.93428646,
+      "end": 795.2429091700001
+    },
+    {
+      "start": 795.2527940200036,
+      "end": 800.7761700200037
+    },
+    {
+      "start": 800.86753092,
+      "end": 800.90753092
+    },
+    {
+      "start": 801.1009820200036,
+      "end": 804.4557110200037
+    },
+    {
+      "start": 807.4390440200036,
+      "end": 807.6289610200038
+    },
+    {
+      "start": 809.2806194599998,
+      "end": 819.9775309200002
+    },
+    {
+      "start": 820.6525309200001,
+      "end": 825.6475309199998
+    },
+    {
+      "start": 827.0425309199998,
+      "end": 828.9051614599998
+    },
+    {
+      "start": 829.7403074599999,
+      "end": 838.3681614599998
+    },
+    {
+      "start": 839.9280650200035,
+      "end": 843.504920020004
+    },
+    {
+      "start": 844.6734750200033,
+      "end": 845.679433020003
+    },
+    {
+      "start": 846.6505990039996,
+      "end": 851.1175309199998
+    },
+    {
+      "start": 852.5450729360032,
+      "end": 852.7268019360034
+    },
+    {
+      "start": 853.7247654600002,
+      "end": 857.7575309200001
+    },
+    {
+      "start": 858.7899913960043,
+      "end": 876.2635155210044
+    },
+    {
+      "start": 876.2734300450002,
+      "end": 878.8964114599999
+    },
+    {
+      "start": 880.0979069360037,
+      "end": 880.3291149360039
+    },
+    {
+      "start": 882.0110319360037,
+      "end": 882.4322189360037
+    },
+    {
+      "start": 883.1751614599998,
+      "end": 888.5875309200002
+    },
+    {
+      "start": 889.5927823960047,
+      "end": 892.4673920620049
+    },
+    {
+      "start": 894.8797460620048,
+      "end": 904.464517062005
+    },
+    {
+      "start": 906.203267062005,
+      "end": 906.4909750620051
+    },
+    {
+      "start": 908.5525309199999,
+      "end": 910.4675309200001
+    },
+    {
+      "start": 910.9518230620041,
+      "end": 911.2170730620041
+    },
+    {
+      "start": 914.95420246,
+      "end": 921.8375309200001
+    },
+    {
+      "start": 923.8503484600001,
+      "end": 924.7575309199999
+    },
+    {
+      "start": 924.767479982004,
+      "end": 925.0408969820044
+    },
+    {
+      "start": 927.32097346,
+      "end": 930.21753092
+    },
+    {
+      "start": 933.0955644420051,
+      "end": 933.2943984420051
+    },
+    {
+      "start": 933.8525309199999,
+      "end": 936.02753646
+    },
+    {
+      "start": 938.79253092,
+      "end": 955.2523074600001
+    },
+    {
+      "start": 955.9778074599999,
+      "end": 957.9563484599998
+    },
+    {
+      "start": 959.28253092,
+      "end": 960.92753092
+    },
+    {
+      "start": 961.6825309200001,
+      "end": 967.7275309200002
+    },
+    {
+      "start": 969.5564505220052,
+      "end": 970.2039295220052
+    },
+    {
+      "start": 970.2348255220052,
+      "end": 972.4685965220051
+    },
+    {
+      "start": 974.3368185220047,
+      "end": 974.6390485220049
+    },
+    {
+      "start": 975.8408074600002,
+      "end": 984.19753092
+    },
+    {
+      "start": 984.8092089820047,
+      "end": 985.1863759820051
+    },
+    {
+      "start": 986.1525309199999,
+      "end": 991.7010574599998
+    },
+    {
+      "start": 992.3946404599998,
+      "end": 995.0612654600001
+    },
+    {
+      "start": 995.5352845220053,
+      "end": 996.1450555220055
+    },
+    {
+      "start": 996.72264046,
+      "end": 997.46753092
+    },
+    {
+      "start": 997.477479982005,
+      "end": 997.6667299820053
+    },
+    {
+      "start": 998.5425309200002,
+      "end": 1007.3075309200001
+    },
+    {
+      "start": 1008.74253092,
+      "end": 1010.9817654599998
+    },
+    {
+      "start": 1012.38253092,
+      "end": 1014.0675309200002
+    },
+    {
+      "start": 1014.6392234599999,
+      "end": 1016.3375309200001
+    },
+    {
+      "start": 1017.4747654599996,
+      "end": 1022.6442864599999
+    },
+    {
+      "start": 1026.0022169820056,
+      "end": 1065.524508982006
+    },
+    {
+      "start": 1068.56730746,
+      "end": 1072.93866146
+    },
+    {
+      "start": 1077.1361049820055,
+      "end": 1077.6298549820053
+    },
+    {
+      "start": 1079.6395309200002,
+      "end": 1081.19474446
+    },
+    {
+      "start": 1081.6120765220057,
+      "end": 1114.457164273005
+    },
+    {
+      "start": 1118.9525309200003,
+      "end": 1132.22214046
+    },
+    {
+      "start": 1132.68972346,
+      "end": 1135.204172795
+    },
+    {
+      "start": 1135.2097851480046,
+      "end": 1137.4976391480045
+    },
+    {
+      "start": 1142.4840281480042,
+      "end": 1142.7963401480042
+    },
+    {
+      "start": 1146.5743471480046,
+      "end": 1147.9120351480046
+    },
+    {
+      "start": 1147.9195691700002,
+      "end": 1156.67859846
+    },
+    {
+      "start": 1159.2925309200002,
+      "end": 1171.4675309200002
+    },
+    {
+      "start": 1172.412994438004,
+      "end": 1173.0389324380044
+    },
+    {
+      "start": 1174.42253092,
+      "end": 1175.66384846
+    },
+    {
+      "start": 1177.733436978004,
+      "end": 1178.687082978004
+    },
+    {
+      "start": 1180.2425309200003,
+      "end": 1183.3924324600002
+    },
+    {
+      "start": 1184.1825309200003,
+      "end": 1185.4214324600002
+    },
+    {
+      "start": 1187.686698058004,
+      "end": 1188.4664270580038
+    },
+    {
+      "start": 1191.9325309200003,
+      "end": 1193.5645309200004
+    },
+    {
+      "start": 1193.572310058004,
+      "end": 1195.1561850580042
+    },
+    {
+      "start": 1196.0486770580037,
+      "end": 1196.4752400580037
+    },
+    {
+      "start": 1200.41253092,
+      "end": 1221.6275309200003
+    },
+    {
+      "start": 1222.76597346,
+      "end": 1225.30161946
+    },
+    {
+      "start": 1228.2045740580038,
+      "end": 1228.7697820580036
+    },
+    {
+      "start": 1230.3525309200002,
+      "end": 1238.32753092
+    },
+    {
+      "start": 1242.7838100580038,
+      "end": 1281.957745975004
+    },
+    {
+      "start": 1285.2154459750034,
+      "end": 1286.6843419750035
+    },
+    {
+      "start": 1286.80753092,
+      "end": 1287.08753092
+    },
+    {
+      "start": 1287.2347169750035,
+      "end": 1289.1350602250031
+    },
+    {
+      "start": 1291.0074222250037,
+      "end": 1294.8199520580035
+    },
+    {
+      "start": 1296.119111058003,
+      "end": 1296.6305480580031
+    },
+    {
+      "start": 1296.6395309200002,
+      "end": 1298.79984846
+    },
+    {
+      "start": 1300.38624446,
+      "end": 1303.82753092
+    },
+    {
+      "start": 1306.03036946,
+      "end": 1309.6375309200002
+    },
+    {
+      "start": 1312.6051055180035,
+      "end": 1313.1571675180035
+    },
+    {
+      "start": 1313.7125309200005,
+      "end": 1315.8975309200002
+    },
+    {
+      "start": 1315.9475309200002,
+      "end": 1317.06753092
+    },
+    {
+      "start": 1317.0925309200002,
+      "end": 1319.6475309200002
+    },
+    {
+      "start": 1320.7530225180033,
+      "end": 1321.548876518003
+    },
+    {
+      "start": 1322.392647518003,
+      "end": 1322.5953975180032
+    },
+    {
+      "start": 1323.3395225180032,
+      "end": 1323.6937725180032
+    },
+    {
+      "start": 1325.6175425180031,
+      "end": 1326.1418975180031
+    },
+    {
+      "start": 1328.3625309200002,
+      "end": 1337.0575309200003
+    },
+    {
+      "start": 1339.29845346,
+      "end": 1339.5775309199998
+    },
+    {
+      "start": 1339.5874949780032,
+      "end": 1339.796682978003
+    },
+    {
+      "start": 1340.97464046,
+      "end": 1341.4575309200002
+    },
+    {
+      "start": 1341.4673854380032,
+      "end": 1341.7756354380033
+    },
+    {
+      "start": 1343.6925309200003,
+      "end": 1345.7168074600002
+    },
+    {
+      "start": 1347.4525309200003,
+      "end": 1348.82753092
+    },
+    {
+      "start": 1350.1425309200001,
+      "end": 1350.6675309200002
+    },
+    {
+      "start": 1350.7175309200002,
+      "end": 1351.31753092
+    },
+    {
+      "start": 1351.3425309200002,
+      "end": 1362.83501467
+    },
+    {
+      "start": 1362.844737728003,
+      "end": 1366.953424728003
+    },
+    {
+      "start": 1367.0275309200001,
+      "end": 1367.34753092
+    },
+    {
+      "start": 1367.5828484600002,
+      "end": 1368.161893087
+    },
+    {
+      "start": 1368.1718653550029,
+      "end": 1372.0987111880027
+    },
+    {
+      "start": 1374.8774611880026,
+      "end": 1375.8377111880027
+    },
+    {
+      "start": 1375.8470477950002,
+      "end": 1377.01047346
+    },
+    {
+      "start": 1378.4695538530025,
+      "end": 1378.7389288530026
+    },
+    {
+      "start": 1379.2773458530025,
+      "end": 1380.9465748530024
+    },
+    {
+      "start": 1383.923941853002,
+      "end": 1390.1910226440018
+    },
+    {
+      "start": 1391.1912920870004,
+      "end": 1411.87753092
+    },
+    {
+      "start": 1414.089636477002,
+      "end": 1419.027866477002
+    },
+    {
+      "start": 1420.1683324770024,
+      "end": 1469.6153858520015
+    },
+    {
+      "start": 1471.8116778520016,
+      "end": 1568.9683356440007
+    },
+    {
+      "start": 1571.4525309200005,
+      "end": 1572.5724324600003
+    },
+    {
+      "start": 1572.60430746,
+      "end": 1582.4175309200002
+    },
+    {
+      "start": 1584.58014046,
+      "end": 1588.8175309199999
+    },
+    {
+      "start": 1589.7435511039996,
+      "end": 1589.9131341039997
+    },
+    {
+      "start": 1591.1548841039998,
+      "end": 1591.543363104
+    },
+    {
+      "start": 1592.29253092,
+      "end": 1594.4175309200004
+    },
+    {
+      "start": 1596.2839471040002,
+      "end": 1596.9137171040002
+    },
+    {
+      "start": 1598.73049446,
+      "end": 1604.285
+    }
+  ],
+  "wordAudit": {
+    "totalWords": 1849,
+    "explicitlyExcludedWords": 127,
+    "retainedWords": 1722,
+    "unaccountedWords": 0,
+    "captionReferencedWords": 1722,
+    "manualSpeechAdditions": [
+      {
+        "id": "C005A",
+        "zh": "真实",
+        "sourceRanges": [
+          {
+            "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+            "start": 32.662568,
+            "end": 33.141068
+          }
+        ],
+        "wordRefs": [],
+        "evidence": {
+          "kind": "MANUAL_CONFIRMED_AUDIO",
+          "activityRange": {
+            "start": 32.479833,
+            "end": 32.938333
+          },
+          "micOffset": 0.19273454,
+          "engineeringActivityRange": {
+            "start": 32.672568,
+            "end": 33.131068
+          },
+          "protectedRange": {
+            "start": 32.662568,
+            "end": 33.141068
+          },
+          "note": "波形定位而非新ASR；按正常剪辑规则保留真实完整字音，两侧约10ms余量，收紧前后无意义静音，不固定保护两秒。"
+        }
+      }
+    ],
+    "correctedRecognition": [
+      {
+        "id": "C117",
+        "utteranceId": 104,
+        "asrText": "我很喜欢听周杰伦的歌",
+        "correctedText": "下半部分",
+        "wordRefs": [
+          {
+            "utteranceId": 104,
+            "wordStart": 0,
+            "wordEndExclusive": 8
+          }
+        ],
+        "note": "wordRefs仅保留源定位证据；finalRange取真实sourceRanges，不用旧错误字数分配时间。"
+      }
+    ]
+  },
+  "semanticExclusions": {
+    "deleteWholeUtterances": {
+      "9": "前一次“做了这么多尝试”，保留第10条完整后版；第8条花费背景继续保留",
+      "16": "“当时”的紧邻失败起头，保留第17条完整表达",
+      "21": "孤立然后，后文现在明确承接，不丢事实",
+      "32": "“当然你也可以”废弃起头，保留第35条完整去向",
+      "52": "用户明确要求删除原修订1 C055–C059：后面C061–C068有完整实际演示与重复讲解，保留后版。",
+      "53": "用户明确要求删除原修订1 C055–C059：后面C061–C068有完整实际演示与重复讲解，保留后版。",
+      "54": "用户明确要求删除原修订1 C055–C059：后面C061–C068有完整实际演示与重复讲解，保留后版。",
+      "55": "用户明确要求删除原修订1 C055–C059：后面C061–C068有完整实际演示与重复讲解，保留后版。",
+      "80": "正常的失败起头“正”，保留第81条",
+      "126": "创作出来了之后的重复组织词“制作”，条形码色卡对象继续保留",
+      "132": "单次正视图试说被第133条完整四视图说明替代",
+      "137": "并且/以及的连续起头，后文道具对象与内容保留",
+      "143": "领取方式的较早试说，保留第144条完整后版",
+      "7": "用户确认Q01：这是废弃重复试说，删除C011与C012对应的最小源内容；不恢复原C055至C059。"
+    },
+    "deletePartialWords": [
+      {
+        "utteranceId": 40,
+        "start": 13,
+        "end": 16,
+        "reason": "误起“场以及”，保留前面的以及并接摄影呈现"
+      },
+      {
+        "utteranceId": 78,
+        "start": 0,
+        "end": 11,
+        "reason": "连续三次失败起头，保留最后完整“这里大概给大家讲解一下我设计的思路”"
+      },
+      {
+        "utteranceId": 136,
+        "start": 7,
+        "end": 9,
+        "reason": "废弃连接并且，前方各方位内容完整保留"
+      }
+    ],
+    "forceKeepUtterances": [
+      48,
+      97,
+      98,
+      102,
+      104,
+      111
+    ],
+    "notes": [
+      "第48条承接第47条末尾这些问题，不能删了留下悬空句尾。",
+      "104原样保留待用户核实，禁止当明显废话自动删除。",
+      "模型名称与口播内部机制不擅改为已验证事实。",
+      "局部ASR边界只用于拟剪时码，真实落剪仍结合相邻静音及试听验收。"
+    ]
+  },
+  "notes": [
+    "没有写入Cap时间轴；本文件仍是修订3的虚拟剪辑映射，等待后续制作阶段冻结EDL。",
+    "Q01按用户确认删除C011与C012对应的最小ASR源区间，非授权ASR词保持保留；后续时码、visual phases和visibleRanges均已重算。",
+    "Q02将C117显示语义修正为“下半部分”，保留其原真实sourceRange与原ASR定位证据，不用旧错误词数分配时间；C118保持“是全身的姿态和服装”。",
+    "Q03保留GPT 2.5为不可拆模型名；Q04将展示语义修正为“有效像素”，不把本例经验扩写成普遍保证。",
+    "Q05新增C005A“真实”，源时码32.662568–33.141068来自人工波形定位，不是新ASR；实际剪口仍需后续听感验收。",
+    "用户已整体批准EDIT_AND_VISUALS并授权先制作动画看效果；本轮不操作Cap、不渲染。",
+    "Astra复核：修正Q01的一基utteranceId为7；源31.013–32.662568静音按用户最后要求收紧。"
+  ],
+  "reviewRevision": 5,
+  "sourceTimeCorrection": {
+    "deltaSeconds": -0.38546908,
+    "reason": "Raw microphone starts 0.192734541s before display. ASR wrapper wrongly added this value. Correct display time is raw mic time minus 0.192734541s; original imported global times are corrected by -0.38546908s. Original ASR is preserved.",
+    "evidence": "recording-meta stream start_time and exported waveform cross-correlation"
+  },
+  "refinement": {
+    "basis": "revision63 T2",
+    "removedSeconds": 179.21029700000085,
+    "receipt": "重新剪辑执行.json"
+  }
+}

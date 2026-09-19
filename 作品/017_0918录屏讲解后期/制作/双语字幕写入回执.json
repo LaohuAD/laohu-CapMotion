@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/Applications/CapMotion.app/Contents/MacOS/cap-cli",
+    "project",
+    "captions",
+    "materialize",
+    "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap",
+    "--expected-revision",
+    "64",
+    "--tracks-json",
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/双语展示字幕.json",
+    "--json"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"captionSegmentCount\": 254,\n  \"captionTrackCount\": 2,\n  \"displayMode\": \"materialized\",\n  \"ok\": true,\n  \"revision\": 65\n}\n",
+  "stderr": ""
+}

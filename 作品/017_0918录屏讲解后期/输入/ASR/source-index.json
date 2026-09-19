@@ -1,0 +1,36 @@
+{
+  "schema": "laohu.cap-asr-source-index/1",
+  "purpose": "first-pass-content-transcription",
+  "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap",
+  "projectName": "Cap 2026-09-18 at 10.53.13",
+  "projectRevision": 4,
+  "recordingType": "studio-multiple-segments",
+  "orderPolicy": "recording-meta-segments",
+  "timeBasis": "raw-recording-display-timeline",
+  "recordingMetaPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/recording-meta.json",
+  "projectConfigPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/project-config.json",
+  "segments": [
+    {
+      "recordingSegment": 0,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/audio-input.ogg",
+      "displayDurationSeconds": 1604.285,
+      "microphoneDurationSeconds": 1604.308854,
+      "microphoneStartTime": -0.040313625,
+      "sourceTimelineOffsetSeconds": 0.192735,
+      "globalOffsetSeconds": 0,
+      "timelineReferences": [
+        0
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "timelineIndex": 0,
+      "recordingSegment": 0,
+      "start": 0,
+      "end": 1604.308854,
+      "timescale": 1
+    }
+  ]
+}

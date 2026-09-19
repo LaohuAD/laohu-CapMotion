@@ -1,0 +1,45 @@
+{
+  "samples": [
+    {
+      "time": 0,
+      "lagMs": 0.0,
+      "finalRMS": 0.06988006085157394,
+      "referenceRMS": 0.06992737948894501
+    },
+    {
+      "time": 10,
+      "lagMs": 0.0,
+      "finalRMS": 0.06058340519666672,
+      "referenceRMS": 0.060615282505750656
+    },
+    {
+      "time": 128.95,
+      "lagMs": 0.0,
+      "finalRMS": 0.10006103664636612,
+      "referenceRMS": 0.1001284122467041
+    },
+    {
+      "time": 283.69,
+      "lagMs": 0.0,
+      "finalRMS": 0.016603106632828712,
+      "referenceRMS": 0.01662580296397209
+    },
+    {
+      "time": 464.22,
+      "lagMs": 0.0,
+      "finalRMS": 0.03676135092973709,
+      "referenceRMS": 0.036785196512937546
+    }
+  ],
+  "manualRealWord": {
+    "start": 12.873037,
+    "duration": 0.47850000000000037,
+    "finalRMS": 0.08362043648958206,
+    "referenceRMS": 0.0836629793047905
+  },
+  "method": "Waveform correlation against independently assembled raw mic from approved EDL; system sound remains in final mix; this is not a full human listening pass.",
+  "currentDeliveryApplicability": {
+    "status": "STALE_PREVIOUS_DELIVERY",
+    "reason": "2026-09-20 EDL已重新剪辑；用户要求自行检查，本轮未重新执行此验收"
+  }
+}

@@ -1,0 +1,672 @@
+{
+  "schema": "laohu.source-cap-review/v1",
+  "generated_at": "2026-09-19T20:00:00+08:00",
+  "scope": "只读源Cap工程；不剪辑、不制作动画、不解析keyboard.bin、不调用ASR",
+  "source": {
+    "cap_path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap",
+    "source_hash_manifest_sha256": "f47886ba02bdf8b2a0f508a854ec8cfa781d7ad759e4d4c18f0e8db8c490353d",
+    "hashed_files": [
+      {
+        "sha256": "326373f46d004814a96cdb6e4732277e9ca6c6d75a0ab33cbce26e44e6da1003",
+        "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/audio-input.ogg"
+      },
+      {
+        "sha256": "9d4add458d5d3c5fc7bddfca4c0771edec1119472969e6e2ec31ee62933ca7e1",
+        "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/camera.mp4"
+      },
+      {
+        "sha256": "52b2ad18d009bbfc3e1c89abfff3536747180865ec87ba09d724b8827a9dc3bf",
+        "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/cursor.json"
+      },
+      {
+        "sha256": "cf1c06373eb7cda2eec5444596ad7d6bca46c0c106febe29aa303b35045d6d7c",
+        "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4"
+      },
+      {
+        "sha256": "248b509c6e21f3074037197e11b6f10af952a82f7a7e37045d4272b0205db0f0",
+        "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/project-config.json"
+      },
+      {
+        "sha256": "8ffda9b12bfb1d19bceecdd2fd3f726aafde36a54587252baec0ab32c969c443",
+        "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/recording-meta.json"
+      },
+      {
+        "sha256": "cf45eeea0038a733c1fe4fbec84f6d502c27ed11b4c783c62e0407817a273b9d",
+        "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/system_audio.ogg"
+      }
+    ],
+    "project_revision": 4,
+    "segment_count": 1,
+    "source_status": {
+      "status": "Complete"
+    }
+  },
+  "timeline": {
+    "aspect_ratio": "wide",
+    "segments": [
+      {
+        "recordingSegment": 0,
+        "timescale": 1.0,
+        "start": 0.0,
+        "end": 1604.308854,
+        "name": null
+      }
+    ],
+    "range_s": {
+      "start": 0.0,
+      "end": 1604.308854,
+      "duration": 1604.308854
+    },
+    "zoom_segment_count": 11,
+    "scene_segment_count": 0,
+    "mask_segment_count": 0,
+    "text_segment_count": 0,
+    "caption_segment_count": 0,
+    "keyboard_segment_count": 33,
+    "audio_segment_count": 0,
+    "camera3d_segment_count": 0,
+    "preserved_extract": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/project-config-relevant.json"
+  },
+  "media_index": [
+    {
+      "kind": "display",
+      "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+      "ffprobe": {
+        "codec": "h264",
+        "type": "video",
+        "width": 3046,
+        "height": 1668,
+        "sample_rate_hz": null,
+        "channels": null,
+        "start_time_s": 0.0,
+        "duration_s": 1604.285,
+        "size_bytes": 2007787896
+      },
+      "recording_meta_start_time_s": 0.152420916,
+      "project_clip_offset_s": 0.0,
+      "expected_clip_offset_from_display_anchor_s": 0.0,
+      "offset_match_error_s": 0.0,
+      "offset_match_within_1e-6": true
+    },
+    {
+      "kind": "camera",
+      "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/camera.mp4",
+      "ffprobe": {
+        "codec": "h264",
+        "type": "video",
+        "width": 1280,
+        "height": 720,
+        "sample_rate_hz": null,
+        "channels": null,
+        "start_time_s": 0.0,
+        "duration_s": 1604.265,
+        "size_bytes": 1605980813
+      },
+      "recording_meta_start_time_s": 0.046325541,
+      "project_clip_offset_s": 0.10609537,
+      "expected_clip_offset_from_display_anchor_s": 0.10609537499999999,
+      "offset_match_error_s": -4.999999997368221e-09,
+      "offset_match_within_1e-6": true
+    },
+    {
+      "kind": "mic",
+      "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/audio-input.ogg",
+      "ffprobe": {
+        "codec": "opus",
+        "type": "audio",
+        "width": null,
+        "height": null,
+        "sample_rate_hz": 48000,
+        "channels": 1,
+        "start_time_s": 0.0,
+        "duration_s": 1604.308854,
+        "size_bytes": 12194725
+      },
+      "recording_meta_start_time_s": -0.040313625,
+      "project_clip_offset_s": 0.19273454,
+      "expected_clip_offset_from_display_anchor_s": 0.19273454099999998,
+      "offset_match_error_s": -9.999999717180685e-10,
+      "offset_match_within_1e-6": true
+    },
+    {
+      "kind": "system_audio",
+      "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/system_audio.ogg",
+      "ffprobe": {
+        "codec": "opus",
+        "type": "audio",
+        "width": null,
+        "height": null,
+        "sample_rate_hz": 48000,
+        "channels": 2,
+        "start_time_s": 0.0,
+        "duration_s": 1604.308771,
+        "size_bytes": 364326
+      },
+      "recording_meta_start_time_s": 0.0,
+      "project_clip_offset_s": 0.15242092,
+      "expected_clip_offset_from_display_anchor_s": 0.152420916,
+      "offset_match_error_s": 3.999999997894577e-09,
+      "offset_match_within_1e-6": true
+    }
+  ],
+  "sync_configuration": {
+    "recording_meta_segment": {
+      "display": {
+        "path": "content/segments/segment-0/display.mp4",
+        "fps": 30,
+        "start_time": 0.152420916
+      },
+      "camera": {
+        "path": "content/segments/segment-0/camera.mp4",
+        "fps": 30,
+        "start_time": 0.046325541,
+        "device_id": "4BA85DDE-7965-43F0-BEF3-EF2BD91FB4D3"
+      },
+      "mic": {
+        "path": "content/segments/segment-0/audio-input.ogg",
+        "start_time": -0.040313625,
+        "device_id": "Insta360 Link 2 Pro"
+      },
+      "system_audio": {
+        "path": "content/segments/segment-0/system_audio.ogg",
+        "start_time": 0.0
+      },
+      "cursor": "content/segments/segment-0/cursor.json",
+      "keyboard": "content/segments/segment-0/keyboard.bin"
+    },
+    "project_clip_offsets": {
+      "camera": 0.10609537,
+      "mic": 0.19273454,
+      "system_audio": 0.15242092
+    },
+    "alignment_anchor": "display recording-meta start_time; expected non-display offset = display.start_time - source.start_time",
+    "audio_project_settings": {
+      "mute": false,
+      "improve": false,
+      "micVolumeDb": 0.0,
+      "micStereoMode": "stereo",
+      "systemVolumeDb": 0.0,
+      "microphoneTrack": {
+        "expanded": false,
+        "mutedRanges": [],
+        "cuts": []
+      },
+      "systemAudioTrack": {
+        "expanded": false,
+        "mutedRanges": [],
+        "cuts": []
+      }
+    },
+    "sync_preserved_without_zero_overwrite": true
+  },
+  "cursor_activity": {
+    "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/cursor.json",
+    "bin_seconds": 10,
+    "click_definition": "clicks counts cursor.json click records with down:true; up:true records are not counted as separate gestures",
+    "click_record_count": 324,
+    "click_gesture_count": 162,
+    "move_record_count": 14319,
+    "active_bin_count": 120,
+    "active_bin_ranges": [
+      {
+        "start_s": 0,
+        "end_s": 50,
+        "bins": 5,
+        "clicks": 15,
+        "moves": 457
+      },
+      {
+        "start_s": 70,
+        "end_s": 230,
+        "bins": 16,
+        "clicks": 26,
+        "moves": 2126
+      },
+      {
+        "start_s": 260,
+        "end_s": 290,
+        "bins": 3,
+        "clicks": 0,
+        "moves": 32
+      },
+      {
+        "start_s": 320,
+        "end_s": 350,
+        "bins": 3,
+        "clicks": 4,
+        "moves": 311
+      },
+      {
+        "start_s": 360,
+        "end_s": 380,
+        "bins": 2,
+        "clicks": 0,
+        "moves": 124
+      },
+      {
+        "start_s": 390,
+        "end_s": 400,
+        "bins": 1,
+        "clicks": 0,
+        "moves": 4
+      },
+      {
+        "start_s": 420,
+        "end_s": 430,
+        "bins": 1,
+        "clicks": 0,
+        "moves": 21
+      },
+      {
+        "start_s": 440,
+        "end_s": 540,
+        "bins": 10,
+        "clicks": 34,
+        "moves": 1553
+      },
+      {
+        "start_s": 550,
+        "end_s": 570,
+        "bins": 2,
+        "clicks": 0,
+        "moves": 44
+      },
+      {
+        "start_s": 590,
+        "end_s": 610,
+        "bins": 2,
+        "clicks": 0,
+        "moves": 77
+      },
+      {
+        "start_s": 620,
+        "end_s": 1030,
+        "bins": 41,
+        "clicks": 32,
+        "moves": 6131
+      },
+      {
+        "start_s": 1040,
+        "end_s": 1150,
+        "bins": 11,
+        "clicks": 13,
+        "moves": 1278
+      },
+      {
+        "start_s": 1270,
+        "end_s": 1400,
+        "bins": 13,
+        "clicks": 20,
+        "moves": 1447
+      },
+      {
+        "start_s": 1450,
+        "end_s": 1480,
+        "bins": 3,
+        "clicks": 6,
+        "moves": 235
+      },
+      {
+        "start_s": 1500,
+        "end_s": 1530,
+        "bins": 3,
+        "clicks": 5,
+        "moves": 287
+      },
+      {
+        "start_s": 1550,
+        "end_s": 1570,
+        "bins": 2,
+        "clicks": 5,
+        "moves": 87
+      },
+      {
+        "start_s": 1590,
+        "end_s": 1604.309,
+        "bins": 2,
+        "clicks": 2,
+        "moves": 105
+      }
+    ],
+    "stats_path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/cursor-stats-10s.json",
+    "keyboard_bin_parsed": false,
+    "keyboard_status": "本轮未使用；keyboard.bin 未读取"
+  },
+  "audio_detection": {
+    "summary_path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/audio-detection-summary.json",
+    "parameters": {
+      "filter": "silencedetect",
+      "noise": "-35dB",
+      "duration_s": 0.5,
+      "command": "ffmpeg -hide_banner -nostdin -v info -i <audio> -af silencedetect=noise=-35dB:d=0.5 -f null -"
+    },
+    "mic": {
+      "silence_start_count": 180,
+      "closed_interval_count": 180,
+      "open_silence_start_s": null,
+      "total_closed_silence_s": 1246.564514,
+      "first_intervals": [
+        {
+          "start_s": 0.0,
+          "end_s": 14.851938,
+          "duration_s": 14.851938
+        },
+        {
+          "start_s": 15.952687,
+          "end_s": 16.633896,
+          "duration_s": 0.681208
+        },
+        {
+          "start_s": 17.258937,
+          "end_s": 19.977,
+          "duration_s": 2.718062
+        },
+        {
+          "start_s": 20.892875,
+          "end_s": 21.633667,
+          "duration_s": 0.740792
+        },
+        {
+          "start_s": 21.978833,
+          "end_s": 28.830979,
+          "duration_s": 6.852146
+        }
+      ],
+      "last_intervals": [
+        {
+          "start_s": 1572.787042,
+          "end_s": 1582.653292,
+          "duration_s": 9.86625
+        },
+        {
+          "start_s": 1584.762875,
+          "end_s": 1589.100688,
+          "duration_s": 4.337813
+        },
+        {
+          "start_s": 1592.377333,
+          "end_s": 1594.685875,
+          "duration_s": 2.308542
+        },
+        {
+          "start_s": 1596.422687,
+          "end_s": 1597.133896,
+          "duration_s": 0.711208
+        },
+        {
+          "start_s": 1598.913229,
+          "end_s": 1604.302354,
+          "duration_s": 5.389125
+        }
+      ],
+      "longest_intervals": [
+        {
+          "start_s": 1471.972625,
+          "end_s": 1569.178292,
+          "duration_s": 97.205667
+        },
+        {
+          "start_s": 556.393146,
+          "end_s": 637.957333,
+          "duration_s": 81.564188
+        },
+        {
+          "start_s": 461.60625,
+          "end_s": 532.2925,
+          "duration_s": 70.68625
+        },
+        {
+          "start_s": 32.883708,
+          "end_s": 77.715583,
+          "duration_s": 44.831875
+        },
+        {
+          "start_s": 1026.151521,
+          "end_s": 1065.745458,
+          "duration_s": 39.593937
+        },
+        {
+          "start_s": 1242.93575,
+          "end_s": 1282.16375,
+          "duration_s": 39.228
+        },
+        {
+          "start_s": 1081.744396,
+          "end_s": 1114.667354,
+          "duration_s": 32.922958
+        },
+        {
+          "start_s": 1420.322563,
+          "end_s": 1453.200083,
+          "duration_s": 32.877521
+        },
+        {
+          "start_s": 108.092812,
+          "end_s": 140.421063,
+          "duration_s": 32.32825
+        },
+        {
+          "start_s": 272.001021,
+          "end_s": 296.253688,
+          "duration_s": 24.252667
+        }
+      ],
+      "ffprobe_duration_s": 1604.308854,
+      "estimated_non_silent_s": 357.74434
+    },
+    "system_audio": {
+      "silence_start_count": 1,
+      "closed_interval_count": 1,
+      "open_silence_start_s": null,
+      "total_closed_silence_s": 1604.302271,
+      "first_intervals": [
+        {
+          "start_s": 0.0,
+          "end_s": 1604.302271,
+          "duration_s": 1604.302271
+        }
+      ],
+      "last_intervals": [
+        {
+          "start_s": 0.0,
+          "end_s": 1604.302271,
+          "duration_s": 1604.302271
+        }
+      ],
+      "longest_intervals": [
+        {
+          "start_s": 0.0,
+          "end_s": 1604.302271,
+          "duration_s": 1604.302271
+        }
+      ],
+      "ffprobe_duration_s": 1604.308771,
+      "estimated_non_silent_s": 0.0065
+    },
+    "interpretation": "silencedetect 电平证据；不替代 ASR，不能单独判定理论讲解或实操语义"
+  },
+  "visual_evidence": {
+    "source_stream": "display.mp4",
+    "sample_interval_s": 60,
+    "sample_times_s": [
+      0.0,
+      60.0,
+      120.0,
+      180.0,
+      240.0,
+      300.0,
+      360.0,
+      420.0,
+      480.0,
+      540.0,
+      600.0,
+      660.0,
+      720.0,
+      780.0,
+      840.0,
+      900.0,
+      960.0,
+      1020.0,
+      1080.0,
+      1140.0,
+      1200.0,
+      1260.0,
+      1320.0,
+      1380.0,
+      1440.0,
+      1500.0,
+      1560.0,
+      1600.0
+    ],
+    "frame_count": 28,
+    "frame_width_px": 960,
+    "frame_paths": [
+      {
+        "source_time_s": 0.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-001.jpg"
+      },
+      {
+        "source_time_s": 60.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-002.jpg"
+      },
+      {
+        "source_time_s": 120.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-003.jpg"
+      },
+      {
+        "source_time_s": 180.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-004.jpg"
+      },
+      {
+        "source_time_s": 240.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-005.jpg"
+      },
+      {
+        "source_time_s": 300.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-006.jpg"
+      },
+      {
+        "source_time_s": 360.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-007.jpg"
+      },
+      {
+        "source_time_s": 420.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-008.jpg"
+      },
+      {
+        "source_time_s": 480.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-009.jpg"
+      },
+      {
+        "source_time_s": 540.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-010.jpg"
+      },
+      {
+        "source_time_s": 600.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-011.jpg"
+      },
+      {
+        "source_time_s": 660.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-012.jpg"
+      },
+      {
+        "source_time_s": 720.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-013.jpg"
+      },
+      {
+        "source_time_s": 780.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-014.jpg"
+      },
+      {
+        "source_time_s": 840.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-015.jpg"
+      },
+      {
+        "source_time_s": 900.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-016.jpg"
+      },
+      {
+        "source_time_s": 960.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-017.jpg"
+      },
+      {
+        "source_time_s": 1020.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-018.jpg"
+      },
+      {
+        "source_time_s": 1080.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-019.jpg"
+      },
+      {
+        "source_time_s": 1140.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-020.jpg"
+      },
+      {
+        "source_time_s": 1200.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-021.jpg"
+      },
+      {
+        "source_time_s": 1260.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-022.jpg"
+      },
+      {
+        "source_time_s": 1320.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-023.jpg"
+      },
+      {
+        "source_time_s": 1380.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-024.jpg"
+      },
+      {
+        "source_time_s": 1440.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-025.jpg"
+      },
+      {
+        "source_time_s": 1500.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-026.jpg"
+      },
+      {
+        "source_time_s": 1560.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-027.jpg"
+      },
+      {
+        "source_time_s": 1600.0,
+        "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames/frame-999.jpg"
+      }
+    ],
+    "frames_dir": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-frames",
+    "contact_sheet_path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/contact-sheet-source-time.jpg",
+    "observation_scope": "每60秒一帧的画面状态证据；contact sheet 已人工目视检查。未将画面语义推断为语音内容。",
+    "extractionMethod": "Each frame re-extracted with explicit -ss source_time_s, not fps resampling.",
+    "contactSheetSha256": "1c351443368acfa29e981e7f75067bab65080597211ce57332bf78d0a2476443"
+  },
+  "verification": {
+    "ffprobe_files": [
+      "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/ffprobe-display.json",
+      "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/ffprobe-camera.json",
+      "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/ffprobe-mic.json",
+      "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/source-evidence/ffprobe-system-audio.json"
+    ],
+    "all_four_media_ffprobe_ok": true,
+    "all_ffprobe_start_time_zero": true,
+    "duration_difference_vs_timeline_s": {
+      "display": -0.023854,
+      "camera": -0.043854,
+      "mic": 0.0,
+      "system_audio": -8.3e-05
+    },
+    "max_abs_duration_difference_s": 0.043854,
+    "sync_offset_matches_within_1e-6": true,
+    "source_project_unchanged_by_this_run": true,
+    "media_copied_to_作品": false,
+    "media_outputs_written_under_review_target": true,
+    "contact_sheet_visual_check": "Astra corrected fps-sampling label mismatch by re-extracting all 28 frames at explicit source times. Main HTML uses separate explicit -ss theory-* evidence frames.",
+    "keyboard_bin_parsed": false
+  },
+  "unconfirmed_items": [
+    "本轮未读取ASR；理论讲解与真实操作的语义边界需由主代理结合其ASR与本证据对齐确认。",
+    "keyboard.bin 未解析，因此键盘操作证据仅保留 project-config 的 keyboardSegments 计数，不作实际键盘事件结论。",
+    "画面只抽样每60秒，未做逐帧/逐秒画面语义审查；contact sheet 不能代表采样点之间的全部变化。",
+    "silencedetect 使用固定 -35dB、0.5s 阈值；低于阈值的声音不代表绝对无声，系统音轨的 0.0065s 非静音余量不作可听内容判断。"
+  ]
+}

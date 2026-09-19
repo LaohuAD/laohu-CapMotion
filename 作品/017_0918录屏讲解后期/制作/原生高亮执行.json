@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python3",
+    "scripts/cap-project-native-tracks.py",
+    "--project",
+    "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap",
+    "--patch",
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/原生高亮迁移.json",
+    "--expected-revision",
+    "65",
+    "--receipt",
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/原生高亮写入回执.json"
+  ],
+  "returncode": 0,
+  "stdout": "{\"schema\": \"laohu.native-track-receipt/1\", \"previousRevision\": 65, \"newRevision\": 66, \"beforeSHA256\": \"a72e558bbf9dfa276216f3c20f5e9ba8502112edd3c3737f8f6ef83595339d93\", \"afterSHA256\": \"03810b1be1fcdea9294145df1d4105697b513d53e70e5db2565dccbd2bfdd8e4\", \"addedHighlights\": 6, \"addedTexts\": 0, \"removedMotionIds\": []}\n",
+  "stderr": ""
+}

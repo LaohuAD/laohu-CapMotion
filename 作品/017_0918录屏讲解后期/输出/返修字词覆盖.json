@@ -1,0 +1,8 @@
+{
+  "newlyUncoveredWords": [],
+  "method": "相对于返修前已批准EDL比较源词覆盖；不把ASR包络当声音，也不代替最终ASR。",
+  "currentDeliveryApplicability": {
+    "status": "STALE_PREVIOUS_DELIVERY",
+    "reason": "2026-09-20 EDL已重新剪辑；用户要求自行检查，本轮未重新执行此验收"
+  }
+}

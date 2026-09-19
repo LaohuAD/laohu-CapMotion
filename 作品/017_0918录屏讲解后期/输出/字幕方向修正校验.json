@@ -1,0 +1,22 @@
+{
+  "projectRevision": 63,
+  "presetRevision": 10,
+  "fixedTrack": "en",
+  "englishOriginalY": 0.987037062645,
+  "englishCurrentY": 0.98703706,
+  "chineseOriginalY": 0.9125493764877319,
+  "chineseCurrentY": 0.9347716,
+  "chineseDownPixelsAt1080": 24.00000139324955,
+  "sizesUnchanged": [
+    {
+      "trackId": "zh-CN",
+      "fontSize": 52
+    },
+    {
+      "trackId": "en",
+      "fontSize": 26
+    }
+  ],
+  "pixelReview": "已查看Cap实际合成：英文回到原底部位置，中文下移后两行描边之间为窄缝，未重叠或裁切",
+  "preview": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/caption-chinese-down.jpg"
+}

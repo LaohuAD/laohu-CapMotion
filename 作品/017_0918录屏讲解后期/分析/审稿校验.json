@@ -1,0 +1,27 @@
+{
+  "status": "APPROVED_EDIT_AND_VISUALS",
+  "sourceConfigAndMetaUnchanged": true,
+  "sourceCoverageSeconds": 1604.285,
+  "provisionalDurationSeconds": 554.900735356,
+  "captionRows": 127,
+  "eventRows": 41,
+  "fullAnimations": 2,
+  "localAnnotations": 3,
+  "wordAudit": {
+    "totalWords": 1849,
+    "explicitlyExcludedWords": 127,
+    "retainedWords": 1722,
+    "unaccountedWords": 0,
+    "captionReferencedWords": 1722
+  },
+  "duplicateCaptionWordRefs": 0,
+  "openQuestions": 0,
+  "htmlBytes": 2397249,
+  "limitations": [
+    "该校验核对审稿、时间映射和实际工程结构；不能替代逐剪口人工试听。",
+    "真实由用户确认原词并按原麦克风波形定位；不是原ASR识别词。",
+    "17个空白零时长ASR标记已从导入字幕过滤，原始ASR保留。"
+  ],
+  "reviewRevision": 3,
+  "timingStatus": "FROZEN"
+}

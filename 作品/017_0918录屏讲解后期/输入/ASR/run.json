@@ -1,0 +1,15 @@
+{
+  "schema": "laohu.cap-asr-run/1",
+  "status": "complete",
+  "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap",
+  "projectRevision": 4,
+  "sourceIndex": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/source-index.json",
+  "rawJson": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/cap-asr.raw.json",
+  "srt": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/cap-asr.srt",
+  "text": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/cap-asr.txt",
+  "captionImport": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/cap-captions.import.json",
+  "segmentRawJson": [
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/segments/000.raw.json"
+  ],
+  "cueCount": 148
+}

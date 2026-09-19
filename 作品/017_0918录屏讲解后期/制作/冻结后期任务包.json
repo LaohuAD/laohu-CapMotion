@@ -1,0 +1,352 @@
+{
+  "schema": "laohu.video-postproduction-handoff/1",
+  "videoId": "017-character-assets",
+  "phase": "SECOND_PASS_POSTPRODUCTION",
+  "intent": {
+    "audience": "遇到人物皮肤油腻、参考图布局与资产复用问题的AI视频创作者",
+    "promise": "理解人物资产图的问题诊断与提示词设计",
+    "mainLine": "展示差异→定位影响因素→豆包诊断实操→四宫格参考分工→引导式提示词→扩展与资源。保留原顺序，以理解和可复用方法为主。",
+    "primaryWin": "讲解与真实操作、图解关系一一对应",
+    "visualStrategy": "实操保留原录屏，理论加入两段关系图与三组局部标注"
+  },
+  "knowledgeActivations": [
+    {
+      "asset": "laohu-video-postproduction + laohu-animation-director",
+      "trigger": "用户批准并要求真实剪辑创作",
+      "judgment": "冻结唯一时间映射后再制作覆盖",
+      "changedDecision": "在独立工作工程执行剪辑、双轨字幕与Remotion",
+      "resultLocation": "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap",
+      "unusedBoundary": "不改源码架构，不生成数字人或AI视频"
+    }
+  ],
+  "thread": {
+    "ownership": "DEDICATED_VIDEO_TASK",
+    "upstreamCreatesOnce": true
+  },
+  "capProject": {
+    "sourcePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap",
+    "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap",
+    "expectedRevision": 74,
+    "nonDestructiveCopy": true
+  },
+  "sources": {
+    "secondPassAsr": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输入/ASR/cap-asr.raw.json",
+    "productionScript": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/分析/预剪辑审稿.json",
+    "finalMainAudio": "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap/assets/edited-main-audio.flac"
+  },
+  "edit": {
+    "edlPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/冻结剪辑清单.json",
+    "sourceToFinalMapPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/源到成片映射.json",
+    "captionTracks": {
+      "sourceMasterPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/源字幕主稿.json",
+      "displayTracksPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/双语展示字幕.json",
+      "mode": "SEPARATE_BILINGUAL",
+      "tracks": [
+        "zh-CN",
+        "en"
+      ]
+    },
+    "preEditReview": {
+      "documentPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/分析/预剪辑审稿.html",
+      "revision": 5,
+      "visualPlan": {
+        "included": true,
+        "feedbackResolved": true,
+        "materialsResolved": true
+      },
+      "fullTimelineCovered": true,
+      "segmentBoundariesIncluded": true,
+      "virtualRoughCutComplete": true,
+      "virtualFineCutComplete": true,
+      "provisionalFinalTimelineIncluded": true,
+      "crossCueSemanticReviewComplete": true,
+      "atomicTermsPreserved": true,
+      "uncertaintiesResolved": true,
+      "userApproval": {
+        "status": "APPROVED",
+        "scope": "EDIT_AND_VISUALS",
+        "reviewRevision": 5,
+        "reference": "用户在本任务明确授权局部返修：收紧无意义气口、双语窄缝、全屏含人物压暗、对象按语义先出现、圈选使用Cap原生高亮；追加删除或居中重要文字，本次删除顶部重复标题。范围仅本轮反馈，不重构内容。",
+        "reworkAuthorization": "用户2026-09-20要求重新剪辑修复问题；其他内容包括动画保持"
+      }
+    }
+  },
+  "protection": {
+    "preserveBaseRecording": true,
+    "preserveFinalMainAudio": true,
+    "mediaOutsideRepository": true
+  },
+  "tasks": [
+    {
+      "id": "V03-1",
+      "type": "REMOTION",
+      "finalRange": {
+        "start": 79.692675,
+        "end": 101.971596
+      },
+      "narrative": {
+        "purpose": "UNDERSTAND",
+        "viewerBefore": "观众听到相关讲解，需看清对象与关系",
+        "viewerAfter": "三类因素怎样影响皮肤观感",
+        "whyThisMedium": "静态原图列出了元素，但没有把三者与“油腻”的观察连接起来。",
+        "handoffIn": "三类因素怎样影响皮肤观感",
+        "handoffOut": "退出图解，回到你将图片交给豆包的真实操作。"
+      },
+      "annotation": {
+        "object": "三类因素怎样影响皮肤观感",
+        "relationship": "整张构成图作为背景，不先裁成一张脸。新增三项到“皮肤观感”的关系线，讲摄影呈现时强调对应支线；如需展示实际高光，只回用开头油腻人物图，并标明“回看开头示例”。不伪造重新打光的前后结果。人物窗和字幕区域保持清晰。",
+        "entrance": "保留整张构成图作为上下文，建立视觉风格→皮肤观感的关系线",
+        "change": "保留整张构成图作为上下文，建立视觉风格→皮肤观感的关系线；接入人物造型→皮肤状态与纹理的关系线，保持整体结构；接入光线表现分支，强调当前焦点；强调光线分支；若引用开头人物脸部高光，标明回看开头示例，不冒充此时原录屏",
+        "resolutionFrame": "退出图解，回到你将图片交给豆包的真实操作。",
+        "materials": [
+          "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4；-ss 364秒原始整帧，等比缩小，无裁切",
+          "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4；-ss 380秒原始整帧，等比缩小，无裁切",
+          "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4；-ss 405秒原始整帧，等比缩小，无裁切"
+        ],
+        "acceptance": "全画布含人物窗压暗，字幕窄缝布局，节点在对象词触发后按左到右展开属性"
+      },
+      "knowledgeVisual": {
+        "contractId": "kvc-V03-1",
+        "segmentId": "V03-1",
+        "spokenClaim": "三类因素怎样影响皮肤观感",
+        "viewerBefore": "观众听到相关讲解，需看清对象与关系",
+        "viewerAfter": "三类因素怎样影响皮肤观感",
+        "knowledgeType": "CAUSE",
+        "entities": [
+          "视觉风格",
+          "皮肤的状态纹理",
+          "摄影呈现",
+          "镜面高光"
+        ],
+        "initialState": "原录屏连续播放",
+        "interaction": "整张构成图作为背景，不先裁成一张脸。新增三项到“皮肤观感”的关系线，讲摄影呈现时强调对应支线；如需展示实际高光，只回用开头油腻人物图，并标明“回看开头示例”。不伪造重新打光的前后结果。人物窗和字幕区域保持清晰。",
+        "stateChanges": [
+          "保留整张构成图作为上下文，建立视觉风格→皮肤观感的关系线",
+          "接入人物造型→皮肤状态与纹理的关系线，保持整体结构",
+          "接入光线表现分支，强调当前焦点",
+          "强调光线分支；若引用开头人物脸部高光，标明回看开头示例，不冒充此时原录屏"
+        ],
+        "resultState": "三类因素怎样影响皮肤观感",
+        "viewerInference": "三类因素怎样影响皮肤观感",
+        "semanticAnchors": [
+          {
+            "spokenCue": "视觉风格",
+            "visualEvent": "保留整张构成图作为上下文，建立视觉风格→皮肤观感的关系线"
+          },
+          {
+            "spokenCue": "皮肤的状态纹理",
+            "visualEvent": "接入人物造型→皮肤状态与纹理的关系线，保持整体结构"
+          },
+          {
+            "spokenCue": "摄影呈现",
+            "visualEvent": "接入光线表现分支，强调当前焦点"
+          },
+          {
+            "spokenCue": "镜面高光",
+            "visualEvent": "强调光线分支；若引用开头人物脸部高光，标明回看开头示例，不冒充此时原录屏"
+          }
+        ],
+        "labelPlan": [
+          {
+            "text": "视觉风格",
+            "target": "视觉风格",
+            "responsibility": "身份"
+          },
+          {
+            "text": "皮肤的状态纹理",
+            "target": "皮肤的状态纹理",
+            "responsibility": "身份"
+          },
+          {
+            "text": "摄影呈现",
+            "target": "摄影呈现",
+            "responsibility": "身份"
+          },
+          {
+            "text": "镜面高光",
+            "target": "镜面高光",
+            "responsibility": "身份"
+          }
+        ],
+        "cameraPurpose": "保留原录屏已有缩放，叠层固定视窗，框线或箭头变化",
+        "carrierDecision": "REMOTION_OVERLAY",
+        "silentTest": "对象与连接关系能看清，标签可读",
+        "audioSyncTest": "按冻结时码检查口播与事件一一对应"
+      },
+      "overlayContinuity": {
+        "groupId": "V03-1",
+        "order": 1,
+        "role": "EXPLANATION",
+        "hostCarrier": "SCREEN_RECORDING",
+        "persistence": "SEGMENT",
+        "stateBefore": "原录屏",
+        "stateUpdate": "三类因素怎样影响皮肤观感",
+        "stateAfter": "原录屏",
+        "contrastMode": "FULL_SCRIM",
+        "contrastReason": "真实底画文字较密；仅在图解区提供对比，保护人物与字幕",
+        "attentionPlan": [
+          {
+            "spokenCue": "视觉风格",
+            "focusOwner": "OVERLAY",
+            "target": "保留整张构成图作为上下文，建立视觉风格→皮肤观感的关系线",
+            "reason": "辅助理解当前关系"
+          },
+          {
+            "spokenCue": "皮肤的状态纹理",
+            "focusOwner": "OVERLAY",
+            "target": "接入人物造型→皮肤状态与纹理的关系线，保持整体结构",
+            "reason": "辅助理解当前关系"
+          },
+          {
+            "spokenCue": "摄影呈现",
+            "focusOwner": "OVERLAY",
+            "target": "接入光线表现分支，强调当前焦点",
+            "reason": "辅助理解当前关系"
+          },
+          {
+            "spokenCue": "镜面高光",
+            "focusOwner": "OVERLAY",
+            "target": "强调光线分支；若引用开头人物脸部高光，标明回看开头示例，不冒充此时原录屏",
+            "reason": "辅助理解当前关系"
+          }
+        ],
+        "protectedRegions": [
+          {
+            "target": "SUBTITLES",
+            "description": "字幕位于图解背景之上；人物窗随底画压暗"
+          }
+        ],
+        "handoff": "退出图解，回到你将图片交给豆包的真实操作。"
+      }
+    },
+    {
+      "id": "V09-1",
+      "type": "REMOTION",
+      "finalRange": {
+        "start": 277.214382,
+        "end": 287.244807
+      },
+      "narrative": {
+        "purpose": "UNDERSTAND",
+        "viewerBefore": "观众听到相关讲解，需看清对象与关系",
+        "viewerAfter": "理解原因，才能给出有针对性的指令",
+        "whyThisMedium": "将本片实例收束为观众可以带走的方法，比再铺一屏口号更有用。",
+        "handoffIn": "理解原因，才能给出有针对性的指令",
+        "handoffOut": "恢复真实画布，展示色卡、场景和道具的延伸结果。"
+      },
+      "annotation": {
+        "object": "理解原因，才能给出有针对性的指令",
+        "relationship": "在当前原录屏上叠加三个依次出现的节点：“发现问题→理解原因→写对应约束”。这是对前文的归纳，不声称底下截图逐项演示了这三步。图的大小和位置保持不变，以当前节点的框线与连接箭头表达讲到哪一步；结束后撤去，回到连续录屏。",
+        "entrance": "从本片例子建立问题与原因节点",
+        "change": "从本片例子建立问题与原因节点；原因连接对应的提示词约束；强调因果承接，留下可复述的三步方法",
+        "resolutionFrame": "恢复真实画布，展示色卡、场景和道具的延伸结果。",
+        "materials": [
+          "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4；-ss 1230秒原始整帧，等比缩小，无裁切"
+        ],
+        "acceptance": "全画布含人物窗压暗，字幕窄缝布局，节点在对象词触发后按左到右展开属性"
+      },
+      "knowledgeVisual": {
+        "contractId": "kvc-V09-1",
+        "segmentId": "V09-1",
+        "spokenClaim": "理解原因，才能给出有针对性的指令",
+        "viewerBefore": "观众听到相关讲解，需看清对象与关系",
+        "viewerAfter": "理解原因，才能给出有针对性的指令",
+        "knowledgeType": "PROCESS",
+        "entities": [
+          "协作",
+          "指挥 AI",
+          "不清楚一些底层逻辑"
+        ],
+        "initialState": "原录屏连续播放",
+        "interaction": "在当前原录屏上叠加三个依次出现的节点：“发现问题→理解原因→写对应约束”。这是对前文的归纳，不声称底下截图逐项演示了这三步。图的大小和位置保持不变，以当前节点的框线与连接箭头表达讲到哪一步；结束后撤去，回到连续录屏。",
+        "stateChanges": [
+          "从本片例子建立问题与原因节点",
+          "原因连接对应的提示词约束",
+          "强调因果承接，留下可复述的三步方法"
+        ],
+        "resultState": "理解原因，才能给出有针对性的指令",
+        "viewerInference": "理解原因，才能给出有针对性的指令",
+        "semanticAnchors": [
+          {
+            "spokenCue": "协作",
+            "visualEvent": "从本片例子建立问题与原因节点"
+          },
+          {
+            "spokenCue": "指挥 AI",
+            "visualEvent": "原因连接对应的提示词约束"
+          },
+          {
+            "spokenCue": "不清楚一些底层逻辑",
+            "visualEvent": "强调因果承接，留下可复述的三步方法"
+          }
+        ],
+        "labelPlan": [
+          {
+            "text": "协作",
+            "target": "协作",
+            "responsibility": "身份"
+          },
+          {
+            "text": "指挥 AI",
+            "target": "指挥 AI",
+            "responsibility": "身份"
+          },
+          {
+            "text": "不清楚一些底层逻辑",
+            "target": "不清楚一些底层逻辑",
+            "responsibility": "身份"
+          }
+        ],
+        "cameraPurpose": "保留原录屏已有缩放，叠层固定视窗，框线或箭头变化",
+        "carrierDecision": "REMOTION_OVERLAY",
+        "silentTest": "对象与连接关系能看清，标签可读",
+        "audioSyncTest": "按冻结时码检查口播与事件一一对应"
+      },
+      "overlayContinuity": {
+        "groupId": "V09-1",
+        "order": 1,
+        "role": "EXPLANATION",
+        "hostCarrier": "SCREEN_RECORDING",
+        "persistence": "SEGMENT",
+        "stateBefore": "原录屏",
+        "stateUpdate": "理解原因，才能给出有针对性的指令",
+        "stateAfter": "原录屏",
+        "contrastMode": "FULL_SCRIM",
+        "contrastReason": "真实底画文字较密；仅在图解区提供对比，保护人物与字幕",
+        "attentionPlan": [
+          {
+            "spokenCue": "协作",
+            "focusOwner": "OVERLAY",
+            "target": "从本片例子建立问题与原因节点",
+            "reason": "辅助理解当前关系"
+          },
+          {
+            "spokenCue": "指挥 AI",
+            "focusOwner": "OVERLAY",
+            "target": "原因连接对应的提示词约束",
+            "reason": "辅助理解当前关系"
+          },
+          {
+            "spokenCue": "不清楚一些底层逻辑",
+            "focusOwner": "OVERLAY",
+            "target": "强调因果承接，留下可复述的三步方法",
+            "reason": "辅助理解当前关系"
+          }
+        ],
+        "protectedRegions": [
+          {
+            "target": "SUBTITLES",
+            "description": "字幕位于图解背景之上；人物窗随底画压暗"
+          }
+        ],
+        "handoff": "恢复真实画布，展示色卡、场景和道具的延伸结果。"
+      }
+    }
+  ],
+  "state": "EDL_FROZEN",
+  "freeze": {
+    "projectRevision": 74,
+    "edlSha256": "abe51ec83d61dc57ec9620e999bd03b11302ab79cc0a521b87fc07c3930cd9c4",
+    "mappingSha256": "3110aa3300d827423512cb75970ed7b1739637fa10fc6f44033b100742bb0c68"
+  }
+}

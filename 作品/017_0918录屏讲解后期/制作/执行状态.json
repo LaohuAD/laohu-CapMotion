@@ -1,0 +1,20 @@
+{
+  "status": "EXPORTED_AWAITING_USER_REVIEW",
+  "projectRevision": 74,
+  "reviewRevision": 5,
+  "duration": 342.57968135599805,
+  "media": "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_成片.mp4",
+  "project": "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap",
+  "pending": [
+    "用户自行检查"
+  ],
+  "completed": [
+    "62处无声区剪除，共179.210297秒",
+    "原始麦克风按新EDL与原同步偏移重建主音频",
+    "两段动画起止与内部事件重映射并重新渲染",
+    "六处原生高亮重映射",
+    "中英双轨按新EDL物化，正文、字体与位置不变",
+    "Cap CLI按1920x1080、30fps、maximum导出"
+  ],
+  "validation": "用户要求停止后续检查；未执行本轮最终ASR或完整解码验收"
+}

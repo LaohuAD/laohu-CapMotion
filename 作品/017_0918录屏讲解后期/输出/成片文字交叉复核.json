@@ -1,0 +1,28 @@
+{
+  "similarity": 0.9399462204959665,
+  "differences": [
+    {
+      "op": "insert",
+      "expected": "",
+      "actual": "可以看他的人物",
+      "context": "的新提示词做出来的人物脸质感是非常好的网上估计也"
+    },
+    {
+      "op": "insert",
+      "expected": "",
+      "actual": "着这个图片的",
+      "context": "现这三个要素视觉风格关乎画面的质感人物造型描述了"
+    },
+    {
+      "op": "replace",
+      "expected": "相关",
+      "actual": "的一个三视图的一个提取",
+      "context": "的内容也给大家准备了道具相关的提示词所有提示词都已经"
+    }
+  ],
+  "note": "校对字幕含正常精简及用户确认专名；ASR不是字幕改写权威，只作漏句和声音完整性交叉线索。",
+  "currentDeliveryApplicability": {
+    "status": "STALE_PREVIOUS_DELIVERY",
+    "reason": "2026-09-20 EDL已重新剪辑；用户要求自行检查，本轮未重新执行此验收"
+  }
+}

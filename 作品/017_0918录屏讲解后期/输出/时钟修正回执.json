@@ -1,0 +1,23 @@
+{
+  "reason": "ASR source clock conversion sign error, discovered by final export waveform comparison",
+  "recordingStartTimes": {
+    "display": 0.152420916,
+    "mic": -0.040313625
+  },
+  "nativeMicSeekOffset": 0.19273454,
+  "rawMicToDisplaySeconds": -0.192734541,
+  "correctionToOldASRGlobalSeconds": -0.38546908,
+  "beforeLagSamplesMs": [
+    -385.5,
+    -385.5,
+    -385.5,
+    -345.5,
+    -385.5
+  ],
+  "beforeRealWordRMS": 0.0034441128,
+  "independentRealWordRMS": 0.08366298,
+  "workRevisionBefore": 41,
+  "workRevisionAfter": 44,
+  "originalRecordingAndSyncConfigUntouched": true,
+  "futureUse": "This recording raw ASR global fields need the correction above; word sourceStartMs/sourceEndMs are raw mic values. Final ASR and approved displayed SRT use target time."
+}

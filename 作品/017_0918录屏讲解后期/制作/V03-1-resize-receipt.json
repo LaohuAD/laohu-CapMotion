@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Applications/CapMotion.app/Contents/MacOS/cap-cli",
+    "motion",
+    "resize",
+    "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap",
+    "--expected-revision",
+    "67",
+    "--segment",
+    "V03-1",
+    "--duration",
+    "22.27892100000001",
+    "--json"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"revision\": 68,\n  \"segment\": {\n    \"id\": \"V03-1\",\n    \"definitionId\": \"work017-v03-1\",\n    \"definitionVersion\": 1,\n    \"start\": 79.692675,\n    \"end\": 101.971596,\n    \"track\": 0,\n    \"zIndex\": 100,\n    \"role\": \"animation\",\n    \"transform\": {\n      \"x\": 0.0,\n      \"y\": 0.0,\n      \"scaleX\": 1.0,\n      \"scaleY\": 1.0,\n      \"rotation\": 0.0\n    },\n    \"opacity\": 1.0,\n    \"durationPolicy\": \"responsive\",\n    \"props\": {\n      \"durationInFrames\": 676,\n      \"events\": [\n        {\n          \"frame\": 0,\n          \"id\": \"e0\",\n          \"label\": \"视觉风格\",\n          \"linkFrame\": 24,\n          \"target\": \"整体质感\",\n          \"targetFrame\": 87\n        },\n        {\n          \"frame\": 97,\n          \"id\": \"e1\",\n          \"label\": \"人物造型\",\n          \"linkFrame\": 130,\n          \"target\": \"皮肤纹理\",\n          \"targetFrame\": 167\n        },\n        {\n          \"frame\": 220,\n          \"id\": \"e2\",\n          \"label\": \"摄影呈现\",\n          \"linkFrame\": 247,\n          \"target\": \"光线表现\",\n          \"targetFrame\": 324\n        }\n      ],\n      \"kind\": \"factors\"\n    },\n    \"artifactId\": \"motion-96b2ab2802243307-final\"\n  }\n}\n",
+  "stderr": ""
+}

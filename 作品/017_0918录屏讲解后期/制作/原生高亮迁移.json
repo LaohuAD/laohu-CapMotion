@@ -1,0 +1,156 @@
+{
+  "masks": [
+    {
+      "start": 68.416313,
+      "end": 69.666313,
+      "track": 0,
+      "enabled": true,
+      "maskType": "highlight",
+      "center": {
+        "x": 0.49,
+        "y": 0.4300000000000001
+      },
+      "size": {
+        "x": 0.7,
+        "y": 0.66
+      },
+      "feather": 0.0,
+      "opacity": 1.0,
+      "pixelation": 24.0,
+      "darkness": 0.72,
+      "fadeDuration": 0.12,
+      "keyframes": {
+        "position": [],
+        "size": [],
+        "intensity": []
+      }
+    },
+    {
+      "start": 190.201927,
+      "end": 192.28074,
+      "track": 0,
+      "enabled": true,
+      "maskType": "highlight",
+      "center": {
+        "x": 0.405,
+        "y": 0.48
+      },
+      "size": {
+        "x": 0.7,
+        "y": 0.7
+      },
+      "feather": 0.0,
+      "opacity": 1.0,
+      "pixelation": 24.0,
+      "darkness": 0.72,
+      "fadeDuration": 0.12,
+      "keyframes": {
+        "position": [],
+        "size": [],
+        "intensity": []
+      }
+    },
+    {
+      "start": 197.194726,
+      "end": 198.691281,
+      "track": 0,
+      "enabled": true,
+      "maskType": "highlight",
+      "center": {
+        "x": 0.485,
+        "y": 0.21999999999999997
+      },
+      "size": {
+        "x": 0.26,
+        "y": 0.29
+      },
+      "feather": 0.0,
+      "opacity": 1.0,
+      "pixelation": 24.0,
+      "darkness": 0.72,
+      "fadeDuration": 0.12,
+      "keyframes": {
+        "position": [],
+        "size": [],
+        "intensity": []
+      }
+    },
+    {
+      "start": 213.396706,
+      "end": 215.896706,
+      "track": 0,
+      "enabled": true,
+      "maskType": "highlight",
+      "center": {
+        "x": 0.28,
+        "y": 0.445
+      },
+      "size": {
+        "x": 0.28,
+        "y": 0.63
+      },
+      "feather": 0.0,
+      "opacity": 1.0,
+      "pixelation": 24.0,
+      "darkness": 0.72,
+      "fadeDuration": 0.12,
+      "keyframes": {
+        "position": [],
+        "size": [],
+        "intensity": []
+      }
+    },
+    {
+      "start": 218.198389,
+      "end": 218.648205,
+      "track": 0,
+      "enabled": true,
+      "maskType": "highlight",
+      "center": {
+        "x": 0.565,
+        "y": 0.495
+      },
+      "size": {
+        "x": 0.37,
+        "y": 0.61
+      },
+      "feather": 0.0,
+      "opacity": 1.0,
+      "pixelation": 24.0,
+      "darkness": 0.72,
+      "fadeDuration": 0.12,
+      "keyframes": {
+        "position": [],
+        "size": [],
+        "intensity": []
+      }
+    },
+    {
+      "start": 233.124892,
+      "end": 233.829579,
+      "track": 0,
+      "enabled": true,
+      "maskType": "highlight",
+      "center": {
+        "x": 0.5,
+        "y": 0.38
+      },
+      "size": {
+        "x": 0.2,
+        "y": 0.4
+      },
+      "feather": 0.0,
+      "opacity": 1.0,
+      "pixelation": 24.0,
+      "darkness": 0.72,
+      "fadeDuration": 0.12,
+      "keyframes": {
+        "position": [],
+        "size": [],
+        "intensity": []
+      }
+    }
+  ],
+  "texts": [],
+  "removeMotionIds": []
+}

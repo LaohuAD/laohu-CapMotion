@@ -1,0 +1,34 @@
+{
+  "trackStyles": [
+    {
+      "trackId": "zh-CN",
+      "fontSize": 52
+    },
+    {
+      "trackId": "en",
+      "fontSize": 26
+    }
+  ],
+  "trackPositions": [
+    {
+      "manualPosition": {
+        "x": 0.5,
+        "y": 0.9347715987099542
+      },
+      "position": "manual",
+      "trackId": "zh-CN"
+    },
+    {
+      "manualPosition": {
+        "x": 0.5,
+        "y": 0.987037062645
+      },
+      "position": "manual",
+      "trackId": "en"
+    }
+  ],
+  "manualPosition": {
+    "x": 0.5,
+    "y": 0.9347715987099542
+  }
+}

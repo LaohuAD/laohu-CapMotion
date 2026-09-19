@@ -1,0 +1,16 @@
+{
+  "schema": "laohu.final-asr-provenance/1",
+  "generatedAt": "2026-09-19T15:48:53.627Z",
+  "media": "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_成片.mp4",
+  "edl": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/冻结剪辑清单.json",
+  "raw": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输出/成片复核ASR.json",
+  "srt": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/输出/成片复核ASR.srt",
+  "mediaSha256": "f04e8e01be1dcbd6649de8f068e1344999463fea168a112a34d8b80bdafef0f7",
+  "edlSha256": "2c1aebc313b420da9233d1939e4ab62d34b1f568a52be41ee25b1c750e22b89d",
+  "rawSha256": "2120aacf58eb7b104e7b2287d1df2fde7389957c7ca08d1595bf228aef1fb7ce",
+  "srtSha256": "6f0ccf4790300420f152e786fcf06a7d30abbf1de4d4b8925c1277fdf37fc600",
+  "currentDeliveryApplicability": {
+    "status": "STALE_PREVIOUS_DELIVERY",
+    "reason": "2026-09-20 EDL已重新剪辑；用户要求自行检查，本轮未重新执行此验收"
+  }
+}

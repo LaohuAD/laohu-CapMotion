@@ -1,0 +1,79 @@
+{
+  "symptom": "017局部标注不醒目、对象晚于属性触发、全幅动画未覆盖人物及四边、剩余气口未收紧、英文缩小后字幕间距变大",
+  "triggerScope": "PROJECT_CAPABILITY",
+  "earliestFailure": "粗剪阶段被画面与未来动画越权：把屏幕动作当作静音保护，并未在字幕动画前完成粗剪精剪验收",
+  "rootLayer": "CHAIN",
+  "hypothesis": "先检查Cap原生能力并将预设偏好绑定到具体执行和真实像素/音频验收，可避免只在文档写规则而成片不执行",
+  "protection": [
+    "原素材与同步参数不变",
+    "原生高亮保留手工可编辑性",
+    "实际操作与有声演示不被理论动画覆盖",
+    "字幕正文与中英配对不被样式更新破坏",
+    "保护完整字音、辅音闭塞和有意义停顿",
+    "不更换引擎、不打包软件、不推送仓库"
+  ],
+  "authorityPath": ".agents/skills/laohu-video-postproduction/SKILL.md",
+  "change": "后期增加偏好执行回执与最终静音分类；导演增加原生能力优先、全幅背景覆盖和对象→关系→结果分别绑定；两轨字号位置一并保存Laohu；修复ASR时钟方向入口；增加带锁的原生高亮/文字窄事务；2026-09-20明确粗剪→精剪→可选调序→字幕/动画依赖，正常流程不重排，老胡操作发声约定覆盖无声画面保护",
+  "decisionChanges": [
+    "圈选直接用Cap原生highlight，Remotion只承担两段关系动画",
+    "全幅背景覆盖完整输出包括人物窗，字幕在上层",
+    "人物造型在对象词出现，再展开右侧皮肤属性",
+    "缺少两轨字号不猜测后宣称还原预设，实际可见间距校准并一起保存",
+    "超过0.2秒的最终静音逐项分类；EVENT名称不能代替有声或动作证据",
+    "正向播放seek offset必须反向换算ASR源时间",
+    "重要文字不默认挂顶栏：重复则删，独立强调置于中央视觉区；对象注释靠近对象",
+    "高亮始中末检查画面漂移：跟随、缩短或撤下，不用静态框误指对象",
+    "字幕调整尊重用户指定移动方向：英文固定原位，仅下移中文；检查前后两轨而非只看相对间距",
+    "正常流程先粗剪精剪，调序作为精剪后独立可选步骤，无明确指令直接跳过",
+    "屏幕动作不能保护无声等待；动画只分析最终剪后内容"
+  ],
+  "regressions": {
+    "current": [
+      "原生高亮27帧始中末检查后撤下漂移窗口并缩短范围，最终6处原生高亮和2段关系动画",
+      "工程63：英文恢复原位置，中文下移24px，Laohu预设10；最终MP4实际字幕帧已检查",
+      "61处静音核心裁去33.110757秒，新增整词未覆盖0；真实被成片ASR识别",
+      "相对上一次已验证导出，本次只改字幕位置；新旧AAC包SHA256完全一致，避免重复ASR调用",
+      "新增6至10秒无声但鼠标移动的规则走查：删除无声等待，禁止先做动画；尚未重新制作成片"
+    ],
+    "legacy": [
+      "原生轨事务保留字幕/音频/其他Motion并拒绝旧revision及轨重叠，3测试通过",
+      "ASR保留原始词时间、多源排序与导入契约，3测试通过",
+      "重复删前留后保留独有条件及完整字音；英文原位与中文下移规则保持"
+    ],
+    "adjacent": [
+      "局部操作不套全幅关系背景，普通圈选不触发Remotion渲染",
+      "原生轨新增只接受窄字段，敏感遮罩不被误改为highlight",
+      "新增有声音乐与独立动画边界、显式调序在精剪后执行的回归用例"
+    ]
+  },
+  "evidence": [
+    "用户本轮三幅反馈图",
+    "作品/017_0918录屏讲解后期/制作/字幕预设修订回执.json",
+    "scripts/cap-project-native-tracks.test.py",
+    "scripts/cap-project-asr.test.mjs",
+    ".agents/skills/laohu-animation-director/SKILL.md",
+    "用户追加顶部文字反馈图codex-clipboard-f3b4a103-cef3-40a0-9a96-7aaf6f475046.png",
+    "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning/F29A19FCD34C542806F736E0661C05F5",
+    "作品/017_0918录屏讲解后期/输出/字幕方向修正校验.json",
+    "作品/017_0918录屏讲解后期/输出/成片音轨同一性校验.json",
+    "作品/017_0918录屏讲解后期/输出/成片静音复核.json",
+    "2026-09-20用户明确阶段顺序及正常流程含义",
+    ".agents/skills/laohu-animation-director/test-prompts.json"
+  ],
+  "rollback": "若高亮遮住操作或紧凑剪口造成断字，按具体源片段回退；不恢复中央暗框冒充全幅，不把所有无声区机械裁零。",
+  "validation": {
+    "STRUCTURE": "PASS",
+    "ROUTE": "PASS",
+    "BEHAVIOR": "OBSERVE",
+    "QUALITY": "UNKNOWN"
+  },
+  "decision": "OBSERVE",
+  "activationReceipt": {
+    "asset": ".agents/skills/laohu-video-evolution/references/四层能力进化与保真.md",
+    "trigger": "用户要求把阶段依赖写死",
+    "judgment": "最早失效在粗剪，不能仅增加最终动画验收",
+    "changedDecision": "先修后期阶段门，再让导演和模板接受剪后输入",
+    "resultLocation": ".agents/skills/laohu-video-postproduction/SKILL.md#阶段顺序硬约束",
+    "unusedBoundary": "不渲染样片、不修改当前媒体、不声称规则走查证明成片质量"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "currentRevision": 74,
+  "sourceUnchanged": {
+    "project-config.json": {
+      "sha256": "248b509c6e21f3074037197e11b6f10af952a82f7a7e37045d4272b0205db0f0",
+      "unchanged": true
+    },
+    "recording-meta.json": {
+      "sha256": "8ffda9b12bfb1d19bceecdd2fd3f726aafde36a54587252baec0ab32c969c443",
+      "unchanged": true
+    }
+  },
+  "syncOffsetsUnchanged": true,
+  "captionTextStyleUnchanged": true,
+  "latestExportAsrWholeWordsLost": [],
+  "oldSourceAsrTimestampConflicts": [
+    {
+      "text": "下",
+      "start": 461.29752,
+      "end": 461.57755
+    },
+    {
+      "text": "获",
+      "start": 1452.9875,
+      "end": 1453.0276
+    }
+  ],
+  "conflictDisposition": "原始ASR时间包络落入静音，保留上一实际导出完整识别词；最终新ASR继续验证真实声音，不能把时间包络冲突冒充漏字或无漏字结论",
+  "animationCount": 2,
+  "nativeHighlightCount": 6
+}

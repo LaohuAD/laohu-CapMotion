@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Applications/CapMotion.app/Contents/MacOS/cap-cli",
+    "motion",
+    "move",
+    "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap",
+    "--expected-revision",
+    "69",
+    "--segment",
+    "V09-1",
+    "--start",
+    "277.214382",
+    "--json"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"revision\": 70,\n  \"segment\": {\n    \"id\": \"V09-1\",\n    \"definitionId\": \"work017-v09-1\",\n    \"definitionVersion\": 1,\n    \"start\": 277.214382,\n    \"end\": 288.36494600000003,\n    \"track\": 0,\n    \"zIndex\": 100,\n    \"role\": \"animation\",\n    \"transform\": {\n      \"x\": 0.0,\n      \"y\": 0.0,\n      \"scaleX\": 1.0,\n      \"scaleY\": 1.0,\n      \"rotation\": 0.0\n    },\n    \"opacity\": 1.0,\n    \"durationPolicy\": \"responsive\",\n    \"props\": {\n      \"durationInFrames\": 335,\n      \"events\": [\n        {\n          \"frame\": 63,\n          \"id\": \"e0\",\n          \"label\": \"发现问题\",\n          \"target\": \"镜面高光\"\n        },\n        {\n          \"frame\": 129,\n          \"id\": \"e1\",\n          \"label\": \"理解原因\",\n          \"target\": \"光线表现\"\n        },\n        {\n          \"frame\": 181,\n          \"id\": \"e2\",\n          \"label\": \"写对应约束\",\n          \"target\": \"皮肤 / 光线\"\n        }\n      ],\n      \"kind\": \"process\"\n    },\n    \"artifactId\": \"motion-a0bb8a47f882984d-final\"\n  }\n}\n",
+  "stderr": ""
+}

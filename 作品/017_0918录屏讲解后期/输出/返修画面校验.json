@@ -1,0 +1,60 @@
+{
+  "projectRevision": 74,
+  "sampleFrames": [
+    {
+      "name": "highlight-1",
+      "time": 69.041313,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-highlight-1.jpg"
+    },
+    {
+      "name": "highlight-2",
+      "time": 191.2413335,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-highlight-2.jpg"
+    },
+    {
+      "name": "highlight-3",
+      "time": 197.9430035,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-highlight-3.jpg"
+    },
+    {
+      "name": "highlight-4",
+      "time": 214.646706,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-highlight-4.jpg"
+    },
+    {
+      "name": "highlight-5",
+      "time": 218.423297,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-highlight-5.jpg"
+    },
+    {
+      "name": "highlight-6",
+      "time": 233.4772355,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-highlight-6.jpg"
+    },
+    {
+      "name": "V03-1",
+      "time": 90.83213549999999,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-V03-1.jpg"
+    },
+    {
+      "name": "V09-1",
+      "time": 282.22959449999996,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-V09-1.jpg"
+    },
+    {
+      "name": "object-before-result",
+      "time": 83.541373,
+      "path": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/017-review/qa-object-before-result.jpg"
+    }
+  ],
+  "nativeHighlights": 6,
+  "nativeTextCount": 0,
+  "motionCount": 2,
+  "status": "PASS_SAMPLED_FRAMES",
+  "findings": [
+    "6处原生高亮抽帧仍指向原对象",
+    "两段图解保持原设计，全画布压暗及字幕上层不变",
+    "人物造型先出现，皮肤纹理随后出现",
+    "中英字幕位置及字号与revision63保持一致"
+  ]
+}

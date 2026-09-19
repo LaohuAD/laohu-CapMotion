@@ -1,0 +1,1131 @@
+{
+  "schema": "laohu.gap-rework-execution/1",
+  "timeBasis": "PRE_REWORK_T2_554.900735356",
+  "decision": "APPLY_STRICT_SILENCE_CORES",
+  "candidateSource": "气口返修候选.json",
+  "reason": "不把ASR包络重叠当成实际字音，也不直接采用条件候选全范围；以更严格静音核心落剪，保留弱音与操作。",
+  "cuts": [
+    {
+      "start": 1.28175,
+      "end": 1.845229,
+      "gapId": "G001",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 5.156292,
+      "end": 5.827271,
+      "gapId": "G003",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 17.708479,
+      "end": 18.955312,
+      "gapId": "G006",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 20.086958,
+      "end": 20.279625,
+      "gapId": "G007",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 24.299458,
+      "end": 24.514542,
+      "gapId": "G009",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 36.737688,
+      "end": 36.957854,
+      "gapId": "G013",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 42.876646,
+      "end": 43.172542,
+      "gapId": "G015",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 44.303458,
+      "end": 44.920604,
+      "gapId": "G016",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "MEANINGLESS_SILENCE",
+      "visualInspection": null
+    },
+    {
+      "start": 55.660729,
+      "end": 56.183062,
+      "gapId": "G021",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "MEANINGLESS_SILENCE",
+      "visualInspection": null
+    },
+    {
+      "start": 80.538729,
+      "end": 80.698271,
+      "gapId": "G027",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 91.475917,
+      "end": 91.661375,
+      "gapId": "G029",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 106.2515,
+      "end": 106.405375,
+      "gapId": "G032",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 109.960812,
+      "end": 110.249771,
+      "gapId": "G034",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 111.168437,
+      "end": 111.441917,
+      "gapId": "G035",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 117.681833,
+      "end": 117.926125,
+      "gapId": "G037",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 118.662875,
+      "end": 119.214458,
+      "gapId": "G038",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 128.508479,
+      "end": 128.863833,
+      "gapId": "G039",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 133.983708,
+      "end": 134.203417,
+      "gapId": "G040",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 141.575417,
+      "end": 141.842729,
+      "gapId": "G042",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 144.707396,
+      "end": 145.070062,
+      "gapId": "G043",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 204.871792,
+      "end": 205.996875,
+      "gapId": "G047",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "MEANINGLESS_VISUAL_WAIT_ASR_EDGE",
+      "visualInspection": null
+    },
+    {
+      "start": 216.591348,
+      "end": 216.846625,
+      "gapId": "G050",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "UNCERTAIN_VISUAL_HOLD",
+      "visualInspection": "已看片：静态结果/画布，无新增操作；结果首次出现保留0.4秒承接"
+    },
+    {
+      "start": 216.867833,
+      "end": 218.241396,
+      "gapId": "G050",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "UNCERTAIN_VISUAL_HOLD",
+      "visualInspection": "已看片：静态结果/画布，无新增操作；结果首次出现保留0.4秒承接"
+    },
+    {
+      "start": 222.276208,
+      "end": 225.21,
+      "gapId": "G051",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "MEANINGLESS_SILENCE",
+      "visualInspection": null
+    },
+    {
+      "start": 248.824896,
+      "end": 249.045771,
+      "gapId": "G057",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 250.626792,
+      "end": 251.098854,
+      "gapId": "G058",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 268.674417,
+      "end": 269.098667,
+      "gapId": "G062",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 286.848437,
+      "end": 287.101354,
+      "gapId": "G065",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 289.550604,
+      "end": 289.779292,
+      "gapId": "G066",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 297.011646,
+      "end": 297.209146,
+      "gapId": "G067",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 319.047542,
+      "end": 320.0535,
+      "gapId": "G072",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 322.452208,
+      "end": 322.633937,
+      "gapId": "G073",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 329.698396,
+      "end": 329.929604,
+      "gapId": "G075",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 331.611521,
+      "end": 332.032708,
+      "gapId": "G076",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 344.312479,
+      "end": 344.577729,
+      "gapId": "G080",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 350.337625,
+      "end": 350.611042,
+      "gapId": "G081",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 367.909083,
+      "end": 368.211313,
+      "gapId": "G085",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 370.02475,
+      "end": 370.401917,
+      "gapId": "G086",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 373.367979,
+      "end": 373.557229,
+      "gapId": "G088",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 390.260187,
+      "end": 390.753937,
+      "gapId": "G090",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 414.342938,
+      "end": 414.65525,
+      "gapId": "G093",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 423.337875,
+      "end": 423.963813,
+      "gapId": "G095",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 427.417,
+      "end": 427.725646,
+      "gapId": "G096",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 432.336458,
+      "end": 432.591187,
+      "gapId": "G097",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 438.541437,
+      "end": 438.968,
+      "gapId": "G100",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 446.946688,
+      "end": 447.186896,
+      "gapId": "G102",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 457.663979,
+      "end": 459.132875,
+      "gapId": "G104",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "MEANINGLESS_SILENCE",
+      "visualInspection": null
+    },
+    {
+      "start": 459.40325,
+      "end": 460.458604,
+      "gapId": "G105",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "MEANINGLESS_SILENCE",
+      "visualInspection": null
+    },
+    {
+      "start": 465.563896,
+      "end": 466.075333,
+      "gapId": "G107",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "MEANINGLESS_SILENCE",
+      "visualInspection": null
+    },
+    {
+      "start": 472.841125,
+      "end": 473.028187,
+      "gapId": "G109",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 474.764042,
+      "end": 475.034896,
+      "gapId": "G111",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 475.878667,
+      "end": 476.081417,
+      "gapId": "G112",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 476.825542,
+      "end": 477.179792,
+      "gapId": "G113",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 479.103562,
+      "end": 479.627917,
+      "gapId": "G114",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 484.099437,
+      "end": 484.308625,
+      "gapId": "G115",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 485.496437,
+      "end": 485.804687,
+      "gapId": "G116",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 507.833125,
+      "end": 511.502062,
+      "gapId": "G124",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 514.714437,
+      "end": 517.240667,
+      "gapId": "G125",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "UNCERTAIN_VISUAL_HOLD",
+      "visualInspection": "已看片：静态结果/画布，无新增操作；结果首次出现保留0.4秒承接"
+    },
+    {
+      "start": 548.403792,
+      "end": 548.573375,
+      "gapId": "G128",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 549.815125,
+      "end": 550.203604,
+      "gapId": "G129",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    },
+    {
+      "start": 552.819188,
+      "end": 553.083958,
+      "gapId": "G130",
+      "reason": "复核为-55dB静音核心，仅裁核心；两侧各保留10ms，弱起尾音区不随-35dB候选删除。",
+      "originalClass": "ASR_OVERLAP_BLANK",
+      "visualInspection": null
+    }
+  ],
+  "retainedOrUncertain": [
+    {
+      "gapId": "G002",
+      "range": {
+        "start": 2.508667,
+        "end": 4.188729
+      },
+      "classification": "NECESSARY_EVIDENCE_HOLD",
+      "reason": "该 EVENT 属于已确认的结果、布局、细节或提示词证据窗口；当前帧差无变化，但静态画面本身承担可读性，不能仅凭无声判定为空镜。"
+    },
+    {
+      "gapId": "G004",
+      "range": {
+        "start": 6.190562,
+        "end": 12.118229
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G005",
+      "range": {
+        "start": 14.521396,
+        "end": 16.544333
+      },
+      "classification": "PROTECTED_MANUAL_SPEECH",
+      "reason": "与用户确认的‘真实’源音频保护范围相交；不得自动切除。"
+    },
+    {
+      "gapId": "G008",
+      "range": {
+        "start": 22.121,
+        "end": 22.820083
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G010",
+      "range": {
+        "start": 25.903562,
+        "end": 28.680729
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G011",
+      "range": {
+        "start": 31.207167,
+        "end": 32.047021
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G012",
+      "range": {
+        "start": 32.123479,
+        "end": 33.568896
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G014",
+      "range": {
+        "start": 39.119479,
+        "end": 39.657125
+      },
+      "classification": "NECESSARY_EVIDENCE_HOLD",
+      "reason": "该 EVENT 属于已确认的结果、布局、细节或提示词证据窗口；当前帧差无变化，但静态画面本身承担可读性，不能仅凭无声判定为空镜。"
+    },
+    {
+      "gapId": "G017",
+      "range": {
+        "start": 46.242667,
+        "end": 48.285333
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G018",
+      "range": {
+        "start": 48.490812,
+        "end": 49.818792
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G019",
+      "range": {
+        "start": 52.007,
+        "end": 52.238646
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G020",
+      "range": {
+        "start": 53.409208,
+        "end": 54.587958
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G022",
+      "range": {
+        "start": 57.975437,
+        "end": 58.475
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G023",
+      "range": {
+        "start": 58.511167,
+        "end": 63.674875
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G024",
+      "range": {
+        "start": 64.76675,
+        "end": 65.013479
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G025",
+      "range": {
+        "start": 69.910646,
+        "end": 70.273208
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G026",
+      "range": {
+        "start": 77.684896,
+        "end": 77.908021
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G028",
+      "range": {
+        "start": 85.404458,
+        "end": 85.625396
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G030",
+      "range": {
+        "start": 94.8985,
+        "end": 95.114562
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G031",
+      "range": {
+        "start": 97.828312,
+        "end": 101.682771
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G033",
+      "range": {
+        "start": 108.798646,
+        "end": 109.183646
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G036",
+      "range": {
+        "start": 113.837083,
+        "end": 114.07825
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G041",
+      "range": {
+        "start": 137.441521,
+        "end": 137.745312
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G044",
+      "range": {
+        "start": 147.160271,
+        "end": 147.4675
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G045",
+      "range": {
+        "start": 150.428062,
+        "end": 197.900437
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G046",
+      "range": {
+        "start": 199.239688,
+        "end": 203.921375
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G048",
+      "range": {
+        "start": 213.045958,
+        "end": 213.358583
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G049",
+      "range": {
+        "start": 215.341771,
+        "end": 215.730562
+      },
+      "classification": "UNCERTAIN_VISUAL_HOLD",
+      "reason": "没有检测到点击或明显帧变化，且仅凭当前通用 EVENT 标记不足以证明需要保护；需人工看片决定是证据停留还是可删等待。"
+    },
+    {
+      "gapId": "G052",
+      "range": {
+        "start": 229.173667,
+        "end": 230.359021
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G053",
+      "range": {
+        "start": 231.194958,
+        "end": 231.457958
+      },
+      "classification": "MIC_LOW_LEVEL_UNCERTAIN",
+      "reason": "麦克风静音检测与更严格边界证据不一致，保守保留并人工复核。"
+    },
+    {
+      "gapId": "G054",
+      "range": {
+        "start": 234.484417,
+        "end": 235.790729
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G055",
+      "range": {
+        "start": 237.430042,
+        "end": 241.164104
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G056",
+      "range": {
+        "start": 243.8325,
+        "end": 245.479
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G059",
+      "range": {
+        "start": 252.694396,
+        "end": 254.715187
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G060",
+      "range": {
+        "start": 258.564104,
+        "end": 263.684687
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G061",
+      "range": {
+        "start": 265.277167,
+        "end": 265.830854
+      },
+      "classification": "NECESSARY_EVIDENCE_HOLD",
+      "reason": "该 EVENT 属于已确认的结果、布局、细节或提示词证据窗口；当前帧差无变化，但静态画面本身承担可读性，不能仅凭无声判定为空镜。"
+    },
+    {
+      "gapId": "G063",
+      "range": {
+        "start": 271.597292,
+        "end": 271.824229
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G064",
+      "range": {
+        "start": 274.805875,
+        "end": 284.836958
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G068",
+      "range": {
+        "start": 297.667354,
+        "end": 303.227708
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G069",
+      "range": {
+        "start": 303.444542,
+        "end": 306.871292
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G070",
+      "range": {
+        "start": 309.797562,
+        "end": 310.044354
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G071",
+      "range": {
+        "start": 316.115417,
+        "end": 317.896542
+      },
+      "classification": "NECESSARY_EVIDENCE_HOLD",
+      "reason": "该 EVENT 属于已确认的结果、布局、细节或提示词证据窗口；当前帧差无变化，但静态画面本身承担可读性，不能仅凭无声判定为空镜。"
+    },
+    {
+      "gapId": "G074",
+      "range": {
+        "start": 324.61625,
+        "end": 328.506875
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G077",
+      "range": {
+        "start": 333.450375,
+        "end": 335.466375
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G078",
+      "range": {
+        "start": 337.762625,
+        "end": 339.756667
+      },
+      "classification": "NECESSARY_EVIDENCE_HOLD",
+      "reason": "该 EVENT 属于已确认的结果、布局、细节或提示词证据窗口；当前帧差无变化，但静态画面本身承担可读性，不能仅凭无声判定为空镜。"
+    },
+    {
+      "gapId": "G079",
+      "range": {
+        "start": 341.434833,
+        "end": 341.782708
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G082",
+      "range": {
+        "start": 355.735771,
+        "end": 355.993187
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G083",
+      "range": {
+        "start": 361.993958,
+        "end": 362.231854
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G084",
+      "range": {
+        "start": 363.880063,
+        "end": 366.055833
+      },
+      "classification": "NECESSARY_EVIDENCE_HOLD",
+      "reason": "该 EVENT 属于已确认的结果、布局、细节或提示词证据窗口；当前帧差无变化，但静态画面本身承担可读性，不能仅凭无声判定为空镜。"
+    },
+    {
+      "gapId": "G087",
+      "range": {
+        "start": 372.500792,
+        "end": 372.791187
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G089",
+      "range": {
+        "start": 382.292167,
+        "end": 383.048104
+      },
+      "classification": "NECESSARY_EVIDENCE_HOLD",
+      "reason": "该 EVENT 属于已确认的结果、布局、细节或提示词证据窗口；当前帧差无变化，但静态画面本身承担可读性，不能仅凭无声判定为空镜。"
+    },
+    {
+      "gapId": "G091",
+      "range": {
+        "start": 393.120479,
+        "end": 402.117542
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G092",
+      "range": {
+        "start": 407.053042,
+        "end": 409.374979
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G094",
+      "range": {
+        "start": 418.379813,
+        "end": 419.788437
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G098",
+      "range": {
+        "start": 433.95975,
+        "end": 434.161687
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G099",
+      "range": {
+        "start": 436.035542,
+        "end": 437.663187
+      },
+      "classification": "NECESSARY_EVIDENCE_HOLD",
+      "reason": "该 EVENT 属于已确认的结果、布局、细节或提示词证据窗口；当前帧差无变化，但静态画面本身承担可读性，不能仅凭无声判定为空镜。"
+    },
+    {
+      "gapId": "G101",
+      "range": {
+        "start": 442.788187,
+        "end": 442.990021
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G103",
+      "range": {
+        "start": 453.185104,
+        "end": 454.419521
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G106",
+      "range": {
+        "start": 462.297708,
+        "end": 464.284187
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G108",
+      "range": {
+        "start": 468.968208,
+        "end": 469.171312
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G110",
+      "range": {
+        "start": 473.492937,
+        "end": 473.715542
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G117",
+      "range": {
+        "start": 489.265292,
+        "end": 489.502625
+      },
+      "classification": "ASR_OVERLAP_LOW_LEVEL_RISK",
+      "reason": "源字幕词级区间与静音区相交，且严格静音覆盖或边界能量不足以排除低能量辅音/字音；不自动提出落剪。"
+    },
+    {
+      "gapId": "G118",
+      "range": {
+        "start": 490.585333,
+        "end": 490.825708
+      },
+      "classification": "UNCERTAIN_VISUAL_HOLD",
+      "reason": "没有检测到点击或明显帧变化，且仅凭当前通用 EVENT 标记不足以证明需要保护；需人工看片决定是证据停留还是可删等待。"
+    },
+    {
+      "gapId": "G119",
+      "range": {
+        "start": 490.826354,
+        "end": 495.017562
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G120",
+      "range": {
+        "start": 495.265104,
+        "end": 497.212542
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G121",
+      "range": {
+        "start": 499.914417,
+        "end": 500.929625
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G122",
+      "range": {
+        "start": 502.344229,
+        "end": 502.66525
+      },
+      "classification": "UNCERTAIN_VISUAL_HOLD",
+      "reason": "没有检测到点击或明显帧变化，且仅凭当前通用 EVENT 标记不足以证明需要保护；需人工看片决定是证据停留还是可删等待。"
+    },
+    {
+      "gapId": "G123",
+      "range": {
+        "start": 503.142,
+        "end": 504.892333
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G126",
+      "range": {
+        "start": 518.342583,
+        "end": 527.499563
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    },
+    {
+      "gapId": "G127",
+      "range": {
+        "start": 529.622896,
+        "end": 542.816292
+      },
+      "classification": "NECESSARY_VISUAL_ACTION",
+      "reason": "该静音区内仍有可验证的录屏状态变化或点击动作；画面动作/证据承担内容，不能因麦克风无声直接删掉。"
+    }
+  ],
+  "removedSeconds": 33.11075700000042,
+  "manualListening": "未声明逐剪口人工试听；以最终ASR、字词及音频同步交叉复核。"
+}

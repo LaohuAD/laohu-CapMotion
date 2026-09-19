@@ -9,6 +9,12 @@ import {scene001Examples} from "./configs/examples/scene001Examples";
 import {editorialOverlayExamples} from "./configs/examples/editorialOverlayExamples";
 import {flowNodeGraphExamples} from "./configs/examples/flowNodeGraphExamples";
 import {h3TutorialConfigs} from "./configs/works/h3Tutorial";
+import {
+  Work017Overlay,
+  work017DefaultProps,
+  work017OverlaySchema,
+  type Work017OverlayProps,
+} from "./works/Work017";
 
 const RegisteredScene: React.FC<ComponentConfig> = (props) => (
   <ComponentScene config={props} />
@@ -19,6 +25,13 @@ const calculateMetadata: CalculateMetadataFunction<ComponentConfig> = ({
 }) => ({
   durationInFrames: props.durationInFrames,
   defaultOutName: `${props.component}-${props.mode}`,
+});
+
+const calculateWork017Metadata: CalculateMetadataFunction<Work017OverlayProps> = ({
+  props,
+}) => ({
+  durationInFrames: props.durationInFrames,
+  defaultOutName: `Work017Overlay-${props.kind}`,
 });
 
 export const Root: React.FC = () => {
@@ -115,6 +128,19 @@ export const Root: React.FC = () => {
             />
           );
         })}
+      </Folder>
+      <Folder name="Work-017-Overlays">
+        <Composition
+          id="Work017Overlay"
+          component={Work017Overlay}
+          durationInFrames={work017DefaultProps.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          schema={work017OverlaySchema}
+          defaultProps={work017DefaultProps}
+          calculateMetadata={calculateWork017Metadata}
+        />
       </Folder>
     </>
   );

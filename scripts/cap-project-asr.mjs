@@ -90,7 +90,9 @@ const sourceOffset = (segment, microphone) => {
 		.filter((value) => value !== null);
 	const micStart = startTime(microphone);
 	if (starts.length === 0 || micStart === null) return 0;
-	return Math.max(0, Math.max(...starts) - micStart);
+	// Cap seeks raw microphone at timeline time + (latest start - mic start).
+	// Inverting that mapping for ASR must subtract the seek offset.
+	return Math.min(0, micStart - Math.max(...starts));
 };
 
 const absoluteMediaPath = (projectPath, media) => {

@@ -1,0 +1,5075 @@
+{
+  "schema": "laohu.bilingual-caption-review/1",
+  "id": "017-character-assets",
+  "title": "人物资产提取｜剪辑与理论动画联合审稿",
+  "reviewRevision": 3,
+  "mappingRevision": 3,
+  "approval": {
+    "status": "APPROVED",
+    "scope": "EDIT_AND_VISUALS",
+    "reviewRevision": 3,
+    "reference": "用户确认：Q01废弃重复，删除C011 C012对应声音；Q02原话下半部分是，替换C117错误周杰伦识别，注意与C118是全身的姿态和服装顺句；Q03确定GPT 2.5名称；Q04有效像素；Q05原音频32到33秒是真实，保留及相邻字音；其他暂无问题，授权先制作动画看效果。"
+  },
+  "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+  "sourceDuration": 1604.285,
+  "targetDuration": 556.550303356,
+  "timingBasis": "PROVISIONAL",
+  "captionStyle": "Laohu预设revision 7：16:9、思源黑体、字重500、白字黑描边及阴影、无字幕动画；本轮已整体批准中英双轨文字方案，尚未写入Cap。模型名GPT 2.5保持不可拆原子。",
+  "counts": {
+    "total": 168,
+    "captions": 127,
+    "events": 41,
+    "manualEntries": 1
+  },
+  "notes": [
+    "这是修订3的文字审定数据，不是Cap物化轨，也不替代虚拟剪辑映射。",
+    "每条记录保留id、sourceRanges、wordRefs、finalRange、zh、en；EVENT保留时间与中英说明但display=false。",
+    "C005A“真实”是用户确认的人工补词，wordRefs为空；C117保留原ASR wordRefs仅作源定位，时长取sourceRanges。",
+    "GPT 2.5、Midjourney、16:9、Agent等技术名词保持原子，不从中间拆分。"
+  ],
+  "segments": [
+    {
+      "id": "C001",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 14.70753092,
+          "end": 17.18753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 1,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ],
+      "finalRange": {
+        "start": 0.15,
+        "end": 2.63
+      },
+      "zh": "这可能是你做的",
+      "en": "This may be what you created",
+      "display": true
+    },
+    {
+      "id": "C002",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 17.18753092,
+          "end": 18.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 19.67753092,
+          "end": 19.72753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 2.63,
+        "end": 4.132
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C003",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 19.72753092,
+          "end": 21.72753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 2,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ],
+      "finalRange": {
+        "start": 4.132,
+        "end": 6.132
+      },
+      "zh": "人物资产图油腻",
+      "en": "The character asset image looks greasy",
+      "display": true
+    },
+    {
+      "id": "C004",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 21.72753092,
+          "end": 23.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 23.90412992,
+          "end": 26.23909692
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 26.89900192,
+          "end": 28.57753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 6.132,
+        "end": 12.057495
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C005",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 28.57753092,
+          "end": 30.61753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 3,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ],
+      "finalRange": {
+        "start": 12.057495,
+        "end": 14.097495
+      },
+      "zh": "这是我做的人物资产图",
+      "en": "This is the character asset image I made",
+      "display": true
+    },
+    {
+      "id": "C005A",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 32.27709892,
+          "end": 32.75559892
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 14.107495,
+        "end": 14.585995
+      },
+      "zh": "真实",
+      "en": "Real",
+      "display": true,
+      "sourceEvidence": {
+        "kind": "MANUAL_CONFIRMED_AUDIO",
+        "activityRange": {
+          "start": 32.479833,
+          "end": 32.938333
+        },
+        "micOffset": 0.19273454,
+        "engineeringActivityRange": {
+          "start": 32.672568,
+          "end": 33.131068
+        },
+        "protectedRange": {
+          "start": 32.662568,
+          "end": 33.141068
+        },
+        "note": "波形定位而非新ASR；按正常剪辑规则保留真实完整字音，两侧约10ms余量，收紧前后无意义静音，不固定保护两秒。"
+      }
+    },
+    {
+      "id": "C006A",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 75.56453092000001,
+          "end": 77.50753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 14.585995,
+        "end": 16.528995
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C007",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 77.50753092,
+          "end": 78.67699492
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 80.38226692,
+          "end": 84.89753092000001
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 4,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 5,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        }
+      ],
+      "finalRange": {
+        "start": 16.528995,
+        "end": 22.213722
+      },
+      "zh": "他们都是从一张图片里面提取出来的一个人物资产",
+      "en": "They are all character assets extracted from a single image",
+      "display": true
+    },
+    {
+      "id": "C008",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 84.89753092000001,
+          "end": 84.92253092000001
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 93.36615792,
+          "end": 94.04753092000001
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 22.213722,
+        "end": 22.920095
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C009",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 94.04753092000001,
+          "end": 97.12753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 6,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 22.920095,
+        "end": 26.000095
+      },
+      "zh": "区别不同的只是里面的提示词而已",
+      "en": "The only difference is the prompt inside",
+      "display": true
+    },
+    {
+      "id": "C010",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 97.12753092,
+          "end": 97.15253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 102.51878891999999,
+          "end": 105.09753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 26.000095,
+        "end": 28.603837
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C013",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 140.12753092,
+          "end": 142.52753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 8,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        }
+      ],
+      "finalRange": {
+        "start": 28.753837,
+        "end": 31.153837
+      },
+      "zh": "这个提示词是我花了几百块钱",
+      "en": "This prompt cost me several hundred yuan",
+      "display": true
+    },
+    {
+      "id": "C014",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 142.52753092,
+          "end": 142.59082791999998
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 143.52767692,
+          "end": 144.35753092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 145.67753091999998,
+          "end": 146.83021191999998
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 148.39913192,
+          "end": 148.77753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 31.153837,
+        "end": 33.578066
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C015",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 148.77753092,
+          "end": 151.93753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 10,
+          "wordStart": 0,
+          "wordEndExclusive": 16
+        }
+      ],
+      "finalRange": {
+        "start": 33.578066,
+        "end": 36.738066
+      },
+      "zh": "做了这么多尝试以及对应的测试之后",
+      "en": "After all these attempts and corresponding tests",
+      "display": true
+    },
+    {
+      "id": "C016",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 153.73753091999998,
+          "end": 155.93753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 11,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 36.98081,
+        "end": 39.18081
+      },
+      "zh": "得出来的一个比较稳定的版本",
+      "en": "I arrived at a relatively stable version",
+      "display": true
+    },
+    {
+      "id": "C017",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 155.93753092,
+          "end": 155.96253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 164.63289092,
+          "end": 165.12753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 39.18081,
+        "end": 39.70045
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C018",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 165.12753092,
+          "end": 167.15099492
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 171.24753092,
+          "end": 172.29753091999999
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 12,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        },
+        {
+          "utteranceId": 13,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ],
+      "finalRange": {
+        "start": 39.70045,
+        "end": 42.773913
+      },
+      "zh": "起因是上一次的人物资产设计",
+      "en": "The cause was the previous character asset design",
+      "display": true
+    },
+    {
+      "id": "C019",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 173.58753092,
+          "end": 175.30847291999999
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 177.56753092,
+          "end": 178.93753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 14,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 15,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ],
+      "finalRange": {
+        "start": 43.184382,
+        "end": 46.275324
+      },
+      "zh": "在这个环节制作人物资产的时候",
+      "en": "When creating the character assets at that stage",
+      "display": true
+    },
+    {
+      "id": "C020",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 178.93753092,
+          "end": 180.94753092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 181.38753092,
+          "end": 182.90753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 46.275324,
+        "end": 49.805324
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C021",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 182.90753092,
+          "end": 185.14753091999998
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 17,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        }
+      ],
+      "finalRange": {
+        "start": 49.805324,
+        "end": 52.045324
+      },
+      "zh": "当时写的提示词非常简单",
+      "en": "The prompt I wrote then was very simple",
+      "display": true
+    },
+    {
+      "id": "C022",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 187.99653092,
+          "end": 189.27653092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 18,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ],
+      "finalRange": {
+        "start": 52.120324,
+        "end": 53.400324
+      },
+      "zh": "就是这样的一个提示词",
+      "en": "It was a prompt like this",
+      "display": true
+    },
+    {
+      "id": "C023",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 189.27653092,
+          "end": 189.30153092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 190.38424392,
+          "end": 191.53753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 53.400324,
+        "end": 54.578611
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C024",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 191.53753092,
+          "end": 193.15052491999998
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 198.27082792,
+          "end": 200.08753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 19,
+          "wordStart": 0,
+          "wordEndExclusive": 4
+        },
+        {
+          "utteranceId": 20,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ],
+      "finalRange": {
+        "start": 54.578611,
+        "end": 58.008308
+      },
+      "zh": "结果导致人物的脸显得非常的油啊",
+      "en": "As a result the character's face looked extremely greasy",
+      "display": true
+    },
+    {
+      "id": "C025",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 200.08753092,
+          "end": 200.11253091999998
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 201.98585092,
+          "end": 202.42753091999998
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 202.78753092,
+          "end": 205.12853791999999
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 206.71546791999998,
+          "end": 209.57753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 58.008308,
+        "end": 63.678058
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C026",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 209.57753092,
+          "end": 211.96703692
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 212.28753092,
+          "end": 213.73753091999998
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 22,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ],
+      "finalRange": {
+        "start": 63.678058,
+        "end": 67.517564
+      },
+      "zh": "现在用我的新提示词做出来的人物脸",
+      "en": "With my new prompt the generated character's face",
+      "display": true
+    },
+    {
+      "id": "C027",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 213.77753092,
+          "end": 214.44253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 216.62753092,
+          "end": 218.55753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 22,
+          "wordStart": 20,
+          "wordEndExclusive": 23
+        },
+        {
+          "utteranceId": 23,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ],
+      "finalRange": {
+        "start": 67.557564,
+        "end": 70.152564
+      },
+      "zh": "质感是非常好的",
+      "en": "has a much better texture",
+      "display": true
+    },
+    {
+      "id": "C028",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 236.30753092,
+          "end": 238.77253091999998
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 240.15441192,
+          "end": 240.62753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 24,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        },
+        {
+          "utteranceId": 25,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        }
+      ],
+      "finalRange": {
+        "start": 70.227564,
+        "end": 73.165683
+      },
+      "zh": "网上估计也有很多类似的提示词",
+      "en": "There are probably many similar prompts online",
+      "display": true
+    },
+    {
+      "id": "C029",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 243.33753092,
+          "end": 244.77753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 26,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ],
+      "finalRange": {
+        "start": 73.465746,
+        "end": 74.905746
+      },
+      "zh": "他们会直接给你一个结论",
+      "en": "They give you a conclusion directly",
+      "display": true
+    },
+    {
+      "id": "C030",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 247.38753092,
+          "end": 248.53253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 251.32753092,
+          "end": 253.81753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 27,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        },
+        {
+          "utteranceId": 28,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        }
+      ],
+      "finalRange": {
+        "start": 74.980746,
+        "end": 78.615746
+      },
+      "zh": "但是不会告诉你怎么处理这个东西的底层逻辑",
+      "en": "But they won't tell you how to handle the underlying logic",
+      "display": true
+    },
+    {
+      "id": "C031",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 255.14753091999998,
+          "end": 256.94753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 29,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ],
+      "finalRange": {
+        "start": 78.691085,
+        "end": 80.491085
+      },
+      "zh": "当你换个场景换个画面",
+      "en": "When you change the scene or the image",
+      "display": true
+    },
+    {
+      "id": "C032",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 257.02753092,
+          "end": 258.70753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 29,
+          "wordStart": 10,
+          "wordEndExclusive": 19
+        }
+      ],
+      "finalRange": {
+        "start": 80.571085,
+        "end": 82.251085
+      },
+      "zh": "该不会的还是不会",
+      "en": "you still won't know how if you didn't before",
+      "display": true
+    },
+    {
+      "id": "C033",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 263.51753092,
+          "end": 265.99753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 30,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        }
+      ],
+      "finalRange": {
+        "start": 82.341121,
+        "end": 84.821121
+      },
+      "zh": "所以这一期视频我会手把手教你",
+      "en": "So in this episode I'll teach you step by step",
+      "display": true
+    },
+    {
+      "id": "C034",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 267.25753091999997,
+          "end": 269.29753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 31,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ],
+      "finalRange": {
+        "start": 84.896121,
+        "end": 86.936121
+      },
+      "zh": "如何解决类似的问题",
+      "en": "how to solve similar problems",
+      "display": true
+    },
+    {
+      "id": "C035",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 269.37753091999997,
+          "end": 271.89753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 31,
+          "wordStart": 9,
+          "wordEndExclusive": 25
+        }
+      ],
+      "finalRange": {
+        "start": 87.016121,
+        "end": 89.536121
+      },
+      "zh": "下一次遇到这种问题应该如何去思考",
+      "en": "and how to think about them next time",
+      "display": true
+    },
+    {
+      "id": "C036",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 302.88753092,
+          "end": 304.56753091999997
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 33,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ],
+      "finalRange": {
+        "start": 89.760919,
+        "end": 91.440919
+      },
+      "zh": "视频可能稍微有点长",
+      "en": "The video may be a little long",
+      "display": true
+    },
+    {
+      "id": "C037",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 306.95753092,
+          "end": 308.19753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 34,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ],
+      "finalRange": {
+        "start": 91.515919,
+        "end": 92.755919
+      },
+      "zh": "我会尽量压缩",
+      "en": "I'll keep it as concise as possible",
+      "display": true
+    },
+    {
+      "id": "C038",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 311.66753092,
+          "end": 313.82753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 35,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        }
+      ],
+      "finalRange": {
+        "start": 92.851726,
+        "end": 95.011726
+      },
+      "zh": "你也可以直接滑到视频的末尾",
+      "en": "You can also skip straight to the end",
+      "display": true
+    },
+    {
+      "id": "C039",
+      "kind": "CAPTION",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 316.06753091999997,
+          "end": 318.17253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 320.50753091999997,
+          "end": 320.99753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 36,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        },
+        {
+          "utteranceId": 37,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        }
+      ],
+      "finalRange": {
+        "start": 95.086726,
+        "end": 97.681726
+      },
+      "zh": "拿我给大家准备好的提示词",
+      "en": "and take the prompts I prepared for you",
+      "display": true
+    },
+    {
+      "id": "C040",
+      "kind": "EVENT",
+      "chapter": "01 结果对比与承诺",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 320.99753092,
+          "end": 321.15411991999997
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 326.58451092,
+          "end": 330.36753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 97.681726,
+        "end": 101.621334
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C041",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 330.36753092,
+          "end": 333.16753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 38,
+          "wordStart": 0,
+          "wordEndExclusive": 17
+        }
+      ],
+      "finalRange": {
+        "start": 101.621334,
+        "end": 104.421334
+      },
+      "zh": "上期视频给大家讲了一张好看的图片",
+      "en": "In the previous video I explained what makes a good-looking image",
+      "display": true
+    },
+    {
+      "id": "C042",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 333.16753092,
+          "end": 335.12753091999997
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 38,
+          "wordStart": 17,
+          "wordEndExclusive": 26
+        }
+      ],
+      "finalRange": {
+        "start": 104.421334,
+        "end": 106.381334
+      },
+      "zh": "是由 6 个元素构成的",
+      "en": "It is made up of six elements",
+      "display": true
+    },
+    {
+      "id": "C043",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 336.68753092,
+          "end": 339.24753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 39,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ],
+      "finalRange": {
+        "start": 106.483933,
+        "end": 109.043933
+      },
+      "zh": "影响人物皮肤状态的",
+      "en": "The factors that affect the character's skin",
+      "display": true
+    },
+    {
+      "id": "C044",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 341.40753092,
+          "end": 345.28753092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 346.80753092,
+          "end": 348.88753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 40,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        },
+        {
+          "utteranceId": 40,
+          "wordStart": 16,
+          "wordEndExclusive": 25
+        }
+      ],
+      "finalRange": {
+        "start": 109.118933,
+        "end": 115.078933
+      },
+      "zh": "就是视觉风格、人物造型以及摄影呈现这三个要素",
+      "en": "are visual style, character design, and photographic presentation",
+      "display": true
+    },
+    {
+      "id": "C045",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 362.06753091999997,
+          "end": 364.57253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 365.13753092,
+          "end": 366.22753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 41,
+          "wordStart": 0,
+          "wordEndExclusive": 17
+        }
+      ],
+      "finalRange": {
+        "start": 115.169885,
+        "end": 118.764885
+      },
+      "zh": "视觉风格关乎画面的质感",
+      "en": "Visual style concerns the image's texture",
+      "display": true
+    },
+    {
+      "id": "C046",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 366.50753091999997,
+          "end": 367.69253091999997
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 371.42241192,
+          "end": 374.32753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 41,
+          "wordStart": 17,
+          "wordEndExclusive": 22
+        },
+        {
+          "utteranceId": 42,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 119.044885,
+        "end": 123.135005
+      },
+      "zh": "人物造型描述了人物皮肤的状态和纹理",
+      "en": "Character design describes the character's skin condition and texture",
+      "display": true
+    },
+    {
+      "id": "C047",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 378.35753092,
+          "end": 379.21018291999997
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 380.14753092,
+          "end": 383.39753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 43,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        }
+      ],
+      "finalRange": {
+        "start": 123.293864,
+        "end": 127.396516
+      },
+      "zh": "摄影呈现决定了皮肤反映出来的光线",
+      "en": "Photographic presentation determines how light is reflected on the skin",
+      "display": true
+    },
+    {
+      "id": "C048",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 398.06753091999997,
+          "end": 403.10753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 44,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ],
+      "finalRange": {
+        "start": 127.517448,
+        "end": 132.557448
+      },
+      "zh": "如果没有特别描述皮肤的光影",
+      "en": "If you don't specifically describe the light and shadow on the skin",
+      "display": true
+    },
+    {
+      "id": "C049",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 403.10753092,
+          "end": 403.53253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 406.53349492,
+          "end": 407.52474492
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 407.86753092,
+          "end": 408.86372392
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 416.53753092,
+          "end": 419.10753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 44,
+          "wordStart": 20,
+          "wordEndExclusive": 22
+        },
+        {
+          "utteranceId": 45,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 46,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        }
+      ],
+      "finalRange": {
+        "start": 132.557448,
+        "end": 137.539891
+      },
+      "zh": "很容易把皮肤做成一个镜面高光的状态",
+      "en": "it is easy to turn the skin into a mirror-like highlight",
+      "display": true
+    },
+    {
+      "id": "C050",
+      "kind": "CAPTION",
+      "chapter": "02 皮肤观感的影响因素",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 419.78753092,
+          "end": 421.22753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 46,
+          "wordStart": 13,
+          "wordEndExclusive": 22
+        }
+      ],
+      "finalRange": {
+        "start": 137.614891,
+        "end": 139.054891
+      },
+      "zh": "所以就会显得很油腻",
+      "en": "so it looks very greasy",
+      "display": true
+    },
+    {
+      "id": "C051",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 430.60753092,
+          "end": 432.96753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 47,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 139.129891,
+        "end": 141.489891
+      },
+      "zh": "那么一张图片到底有什么样的问题",
+      "en": "So what exactly is wrong with an image",
+      "display": true
+    },
+    {
+      "id": "C052",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 433.16753092,
+          "end": 434.17924492
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 435.41795292,
+          "end": 437.40753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 47,
+          "wordStart": 15,
+          "wordEndExclusive": 19
+        },
+        {
+          "utteranceId": 48,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ],
+      "finalRange": {
+        "start": 141.689891,
+        "end": 144.691183
+      },
+      "zh": "这些问题我们怎么能够发现呢",
+      "en": "How can we identify these problems",
+      "display": true
+    },
+    {
+      "id": "C053",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 437.64753092,
+          "end": 440.00753091999997
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 49,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 144.931183,
+        "end": 147.291183
+      },
+      "zh": "我们作为一个小白怎么能够知道呢",
+      "en": "How can a beginner like us know",
+      "display": true
+    },
+    {
+      "id": "C054",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 441.18753092,
+          "end": 442.92576592
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 444.36003691999997,
+          "end": 445.74753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 50,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        },
+        {
+          "utteranceId": 51,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ],
+      "finalRange": {
+        "start": 147.366183,
+        "end": 150.491912
+      },
+      "zh": "这就要用到上一次视频给大家的一个思路",
+      "en": "This is where the idea from the previous video comes in",
+      "display": true
+    },
+    {
+      "id": "C060",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 461.57753092,
+          "end": 461.60253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 469.50502392,
+          "end": 474.58194992
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 476.31588492,
+          "end": 481.19739291999997
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 487.68386291999997,
+          "end": 489.55886291999997
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 490.69916692,
+          "end": 492.57416692
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 492.94333092,
+          "end": 498.03611492
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 500.05172892,
+          "end": 506.61867092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 507.35303292,
+          "end": 511.17464192
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 511.96464391999996,
+          "end": 520.73016392
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 521.26264692,
+          "end": 524.43035792
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 525.31225692,
+          "end": 528.2134359199999
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 528.56453092,
+          "end": 531.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 531.89040192,
+          "end": 532.16753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 150.566912,
+        "end": 197.968222
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C061",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 532.16753092,
+          "end": 533.40753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 56,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 197.968222,
+        "end": 199.208222
+      },
+      "zh": "我们可以截一张图",
+      "en": "We can take a screenshot",
+      "display": true
+    },
+    {
+      "id": "C062",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 533.40753092,
+          "end": 535.40171392
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 535.94221692,
+          "end": 538.65753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 199.208222,
+        "end": 203.917718
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C063",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 538.65753092,
+          "end": 539.49753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 57,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ],
+      "finalRange": {
+        "start": 203.917718,
+        "end": 204.757718
+      },
+      "zh": "然后丢给豆包",
+      "en": "then send it to Doubao",
+      "display": true
+    },
+    {
+      "id": "C064",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 539.49753092,
+          "end": 540.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 542.07753092,
+          "end": 542.12753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 204.757718,
+        "end": 205.949718
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C065",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 542.12753092,
+          "end": 543.48753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 58,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 205.949718,
+        "end": 207.309718
+      },
+      "zh": "并且发出这个指令",
+      "en": "and issue this instruction",
+      "display": true
+    },
+    {
+      "id": "C066",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 545.3475309199999,
+          "end": 549.10753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 59,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        }
+      ],
+      "finalRange": {
+        "start": 207.384718,
+        "end": 211.144718
+      },
+      "zh": "请解释一下这张图上的人物的脸为什么这么油腻",
+      "en": "Please explain why the character's face in this image looks so greasy",
+      "display": true
+    },
+    {
+      "id": "C067",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 551.72753092,
+          "end": 553.60753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 60,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 211.279348,
+        "end": 213.159348
+      },
+      "zh": "有哪些元素造成的",
+      "en": "What elements caused it",
+      "display": true
+    },
+    {
+      "id": "C068",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 553.68753092,
+          "end": 555.92753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 61,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        }
+      ],
+      "finalRange": {
+        "start": 213.239348,
+        "end": 215.479348
+      },
+      "zh": "请从底层逻辑给我解释一下",
+      "en": "Please explain it to me from the underlying logic",
+      "display": true
+    },
+    {
+      "id": "C069",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 555.92753092,
+          "end": 556.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 635.56453092,
+          "end": 637.78753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 215.479348,
+        "end": 218.414348
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C070",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 637.78753092,
+          "end": 640.74753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 62,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 218.414348,
+        "end": 221.374348
+      },
+      "zh": "然后豆包就会给你很多的一些分析",
+      "en": "Then Doubao will give you various analyses",
+      "display": true
+    },
+    {
+      "id": "C071",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 658.00753092,
+          "end": 661.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 662.10753092,
+          "end": 664.03753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 63,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        },
+        {
+          "utteranceId": 64,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ],
+      "finalRange": {
+        "start": 221.574521,
+        "end": 227.136521
+      },
+      "zh": "比如说脸颊有过度的镜面反射",
+      "en": "For example excessive mirror-like reflection on the cheeks",
+      "display": true
+    },
+    {
+      "id": "C072",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 664.23753092,
+          "end": 666.19753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 64,
+          "wordStart": 10,
+          "wordEndExclusive": 20
+        }
+      ],
+      "finalRange": {
+        "start": 227.336521,
+        "end": 229.296521
+      },
+      "zh": "削弱了皮肤的哑光质感",
+      "en": "weakens the skin's matte texture",
+      "display": true
+    },
+    {
+      "id": "C073",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 666.19753092,
+          "end": 667.14382492
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 672.71886092,
+          "end": 672.81753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 229.296521,
+        "end": 230.341486
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C074",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 672.81753092,
+          "end": 675.0975309199999
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 65,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ],
+      "finalRange": {
+        "start": 230.341486,
+        "end": 232.621486
+      },
+      "zh": "比如说硬主光过强",
+      "en": "For example the hard key light is too strong",
+      "display": true
+    },
+    {
+      "id": "C075",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 675.25753092,
+          "end": 677.01753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 65,
+          "wordStart": 9,
+          "wordEndExclusive": 16
+        }
+      ],
+      "finalRange": {
+        "start": 232.781486,
+        "end": 234.541486
+      },
+      "zh": "主光源亮度太高",
+      "en": "The key light source is too bright",
+      "display": true
+    },
+    {
+      "id": "C076",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 677.01753092,
+          "end": 678.39753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 234.541486,
+        "end": 235.921486
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C077",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 678.39753092,
+          "end": 679.95753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 66,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ],
+      "finalRange": {
+        "start": 235.921486,
+        "end": 237.481486
+      },
+      "zh": "缺少柔和补光",
+      "en": "There is not enough soft fill light",
+      "display": true
+    },
+    {
+      "id": "C078",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 679.95753092,
+          "end": 679.98253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 681.7918759199999,
+          "end": 685.44753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 237.481486,
+        "end": 241.162141
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C079",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 685.44753092,
+          "end": 686.61553692
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 687.90395392,
+          "end": 689.43753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 67,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 68,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ],
+      "finalRange": {
+        "start": 241.162141,
+        "end": 243.863724
+      },
+      "zh": "没有环境漫射光柔化高光",
+      "en": "There is no ambient diffused light to soften the highlights",
+      "display": true
+    },
+    {
+      "id": "C080",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 689.43753092,
+          "end": 690.96900992
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 694.55753092,
+          "end": 694.60753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 243.863724,
+        "end": 245.445203
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C081",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 694.60753092,
+          "end": 697.32753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 69,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        }
+      ],
+      "finalRange": {
+        "start": 245.445203,
+        "end": 248.165203
+      },
+      "zh": "就会给出很多这样的分析",
+      "en": "It will give you many analyses like these",
+      "display": true
+    },
+    {
+      "id": "C082",
+      "kind": "CAPTION",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 697.44753092,
+          "end": 701.96753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 70,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ],
+      "finalRange": {
+        "start": 248.285203,
+        "end": 252.805203
+      },
+      "zh": "那你就针对它的缺点去写对应的提示词就行了",
+      "en": "Then just write prompts that address its shortcomings",
+      "display": true
+    },
+    {
+      "id": "C083",
+      "kind": "EVENT",
+      "chapter": "03 用豆包诊断问题",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 701.96753092,
+          "end": 701.99253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 703.63836292,
+          "end": 705.51336292
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 710.51566192,
+          "end": 710.64753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 252.805203,
+        "end": 254.837072
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C084",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 710.64753092,
+          "end": 711.77243292
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 713.36591192,
+          "end": 715.81753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 71,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 72,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        }
+      ],
+      "finalRange": {
+        "start": 254.837072,
+        "end": 258.413593
+      },
+      "zh": "假设现在你写好了一个生图片的提示词",
+      "en": "Suppose you've written a prompt for a generated image",
+      "display": true
+    },
+    {
+      "id": "C085",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 715.81753092,
+          "end": 715.97805792
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 717.01621192,
+          "end": 718.89121192
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 721.87151292,
+          "end": 723.74651292
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 726.65285992,
+          "end": 728.01753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 258.413593,
+        "end": 263.688791
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C086",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 728.01753092,
+          "end": 729.41753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 73,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ],
+      "finalRange": {
+        "start": 263.688791,
+        "end": 265.088791
+      },
+      "zh": "并且你使用 Midjourney",
+      "en": "and you use Midjourney",
+      "display": true
+    },
+    {
+      "id": "C087",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 729.41753092,
+          "end": 730.08204292
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 731.17753092,
+          "end": 731.22753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 265.088791,
+        "end": 265.803303
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C088",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 731.22753092,
+          "end": 734.10753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 74,
+          "wordStart": 0,
+          "wordEndExclusive": 17
+        }
+      ],
+      "finalRange": {
+        "start": 265.803303,
+        "end": 268.683303
+      },
+      "zh": "生成了这样一张非常好看的图片",
+      "en": "to generate a very attractive image like this",
+      "display": true
+    },
+    {
+      "id": "C089",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 739.85753092,
+          "end": 741.36253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 742.62299492,
+          "end": 743.64253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 744.04753092,
+          "end": 745.37753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 75,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        },
+        {
+          "utteranceId": 76,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ],
+      "finalRange": {
+        "start": 269.112463,
+        "end": 272.966999
+      },
+      "zh": "然后你就想把它制作成一张人物资产图",
+      "en": "Then you want to turn it into a character asset sheet",
+      "display": true
+    },
+    {
+      "id": "C090",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 745.37753092,
+          "end": 747.33753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 76,
+          "wordStart": 11,
+          "wordEndExclusive": 21
+        }
+      ],
+      "finalRange": {
+        "start": 272.966999,
+        "end": 274.926999
+      },
+      "zh": "方便后面进行复用",
+      "en": "to make it easier to reuse later",
+      "display": true
+    },
+    {
+      "id": "C091",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 747.33753092,
+          "end": 747.36253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 748.56453092,
+          "end": 751.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 752.50795392,
+          "end": 754.38295392
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 761.07391392,
+          "end": 765.93753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 274.926999,
+        "end": 284.765617
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C092",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 765.93753092,
+          "end": 768.04253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 768.48753092,
+          "end": 771.05753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 77,
+          "wordStart": 0,
+          "wordEndExclusive": 27
+        }
+      ],
+      "finalRange": {
+        "start": 284.765617,
+        "end": 289.440617
+      },
+      "zh": "这里我就重新设计了一下提取资产图的提示词结构",
+      "en": "Here I redesigned the prompt structure for extracting assets",
+      "display": true
+    },
+    {
+      "id": "C093",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 777.61753092,
+          "end": 780.69753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 78,
+          "wordStart": 11,
+          "wordEndExclusive": 28
+        }
+      ],
+      "finalRange": {
+        "start": 289.590617,
+        "end": 292.670617
+      },
+      "zh": "这里大概给大家讲解一下我设计的思路",
+      "en": "Let me explain the thinking behind my design",
+      "display": true
+    },
+    {
+      "id": "C094",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 782.71753092,
+          "end": 784.5975309199999
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 79,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ],
+      "finalRange": {
+        "start": 292.745617,
+        "end": 294.625617
+      },
+      "zh": "首先是这个人物的资产图",
+      "en": "First this character asset image",
+      "display": true
+    },
+    {
+      "id": "C095",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 784.5975309199999,
+          "end": 786.98253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 787.26753092,
+          "end": 787.83753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 79,
+          "wordStart": 11,
+          "wordEndExclusive": 26
+        }
+      ],
+      "finalRange": {
+        "start": 294.625617,
+        "end": 297.580617
+      },
+      "zh": "我给它设计成了四宫格的布局",
+      "en": "is designed as a four-panel layout",
+      "display": true
+    },
+    {
+      "id": "C096",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 787.83753092,
+          "end": 787.93428692
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 795.24290892,
+          "end": 800.86753092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 800.90753092,
+          "end": 804.50753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 297.580617,
+        "end": 306.901994
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C097",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 804.50753092,
+          "end": 809.22753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 81,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        }
+      ],
+      "finalRange": {
+        "start": 306.901994,
+        "end": 311.621994
+      },
+      "zh": "正常大家看的比较多的可能是这种 16:9 的布局",
+      "en": "Normally most people use a 16:9 layout like this",
+      "display": true
+    },
+    {
+      "id": "C098",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 820.02753092,
+          "end": 820.65253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 825.64753092,
+          "end": 827.01753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 82,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        },
+        {
+          "utteranceId": 83,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 311.725082,
+        "end": 313.720082
+      },
+      "zh": "但是 16:9 比例的一个问题是",
+      "en": "But 16:9 has one problem",
+      "display": true
+    },
+    {
+      "id": "C099",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 829.00753092,
+          "end": 829.74030792
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 838.36816192,
+          "end": 839.87753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 84,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        },
+        {
+          "utteranceId": 85,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ],
+      "finalRange": {
+        "start": 313.847452,
+        "end": 316.089598
+      },
+      "zh": "相对一个图片的大小来说",
+      "en": "compared with the size of a single image",
+      "display": true
+    },
+    {
+      "id": "C100",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 839.87753092,
+          "end": 841.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 843.47753092,
+          "end": 843.52753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 316.089598,
+        "end": 317.901598
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C101",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 843.52753092,
+          "end": 846.52753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 86,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ],
+      "finalRange": {
+        "start": 317.901598,
+        "end": 320.901598
+      },
+      "zh": "里面的分辨率会更低",
+      "en": "the resolution inside each panel is lower",
+      "display": true
+    },
+    {
+      "id": "C102",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 851.16753092,
+          "end": 853.72476592
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 857.75753092,
+          "end": 858.8475309199999
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 87,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        },
+        {
+          "utteranceId": 88,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        }
+      ],
+      "finalRange": {
+        "start": 321.074666,
+        "end": 324.721901
+      },
+      "zh": "所以有效信息就会更少",
+      "en": "So there is less useful information",
+      "display": true,
+      "displayTextCorrection": {
+        "from": "所以有效信息就会更少",
+        "to": "所以有效像素就会更少",
+        "basis": "USER_CONFIRMED_Q04"
+      }
+    },
+    {
+      "id": "C103",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 858.8475309199999,
+          "end": 858.87253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 863.32972692,
+          "end": 865.20472692
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 874.39842992,
+          "end": 876.27342992
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 878.89641192,
+          "end": 878.95753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 324.721901,
+        "end": 328.55802
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C104",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 878.95753092,
+          "end": 883.1751619199999
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 888.58753092,
+          "end": 889.47753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 89,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        },
+        {
+          "utteranceId": 90,
+          "wordStart": 0,
+          "wordEndExclusive": 4
+        }
+      ],
+      "finalRange": {
+        "start": 328.55802,
+        "end": 333.665651
+      },
+      "zh": "很多空间被这种无意义的背景占据了",
+      "en": "A lot of space is occupied by meaningless background",
+      "display": true
+    },
+    {
+      "id": "C105",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 889.47753092,
+          "end": 891.17706692
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 892.40753092,
+          "end": 892.45753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 333.665651,
+        "end": 335.415187
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C106",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 892.45753092,
+          "end": 894.85753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 91,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 335.415187,
+        "end": 337.815187
+      },
+      "zh": "但是我这种设计的话就会非常合理",
+      "en": "But this design of mine makes much better use of the space",
+      "display": true
+    },
+    {
+      "id": "C107",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 894.85753092,
+          "end": 894.88253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 902.56453092,
+          "end": 904.48753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 337.815187,
+        "end": 339.763187
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C108",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 904.48753092,
+          "end": 908.55253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 910.46753092,
+          "end": 910.91753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 92,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        },
+        {
+          "utteranceId": 93,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        }
+      ],
+      "finalRange": {
+        "start": 339.763187,
+        "end": 344.278187
+      },
+      "zh": "你能够很明显地感觉到上半部分就是人脸的一个参考",
+      "en": "You can clearly see that the upper half is a facial reference",
+      "display": true
+    },
+    {
+      "id": "C109",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 911.23753092,
+          "end": 914.87753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 93,
+          "wordStart": 2,
+          "wordEndExclusive": 23
+        }
+      ],
+      "finalRange": {
+        "start": 344.598187,
+        "end": 348.238187
+      },
+      "zh": "下半部分就是人的服装以及姿态的一个参考",
+      "en": "the lower half is a reference for clothing and pose",
+      "display": true
+    },
+    {
+      "id": "C110",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 921.88753092,
+          "end": 923.85034892
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 924.75753092,
+          "end": 927.28753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 94,
+          "wordStart": 0,
+          "wordEndExclusive": 21
+        }
+      ],
+      "finalRange": {
+        "start": 348.364858,
+        "end": 352.857676
+      },
+      "zh": "然后这四个宫格的人物的姿势我也有对应的讲究",
+      "en": "Then each pose in the four panels has its own purpose",
+      "display": true
+    },
+    {
+      "id": "C111",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 930.26753092,
+          "end": 933.82753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 95,
+          "wordStart": 0,
+          "wordEndExclusive": 19
+        }
+      ],
+      "finalRange": {
+        "start": 352.941118,
+        "end": 356.501118
+      },
+      "zh": "第一个宫格是一个低角度的侧写镜头",
+      "en": "The first panel is a low-angle side-profile shot",
+      "display": true
+    },
+    {
+      "id": "C112",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 936.08753092,
+          "end": 938.79253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 955.25230792,
+          "end": 955.97780792
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 957.95634892,
+          "end": 959.28253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 960.92753092,
+          "end": 961.65753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 96,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        },
+        {
+          "utteranceId": 97,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 98,
+          "wordStart": 0,
+          "wordEndExclusive": 3
+        }
+      ],
+      "finalRange": {
+        "start": 356.586113,
+        "end": 362.072795
+      },
+      "zh": "能够很清楚地看到这个人物的侧面和整个人物的下颌线",
+      "en": "so you can clearly see the character's profile and jawline",
+      "display": true
+    },
+    {
+      "id": "C113",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 967.77753092,
+          "end": 969.65753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 99,
+          "wordStart": 0,
+          "wordEndExclusive": 11
+        }
+      ],
+      "finalRange": {
+        "start": 362.147795,
+        "end": 364.027795
+      },
+      "zh": "第二幅图就是人物的正面",
+      "en": "The second image is the character's front view",
+      "display": true
+    },
+    {
+      "id": "C114",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 969.65753092,
+          "end": 971.63953092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 972.43753092,
+          "end": 972.48753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 364.027795,
+        "end": 366.059795
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C115",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 972.48753092,
+          "end": 975.84080792
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 984.19753092,
+          "end": 986.12753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 100,
+          "wordStart": 0,
+          "wordEndExclusive": 16
+        },
+        {
+          "utteranceId": 101,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ],
+      "finalRange": {
+        "start": 366.059795,
+        "end": 371.343072
+      },
+      "zh": "能够很清楚地看见人物脸部的轮廓、五官、皮肤色彩",
+      "en": "so you can clearly see the facial contour features and skin tone",
+      "display": true
+    },
+    {
+      "id": "C116",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 991.80753092,
+          "end": 992.39464092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 995.06126592,
+          "end": 995.62253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 995.98753092,
+          "end": 996.72264092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 997.46753092,
+          "end": 998.51753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 102,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        },
+        {
+          "utteranceId": 103,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 371.474545,
+        "end": 374.40803
+      },
+      "zh": "以及头发、头饰、妆容这些",
+      "en": "as well as the hair headwear and makeup",
+      "display": true
+    },
+    {
+      "id": "C117",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1007.35753092,
+          "end": 1008.71753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 104,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 374.48303,
+        "end": 375.84303
+      },
+      "zh": "下半部分",
+      "en": "the lower half",
+      "display": true,
+      "sourceTextCorrection": {
+        "from": "我很喜欢听周杰伦的歌",
+        "to": "下半部分",
+        "basis": "USER_CONFIRMED_Q02",
+        "wordRefPolicy": "TIME_ONLY_AFTER_USER_CORRECTION"
+      }
+    },
+    {
+      "id": "C118",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1011.07753092,
+          "end": 1012.38253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1014.06753092,
+          "end": 1014.5975309199999
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 105,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        },
+        {
+          "utteranceId": 106,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        }
+      ],
+      "finalRange": {
+        "start": 375.963795,
+        "end": 377.798795
+      },
+      "zh": "是全身的姿态和服装",
+      "en": "shows the full-body pose and clothing",
+      "display": true
+    },
+    {
+      "id": "C119",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1016.38753092,
+          "end": 1017.47476592
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1022.64428692,
+          "end": 1026.05753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 107,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 108,
+          "wordStart": 0,
+          "wordEndExclusive": 20
+        }
+      ],
+      "finalRange": {
+        "start": 377.890488,
+        "end": 382.390967
+      },
+      "zh": "然后我特别对下半部分人物的脸部进行了模糊处理",
+      "en": "Then I specifically blurred the faces of the characters in the lower half",
+      "display": true
+    },
+    {
+      "id": "C120",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1026.05753092,
+          "end": 1026.6395309200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1065.4775309200002,
+          "end": 1065.5275309200001
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 382.390967,
+        "end": 383.022967
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C121",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1065.5275309200001,
+          "end": 1067.1675309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 109,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        }
+      ],
+      "finalRange": {
+        "start": 383.022967,
+        "end": 384.662967
+      },
+      "zh": "这样在做 AI 视频时",
+      "en": "When making AI videos this way",
+      "display": true
+    },
+    {
+      "id": "C122",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1067.1675309200002,
+          "end": 1068.56730792
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1072.9386619200002,
+          "end": 1075.05753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 109,
+          "wordStart": 12,
+          "wordEndExclusive": 18
+        },
+        {
+          "utteranceId": 110,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        }
+      ],
+      "finalRange": {
+        "start": 384.662967,
+        "end": 388.181613
+      },
+      "zh": "就不会学到错误的五官",
+      "en": "it won't learn the wrong facial features",
+      "display": true
+    },
+    {
+      "id": "C123",
+      "kind": "CAPTION",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1075.2575309200001,
+          "end": 1079.6395309200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1081.1947449200002,
+          "end": 1081.6675309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 110,
+          "wordStart": 12,
+          "wordEndExclusive": 29
+        },
+        {
+          "utteranceId": 111,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        }
+      ],
+      "finalRange": {
+        "start": 388.381613,
+        "end": 393.236399
+      },
+      "zh": "而是去找正确的五官进行参考",
+      "en": "instead it will find the correct facial features to use as reference",
+      "display": true
+    },
+    {
+      "id": "C124",
+      "kind": "EVENT",
+      "chapter": "04 四宫格的布局与参考",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1081.6675309200002,
+          "end": 1081.69253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1101.2202659200002,
+          "end": 1103.0952659200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1103.61362592,
+          "end": 1105.48862592
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1105.77164192,
+          "end": 1109.5114299200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1113.1082189200001,
+          "end": 1114.5275309200001
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 393.236399,
+        "end": 402.1705
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C125",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1114.5275309200001,
+          "end": 1116.12753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 112,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ],
+      "finalRange": {
+        "start": 402.1705,
+        "end": 403.7705
+      },
+      "zh": "关于提示词的部分",
+      "en": "As for the prompt",
+      "display": true
+    },
+    {
+      "id": "C126",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1116.2475309200001,
+          "end": 1118.95253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1132.2221409200001,
+          "end": 1132.58753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 112,
+          "wordStart": 10,
+          "wordEndExclusive": 22
+        },
+        {
+          "utteranceId": 113,
+          "wordStart": 0,
+          "wordEndExclusive": 2
+        }
+      ],
+      "finalRange": {
+        "start": 403.8905,
+        "end": 406.96089
+      },
+      "zh": "我进行了一个引导式的书写",
+      "en": "I wrote it as a guided instruction",
+      "display": true
+    },
+    {
+      "id": "C127",
+      "kind": "EVENT",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1132.58753092,
+          "end": 1132.68972392
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1135.20417292,
+          "end": 1137.5175309200001
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 406.96089,
+        "end": 409.376441
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C128",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1137.5175309200001,
+          "end": 1142.31753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 114,
+          "wordStart": 0,
+          "wordEndExclusive": 23
+        }
+      ],
+      "finalRange": {
+        "start": 409.376441,
+        "end": 414.176441
+      },
+      "zh": "比如说排除图片原本照射在人物脸部的光影氛围",
+      "en": "for example exclude the original lighting and shadow atmosphere on the image",
+      "display": true
+    },
+    {
+      "id": "C129",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1142.7575309200001,
+          "end": 1145.31753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 114,
+          "wordStart": 23,
+          "wordEndExclusive": 36
+        }
+      ],
+      "finalRange": {
+        "start": 414.616441,
+        "end": 417.176441
+      },
+      "zh": "消除硬光光源产生的皮肤效果",
+      "en": "remove the skin effect caused by hard light",
+      "display": true
+    },
+    {
+      "id": "C130",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1145.35753092,
+          "end": 1146.63753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 114,
+          "wordStart": 36,
+          "wordEndExclusive": 42
+        }
+      ],
+      "finalRange": {
+        "start": 417.216441,
+        "end": 418.496441
+      },
+      "zh": "进行重新打光",
+      "en": "relight the subject",
+      "display": true
+    },
+    {
+      "id": "C131",
+      "kind": "EVENT",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1146.63753092,
+          "end": 1147.91956892
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1156.67859892,
+          "end": 1156.82753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 418.496441,
+        "end": 419.927411
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C132",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1156.82753092,
+          "end": 1159.2675309200001
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 115,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        }
+      ],
+      "finalRange": {
+        "start": 419.927411,
+        "end": 422.367411
+      },
+      "zh": "类似的这种引导式指令",
+      "en": "Instructions like this guide the model",
+      "display": true
+    },
+    {
+      "id": "C133",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1171.5175309200001,
+          "end": 1174.39753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 116,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 422.442411,
+        "end": 425.322411
+      },
+      "zh": "因为 GPT 2.5 生图",
+      "en": "Because GPT 2.5 generates images",
+      "display": true
+    },
+    {
+      "id": "C134",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1175.7775309200001,
+          "end": 1177.81753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 117,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        }
+      ],
+      "finalRange": {
+        "start": 425.461094,
+        "end": 427.501094
+      },
+      "zh": "它背后是有一个思考模型的",
+      "en": "there is a reasoning model behind it",
+      "display": true
+    },
+    {
+      "id": "C135",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1178.53753092,
+          "end": 1180.24253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1183.3924329200001,
+          "end": 1184.15753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 117,
+          "wordStart": 12,
+          "wordEndExclusive": 20
+        },
+        {
+          "utteranceId": 118,
+          "wordStart": 0,
+          "wordEndExclusive": 1
+        }
+      ],
+      "finalRange": {
+        "start": 427.576094,
+        "end": 430.046192
+      },
+      "zh": "是有一个 Agent 在指挥的",
+      "en": "with an Agent directing it",
+      "display": true
+    },
+    {
+      "id": "C136",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1185.5075309200001,
+          "end": 1187.69253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1188.2175309200002,
+          "end": 1191.90753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 119,
+          "wordStart": 0,
+          "wordEndExclusive": 29
+        }
+      ],
+      "finalRange": {
+        "start": 430.157291,
+        "end": 436.032291
+      },
+      "zh": "所以我们要充分调动生图模型背后的思考链路",
+      "en": "so we should fully engage the reasoning chain behind the image-generation model",
+      "display": true
+    },
+    {
+      "id": "C137",
+      "kind": "EVENT",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1191.90753092,
+          "end": 1191.93253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1193.5645309200002,
+          "end": 1195.1875309200002
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 436.032291,
+        "end": 437.680291
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C138",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1195.1875309200002,
+          "end": 1200.38753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 120,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        },
+        {
+          "utteranceId": 121,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ],
+      "finalRange": {
+        "start": 437.680291,
+        "end": 442.880291
+      },
+      "zh": "引导 AI 往什么方向去思考、往什么方向去处理",
+      "en": "guide AI on what direction to think in and how to process it",
+      "display": true
+    },
+    {
+      "id": "C139",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1221.6775309200002,
+          "end": 1222.76597392
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1225.3016199200001,
+          "end": 1227.12753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 122,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        },
+        {
+          "utteranceId": 123,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        }
+      ],
+      "finalRange": {
+        "start": 442.955291,
+        "end": 445.869645
+      },
+      "zh": "这也是未来人与 AI 进行协作的时候",
+      "en": "This is also the most important ability",
+      "display": true
+    },
+    {
+      "id": "C140",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1227.1675309200002,
+          "end": 1228.2075309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 123,
+          "wordStart": 12,
+          "wordEndExclusive": 20
+        }
+      ],
+      "finalRange": {
+        "start": 445.909645,
+        "end": 446.949645
+      },
+      "zh": "最重要的一个能力",
+      "en": "when people collaborate with AI in the future",
+      "display": true
+    },
+    {
+      "id": "C141",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1228.60753092,
+          "end": 1230.32753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 123,
+          "wordStart": 20,
+          "wordEndExclusive": 30
+        }
+      ],
+      "finalRange": {
+        "start": 447.024645,
+        "end": 448.744645
+      },
+      "zh": "就是指挥 AI 的能力",
+      "en": "the ability to direct AI",
+      "display": true
+    },
+    {
+      "id": "C142",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1238.37753092,
+          "end": 1240.65753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 124,
+          "wordStart": 0,
+          "wordEndExclusive": 14
+        }
+      ],
+      "finalRange": {
+        "start": 448.819645,
+        "end": 451.099645
+      },
+      "zh": "如果你不清楚一些底层逻辑的话",
+      "en": "If you don't understand some underlying logic",
+      "display": true
+    },
+    {
+      "id": "C143",
+      "kind": "CAPTION",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1240.65753092,
+          "end": 1242.9775309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 124,
+          "wordStart": 14,
+          "wordEndExclusive": 26
+        }
+      ],
+      "finalRange": {
+        "start": 451.099645,
+        "end": 453.419645
+      },
+      "zh": "你是没办法去指挥 AI 的",
+      "en": "you won't be able to direct AI",
+      "display": true
+    },
+    {
+      "id": "C144",
+      "kind": "EVENT",
+      "chapter": "05 引导式提示词与方法",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1242.9775309200002,
+          "end": 1243.00253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1280.9961119200002,
+          "end": 1281.89753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 453.419645,
+        "end": 454.346064
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C145",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1281.89753092,
+          "end": 1283.53753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 125,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 454.346064,
+        "end": 455.986064
+      },
+      "zh": "用类似的思路",
+      "en": "Using a similar approach",
+      "display": true
+    },
+    {
+      "id": "C146",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1283.57753092,
+          "end": 1286.80753092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1287.08753092,
+          "end": 1287.2990349200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1288.14402392,
+          "end": 1290.90753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 125,
+          "wordStart": 8,
+          "wordEndExclusive": 15
+        },
+        {
+          "utteranceId": 127,
+          "wordStart": 0,
+          "wordEndExclusive": 9
+        }
+      ],
+      "finalRange": {
+        "start": 456.026064,
+        "end": 462.231075
+      },
+      "zh": "我也创作出了制作条形码色卡的提示词",
+      "en": "I also created prompts for making barcode color cards",
+      "display": true
+    },
+    {
+      "id": "C147",
+      "kind": "EVENT",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1290.90753092,
+          "end": 1291.6857719200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1293.5645309200002,
+          "end": 1294.85753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 462.231075,
+        "end": 464.302316
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C148",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1294.85753092,
+          "end": 1296.6395309200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1298.7998489200002,
+          "end": 1300.2675309200001
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 128,
+          "wordStart": 0,
+          "wordEndExclusive": 4
+        },
+        {
+          "utteranceId": 129,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ],
+      "finalRange": {
+        "start": 464.302316,
+        "end": 467.551998
+      },
+      "zh": "以及提取场景资产的提示词",
+      "en": "as well as prompts for extracting scene assets",
+      "display": true
+    },
+    {
+      "id": "C149",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1303.87753092,
+          "end": 1304.9175309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 130,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 467.720712,
+        "end": 468.760712
+      },
+      "zh": "这也是一个四宫格",
+      "en": "This is also a four-panel layout",
+      "display": true
+    },
+    {
+      "id": "C150",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1305.15753092,
+          "end": 1306.03036992
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1309.63753092,
+          "end": 1312.6325309200001
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1312.9975309200001,
+          "end": 1313.6875309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 130,
+          "wordStart": 8,
+          "wordEndExclusive": 11
+        },
+        {
+          "utteranceId": 131,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        }
+      ],
+      "finalRange": {
+        "start": 469.000712,
+        "end": 473.55855
+      },
+      "zh": "我也对每一个宫格的内容进行了一个详细的区分",
+      "en": "I also clearly separated the content of each panel",
+      "display": true
+    },
+    {
+      "id": "C151",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1319.6975309200002,
+          "end": 1320.7775309200001
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 133,
+          "wordStart": 0,
+          "wordEndExclusive": 6
+        }
+      ],
+      "finalRange": {
+        "start": 473.70855,
+        "end": 474.78855
+      },
+      "zh": "这个是正视图",
+      "en": "This is the front view",
+      "display": true
+    },
+    {
+      "id": "C152",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1321.37753092,
+          "end": 1323.29753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 133,
+          "wordStart": 6,
+          "wordEndExclusive": 12
+        }
+      ],
+      "finalRange": {
+        "start": 474.86355,
+        "end": 476.78355
+      },
+      "zh": "这个是侧视图",
+      "en": "This is the side view",
+      "display": true
+    },
+    {
+      "id": "C153",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1323.57753092,
+          "end": 1325.61753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 133,
+          "wordStart": 12,
+          "wordEndExclusive": 21
+        }
+      ],
+      "finalRange": {
+        "start": 477.06355,
+        "end": 479.10355
+      },
+      "zh": "这个是低角度远视图",
+      "en": "This is the low-angle long shot",
+      "display": true
+    },
+    {
+      "id": "C154",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1326.0175309200001,
+          "end": 1328.33753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 133,
+          "wordStart": 21,
+          "wordEndExclusive": 30
+        }
+      ],
+      "finalRange": {
+        "start": 479.50355,
+        "end": 481.82355
+      },
+      "zh": "这个是高角度俯视图",
+      "en": "This is the high-angle overhead shot",
+      "display": true
+    },
+    {
+      "id": "C155",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1337.10753092,
+          "end": 1339.14753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 134,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 481.89855,
+        "end": 483.93855
+      },
+      "zh": "这几个视图的联合",
+      "en": "Together these views",
+      "display": true
+    },
+    {
+      "id": "C156",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1339.62753092,
+          "end": 1340.9746409200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1341.4575309200002,
+          "end": 1343.69253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1345.71680792,
+          "end": 1346.58753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 134,
+          "wordStart": 8,
+          "wordEndExclusive": 24
+        },
+        {
+          "utteranceId": 135,
+          "wordStart": 0,
+          "wordEndExclusive": 4
+        }
+      ],
+      "finalRange": {
+        "start": 484.139473,
+        "end": 488.592306
+      },
+      "zh": "能够让 AI 视频参考这个场景中",
+      "en": "allow the AI video to reference",
+      "display": true
+    },
+    {
+      "id": "C157",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1346.58753092,
+          "end": 1347.45253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1348.82753092,
+          "end": 1350.11753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 135,
+          "wordStart": 4,
+          "wordEndExclusive": 7
+        },
+        {
+          "utteranceId": 136,
+          "wordStart": 0,
+          "wordEndExclusive": 7
+        }
+      ],
+      "finalRange": {
+        "start": 488.592306,
+        "end": 490.747306
+      },
+      "zh": "各个方位的内容",
+      "en": "content from different directions in the scene",
+      "display": true
+    },
+    {
+      "id": "C158",
+      "kind": "EVENT",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1350.11753092,
+          "end": 1350.1425309200001
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1350.6675309200002,
+          "end": 1350.7175309200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1351.31753092,
+          "end": 1351.3425309200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1362.83501492,
+          "end": 1367.0275309200001
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1367.34753092,
+          "end": 1367.58284892
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1368.1618929200001,
+          "end": 1370.0368929200001
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1372.07753092,
+          "end": 1372.12753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 490.747306,
+        "end": 497.20014
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C159",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1372.12753092,
+          "end": 1374.84753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 138,
+          "wordStart": 0,
+          "wordEndExclusive": 16
+        }
+      ],
+      "finalRange": {
+        "start": 497.20014,
+        "end": 499.92014
+      },
+      "zh": "也给大家准备了道具相关的提示词",
+      "en": "I also prepared prompts for props",
+      "display": true
+    },
+    {
+      "id": "C160",
+      "kind": "EVENT",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1374.84753092,
+          "end": 1375.84704792
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1377.01047392,
+          "end": 1380.9175309200002
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 499.92014,
+        "end": 504.826714
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C161",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1380.9175309200002,
+          "end": 1383.96638692
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1386.5645309200002,
+          "end": 1391.11753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 139,
+          "wordStart": 0,
+          "wordEndExclusive": 18
+        },
+        {
+          "utteranceId": 140,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        }
+      ],
+      "finalRange": {
+        "start": 504.826714,
+        "end": 512.42857
+      },
+      "zh": "所有提示词都已经放到了这个画布的左下角区域",
+      "en": "All the prompts have been placed in the lower-left area of this canvas",
+      "display": true
+    },
+    {
+      "id": "C162",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1411.9275309200002,
+          "end": 1414.12753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 141,
+          "wordStart": 0,
+          "wordEndExclusive": 13
+        }
+      ],
+      "finalRange": {
+        "start": 512.552331,
+        "end": 514.752331
+      },
+      "zh": "我也往我的文档里面放了一份",
+      "en": "I also put a copy in my document",
+      "display": true
+    },
+    {
+      "id": "C163",
+      "kind": "EVENT",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1414.12753092,
+          "end": 1414.1525309200001
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1416.5645309200002,
+          "end": 1419.14753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 514.752331,
+        "end": 517.360331
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C164",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1419.14753092,
+          "end": 1420.2275309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 142,
+          "wordStart": 0,
+          "wordEndExclusive": 8
+        }
+      ],
+      "finalRange": {
+        "start": 517.360331,
+        "end": 518.440331
+      },
+      "zh": "大家可以自行获取",
+      "en": "You can get them yourself",
+      "display": true
+    },
+    {
+      "id": "C165",
+      "kind": "EVENT",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1420.2275309200002,
+          "end": 1420.25253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1452.9375309200002,
+          "end": 1452.9875309200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1454.9875309200002,
+          "end": 1455.01253092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1458.7425179200002,
+          "end": 1460.6175179200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1461.01866592,
+          "end": 1466.06890492
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1466.5098019200002,
+          "end": 1468.3848019200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1469.4975309200001,
+          "end": 1469.54753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 518.440331,
+        "end": 527.39057
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C166",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1469.54753092,
+          "end": 1470.1875309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 144,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        }
+      ],
+      "finalRange": {
+        "start": 527.39057,
+        "end": 528.03057
+      },
+      "zh": "获取的方式",
+      "en": "How to get them",
+      "display": true
+    },
+    {
+      "id": "C167",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1470.1875309200002,
+          "end": 1471.86753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 144,
+          "wordStart": 5,
+          "wordEndExclusive": 17
+        }
+      ],
+      "finalRange": {
+        "start": 528.03057,
+        "end": 529.71057
+      },
+      "zh": "你可以在评论区里面找一下",
+      "en": "You can look in the comments",
+      "display": true
+    },
+    {
+      "id": "C168",
+      "kind": "EVENT",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1471.86753092,
+          "end": 1471.8925309200001
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1502.53488792,
+          "end": 1504.40988792
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1505.65725292,
+          "end": 1508.0519479200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1510.52083392,
+          "end": 1512.85391892
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1557.49875892,
+          "end": 1560.02959192
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1560.7671019200002,
+          "end": 1564.5062059200002
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1568.7775309200001,
+          "end": 1568.82753092
+        }
+      ],
+      "wordRefs": [],
+      "finalRange": {
+        "start": 529.71057,
+        "end": 542.658287
+      },
+      "zh": "原画面操作或结果停留（无识别字幕）",
+      "en": "Original screen action or result hold (no caption)",
+      "display": false
+    },
+    {
+      "id": "C169",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1568.82753092,
+          "end": 1571.4275309200002
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 145,
+          "wordStart": 0,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 542.658287,
+        "end": 545.258287
+      },
+      "zh": "我这些提示词肯定还有一些局限性",
+      "en": "These prompts certainly still have limitations",
+      "display": true
+    },
+    {
+      "id": "C170",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1582.4675309200002,
+          "end": 1584.58014092
+        },
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1588.81753092,
+          "end": 1589.82753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 146,
+          "wordStart": 0,
+          "wordEndExclusive": 12
+        },
+        {
+          "utteranceId": 147,
+          "wordStart": 0,
+          "wordEndExclusive": 5
+        }
+      ],
+      "finalRange": {
+        "start": 545.365162,
+        "end": 548.487772
+      },
+      "zh": "如果你发现还有一些问题你不能解决的",
+      "en": "If you find problems you can't solve",
+      "display": true
+    },
+    {
+      "id": "C171",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1589.86753092,
+          "end": 1591.10753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 147,
+          "wordStart": 5,
+          "wordEndExclusive": 11
+        }
+      ],
+      "finalRange": {
+        "start": 548.527772,
+        "end": 549.767772
+      },
+      "zh": "那么欢迎留言",
+      "en": "feel free to leave a comment",
+      "display": true
+    },
+    {
+      "id": "C172",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1591.34753092,
+          "end": 1592.2675309200001
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 147,
+          "wordStart": 11,
+          "wordEndExclusive": 15
+        }
+      ],
+      "finalRange": {
+        "start": 550.007772,
+        "end": 550.927772
+      },
+      "zh": "我来解决",
+      "en": "I'll solve them",
+      "display": true
+    },
+    {
+      "id": "C173",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1594.4675309200002,
+          "end": 1596.30753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 148,
+          "wordStart": 0,
+          "wordEndExclusive": 10
+        }
+      ],
+      "finalRange": {
+        "start": 551.002772,
+        "end": 552.842772
+      },
+      "zh": "好那么本期视频到这里",
+      "en": "Alright that's all for this episode",
+      "display": true
+    },
+    {
+      "id": "C174",
+      "kind": "CAPTION",
+      "chapter": "06 延伸实例与资源",
+      "sourceRanges": [
+        {
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-18 10.26 AM.cap/content/segments/segment-0/display.mp4",
+          "start": 1596.7475309200001,
+          "end": 1598.54753092
+        }
+      ],
+      "wordRefs": [
+        {
+          "utteranceId": 148,
+          "wordStart": 10,
+          "wordEndExclusive": 20
+        }
+      ],
+      "finalRange": {
+        "start": 552.917772,
+        "end": 554.717772
+      },
+      "zh": "咱们下期视频再见拜拜",
+      "en": "See you next time bye-bye",
+      "display": true
+    }
+  ],
+  "scope": {
+    "start": 0,
+    "end": 554.900735
+  }
+}

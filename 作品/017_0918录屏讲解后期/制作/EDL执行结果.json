@@ -1,0 +1,17 @@
+{
+  "command": [
+    "node",
+    "scripts/cap-project-edl.mjs",
+    "--project",
+    "/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap",
+    "--edl",
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/冻结剪辑清单.json",
+    "--expected-revision",
+    "63",
+    "--receipt",
+    "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/EDL写入回执.json"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"schema\": \"laohu.cap-edl-receipt/1\",\n  \"status\": \"applied\",\n  \"projectPath\": \"/Volumes/Laohu_Work/软件数据/Cap/录制/017_人物资产提取_工作工程.cap\",\n  \"projectName\": \"017_人物资产提取_工作工程.cap\",\n  \"edlPath\": \"/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/017_0918录屏讲解后期/制作/冻结剪辑清单.json\",\n  \"edlSha256\": \"abe51ec83d61dc57ec9620e999bd03b11302ab79cc0a521b87fc07c3930cd9c4\",\n  \"previousRevision\": 63,\n  \"newRevision\": 64,\n  \"segmentCount\": 246,\n  \"durationSeconds\": 342.579681355998,\n  \"appliedAt\": \"2026-09-19T16:14:45.268Z\"\n}\n",
+  "stderr": ""
+}
