@@ -3667,24 +3667,222 @@ impl ScreenshotEditorWindowIds {
     }
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct EditorRecordingTargetLease {
+    pub project_path: PathBuf,
+    pub owner_id: Option<String>,
+    pub request_id: Option<String>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum EditorRecordingTargetPhase {
+    Pending,
+    Active,
+}
+
+#[derive(Clone, Debug)]
+struct OwnedEditorRecordingTarget {
+    lease: EditorRecordingTargetLease,
+    phase: EditorRecordingTargetPhase,
+}
+
+#[derive(Default, Debug)]
+pub struct EditorRecordingTargetState {
+    target: Option<OwnedEditorRecordingTarget>,
+}
+
+impl EditorRecordingTargetState {
+    pub fn claim(&mut self, lease: EditorRecordingTargetLease) -> Result<(), String> {
+        if lease.owner_id.is_some() != lease.request_id.is_some() {
+            return Err("Editor recording target owner and request must be provided together".into());
+        }
+
+        match &self.target {
+            None => {
+                self.target = Some(OwnedEditorRecordingTarget {
+                    lease,
+                    phase: EditorRecordingTargetPhase::Pending,
+                });
+                Ok(())
+            }
+            Some(current)
+                if current.phase == EditorRecordingTargetPhase::Pending
+                    && current.lease == lease =>
+            {
+                Ok(())
+            }
+            Some(current) => Err(format!(
+                "Recording target is already owned by {}",
+                current.lease.project_path.display()
+            )),
+        }
+    }
+
+    pub fn clear_if_matches(&mut self, expected: &EditorRecordingTargetLease) -> bool {
+        let Some(current) = self.target.as_ref() else {
+            return false;
+        };
+        if current.phase != EditorRecordingTargetPhase::Pending || &current.lease != expected {
+            return false;
+        }
+        self.target = None;
+        true
+    }
+
+    pub fn promote_for_recording(&mut self) -> Option<EditorRecordingTargetLease> {
+        let current = self.target.as_mut()?;
+        if current.phase == EditorRecordingTargetPhase::Pending {
+            current.phase = EditorRecordingTargetPhase::Active;
+        }
+        Some(current.lease.clone())
+    }
+
+    pub fn take_active(&mut self) -> Option<EditorRecordingTargetLease> {
+        let current = self.target.as_ref()?;
+        if current.phase != EditorRecordingTargetPhase::Active {
+            return None;
+        }
+        self.target.take().map(|target| target.lease)
+    }
+
+    pub fn take_active_if_matches(
+        &mut self,
+        expected: &EditorRecordingTargetLease,
+    ) -> Option<EditorRecordingTargetLease> {
+        let current = self.target.as_ref()?;
+        if current.phase != EditorRecordingTargetPhase::Active || &current.lease != expected {
+            return None;
+        }
+        self.target.take().map(|target| target.lease)
+    }
+
+    pub fn current_path(&self) -> Option<PathBuf> {
+        self.target
+            .as_ref()
+            .map(|target| target.lease.project_path.clone())
+    }
+}
+
 #[derive(Default, Clone)]
-pub struct EditorRecordingTarget(pub Arc<Mutex<Option<PathBuf>>>);
+pub struct EditorRecordingTarget(pub Arc<Mutex<EditorRecordingTargetState>>);
 
 impl EditorRecordingTarget {
     pub fn get(app: &AppHandle) -> Self {
         app.state::<EditorRecordingTarget>().deref().clone()
     }
 
-    pub fn set(app: &AppHandle, path: Option<PathBuf>) {
-        *Self::get(app).0.lock().unwrap() = path;
+    pub fn set(
+        app: &AppHandle,
+        path: Option<PathBuf>,
+        owner_id: Option<String>,
+        request_id: Option<String>,
+    ) -> Result<(), String> {
+        let target = Self::get(app);
+        let mut state = target.0.lock().unwrap();
+        match path {
+            Some(project_path) => state.claim(EditorRecordingTargetLease {
+                project_path,
+                owner_id,
+                request_id,
+            }),
+            None => {
+                // Legacy main-window/overlay callers can clear only an
+                // unowned pending target. They must never clear an editor's
+                // pending or active lease.
+                let expected = state.target.as_ref().map(|target| target.lease.clone());
+                if let Some(expected) = expected
+                    && expected.owner_id.is_none()
+                    && expected.request_id.is_none()
+                {
+                    state.clear_if_matches(&expected);
+                }
+                Ok(())
+            }
+        }
+    }
+
+    pub fn clear_if_matches(
+        app: &AppHandle,
+        expected_path: &std::path::Path,
+        owner_id: Option<String>,
+        request_id: Option<String>,
+    ) -> bool {
+        let target = Self::get(app);
+        let mut state = target.0.lock().unwrap();
+        state.clear_if_matches(&EditorRecordingTargetLease {
+            project_path: expected_path.to_path_buf(),
+            owner_id,
+            request_id,
+        })
+    }
+
+    pub fn begin_recording(app: &AppHandle) -> Option<EditorRecordingTargetLease> {
+        Self::get(app)
+            .0
+            .lock()
+            .unwrap()
+            .promote_for_recording()
+    }
+
+    pub fn take_active(app: &AppHandle) -> Option<EditorRecordingTargetLease> {
+        Self::get(app).0.lock().unwrap().take_active()
+    }
+
+    pub fn take_active_if_matches(
+        app: &AppHandle,
+        expected: &EditorRecordingTargetLease,
+    ) -> Option<EditorRecordingTargetLease> {
+        Self::get(app)
+            .0
+            .lock()
+            .unwrap()
+            .take_active_if_matches(expected)
     }
 
     pub fn current(app: &AppHandle) -> Option<PathBuf> {
-        Self::get(app).0.lock().unwrap().clone()
+        Self::get(app).0.lock().unwrap().current_path()
+    }
+}
+
+#[cfg(test)]
+mod editor_recording_target_tests {
+    use super::{EditorRecordingTargetLease, EditorRecordingTargetState};
+    use std::path::PathBuf;
+
+    fn lease(path: &str, owner: &str, request: &str) -> EditorRecordingTargetLease {
+        EditorRecordingTargetLease {
+            project_path: PathBuf::from(path),
+            owner_id: Some(owner.to_string()),
+            request_id: Some(request.to_string()),
+        }
     }
 
-    pub fn take(app: &AppHandle) -> Option<PathBuf> {
-        Self::get(app).0.lock().unwrap().take()
+    #[test]
+    fn rejects_a_second_owner_and_preserves_the_first_pending_target() {
+        let mut state = EditorRecordingTargetState::default();
+        let first = lease("/projects/one.cap", "owner-one", "request-one");
+        let second = lease("/projects/two.cap", "owner-two", "request-two");
+
+        assert!(state.claim(first.clone()).is_ok());
+        assert!(state.claim(second.clone()).is_err());
+        assert_eq!(state.current_path(), Some(first.project_path));
+        assert!(!state.clear_if_matches(&second));
+        assert_eq!(state.current_path(), Some(PathBuf::from("/projects/one.cap")));
+    }
+
+    #[test]
+    fn active_target_cannot_be_cleared_or_replaced_until_native_finish_takes_it() {
+        let mut state = EditorRecordingTargetState::default();
+        let first = lease("/projects/one.cap", "owner-one", "request-one");
+        let second = lease("/projects/two.cap", "owner-two", "request-two");
+
+        assert!(state.claim(first.clone()).is_ok());
+        let active = state.promote_for_recording().expect("target is promoted");
+        assert_eq!(active, first);
+        assert!(!state.clear_if_matches(&first));
+        assert!(state.claim(second).is_err());
+        assert_eq!(state.take_active(), Some(first));
+        assert!(state.current_path().is_none());
     }
 }
 

@@ -8,6 +8,7 @@ import type {
 	EmotionalTone,
 	InformationShape,
 } from "../schemas/director";
+import {flowNodeGraphModes} from "../utils/flowTopology";
 
 type Manifest = {
 	id: ComponentConfig["component"];
@@ -19,12 +20,62 @@ type Manifest = {
 	informationShapes: readonly InformationShape[];
 	minDurationSeconds: number;
 	maxItems: number;
+	autoSelectionEligibility: Readonly<Record<string, ModeAutoSelectionEligibility>>;
 	specPath: string;
 	schema: ZodType;
 	defaultProps: ComponentConfig;
 };
 
+export type ModeAutoSelectionEligibility = {
+	eligible: boolean;
+	reasons: readonly string[];
+};
+
 const source = { type: "editorial", confidence: "inferred" } as const;
+
+const unsupportedModeReasons: Record<string, Record<string, string>> = {
+	FlowNodeGraph: {
+		"artifact-flow": "Legacy spelling remains available for explicit configs; automatic selection uses data-flow.",
+	},
+	SystemMap: {
+		hierarchy: "The current renderer implements a hub-and-spoke layout, not hierarchical levels.",
+		inclusion: "The current renderer does not draw containment boundaries.",
+		network: "The current renderer does not draw arbitrary network edges.",
+		radial: "The current renderer does not implement a radial layout contract.",
+	},
+	DecisionCanvas: {
+		"decision-tree": "The current renderer does not implement tree branches.",
+		radar: "The current renderer does not implement radar axes.",
+	},
+	DataStoryChart: {
+		ranking: "The current renderer does not sort or label rank positions.",
+		counter: "The current renderer does not implement a counter transition.",
+	},
+	FormTemplateBuilder: {
+		checklist: "The current renderer is an input form, not a checklist state machine.",
+		"result-card": "The current renderer does not implement a standalone result-card layout.",
+	},
+	ScreenExplainer: {
+		device: "The current renderer does not implement a device frame.",
+		"side-by-side": "The current renderer does not implement a two-pane comparison.",
+	},
+	RiskActionLoop: {
+		"trigger-chain": "The current renderer only renders risk → action → proof rows.",
+		redline: "The current renderer does not implement a redline treatment.",
+	},
+};
+
+const getAutoSelectionEligibility = (
+	componentId: string,
+	modes: readonly string[],
+): Readonly<Record<string, ModeAutoSelectionEligibility>> => Object.fromEntries(
+	modes.map((mode) => {
+		const unsupportedReason = unsupportedModeReasons[componentId]?.[mode];
+		return [mode, unsupportedReason
+			? {eligible: false, reasons: [unsupportedReason]}
+			: {eligible: true, reasons: [`${componentId} has a renderer for ${mode}.`]}];
+	}),
+);
 
 const manifests = [
 	{
@@ -53,7 +104,7 @@ const manifests = [
 		id: "FlowNodeGraph",
 		displayName: "流程节点图",
 		purpose: "解释步骤、因果推进、分支、闭环和产物流转",
-		modes: ["linear", "branch", "loop", "artifact-flow"],
+		modes: flowNodeGraphModes,
 		communicationGoals: ["explain", "guide", "review"],
 		emotionalTones: ["clear", "energetic", "futuristic", "satisfying"],
 		informationShapes: ["sequence", "network"],
@@ -203,6 +254,7 @@ export const componentRegistry: Manifest[] = manifests.map((manifest) => {
 
 	return {
 		...manifest,
+		autoSelectionEligibility: getAutoSelectionEligibility(manifest.id, manifest.modes),
 		specPath: `workflows/laohu-video/模板/components/${manifest.id}.md`,
 		schema,
 		defaultProps: {
@@ -257,3 +309,12 @@ export const getComponentManifest = (id: ComponentConfig["component"]) => {
 	}
 	return manifest;
 };
+
+export const getModeAutoSelectionEligibility = (
+	componentId: ComponentConfig["component"],
+	mode: string,
+): ModeAutoSelectionEligibility =>
+	getComponentManifest(componentId).autoSelectionEligibility[mode] ?? {
+		eligible: false,
+		reasons: [`No auto-selection capability is registered for ${componentId}:${mode}.`],
+	};

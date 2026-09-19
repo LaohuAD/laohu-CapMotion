@@ -1,5 +1,5 @@
 import React from "react";
-import {Img, interpolate, useCurrentFrame} from "remotion";
+import {Img, useCurrentFrame} from "remotion";
 import type {ComponentConfig, VisualItem} from "../schemas/components";
 import {buildSceneTiming} from "../utils/timing";
 import {editorialRevealProgress} from "../visual/motion";
@@ -35,11 +35,11 @@ const Rail: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
   const accent = resolveSemanticAccent(config.stylePreset, config.accentRole ?? "info");
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   return (
     <div style={{display: "flex", flexDirection: "column", gap: 12, marginTop: 22}}>
       {config.items.map((item, index) => {
-        const reveal = editorialRevealProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
+        const reveal = editorialRevealProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames);
         const color = itemColor(item, accent, theme.muted, theme.success, theme.danger);
         return (
           <div key={item.id} style={{display: "grid", gridTemplateColumns: "28px 1fr", gap: 12, alignItems: "center", opacity: reveal.opacity, translate: `${reveal.translateX}px 0`}}>
@@ -56,13 +56,15 @@ const Rail: React.FC<{config: ComponentConfig}> = ({config}) => {
 };
 
 const EvidenceDock: React.FC<{config: ComponentConfig}> = ({config}) => {
+  const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
   const accent = resolveSemanticAccent(config.stylePreset, config.accentRole ?? "info");
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   return (
     <div style={{marginTop: 24, display: "grid", gridTemplateColumns: config.mediaSrc ? "1.25fr .75fr" : "1fr", gap: 18}}>
       {config.mediaSrc ? <div style={{border: `2px solid ${accent}`, background: "rgba(5,8,12,.56)", padding: 10}}><Img src={config.mediaSrc} style={{display: "block", width: "100%", maxHeight: 440, objectFit: "contain"}} /></div> : null}
       <div style={{display: "flex", flexDirection: "column", gap: 10}}>
-        {config.items.map((item) => <div key={item.id} style={{padding: "13px 16px", borderLeft: `4px solid ${item.status === "active" ? accent : theme.line}`, background: "rgba(5,8,12,.58)", color: theme.text, ...typeStyles.cardTitle, fontSize: 22}}>{item.label}</div>)}
+        {config.items.map((item, index) => <div key={item.id} style={{padding: "13px 16px", borderLeft: `4px solid ${item.status === "active" ? accent : theme.line}`, background: "rgba(5,8,12,.58)", color: theme.text, ...typeStyles.cardTitle, fontSize: 22, opacity: editorialRevealProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames).opacity}}>{item.label}</div>)}
       </div>
     </div>
   );
@@ -72,23 +74,33 @@ const LabelStack: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
   const accent = resolveSemanticAccent(config.stylePreset, config.accentRole ?? "info");
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   return <div style={{display: "flex", flexWrap: "wrap", gap: 12, marginTop: 24}}>{config.items.map((item, index) => {
-    const progress = interpolate(frame, [index * 8, index * 8 + 16], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
+    const progress = editorialRevealProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames).opacity;
     return <div key={item.id} style={{padding: "12px 18px", border: `1px solid ${item.status === "active" ? accent : theme.line}`, background: item.status === "active" ? `${accent}22` : "rgba(5,8,12,.56)", color: theme.text, fontSize: 23, ...typeStyles.cardTitle, opacity: progress, scale: 0.94 + progress * 0.06}}>{item.label}</div>;
   })}</div>;
 };
 
 const ValueCallout: React.FC<{config: ComponentConfig}> = ({config}) => {
+  const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
   const accent = resolveSemanticAccent(config.stylePreset, config.accentRole ?? "warning");
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   const main = config.items[0];
-  return <div style={{marginTop: 26, padding: "22px 24px", borderLeft: `7px solid ${accent}`, background: "rgba(5,8,12,.62)"}}><div style={{...typeStyles.hero, fontSize: 74, lineHeight: 1, color: accent}}>{main?.result ?? main?.value ?? main?.label}</div>{main?.result || main?.value !== undefined ? <div style={{marginTop: 12, fontSize: 25, color: theme.text, ...typeStyles.cardTitle}}>{main.label}</div> : null}</div>;
+  const progress = main ? editorialRevealProgress(frame, 0, config.items.length, timing.buildEnd, main.revealAtFrame, main.actionDurationFrames).opacity : 0;
+  return <div style={{marginTop: 26, padding: "22px 24px", borderLeft: `7px solid ${accent}`, background: "rgba(5,8,12,.62)", opacity: progress}}><div style={{...typeStyles.hero, fontSize: 74, lineHeight: 1, color: accent}}>{main?.result ?? main?.value ?? main?.label}</div>{main?.result || main?.value !== undefined ? <div style={{marginTop: 12, fontSize: 25, color: theme.text, ...typeStyles.cardTitle}}>{main.label}</div> : null}</div>;
 };
 
 const Bridge: React.FC<{config: ComponentConfig}> = ({config}) => {
+  const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
   const accent = resolveSemanticAccent(config.stylePreset, config.accentRole ?? "info");
-  return <div style={{marginTop: 28, display: "flex", alignItems: "center", gap: 16}}><div style={{width: 52, height: 4, background: accent}}/><div style={{fontSize: 30, color: theme.text, ...typeStyles.cardTitle}}>{config.items[0]?.label ?? config.conclusion}</div><div style={{fontSize: 30, color: accent}}>→</div><div style={{fontSize: 24, color: theme.muted}}>{config.items[1]?.label ?? config.overlayContinuity?.stateAfter}</div></div>;
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
+  const first = config.items[0];
+  const second = config.items[1];
+  const firstProgress = first ? editorialRevealProgress(frame, 0, config.items.length, timing.buildEnd, first.revealAtFrame, first.actionDurationFrames).opacity : 0;
+  const secondProgress = second ? editorialRevealProgress(frame, 1, config.items.length, timing.buildEnd, second.revealAtFrame, second.actionDurationFrames).opacity : 0;
+  return <div style={{marginTop: 28, display: "flex", alignItems: "center", gap: 16}}><div style={{width: 52, height: 4, background: accent, opacity: firstProgress}}/><div style={{fontSize: 30, color: theme.text, ...typeStyles.cardTitle, opacity: firstProgress}}>{first?.label ?? config.conclusion}</div><div style={{fontSize: 30, color: accent, opacity: Math.min(firstProgress, secondProgress)}}>→</div><div style={{fontSize: 24, color: theme.muted, opacity: secondProgress}}>{second?.label ?? config.overlayContinuity?.stateAfter}</div></div>;
 };
 
 export const EditorialOverlayShell: React.FC<{config: ComponentConfig}> = ({config}) => {

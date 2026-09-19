@@ -6,19 +6,29 @@
 
 ## Modes
 
-`linear` / `branch` / `loop` / `artifact-flow`
+`linear` / `branch` / `loop` / `data-flow`
+
+`artifact-flow` remains a compatibility alias for `data-flow`; new configs
+should use `data-flow`.
 
 ## 输入边界
 
 - 2-8 个节点，每个节点包含动作或产物，而不是孤立名词。
-- `links` 必须指向真实存在的节点。
+- `links` 必须指向真实存在的节点，不能重复声明同一条边。
+- `linear` 可以省略 `links` 以兼容旧配置，此时按节点数组生成一条单路径；
+  一旦提供 `links`，它必须仍然是一条无环单路径。
+- `branch` 必须显式提供至少一个二出边节点，且不能混入回环。
+- `loop` 必须显式提供至少一条返回边；需要反馈的边必须真正画出来。
+- `data-flow` 必须显式提供边，支持无环的数据/产物流转；反馈闭环请使用 `loop`。
 - `artifact-flow` 的说明写清该产物决定什么或进入哪一步。
 
 ## 适用
 
 流程、方法路径、反馈闭环、文件或资产流转。
 
-`presentation=overlay` 时改为纵向累积节点，适合章节议程、四层运行链和后台状态；旧节点保留，新节点依次补全路径，结论只在结构建立后出现。
+`presentation=overlay` 时，线性图保持纵向累积节点；分支和数据流使用受限宽度的分层布局，
+回环保留返回边，适合章节议程、四层运行链和后台状态。旧节点保留，新节点依次补全路径，
+结论只在结构建立后出现。所有边和节点都以稳定 `id` 为键。
 
 ## 禁用
 

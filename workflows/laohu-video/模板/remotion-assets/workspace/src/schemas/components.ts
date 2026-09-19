@@ -8,6 +8,10 @@ import {
   overlayContinuitySchema,
   timeRangeSchema,
 } from "./director";
+import {
+  flowNodeGraphModes,
+  validateFlowTopology,
+} from "../utils/flowTopology";
 
 export const componentIds = [
   "KineticStatement",
@@ -36,6 +40,7 @@ export const stylePresetSchema = z.enum([
 
 export const presentationSchema = z.enum(["stage", "overlay"]);
 export const placementSchema = z.enum(["left", "right", "center"]);
+export const flowNodeGraphModeSchema = z.enum(flowNodeGraphModes);
 export const accentRoleSchema = z.enum([
   "info",
   "success",
@@ -57,6 +62,8 @@ export const visualItemSchema = z.object({
   value: z.number().optional(),
   secondaryValue: z.number().optional(),
   revealAtFrame: z.number().int().min(0).optional(),
+  actionDurationFrames: z.number().int().positive().optional(),
+  holdFrames: z.number().int().nonnegative().optional(),
   status: z.enum(["default", "positive", "negative", "active", "muted"]).default("default"),
   source: contentSourceSchema,
 });
@@ -98,7 +105,7 @@ export const createComponentSchema = <
 >(id: TId, modes: TModes, maxItems: number) =>
   z.object({
     component: z.literal(id),
-    mode: z.enum(modes),
+    mode: id === "FlowNodeGraph" ? flowNodeGraphModeSchema : z.enum(modes),
     ...baseFields,
     items: baseFields.items.max(maxItems),
   }).superRefine((config, context) => {
@@ -117,7 +124,35 @@ export const createComponentSchema = <
           message: "revealAtFrame must be inside durationInFrames",
         });
       }
+      if (item.revealAtFrame !== undefined && item.actionDurationFrames !== undefined) {
+        const actionEndFrame = item.revealAtFrame + item.actionDurationFrames;
+        const readableEndFrame = actionEndFrame + (item.holdFrames ?? 0);
+        if (actionEndFrame > config.durationInFrames) {
+          context.addIssue({
+            code: "custom",
+            path: ["items", index, "actionDurationFrames"],
+            message: "revealAtFrame + actionDurationFrames must fit inside durationInFrames",
+          });
+        }
+        if (readableEndFrame > config.durationInFrames) {
+          context.addIssue({
+            code: "custom",
+            path: ["items", index, "holdFrames"],
+            message: "holdFrames must leave the item readable inside durationInFrames",
+          });
+        }
+      }
     });
+    if (id === "FlowNodeGraph") {
+      const topologyIssues = validateFlowTopology(config.mode, config.items, config.links);
+      for (const issue of topologyIssues) {
+        context.addIssue({
+          code: "custom",
+          path: issue.path ?? [],
+          message: issue.message,
+        });
+      }
+    }
   });
 
 export type VisualItem = z.infer<typeof visualItemSchema>;

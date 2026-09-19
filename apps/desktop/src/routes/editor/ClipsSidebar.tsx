@@ -64,6 +64,7 @@ import {
 	serializeProjectConfiguration,
 	useEditorContext,
 } from "./context";
+import { createEditorRecordingFlow } from "./editor-recording-flow";
 import { getExistingRecordingPickerOptions } from "./existing-recording-picker";
 import { Input } from "./ui";
 
@@ -281,13 +282,20 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 	let previousMode: RecordingMode | null = null;
 	const [importing, setImporting] = createSignal(false);
 	const [recordOpen, setRecordOpen] = createSignal(false);
+	const [recordingPreparation, setRecordingPreparation] = createSignal(false);
+	const [recordingPreparationError, setRecordingPreparationError] =
+		createSignal<string | null>(null);
+	const recordingOwnerId = `editor:${crypto.randomUUID()}`;
+	const recordingRequestId = `request:${crypto.randomUUID()}`;
+	let cancelRecordingPreparation: (() => Promise<unknown>) | undefined;
+	let retryRecordingPreparation: (() => void) | undefined;
 
-	const restoreMode = () => {
-		if (previousMode !== null && rawOptions.mode !== previousMode) {
-			setOptions("mode", previousMode);
-			void commands.setRecordingMode(previousMode);
-		}
+	const restoreMode = async () => {
+		const mode = previousMode;
+		if (mode === null) return;
 		previousMode = null;
+		if (rawOptions.mode !== mode) setOptions("mode", mode);
+		await commands.setRecordingMode(mode);
 	};
 
 	const [displayMenuOpen, setDisplayMenuOpen] = createSignal(false);
@@ -303,10 +311,15 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 		if (!activeTargetMenu()) setTargetSearch("");
 	});
 
-	const closeRecord = () => {
+	const closeRecordShell = () => {
 		setRecordOpen(false);
 		setDisplayMenuOpen(false);
 		setWindowMenuOpen(false);
+	};
+
+	const closeRecord = () => {
+		closeRecordShell();
+		void cancelRecordingPreparation?.().catch(() => {});
 	};
 
 	let hiddenForPicker = false;
@@ -326,7 +339,15 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 			});
 			void commands.closeTargetSelectOverlays().catch(() => {});
 		}
-		void commands.setEditorRecordingTarget(null).catch(() => {});
+		void commands
+			.clearEditorRecordingTarget(
+				editorInstance.path,
+				recordingOwnerId,
+				recordingRequestId,
+			)
+			.catch((error) =>
+				console.error("Failed to clear editor recording target:", error),
+			);
 	};
 
 	const showEditorWindow = async (focus: boolean) => {
@@ -335,11 +356,45 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 		if (focus) await window.setFocus();
 	};
 
-	const hideEditorForPicker = () => {
+	const hideEditorForPicker = async () => {
 		if (hiddenForPicker) return;
 		hiddenForPicker = true;
-		void getCurrentWindow().hide();
+		await getCurrentWindow().hide();
 	};
+
+	const recordingFlow = createEditorRecordingFlow<
+		ReturnType<typeof serializeProjectConfiguration>,
+		ScreenCaptureTarget
+	>({
+		stopPlayback: async () => {
+			await commands.stopPlayback();
+			setEditorState("playing", false);
+		},
+		setRecordingMode: (mode) =>
+			commands.setRecordingMode(mode as RecordingMode),
+		setProjectConfig: (config) => commands.setProjectConfig(config),
+		setEditorRecordingTarget: (projectPath, ownerId, requestId) =>
+			commands.setEditorRecordingTarget(projectPath, ownerId, requestId),
+		clearEditorRecordingTarget: (projectPath, ownerId, requestId) =>
+			commands.clearEditorRecordingTarget(projectPath, ownerId, requestId),
+		openTargetSelectOverlays: (target, targetMode) =>
+			commands.openTargetSelectOverlays(
+				target,
+				null,
+				targetMode as RecordingTargetMode,
+			),
+		closeTargetSelectOverlays: () => commands.closeTargetSelectOverlays(),
+		hideEditorForPicker,
+		showEditor: () => showEditorWindow(true),
+		reportRollbackError: (error) =>
+			console.error("Failed to roll back editor recording preparation:", error),
+		restoreRecordingMode: async (mode) => {
+			const previous = mode as RecordingMode;
+			if (rawOptions.mode !== previous) setOptions("mode", previous);
+			await commands.setRecordingMode(previous);
+			previousMode = null;
+		},
+	});
 
 	createEffect(
 		on(
@@ -353,7 +408,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 				closeRecord();
 				setTargetSearch("");
 				resetRecordingTarget();
-				restoreMode();
+				void restoreMode().catch(() => {});
 
 				if (hiddenForPicker) {
 					hiddenForPicker = false;
@@ -419,86 +474,152 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 				setTargetSearch("");
 				return;
 			}
-			void commands.setEditorRecordingTarget(null).catch(() => {});
-			restoreMode();
-			closeRecord();
+			void commands
+				.clearEditorRecordingTarget(
+					editorInstance.path,
+					recordingOwnerId,
+					recordingRequestId,
+				)
+				.catch((error) =>
+					console.error("Failed to clear editor recording target:", error),
+				);
+			void restoreMode().catch(() => {});
+			closeRecordShell();
 			void showEditorWindow(true).catch(() => {});
 		}
 	});
 
 	onCleanup(() => {
 		resetRecordingTarget();
-		restoreMode();
+		void cancelRecordingPreparation?.().catch(() => {});
+		void restoreMode().catch(() => {});
 		if (hiddenForPicker) void showEditorWindow(false).catch(() => {});
 	});
 
-	const beginEditorRecording = async () => {
-		closeRecord();
-		if (editorState.playing) {
-			await commands.stopPlayback();
-			setEditorState("playing", false);
-		}
+	type RecordingSelection = {
+		targetMode: RecordingTargetMode;
+		target: ScreenCaptureTarget | null;
+		apply: () => void;
+		onReady?: () => Promise<void> | void;
+	};
+
+	const prepareEditorRecording = async (selection: RecordingSelection) => {
+		if (recordingPreparation()) return;
+
+		setRecordingPreparationError(null);
+		retryRecordingPreparation = () => {
+			void prepareEditorRecording(selection);
+		};
+
+		const previousTargetMode = rawOptions.targetMode;
+		const previousTargetModeSource = rawOptions.targetModeSource;
+		const previousTargetModeDismissal = rawOptions.targetModeDismissal;
+		const previousCaptureTarget = rawOptions.captureTarget;
+		const previousCaptureSystemAudio = rawOptions.captureSystemAudio;
 		if (previousMode === null) previousMode = rawOptions.mode;
+
+		selection.apply();
 		setOptions("mode", "studio");
-		await commands.setRecordingMode("studio");
-		await commands.setProjectConfig(serializeProjectConfiguration(project));
-		await commands.setEditorRecordingTarget(editorInstance.path);
+		setRecordingPreparation(true);
+
+		const cancel = () => recordingFlow.cancel();
+		cancelRecordingPreparation = cancel;
+		const result = await recordingFlow.prepare({
+			projectPath: editorInstance.path,
+			ownerId: recordingOwnerId,
+			requestId: recordingRequestId,
+			projectConfig: serializeProjectConfiguration(project),
+			previousMode: previousMode ?? rawOptions.mode,
+			shouldStopPlayback: editorState.playing,
+			target: selection.target,
+			targetMode: selection.targetMode,
+			isProjectCurrent: (projectPath) => projectPath === editorInstance.path,
+			onCommitPicker: () =>
+				setOptions({
+					targetMode: selection.targetMode,
+					targetModeSource: "editor",
+				}),
+			onRollbackPicker: () => {
+				setOptions({
+					targetMode: previousTargetMode,
+					targetModeSource: previousTargetModeSource,
+					targetModeDismissal: previousTargetModeDismissal,
+				});
+				setOptions("captureTarget", reconcile(previousCaptureTarget));
+				setOptions("captureSystemAudio", previousCaptureSystemAudio);
+				hiddenForPicker = false;
+			},
+		});
+		if (cancelRecordingPreparation === cancel)
+			cancelRecordingPreparation = undefined;
+		setRecordingPreparation(false);
+
+		if (result.kind === "failed") {
+			const message =
+				result.error instanceof Error
+					? result.error.message
+					: String(result.error);
+			setRecordingPreparationError(message);
+			return result;
+		}
+		if (result.kind === "cancelled") {
+			setRecordingPreparationError(null);
+			return result;
+		}
+
+		setRecordingPreparationError(null);
+		if (result.kind === "ready") await selection.onReady?.();
+		return result;
 	};
 
 	const openTargetMode = async (mode: RecordingTargetMode) => {
 		setDisplayMenuOpen(false);
 		setWindowMenuOpen(false);
-		await beginEditorRecording();
-
-		if (mode === "camera") {
-			setOptions(
-				"captureTarget",
-				reconcile({ variant: "cameraOnly" } as ScreenCaptureTarget),
-			);
-			setOptions("captureSystemAudio", false);
-		}
-
-		await commands.openTargetSelectOverlays(null, null, mode);
-		setOptions({ targetMode: mode, targetModeSource: "editor" });
-		hideEditorForPicker();
+		await prepareEditorRecording({
+			targetMode: mode,
+			target: null,
+			apply: () => {
+				if (mode !== "camera") return;
+				setOptions(
+					"captureTarget",
+					reconcile({ variant: "cameraOnly" } as ScreenCaptureTarget),
+				);
+				setOptions("captureSystemAudio", false);
+			},
+		});
 	};
 
 	const selectDisplayTarget = async (target: CaptureDisplayWithThumbnail) => {
-		setOptions(
-			"captureTarget",
-			reconcile({ variant: "display", id: target.id }),
-		);
 		setDisplayMenuOpen(false);
-		await beginEditorRecording();
-		await commands.openTargetSelectOverlays(
-			{ variant: "display", id: target.id },
-			null,
-			"display",
-		);
-		setOptions({ targetMode: "display", targetModeSource: "editor" });
-		hideEditorForPicker();
+		await prepareEditorRecording({
+			targetMode: "display",
+			target: { variant: "display", id: target.id },
+			apply: () =>
+				setOptions(
+					"captureTarget",
+					reconcile({ variant: "display", id: target.id }),
+				),
+		});
 	};
 
 	const selectWindowTarget = async (target: CaptureWindowWithThumbnail) => {
-		setOptions(
-			"captureTarget",
-			reconcile({ variant: "window", id: target.id }),
-		);
 		setWindowMenuOpen(false);
-		await beginEditorRecording();
-		await commands.openTargetSelectOverlays(
-			{ variant: "window", id: target.id },
-			null,
-			"window",
-		);
-		setOptions({ targetMode: "window", targetModeSource: "editor" });
-		hideEditorForPicker();
-
-		try {
-			await commands.focusWindow(target.id);
-		} catch (error) {
-			console.error("Failed to focus window:", error);
-		}
+		await prepareEditorRecording({
+			targetMode: "window",
+			target: { variant: "window", id: target.id },
+			apply: () =>
+				setOptions(
+					"captureTarget",
+					reconcile({ variant: "window", id: target.id }),
+				),
+			onReady: async () => {
+				try {
+					await commands.focusWindow(target.id);
+				} catch (error) {
+					console.error("Failed to focus window:", error);
+				}
+			},
+		});
 	};
 
 	const importRecordingPath = async (sourcePath: string) => {
@@ -791,6 +912,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 			selected={rawOptions.targetMode === mode}
 			Component={Icon}
 			onClick={() => void openTargetMode(mode)}
+			disabled={recordingPreparation()}
 			name={name}
 			class="flex-1"
 		/>
@@ -817,7 +939,10 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 					<Button
 						variant="blue"
 						class="flex flex-1 gap-2 justify-center items-center h-10"
-						onClick={() => setRecordOpen(true)}
+						onClick={() => {
+							setRecordOpen(true);
+							setRecordingPreparationError(null);
+						}}
 					>
 						<IconLucideVideo class="size-4" />
 						{text("Record a new clip")}
@@ -1008,6 +1133,60 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 							</div>
 
 							<div class="flex flex-col flex-1 p-5 min-h-0">
+								<Show when={recordingPreparation()}>
+									<div
+										class="flex flex-none items-center px-3 py-2 mb-3 text-xs rounded-lg bg-blue-3 text-blue-11"
+										role="status"
+										aria-live="polite"
+									>
+										{text("Preparing recorder…")}
+									</div>
+								</Show>
+								<Show when={recordingPreparationError()}>
+									{(message) => (
+										<div
+											class="flex flex-none gap-3 items-start px-3 py-2 mb-3 text-xs rounded-lg bg-red-3 text-red-11"
+											role="alert"
+										>
+											<span class="flex-1 min-w-0 break-words">
+												{text("Unable to prepare recording.")} {message()}
+											</span>
+											<button
+												type="button"
+												onClick={() => retryRecordingPreparation?.()}
+												class="flex-none font-medium underline underline-offset-2 hover:no-underline"
+											>
+												{text("capture.tryAgain")}
+											</button>
+										</div>
+									)}
+								</Show>
+								<Show when={devices.isPending && !recordingPreparation()}>
+									<div
+										class="flex flex-none items-center px-3 py-2 mb-3 text-xs rounded-lg bg-gray-3 text-gray-11"
+										role="status"
+										aria-live="polite"
+									>
+										{text("Loading recording devices…")}
+									</div>
+								</Show>
+								<Show when={devices.isError && !recordingPreparation()}>
+									<div
+										class="flex flex-none gap-3 items-center px-3 py-2 mb-3 text-xs rounded-lg bg-amber-3 text-amber-11"
+										role="alert"
+									>
+										<span class="flex-1">
+											{text("Unable to load recording devices.")}
+										</span>
+										<button
+											type="button"
+											onClick={() => void devices.refetch()}
+											class="flex-none font-medium underline underline-offset-2 hover:no-underline"
+										>
+											{text("capture.tryAgain")}
+										</button>
+									</div>
+								</Show>
 								<Show
 									when={activeTargetMenu()}
 									fallback={
@@ -1026,6 +1205,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 															selected={rawOptions.targetMode === "display"}
 															Component={IconMdiMonitor}
 															onClick={() => void openTargetMode("display")}
+															disabled={recordingPreparation()}
 															name={text("Display")}
 															class="flex-1 pl-5 rounded-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
 														/>
@@ -1035,6 +1215,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 																"rounded-none border-l border-gray-6 focus-visible:ring-0 focus-visible:ring-offset-0",
 																displayMenuOpen() && "bg-gray-5",
 															)}
+															disabled={recordingPreparation()}
 															expanded={displayMenuOpen()}
 															onClick={() => {
 																setDisplayMenuOpen((prev) => {
@@ -1059,6 +1240,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 															selected={rawOptions.targetMode === "window"}
 															Component={IconLucideAppWindowMac}
 															onClick={() => void openTargetMode("window")}
+															disabled={recordingPreparation()}
 															name={text("Window")}
 															class="flex-1 pl-5 rounded-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
 														/>
@@ -1068,6 +1250,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 																"rounded-none border-l border-gray-6 focus-visible:ring-0 focus-visible:ring-offset-0",
 																windowMenuOpen() && "bg-gray-5",
 															)}
+															disabled={recordingPreparation()}
 															expanded={windowMenuOpen()}
 															onClick={() => {
 																setWindowMenuOpen((prev) => {
@@ -1097,7 +1280,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 
 											<div class="flex flex-col gap-2">
 												<CameraSelectBase
-													disabled={devices.isPending}
+													disabled={devices.isPending || recordingPreparation()}
 													options={cameras()}
 													value={selectedCamera()}
 													onChange={(camera) => {
@@ -1121,7 +1304,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 													iconClass="text-gray-10 size-4"
 												/>
 												<MicrophoneSelectBase
-													disabled={devices.isPending}
+													disabled={devices.isPending || recordingPreparation()}
 													options={mics()}
 													value={selectedMicName()}
 													onChange={(value) => {
@@ -1193,6 +1376,7 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 													variant="display"
 													targets={filteredDisplayTargets()}
 													isLoading={displayTargets.isPending}
+													disabled={recordingPreparation()}
 													errorMessage={
 														displayTargets.error
 															? text("Unable to load displays.")
@@ -1208,12 +1392,22 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 															: undefined
 													}
 												/>
+												<Show when={displayTargets.error}>
+													<button
+														type="button"
+														onClick={() => void displayTargets.refetch()}
+														class="mt-2 w-full text-xs font-medium underline underline-offset-2 text-gray-11 hover:text-gray-12 hover:no-underline"
+													>
+														{text("capture.tryAgain")}
+													</button>
+												</Show>
 											</Show>
 											<Show when={activeTargetMenu() === "window"}>
 												<TargetMenuGrid
 													variant="window"
 													targets={filteredWindowTargets()}
 													isLoading={windowTargets.isPending}
+													disabled={recordingPreparation()}
 													errorMessage={
 														windowTargets.error
 															? text("Unable to load windows.")
@@ -1227,6 +1421,15 @@ function ClipsSidebarInner(props: { open: boolean; class?: string }) {
 															: undefined
 													}
 												/>
+												<Show when={windowTargets.error}>
+													<button
+														type="button"
+														onClick={() => void windowTargets.refetch()}
+														class="mt-2 w-full text-xs font-medium underline underline-offset-2 text-gray-11 hover:text-gray-12 hover:no-underline"
+													>
+														{text("capture.tryAgain")}
+													</button>
+												</Show>
 											</Show>
 										</div>
 									</div>

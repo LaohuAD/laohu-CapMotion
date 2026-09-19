@@ -395,8 +395,11 @@ async getEditorMeta() : Promise<RecordingMeta> {
 async getRecordingMetaByPath(projectPath: string) : Promise<RecordingMeta> {
     return await TAURI_INVOKE("get_recording_meta_by_path", { projectPath });
 },
-async setEditorRecordingTarget(projectPath: string | null) : Promise<null> {
-    return await TAURI_INVOKE("set_editor_recording_target", { projectPath });
+async setEditorRecordingTarget(projectPath: string | null, ownerId?: string | null, requestId?: string | null) : Promise<null> {
+    return await TAURI_INVOKE("set_editor_recording_target", { projectPath, ownerId, requestId });
+},
+async clearEditorRecordingTarget(projectPath: string, ownerId?: string | null, requestId?: string | null) : Promise<null> {
+    return await TAURI_INVOKE("clear_editor_recording_target", { projectPath, ownerId, requestId });
 },
 async deleteRecordingDirectory(path: string) : Promise<null> {
     return await TAURI_INVOKE("delete_recording_directory", { path });

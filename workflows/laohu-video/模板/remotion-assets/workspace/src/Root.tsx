@@ -7,6 +7,7 @@ import {getComponentManifest} from "./registry/componentRegistry";
 import type {ComponentConfig} from "./schemas/components";
 import {scene001Examples} from "./configs/examples/scene001Examples";
 import {editorialOverlayExamples} from "./configs/examples/editorialOverlayExamples";
+import {flowNodeGraphExamples} from "./configs/examples/flowNodeGraphExamples";
 import {h3TutorialConfigs} from "./configs/works/h3Tutorial";
 
 const RegisteredScene: React.FC<ComponentConfig> = (props) => (
@@ -65,6 +66,25 @@ export const Root: React.FC = () => {
             <Composition
               key={sceneId}
               id={`Editorial-${sceneId}`}
+              component={RegisteredScene}
+              durationInFrames={config.durationInFrames}
+              fps={30}
+              width={1920}
+              height={1080}
+              schema={manifest.schema as ZodType<ComponentConfig>}
+              defaultProps={config}
+              calculateMetadata={calculateMetadata}
+            />
+          );
+        })}
+      </Folder>
+      <Folder name="Demo-Flow-Topology">
+        {Object.entries(flowNodeGraphExamples).map(([sceneId, config]) => {
+          const manifest = getComponentManifest(config.component);
+          return (
+            <Composition
+              key={sceneId}
+              id={`Flow-${sceneId}`}
               component={RegisteredScene}
               durationInFrames={config.durationInFrames}
               fps={30}

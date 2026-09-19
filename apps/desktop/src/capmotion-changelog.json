@@ -1,5 +1,17 @@
 [
 	{
+		"version": "0.1.5",
+		"publishedAt": "2026-09-19T00:00:00+08:00",
+		"title": {
+			"en": "More reliable recording handoff and semantic animation foundations",
+			"zh-CN": "更可靠的补录交接与语义动画基础"
+		},
+		"content": {
+			"en": "### Recording reliability\n\n- Keeps the recording setup visible while the editor prepares a new clip, with retry and recoverable failure states.\n- Serializes preparation and protects project identity during target binding and cleanup.\n- Reports target-overlay creation failures instead of treating a missing picker as success.\n\n### Animation foundations\n\n- Adds explicit semantic-anchor, relative-timing, topology-validation and reusable-case contracts to the Remotion workspace.\n- Keeps historical case feedback separate from current adoption decisions.\n- Makes component mode eligibility and cache integrity explicit, while preserving the existing Remotion rendering path.\n\n### Project workflow\n\n- Documents how to decide between reusable components and original compositions from visible object changes and causal relationships.",
+			"zh-CN": "### 补录可靠性\n\n- 编辑器准备补录片段时保持录制设置界面可见，并提供重试和可恢复的失败状态。\n- 串行执行准备流程，在录制目标绑定和清理时保护工程身份。\n- 录制目标窗口创建失败会明确返回，不再把窗口未出现当成成功。\n\n### 动画基础能力\n\n- Remotion workspace 增加明确的语义锚点、相对节拍、拓扑校验和可复用案例契约。\n- 历史案例反馈与当前采用判断分开保存。\n- 明确组件模式可选范围和缓存完整性，同时保留现有 Remotion 渲染路径。\n\n### 项目流程\n\n- 补充根据可见对象变化和因果关系，在可复用组件与原创 Composition 之间做选择的方法。"
+		}
+	},
+	{
 		"version": "0.1.4",
 		"publishedAt": "2026-09-13T00:00:00+08:00",
 		"title": {

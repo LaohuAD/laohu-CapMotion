@@ -48,6 +48,7 @@ export const editorialOverlayExamples: Record<
   | "evolutionProof"
   | "fourLayerStack"
   | "surfaceVsSystem"
+  | "beforeAfter"
   | "chapterProgress"
   | "evidenceCheckpoint"
   | "conceptLabels"
@@ -149,6 +150,28 @@ export const editorialOverlayExamples: Record<
       {id: "qa", label: "行为回归", status: "positive"},
     ]),
     highlightOrder: ["color", "effect", "chain", "qa"],
+  },
+  beforeAfter: {
+    ...overlayBase,
+    component: "CompareTransform",
+    mode: "before-after",
+    placement: "right",
+    accentRole: "info",
+    kicker: "CONTENT / BEFORE → AFTER",
+    title: "从歌词起点，改成选题起点",
+    subtitle: "先锁定人群、情绪和场景，再决定画面与标题",
+    conclusion: "先确定观众要被表达什么，再进入制作",
+    communicationGoal: "compare",
+    emotionalTone: "clear",
+    informationShape: "transformation",
+    durationInFrames: 270,
+    items: sourcedItems("场景-08：选题公式", [
+      {id: "before-audience", label: "先写歌词", description: "还没有锁定具体听众"},
+      {id: "before-visual", label: "后补画面", description: "画面和标题缺少共同主题"},
+      {id: "after-audience", label: "先锁人群与情绪", description: "明确谁需要这首歌替他说话", status: "positive"},
+      {id: "after-scene", label: "再定场景与前三秒", description: "画面和发布标题共同服务主题", status: "positive"},
+    ]),
+    highlightOrder: ["before-audience", "before-visual", "after-audience", "after-scene"],
   },
   chapterProgress: {
     ...overlayBase,

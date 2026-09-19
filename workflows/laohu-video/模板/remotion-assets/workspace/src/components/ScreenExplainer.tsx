@@ -9,7 +9,7 @@ import {compactTypography, getVisualTheme} from "../visual/theme";
 export const ScreenExplainer: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   return (
     <SceneStage config={config}>
       <SceneHeader config={config} kicker="SCREEN / ANNOTATE" />
@@ -56,6 +56,7 @@ export const ScreenExplainer: React.FC<{config: ComponentConfig}> = ({config}) =
                   config.items.length,
                   timing.buildEnd,
                   item.revealAtFrame,
+                  item.actionDurationFrames,
                 ),
               }}
             >

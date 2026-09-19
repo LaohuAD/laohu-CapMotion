@@ -204,8 +204,15 @@ export const ItemCard: React.FC<{
 }> = ({item, index, count, config, style}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
-  const timing = buildSceneTiming(config.durationInFrames);
-  const progress = enterProgress(frame, index, count, timing.buildEnd, item.revealAtFrame);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
+  const progress = enterProgress(
+    frame,
+    index,
+    count,
+    timing.buildEnd,
+    item.revealAtFrame,
+    item.actionDurationFrames,
+  );
   const color =
     item.status === "negative"
       ? theme.danger
@@ -260,7 +267,7 @@ export const ItemCard: React.FC<{
 export const ConclusionBar: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   if (!config.conclusion) return null;
   const progress = interpolate(frame, [timing.buildEnd, timing.resolveEnd], [0, 1], {
     easing: Easing.bezier(0.16, 1, 0.3, 1),

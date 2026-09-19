@@ -22,7 +22,7 @@ export const DataStoryChart: React.FC<{config: ComponentConfig}> = ({config}) =>
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
   const accent = resolveSemanticAccent(config.stylePreset, config.accentRole ?? "info");
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   const values = config.items.map((item, index) => item.value ?? (index + 1) * 20);
   const max = Math.max(...values, 1);
   const chartProgress = interpolate(frame, [timing.introduceEnd, timing.buildEnd], [0, 1], {
@@ -78,7 +78,7 @@ export const DataStoryChart: React.FC<{config: ComponentConfig}> = ({config}) =>
             ) : presentation === "dashboard" ? (
               <div style={{height: getChartHeight(config.presentation), display: "grid", gridTemplateColumns: `repeat(${config.items.length}, 1fr)`, gap: 12}}>
                 {config.items.map((item, index) => (
-                  <div key={item.id} style={{display: "flex", flexDirection: "column", justifyContent: "center", opacity: enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame)}}>
+                  <div key={item.id} style={{display: "flex", flexDirection: "column", justifyContent: "center", opacity: enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames)}}>
                     <div style={{...typeStyles.number, fontSize: 38, color: accent}}>{item.result ?? item.label}</div>
                     <div style={{...typeStyles.body, fontSize: 20, color: theme.muted, marginTop: 10}}>{item.description}</div>
                   </div>
@@ -87,7 +87,7 @@ export const DataStoryChart: React.FC<{config: ComponentConfig}> = ({config}) =>
             ) : (
               <div style={{height: getChartHeight(config.presentation), display: "flex", alignItems: "flex-end", gap: 18}}>
                 {config.items.map((item, index) => {
-                  const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
+                  const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames);
                   const height = 210 * (values[index] / max) * progress;
                   return (
                     <div key={item.id} style={{flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", height: "100%"}}>
@@ -125,7 +125,7 @@ export const DataStoryChart: React.FC<{config: ComponentConfig}> = ({config}) =>
           <div style={{height: 520, display: "grid", gridTemplateRows: "1fr auto", gap: 32}}>
             <div style={{display: "grid", gridTemplateColumns: `repeat(${config.items.length}, 1fr)`, gap: 28}}>
               {config.items.map((item, index) => (
-                <Surface key={item.id} theme={theme} active={item.status === "active"} style={{padding: 34, display: "flex", flexDirection: "column", justifyContent: "center", opacity: enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame)}}>
+                  <Surface key={item.id} theme={theme} active={item.status === "active"} style={{padding: 34, display: "flex", flexDirection: "column", justifyContent: "center", opacity: enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames)}}>
                   <div style={{...typeStyles.number, fontSize: 72, color: theme.accent}}>{item.label.split(" ")[0]}</div>
                   <div style={{...typeStyles.cardTitle, fontSize: 38, marginTop: 18}}>{item.label.split(" ").slice(1).join(" ")}</div>
                   <div style={{...typeStyles.body, fontSize: 30, color: theme.muted, marginTop: 18}}>{item.description}</div>
@@ -178,7 +178,7 @@ export const DataStoryChart: React.FC<{config: ComponentConfig}> = ({config}) =>
         ) : (
           <div style={{height: 410, display: "flex", alignItems: "flex-end", gap: 28, padding: "20px 30px"}}>
             {config.items.map((item, index) => {
-              const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
+              const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames);
               return (
                 <div key={item.id} style={{flex: 1, textAlign: "center"}}>
                   <div style={{...typeStyles.number, fontSize: 36, color: theme.accent}}>{values[index]}</div>

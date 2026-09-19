@@ -3490,8 +3490,21 @@ async fn get_recording_meta_by_path(project_path: PathBuf) -> Result<RecordingMe
 async fn set_editor_recording_target(
     app: AppHandle,
     project_path: Option<PathBuf>,
+    owner_id: Option<String>,
+    request_id: Option<String>,
 ) -> Result<(), String> {
-    EditorRecordingTarget::set(&app, project_path);
+    EditorRecordingTarget::set(&app, project_path, owner_id, request_id)
+}
+
+#[tauri::command]
+#[specta::specta]
+async fn clear_editor_recording_target(
+    app: AppHandle,
+    project_path: PathBuf,
+    owner_id: Option<String>,
+    request_id: Option<String>,
+) -> Result<(), String> {
+    EditorRecordingTarget::clear_if_matches(&app, &project_path, owner_id, request_id);
     Ok(())
 }
 #[tauri::command]
@@ -5464,6 +5477,7 @@ fn specta_builder() -> tauri_specta::Builder {
             get_editor_meta,
             get_recording_meta_by_path,
             set_editor_recording_target,
+            clear_editor_recording_target,
             delete_recording_directory,
             set_pretty_name,
             set_server_url,

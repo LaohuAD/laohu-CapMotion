@@ -9,14 +9,21 @@ import {getVisualTheme} from "../visual/theme";
 export const FormTemplateBuilder: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   return (
     <SceneStage config={config}>
       <SceneHeader config={config} kicker="FILL / BUILD / OUTPUT" />
       <div style={{display: "grid", gridTemplateColumns: "1.35fr 0.65fr", gap: 42, marginTop: 24, height: 620}}>
         <Surface theme={theme} style={{padding: "28px 34px"}}>
           {config.items.map((item, index) => {
-            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
+            const progress = enterProgress(
+              frame,
+              index,
+              config.items.length,
+              timing.buildEnd,
+              item.revealAtFrame,
+              item.actionDurationFrames,
+            );
             const typed = Math.max(0, Math.floor((item.description?.length ?? 0) * progress));
             return (
               <div key={item.id} style={{display: "grid", gridTemplateColumns: "260px 1fr 54px", gap: 22, alignItems: "center", minHeight: 106, borderBottom: `2px solid ${theme.line}`, opacity: progress}}>

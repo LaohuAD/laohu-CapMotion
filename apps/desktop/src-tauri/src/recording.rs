@@ -75,7 +75,8 @@ use crate::{
     upload::{InstantMultipartUpload, SegmentUploader, compress_image},
     web_api::ManagerExt,
     windows::{
-        CapWindowId, EditorRecordingTarget, ShowCapWindow, editor_window_for_path, hide_overlay,
+        CapWindowId, EditorRecordingTarget, EditorRecordingTargetLease, ShowCapWindow,
+        editor_window_for_path, hide_overlay,
     },
 };
 
@@ -1454,6 +1455,53 @@ fn notify_recording_start_failed(app: &AppHandle, error: &str) {
     .emit(app);
 }
 
+fn restore_editor_recording_window(app: &AppHandle, project_path: &Path) {
+    let Some(editor_window) = editor_window_for_path(app, project_path) else {
+        warn!(project_path = %project_path.display(), "Editor recording target window is no longer available");
+        return;
+    };
+
+    if let Err(error) = editor_window.unminimize() {
+        warn!(%error, "Failed to unminimize editor after recording");
+    }
+    if let Err(error) = editor_window.show() {
+        warn!(%error, "Failed to show editor after recording");
+    }
+    if let Err(error) = editor_window.set_focus() {
+        warn!(%error, "Failed to focus editor after recording");
+    }
+}
+
+struct EditorRecordingStartGuard {
+    app: AppHandle,
+    lease: Option<EditorRecordingTargetLease>,
+}
+
+impl EditorRecordingStartGuard {
+    fn new(app: &AppHandle, lease: Option<EditorRecordingTargetLease>) -> Self {
+        Self {
+            app: app.clone(),
+            lease,
+        }
+    }
+
+    fn disarm(&mut self) {
+        self.lease = None;
+    }
+}
+
+impl Drop for EditorRecordingStartGuard {
+    fn drop(&mut self) {
+        let Some(lease) = self.lease.take() else {
+            return;
+        };
+
+        if let Some(lease) = EditorRecordingTarget::take_active_if_matches(&self.app, &lease) {
+            restore_editor_recording_window(&self.app, &lease.project_path);
+        }
+    }
+}
+
 fn recording_start_mode_error(mode: RecordingMode, authenticated: bool) -> Option<&'static str> {
     match mode {
         RecordingMode::Instant if !authenticated => Some("Please sign in to use instant recording"),
@@ -1869,6 +1917,14 @@ async fn start_recording_with_camera_lock(
             app_state.was_camera_only_recording = true;
         }
     }
+
+    // Promote the editor's pending lease before any asynchronous recording
+    // setup. Once promoted, another editor (or a legacy null clear) cannot
+    // replace it while this recording is being started or finished.
+    let mut editor_recording_start_guard = EditorRecordingStartGuard::new(
+        &app,
+        EditorRecordingTarget::begin_recording(&app),
+    );
 
     let instant_auth = if matches!(inputs.mode, RecordingMode::Instant) {
         AuthStore::get(&app).ok().flatten()
@@ -2529,6 +2585,10 @@ async fn start_recording_with_camera_lock(
         }
     };
 
+    // The active recording now owns the native handoff. Its finish/cancel
+    // paths take the lease; the start-failure guard must no longer do so.
+    editor_recording_start_guard.disarm();
+
     if matches!(inputs.mode, RecordingMode::Studio) {
         spawn_current_desktop_background_snapshot(
             project_file_path.clone(),
@@ -3071,8 +3131,9 @@ where
 async fn cancel_discarded_recording(
     app: &AppHandle,
     recording: InProgressRecording,
+    preserve_editor_target: bool,
 ) -> Option<String> {
-    match recording {
+    let result = match recording {
         InProgressRecording::Instant {
             handle,
             segment_upload,
@@ -3105,7 +3166,15 @@ async fn cancel_discarded_recording(
 
             None
         }
+    };
+
+    if !preserve_editor_target
+        && let Some(editor_lease) = EditorRecordingTarget::take_active(app)
+    {
+        restore_editor_recording_window(app, &editor_lease.project_path);
     }
+
+    result
 }
 
 async fn remove_recording_dir(recording_dir: &Path) -> Result<(), String> {
@@ -3142,7 +3211,7 @@ async fn delete_remote_instant_video(app: &AppHandle, video_id: &str) -> Result<
 
 async fn discard_recording(app: &AppHandle, recording: InProgressRecording) -> Result<(), String> {
     let recording_dir = recording.recording_dir().clone();
-    let video_id = cancel_discarded_recording(app, recording).await;
+    let video_id = cancel_discarded_recording(app, recording, false).await;
     let local_delete = remove_recording_dir(&recording_dir).await;
     let remote_delete = if let Some(video_id) = video_id {
         delete_remote_instant_video(app, &video_id).await
@@ -3219,7 +3288,7 @@ pub async fn restart_recording(
     // Cleanup of the discarded recording must not block or abort the restart:
     // the old recording is already cancelled at this point, and the new one
     // writes to a fresh directory.
-    if let Some(video_id) = cancel_discarded_recording(&app, recording).await {
+    if let Some(video_id) = cancel_discarded_recording(&app, recording, true).await {
         let app = app.clone();
         tokio::spawn(async move {
             if let Err(err) = delete_remote_instant_video(&app, &video_id).await {
@@ -3659,12 +3728,8 @@ async fn handle_recording_end(
     // Using `take()` (not `current()`) here is deliberate: it restores the
     // editor window AND clears any stale target so it can't leak into the next
     // recording session.
-    if let Some(editor_path) = EditorRecordingTarget::take(&handle)
-        && let Some(editor_window) = editor_window_for_path(&handle, &editor_path)
-    {
-        let _ = editor_window.unminimize();
-        let _ = editor_window.show();
-        let _ = editor_window.set_focus();
+    if let Some(editor_lease) = EditorRecordingTarget::take_active(&handle) {
+        restore_editor_recording_window(&handle, &editor_lease.project_path);
     }
 
     CurrentRecordingChanged.emit(&handle).ok();
@@ -3696,12 +3761,9 @@ async fn apply_post_studio_editor_behaviour(
     recording_dir: PathBuf,
     duration_secs: f64,
 ) -> bool {
-    if let Some(editor_path) = EditorRecordingTarget::take(app) {
-        if let Some(editor_window) = editor_window_for_path(app, &editor_path) {
-            let _ = editor_window.unminimize();
-            let _ = editor_window.show();
-            let _ = editor_window.set_focus();
-        }
+    if let Some(editor_lease) = EditorRecordingTarget::take_active(app) {
+        let editor_path = editor_lease.project_path;
+        restore_editor_recording_window(app, &editor_path);
 
         let _ = EditorRecordingAdded {
             editor_path,

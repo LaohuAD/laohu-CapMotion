@@ -9,7 +9,7 @@ import {getVisualTheme} from "../visual/theme";
 export const TimelineRoadmap: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   const lineProgress = interpolate(frame, [timing.introduceEnd, timing.buildEnd], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
@@ -32,7 +32,14 @@ export const TimelineRoadmap: React.FC<{config: ComponentConfig}> = ({config}) =
         </div>
         <div style={{display: "grid", gridTemplateColumns: `repeat(${config.items.length}, 1fr)`, gap: 20}}>
           {config.items.map((item, index) => {
-            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
+            const progress = enterProgress(
+              frame,
+              index,
+              config.items.length,
+              timing.buildEnd,
+              item.revealAtFrame,
+              item.actionDurationFrames,
+            );
             return (
               <div key={item.id} style={{textAlign: "center", opacity: progress}}>
                 <div style={{fontSize: 30, fontWeight: 900, color: theme.accent}}>

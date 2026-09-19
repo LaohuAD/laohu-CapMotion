@@ -43,7 +43,7 @@ export const KineticStatement: React.FC<{config: ComponentConfig}> = ({config}) 
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
   const accent = resolveSemanticAccent(config.stylePreset, config.accentRole ?? "info");
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   const titleProgress = interpolate(frame, [0, timing.introduceEnd], [0, 1], {
     easing: Easing.bezier(0.16, 1, 0.3, 1),
     extrapolateLeft: "clamp",
@@ -97,6 +97,7 @@ export const KineticStatement: React.FC<{config: ComponentConfig}> = ({config}) 
                 config.items.length,
                 timing.buildEnd,
                 item.revealAtFrame,
+                item.actionDurationFrames,
               );
               return (
                 <Surface
@@ -195,7 +196,10 @@ export const KineticStatement: React.FC<{config: ComponentConfig}> = ({config}) 
             const progress = item.revealAtFrame === undefined
               ? interpolate(
                   frame,
-                  [timing.introduceEnd + index * 8, timing.introduceEnd + index * 8 + 18],
+                  [
+                    timing.introduceEnd + index * 8,
+                    timing.introduceEnd + index * 8 + (item.actionDurationFrames ?? 18),
+                  ],
                   [0, 1],
                   {extrapolateLeft: "clamp", extrapolateRight: "clamp"},
                 )
@@ -205,6 +209,7 @@ export const KineticStatement: React.FC<{config: ComponentConfig}> = ({config}) 
                   config.items.length,
                   timing.buildEnd,
                   item.revealAtFrame,
+                  item.actionDurationFrames,
                 );
             return (
               <div

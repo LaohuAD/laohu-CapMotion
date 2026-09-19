@@ -16,7 +16,7 @@ export const getRiskRows = (items: VisualItem[]) =>
 export const RiskActionLoop: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   const rows = getRiskRows(config.items);
   return (
     <SceneStage config={config}>
@@ -37,6 +37,7 @@ export const RiskActionLoop: React.FC<{config: ComponentConfig}> = ({config}) =>
               rows.length,
               timing.buildEnd,
               config.items[index].revealAtFrame,
+              config.items[index].actionDurationFrames,
             );
             return (
               <div key={config.items[index].id} style={{display: "grid", gridTemplateColumns: "1fr 54px 1fr 54px 0.8fr", gap: 14, alignItems: "center", opacity: progress}}>

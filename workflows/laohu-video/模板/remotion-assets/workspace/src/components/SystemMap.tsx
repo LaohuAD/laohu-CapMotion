@@ -13,7 +13,7 @@ const positions = [
 export const SystemMap: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   return (
     <SceneStage config={config}>
       <SceneHeader config={config} kicker="SYSTEM / RELATION" />
@@ -21,7 +21,7 @@ export const SystemMap: React.FC<{config: ComponentConfig}> = ({config}) => {
         <svg width="100%" height="100%" style={{position: "absolute", inset: 0}}>
           {config.items.map((item, index) => {
             const [x, y] = positions[index] ?? positions[index % positions.length];
-            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
+            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames);
             return (
               <line
                 key={`line-${item.id}`}
@@ -62,7 +62,7 @@ export const SystemMap: React.FC<{config: ComponentConfig}> = ({config}) => {
         </Surface>
         {config.items.map((item, index) => {
           const [x, y] = positions[index] ?? positions[index % positions.length];
-          const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
+          const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame, item.actionDurationFrames);
           return (
             <Surface
               key={item.id}

@@ -34,6 +34,31 @@ const knowledgeVisual = {
   audioSyncTest: "口播说到对应语义时才触发变化",
 };
 
+const standaloneKnowledgeVisual = {
+  contractId: "standalone-001",
+  claim: "一份资料先拆成片段，再筛选并合成为回答",
+  viewerBefore: "观众只看到一个资料卡片",
+  viewerAfter: "观众能看出片段状态变化和来源汇合",
+  knowledgeType: "PROCESS" as const,
+  entities: ["原始资料", "资料片段", "可追溯回答"],
+  initialState: "一份资料尚未拆解",
+  interaction: "资料拆成片段并按问题筛选",
+  stateChanges: ["片段进入待筛选", "保留片段进入回答"],
+  resultState: "回答保留来源关系",
+  viewerInference: "回答不是凭空生成，而是由保留片段合成",
+  relativeEvents: [
+    {atFrame: 0, event: "原始资料进入画面"},
+    {atFrame: 60, event: "资料分成片段"},
+    {atFrame: 120, event: "保留片段汇成回答"},
+  ],
+  labelPlan: [
+    {text: "原始资料", target: "资料", responsibility: "身份" as const},
+    {text: "保留", target: "片段", responsibility: "结果" as const},
+  ],
+  cameraPurpose: "固定视窗看清资料的拆分、筛选和汇合",
+  silentTest: "静音仍能看出对象、状态变化和来源汇合",
+};
+
 const overlayContinuity = {
   groupId: "chapter-two-pass",
   order: 1,
@@ -66,6 +91,93 @@ const aiHostCompatibility = {
 };
 
 describe("animation director schemas", () => {
+  it("accepts a standalone animation with explicit relative timing and no narration", () => {
+    const result = animationBriefSchema.parse({
+      contentMode: "standalone",
+      timingMode: "relative",
+      durationInFrames: 180,
+      userRequest: "展示一个独立的节点关系动画",
+      outputMode: "standalone",
+      referenceDocs: ["/project/input/source.md"],
+      narrative: {
+        purpose: "UNDERSTAND",
+        viewerBefore: "观众还看不出资料如何变成回答",
+        viewerAfter: "观众能复述资料拆分、筛选和汇合",
+        whyThisMedium: "需要同时看到对象状态和来源关系",
+        handoffIn: "承接一份资料进入处理",
+        handoffOut: "交给可追溯回答",
+      },
+      knowledgeVisual: standaloneKnowledgeVisual,
+      annotation: {
+        object: "节点关系",
+        relationship: "输入经过处理形成结果",
+        entrance: "节点按拓扑层级进入",
+        change: "连接边逐条建立",
+        resolutionFrame: "完整关系保持可读",
+        materials: ["/project/input/source.md"],
+        acceptance: ["不依赖口播仍能读出关系"],
+      },
+    });
+
+    expect(result.contentMode).toBe("standalone");
+    expect(result.asrPath).toBeUndefined();
+    expect(result.overlayContinuity).toBeUndefined();
+    expect(result.narrative.purpose).toBe("UNDERSTAND");
+    expect(result.knowledgeVisual).toMatchObject({claim: standaloneKnowledgeVisual.claim});
+  });
+
+  it("rejects the removed inputMode compatibility alias", () => {
+    expect(() => animationBriefSchema.parse({
+      inputMode: "standalone",
+      contentMode: "standalone",
+      timingMode: "relative",
+      durationInFrames: 180,
+      userRequest: "独立展示一个图",
+      outputMode: "standalone",
+      narrative: {
+        purpose: "TRANSITION",
+        viewerBefore: "上一段结束",
+        viewerAfter: "下一段开始",
+        whyThisMedium: "需要一个停点",
+        handoffIn: "承接上一段",
+        handoffOut: "交给下一段",
+      },
+      annotation: {
+        object: "章节标题",
+        relationship: "章节交接",
+        entrance: "标题进入",
+        change: "标题停留",
+        resolutionFrame: "标题可读",
+        materials: ["source"],
+        acceptance: ["静音可读"],
+      },
+    })).toThrow(/Unrecognized key|inputMode/i);
+  });
+
+  it("does not infer narration from outputMode alone", () => {
+    expect(() => animationBriefSchema.parse({
+      userRequest: "独立展示一个图",
+      outputMode: "standalone",
+      narrative: {
+        purpose: "TRANSITION",
+        viewerBefore: "上一段结束",
+        viewerAfter: "下一段开始",
+        whyThisMedium: "章节交接",
+        handoffIn: "上一段",
+        handoffOut: "下一段",
+      },
+      annotation: {
+        object: "节点",
+        relationship: "输入到输出",
+        entrance: "逐个进入",
+        change: "建立连接",
+        resolutionFrame: "结果停留",
+        materials: ["source"],
+        acceptance: ["关系清楚"],
+      },
+    })).toThrow(/asrPath|relative timing|timingMode/i);
+  });
+
   it("accepts a traceable ASR animation brief", () => {
     const result = animationBriefSchema.parse({
       asrPath: "/project/input/talk.srt",
@@ -95,6 +207,8 @@ describe("animation director schemas", () => {
     });
 
     expect(result.outputMode).toBe("standalone");
+    expect(result.timeRange).toBeDefined();
+    if (!result.timeRange) throw new Error("expected a source time range");
     expect(result.timeRange.end - result.timeRange.start).toBe(18);
   });
 
@@ -322,6 +436,7 @@ describe("editorial overlay schema", () => {
     const firstItem = manifest.defaultProps.items[0];
     const result = manifest.schema.parse({
       ...manifest.defaultProps,
+      links: [{from: firstItem.id, to: "second"}],
       items: [
         {...firstItem, revealAtFrame: 36},
         {...firstItem, id: "second", label: "第二个语义点", revealAtFrame: 92},

@@ -10,7 +10,13 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "compositions": "remotion compositions src/index.ts"
+    "compositions": "remotion compositions src/index.ts",
+    "semantic:anchors": "node --experimental-strip-types scripts/semantic-anchors.mjs",
+    "semantic:index": "node --experimental-strip-types scripts/semantic-retrieval.mjs index",
+    "semantic:search": "node --experimental-strip-types scripts/semantic-retrieval.mjs search",
+    "render:cached": "node --experimental-strip-types scripts/render-with-cache.mjs",
+    "test:cli": "node --experimental-strip-types --test scripts/*.node.mjs",
+    "test:all": "npm run test && npm run test:cli"
   },
   "dependencies": {
     "@remotion/cli": "4.0.489",

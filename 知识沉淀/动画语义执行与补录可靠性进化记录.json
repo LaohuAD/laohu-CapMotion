@@ -1,0 +1,96 @@
+{
+  "symptom": "语义设计和组件注册声明不能保证实际画面执行；补录准备与窗口创建缺少可靠失败恢复。",
+  "triggerScope": "PROJECT_CAPABILITY",
+  "earliestFailure": "把声明的模式、命令返回成功和元数据存在，当作画面、窗口与时序已经生效。",
+  "rootLayer": "STRUCTURE",
+  "hypothesis": "在既有 Remotion 与 Cap 工程契约内接通语义引用、真实组件行为、产物完整性与补录交接，可以提高复用可靠性；无需更换动画引擎。",
+  "protection": [
+    "不修改用户作品、已安装独立版、交付版本或 Release。",
+    "保留冻结 EDL 的唯一时间权威，纯动画显式使用相对时间。",
+    "历史认可与当前采用分开，检索不构成制作批准。",
+    "不把自动化测试通过当成用户审美或真实硬件验收。"
+  ],
+  "authorityPath": ".agents/skills/laohu-animation-director/SKILL.md",
+  "change": "已更新导演与进化Skill，并保留当前代码改动；按用户范围纠正停止样例精修与新增派工，未完成集成保持待验证。",
+  "decisionChanges": [
+    "保留 Remotion；不迁移 HyperFrames，不升级 GSAP 依赖。",
+    "先修已有组件实际能力，再限制未实现模式的自动推荐。",
+    "源时间引用必须携带身份与映射修订，拒绝重复、删除及过期歧义。",
+    "保留已有 native cache，补完整性与实例归属；独立渲染包装器不替代 Cap 工程接口。"
+  ],
+  "regressions": {
+    "current": [
+      "补录准备失败/取消/重复点击与窗口交接；新拓扑、语义解析、缓存行为测试。"
+    ],
+    "legacy": [
+      "H3 配置、旧线性流程、现有字幕/预设/工程路由。"
+    ],
+    "adjacent": [
+      "无口播独立动画、跨工程补录归属、Windows 共享契约与 CI。"
+    ]
+  },
+  "evidence": [
+    "原始讨论：chatgpt-conversation://6aac08a1-7900-83eb-85e6-a14bb4f5e5c2",
+    "基线 f3f241480；初始 workspace 42 tests 通过；cap-motion-cli 5 tests 通过。",
+    "首次改版 topology 67 tests 通过，但真实 Flow-loop 截帧发现反馈线隐藏，拒绝按测试结果直接验收。",
+    "桌面 cargo check 在现有 target 完成，首次通过耗时5m23s；后续原生修改仍需再次检查。"
+  ],
+  "rollback": "按职责回退当前变更；不重置用户未提交文件。声明与实现不一致时先停止自动选用该模式，保留显式旧配置兼容。",
+  "validation": {
+    "STRUCTURE": "PASS",
+    "ROUTE": "OBSERVE",
+    "BEHAVIOR": "OBSERVE",
+    "QUALITY": "UNKNOWN"
+  },
+  "decision": "OBSERVE",
+  "knowledgeActivations": [
+    {
+      "asset": "Hypit skills/hypit/references/production/timing.md",
+      "trigger": "核实语义映射是否依赖另一个动画引擎",
+      "judgment": "语义触发位置与 authored 动作时长可分离",
+      "decision": "在当前 Remotion 组件内实现语义到相对帧适配，不迁移引擎",
+      "result": "共享 workspace 语义工具与组件计时",
+      "notUsed": "未复制实现代码、皮肤、完整 Skill 或 HyperFrames 工作流"
+    },
+    {
+      "asset": "组件设计方法论与动画导演规则",
+      "trigger": "注册模式不等于实际画面能力",
+      "judgment": "按真实关系与行为选择组件，特殊叙事保留作品专属 Composition",
+      "decision": "增加模式可选范围、真实画面回归及原创过程样例",
+      "result": "registry、组件行为、导演路由",
+      "notUsed": "不把常见组件变成全部原创动画的固定形式"
+    }
+  ],
+  "scopeCorrection": {
+    "trigger": "用户指出架构与长期能力优化被扩大成具体效果反复打磨，浪费额度",
+    "earliestFailure": "主控把真实作品级视觉验收套用到架构能力建设，没有先用Skill固化判断并设置最小验证停止条件",
+    "correctAction": "停止效果细化与新增派工；拆分、筛选、组合、传递、反馈的判断写入现有动画导演Skill；进化Skill增加架构任务的最小验证和额度边界",
+    "prohibited": "不以还能更漂亮为由继续样片渲染、效果实现和循环派工",
+    "exception": "真实作品获准制作时仍执行原有画面验收；确定性接口故障允许局部修复",
+    "authority": [
+      ".agents/skills/laohu-animation-director/SKILL.md",
+      ".agents/skills/laohu-video-evolution/SKILL.md"
+    ],
+    "cancelledPackets": [
+      "20260919101822-9e15cf3e",
+      "20260919102317-e5629516",
+      "20260919101950-70833a56"
+    ],
+    "cancelOutcome": "用户调整范围后SIGINT主动停止；codex exit 1 / launcher exit 2，未重试，不视为完成",
+    "notDispatched": [
+      "20260919100055-e1c1a11c",
+      "20260919100056-50d78a07"
+    ],
+    "removed": "未完成的OriginalObjectProcess演示及注册入口",
+    "remaining": "已有代码仅作中断后的编译和基础回归收口；真实GUI录制、完整语义集成与原生缓存加固未验收，不能声称所有优化完成"
+  },
+  "closeoutChecks": {
+    "desktopCargoCheck": "PASS",
+    "desktopTypecheck": "PASS",
+    "recordingFlowTests": "7 PASS",
+    "workspaceTypecheck": "PASS",
+    "workspaceTests": "71 PASS",
+    "cliTests": "5 PASS",
+    "scope": "中断后的编译与基础回归，不代表完整集成、GUI录制或审美验收"
+  }
+}

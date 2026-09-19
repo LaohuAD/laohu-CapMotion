@@ -9,14 +9,21 @@ import {getVisualTheme} from "../visual/theme";
 export const FunnelJourney: React.FC<{config: ComponentConfig}> = ({config}) => {
   const frame = useCurrentFrame();
   const theme = getVisualTheme(config.stylePreset);
-  const timing = buildSceneTiming(config.durationInFrames);
+  const timing = buildSceneTiming(config.durationInFrames, config.items);
   return (
     <SceneStage config={config}>
       <SceneHeader config={config} kicker="FUNNEL / JOURNEY" />
       <div style={{display: "grid", gridTemplateColumns: "1.15fr 0.85fr", gap: 54, marginTop: 18, height: 640}}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: 12, paddingTop: 16}}>
           {config.items.map((item, index) => {
-            const progress = enterProgress(frame, index, config.items.length, timing.buildEnd, item.revealAtFrame);
+            const progress = enterProgress(
+              frame,
+              index,
+              config.items.length,
+              timing.buildEnd,
+              item.revealAtFrame,
+              item.actionDurationFrames,
+            );
             const width = 100 - index * (48 / Math.max(1, config.items.length - 1));
             return (
               <div

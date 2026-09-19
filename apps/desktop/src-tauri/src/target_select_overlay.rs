@@ -13,7 +13,7 @@ use crate::{
     App, ArcLock, general_settings,
     recording_settings::RecordingTargetMode,
     window_exclusion::WindowExclusion,
-    windows::{CapWindowId, ShowCapWindow, hide_overlay, show_overlay},
+    windows::{CapWindowId, ShowCapWindow, hide_overlay},
 };
 use scap_targets::{
     Display, DisplayId, Window, WindowId,
@@ -59,8 +59,6 @@ pub async fn open_target_select_overlays(
     specific_display_id: Option<String>,
     target_mode: Option<RecordingTargetMode>,
 ) -> Result<(), String> {
-    let start = Instant::now();
-
     let resolved_specific_display_id = specific_display_id.as_ref().map(|id_str| {
         id_str
             .parse::<DisplayId>()
@@ -112,37 +110,45 @@ pub async fn open_target_select_overlays(
         .get(&app);
 
         if let Some(window) = existing_window {
-            show_overlay(&window);
+            show_target_select_overlay(&window).map_err(|error| {
+                close_target_select_overlay_windows(&app);
+                format!("Failed to show target select overlay for {display_id}: {error}")
+            })?;
+
+            if let Err(error) = wait_for_target_select_overlay_ready(&window).await {
+                close_target_select_overlay_windows(&app);
+                return Err(format!(
+                    "Target select overlay for {display_id} was not ready: {error}"
+                ));
+            }
 
             if should_focus {
                 focus_target_select_overlay(&window);
             }
 
             state.spawn(display_id, window.clone());
-        } else if start.elapsed() < Duration::from_secs(1) {
-            if let Ok(window) = (ShowCapWindow::TargetSelectOverlay {
+        } else {
+            let window = (ShowCapWindow::TargetSelectOverlay {
                 display_id: display_id.clone(),
                 target_mode,
             })
             .show(&app)
             .await
-            {
-                finish_created_target_select_overlay(&window, should_focus);
+            .map_err(|error| {
+                close_target_select_overlay_windows(&app);
+                format!("Failed to create target select overlay for {display_id}: {error}")
+            })?;
+
+            if let Err(error) = wait_for_target_select_overlay_ready(&window).await {
+                close_target_select_overlay_windows(&app);
+                return Err(format!(
+                    "Target select overlay for {display_id} was not ready: {error}"
+                ));
             }
-        } else {
-            let app_clone = app.clone();
-            let display_id_clone = display_id.clone();
-            tokio::spawn(async move {
-                if let Ok(window) = (ShowCapWindow::TargetSelectOverlay {
-                    display_id: display_id_clone,
-                    target_mode,
-                })
-                .show(&app_clone)
-                .await
-                {
-                    finish_created_target_select_overlay(&window, should_focus);
-                }
-            });
+
+            if should_focus {
+                focus_target_select_overlay(&window);
+            }
         }
     }
 
@@ -215,25 +221,38 @@ pub async fn open_target_select_overlays(
     Ok(())
 }
 
-fn finish_created_target_select_overlay(window: &WebviewWindow, should_focus: bool) {
-    #[cfg(target_os = "macos")]
-    let _ = (window, should_focus);
+fn show_target_select_overlay(window: &WebviewWindow) -> Result<(), String> {
+    window
+        .set_ignore_cursor_events(false)
+        .map_err(|error| error.to_string())?;
+    window.show().map_err(|error| error.to_string())
+}
 
-    #[cfg(not(target_os = "macos"))]
-    {
-        window.show().ok();
-        if should_focus {
-            focus_target_select_overlay(window);
+async fn wait_for_target_select_overlay_ready(window: &WebviewWindow) -> Result<(), String> {
+    let deadline = Instant::now() + Duration::from_secs(2);
+
+    loop {
+        match window.is_visible() {
+            Ok(true) => return Ok(()),
+            Ok(false) if Instant::now() < deadline => {
+                tokio::time::sleep(Duration::from_millis(20)).await;
+            }
+            Ok(false) => return Err("window did not become visible".to_string()),
+            Err(error) => return Err(error.to_string()),
         }
     }
 }
 
 fn focus_target_select_overlay(window: &WebviewWindow) {
     #[cfg(target_os = "macos")]
-    let _ = window;
+    {
+        let _ = window;
+    }
 
     #[cfg(not(target_os = "macos"))]
-    window.set_focus().ok();
+    {
+        let _ = window.set_focus();
+    }
 }
 
 fn should_skip_window(window: &Window, exclusions: &[WindowExclusion]) -> bool {

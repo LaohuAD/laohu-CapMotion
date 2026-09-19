@@ -1,7 +1,9 @@
 import {describe, expect, it} from "vitest";
 import {scene001Examples} from "../configs/examples/scene001Examples";
+import {flowNodeGraphExamples} from "../configs/examples/flowNodeGraphExamples";
 import {getComponentManifest} from "../registry/componentRegistry";
 import {getRiskRows} from "../components/RiskActionLoop";
+import {h3TutorialConfigs} from "../configs/works/h3Tutorial";
 
 describe("spoken-video acceptance examples", () => {
   it("covers the six planned Remotion acceptance scenes", () => {
@@ -56,6 +58,7 @@ describe("editorial overlay examples", () => {
       "evolutionProof",
       "fourLayerStack",
       "surfaceVsSystem",
+      "beforeAfter",
       "chapterProgress",
       "evidenceCheckpoint",
       "conceptLabels",
@@ -75,6 +78,35 @@ describe("editorial overlay examples", () => {
       expect(config.presentation).toBe("overlay");
       expect(config.stylePreset).toBe("editorial-dark");
       expect(config.items.every((item) => item.source.type !== "illustrative")).toBe(true);
+    }
+  });
+});
+
+describe("flow topology examples", () => {
+  it("covers workflow, branch comparison, loop, and data-flow overlay examples", () => {
+    expect(Object.keys(flowNodeGraphExamples)).toEqual(["workflow", "branch", "loop", "overlay"]);
+
+    expect(flowNodeGraphExamples.workflow.mode).toBe("linear");
+    expect(flowNodeGraphExamples.branch.mode).toBe("branch");
+    expect(flowNodeGraphExamples.loop.mode).toBe("loop");
+    expect(flowNodeGraphExamples.overlay.mode).toBe("data-flow");
+    expect(flowNodeGraphExamples.overlay.presentation).toBe("overlay");
+  });
+
+  it("validates every topology example against the registered schema", () => {
+    for (const config of Object.values(flowNodeGraphExamples)) {
+      const manifest = getComponentManifest(config.component);
+      expect(() => manifest.schema.parse(config)).not.toThrow();
+      expect(config.items.every((item) => item.source.ref?.includes("source-material.md#"))).toBe(true);
+    }
+  });
+
+  it("keeps the existing H3 FlowNodeGraph work configs valid", () => {
+    for (const config of Object.values(h3TutorialConfigs).filter(
+      (candidate) => candidate.component === "FlowNodeGraph",
+    )) {
+      const manifest = getComponentManifest(config.component);
+      expect(() => manifest.schema.parse(config)).not.toThrow();
     }
   });
 });
