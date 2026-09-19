@@ -31,6 +31,9 @@ concurrency:
 
 jobs:
   prepare:
+    # This publisher requires upstream Cap's CrabNebula credentials. Forks
+    # distribute their own releases and must not run this scheduled publisher.
+    if: github.repository == 'CapSoftware/Cap'
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}

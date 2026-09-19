@@ -124,7 +124,9 @@ jobs:
           version: 2.2.0
 
       - name: Run Biome
-        run: biome ci . --linter-enabled=false
+        # Check application code and build tooling, not video project data,
+        # vendored Skills, or the independent Remotion template workspace.
+        run: biome ci apps packages scripts *.json --linter-enabled=false
 
   format-rust:
     name: Format (Cargo)
