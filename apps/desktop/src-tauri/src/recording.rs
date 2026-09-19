@@ -1921,10 +1921,8 @@ async fn start_recording_with_camera_lock(
     // Promote the editor's pending lease before any asynchronous recording
     // setup. Once promoted, another editor (or a legacy null clear) cannot
     // replace it while this recording is being started or finished.
-    let mut editor_recording_start_guard = EditorRecordingStartGuard::new(
-        &app,
-        EditorRecordingTarget::begin_recording(&app),
-    );
+    let mut editor_recording_start_guard =
+        EditorRecordingStartGuard::new(&app, EditorRecordingTarget::begin_recording(&app));
 
     let instant_auth = if matches!(inputs.mode, RecordingMode::Instant) {
         AuthStore::get(&app).ok().flatten()
@@ -3168,9 +3166,7 @@ async fn cancel_discarded_recording(
         }
     };
 
-    if !preserve_editor_target
-        && let Some(editor_lease) = EditorRecordingTarget::take_active(app)
-    {
+    if !preserve_editor_target && let Some(editor_lease) = EditorRecordingTarget::take_active(app) {
         restore_editor_recording_window(app, &editor_lease.project_path);
     }
 

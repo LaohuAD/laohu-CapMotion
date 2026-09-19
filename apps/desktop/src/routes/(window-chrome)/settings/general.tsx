@@ -1,4 +1,3 @@
-import { StorageLocationControl } from "~/components/StorageLocationControl";
 import { Button } from "@cap/ui-solid";
 import { createWritableMemo } from "@solid-primitives/memo";
 import {
@@ -6,6 +5,7 @@ import {
 	requestPermission,
 } from "@tauri-apps/plugin-notification";
 import { type OsType, type } from "@tauri-apps/plugin-os";
+import { StorageLocationControl } from "~/components/StorageLocationControl";
 import "@total-typescript/ts-reset/filter-boolean";
 import { Collapsible } from "@kobalte/core/collapsible";
 import { CheckMenuItem, Menu, MenuItem } from "@tauri-apps/api/menu";

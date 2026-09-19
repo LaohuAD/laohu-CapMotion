@@ -17,9 +17,9 @@ import {
 	Show,
 } from "solid-js";
 import { createStore } from "solid-js/store";
+import { StorageLocationControl } from "~/components/StorageLocationControl";
 import { type TranslationKey, useI18n } from "~/i18n";
 import { generalSettingsStore } from "~/store";
-import { StorageLocationControl } from "~/components/StorageLocationControl";
 import { isPermissionGranted as isPermitted } from "~/utils/os-permissions";
 import {
 	commands,

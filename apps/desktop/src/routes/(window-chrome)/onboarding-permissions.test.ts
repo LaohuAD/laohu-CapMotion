@@ -95,9 +95,9 @@ describe("onboarding permission gate", () => {
 	});
 
 	it("remembers a permission when the user continues directly to the next setting", () => {
-		expect(
-			claimAfterSettingsChoice({}, "screenRecording", false),
-		).toEqual({ screenRecording: true });
+		expect(claimAfterSettingsChoice({}, "screenRecording", false)).toEqual({
+			screenRecording: true,
+		});
 		expect(
 			claimAfterSettingsChoice({}, "screenRecording", true, "granted"),
 		).toEqual({});

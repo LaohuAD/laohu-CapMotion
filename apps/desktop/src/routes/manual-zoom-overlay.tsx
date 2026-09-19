@@ -24,9 +24,9 @@ export default function ManualZoomOverlay() {
 		let sampleInFlight = false;
 		let lastRequestedAt = performance.now();
 		let lastAppliedAt = lastRequestedAt;
-		let predictionState: ReturnType<
-			typeof predictManualZoomCursor
-		>["state"] | null = null;
+		let predictionState:
+			| ReturnType<typeof predictManualZoomCursor>["state"]
+			| null = null;
 		let bounds:
 			| { x: number; y: number; width: number; height: number }
 			| undefined;

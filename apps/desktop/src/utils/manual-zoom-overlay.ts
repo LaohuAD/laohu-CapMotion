@@ -79,10 +79,7 @@ export function advanceManualZoomFollow(
 	);
 	const fastResponse = Math.max(
 		slowResponse,
-		positiveOr(
-			config.fastResponse,
-			DEFAULT_MANUAL_ZOOM_FOLLOW.fastResponse,
-		),
+		positiveOr(config.fastResponse, DEFAULT_MANUAL_ZOOM_FOLLOW.fastResponse),
 	);
 	const predictionHorizonSecs = nonNegativeOr(
 		config.predictionHorizonSecs,
@@ -94,15 +91,8 @@ export function advanceManualZoomFollow(
 	);
 	const safeDt = Math.max(0, finiteOr(dt, 0));
 	const safeSpeed = Math.max(0, finiteOr(cursorSpeed, 0));
-	const maxLead = Math.max(
-		Number.EPSILON,
-		viewportHalf * 2 * maxLeadRatio,
-	);
-	const speedMix = clamp(
-		(safeSpeed * predictionHorizonSecs) / maxLead,
-		0,
-		1,
-	);
+	const maxLead = Math.max(Number.EPSILON, viewportHalf * 2 * maxLeadRatio);
+	const speedMix = clamp((safeSpeed * predictionHorizonSecs) / maxLead, 0, 1);
 	const response = slowResponse + (fastResponse - slowResponse) * speedMix;
 	const alpha = 1 - Math.exp(-response * safeDt);
 	const comfortHalf = viewportHalf * comfortZoneRatio;
@@ -158,10 +148,7 @@ export function predictManualZoomCursor(
 		x: clamp(finiteOr(cursor.x, previous?.cursor.x ?? 0.5), 0, 1),
 		y: clamp(finiteOr(cursor.y, previous?.cursor.y ?? 0.5), 0, 1),
 	};
-	const safeSampledAtMs = finiteOr(
-		sampledAtMs,
-		previous?.sampledAtMs ?? 0,
-	);
+	const safeSampledAtMs = finiteOr(sampledAtMs, previous?.sampledAtMs ?? 0);
 	let velocity = { x: 0, y: 0 };
 
 	if (previous) {
@@ -191,10 +178,7 @@ export function predictManualZoomCursor(
 	);
 	const maxLead =
 		viewportSize *
-		nonNegativeOr(
-			config.maxLeadRatio,
-			DEFAULT_MANUAL_ZOOM_FOLLOW.maxLeadRatio,
-		);
+		nonNegativeOr(config.maxLeadRatio, DEFAULT_MANUAL_ZOOM_FOLLOW.maxLeadRatio);
 	const framingCursor = {
 		x: clamp(
 			safeCursor.x + clamp(velocity.x * horizon, -maxLead, maxLead),

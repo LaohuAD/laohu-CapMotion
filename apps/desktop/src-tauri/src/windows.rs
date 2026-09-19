@@ -3694,7 +3694,9 @@ pub struct EditorRecordingTargetState {
 impl EditorRecordingTargetState {
     pub fn claim(&mut self, lease: EditorRecordingTargetLease) -> Result<(), String> {
         if lease.owner_id.is_some() != lease.request_id.is_some() {
-            return Err("Editor recording target owner and request must be provided together".into());
+            return Err(
+                "Editor recording target owner and request must be provided together".into(),
+            );
         }
 
         match &self.target {
@@ -3817,11 +3819,7 @@ impl EditorRecordingTarget {
     }
 
     pub fn begin_recording(app: &AppHandle) -> Option<EditorRecordingTargetLease> {
-        Self::get(app)
-            .0
-            .lock()
-            .unwrap()
-            .promote_for_recording()
+        Self::get(app).0.lock().unwrap().promote_for_recording()
     }
 
     pub fn take_active(app: &AppHandle) -> Option<EditorRecordingTargetLease> {
@@ -3867,7 +3865,10 @@ mod editor_recording_target_tests {
         assert!(state.claim(second.clone()).is_err());
         assert_eq!(state.current_path(), Some(first.project_path));
         assert!(!state.clear_if_matches(&second));
-        assert_eq!(state.current_path(), Some(PathBuf::from("/projects/one.cap")));
+        assert_eq!(
+            state.current_path(),
+            Some(PathBuf::from("/projects/one.cap"))
+        );
     }
 
     #[test]

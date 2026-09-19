@@ -30,27 +30,32 @@ test("local packaging uses a persistent certificate identity instead of ad-hoc s
 
 test("project-window registries exist before single-instance file-open callbacks", () => {
 	const source = readFileSync(
-		new URL(
-			"../apps/desktop/src-tauri/src/lib.rs",
-			import.meta.url,
-		),
+		new URL("../apps/desktop/src-tauri/src/lib.rs", import.meta.url),
 		"utf8",
 	);
-	const builderStart = source.indexOf("let mut builder = tauri::Builder::default()");
+	const builderStart = source.indexOf(
+		"let mut builder = tauri::Builder::default()",
+	);
 	const singleInstancePlugin = source.indexOf(
 		".plugin(tauri_plugin_single_instance::init",
 		builderStart,
 	);
 
 	assert.ok(builderStart >= 0, "Tauri builder initialization must exist");
-	assert.ok(singleInstancePlugin > builderStart, "single-instance plugin must exist");
+	assert.ok(
+		singleInstancePlugin > builderStart,
+		"single-instance plugin must exist",
+	);
 	for (const state of [
 		"EditorWindowIds::default()",
 		"ScreenshotEditorWindowIds::default()",
 		"EditorRecordingTarget::default()",
 	]) {
 		const registration = source.indexOf(`.manage(${state})`, builderStart);
-		assert.ok(registration > builderStart, `${state} must be managed by the builder`);
+		assert.ok(
+			registration > builderStart,
+			`${state} must be managed by the builder`,
+		);
 		assert.ok(
 			registration < singleInstancePlugin,
 			`${state} must be registered before file-open callbacks can run`,

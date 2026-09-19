@@ -326,7 +326,9 @@ export function ZoomTrack(props: {
 											: text("Auto Zoom")}
 									</Button>
 									<span class="text-xs text-gray-10">
-										{text("Generate editable zoom segments from recorded clicks")}
+										{text(
+											"Generate editable zoom segments from recorded clicks",
+										)}
 									</span>
 								</div>
 								<button

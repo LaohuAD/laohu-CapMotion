@@ -183,10 +183,10 @@ export function createEditorRecordingFlow<Config, Target>(
 			}
 
 			return {
-					kind: "failed",
-					projectPath: operation.input.projectPath,
-					error,
-					rollbackErrors,
+				kind: "failed",
+				projectPath: operation.input.projectPath,
+				error,
+				rollbackErrors,
 			};
 		} finally {
 			if (active === operation) active = undefined;

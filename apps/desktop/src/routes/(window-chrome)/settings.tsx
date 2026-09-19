@@ -452,9 +452,7 @@ export default function Settings(props: RouteSectionProps) {
 				})
 				.catch(() => false);
 			if (openDownload)
-				await shell.open(
-					"https://github.com/LaohuAD/laohu-CapMotion/releases",
-				);
+				await shell.open("https://github.com/LaohuAD/laohu-CapMotion/releases");
 		} finally {
 			setIsCheckingForUpdates(false);
 		}
@@ -537,11 +535,11 @@ export default function Settings(props: RouteSectionProps) {
 									<button
 										type="button"
 										class="text-gray-11 hover:text-gray-12 underline transition-colors"
-									onClick={() =>
-										shell.open(
-										"https://github.com/LaohuAD/laohu-CapMotion/releases",
-										)
-									}
+										onClick={() =>
+											shell.open(
+												"https://github.com/LaohuAD/laohu-CapMotion/releases",
+											)
+										}
 									>
 										{t("settings.account.previousVersions")}
 									</button>

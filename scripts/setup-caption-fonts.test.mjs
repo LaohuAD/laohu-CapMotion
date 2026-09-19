@@ -5,10 +5,7 @@ import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
-import {
-	CAPTION_FONTS,
-	ensureCaptionFont,
-} from "./setup-caption-fonts.mjs";
+import { CAPTION_FONTS, ensureCaptionFont } from "./setup-caption-fonts.mjs";
 
 test("bundles exact Source Han caption weights instead of one variable face", () => {
 	for (const family of ["Source Han Sans CN VF", "Source Han Serif CN VF"]) {

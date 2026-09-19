@@ -20,7 +20,10 @@ describe("editor localization coverage", () => {
 		expect(presets).toContain('text("Reset unsaved changes")');
 		const presetSubmenuTrigger = presets.slice(
 			presets.indexOf("as={KDropdownMenu.SubTrigger}"),
-			presets.indexOf("</MenuItem>", presets.indexOf("as={KDropdownMenu.SubTrigger}")),
+			presets.indexOf(
+				"</MenuItem>",
+				presets.indexOf("as={KDropdownMenu.SubTrigger}"),
+			),
 		);
 		expect(presetSubmenuTrigger).not.toContain("applyPreset()");
 	});
