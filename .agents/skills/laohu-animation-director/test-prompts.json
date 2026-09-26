@@ -1,33 +1,33 @@
 [
   {
     "name": "vague-time-range",
-    "prompt": "请在 05:20 到 06:24 做一个动画，我没有明确想法。先读 ASR 和素材再推荐。",
-    "expected": "先读对应 ASR、材料与前后文，完成画面理解和具体动作/焦点/声音节拍，再选择实现。若只有预计时间，标为设计草案；不伪造冻结时码。"
+    "prompt": "请在 05:20 到 06:24 做一个口播动效，我没有明确想法。先读 ASR、材料与底画，再选择合适的上游。",
+    "expected": "本地先判断观看目的、讲解范围、动画必要性、内容事实和底画边界；选择一个原版上游，由其按原方法产出分镜候选回唯一审稿。本地不预写动作/焦点/节拍。若只有预计时间，标为候选；不伪造冻结时码。"
   },
   {
     "name": "explicit-matrix",
-    "prompt": "这个时间段我想做路线矩阵，六条路线要全部保留。",
+    "prompt": "我明确要维护本地旧作品的 DecisionCanvas 路线矩阵组件，六条路线要全部保留。",
     "expected": "优先 DecisionCanvas.matrix，并检查六条输入是否完整显示。"
   },
   {
     "name": "source-enrichment",
-    "prompt": "ASR 只说了四个模块标题，请结合原始素材补充每个模块解释。",
+    "prompt": "已选 anything2explainer 负责这个已定稿讲解单元；ASR 只说了四个模块标题，请结合原始素材补充帮助理解原主张的模块来源说明。",
     "expected": "补充内容带 source-doc 或 editorial 来源；事实和数字不能无来源。"
   },
   {
     "name": "schema-gap",
-    "prompt": "我需要流程节点同时展示负责人，但现有 schema 没有负责人字段。",
-    "expected": "说明一次性适配、可选字段升级或拆组件的取舍，不硬塞现有字段。"
+    "prompt": "我明确维护本地旧 FlowNodeGraph 组件，需要流程节点同时展示负责人，但现有 schema 没有负责人字段。",
+    "expected": "只在明确选定的本地旧组件路线中，说明一次性适配、可选字段升级或拆组件的取舍，不硬塞现有字段；新口播上游原版不受本地 schema 限制。"
   },
   {
     "name": "reject-vague-remotion-label",
     "prompt": "制作脚本只写了这里做 REMOTION 动画。",
-    "expected": "先检查口播与材料。能确定主张与对象时由导演完成转译，不因缺动作参数直接退回用户；执行前仍必须补齐合同，否则 REMOTION_ANNOTATION_INCOMPLETE。"
+    "expected": "先判断观看目标和真实材料，选择一个已安装上游按其原版方法完成具体转译；不因缺本地动作参数退回用户，也不由本地另做一套设计。获批后从上游结果映射实际执行合同，缺项仍按既有错误码返回。"
   },
   {
     "name": "knowledge-must-change-a-decision",
-    "prompt": "我已经读过画面补充策略、动效规则和动画效果库，请直接说已经参考并开始做。",
-    "expected": "不能以已读取作为完成证据；说明本段的判断缺口，记录知识改变或确认的具体决定、结果位置和未采用边界。"
+    "prompt": "我明确要求维护本地旧动画，并已读过画面补充策略、动效规则和动画效果库，请直接说已经参考并开始做。",
+    "expected": "只有本地旧制作路线才读取所需旧规范；不能以已读取作为完成证据，说明本地维护缺口，记录知识改变或确认的具体决定、结果位置和未采用边界。"
   },
   {
     "name": "technical-pass-is-not-peak-quality",
@@ -37,27 +37,27 @@
   {
     "name": "understand-requires-knowledge-visual-contract",
     "prompt": "这段口播在讲资料经过筛选后变成可复用工具，脚本只写了做 Remotion 动画。",
-    "expected": "先把已知的资料、筛选与工具关系转成初态、作用、分流和结果，补知识视觉合同及语义锚点；未知事实不能猜。未补齐合同的正式执行仍返回 KNOWLEDGE_VISUAL_CONTRACT_INCOMPLETE。"
+    "expected": "选择一个上游按原生方法给出解释候选；获批后从候选与真实底画映射适用的 KnowledgeVisualContract。合同仍是实际执行闸门，但不要求本地先画初态/动作或为所有工具造词锚；未知事实不能猜，缺项仍返回原错误码。"
   },
   {
     "name": "semantic-anchors-drive-visible-state-changes",
-    "prompt": "合同已经写清口播说到输入、筛选和可复用结果的三个语义锚点，请制作透明 Remotion 叠层。",
-    "expected": "把三个 spokenCue 分别映射为对象建立、作用路径和结果锁定的可见状态变化；用少量中文大标签就近标注，默认灰黑半透明蒙版，并完成静音理解和声画同步验收。"
+    "prompt": "我明确要求维护一段已有本地 EditorialOverlayShell 旧作品：合同写清输入、筛选和可复用结果的三个语义锚点，请按原组件 schema 制作批准的透明叠层。",
+    "expected": "仅在此显式本地旧组件维护任务中按其真实 schema/props 处理获批状态变化与宿主合同；不把 Shell、标签或 FULL_SCRIM 默认强加给 TalkCraft/anything2explainer 新任务，并按旧组件实际能力验收。"
   },
   {
     "name": "poster-idea-before-edl",
-    "prompt": "我有六张海报，想从堆叠摊开成两行，镜头扫过去，最后一张放大。先帮我设计，还没有口播或 EDL。",
-    "expected": "交付相对秒数的画面、运动、视窗、图层、声音设计和停稳结果；保留原比例与图片主角。无 ASR/EDL 不妨碍设计，但不伪造正式合同或制作已冻结资产。"
+    "prompt": "我明确要做无口播独立动画并沿用本地相对时间入口：六张海报从堆叠摊开成两行，最后一张放大。先帮我做设计，还没有 EDL。",
+    "expected": "走 `contentMode=standalone`、`timingMode=relative` 的本地独立入口；可按该路线形成相对节拍候选，保留图片事实和用户锁定内容。不伪造口播合同、T2 或冻结资产。"
   },
   {
     "name": "custom-composition-is-not-new-engine",
-    "prompt": "六张图的透视编排现有组件做不了，这段已经授权制作，也有冻结时码和素材。",
+    "prompt": "我明确维护已有本地旧动画：六张图的透视编排现有旧组件做不了，这段已经授权制作，也有冻结时码和素材。",
     "expected": "允许在共享 workspace 注册作品专属 Composition 与自身 props schema，记录 source/compositionId，按同一个 Cap definition 接入；不必先升级为公共家族，不另装一套依赖。"
   },
   {
     "name": "reference-does-not-lock-style",
-    "prompt": "参考里都是深色玻璃侧边卡片，这次六张彩色海报是否也必须统一包成玻璃卡？",
-    "expected": "说明参考的适用范围；海报自身可以成为主体，迁移逐步建立和焦点交接的方法即可，不强制照抄参考皮肤。"
+    "prompt": "这次新口播单元已选定 TalkCraft。某本地参考里都是深色玻璃侧边卡片，六张彩色海报是否也必须统一包成玻璃卡？",
+    "expected": "选中的上游按其原版方法决定表达；本地参考不覆盖其制作准则，海报能否成为主体由上游候选呈现并回唯一审稿，保持用户已有明确锁定决定。"
   },
   {
     "name": "ranking-image-is-not-history",
@@ -67,7 +67,7 @@
   {
     "name": "sound-delivery-must-be-audible",
     "prompt": "设计里每次落位有声音，导入 Cap Motion 就算交付了吗？",
-    "expected": "不能。视觉默认静音，记录声音事件；核验独立音轨或混音链并试听最终导出后才能报告有声交付，未支持时明确待接入而非改写原主音频。"
+    "expected": "不能仅凭导入视觉资产宣称声音已交付。创意声音按所选原版决定；本地核验Cap是否有独立音轨/混音接法并试听最终导出，保护原主音频，接口不支持时明确待接入。"
   },
   {
     "name": "official-documentation-is-not-runtime-upgrade",
@@ -77,17 +77,17 @@
   {
     "name": "missing-fact-is-not-missing-design",
     "prompt": "帮我做“效率提升 90%”的动画，脚本和材料没有这个数字的出处。",
-    "expected": "缺少事实依据，不能自行填来源或伪造统计；保留可做的视觉设计，说明数字缺口，正式事实画面不能执行。"
+    "expected": "缺少事实依据，不能自行填来源或伪造统计；仍可由所选上游制作不依赖该数字的候选，说明缺口并将主张/数字画面退回审稿，不宣称事实画面已获准。"
   },
   {
     "name": "approved-design-must-survive",
-    "prompt": "已确定六张图片的顺序、最后主图和浅色背景，只要补运动，不改方案。",
-    "expected": "沿原设计补动作与节拍，保留顺序、主图、浅色背景，不因默认 preset 或新奇要求改成新方案。"
+    "prompt": "TalkCraft 已选定负责这个单元；六张图片的顺序、最后主图和浅色背景已明确锁定，只要依原版方法补运动，不改方案。",
+    "expected": "把锁定的顺序、主图和浅色背景作为约束交给 TalkCraft 按原版方法制作；本地不另写动作/节拍，也不因旧 preset 或新奇要求改掉已锁内容。"
   },
   {
     "name": "group-cut-content-before-animation",
     "prompt": "虚拟成片 40–43 秒说资料多，43–46 秒说筛选，46–50 秒说留下工具，50–56 秒实际点击工具；前三段共分成六条字幕。请规划动画。",
-    "expected": "把前三段组成一个解释单元，六条字幕不机械拆六个动画；依据真实底画决定覆盖，动画在 50 秒操作前交还。40–50 仅为有条件的示例候选，结果停留须容纳其中，不延长音频。保存片段引用和内容/覆盖边界。"
+    "expected": "本地判断前三段可组成一个解释单元，六条字幕不机械拆六个任务；根据真实底画确定覆盖边界并在50秒操作前交还，再由所选上游提供原生候选。40–50只是待映射的范围候选；不由本地规定结果停留或动作节拍，也不延长音频。"
   },
   {
     "name": "split-discontinuous-overlays",
@@ -97,7 +97,7 @@
   {
     "name": "no-script-label-still-plan",
     "prompt": "请规划整条口播，制作脚本只有两处动画建议，但剪后还有一段复杂流程，原画面一直停在桌面。",
-    "expected": "检查全请求范围，不仅加工两个标记；评估复杂流程的真实理解缺口，可提出新的动画单元，给内容/覆盖范围与材料依据，不按静止时长机械填满。"
+    "expected": "本地检查全请求范围，不只看两个标记；若复杂流程确有视觉理解缺口，确定讲解单元、观看目标、内容/覆盖范围和真实材料，再让选定上游提供原生候选。不因静止时长机械增加动画。"
   },
   {
     "name": "still-speaker-may-matter",
@@ -107,7 +107,7 @@
   {
     "name": "asset-plan-follows-purpose",
     "prompt": "一段解释抽象分流，另一段证明软件操作结果。都要生成几张图片配动画吗？",
-    "expected": "抽象关系可用程序图形与短标签；真实操作结果优先实际录屏/截图并记录出处及可读细节。逐项列用途、时间、来源、准备状态，缺材料不自动授权生成或采购。"
+    "expected": "本地识别抽象关系或真实操作需要什么证据材料，记录其用途、对应单元、来源与缺口；所选上游决定原生视觉表达。真实操作结果使用真实录屏/截图；缺材料不自动授权生成或采购。"
   },
   {
     "name": "virtual-asr-does-not-require-render",
@@ -117,17 +117,17 @@
   {
     "name": "scoped-animation-stays-scoped",
     "prompt": "只帮我判断 2:10–2:25 的画面，其他都已经确认。",
-    "expected": "仅看该段与必要前后文，保留其他已确认安排；不借整片能力重做全片，不越界扩大覆盖。"
+    "expected": "仅看该段与必要前后文；已授权局部返工沿用该单元批准，不重开整片审稿，不借整片能力重做全片或扩大覆盖。"
   },
   {
     "name": "joint-review-before-production",
     "prompt": "虚拟剪辑后给我同一份方案，里面一起看动画，所有东西确认好再剪辑和制作。",
-    "expected": "在同一份审稿主文档提供源引用、预期成片字幕、动画单元/效果/可见窗口/素材/覆盖/音效，整体批准前只读分析和文字设计，不开始剪辑写入、作品动画代码或渲染。"
+    "expected": "在同一份审稿主文档提供源引用、预期成片字幕、观看目的、覆盖/底画保护、素材来源及所选上游的原生分镜候选；整体批准前只做策划，不开始剪辑写入、作品动画实现或渲染。"
   },
   {
     "name": "picture-feedback-updates-design",
     "prompt": "A02方案不好，换成我这三张截图，第二张要放大讲，其他先别做。",
-    "expected": "把反馈写回A02，更新三图用途、顺序、第二图放大和阅读时间、覆盖及前后衔接；若影响时码同步重算。保留其他有效决定，递增当前审稿修订并待整体批准，不能只追加素材路径或先制作其他段。"
+    "expected": "把反馈、三图用途/来源和“第二图放大”的观看要求写回A02，交该单元上游按原方法更新分镜候选；本地核对新的覆盖与前后底画衔接及受影响时码，不另排上游动作。递增审稿修订、等待整体批准，不先制作其他段。"
   },
   {
     "name": "partial-approval-is-not-whole",
@@ -142,12 +142,12 @@
   {
     "name": "joint-html-not-old-caption-table",
     "prompt": "按我以前左右时码的想法做HTML，但内容用刚刚完善的新审稿模板。",
-    "expected": "保留新联合审稿的疑难、主线、跨字幕动画理由/覆盖窗/图片用途/逐拍动作/音效/反馈与整体确认；生成中央竖轴左右关联的HTML，不只翻版旧字幕表。"
+    "expected": "保留新联合审稿的疑难、主线、讲解单元/覆盖窗/素材用途、上游原生分镜候选、反馈与整体确认；HTML展示其来源关联，不要求本地再写逐拍动作表或强制音效字段，不退回旧字幕表。"
   },
   {
     "name": "html-feedback-does-not-authorize-media",
     "prompt": "我在A01下面写了“第二张图多留两秒”，你把这个意见接回去。",
-    "expected": "核对作品修订与内容标识，将反馈合入同一审稿JSON，更新效果/阅读时间/覆盖/衔接并重生HTML；浏览器留言不自动批准或触发媒体制作。"
+    "expected": "核对作品修订与内容标识，将反馈合入同一审稿JSON，交上游更新原生候选并重生HTML；同步核对覆盖、底画交还及受影响时间。浏览器留言不自动批准或触发媒体制作。"
   },
   {
     "name": "repeated-cue-needs-source-identity",
@@ -156,18 +156,18 @@
   },
   {
     "name": "placement-only-reuses-local-animation",
-    "prompt": "把已完成的动画整体向后移动两秒，内部文案、节拍和时长都不变。",
+    "prompt": "我明确维护既有本地旧动画资产：把它整体向后移动两秒，内部文案、节拍和时长都不变。",
     "expected": "更新工程放置位置；检查输入和产物完整性后复用原局部渲染。若语义事件相对位置随剪辑变化，先重算再判断缓存，不能把绝对时码混入局部入场帧。"
   },
   {
     "name": "matching-keyword-is-not-matching-relation",
-    "prompt": "讲的是错误数量没有增长，帮我从旧增长案例里选一个动画。",
+    "prompt": "我明确使用本地旧组件/案例路线：讲的是错误数量没有增长，帮我从旧增长案例里选一个候选动画。",
     "expected": "关键词只召回候选，检查否定关系、对象与比较基准；不使用上升箭头暗示增长。不把候选案例升级为已认可经验。"
   },
   {
     "name": "standalone-explicit-clock",
     "prompt": "这是一段独立无口播动画，设计已经批准，用相对节拍实现，不接入讲解视频。",
-    "expected": "走显式独立时间模式，不伪造ASR、冻结EDL或宿主连续性；仍保留来源、观看目标、动作节拍、结果停留与视觉验收。带口播的独立输出仍保留口播合同。"
+    "expected": "走显式独立时间模式，不伪造ASR、冻结EDL或宿主连续性；仍保留来源、观看目标、动作节拍、结果停留与视觉验收，不触发口播后期 video-talkcraft 路由。带口播的独立输出仍保留口播合同。"
   },
   {
     "name": "capability-upgrade-is-not-demo-polish",
@@ -176,8 +176,8 @@
   },
   {
     "name": "registered-mode-must-have-behavior",
-    "prompt": "注册表里有一个模式但实现只画顺序卡片，也先推荐给我吧。",
-    "expected": "拒绝把未实现拓扑当作可用能力；选择实际支持的模式或明确提出实现缺口。不能靠修改说明冒充画面能力完成。"
+    "prompt": "我明确选择维护本地旧组件：注册表里有一个模式但实现只画顺序卡片，也先推荐给我吧。",
+    "expected": "仅在此本地旧组件路线中拒绝把未实现拓扑当作可用能力；选择实际支持的模式或明确提出实现缺口。不能靠修改说明冒充画面能力完成。新上游仍按自身能力制作。"
   },
   {
     "name": "rough-fine-before-motion",
@@ -198,5 +198,80 @@
     "name": "audible-demo-and-standalone-boundary",
     "prompt": "系统音轨在播放音乐但没有ASR字幕；另一个任务是独立无口播动画。",
     "expected": "音乐不是无声等待，保留有效播放；独立动画不被录屏粗剪前置劫持。"
+  },
+  {
+    "name": "motion-production-directly-calls-upstream",
+    "prompt": "虚拟精剪已完成，动画导演已选定 TalkCraft 负责这个证据展示单元。请用校正后的成片字幕和当前底画规划并制作获批的 Remotion 动效。",
+    "expected": "当前单元既已选定 TalkCraft，就直接调用原版：策划阶段用语义标注/原卡匹配/SHOTBOOK候选回唯一审稿，当前批准和T2冻结后才实现。保留原卡与motion-systems，不重写方法、不重剪、不改稿、不做新ASR/TTS；不适用的整片流程不冒报通过。"
+  },
+  {
+    "name": "corrected-caption-is-not-word-timing",
+    "prompt": "校正后的展示字幕有改字，按它给每个字平均分配时间，直接喂给 video-talkcraft 做 beat 对齐。",
+    "expected": "校正文本是显示/语义依据；原录音是发声内容依据，ASR词时码是源定位线索并保留冻结映射。经录音核实的同音字更正可以保留同一发音词的时间；改写/合并文本不得伪造逐字对齐。无可追溯字锚时只做候选策划或已核实边界安排，不声称上游字锚检查通过；当前没有 Cap 自动导入适配器。"
+  },
+  {
+    "name": "editing-and-cap-native-work-do-not-route-upstream",
+    "prompt": "只修正 SRT 错字，或只给 Cap 文字/高亮轨加标记，需要调用 video-talkcraft 或 anything2explainer 吗？",
+    "expected": "不调用。字幕校正按原 Skill，Cap 原生文字/高亮沿原接口；只有需要对应上游动效制作的已批准视觉单元才进入选择路由。"
+  },
+  {
+    "name": "upstream-card-is-not-assumed-transparent",
+    "prompt": "选中的 video-talkcraft 原卡看起来像叠层，把 TSX 原样放进 Cap 就会透明吗？",
+    "expected": "先检查原卡 TSX 实际背景、画幅、帧率和输出；例如 source-converge.tsx 含白底。按已批准的全幅/叠层职责选择成品资产或允许的宿主适配，不宣称所有卡天然透明，也不改写卡片运动。"
+  },
+  {
+    "name": "animation-upstream-is-chosen-per-unit",
+    "prompt": "同一条口播先展示真实页面，再解释检索、筛选和结果如何形成；是不是必须两种 Skill 一起做，或者全片只准选一种？",
+    "expected": "按讲解单元和表达目标选择唯一主制作方；页面证据可选 TalkCraft 原卡，连续机制图解可选 anything2explainer，属于路由示例而非固定分类。整片可按不同单元混用；两项目能力部分重叠，不要求每条都同时使用，也不让同一单元两个主动画重复抢焦点。"
+  },
+  {
+    "name": "anything2explainer-research-preserves-locked-content",
+    "prompt": "anything2explainer 检索到一个支持原稿主张的新来源，也发现另一个权威来源与原稿数字不一致；请直接把资料加进动画并修正字幕。",
+    "expected": "研究可补来源、真实素材、术语释义或解释原主张的材料，记录出处和用途；不得改定稿/校正字幕或自行选定矛盾数字。把冲突及出处放回现有疑难审稿；影响公开承诺或结论的新增内容先走现有批准。"
+  },
+  {
+    "name": "anything2explainer-uses-limited-original-stages",
+    "prompt": "为了做一个已批准的机制图解，完整运行 anything2explainer 从建项目、改 lessons、重写稿和 TTS 到渲染的整条流程吧。",
+    "expected": "直接调用原版，但限定当前图解单元：阶段1仅做必要的稿件补充检索，跳过阶段2写稿/TTS；阶段3分镜候选回唯一审稿。批准且T2冻结后再按需执行原阶段3–7和对应QC。禁止阶段0 new_project.sh/依赖安装及阶段8 lessons改动；无批准或冻结不制作、不渲染。"
+  },
+  {
+    "name": "anything2explainer-timing-and-host-are-not-assumed-compatible",
+    "prompt": "已校正字幕有可追溯的 T2 句块起止，但没有逐字映射；原版和当前工程都是 30fps，字幕块从 T2 90 秒开始。能按句块制作吗？是否把 90 直接当 shot.from 并透明叠进 Cap？",
+    "expected": "可把有证据的校正字幕句/块起止映射到timeline.ts的Sentence与subs.ts的SubEntry块帧，不要求每个效果逐字锚定；若某个效果明确踩单字而缺词级证据，只停该细节或降到真实块边界。shot是片段局部的一基含尾帧，Sequence.from需减1；显式换算T2绝对时码、局部偏移、单位、端点与帧率，不把90原样当帧。核对1280×720与当前1920×1080、Stage黑底及内置ProgressBar/Subtitles；Cap已承接的主音频/字幕不得重复输出，不声称天然透明或直接导入。"
+  },
+  {
+    "name": "same-unit-has-one-primary-animation-owner",
+    "prompt": "TalkCraft 和 anything2explainer 都为同一段机制讲解生成一个全幅主动画；字幕和章节层原本持续存在。是否应该都叠上去，还是把所有轨道也强行互斥？",
+    "expected": "同一讲解单元只指定一个主动画负责人，避免双重主焦点；字幕/章节等既有层按职责持续，不设所有轨道禁止重叠的硬规。局部组合只有在主责、用途、接口和视觉/时间相容经过验证后才采用。"
+  },
+  {
+    "name": "selected-upstream-not-forced-local-shell",
+    "prompt": "这个新口播单元已经选定 TalkCraft。旧本地规范要求十二家族、EditorialOverlayShell、labelPlan 和 FULL_SCRIM；请按这些规范制作原卡。",
+    "expected": "TalkCraft 直接按原版方法选卡、分镜并制作；本地只给观看目的、真实素材、批准覆盖与底画边界，不强加十二家族、Shell、labelPlan、FULL_SCRIM 或其他旧样式。保留已明确锁定的作品决定。"
+  },
+  {
+    "name": "upstream-failure-does-not-trigger-local-fallback",
+    "prompt": "已选 anything2explainer，但共享环境兼容暂时无法验证；是否应自动改用本地手写类似卡片交付？",
+    "expected": "说明具体兼容缺口，不将失败自动回退成近似本地原创卡；将单元留作候选、保留原画面或提出有依据的替代，经现有审稿处理，也不虚报已调用/适配。"
+  },
+  {
+    "name": "validator-contracts-map-from-approved-upstream",
+    "prompt": "选定 TalkCraft 后，annotation、KnowledgeVisualContract、OverlayContinuityContract、hostCompatibility、animationBriefSchema 太像第二套设计，是否可以关掉？",
+    "expected": "不能删除或放宽实际 postproduction validator 消费的合同；从获批上游候选、真实底画和任务数据映射适用字段。合同是交付/验收边界，不要求先做一份本地动作设计。"
+  },
+  {
+    "name": "semantic-anchor-prototype-is-not-default-route",
+    "prompt": "anything2explainer 的字幕句块已有可靠 T2 起止；是不是还必须先跑本地 semantic:anchors 和 ComponentConfig？",
+    "expected": "不必。优先使用选定上游的原生句/块时间，并验证到 Cap 的显式时间换算；本地 semantic:anchors 是未做完整生产链验收的旧原型，只在明确选本地路线时隔离核验，不作上游前置或自动回退。"
+  },
+  {
+    "name": "cap-render-and-workspace-cache-are-distinct",
+    "prompt": "我用 workspace 的 render:cached 渲染成功，是不是就等于 Cap Motion 轨内的 cap motion render 和工程接回也已验收？",
+    "expected": "不是。render:cached 是独立 workspace 资产缓存/渲染；cap motion render 是 Cap 工程轨内渲染。分别按输入、receipt、placement 和真实宿主结果报告，不能互相冒充。"
+  },
+  {
+    "name": "native-highlight-ai-host-and-standalone-routes-remain",
+    "prompt": "需要局部 Cap 原生高亮，另一个任务是 AI_VIDEO_FULL 底画，还有一段无口播相对时间动画；这些都交给 TalkCraft 的程序叠层处理吗？",
+    "expected": "Cap 原生文字/高亮仅走 scripts/cap-project-native-tracks.py 窄接口；AI_VIDEO_FULL 仍按 hostCompatibility 合同核验底画；无口播独立动画保留 contentMode=standalone、timingMode=relative 和 durationInFrames。只有确需上游动效的已批准口播单元才路由到 TalkCraft/A2E。"
   }
 ]

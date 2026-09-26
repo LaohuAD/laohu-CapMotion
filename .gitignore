@@ -96,6 +96,8 @@ workflows/laohu-video/作品/
 workflows/laohu-video/知识沉淀/
 workflows/laohu-video/参考资料/
 workflows/laohu-video/归档/
+/.agents/skills/video-talkcraft/
+/.agents/skills/anything2explainer/
 
 *.mp4
 *.mov

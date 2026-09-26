@@ -473,6 +473,183 @@
         "QUALITY": "UNKNOWN"
       },
       "decision": "OBSERVE"
+    },
+    {
+      "date": "2026-09-26",
+      "symptom": "用户要求原样安装并直接调用 video-talkcraft，不将其方法移植重写。",
+      "triggerScope": "PROJECT_CAPABILITY",
+      "earliestFailure": "动画导演缺少专门上游动效制作 Skill 的阶段调用入口。",
+      "rootLayer": "CHAIN",
+      "hypothesis": "薄调用路由可复用上游原卡制作，同时保留本地流程权威。",
+      "protection": [
+        "校正显示语义、原录音/ASR源定位、审批、冻结T2与Cap总装分权保留。"
+      ],
+      "authorityPath": ".agents/skills/laohu-animation-director/SKILL.md + references/video-talkcraft直接调用.md",
+      "change": "新增口播后期阶段路由、最小输入边界、测试提示与只读预演；上游保持原样。",
+      "decisionChanges": [
+        "策划候选回唯一审稿，正式制作须现有授权与冻结T2；无字锚不伪造逐字时间。"
+      ],
+      "regressions": {
+        "current": [
+          "017 V03只读；字幕words为空时不生成伪字锚或改变批准。"
+        ],
+        "legacy": [
+          "纯剪辑/SRT校正和Cap原生高亮沿用旧路由。"
+        ],
+        "adjacent": [
+          "无口播独立动画保留相对事件，局部返工不扩大审稿。"
+        ]
+      },
+      "knowledgeActivation": {
+        "why": "用户纠偏要求直接调用上游能力。",
+        "sources": [
+          "video-talkcraft原版Skill/卡片/LICENSE及017审稿数据"
+        ],
+        "decision": "本地导演管阶段、时间、授权和接回；上游直接制作原卡。",
+        "result": "动画导演调用路由、薄说明与边界提示。",
+        "notAdopted": "不移植方法、不造导入适配器、不重剪或重识别。"
+      },
+      "evidence": [
+        "017 revision 5 的 V03 为 APPROVED/CONFIRMED；展示字幕 words 为空、源词时码与映射字段分离；未执行渲染或质量验证。",
+        "上游 https://github.com/Vincentwei1021/video-talkcraft，commit 914103688cdec20ea35699f73b08e357a817c37a，实际安装于 .agents/skills/video-talkcraft。",
+        "原版 PYTHONDONTWRITEBYTECODE=1 python3 .agents/skills/video-talkcraft/scripts/cards_index.py --check exit 0：108 张卡元数据齐全、词表封闭，cards-index.json 与 taxonomy 索引和源一致；这不是渲染验收。"
+      ],
+      "rollback": "若调用导致审批/时间权威混淆则回退本地路由；无真实字映射时停在候选或已核实边界。",
+      "validation": {
+        "STRUCTURE": "PASS",
+        "ROUTE": "PASS",
+        "BEHAVIOR": "OBSERVE",
+        "QUALITY": "UNKNOWN"
+      },
+      "decision": "OBSERVE"
+    },
+    {
+      "date": "2026-09-26",
+      "symptom": "新增 anything2explainer 后，原动画入口没有按讲解目标在两种上游间路由；其检索/全片流程还可能越过已定稿内容和现有后期闸门。",
+      "triggerScope": "PROJECT_CAPABILITY",
+      "earliestFailure": "动画导演只提供 TalkCraft 直接调用入口，没有第二个上游的阶段限定入口与内容主权约束。",
+      "rootLayer": "CHAIN",
+      "hypothesis": "按视觉讲解单元指定唯一主制作方，并把 anything2explainer 限定到已批准图解单元，可让同片按内容目标混用，同时保留脚本、字幕、时间和批准权威。",
+      "protection": [
+        "最终脚本/校正字幕决定内容；冻结 EDL、映射和原声决定时间。",
+        "检索补充须有来源和用途；矛盾回疑难审稿，不静默改稿或延长 T2。",
+        "TalkCraft 原调用、现有审稿/冻结/Cap 总装、字幕与章节层继续有效；输出不重复主音频或已有字幕。",
+        "不改变上游仓库、Remotion 依赖或既有剪辑/字幕流程。"
+      ],
+      "authorityPath": ".agents/skills/laohu-animation-director/SKILL.md + references/anything2explainer直接调用.md",
+      "change": "增加按单元选择唯一上游负责人的薄路由、A2E阶段限定调用说明、知识索引及行为提示；保留 TalkCraft 原始能力并改为选中时调用。",
+      "decisionChanges": [
+        "TalkCraft 与 anything2explainer 可按不同讲解单元混用，能力重叠时按目标选用，不要求每片双用。",
+        "A2E研究只补来源、素材、术语释义和解释原主张的材料；新增主张/结论、承诺变化或时间变化回现有审稿。",
+        "A2E只做获准图解段；真实校正字幕块起止可形成句/块帧，不强制逐字锚；显式处理局部帧、画布、固定底色/HUD与共享 Remotion 版本差异，不声称天然透明或一键接 Cap。"
+      ],
+      "regressions": {
+        "current": [
+          "行为提示覆盖按单元选型、检索不改稿、矛盾回审、原版阶段限制、句/块时间锚、单字降级、时间/宿主适配、音频/字幕不重复与同段单一主动画负责人。"
+        ],
+        "legacy": [
+          "TalkCraft 选定后仍直接调用原版；纯剪辑、SRT及Cap原生文字/高亮继续走原路由。"
+        ],
+        "adjacent": [
+          "同片不同单元可混用且已有字幕/章节层可持续；无口播独立动画仍走相对时间入口，局部返工不扩大范围。"
+        ]
+      },
+      "knowledgeActivation": {
+        "why": "用户明确要求把第二个原版 Skill 接入项目，并以定稿内容为动效主权。",
+        "sources": [
+          "anything2explainer 原版 Skill、Stage/Root 模板和 LICENSE",
+          "video-talkcraft 直接调用说明与本地动画导演路由"
+        ],
+        "decision": "保留两个原版能力；动画导演按单元定唯一主责，检索服务已定稿内容。",
+        "result": "动画导演 Skill、两条直接调用 reference、行为提示及本进化记录。",
+        "notAdopted": "不重写上游图元/样式、不造新引擎、不执行上游全片写稿/TTS/安装流程、不改作品或生成媒体。"
+      },
+      "evidence": [
+        "上游 anything2explainer commit 735c79c8724e897e8971cd59dde7e5aa11e4d6ce；安装副本 clean、约38MB，git fsck通过。",
+        "上游 Remotion 4.0.507、共享 workspace 4.0.489；上游1280×720、共享工程1920×1080，均30fps；shot.from/to一基含尾，Sequence.from减1。timeline.ts的Sentence与subs.ts的SubEntry均支持一基含端点的句/字幕块；Stage固定黑底、内置ProgressBar/Subtitles且audio默认false，Video显式启用audio。",
+        "LICENSE 为 PolyForm Noncommercial 1.0.0；商业使用须先获作者授权。",
+        "本轮只验证结构和调用边界；未运行媒体渲染或真实作品画质验收。"
+      ],
+      "rollback": "若双路由造成同单元双重主焦点、研究越权改稿、错误时间映射或Cap合成职责不清，回退到单一上游候选并交回现有审稿；不得放松内容、批准或冻结权威。",
+      "validation": {
+        "STRUCTURE": "PASS",
+        "ROUTE": "PASS",
+        "BEHAVIOR": "OBSERVE",
+        "QUALITY": "UNKNOWN"
+      },
+      "decision": "OBSERVE"
+    },
+    {
+      "date": "2026-09-26",
+      "symptom": "接入两种上游原版动效后，本地转译规范仍要求重复设计；需明确旧动画能力去向。",
+      "triggerScope": "PROJECT_CAPABILITY",
+      "earliestFailure": "选定上游后仍先要求本地补全构图、动作和节拍，形成两套制作指挥；移出主入口的旧命令状态也缺明确路由。",
+      "rootLayer": "CHAIN",
+      "hypothesis": "上游原版负责新口播的具体制作，本地只保留目的、事实、时间、底画、批准、合同映射和Cap接回，可消除重复设计并保全成熟旧能力。",
+      "protection": [
+        "原稿/事实/ASR定位、冻结EDL/T2、唯一审稿与真实用户批准继续有效。",
+        "validator消费的annotation、KnowledgeVisualContract、OverlayContinuityContract、AIhost/hostCompatibility、animationBriefSchema及revision-safe Cap合同不删不放宽。",
+        "已确认作品效果、旧组件源码、Cap原生高亮、无口播相对入口和上游权限继续保留。",
+        "未渲染、未验收宿主或未观看成片时，不声称动画质量提升。"
+      ],
+      "authorityPath": ".agents/skills/laohu-animation-director/SKILL.md + references/动画知识路由与激活.md + workflows/laohu-video/规范/动画导演转译规范.md",
+      "change": "导演/转译入口明确上游原版制作责任、合同映射与不自动回退；路由记录旧原型状态；并行维护把既有视觉规则改为条件触发，删除仅含陈旧占位信息且无引用的 compositions README。",
+      "decisionChanges": [
+        "新口播直接调用所选TalkCraft/A2E原版；旧动作/布局示例只供本地明确维护任务。",
+        "缺兼容证据或上游失败不自动使用本地近似卡片；说明缺口并保留原画或给有依据的替代。",
+        "不强制Shell、十二家族、FULL_SCRIM、四轴/标签字段或所有任务采用semantic:anchors。"
+      ],
+      "capabilityDestinations": [
+        {
+          "before": "本地重复设计后再交给上游",
+          "after": "所选原版负责卡片/图元、分镜、运动与制作；本地负责项目边界、单一审稿和接回",
+          "location": ".agents/skills/laohu-animation-director/references/{video-talkcraft直接调用.md,anything2explainer直接调用.md}；workflows/laohu-video/规范/动画导演转译规范.md §§2B–5"
+        },
+        {
+          "before": "旧视觉规范和本地组件容易成为新任务默认母本",
+          "after": "既有规范、示例及workspace/src代码保留，只在旧作品维护/用户指定本地组件时激活",
+          "location": "workflows/laohu-video/规范/{画面表达规则.md,画面补充策略.md,动效规则.md,动画效果库.md,MG动画表达方法.md,视觉风格.md,图表关系表达规则.md,组件设计方法论.md,组件规则.md}；模板/components与模板/remotion-assets/workspace/src/"
+        },
+        {
+          "before": "语义锚点/案例CLI可能被理解为已验收默认链",
+          "after": "标明仅本地旧路线原型、未完整验收EDL/ASR至Cap生产链；上游使用各自时间接口",
+          "location": "workflows/laohu-video/模板/remotion-assets/workspace/README.md、src/semantic/；动画导演/references/动画知识路由与激活.md"
+        },
+        {
+          "before": "两种渲染入口及特殊宿主路线易混淆",
+          "after": "分别路由Cap motion definition/add/update/remove/render与workspace render:cached；保留native-track窄接口、AI_VIDEO_FULL hostCompatibility、standalone relative/duration合同",
+          "location": "规范/Cap Agent 工程接口.md；scripts/cap-project-native-tracks.py；workspace/README.md与schemas/director.ts；scripts/postproduction-package.mjs"
+        },
+        {
+          "before": "旧模板目录留有未引用的占位说明",
+          "after": "仅删除陈旧、无人引用的README，未删除实现或作品资产",
+          "location": "workflows/laohu-video/模板/compositions/README.md"
+        }
+      ],
+      "regressions": {
+        "current": [
+          "test-prompts新增6条：上游不套旧Shell/家族、失败不回退、合同映射、语义锚原型状态、两类渲染区分、native/AI-host/standalone路由。"
+        ],
+        "legacy": [
+          "保留显式本地旧作品/组件、原生高亮、纯剪辑/SRT、无口播相对时间及局部返工入口。"
+        ],
+        "adjacent": [
+          "并行维护worker报告43项project-routing、postproduction-package与evolution-record测试通过；媒体渲染和画质仍未验证。"
+        ]
+      },
+      "evidence": [
+        "Cap Agent接口记录工程轨内cap motion render及revision/工件校验；workspace README记录render:cached独立缓存契约。",
+        "AI_VIDEO_FULL继续要求hostCompatibility；native tracks保留窄revision-safe脚本；独立模式schema仍要求durationInFrames。",
+        "仅删除无引用的旧compositions README；没有删除组件源码、上游卡片、用户作品或依赖。"
+      ],
+      "rollback": "若新路由损失已批准内容、时间、事实或Cap合同，修正路由并返回唯一审稿；不得以近似本地原创动画或弱化validator掩盖上游兼容缺口。",
+      "validation": {
+        "STRUCTURE": "PASS",
+        "ROUTE": "PASS",
+        "BEHAVIOR": "OBSERVE",
+        "QUALITY": "UNKNOWN"
+      },
+      "decision": "OBSERVE"
     }
   ]
 }
