@@ -1,0 +1,38 @@
+{
+  "fontWeight": 500,
+  "size": 52,
+  "position": "manual",
+  "manualPosition": {
+    "x": 0.5,
+    "y": 0.9125494
+  },
+  "trackPositions": [
+    {
+      "trackId": "zh-CN",
+      "position": "manual",
+      "manualPosition": {
+        "x": 0.5,
+        "y": 0.9125494
+      }
+    },
+    {
+      "trackId": "en",
+      "position": "manual",
+      "manualPosition": {
+        "x": 0.5,
+        "y": 0.98703706
+      }
+    }
+  ],
+  "trackStyles": [
+    {
+      "trackId": "zh-CN",
+      "fontSize": 52
+    },
+    {
+      "trackId": "en",
+      "fontSize": 34
+    }
+  ],
+  "preset": "user:Laohu"
+}

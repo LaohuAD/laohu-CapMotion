@@ -1,0 +1,256 @@
+{
+  "schema": "laohu.cap-asr-source-index/1",
+  "purpose": "first-pass-content-transcription",
+  "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+  "projectName": "Cap 2026-09-10 at 15.20.47",
+  "projectRevision": 1,
+  "recordingType": "studio-multiple-segments",
+  "orderPolicy": "recording-meta-segments",
+  "timeBasis": "raw-recording-display-timeline",
+  "recordingMetaPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/recording-meta.json",
+  "projectConfigPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/project-config.json",
+  "segments": [
+    {
+      "recordingSegment": 0,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-0/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-0/audio-input.ogg",
+      "displayDurationSeconds": 486.301667,
+      "microphoneDurationSeconds": 486.343604,
+      "microphoneStartTime": -0.043949,
+      "sourceTimelineOffsetSeconds": 0.173123,
+      "globalOffsetSeconds": 0,
+      "timelineReferences": [
+        0
+      ]
+    },
+    {
+      "recordingSegment": 1,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-1/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-1/audio-input.ogg",
+      "displayDurationSeconds": 418.711667,
+      "microphoneDurationSeconds": 418.718833,
+      "microphoneStartTime": -0.028135291,
+      "sourceTimelineOffsetSeconds": 0.186462,
+      "globalOffsetSeconds": 486.301667,
+      "timelineReferences": [
+        1
+      ]
+    },
+    {
+      "recordingSegment": 2,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-2/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-2/audio-input.ogg",
+      "displayDurationSeconds": 529.891667,
+      "microphoneDurationSeconds": 530.002625,
+      "microphoneStartTime": -0.001644791,
+      "sourceTimelineOffsetSeconds": 0.193121,
+      "globalOffsetSeconds": 905.013334,
+      "timelineReferences": [
+        2
+      ]
+    },
+    {
+      "recordingSegment": 3,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-3/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-3/audio-input.ogg",
+      "displayDurationSeconds": 155.683333,
+      "microphoneDurationSeconds": 155.875917,
+      "microphoneStartTime": 0.041677416,
+      "sourceTimelineOffsetSeconds": 0.243127,
+      "globalOffsetSeconds": 1434.905001,
+      "timelineReferences": [
+        3
+      ]
+    },
+    {
+      "recordingSegment": 4,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-4/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-4/audio-input.ogg",
+      "displayDurationSeconds": 528.553333,
+      "microphoneDurationSeconds": 528.603208,
+      "microphoneStartTime": 0.005454875,
+      "sourceTimelineOffsetSeconds": 0.171455,
+      "globalOffsetSeconds": 1590.588334,
+      "timelineReferences": [
+        4
+      ]
+    },
+    {
+      "recordingSegment": 5,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-5/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-5/audio-input.ogg",
+      "displayDurationSeconds": 108.071667,
+      "microphoneDurationSeconds": 108.285083,
+      "microphoneStartTime": 0.072713208,
+      "sourceTimelineOffsetSeconds": 0.334792,
+      "globalOffsetSeconds": 2119.141667,
+      "timelineReferences": [
+        5
+      ]
+    },
+    {
+      "recordingSegment": 6,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-6/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-6/audio-input.ogg",
+      "displayDurationSeconds": 366.718333,
+      "microphoneDurationSeconds": 366.804583,
+      "microphoneStartTime": 0.004189166,
+      "sourceTimelineOffsetSeconds": 0.18479,
+      "globalOffsetSeconds": 2227.213334,
+      "timelineReferences": [
+        6
+      ]
+    },
+    {
+      "recordingSegment": 7,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-7/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-7/audio-input.ogg",
+      "displayDurationSeconds": 134.671667,
+      "microphoneDurationSeconds": 134.850208,
+      "microphoneStartTime": 0.067816916,
+      "sourceTimelineOffsetSeconds": 0.231456,
+      "globalOffsetSeconds": 2593.931667,
+      "timelineReferences": [
+        7
+      ]
+    },
+    {
+      "recordingSegment": 8,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-8/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-8/audio-input.ogg",
+      "displayDurationSeconds": 21.838333,
+      "microphoneDurationSeconds": 21.99075,
+      "microphoneStartTime": 0.0060865,
+      "sourceTimelineOffsetSeconds": 0.50146,
+      "globalOffsetSeconds": 2728.603334,
+      "timelineReferences": [
+        8
+      ]
+    },
+    {
+      "recordingSegment": 9,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-9/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-9/audio-input.ogg",
+      "displayDurationSeconds": 169.42,
+      "microphoneDurationSeconds": 169.549479,
+      "microphoneStartTime": 0.075376208,
+      "sourceTimelineOffsetSeconds": 0.288123,
+      "globalOffsetSeconds": 2750.441667,
+      "timelineReferences": [
+        9
+      ]
+    },
+    {
+      "recordingSegment": 10,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-10/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-10/audio-input.ogg",
+      "displayDurationSeconds": 109.198333,
+      "microphoneDurationSeconds": 108.666771,
+      "microphoneStartTime": 0.058889875,
+      "sourceTimelineOffsetSeconds": 0.568129,
+      "globalOffsetSeconds": 2919.861667,
+      "timelineReferences": [
+        10
+      ]
+    },
+    {
+      "recordingSegment": 11,
+      "displayPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-11/display.mp4",
+      "microphonePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-11/audio-input.ogg",
+      "displayDurationSeconds": 62.583333,
+      "microphoneDurationSeconds": 62.066,
+      "microphoneStartTime": -0.00041925,
+      "sourceTimelineOffsetSeconds": 0.308116,
+      "globalOffsetSeconds": 3029.06,
+      "timelineReferences": [
+        11
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "timelineIndex": 0,
+      "recordingSegment": 0,
+      "start": 0,
+      "end": 486.343604,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 1,
+      "recordingSegment": 1,
+      "start": 0,
+      "end": 418.718833,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 2,
+      "recordingSegment": 2,
+      "start": 0,
+      "end": 530.002625,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 3,
+      "recordingSegment": 3,
+      "start": 0,
+      "end": 155.875917,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 4,
+      "recordingSegment": 4,
+      "start": 0,
+      "end": 528.603208,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 5,
+      "recordingSegment": 5,
+      "start": 0,
+      "end": 108.285083,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 6,
+      "recordingSegment": 6,
+      "start": 0,
+      "end": 366.804583,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 7,
+      "recordingSegment": 7,
+      "start": 0,
+      "end": 134.850208,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 8,
+      "recordingSegment": 8,
+      "start": 0,
+      "end": 21.99075,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 9,
+      "recordingSegment": 9,
+      "start": 0,
+      "end": 169.549479,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 10,
+      "recordingSegment": 10,
+      "start": 0,
+      "end": 109.198333,
+      "timescale": 1
+    },
+    {
+      "timelineIndex": 11,
+      "recordingSegment": 11,
+      "start": 0,
+      "end": 62.583333,
+      "timescale": 1
+    }
+  ]
+}

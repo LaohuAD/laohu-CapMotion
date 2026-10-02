@@ -1,0 +1,12 @@
+{
+  "schema": "laohu.final-asr-provenance/1",
+  "generatedAt": "2026-09-10T12:35:30.964Z",
+  "media": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/edited-main-audio.mp3",
+  "edl": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/冻结剪辑清单.json",
+  "raw": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/输出/成片ASR.raw.json",
+  "srt": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/输出/成片ASR.srt",
+  "mediaSha256": "9b5ad3ba0ee6d3742813eefefa6a4521056e8db0620bea04c4ea481aa0a8d4d1",
+  "edlSha256": "1fc1103b9f808f93c1c88a729abbd9d3fb167814670b8cb863be63e6f44ab7a0",
+  "rawSha256": "646be4417ddb35aa6ad03a53ece96c7f890a5ea3e66d1597fd57f10c41f42715",
+  "srtSha256": "d6f68dedb38de909b52b2644cf8dc7a8d8658e607bedf3d101f1e7d9ecc2ee9e"
+}

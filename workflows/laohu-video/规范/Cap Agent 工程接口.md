@@ -49,7 +49,7 @@ Agent 默认只能修改作品层数据：剪辑 EDL、轨道片段、字幕正�
 | 读取 | `cap project inspect / validate` | 已有 | 只读 |
 | 原始 ASR 字幕 | `cap project captions import` | 已有 | 保留样式和其他轨道 |
 | 字幕样式 | `cap project captions style` | 已实现 | 局部 patch，不替换字幕正文 |
-| Remotion | `cap motion definition/add/update/remove/render` | 已有 | revision + 工件校验 |
+| Remotion 覆盖轨 | `cap motion definition register` · `motion add` · `motion move` · `motion resize` · `motion props set` · `motion render` · `motion artifact` | 已有 | revision + 工件校验；**没有 `motion remove`**，已挂载的段落撤不掉 |
 | EDL | `scripts/cap-project-edl.mjs` | 可执行，待升为 `cap project edit apply` | 当前已有锁、revision、原子写和回执 |
 | 成片展示字幕 | `cap project captions materialize` | 已实现 | `laohu.cap-caption-tracks/1`；两条成片时码字幕轨，不覆盖源时码字幕主稿 |
 | 工程展示 | `cap project presentation` | 已实现 | 只局部更新画幅、背景绑定和画面位置；不替换 EDL、字幕、音频或覆盖轨 |
@@ -62,6 +62,24 @@ Agent 默认只能修改作品层数据：剪辑 EDL、轨道片段、字幕正�
 | 全配置替换 | `cap project config set` | 仅调试/迁移 | 普通 Agent 禁用，遗漏字段会重置 |
 
 字幕样式对用户和新 Agent 只暴露一套 `shadow*` 参数。未开启描边时，阴影从字形轮廓向外生长；开启描边时，同一阴影自动从“字形＋描边”的外缘继续扩展，颜色、透明度、模糊、距离和角度均沿用 `shadow*`。旧工程和旧调用中的 `outlineShadow*` 只作为兼容输入；读取或下次修改时必须将其合并到 `shadow*` 并关闭旧开关，不得再在界面或预设中显示两组彼此割裂的阴影。描边采样与效果边界属于渲染器公共能力，不能用某个用户预设中的数值替代；命名预设只保存用户选择的开关和参数。
+
+## 覆盖轨的已知边界与操作陷阱
+
+这些是实际写工程时踩出来的，照做能避开整类返工。
+
+**没有 `motion remove`。** 覆盖轨只能新增、移动、缩放和改 props，撤不掉一个已挂载的段落。要换掉某个单元的实现，只能从源工程重建工作工程，再按新清单重挂。
+
+**同一角色的动画不能在时间上重叠。** 报错形如 `SameRoleOverlap { first_segment_id, second_segment_id, role: Animation }`。相邻两张卡的硬边界是**前一张卡的起点到后一张卡的起点**，不是各自的覆盖窗口。关键词落在窗口末尾时，卡可以延长到下一张卡之前，不必被窗口砍短。
+
+**定义是版本化的，v1 不可覆盖。** 同一 id 再次 `definition register` 会报 `already exists`。上一次中断留下的定义直接复用，不让整批挂载卡在一个已存在的定义上。源代码改了要出新版本，不能原地覆盖。
+
+**`compositionId` 属于每个定义，不属于清单。** 一份清单里可以既有共享形态组件（一个 Composition 覆盖多种 kind），也有独立 Composition 的原卡。清单顶层只作缺省。
+
+**定义里的源文件路径会随文件挪动失效。** 卡片从 `src/works/…` 挪到 `src/cards/…` 后，定义仍指向旧路径，渲染能过但整条链再也跑不通。挪动后要重建工程让定义按新路径重新注册。
+
+**每次写操作带当时真实的 `expectedRevision`。** 批量挂载时逐条实时读取，不用一个缓存值套到底；工程被别的操作推进过就会 revision 冲突。
+
+**`motion` 的 duration 与 bounds 单位是秒，不是帧。** 用帧注册会在写入后发现越界，且没有 remove 可以回退。
 
 ## 应继续固化的接口
 

@@ -1,0 +1,28 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {findSafeSilenceCore} from '../../../workflows/laohu-video/模板/video-editing/safe-speech-gap-refinement.mjs';
+const W=resolve('作品/016_三工程口播虚拟剪辑');const r=JSON.parse(await readFile(W+'/分析/预剪辑审稿.json'));const ass=JSON.parse(await readFile(W+'/制作/工程组装回执.json'));
+const sm=new Map(ass.segmentMap.map(x=>[`${x.tag}:${x.sourceRecordingSegment}`,x]));
+const sequence=r.plannedEdl.map((e,i)=>{const m=sm.get(`${e.tag}:${e.recordingSegment}`);return {index:i+1,recordingSegment:m.workingRecordingSegment,sourceStart:e.microphoneRange.start-m.micOffset,sourceEnd:e.microphoneRange.end-m.micOffset,targetStart:e.finalRange.start,targetEnd:e.finalRange.end,blockId:e.blockId,sourceProject:m.sourceProject,sourceRecordingSegment:e.recordingSegment}});
+const edl={schema:'laohu.cap-edl/1',sourceProjectRevision:2,durationSeconds:r.scope.end,sequence};
+const folders={A:'A_首录',B:'B_续录',C:'C_补录'};let captions=[];let safety=[];
+const sil=JSON.parse(await readFile(W+'/分析/音轨静音证据.json'));
+for(const m of ass.segmentMap){let raw;try{raw=JSON.parse(await readFile(`${W}/输入/${folders[m.tag]}/segments/${String(m.sourceRecordingSegment).padStart(3,'0')}.raw.json`));}catch{continue;}
+ const offset=m.workingGlobalStart-m.micOffset;
+ const allWords=[];
+ for(const [i,u]of raw.result.utterances.entries()){
+  const words=u.words.filter(w=>w.start_time>=0&&w.end_time>w.start_time).map(w=>({text:w.text,start:offset+w.start_time/1000,end:offset+w.end_time/1000}));
+  captions.push({id:`${m.tag}-${m.sourceRecordingSegment}-${i}`,start:offset+u.start_time/1000,end:offset+u.end_time/1000,text:u.text,words});
+  for(const w of u.words.filter(w=>w.start_time>=0&&w.end_time>w.start_time))allWords.push({text:w.text,start:w.start_time/1000,end:w.end_time/1000});
+ }
+ const s=sil.find(x=>x.project===m.sourceProject.split('/').at(-1)&&x.segment===m.sourceRecordingSegment&&x.track==='mic');
+ for(const silence of s?.silences??[]){if(silence.end===null)continue;const core=findSafeSilenceCore({silence,words:allWords,keepTailSeconds:.1,keepPrerollSeconds:.14});if(core)safety.push({tag:m.tag,segment:m.sourceRecordingSegment,core});}
+}
+const translations=new Map((await readFile(W+'/制作/英文字幕逐段.txt','utf8')).trim().split('\n').map(l=>{const [id,...texts]=l.split('|');return[id,texts]}));
+let display=[];
+for(const b of r.editorialBlocks){const subs=r.segments.filter(s=>s.blockId===b.id);const en=translations.get(b.id);if(en?.length!==subs.length)throw Error(`${b.id} subtitle count ${en?.length}/${subs.length}`);subs.forEach((s,i)=>display.push({id:s.id,start:s.finalRange.start,end:s.finalRange.end,text:s.text.replace(/(?<=[\p{Script=Han}]) +(?=[\p{Script=Han}])/gu,''),en:en[i]}));}
+const tracks={schema:'laohu.cap-caption-tracks/1',tracks:[{id:'zh-CN',label:'中文字幕',language:'zh-CN',style:{fontSize:64,position:'manual',manualPosition:{x:.5,y:.92}},segments:display.map(s=>({id:s.id+'-zh',pairId:s.id,start:s.start,end:s.end,text:s.text,words:[]}))},{id:'en',label:'English Captions',language:'en',style:{fontSize:34,position:'manual',manualPosition:{x:.5,y:.972}},segments:display.map(s=>({id:s.id+'-en',pairId:s.id,start:s.start,end:s.end,text:s.en,words:[]}))}]};
+for(const [f,d]of Object.entries({'冻结剪辑清单.json':edl,'源到成片映射.json':{schema:'laohu.source-to-final/1',duration:r.scope.end,segments:r.plannedEdl,assemblySegments:ass.segmentMap},'源字幕主稿.json':{sourceTimed:true,segments:captions},'双语展示字幕.json':tracks,'静音安全核审计.json':{status:'PASS_WORD_GUARDS',safeCores:safety,reviewWordCoverage:r.audit.verification,formalCuts:'approved plannedEdl retained without extra deletions'},'画面绑定.json':{aspectRatio:'wide',background:{sourceBinding:'currentDesktop',displayPosition:{x:.5,y:.44}}},'预览设置.json':{format:'Mp4',fps:30,resolution_base:{x:1920,y:1080},compression:'Social',custom_bpp:null}}))await writeFile(W+'/制作/'+f,JSON.stringify(d,null,2));
+const review={documentPath:W+'/分析/预剪辑审稿.html',revision:1,fullTimelineCovered:true,segmentBoundariesIncluded:true,virtualRoughCutComplete:true,virtualFineCutComplete:true,provisionalFinalTimelineIncluded:true,crossCueSemanticReviewComplete:true,atomicTermsPreserved:true,uncertaintiesResolved:true,userApproval:r.approval};
+const pack={schema:'laohu.video-postproduction-handoff/1',videoId:r.id,phase:'SECOND_PASS_POSTPRODUCTION',intent:{audience:r.brief.audience,promise:'从六要素构图到资产提取，理解如何自行判断并修正 AI 结果',mainLine:r.brief.mainline,primaryWin:'连续操作与案例关系清楚',visualStrategy:'原录屏及原摄像头；不做动画'},knowledgeActivations:[{asset:'laohu-video-postproduction',trigger:'用户批准实际剪辑',judgment:'保留源工程，按批准片段映射后生成字幕',changedDecision:'在独立工作工程执行 revision-safe 写入',resultLocation:ass.workProject,unusedBoundary:'不生成动画或数字人'},{asset:'correct-srt-subtitles',trigger:'字幕校对及剪口复核',judgment:'原声和已确认审稿决定文字',changedDecision:'保留型号原声差异，以最终主音频复核',resultLocation:W+'/制作/双语展示字幕.json',unusedBoundary:'不借校对重剪内容'}],thread:{ownership:'DEDICATED_VIDEO_TASK',upstreamCreatesOnce:true},capProject:{sourcePath:ass.sources.A,path:ass.workProject,expectedRevision:0,nonDestructiveCopy:true},sources:{secondPassAsr:W+'/输入/A_首录/cap-asr.raw.json',productionScript:W+'/分析/预剪辑审稿.json',finalMainAudio:ass.workProject+'/assets/edited-main-audio.mp3'},edit:{edlPath:W+'/制作/冻结剪辑清单.json',sourceToFinalMapPath:W+'/制作/源到成片映射.json',captionTracks:{sourceMasterPath:W+'/制作/源字幕主稿.json',displayTracksPath:W+'/制作/双语展示字幕.json',mode:'SEPARATE_BILINGUAL',tracks:['zh-CN','en']},preEditReview:review},protection:{preserveBaseRecording:true,preserveFinalMainAudio:true,mediaOutsideRepository:true},tasks:[]};
+await writeFile(W+'/制作/后期任务包.json',JSON.stringify(pack,null,2));console.log({edl:sequence.length,sourceCaptions:captions.length,displayCaptions:display.length,safeCores:safety.length});

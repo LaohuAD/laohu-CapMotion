@@ -1,0 +1,940 @@
+{
+  "status": "PASS_CLI_RELOAD_RENDER",
+  "guiInteraction": "not run; no visible app launched",
+  "windows": "shared contract tested; Windows native run pending",
+  "image": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/developer-subtitle-preview.jpg",
+  "checks": [
+    "source import",
+    "EDL write from original timeline",
+    "bilingual materialization preserves user track preferences",
+    "independent sizes",
+    "preset save and fresh reload",
+    "actual preview render"
+  ],
+  "log": [
+    {
+      "command": [
+        "project",
+        "validate",
+        "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap"
+      ],
+      "result": {
+        "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap",
+        "valid": true,
+        "recordingType": "studio",
+        "checks": [
+          {
+            "role": "recordingMeta",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/recording-meta.json",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "projectConfig",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/project-config.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-0/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-0/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-0/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-0/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-0/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-1/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-1/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-1/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-1/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-1/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-2/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-2/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-2/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-2/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-2/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-3/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-3/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-3/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-3/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-3/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-4/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-4/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-4/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-4/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-4/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-5/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-5/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-5/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-5/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-5/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-6/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-6/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-6/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-6/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-6/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-7/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-7/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-7/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-7/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-7/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-8/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-8/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-8/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-8/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-8/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-9/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-9/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-9/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-9/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-9/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-10/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-10/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-10/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-10/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-10/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-11/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-11/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-11/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-11/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-11/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-12/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-12/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-12/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-12/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-12/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-13/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-13/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-13/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-13/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-13/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-14/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-14/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-14/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-14/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-14/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-15/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-15/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-15/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-15/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-15/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-16/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-16/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-16/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-16/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-16/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "displayVideo",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-17/display.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "camera",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-17/camera.mp4",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "mic",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-17/audio-input.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "systemAudio",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-17/system_audio.ogg",
+            "exists": true,
+            "required": true
+          },
+          {
+            "role": "cursor",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/content/segments/segment-17/cursor.json",
+            "exists": true,
+            "required": false
+          },
+          {
+            "role": "output",
+            "path": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/output/result.mp4",
+            "exists": false,
+            "required": false
+          }
+        ],
+        "missing": []
+      }
+    },
+    {
+      "command": [
+        "project",
+        "preset",
+        "apply"
+      ],
+      "result": {
+        "ok": true,
+        "preset": "Laohu",
+        "revision": 1
+      }
+    },
+    {
+      "command": [
+        "project",
+        "captions",
+        "import"
+      ],
+      "result": {
+        "captionCount": 591,
+        "ok": true,
+        "revision": 2,
+        "sourceTimed": true
+      }
+    },
+    {
+      "command": [
+        "project",
+        "captions",
+        "materialize"
+      ],
+      "result": {
+        "captionSegmentCount": 998,
+        "captionTrackCount": 2,
+        "displayMode": "materialized",
+        "ok": true,
+        "revision": 4
+      }
+    },
+    {
+      "command": [
+        "project",
+        "inspect",
+        "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap"
+      ],
+      "result": {
+        "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap",
+        "outputPath": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/output/result.mp4",
+        "revision": 4,
+        "name": "016 人物设计与资产提取",
+        "recordingType": "studio"
+      }
+    },
+    {
+      "command": [
+        "project",
+        "captions",
+        "style"
+      ],
+      "result": {
+        "ok": true,
+        "revision": 5
+      }
+    },
+    {
+      "command": [
+        "presets",
+        "save",
+        "Test"
+      ],
+      "result": {
+        "ok": true,
+        "preset": "Test",
+        "previousRevision": 0,
+        "revision": 1
+      }
+    },
+    {
+      "command": [
+        "presets",
+        "inspect",
+        "Test"
+      ],
+      "result": {
+        "ok": true,
+        "preset": {
+          "config": {
+            "annotations": [],
+            "aspectRatio": "wide",
+            "audio": {
+              "improve": false,
+              "micStereoMode": "stereo",
+              "micVolumeDb": 0.0,
+              "microphoneTrack": {
+                "cuts": [],
+                "expanded": false,
+                "mutedRanges": []
+              },
+              "mute": false,
+              "systemAudioTrack": {
+                "cuts": [],
+                "expanded": false,
+                "mutedRanges": []
+              },
+              "systemVolumeDb": 0.0
+            },
+            "background": {
+              "advancedShadow": {
+                "blur": 9.100000381469727,
+                "opacity": 24.100000381469727,
+                "size": 8.0
+              },
+              "blur": 7.8,
+              "border": {
+                "color": [
+                  0,
+                  0,
+                  0
+                ],
+                "enabled": true,
+                "opacity": 47.0,
+                "width": 2.9000000953674316
+              },
+              "crop": null,
+              "displayPosition": {
+                "x": 0.5,
+                "y": 0.44
+              },
+              "frame": null,
+              "inset": 0,
+              "notch": null,
+              "padding": 4.0,
+              "rounding": 9.1,
+              "roundingType": "squircle",
+              "shadow": 39.599998474121094,
+              "source": {
+                "path": null,
+                "type": "wallpaper"
+              },
+              "sourceBinding": "currentDesktop"
+            },
+            "camera": {
+              "advancedShadow": {
+                "blur": 10.5,
+                "opacity": 44.20000076293945,
+                "size": 33.900001525878906
+              },
+              "backgroundBlur": {
+                "mode": "off"
+              },
+              "hide": false,
+              "manualPosition": null,
+              "mirror": false,
+              "position": {
+                "x": "right",
+                "y": "bottom"
+              },
+              "rounding": 25.0,
+              "roundingType": "squircle",
+              "scaleDuringZoom": 0.699999988079071,
+              "shadow": 46.099998474121094,
+              "shape": "square",
+              "size": 20.0,
+              "zoomSize": 60.0
+            },
+            "captions": {
+              "displayMode": "materialized",
+              "segments": [],
+              "settings": {
+                "activeWordHighlight": false,
+                "animation": "none",
+                "backgroundColor": "#000000",
+                "backgroundOpacity": 0,
+                "color": "#FFFFFF",
+                "enabled": true,
+                "exportWithSubtitles": true,
+                "fadeDuration": 0.11999999731779099,
+                "font": "Source Han Sans CN VF",
+                "fontWeight": 500,
+                "highlightColor": "#FFFFFF",
+                "highlightStyle": "color",
+                "italic": false,
+                "letterSpacing": 0.0,
+                "lingerDuration": 0.4000000059604645,
+                "manualPosition": {
+                  "x": 0.5,
+                  "y": 0.9125493764877319
+                },
+                "outline": true,
+                "outlineColor": "#000000",
+                "outlineShadow": false,
+                "outlineShadowAngle": -45.0,
+                "outlineShadowBlur": 15.0,
+                "outlineShadowColor": "#000000",
+                "outlineShadowDistance": 5.0,
+                "outlineShadowOpacity": 75.0,
+                "outlineWidth": 4.0,
+                "position": "manual",
+                "preset": "user:Test",
+                "shadow": true,
+                "shadowAngle": -45.0,
+                "shadowBlur": 15.0,
+                "shadowColor": "#000000",
+                "shadowDistance": 5.0,
+                "shadowOpacity": 75.0,
+                "size": 52,
+                "trackPositions": [
+                  {
+                    "manualPosition": {
+                      "x": 0.5,
+                      "y": 0.9125493764877319
+                    },
+                    "position": "manual",
+                    "trackId": "zh-CN"
+                  },
+                  {
+                    "manualPosition": {
+                      "x": 0.5,
+                      "y": 0.9870370626449585
+                    },
+                    "position": "manual",
+                    "trackId": "en"
+                  }
+                ],
+                "trackStyles": [
+                  {
+                    "fontSize": 48,
+                    "trackId": "zh-CN"
+                  },
+                  {
+                    "fontSize": 31,
+                    "trackId": "en"
+                  }
+                ],
+                "uppercase": false,
+                "wordTransitionDuration": 0.25
+              },
+              "sourceTimed": true
+            },
+            "clips": [],
+            "colorCorrection": {
+              "camera": {
+                "contrast": 0.0,
+                "exposure": 0.0,
+                "fade": 0.0,
+                "grain": 0.0,
+                "intensity": 1.0,
+                "preset": "none",
+                "saturation": 0.0,
+                "splitTone": 0.0,
+                "temperature": 0.0,
+                "tint": 0.0,
+                "vignette": 0.0
+              },
+              "gradeCursor": true,
+              "screen": {
+                "contrast": 0.0,
+                "exposure": 0.0,
+                "fade": 0.0,
+                "grain": 0.0,
+                "intensity": 1.0,
+                "preset": "none",
+                "saturation": 0.0,
+                "splitTone": 0.0,
+                "temperature": 0.0,
+                "tint": 0.0,
+                "vignette": 0.0
+              }
+            },
+            "cursor": {
+              "animationStyle": "mellow",
+              "baseRotation": 0.0,
+              "clickSpring": null,
+              "friction": 70.0,
+              "hide": false,
+              "hideWhenIdle": false,
+              "hideWhenIdleDelay": 2.0,
+              "mass": 3.0,
+              "motionBlur": 1.0,
+              "raw": false,
+              "ripple": {
+                "color": [
+                  71,
+                  133,
+                  255
+                ],
+                "duration": 0.6000000238418579,
+                "enabled": false,
+                "size": 1.0,
+                "strength": 0.699999988079071
+              },
+              "rotationAmount": 0.15000000596046448,
+              "size": 100,
+              "stopMovementInLastSeconds": null,
+              "tension": 470.0,
+              "type": "auto",
+              "useSvg": true
+            },
+            "hotkeys": {
+              "show": false
+            },
+            "keyboard": null,
+            "motion": {
+              "artifacts": [],
+              "definitions": [],
+              "segments": []
+            },
+            "projectRevision": 0,
+            "screenMotionBlur": 1.0,
+            "screenMovementSpring": {
+              "damping": 40.0,
+              "mass": 2.25,
+              "stiffness": 200.0
+            },
+            "textAnimVersion": 1,
+            "textSizeVersion": 1,
+            "timeline": null
+          },
+          "name": "Test"
+        },
+        "revision": 1
+      }
+    },
+    {
+      "command": [
+        "project",
+        "inspect",
+        "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap"
+      ],
+      "result": {
+        "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap",
+        "outputPath": "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap/output/result.mp4",
+        "revision": 5,
+        "name": "016 人物设计与资产提取",
+        "recordingType": "studio"
+      }
+    },
+    {
+      "command": [
+        "export-preview",
+        "/Volumes/Laohu_Work/软件数据/Cap/任务临时/016实际剪辑/subtitle-qa.cap",
+        "--frame-time"
+      ],
+      "result": {
+        "estimated_size_mb": 993.9191311240587,
+        "actual_width": 1920,
+        "actual_height": 1080,
+        "frame_render_time_ms": 2824.805,
+        "total_frames": 52531
+      }
+    }
+  ]
+}

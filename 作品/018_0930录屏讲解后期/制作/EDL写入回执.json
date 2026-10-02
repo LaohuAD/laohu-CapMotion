@@ -1,0 +1,13 @@
+{
+  "schema": "laohu.cap-edl-receipt/1",
+  "status": "applied",
+  "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap",
+  "projectName": "018_从使用AI工具到建立判断力_工作工程.cap",
+  "edlPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/018_0930录屏讲解后期/制作/剪辑清单.json",
+  "edlSha256": "8a0e39da575dbc6c6f67a7784c0c56dec176ea7e8ae0053d6716e10a0b4e1518",
+  "previousRevision": 7,
+  "newRevision": 8,
+  "segmentCount": 969,
+  "durationSeconds": 1454.813,
+  "appliedAt": "2026-10-01T16:04:42.029Z"
+}

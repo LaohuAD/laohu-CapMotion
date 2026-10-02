@@ -1,0 +1,6792 @@
+{
+  "status": "PASS_WORD_GUARDS",
+  "safeCores": [
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 0.05,
+        "end": 1.1130209999999998
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 5.529999999999999,
+        "end": 13.049999999999999
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 16.614896,
+        "end": 18.611812
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 21.59,
+        "end": 21.71
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 23.55,
+        "end": 31.43
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 34.39,
+        "end": 36.228646
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 38.225125,
+        "end": 44.692521
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 48.4,
+        "end": 50.96
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 53.152311999999995,
+        "end": 53.6
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 55.440000000000005,
+        "end": 55.76
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 61.2,
+        "end": 68.28
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 71.52,
+        "end": 72.46
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 75.97999999999999,
+        "end": 78.69
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 79.61,
+        "end": 88.79
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 91.43575,
+        "end": 95.71
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 97.024,
+        "end": 99.59
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 102.71,
+        "end": 102.99
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 103.94999999999999,
+        "end": 104.89
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 109.80999999999999,
+        "end": 110.33
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 113.89,
+        "end": 117.724563
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 118.38,
+        "end": 119.14
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 124.53999999999999,
+        "end": 124.7
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 126.89999999999999,
+        "end": 127.704937
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 129.12,
+        "end": 130.48879200000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 134.961937,
+        "end": 136.36
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 137.72,
+        "end": 141.169833
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 145.07999999999998,
+        "end": 145.32000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 147.425417,
+        "end": 165.83935400000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 170.7,
+        "end": 172.3
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 173.178604,
+        "end": 179.39000000000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 179.978167,
+        "end": 180.28
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 183.6,
+        "end": 192.48000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 195.72,
+        "end": 200.82000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 202.756625,
+        "end": 203.858812
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 205.86045800000002,
+        "end": 207.27
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 211.15,
+        "end": 211.456208
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 214.47,
+        "end": 216.25
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 219.60999999999999,
+        "end": 221.01000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 224.89,
+        "end": 226.25
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 228.32999999999998,
+        "end": 231.43
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 235.82999999999998,
+        "end": 236.03
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 237.87,
+        "end": 238.97000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 241.60999999999999,
+        "end": 245.550458
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 250.63,
+        "end": 252.008542
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 254.84,
+        "end": 255.390417
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 255.83185400000002,
+        "end": 262.07
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 264.35,
+        "end": 264.79
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 266.71000000000004,
+        "end": 269.18
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 269.78000000000003,
+        "end": 272.62
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 275.94,
+        "end": 276.22
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 277.70000000000005,
+        "end": 278.87
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 279.87,
+        "end": 280.03000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 281.27000000000004,
+        "end": 282.390938
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 282.85145800000004,
+        "end": 283.83000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 285.395729,
+        "end": 288.806188
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 296.49,
+        "end": 296.61
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 298.33000000000004,
+        "end": 300.41
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 303.8505,
+        "end": 304.29
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 306.85,
+        "end": 307.09000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 315.86,
+        "end": 317.77000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 321.578771,
+        "end": 330.66
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 335.34000000000003,
+        "end": 335.82
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 336.77925,
+        "end": 337.34000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 338.86,
+        "end": 339.54
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 341.74,
+        "end": 345.45
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 348.81,
+        "end": 349.01
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 352.17,
+        "end": 352.33000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 356.89000000000004,
+        "end": 357.14
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 363.34000000000003,
+        "end": 363.94
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 364.78000000000003,
+        "end": 365.90000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 368.26000000000005,
+        "end": 372.63
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 375.677708,
+        "end": 376.11
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 377.318896,
+        "end": 378.64
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 382.6,
+        "end": 383.04
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 384.16,
+        "end": 385.16
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 386.77575,
+        "end": 389.74
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 393.42,
+        "end": 394.464583
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 396.82000000000005,
+        "end": 397.42
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 398.62,
+        "end": 399.85
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 402.528021,
+        "end": 404.49925
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 406.343437,
+        "end": 420.06
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 423.74,
+        "end": 425.233208
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 427.869125,
+        "end": 430.86225
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 434.5,
+        "end": 434.74
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 436.94,
+        "end": 439.5
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 442.90000000000003,
+        "end": 449.059562
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 451.75,
+        "end": 454.83000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 456.71000000000004,
+        "end": 461.7765
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 465.74,
+        "end": 466.02000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 469.66,
+        "end": 469.82
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 470.602792,
+        "end": 471.02000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 0,
+      "core": {
+        "start": 479.08000000000004,
+        "end": 486.207104
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 0.05,
+        "end": 3.38
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 5.42,
+        "end": 15.62
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 25.465688,
+        "end": 29.718125
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 29.922562,
+        "end": 32.65
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 36.444145999999996,
+        "end": 38.85
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 40.77,
+        "end": 42.15
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 42.79,
+        "end": 45.57
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 50.17,
+        "end": 50.37
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 53.77,
+        "end": 54.01
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 57.29,
+        "end": 57.49
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 60.259104,
+        "end": 60.57
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 63.117749999999994,
+        "end": 65.63
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 67.47,
+        "end": 67.79
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 68.14999999999999,
+        "end": 68.79
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 71.42999999999999,
+        "end": 71.63
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 73.58999999999999,
+        "end": 73.75
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 76.86999999999999,
+        "end": 78.71
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 79.855792,
+        "end": 80.03
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 81.86999999999999,
+        "end": 82.03
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 85.63,
+        "end": 88.08
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 91.6,
+        "end": 93.51875000000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 95.63825,
+        "end": 98.49
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 100.89,
+        "end": 103.05
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 106.40264599999999,
+        "end": 106.92999999999999
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 108.141333,
+        "end": 108.53
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 109.89,
+        "end": 112.05
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 114.34133299999999,
+        "end": 114.89
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 116.13,
+        "end": 117.35
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 119.645104,
+        "end": 120.62
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 122.22,
+        "end": 124.74225
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 125.36010399999999,
+        "end": 126.525812
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 129.50375000000003,
+        "end": 131.86
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 136.01999999999998,
+        "end": 136.18
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 137.26,
+        "end": 137.66000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 140.46,
+        "end": 143.553417
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 146.76999999999998,
+        "end": 150
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 153.72,
+        "end": 156.629979
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 160.25,
+        "end": 162.22000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 166.78,
+        "end": 252.18
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 259.74,
+        "end": 263.227937
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 266.31,
+        "end": 266.51
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 269.47,
+        "end": 269.71000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 273.03000000000003,
+        "end": 273.31
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 274.35,
+        "end": 274.63
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 280.19,
+        "end": 283.32
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 284.56,
+        "end": 288.060375
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 289.34000000000003,
+        "end": 290.752646
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 293.130979,
+        "end": 293.53000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 294.37,
+        "end": 294.85
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 297.53000000000003,
+        "end": 321.809333
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 323.279604,
+        "end": 323.56
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 328.307687,
+        "end": 328.8
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 333.04,
+        "end": 333.41
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 336.827,
+        "end": 360.26
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 363.1,
+        "end": 373.24
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 379,
+        "end": 379.2
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 384.68,
+        "end": 384.86
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 389.18,
+        "end": 389.42
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 391.082896,
+        "end": 392.26
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 393.817354,
+        "end": 403.969333
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 404.414542,
+        "end": 405.46000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 1,
+      "core": {
+        "start": 406.595625,
+        "end": 418.582333
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 0.05,
+        "end": 2.82
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 6.016312,
+        "end": 6.260000000000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 8.1,
+        "end": 8.379999999999999
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 12.06,
+        "end": 12.5
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 18.934083,
+        "end": 19.27
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 20.166812,
+        "end": 20.349999999999998
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 24.790000000000003,
+        "end": 39.24
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 44,
+        "end": 44.16
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 47.32,
+        "end": 47.68
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 53.08,
+        "end": 55.65
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 57.247792,
+        "end": 57.37
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 60.370000000000005,
+        "end": 60.69
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 65.16999999999999,
+        "end": 67.4
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 69.83999999999999,
+        "end": 71.109667
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 77.037917,
+        "end": 83.12
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 89.06804199999999,
+        "end": 90.99
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 95.055583,
+        "end": 95.59
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 96.83,
+        "end": 98.63125000000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 107.66,
+        "end": 108.14
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 112.03147899999999,
+        "end": 112.87
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 121.97714599999999,
+        "end": 124.02
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 124.991917,
+        "end": 125.17999999999999
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 129.06,
+        "end": 142.53
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 144.09,
+        "end": 160.91000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 165.39,
+        "end": 180.62
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 182.66,
+        "end": 183.66000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 185.582938,
+        "end": 185.9
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 186.73999999999998,
+        "end": 188.879062
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 192.898562,
+        "end": 193.33
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 196.81,
+        "end": 202.39000000000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 210.43,
+        "end": 210.99
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 218.29,
+        "end": 230.136708
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 232.21816700000002,
+        "end": 234.16000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 238.72,
+        "end": 239.216271
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 242.32,
+        "end": 242.88000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 244.23366700000003,
+        "end": 244.671021
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 245.08829200000002,
+        "end": 246.76208300000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 249.01,
+        "end": 249.41000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 255.93645800000002,
+        "end": 257.504563
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 259.578896,
+        "end": 260.25
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 262.65000000000003,
+        "end": 265.35
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 275.11,
+        "end": 276.78000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 283.90000000000003,
+        "end": 285.35
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 285.99,
+        "end": 286.11
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 291.35,
+        "end": 291.63
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 295.653479,
+        "end": 307.46000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 310.403708,
+        "end": 310.78000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 315.46000000000004,
+        "end": 315.78000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 317.38,
+        "end": 317.86
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 319.54,
+        "end": 321.339458
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 323.32000000000005,
+        "end": 324.36
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 325.45495800000003,
+        "end": 325.68
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 328.644562,
+        "end": 329.267812
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 331.37,
+        "end": 331.69
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 333.779104,
+        "end": 334.45
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 341.21000000000004,
+        "end": 342.71000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 344.19,
+        "end": 353.59000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 354.83000000000004,
+        "end": 360.43
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 362.23,
+        "end": 362.71000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 364.07000000000005,
+        "end": 384.095812
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 386.963187,
+        "end": 393.01
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 394.313458,
+        "end": 394.97
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 397.13,
+        "end": 401.095458
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 2,
+      "core": {
+        "start": 402.85,
+        "end": 529.866125
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 0.05,
+        "end": 0.45999999999999996
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 4.9799999999999995,
+        "end": 6.82
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 9.86,
+        "end": 11.69
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 13.561021,
+        "end": 14.37
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 19.09,
+        "end": 23
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 25.560000000000002,
+        "end": 25.96
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 28.32,
+        "end": 29.28
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 30.823167,
+        "end": 31
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 31.789104000000002,
+        "end": 33.91
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 38.83,
+        "end": 47.65
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 48.547542,
+        "end": 52.47
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 56.230000000000004,
+        "end": 56.63
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 60.99,
+        "end": 63.18
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 65.067104,
+        "end": 67.12
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 68.481771,
+        "end": 74.92310400000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 77.19999999999999,
+        "end": 77.96
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 79.36,
+        "end": 82.39
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 84.22999999999999,
+        "end": 86.91
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 90.050792,
+        "end": 92.12952100000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 94.61999999999999,
+        "end": 99.84
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 100.88,
+        "end": 102.06
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 106.25999999999999,
+        "end": 106.5
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 106.866854,
+        "end": 107.58
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 109.78,
+        "end": 110.83
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 114.638604,
+        "end": 116.03
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 119.30999999999999,
+        "end": 119.75
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 121.096333,
+        "end": 121.51
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 122.70370799999999,
+        "end": 127.92
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 129.48,
+        "end": 129.606583
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 130.290042,
+        "end": 132.10000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 135.680562,
+        "end": 135.98000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 137.452167,
+        "end": 139.966104
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 143.132313,
+        "end": 144.250896
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 146.103792,
+        "end": 147.529854
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 3,
+      "core": {
+        "start": 148.06314600000002,
+        "end": 155.739417
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 0.05,
+        "end": 1.06
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 12.867750000000001,
+        "end": 14.603936999999998
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 15.59125,
+        "end": 16.189999999999998
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 19.75,
+        "end": 20.189999999999998
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 25.19,
+        "end": 26.811125
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 27.011771,
+        "end": 29.579333000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 36.941646,
+        "end": 39.71
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 41.942125,
+        "end": 45.55
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 47.640854,
+        "end": 49.42
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 50.02,
+        "end": 69.708167
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 74.906104,
+        "end": 76.84
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 80.299667,
+        "end": 94.69025
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 94.901042,
+        "end": 95.2
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 98.995792,
+        "end": 104.05
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 105.178375,
+        "end": 106.71510400000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 109.28999999999999,
+        "end": 109.49
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 111.72999999999999,
+        "end": 113.6
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 119.014708,
+        "end": 120.03
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 120.95356199999999,
+        "end": 124.24
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 125.91999999999999,
+        "end": 128.70000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 131.129625,
+        "end": 135.9
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 137.714687,
+        "end": 143.050813
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 146.65,
+        "end": 157.851937
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 161.64,
+        "end": 162.12
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 165.501854,
+        "end": 172.275583
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 173.23999999999998,
+        "end": 175.36
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 181.451042,
+        "end": 181.60000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 184.23999999999998,
+        "end": 184.4
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 186.600729,
+        "end": 188.48000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 190.51999999999998,
+        "end": 196.35000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 199.79,
+        "end": 201.18
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 204.29208300000002,
+        "end": 204.82000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 209.42,
+        "end": 218.41000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 223.32999999999998,
+        "end": 227.689312
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 227.872062,
+        "end": 228.91000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 232.582896,
+        "end": 235.05
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 236.81,
+        "end": 244.06
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 245.76991700000002,
+        "end": 246.74
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 247.78,
+        "end": 249.282792
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 250.025042,
+        "end": 251.38000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 253.29999999999998,
+        "end": 271.57
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 273.69,
+        "end": 273.89
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 276.85060400000003,
+        "end": 277.01
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 281.17,
+        "end": 301.48
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 303.95468700000004,
+        "end": 316.022396
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 317.5,
+        "end": 319.299604
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 324.95000000000005,
+        "end": 327.924625
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 329.363771,
+        "end": 329.65000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 331.61,
+        "end": 332.71000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 335.27000000000004,
+        "end": 335.43
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 338.63,
+        "end": 338.83000000000004
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 341.71000000000004,
+        "end": 341.91
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 343.43,
+        "end": 346.355417
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 347.95000000000005,
+        "end": 348.199896
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 348.384187,
+        "end": 359.732917
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 360.702021,
+        "end": 370.90000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 371.763208,
+        "end": 373.038229
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 378.264208,
+        "end": 378.74
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 381.3,
+        "end": 383.36
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 384.198625,
+        "end": 384.56
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 386.64000000000004,
+        "end": 452.469979
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 452.65002100000004,
+        "end": 453.29
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 456.17,
+        "end": 456.29
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 457.53114600000004,
+        "end": 460.16
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 463.20000000000005,
+        "end": 465.705
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 467.78056200000003,
+        "end": 475.625083
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 478.81,
+        "end": 479.05
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 484.758979,
+        "end": 487.496667
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 491.630917,
+        "end": 499.238313
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 499.90950000000004,
+        "end": 500.90000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 503.62,
+        "end": 506.82
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 508.532375,
+        "end": 513.13
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 515.1700000000001,
+        "end": 515.5371250000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 4,
+      "core": {
+        "start": 515.7241459999999,
+        "end": 528.466708
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 0.05,
+        "end": 5.580542
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 7.869999999999999,
+        "end": 11.738771
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 13.44,
+        "end": 43.769999999999996
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 45.943166999999995,
+        "end": 48.29
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 50.690000000000005,
+        "end": 58.196146
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 59.578146,
+        "end": 68.591958
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 69.89,
+        "end": 76
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 77.67999999999999,
+        "end": 81.55
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 82.315979,
+        "end": 82.791208
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 5,
+      "core": {
+        "start": 83.379729,
+        "end": 108.148583
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 0.05,
+        "end": 1.52
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 6.4799999999999995,
+        "end": 33.176417
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 33.380292,
+        "end": 81.29
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 86.44999999999999,
+        "end": 86.65
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 88.21,
+        "end": 88.61
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 89.977687,
+        "end": 92.56
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 94.810979,
+        "end": 94.96
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 96.96,
+        "end": 99.33
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 101.33,
+        "end": 101.57
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 102.25,
+        "end": 122.62
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 124.74,
+        "end": 132.35000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 136.964687,
+        "end": 137.99
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 139.542271,
+        "end": 139.67000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 140.74366700000002,
+        "end": 148.69000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 149.837312,
+        "end": 150.41000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 151.76999999999998,
+        "end": 153.74
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 157.041042,
+        "end": 157.54000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 159.82,
+        "end": 160.22000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 161.06,
+        "end": 161.22000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 162.71370800000003,
+        "end": 165.026708
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 167.049521,
+        "end": 172.36
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 174.84,
+        "end": 176.47000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 179.31,
+        "end": 190.24966700000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 193.07531200000003,
+        "end": 198.02
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 202.18,
+        "end": 230.27
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 234.91,
+        "end": 235.11
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 237.39,
+        "end": 247.924
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 250.82,
+        "end": 253.3
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 257.22,
+        "end": 261.413542
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 262.17,
+        "end": 273.26725
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 273.46977100000004,
+        "end": 288.89725
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 6,
+      "core": {
+        "start": 289.214792,
+        "end": 366.668083
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 0.05,
+        "end": 1.12
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 5.08,
+        "end": 5.640000000000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 6.981812,
+        "end": 8.77
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 12.61,
+        "end": 16.984521
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 21.554167,
+        "end": 22.96
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 25.360000000000003,
+        "end": 25.72
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 26.452375,
+        "end": 33.39
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 35.71,
+        "end": 37.26
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 39.02,
+        "end": 39.58
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 43.729167,
+        "end": 43.98
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 46.620000000000005,
+        "end": 46.744395999999995
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 48.314291999999995,
+        "end": 48.730124999999994
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 49.174312,
+        "end": 51.474146
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 56.00725,
+        "end": 58.830042
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 60.9,
+        "end": 62.202749999999995
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 66.46,
+        "end": 66.58
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 67.78,
+        "end": 68.1
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 72.46,
+        "end": 78.21
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 78.80999999999999,
+        "end": 80.79
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 82.52674999999999,
+        "end": 83.686312
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 84.71,
+        "end": 85.31
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 91.35,
+        "end": 94.51183300000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 96.416083,
+        "end": 105.5
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 109.974833,
+        "end": 110.22
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 117.53999999999999,
+        "end": 121.15
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 123.11,
+        "end": 123.39
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 125.831979,
+        "end": 125.99
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 126.66999999999999,
+        "end": 126.87
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 128.82999999999998,
+        "end": 130.678292
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 131.46,
+        "end": 132.72000000000003
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 7,
+      "core": {
+        "start": 134.04,
+        "end": 134.713708
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 8,
+      "core": {
+        "start": 0.05,
+        "end": 1.19
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 8,
+      "core": {
+        "start": 6.8383329999999996,
+        "end": 7.15
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 8,
+      "core": {
+        "start": 8.298667,
+        "end": 10.61
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 8,
+      "core": {
+        "start": 17.21,
+        "end": 21.85425
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 0.05,
+        "end": 2.1999999999999997
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 7.4399999999999995,
+        "end": 7.640000000000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 9.164000000000001,
+        "end": 9.44
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 14.325042,
+        "end": 14.57
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 16.490000000000002,
+        "end": 19.456146
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 23.94,
+        "end": 26.704292000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 28.87,
+        "end": 33.8
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 35.32,
+        "end": 35.519999999999996
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 37.292978999999995,
+        "end": 39.447520999999995
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 41.862646,
+        "end": 42.25
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 44.316686999999995,
+        "end": 45.935479
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 46.724520999999996,
+        "end": 48.933667
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 53.72,
+        "end": 56.26
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 57.7,
+        "end": 59.096646
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 60.368311999999996,
+        "end": 60.5
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 63.588353999999995,
+        "end": 70.214729
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 73.89999999999999,
+        "end": 74.17999999999999
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 75.53999999999999,
+        "end": 75.7
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 78.25999999999999,
+        "end": 78.82
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 84.273937,
+        "end": 85.87902100000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 89.07,
+        "end": 89.39475
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 90.017708,
+        "end": 90.32
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 92.88,
+        "end": 93.12
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 94.15662499999999,
+        "end": 94.72
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 99.36,
+        "end": 108.16
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 109.6,
+        "end": 109.8
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 116.28,
+        "end": 116.56
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 118.296396,
+        "end": 121.67716700000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 126.66,
+        "end": 132.14000000000001
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 132.81456200000002,
+        "end": 136.79000000000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 138.12475,
+        "end": 140.480021
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 143.04999999999998,
+        "end": 143.53
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 145.249042,
+        "end": 149.49
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 155.062,
+        "end": 156.21102100000002
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 156.85999999999999,
+        "end": 157.904896
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 161.573292,
+        "end": 161.99075
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 9,
+      "core": {
+        "start": 162.17895800000002,
+        "end": 169.412979
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 10,
+      "core": {
+        "start": 0.05,
+        "end": 35.606479
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 10,
+      "core": {
+        "start": 37.93,
+        "end": 64.22
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 10,
+      "core": {
+        "start": 65.774042,
+        "end": 66.3
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 10,
+      "core": {
+        "start": 68.17999999999999,
+        "end": 72.195229
+      }
+    },
+    {
+      "tag": "A",
+      "segment": 10,
+      "core": {
+        "start": 73.89,
+        "end": 108.530271
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 0.05,
+        "end": 5.96
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 9.970438000000001,
+        "end": 12.91
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 16.476333,
+        "end": 16.63
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 19.099708,
+        "end": 19.79
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 21.71,
+        "end": 22.31
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 24.017042,
+        "end": 24.419999999999998
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 26.063417,
+        "end": 27.41
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 28.383208,
+        "end": 28.685271
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 29.420812,
+        "end": 31.999000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 34.449687,
+        "end": 34.719
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 36.882292,
+        "end": 38.321208
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 0,
+      "core": {
+        "start": 43.620000000000005,
+        "end": 47.409729
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 0.05,
+        "end": 2.82
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 7.06,
+        "end": 7.7
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 8.621979000000001,
+        "end": 11.138582999999999
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 11.702708000000001,
+        "end": 13.17
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 14.049999999999999,
+        "end": 20.981729
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 24.509812,
+        "end": 24.74
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 27.34,
+        "end": 27.54
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 28.98,
+        "end": 30.9
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 35.300000000000004,
+        "end": 36.39
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 39.451417,
+        "end": 39.903042
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 40.083104,
+        "end": 40.506
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 44.28,
+        "end": 45.95
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 47.27,
+        "end": 48.349270999999995
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 49.74,
+        "end": 51.446332999999996
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 52.160000000000004,
+        "end": 56.31
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 60.27,
+        "end": 64.38279200000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 69.77,
+        "end": 71.73
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 73.64999999999999,
+        "end": 77.63
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 80.47,
+        "end": 80.95
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 82.75,
+        "end": 83.27
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 84.250271,
+        "end": 84.39
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 87.19,
+        "end": 87.38454200000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 89.91,
+        "end": 90.03
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 91.22999999999999,
+        "end": 91.83
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 95.987646,
+        "end": 96.39
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 98.50999999999999,
+        "end": 98.67
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 101.75,
+        "end": 103.17999999999999
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 107.46,
+        "end": 110.49
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 111.92999999999999,
+        "end": 118.66
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 120.22,
+        "end": 122.1
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 123.74,
+        "end": 123.98
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 133.63497900000002,
+        "end": 134.62
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 136.66,
+        "end": 136.82000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 142.26,
+        "end": 143.132542
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 150.03,
+        "end": 152.115187
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 154.014687,
+        "end": 168.17625
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 168.356479,
+        "end": 178.83
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 182.31,
+        "end": 182.51000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 183.60750000000002,
+        "end": 184.03
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 185.54999999999998,
+        "end": 194.82862500000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 199.072292,
+        "end": 199.24
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 200.98333300000002,
+        "end": 201.4
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 204.40943700000003,
+        "end": 208.151896
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 209.60754200000002,
+        "end": 210.948708
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 212.57999999999998,
+        "end": 214.375479
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 216.079271,
+        "end": 216.58
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 219.26,
+        "end": 219.74
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 221.056667,
+        "end": 234.7365
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 243.29,
+        "end": 243.65
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 244.51839600000002,
+        "end": 248.812813
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 252.25300000000001,
+        "end": 254.118354
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 1,
+      "core": {
+        "start": 258.79,
+        "end": 267.395896
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 0.05,
+        "end": 1.644771
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 3.443583,
+        "end": 4.58
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 6.5,
+        "end": 6.7
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 10.7,
+        "end": 11.719999999999999
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 14,
+        "end": 15.19
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 17.150000000000002,
+        "end": 18.12
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 20.608458000000002,
+        "end": 22.611250000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 28.075083,
+        "end": 28.509999999999998
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 32.95,
+        "end": 33.32
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 37.04,
+        "end": 38.517146
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 39.51,
+        "end": 39.732499999999995
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 39.956021,
+        "end": 41.53
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 45.730000000000004,
+        "end": 46.275186999999995
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 52.13,
+        "end": 52.496103999999995
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 52.962562,
+        "end": 55.6
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 56.868249999999996,
+        "end": 58.994187
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 63.56,
+        "end": 66.657375
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 70.41999999999999,
+        "end": 70.9
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 71.328396,
+        "end": 72.07
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 78.47,
+        "end": 80.83
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 82.491208,
+        "end": 82.95
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 85.86999999999999,
+        "end": 88.307812
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 90.067875,
+        "end": 90.39
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 93.045333,
+        "end": 93.51
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 97.23727099999999,
+        "end": 100.50247900000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 102.808458,
+        "end": 104.667375
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 104.967146,
+        "end": 105.4
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 106.39999999999999,
+        "end": 106.84
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 111.188688,
+        "end": 111.88
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 112.75999999999999,
+        "end": 113.56
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 114.28,
+        "end": 114.88
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 116.44,
+        "end": 121.13
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 127.13,
+        "end": 127.41
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 129.01,
+        "end": 129.45000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 131.74125,
+        "end": 132.41000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 135.69220800000002,
+        "end": 135.89000000000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 137.04999999999998,
+        "end": 137.53
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 142.31858300000002,
+        "end": 143.54000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 147.94,
+        "end": 148.9
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 149.9,
+        "end": 151.3
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 153.85999999999999,
+        "end": 160.29000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 161.99927100000002,
+        "end": 164.16000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 166.12,
+        "end": 169.44000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 172.326354,
+        "end": 177.73525
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 179.916167,
+        "end": 185.225917
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 186.63,
+        "end": 186.83
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 191.90270800000002,
+        "end": 192.15
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 199.2,
+        "end": 200.02025
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 201.91,
+        "end": 202.77156200000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 203.46,
+        "end": 208.17000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 210.89,
+        "end": 213.75
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 216.423188,
+        "end": 217.27
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 220.10999999999999,
+        "end": 222.970479
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 226.64,
+        "end": 231.17362500000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 232.463208,
+        "end": 232.76000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 233.48,
+        "end": 234.04000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 235.07999999999998,
+        "end": 249.89000000000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 252.73,
+        "end": 252.93
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 254.54364600000002,
+        "end": 258.806937
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 262.737771,
+        "end": 263.31
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 264.435021,
+        "end": 267.897729
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 274.71000000000004,
+        "end": 274.83000000000004
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 276.71000000000004,
+        "end": 277.313917
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 277.577354,
+        "end": 279.288333
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 288.66,
+        "end": 289.550479
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 290.37,
+        "end": 290.53000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 292.97,
+        "end": 293.33000000000004
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 296.97,
+        "end": 305.68
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 308.276812,
+        "end": 310.770062
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 311.393333,
+        "end": 334.88
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 338.724021,
+        "end": 339.886417
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 342.93,
+        "end": 349.93
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 353.33000000000004,
+        "end": 361.9455
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 362.917479,
+        "end": 373.717146
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 376.58000000000004,
+        "end": 379.44
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 381.83500000000004,
+        "end": 381.96000000000004
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 383.56,
+        "end": 385.01
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 386.73,
+        "end": 392.12
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 396.409292,
+        "end": 401.171979
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 406.416708,
+        "end": 412.096646
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 414.98037500000004,
+        "end": 417.974312
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 418.83000000000004,
+        "end": 420.12
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 422.12,
+        "end": 422.28000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 424.573083,
+        "end": 425.438688
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 426.55,
+        "end": 427.11
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 430.19,
+        "end": 430.31
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 432.07000000000005,
+        "end": 432.55
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 434.47,
+        "end": 434.83000000000004
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 435.99,
+        "end": 436.593583
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 439.156729,
+        "end": 455.989562
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 460.41,
+        "end": 461.38
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 464.06,
+        "end": 464.945479
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 466.48,
+        "end": 468
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 470.68,
+        "end": 486.63
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 489.47,
+        "end": 489.71000000000004
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 491.224542,
+        "end": 495.53000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 497.05,
+        "end": 500.251021
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 500.93,
+        "end": 501.37
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 502.09000000000003,
+        "end": 503.837896
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 508.81,
+        "end": 510.684708
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 512.496542,
+        "end": 514.534875
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 515.759,
+        "end": 516.835375
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 517.192958,
+        "end": 517.892479
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 522.1700000000001,
+        "end": 523.98
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 525.58,
+        "end": 597.3000000000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 598.6092289999999,
+        "end": 598.98
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 604.7526459999999,
+        "end": 606.11
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 611.11,
+        "end": 611.27
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 618.100375,
+        "end": 622.279375
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 623.6366459999999,
+        "end": 625.894812
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 626.99,
+        "end": 629.028854
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 631.77,
+        "end": 632.61
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 634.8693539999999,
+        "end": 635.17
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 640.25,
+        "end": 652.379521
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 656.9200000000001,
+        "end": 657.52
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 661.0400000000001,
+        "end": 661.48
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 661.8787289999999,
+        "end": 662.039
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 2,
+      "core": {
+        "start": 663.159,
+        "end": 721.943104
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 0.05,
+        "end": 6.8500000000000005
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 9.17,
+        "end": 18.111396000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 20.347313,
+        "end": 21.377458
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 21.557792,
+        "end": 23.509999999999998
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 30.35,
+        "end": 30.509999999999998
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 33.683667,
+        "end": 36.524646
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 38.02,
+        "end": 39.69
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 47.33,
+        "end": 50.69
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 52.01,
+        "end": 54.029208
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 56.603521,
+        "end": 56.8
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 57.76,
+        "end": 61.925374999999995
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 62.110229,
+        "end": 66.72
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 67.999312,
+        "end": 68.84
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 73.08,
+        "end": 73.48
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 74.72,
+        "end": 75.04
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 77.47999999999999,
+        "end": 78.92999999999999
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 84.53,
+        "end": 85.13
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 87.13,
+        "end": 87.45
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 87.89714599999999,
+        "end": 88.37
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 89.856854,
+        "end": 90.24
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 94.32,
+        "end": 94.52
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 97.61595799999999,
+        "end": 98.24
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 103.758292,
+        "end": 104.01
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 107.61643699999999,
+        "end": 110.4
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 112.55387499999999,
+        "end": 113.94
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 118.32347899999999,
+        "end": 121.74
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 125.89999999999999,
+        "end": 146.4
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 149.4,
+        "end": 149.60000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 153.72539600000002,
+        "end": 153.88000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 156.78706300000002,
+        "end": 158.07000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 162.07125000000002,
+        "end": 166.187042
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 170.11697900000001,
+        "end": 177.608667
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 186.18,
+        "end": 190.114542
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 192.020521,
+        "end": 202.61
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 205.359125,
+        "end": 206.527333
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 206.707375,
+        "end": 207.61
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 210.158333,
+        "end": 211.77
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 216.57,
+        "end": 217.81
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 219.592146,
+        "end": 220.09
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 220.45962500000002,
+        "end": 224.47468700000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 226.279021,
+        "end": 227.53
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 230.25,
+        "end": 237.93
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 241.53,
+        "end": 241.73000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 243.73,
+        "end": 246.9
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 254.66,
+        "end": 260.96000000000004
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 261.58052100000003,
+        "end": 262
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 263.44,
+        "end": 265.681083
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 272.81,
+        "end": 272.93
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 277.81,
+        "end": 281.128312
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 286.81656200000003,
+        "end": 287.15000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 289.385833,
+        "end": 289.63
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 293.71000000000004,
+        "end": 297.612958
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 298.38,
+        "end": 299.63
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 301.91,
+        "end": 303.03000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 304.03000000000003,
+        "end": 304.599604
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 304.846896,
+        "end": 306.201563
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 306.398708,
+        "end": 318.25
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 320.242208,
+        "end": 320.53000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 324.054437,
+        "end": 324.49
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 325.49,
+        "end": 325.85
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 328.05,
+        "end": 328.783563
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 329.130646,
+        "end": 329.993625
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 334.04,
+        "end": 335.880125
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 337.604479,
+        "end": 344.121688
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 347.1,
+        "end": 347.38
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 348.790104,
+        "end": 350.8495
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 352.352521,
+        "end": 353.6975
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 354.12125000000003,
+        "end": 357.97
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 361.65000000000003,
+        "end": 363.154646
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 367.1,
+        "end": 367.46000000000004
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 368.624937,
+        "end": 368.82
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 369.86,
+        "end": 372.233729
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 373.40000000000003,
+        "end": 386.938146
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 397.14000000000004,
+        "end": 400.594479
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 407.73,
+        "end": 407.89
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 412.93,
+        "end": 413.2
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 417.04,
+        "end": 417.36
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 421.16,
+        "end": 421.72
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 424.44,
+        "end": 425.044146
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 425.53447900000003,
+        "end": 427.777583
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 431.11,
+        "end": 431.27000000000004
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 432.47,
+        "end": 432.59000000000003
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 433.71000000000004,
+        "end": 434.31
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 438.15000000000003,
+        "end": 438.660646
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 442.43,
+        "end": 443.458
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 448.06,
+        "end": 449.548896
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 449.977479,
+        "end": 455.47
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 457.75,
+        "end": 459.31
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 461.07000000000005,
+        "end": 461.899208
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 462.217354,
+        "end": 464.69
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 466.93,
+        "end": 533.988375
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 536.13925,
+        "end": 536.6
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 537.24,
+        "end": 537.6
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 540.076187,
+        "end": 541.881833
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 542.207896,
+        "end": 542.7
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 544.0600000000001,
+        "end": 544.896104
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 547.59,
+        "end": 554.880833
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 557.5400000000001,
+        "end": 570.39
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 572.5500000000001,
+        "end": 573.23
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 580.47,
+        "end": 581.29
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 583.13,
+        "end": 585.114854
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 589.78,
+        "end": 589.94
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 595.98,
+        "end": 596.405229
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 599.85,
+        "end": 599.97
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 601.49,
+        "end": 601.69
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 604.53,
+        "end": 604.77
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 605.721646,
+        "end": 606.8000000000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 608.88,
+        "end": 609.36
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 611.2,
+        "end": 613.468646
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 617.043771,
+        "end": 624.207729
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 632.4540209999999,
+        "end": 640.2635
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 642.5600000000001,
+        "end": 650.398563
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 652.709521,
+        "end": 653.23
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 654.51,
+        "end": 654.99
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 662.9542289999999,
+        "end": 663.59
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 669.35,
+        "end": 669.75
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 671.881854,
+        "end": 674
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 678.76,
+        "end": 680.368292
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 681.87,
+        "end": 697.072
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 697.97,
+        "end": 701.558521
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 703.5400000000001,
+        "end": 712.37175
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 714.4008329999999,
+        "end": 716.803937
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 726.6118749999999,
+        "end": 729.19
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 730.6700000000001,
+        "end": 758.381813
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 758.5622079999999,
+        "end": 912.167687
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 912.348271,
+        "end": 913.231979
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 914.711521,
+        "end": 915.3100000000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 916.95,
+        "end": 920.352896
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 3,
+      "core": {
+        "start": 922.300979,
+        "end": 1049.2305829999998
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 0.05,
+        "end": 1.2599999999999998
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 3.4437919999999997,
+        "end": 3.94
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 6.525125,
+        "end": 6.7
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 12.34,
+        "end": 12.856395999999998
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 15.469999999999999,
+        "end": 16.03
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 21.830000000000002,
+        "end": 23.99
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 30.360604000000002,
+        "end": 31.73
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 34.13,
+        "end": 37.252167
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 38.905145999999995,
+        "end": 39.92
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 41.64,
+        "end": 49.76
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 54.850874999999995,
+        "end": 59.62
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 61.936311999999994,
+        "end": 70.44864600000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 75.57,
+        "end": 75.92999999999999
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 87.725583,
+        "end": 88.17999999999999
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 90.036542,
+        "end": 90.6
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 92.08,
+        "end": 93.26
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 96.66,
+        "end": 97.956354
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 100.30999999999999,
+        "end": 105.25
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 106.72999999999999,
+        "end": 122.34
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 129.22,
+        "end": 129.82000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 136.01,
+        "end": 141.331458
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 142.190979,
+        "end": 142.81
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 144.17,
+        "end": 145.28
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 148.48,
+        "end": 148.64000000000001
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 152.62647900000002,
+        "end": 155.45739600000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 157.885354,
+        "end": 158.07000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 159.972146,
+        "end": 164.5
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 167.48322900000002,
+        "end": 168.02
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 169.66,
+        "end": 173.43
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 179.07,
+        "end": 179.50495800000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 185.380229,
+        "end": 185.59
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 187.65689600000002,
+        "end": 189.647917
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 191.28,
+        "end": 192.04000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 193,
+        "end": 210.364979
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 214.09512500000002,
+        "end": 217.162438
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 218.20516700000002,
+        "end": 222.58
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 227.01999999999998,
+        "end": 227.26000000000002
+      }
+    },
+    {
+      "tag": "B",
+      "segment": 4,
+      "core": {
+        "start": 230.337813,
+        "end": 232.412917
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 0.649,
+        "end": 1.565417
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 6.76,
+        "end": 6.96
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 8.127292,
+        "end": 9.08
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 10.76,
+        "end": 11.2
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 13.904687000000001,
+        "end": 14.2
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 17.18025,
+        "end": 17.599999999999998
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 23.64,
+        "end": 24.24
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 25.84,
+        "end": 26.08
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 28.384958,
+        "end": 28.919999999999998
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 30.061937,
+        "end": 30.41
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 34.410000000000004,
+        "end": 34.57
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 36.016020999999995,
+        "end": 36.33
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 37.29,
+        "end": 38.910146
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 40.660000000000004,
+        "end": 46.297833
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 48.92,
+        "end": 49.08
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 51.84,
+        "end": 52.16
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 54.2,
+        "end": 55.33325
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 60.72,
+        "end": 60.92
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 63.982853999999996,
+        "end": 64.4
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 65.520667,
+        "end": 65.94
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 74.5,
+        "end": 74.86
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 75.702958,
+        "end": 75.99
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 77.086792,
+        "end": 77.27
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 80.99318699999999,
+        "end": 81.79
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 82.659229,
+        "end": 89.699625
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 92.398708,
+        "end": 94.78
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 97.393542,
+        "end": 98.1
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 102.017083,
+        "end": 102.22
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 103.52268699999999,
+        "end": 104.49
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 107.20349999999999,
+        "end": 107.644125
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 110.77,
+        "end": 111.33
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 113.357854,
+        "end": 114.676479
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 114.996167,
+        "end": 115.573437
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 116.813292,
+        "end": 117.25
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 122.53,
+        "end": 122.65
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 129.227021,
+        "end": 130.87
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 135.47,
+        "end": 136.11
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 139.63,
+        "end": 140.27
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 143.94458300000002,
+        "end": 144.32000000000002
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 154.84,
+        "end": 155.2015
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 159.57999999999998,
+        "end": 159.74
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 163.346458,
+        "end": 163.62
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 168.23999999999998,
+        "end": 169.74
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 174.14,
+        "end": 174.26000000000002
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 174.98,
+        "end": 175.87175
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 177.80966700000002,
+        "end": 178.59
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 181.59,
+        "end": 181.75
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 183.15,
+        "end": 183.35000000000002
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 187.60935400000002,
+        "end": 187.83
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 201.95,
+        "end": 203.439479
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 204.43425000000002,
+        "end": 207.32000000000002
+      }
+    },
+    {
+      "tag": "C",
+      "segment": 0,
+      "core": {
+        "start": 208.28,
+        "end": 221.94958300000002
+      }
+    }
+  ],
+  "reviewWordCoverage": {
+    "sourceConfigsUnchanged": true,
+    "sourceCoverageComplete": true,
+    "captionTimelineContinuous": true,
+    "mappedWordLossCount": 0,
+    "errors": [],
+    "htmlReadback": "Headless Chrome: 16 chapters, 499 captions, 2221 source rows; search returns 5 matches for 假细节; chapter jump checked visually; no horizontal overflow at 1440px; no page errors.",
+    "semanticReview": "反审已修正跨句字幕错位、3D 起始词锚、前景植物漏保、补录重复及结尾残词；字幕顺句保持源语义，词锚相似度不是准确性证明。",
+    "gate": "虚拟审稿可交付；真实剪口试听、工程写入和媒体验收均未执行"
+  },
+  "formalCuts": "approved plannedEdl retained without extra deletions"
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "laohu.video-postproduction-handoff/1",
+  "videoId": "016-three-cap-assets",
+  "phase": "SECOND_PASS_POSTPRODUCTION",
+  "intent": {
+    "audience": "关注老胡、希望用 AI 创作影视短片但没有美术基础的粉丝",
+    "promise": "从六要素构图到资产提取，理解如何自行判断并修正 AI 结果",
+    "mainLine": "六要素逐步构图 → 提取人物和场景资产 → 去假细节及补全 → 用真实失败对比理解 AI 补词的边界 → 回到自己的审美判断。前三步按原操作顺序；补录归位；学习感悟后移；轻微仰拍的重复复盘并入同一案例。",
+    "primaryWin": "连续操作与案例关系清楚",
+    "visualStrategy": "原录屏及原摄像头；不做动画"
+  },
+  "knowledgeActivations": [
+    {
+      "asset": "laohu-video-postproduction",
+      "trigger": "用户批准实际剪辑",
+      "judgment": "保留源工程，按批准片段映射后生成字幕",
+      "changedDecision": "在独立工作工程执行 revision-safe 写入",
+      "resultLocation": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap",
+      "unusedBoundary": "不生成动画或数字人"
+    },
+    {
+      "asset": "correct-srt-subtitles",
+      "trigger": "字幕校对及剪口复核",
+      "judgment": "原声和已确认审稿决定文字",
+      "changedDecision": "保留型号原声差异，以最终主音频复核",
+      "resultLocation": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/双语展示字幕.json",
+      "unusedBoundary": "不借校对重剪内容"
+    },
+    {
+      "asset": "laohu-video-evolution + speech pause research",
+      "trigger": "用户指出句内过度拆切、收音急、起音留白和波形断崖",
+      "judgment": "自然承接先由意群决定；短静音检测不是剪辑授权；波形必须对齐播放时钟",
+      "changedDecision": "从批准语义基线恢复句内节奏；旧893段改为518段，调整两处长句间静音；开发波形按音轨offset对齐",
+      "resultLocation": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/气口返修映射.json",
+      "unusedBoundary": "不采用英语实验0.6秒作为中文口播固定值；未声称完整人工听审"
+    },
+    {
+      "asset": "B档用户实听偏好",
+      "trigger": "用户确认两个真实片段B优于A且20ms可接受",
+      "judgment": "字音与拖音本体保护，犹豫静音不由句内句间决定",
+      "changedDecision": "全片按低能量安全区约20ms收紧，区分ASR时码包住静音与实际漏字",
+      "resultLocation": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/气口返修映射.json",
+      "unusedBoundary": "不改变播放速度，不强求每个实际间隔恰好20ms，不打包软件"
+    }
+  ],
+  "thread": {
+    "ownership": "DEDICATED_VIDEO_TASK",
+    "upstreamCreatesOnce": true
+  },
+  "capProject": {
+    "sourcePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+    "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap",
+    "expectedRevision": 46,
+    "nonDestructiveCopy": true
+  },
+  "sources": {
+    "secondPassAsr": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/输入/A_首录/cap-asr.raw.json",
+    "productionScript": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/分析/预剪辑审稿.json",
+    "finalMainAudio": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/edited-main-audio.mp3"
+  },
+  "edit": {
+    "edlPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/冻结剪辑清单.json",
+    "sourceToFinalMapPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/源到成片映射.json",
+    "captionTracks": {
+      "sourceMasterPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/源字幕主稿.json",
+      "displayTracksPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/双语展示字幕.json",
+      "mode": "SEPARATE_BILINGUAL",
+      "tracks": [
+        "zh-CN",
+        "en"
+      ]
+    },
+    "preEditReview": {
+      "documentPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/分析/预剪辑审稿.html",
+      "revision": 2,
+      "fullTimelineCovered": true,
+      "segmentBoundariesIncluded": true,
+      "virtualRoughCutComplete": true,
+      "virtualFineCutComplete": true,
+      "provisionalFinalTimelineIncluded": true,
+      "crossCueSemanticReviewComplete": true,
+      "atomicTermsPreserved": true,
+      "uncertaintiesResolved": true,
+      "userApproval": {
+        "status": "APPROVED",
+        "scope": "EDIT_ONLY",
+        "reviewRevision": 2,
+        "reference": "用户试听后明确选择B档，约20ms间隔，按已确认听感处理句内及句间犹豫空白"
+      }
+    }
+  },
+  "protection": {
+    "preserveBaseRecording": true,
+    "preserveFinalMainAudio": true,
+    "mediaOutsideRepository": true
+  },
+  "tasks": [],
+  "state": "EDL_FROZEN",
+  "freeze": {
+    "projectRevision": 46,
+    "edlSha256": "1fc1103b9f808f93c1c88a729abbd9d3fb167814670b8cb863be63e6f44ab7a0",
+    "mappingSha256": "898b03d8cdc0a12995e4d905e461ac176e2056162b9fe924c7196716f3c1c48a"
+  }
+}

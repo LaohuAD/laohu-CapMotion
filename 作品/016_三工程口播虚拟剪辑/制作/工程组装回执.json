@@ -1,0 +1,1187 @@
+{
+  "schema": "laohu.project-assembly/1",
+  "workProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap",
+  "status": "initialized",
+  "revision": 0,
+  "sources": {
+    "A": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+    "B": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap",
+    "C": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap"
+  },
+  "sourceHashes": {
+    "A": {
+      "project-config.json": "291f9b663db5a8adfd02467dbb00482ac453e8a9815aff6919b7dd99e7b6a049",
+      "recording-meta.json": "aa5f926cef269d91162288d75b5491e16a47d7b23adc509313514adfc2ca3b22"
+    },
+    "B": {
+      "project-config.json": "e6acd791e42266e657ae1e64ccc3c9928b10a75008056623e935be69a8e388a9",
+      "recording-meta.json": "79bd57f2d59549af3c74e1af47c545a0bfc747d4243dbeda9219c998b27abef8"
+    },
+    "C": {
+      "project-config.json": "c3037b3938027d4d9127f517d237e74d3f00929da75723da17d610e1fb4c32a3",
+      "recording-meta.json": "9957f6c81cf44d8786a7327ff201bd1d0ed6796ed1f3e934c0e5fab646e886df"
+    }
+  },
+  "segmentMap": [
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 0,
+      "workingRecordingSegment": 0,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 0,
+      "duration": 486.343604,
+      "micOffset": 0.173123083
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 1,
+      "workingRecordingSegment": 1,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 486.343604,
+      "duration": 418.718833,
+      "micOffset": 0.186461957
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 2,
+      "workingRecordingSegment": 2,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 905.062437,
+      "duration": 530.002625,
+      "micOffset": 0.193121332
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 3,
+      "workingRecordingSegment": 3,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 1435.0650620000001,
+      "duration": 155.875917,
+      "micOffset": 0.24312670900000002
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 4,
+      "workingRecordingSegment": 4,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 1590.9409790000002,
+      "duration": 528.603208,
+      "micOffset": 0.171454583
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 5,
+      "workingRecordingSegment": 5,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 2119.5441870000004,
+      "duration": 108.285083,
+      "micOffset": 0.33479166699999996
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 6,
+      "workingRecordingSegment": 6,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 2227.8292700000006,
+      "duration": 366.804583,
+      "micOffset": 0.18478975
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 7,
+      "workingRecordingSegment": 7,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 2594.6338530000007,
+      "duration": 134.850208,
+      "micOffset": 0.231455959
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 8,
+      "workingRecordingSegment": 8,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 2729.4840610000006,
+      "duration": 21.99075,
+      "micOffset": 0.501460166
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 9,
+      "workingRecordingSegment": 9,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 2751.4748110000005,
+      "duration": 169.549479,
+      "micOffset": 0.288122833
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 10,
+      "workingRecordingSegment": 10,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 2921.0242900000003,
+      "duration": 109.198333,
+      "micOffset": 0.568128541
+    },
+    {
+      "tag": "A",
+      "sourceRecordingSegment": 11,
+      "workingRecordingSegment": 11,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap",
+      "workingGlobalStart": 3030.222623,
+      "duration": 62.583333,
+      "micOffset": 0.30811579099999997
+    },
+    {
+      "tag": "B",
+      "sourceRecordingSegment": 0,
+      "workingRecordingSegment": 12,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap",
+      "workingGlobalStart": 3092.805956,
+      "duration": 47.546229,
+      "micOffset": 0.789880166
+    },
+    {
+      "tag": "B",
+      "sourceRecordingSegment": 1,
+      "workingRecordingSegment": 13,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap",
+      "workingGlobalStart": 3140.352185,
+      "duration": 267.532396,
+      "micOffset": 0.298204333
+    },
+    {
+      "tag": "B",
+      "sourceRecordingSegment": 2,
+      "workingRecordingSegment": 14,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap",
+      "workingGlobalStart": 3407.8845810000003,
+      "duration": 722.079604,
+      "micOffset": 0.359871125
+    },
+    {
+      "tag": "B",
+      "sourceRecordingSegment": 3,
+      "workingRecordingSegment": 15,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap",
+      "workingGlobalStart": 4129.964185000001,
+      "duration": 1049.418333,
+      "micOffset": 0.246539833
+    },
+    {
+      "tag": "B",
+      "sourceRecordingSegment": 4,
+      "workingRecordingSegment": 16,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap",
+      "workingGlobalStart": 5179.382518,
+      "duration": 232.549417,
+      "micOffset": 0.264869083
+    },
+    {
+      "tag": "C",
+      "sourceRecordingSegment": 0,
+      "workingRecordingSegment": 17,
+      "sourceProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap",
+      "workingGlobalStart": 5411.9319350000005,
+      "duration": 222.086083,
+      "micOffset": 0.249792541
+    }
+  ],
+  "mediaClones": [
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/assets/current-desktop-background.jpg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/current-desktop-background.jpg",
+      "bytes": 747744,
+      "sourceMtimeNs": 1789019774259746910,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/screenshots/display.jpg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/screenshots/display.jpg",
+      "bytes": 672353,
+      "sourceMtimeNs": 1789024848614050635,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_4.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_0.png",
+      "bytes": 1742,
+      "sourceMtimeNs": 1789020108470005560,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_7.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_1.png",
+      "bytes": 2619,
+      "sourceMtimeNs": 1789020450807280400,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_10.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_2.png",
+      "bytes": 2147,
+      "sourceMtimeNs": 1789022750274275844,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_9.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_3.png",
+      "bytes": 2669,
+      "sourceMtimeNs": 1789020721028790404,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_3.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_4.png",
+      "bytes": 2185,
+      "sourceMtimeNs": 1789020106767514545,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_8.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_5.png",
+      "bytes": 2298,
+      "sourceMtimeNs": 1789020593873657453,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_5.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_6.png",
+      "bytes": 4650,
+      "sourceMtimeNs": 1789020260475248116,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_2.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_7.png",
+      "bytes": 7738,
+      "sourceMtimeNs": 1789020106644646451,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_1.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_8.png",
+      "bytes": 2573,
+      "sourceMtimeNs": 1789019878426614639,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_0.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_9.png",
+      "bytes": 17737,
+      "sourceMtimeNs": 1789019773976614340,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/cursors/cursor_6.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_10.png",
+      "bytes": 1320,
+      "sourceMtimeNs": 1789020380256483910,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-0/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-0/cursor.json",
+      "bytes": 611449,
+      "sourceMtimeNs": 1789020260526227652,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-0/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-0/camera.mp4",
+      "bytes": 487105859,
+      "sourceMtimeNs": 1789020260409397283,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-0/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-0/system_audio.ogg",
+      "bytes": 110548,
+      "sourceMtimeNs": 1789020260476178041,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-0/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-0/display.mp4",
+      "bytes": 556122166,
+      "sourceMtimeNs": 1789020260518060454,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-0/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-0/keyboard.bin",
+      "bytes": 1607,
+      "sourceMtimeNs": 1789020260526890282,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-0/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-0/audio-input.ogg",
+      "bytes": 6556352,
+      "sourceMtimeNs": 1789020260389301105,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-1/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-1/cursor.json",
+      "bytes": 1069825,
+      "sourceMtimeNs": 1789020687930467145,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-1/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-1/camera.mp4",
+      "bytes": 419298428,
+      "sourceMtimeNs": 1789020687752392359,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-1/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-1/system_audio.ogg",
+      "bytes": 95184,
+      "sourceMtimeNs": 1789020687883362728,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-1/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-1/display.mp4",
+      "bytes": 310912790,
+      "sourceMtimeNs": 1789020687919728467,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-1/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-1/keyboard.bin",
+      "bytes": 3645,
+      "sourceMtimeNs": 1789020687931029817,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-1/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-1/audio-input.ogg",
+      "bytes": 4029617,
+      "sourceMtimeNs": 1789020687727452472,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-2/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-2/cursor.json",
+      "bytes": 1421323,
+      "sourceMtimeNs": 1789021227798395870,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-2/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-2/camera.mp4",
+      "bytes": 530324442,
+      "sourceMtimeNs": 1789021227684377438,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-2/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-2/system_audio.ogg",
+      "bytes": 120468,
+      "sourceMtimeNs": 1789021227746628599,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-2/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-2/display.mp4",
+      "bytes": 533014223,
+      "sourceMtimeNs": 1789021227783586571,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-2/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-2/keyboard.bin",
+      "bytes": 4319,
+      "sourceMtimeNs": 1789021227798842877,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-2/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-2/audio-input.ogg",
+      "bytes": 5109395,
+      "sourceMtimeNs": 1789021227664119296,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-3/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-3/cursor.json",
+      "bytes": 389259,
+      "sourceMtimeNs": 1789021636955689826,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-3/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-3/camera.mp4",
+      "bytes": 156375397,
+      "sourceMtimeNs": 1789021636868654202,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-3/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-3/system_audio.ogg",
+      "bytes": 35523,
+      "sourceMtimeNs": 1789021636906863902,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-3/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-3/display.mp4",
+      "bytes": 172099605,
+      "sourceMtimeNs": 1789021636942197052,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-3/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-3/keyboard.bin",
+      "bytes": 295,
+      "sourceMtimeNs": 1789021636956074666,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-3/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-3/audio-input.ogg",
+      "bytes": 2354828,
+      "sourceMtimeNs": 1789021636850233510,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-4/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-4/cursor.json",
+      "bytes": 876663,
+      "sourceMtimeNs": 1789022221629137238,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-4/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-4/camera.mp4",
+      "bytes": 529374923,
+      "sourceMtimeNs": 1789022221476942846,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-4/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-4/system_audio.ogg",
+      "bytes": 120134,
+      "sourceMtimeNs": 1789022221570889826,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-4/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-4/display.mp4",
+      "bytes": 409600112,
+      "sourceMtimeNs": 1789022221611290808,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-4/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-4/keyboard.bin",
+      "bytes": 1977,
+      "sourceMtimeNs": 1789022221629945961,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-4/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-4/audio-input.ogg",
+      "bytes": 5513005,
+      "sourceMtimeNs": 1789022221446503909,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-5/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-5/cursor.json",
+      "bytes": 262452,
+      "sourceMtimeNs": 1789022503166591449,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-5/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-5/camera.mp4",
+      "bytes": 108568459,
+      "sourceMtimeNs": 1789022502977488215,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-5/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-5/system_audio.ogg",
+      "bytes": 24742,
+      "sourceMtimeNs": 1789022503086042072,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-5/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-5/display.mp4",
+      "bytes": 98452014,
+      "sourceMtimeNs": 1789022503157982885,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-5/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-5/keyboard.bin",
+      "bytes": 3481,
+      "sourceMtimeNs": 1789022503166993247,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-5/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-5/audio-input.ogg",
+      "bytes": 477361,
+      "sourceMtimeNs": 1789022502960097501,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-6/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-6/cursor.json",
+      "bytes": 841264,
+      "sourceMtimeNs": 1789023019597184955,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-6/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-6/camera.mp4",
+      "bytes": 367236141,
+      "sourceMtimeNs": 1789023019464702690,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-6/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-6/system_audio.ogg",
+      "bytes": 83400,
+      "sourceMtimeNs": 1789023019545358111,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-6/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-6/display.mp4",
+      "bytes": 329195054,
+      "sourceMtimeNs": 1789023019582822126,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-6/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-6/keyboard.bin",
+      "bytes": 745,
+      "sourceMtimeNs": 1789023019597654046,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-6/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-6/audio-input.ogg",
+      "bytes": 1941054,
+      "sourceMtimeNs": 1789023019442076428,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-7/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-7/cursor.json",
+      "bytes": 407527,
+      "sourceMtimeNs": 1789023566433756698,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-7/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-7/camera.mp4",
+      "bytes": 135175822,
+      "sourceMtimeNs": 1789023566343995913,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-7/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-7/system_audio.ogg",
+      "bytes": 30756,
+      "sourceMtimeNs": 1789023566383924638,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-7/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-7/display.mp4",
+      "bytes": 171117236,
+      "sourceMtimeNs": 1789023566420844602,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-7/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-7/keyboard.bin",
+      "bytes": 877,
+      "sourceMtimeNs": 1789023566434197372,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-7/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-7/audio-input.ogg",
+      "bytes": 1911071,
+      "sourceMtimeNs": 1789023566325630391,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-8/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-8/cursor.json",
+      "bytes": 25260,
+      "sourceMtimeNs": 1789023631880020088,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-8/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-8/camera.mp4",
+      "bytes": 13538346,
+      "sourceMtimeNs": 1789023631473418053,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-8/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-8/system_audio.ogg",
+      "bytes": 5121,
+      "sourceMtimeNs": 1789023631550877794,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-8/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-8/display.mp4",
+      "bytes": 16941765,
+      "sourceMtimeNs": 1789023631819366926,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-8/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-8/keyboard.bin",
+      "bytes": 125,
+      "sourceMtimeNs": 1789023631880595264,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-8/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-8/audio-input.ogg",
+      "bytes": 283485,
+      "sourceMtimeNs": 1789023631226913088,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-9/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-9/cursor.json",
+      "bytes": 454388,
+      "sourceMtimeNs": 1789024633818348594,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-9/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-9/camera.mp4",
+      "bytes": 168065582,
+      "sourceMtimeNs": 1789024633544428243,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-9/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-9/system_audio.ogg",
+      "bytes": 38645,
+      "sourceMtimeNs": 1789024633575904489,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-9/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-9/display.mp4",
+      "bytes": 202651533,
+      "sourceMtimeNs": 1789024633762803852,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-9/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-9/keyboard.bin",
+      "bytes": 1175,
+      "sourceMtimeNs": 1789024633819175649,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-9/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-9/audio-input.ogg",
+      "bytes": 2336627,
+      "sourceMtimeNs": 1789024633414836360,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-10/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-10/cursor.json",
+      "bytes": 43033,
+      "sourceMtimeNs": 1789024756771004157,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-10/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-10/camera.mp4",
+      "bytes": 99400268,
+      "sourceMtimeNs": 1789024755494186909,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-10/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-10/system_audio.ogg",
+      "bytes": 24818,
+      "sourceMtimeNs": 1789024756409825982,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-10/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-10/display.mp4",
+      "bytes": 74364205,
+      "sourceMtimeNs": 1789024756704651481,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-10/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-10/keyboard.bin",
+      "bytes": 277,
+      "sourceMtimeNs": 1789024756771415748,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-10/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-10/audio-input.ogg",
+      "bytes": 275217,
+      "sourceMtimeNs": 1789024755336734883,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-11/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-11/cursor.json",
+      "bytes": 28604,
+      "sourceMtimeNs": 1789024846854568260,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-11/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-11/camera.mp4",
+      "bytes": 30348403,
+      "sourceMtimeNs": 1789024845835151996,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-11/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-11/system_audio.ogg",
+      "bytes": 14244,
+      "sourceMtimeNs": 1789024845755755347,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-11/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-11/display.mp4",
+      "bytes": 17533593,
+      "sourceMtimeNs": 1789024846737996850,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-11/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-11/keyboard.bin",
+      "bytes": 49,
+      "sourceMtimeNs": 1789024846855227563,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 01.56 PM.cap/content/segments/segment-11/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-11/audio-input.ogg",
+      "bytes": 50051,
+      "sourceMtimeNs": 1789024845079330322,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_6.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_11.png",
+      "bytes": 1320,
+      "sourceMtimeNs": 1789025620213432634,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_8.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_12.png",
+      "bytes": 1742,
+      "sourceMtimeNs": 1789027792814191691,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_1.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_13.png",
+      "bytes": 7738,
+      "sourceMtimeNs": 1789025064806079516,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_9.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_14.png",
+      "bytes": 1172,
+      "sourceMtimeNs": 1789027969850217989,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_4.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_15.png",
+      "bytes": 2573,
+      "sourceMtimeNs": 1789025584901649927,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_2.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_16.png",
+      "bytes": 2619,
+      "sourceMtimeNs": 1789025111247647105,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_11.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_17.png",
+      "bytes": 2147,
+      "sourceMtimeNs": 1789030584168130745,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_5.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_18.png",
+      "bytes": 2185,
+      "sourceMtimeNs": 1789025588674313082,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_7.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_19.png",
+      "bytes": 2669,
+      "sourceMtimeNs": 1789025703328321750,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_0.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_20.png",
+      "bytes": 17737,
+      "sourceMtimeNs": 1789025064527933136,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_3.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_21.png",
+      "bytes": 4650,
+      "sourceMtimeNs": 1789025111903708992,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/cursors/cursor_10.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_22.png",
+      "bytes": 2298,
+      "sourceMtimeNs": 1789029872952568408,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-0/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-12/cursor.json",
+      "bytes": 93705,
+      "sourceMtimeNs": 1789025112279446190,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-0/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-12/camera.mp4",
+      "bytes": 45711778,
+      "sourceMtimeNs": 1789025111992524620,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-0/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-12/system_audio.ogg",
+      "bytes": 10959,
+      "sourceMtimeNs": 1789025111990285133,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-0/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-12/display.mp4",
+      "bytes": 42592964,
+      "sourceMtimeNs": 1789025112212530392,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-0/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-12/keyboard.bin",
+      "bytes": 151,
+      "sourceMtimeNs": 1789025112279895529,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-0/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-12/audio-input.ogg",
+      "bytes": 663655,
+      "sourceMtimeNs": 1789025111883273307,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-1/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-13/cursor.json",
+      "bytes": 754536,
+      "sourceMtimeNs": 1789025848816723992,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-1/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-13/camera.mp4",
+      "bytes": 265866594,
+      "sourceMtimeNs": 1789025848401726943,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-1/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-13/system_audio.ogg",
+      "bytes": 60883,
+      "sourceMtimeNs": 1789025848443657416,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-1/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-13/display.mp4",
+      "bytes": 339444315,
+      "sourceMtimeNs": 1789025848739092462,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-1/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-13/keyboard.bin",
+      "bytes": 383,
+      "sourceMtimeNs": 1789025848817222582,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-1/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-13/audio-input.ogg",
+      "bytes": 3505228,
+      "sourceMtimeNs": 1789025848311082740,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-2/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-14/cursor.json",
+      "bytes": 2115138,
+      "sourceMtimeNs": 1789028450430204236,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-2/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-14/camera.mp4",
+      "bytes": 713857238,
+      "sourceMtimeNs": 1789028450002320498,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-2/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-14/system_audio.ogg",
+      "bytes": 164076,
+      "sourceMtimeNs": 1789028450066496618,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-2/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-14/display.mp4",
+      "bytes": 946516489,
+      "sourceMtimeNs": 1789028450359824553,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-2/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-14/keyboard.bin",
+      "bytes": 3307,
+      "sourceMtimeNs": 1789028450430570614,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-2/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-14/audio-input.ogg",
+      "bytes": 7681446,
+      "sourceMtimeNs": 1789028449896403825,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-3/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-15/cursor.json",
+      "bytes": 2193221,
+      "sourceMtimeNs": 1789030786547522578,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-3/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-15/camera.mp4",
+      "bytes": 974142859,
+      "sourceMtimeNs": 1789030786015715159,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-3/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-15/system_audio.ogg",
+      "bytes": 238361,
+      "sourceMtimeNs": 1789030786070636784,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-3/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-15/display.mp4",
+      "bytes": 1265892131,
+      "sourceMtimeNs": 1789030786472107144,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-3/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-15/keyboard.bin",
+      "bytes": 4769,
+      "sourceMtimeNs": 1789030786548207684,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-3/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-15/audio-input.ogg",
+      "bytes": 9262729,
+      "sourceMtimeNs": 1789030785778388569,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-4/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-16/cursor.json",
+      "bytes": 567177,
+      "sourceMtimeNs": 1789031093553399814,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-4/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-16/camera.mp4",
+      "bytes": 229972251,
+      "sourceMtimeNs": 1789031093237983825,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-4/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-16/system_audio.ogg",
+      "bytes": 52930,
+      "sourceMtimeNs": 1789031093333777433,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-4/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-16/display.mp4",
+      "bytes": 298325546,
+      "sourceMtimeNs": 1789031093506483662,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-4/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-16/keyboard.bin",
+      "bytes": 693,
+      "sourceMtimeNs": 1789031093553887818,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 03.24 PM.cap/content/segments/segment-4/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-16/audio-input.ogg",
+      "bytes": 2999843,
+      "sourceMtimeNs": 1789031093152759696,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_6.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_23.png",
+      "bytes": 1742,
+      "sourceMtimeNs": 1789031365018350637,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_4.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_24.png",
+      "bytes": 1172,
+      "sourceMtimeNs": 1789031336692472127,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_5.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_25.png",
+      "bytes": 7738,
+      "sourceMtimeNs": 1789031356470833603,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_8.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_26.png",
+      "bytes": 2619,
+      "sourceMtimeNs": 1789031546190707097,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_1.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_27.png",
+      "bytes": 2573,
+      "sourceMtimeNs": 1789031332031509029,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_0.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_28.png",
+      "bytes": 17737,
+      "sourceMtimeNs": 1789031326148962375,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_2.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_29.png",
+      "bytes": 1320,
+      "sourceMtimeNs": 1789031332118723420,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_7.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_30.png",
+      "bytes": 2669,
+      "sourceMtimeNs": 1789031526029219148,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/cursors/cursor_3.png",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/cursors/cursor_31.png",
+      "bytes": 2185,
+      "sourceMtimeNs": 1789031332367131097,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/segments/segment-0/cursor.json",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-17/cursor.json",
+      "bytes": 821951,
+      "sourceMtimeNs": 1789031548505822451,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/segments/segment-0/camera.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-17/camera.mp4",
+      "bytes": 217746659,
+      "sourceMtimeNs": 1789031548195470908,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/segments/segment-0/system_audio.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-17/system_audio.ogg",
+      "bytes": 50568,
+      "sourceMtimeNs": 1789031548237119154,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/segments/segment-0/display.mp4",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-17/display.mp4",
+      "bytes": 442456778,
+      "sourceMtimeNs": 1789031548448353236,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/segments/segment-0/keyboard.bin",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-17/keyboard.bin",
+      "bytes": 589,
+      "sourceMtimeNs": 1789031548506326996,
+      "method": "APFS clone"
+    },
+    {
+      "source": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 05.08 PM.cap/content/segments/segment-0/audio-input.ogg",
+      "destination": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/content/segments/segment-17/audio-input.ogg",
+      "bytes": 3505423,
+      "sourceMtimeNs": 1789031548113809800,
+      "method": "APFS clone"
+    }
+  ],
+  "sourceSeconds": 5634.018018000001,
+  "boundary": "New package initialization only; no pre-existing configuration replaced. Subsequent editing through approved revision-safe interfaces."
+}

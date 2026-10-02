@@ -1,0 +1,178 @@
+{
+  "schema": "laohu.overlay-mount-receipt/1",
+  "project": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap",
+  "manifest": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/018_0930录屏讲解后期/制作/动画manifest.json",
+  "compositionId": "CardSourceConverge",
+  "fps": 30,
+  "unitCount": 19,
+  "mounted": 19,
+  "skipped": 0,
+  "dryRun": false,
+  "finalRevision": 57,
+  "definitionReused": [
+    "card-alt-block-lines",
+    "card-source-converge",
+    "card-word-slot-cycle",
+    "card-title-demote-to-label",
+    "card-per-character-rise",
+    "card-source-converge",
+    "card-chip-grid-single-select",
+    "card-alt-block-lines",
+    "card-line-by-line-slide"
+  ],
+  "results": [
+    {
+      "segmentId": "V018-03",
+      "definitionId": "card-type-contrast-emphasis",
+      "action": "已挂载",
+      "start": 53.291,
+      "duration": 4.49,
+      "durationInFrames": 135
+    },
+    {
+      "segmentId": "V018-04",
+      "definitionId": "card-source-converge",
+      "action": "已挂载",
+      "start": 57.781,
+      "duration": 7.66,
+      "durationInFrames": 230
+    },
+    {
+      "segmentId": "V018-05",
+      "definitionId": "card-word-slot-cycle",
+      "action": "已挂载",
+      "start": 85.503,
+      "duration": 4.72,
+      "durationInFrames": 142
+    },
+    {
+      "segmentId": "V018-06",
+      "definitionId": "card-chip-grid-single-select",
+      "action": "已挂载",
+      "start": 103.718,
+      "duration": 16.885,
+      "durationInFrames": 507
+    },
+    {
+      "segmentId": "V018-07",
+      "definitionId": "card-per-character-rise",
+      "action": "已挂载",
+      "start": 141.024,
+      "duration": 4.06,
+      "durationInFrames": 122
+    },
+    {
+      "segmentId": "V018-08",
+      "definitionId": "card-alt-block-lines",
+      "action": "已挂载",
+      "start": 149.533,
+      "duration": 10.26,
+      "durationInFrames": 308
+    },
+    {
+      "segmentId": "V018-09",
+      "definitionId": "card-line-by-line-slide",
+      "action": "已挂载",
+      "start": 224.082,
+      "duration": 10.514,
+      "durationInFrames": 315
+    },
+    {
+      "segmentId": "V018-10",
+      "definitionId": "card-title-demote-to-label",
+      "action": "已挂载",
+      "start": 251.791,
+      "duration": 5.131,
+      "durationInFrames": 154
+    },
+    {
+      "segmentId": "V018-11",
+      "definitionId": "card-alt-block-lines",
+      "action": "已挂载",
+      "start": 261.887,
+      "duration": 5.508,
+      "durationInFrames": 165
+    },
+    {
+      "segmentId": "V018-12",
+      "definitionId": "card-source-converge",
+      "action": "已挂载",
+      "start": 277.595,
+      "duration": 17.804,
+      "durationInFrames": 534
+    },
+    {
+      "segmentId": "V018-13",
+      "definitionId": "card-word-slot-cycle",
+      "action": "已挂载",
+      "start": 306.567,
+      "duration": 4.241,
+      "durationInFrames": 127
+    },
+    {
+      "segmentId": "V018-14",
+      "definitionId": "card-title-demote-to-label",
+      "action": "已挂载",
+      "start": 328.871,
+      "duration": 9.219,
+      "durationInFrames": 277
+    },
+    {
+      "segmentId": "V018-15",
+      "definitionId": "card-per-character-rise",
+      "action": "已挂载",
+      "start": 356.149,
+      "duration": 4.6,
+      "durationInFrames": 138
+    },
+    {
+      "segmentId": "V018-1",
+      "definitionId": "card-source-converge",
+      "action": "已挂载",
+      "start": 454.235,
+      "duration": 5.039,
+      "durationInFrames": 151
+    },
+    {
+      "segmentId": "V018-16",
+      "definitionId": "card-chip-grid-single-select",
+      "action": "已挂载",
+      "start": 704.411,
+      "duration": 6.521,
+      "durationInFrames": 196
+    },
+    {
+      "segmentId": "V018-17",
+      "definitionId": "card-step-timeline-vertical",
+      "action": "已挂载",
+      "start": 720.36,
+      "duration": 9.133,
+      "durationInFrames": 274
+    },
+    {
+      "segmentId": "V018-18",
+      "definitionId": "card-alt-block-lines",
+      "action": "已挂载",
+      "start": 818.981,
+      "duration": 9.911,
+      "durationInFrames": 297
+    },
+    {
+      "segmentId": "V018-2",
+      "definitionId": "card-numbered-step-stack",
+      "action": "已挂载",
+      "start": 849.613,
+      "duration": 8.921,
+      "durationInFrames": 268
+    },
+    {
+      "segmentId": "V018-19",
+      "definitionId": "card-line-by-line-slide",
+      "action": "已挂载",
+      "start": 1401.794,
+      "duration": 7.021,
+      "durationInFrames": 211
+    }
+  ],
+  "mountedAt": "2026-10-01T16:04:43.547Z"
+}

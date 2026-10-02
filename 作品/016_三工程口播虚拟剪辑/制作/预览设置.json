@@ -1,0 +1,8 @@
+{
+  "fps": 30,
+  "resolution_base": {
+    "x": 1920,
+    "y": 1080
+  },
+  "compression_bpp": 0.15
+}

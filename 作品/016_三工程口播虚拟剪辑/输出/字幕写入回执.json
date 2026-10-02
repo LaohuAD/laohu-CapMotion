@@ -1,0 +1,12 @@
+{
+  "schema": "laohu.cap-caption-track-receipt/1",
+  "status": "applied",
+  "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap",
+  "trackPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/双语展示字幕.json",
+  "trackSha256": "516582e35248ab7dd44431aeae728e910b7b1c1e3b44561aeb9e22722ab26be6",
+  "previousRevision": 37,
+  "newRevision": 38,
+  "captionTrackCount": 2,
+  "captionSegmentCount": 998,
+  "appliedAt": "2026-09-10T11:11:29.657Z"
+}

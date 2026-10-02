@@ -10,11 +10,63 @@ import {editorialOverlayExamples} from "./configs/examples/editorialOverlayExamp
 import {flowNodeGraphExamples} from "./configs/examples/flowNodeGraphExamples";
 import {h3TutorialConfigs} from "./configs/works/h3Tutorial";
 import {
+  Work018Overlay,
+  work018DefaultProps,
+  work018OverlaySchema,
+  type Work018OverlayProps,
+} from "./works/Work018";
+import {
+  SourceConverge,
+  sourceConvergeDefaultProps,
+  sourceConvergeSchema,
+  type SourceConvergeProps,
+} from "./cards/source-converge";
+import {
   Work017Overlay,
   work017DefaultProps,
   work017OverlaySchema,
   type Work017OverlayProps,
 } from "./works/Work017";
+import {
+  TypeContrastEmphasis as TypeContrastEmphasisCard,
+  TypeContrastEmphasisDefaultProps as TypeContrastEmphasisDefaults,
+} from "./cards/type-contrast-emphasis";
+import {
+  SourceConverge as SourceConvergeCard,
+  SourceConvergeDefaultProps as SourceConvergeDefaults,
+} from "./cards/source-converge";
+import {
+  WordSlotCycle as WordSlotCycleCard,
+  WordSlotCycleDefaultProps as WordSlotCycleDefaults,
+} from "./cards/word-slot-cycle";
+import {
+  ChipGridSingleSelect as ChipGridSingleSelectCard,
+  ChipGridSingleSelectDefaultProps as ChipGridSingleSelectDefaults,
+} from "./cards/chip-grid-single-select";
+import {
+  PerCharacterRise as PerCharacterRiseCard,
+  PerCharacterRiseDefaultProps as PerCharacterRiseDefaults,
+} from "./cards/per-character-rise";
+import {
+  AltBlockLines as AltBlockLinesCard,
+  AltBlockLinesDefaultProps as AltBlockLinesDefaults,
+} from "./cards/alt-block-lines";
+import {
+  LineByLineSlide as LineByLineSlideCard,
+  LineByLineSlideDefaultProps as LineByLineSlideDefaults,
+} from "./cards/line-by-line-slide";
+import {
+  TitleDemoteToLabel as TitleDemoteToLabelCard,
+  TitleDemoteToLabelDefaultProps as TitleDemoteToLabelDefaults,
+} from "./cards/title-demote-to-label";
+import {
+  NumberedStepStack as NumberedStepStackCard,
+  NumberedStepStackDefaultProps as NumberedStepStackDefaults,
+} from "./cards/numbered-step-stack";
+import {
+  StepTimelineVertical as StepTimelineVerticalCard,
+  StepTimelineVerticalDefaultProps as StepTimelineVerticalDefaults,
+} from "./cards/step-timeline-vertical";
 
 const RegisteredScene: React.FC<ComponentConfig> = (props) => (
   <ComponentScene config={props} />
@@ -32,6 +84,20 @@ const calculateWork017Metadata: CalculateMetadataFunction<Work017OverlayProps> =
 }) => ({
   durationInFrames: props.durationInFrames,
   defaultOutName: `Work017Overlay-${props.kind}`,
+});
+
+const calculateWork018Metadata: CalculateMetadataFunction<Work018OverlayProps> = ({
+  props,
+}) => ({
+  durationInFrames: props.durationInFrames,
+  defaultOutName: `Work018Overlay-${props.kind}`,
+});
+
+const calculateSourceConvergeMetadata: CalculateMetadataFunction<SourceConvergeProps> = ({
+  props,
+}) => ({
+  durationInFrames: props.durationInFrames,
+  defaultOutName: "Work018SourceConverge",
 });
 
 export const Root: React.FC = () => {
@@ -128,6 +194,151 @@ export const Root: React.FC = () => {
             />
           );
         })}
+      </Folder>
+      <Folder name="Work-018-Overlays">
+        <Composition
+          id="Work018Overlay"
+          component={Work018Overlay}
+          durationInFrames={work018DefaultProps.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          schema={work018OverlaySchema}
+          defaultProps={work018DefaultProps}
+          calculateMetadata={calculateWork018Metadata}
+        />
+        <Composition
+          id="Work018SourceConverge"
+          component={SourceConverge}
+          durationInFrames={sourceConvergeDefaultProps.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          schema={sourceConvergeSchema}
+          defaultProps={sourceConvergeDefaultProps}
+          calculateMetadata={calculateSourceConvergeMetadata}
+        />
+        <Composition
+          id="CardStepTimelineVertical"
+          component={StepTimelineVerticalCard}
+          durationInFrames={StepTimelineVerticalDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardStepTimelineVertical",
+          })}
+        />
+        <Composition
+          id="CardTypeContrastEmphasis"
+          component={TypeContrastEmphasisCard}
+          durationInFrames={TypeContrastEmphasisDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardTypeContrastEmphasis",
+          })}
+        />
+        <Composition
+          id="CardSourceConverge"
+          component={SourceConvergeCard}
+          durationInFrames={SourceConvergeDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardSourceConverge",
+          })}
+        />
+        <Composition
+          id="CardWordSlotCycle"
+          component={WordSlotCycleCard}
+          durationInFrames={WordSlotCycleDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardWordSlotCycle",
+          })}
+        />
+        <Composition
+          id="CardChipGridSingleSelect"
+          component={ChipGridSingleSelectCard}
+          durationInFrames={ChipGridSingleSelectDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardChipGridSingleSelect",
+          })}
+        />
+        <Composition
+          id="CardPerCharacterRise"
+          component={PerCharacterRiseCard}
+          durationInFrames={PerCharacterRiseDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardPerCharacterRise",
+          })}
+        />
+        <Composition
+          id="CardAltBlockLines"
+          component={AltBlockLinesCard}
+          durationInFrames={AltBlockLinesDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardAltBlockLines",
+          })}
+        />
+        <Composition
+          id="CardLineByLineSlide"
+          component={LineByLineSlideCard}
+          durationInFrames={LineByLineSlideDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardLineByLineSlide",
+          })}
+        />
+        <Composition
+          id="CardTitleDemoteToLabel"
+          component={TitleDemoteToLabelCard}
+          durationInFrames={TitleDemoteToLabelDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardTitleDemoteToLabel",
+          })}
+        />
+        <Composition
+          id="CardNumberedStepStack"
+          component={NumberedStepStackCard}
+          durationInFrames={NumberedStepStackDefaults.durationInFrames}
+          fps={30}
+          width={1920}
+          height={1080}
+          calculateMetadata={({ props }: { props: { durationInFrames: number } }) => ({
+            durationInFrames: props.durationInFrames,
+            defaultOutName: "CardNumberedStepStack",
+          })}
+        />
+
       </Folder>
       <Folder name="Work-017-Overlays">
         <Composition

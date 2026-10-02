@@ -1,0 +1,586 @@
+{
+ "schema": "laohu.overlay-manifest/1",
+ "compositionId": "CardSourceConverge",
+ "fps": 30,
+ "units": [
+  {
+   "segmentId": "V018-03",
+   "slug": "type-contrast-emphasis",
+   "definitionId": "card-type-contrast-emphasis",
+   "compositionId": "CardTypeContrastEmphasis",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/type-contrast-emphasis.tsx",
+   "start": 53.291,
+   "rawDuration": 5.082,
+   "duration": 4.49,
+   "props": {
+    "durationInFrames": 135,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     1.2,
+     2.04,
+     2.715,
+     3.182
+    ],
+    "words": [
+     {
+      "w": "我好牛逼",
+      "beat": 0
+     },
+     {
+      "w": "事实真的是",
+      "beat": 1.2
+     },
+     {
+      "w": "我牛逼",
+      "beat": 2.04,
+      "emph": "serif"
+     },
+     {
+      "w": "还是",
+      "beat": 2.715
+     },
+     {
+      "w": "AI牛逼",
+      "beat": 3.182,
+      "emph": "color"
+     }
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-04",
+   "slug": "source-converge",
+   "definitionId": "card-source-converge",
+   "compositionId": "CardSourceConverge",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/source-converge.tsx",
+   "start": 57.781,
+   "rawDuration": 7.66,
+   "duration": 7.66,
+   "props": {
+    "durationInFrames": 230,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     2.36,
+     4.12
+    ],
+    "title": "人人都会用 AI 之后",
+    "sources": [
+     "越来越多的人都会使用AI工具",
+     "信息差越来越小",
+     "大家都能够用AI去完成工作"
+    ],
+    "hub": "核心优势到底在什么地方",
+    "caption": "问题回到自己身上",
+    "convAt": 4.12
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-05",
+   "slug": "word-slot-cycle",
+   "definitionId": "card-word-slot-cycle",
+   "compositionId": "CardWordSlotCycle",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/word-slot-cycle.tsx",
+   "start": 85.503,
+   "rawDuration": 4.72,
+   "duration": 4.72,
+   "props": {
+    "durationInFrames": 142,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     0.72,
+     1.76,
+     2.92
+    ],
+    "stem": "你拿到的图，",
+    "words": [
+     "千篇一律",
+     "全是AI脸",
+     "完全没有美感",
+     "无法控制"
+    ],
+    "final": "说不清哪里不对",
+    "accent": "#8FE3D1"
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-06",
+   "slug": "chip-grid-single-select",
+   "definitionId": "card-chip-grid-single-select",
+   "compositionId": "CardChipGridSingleSelect",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/chip-grid-single-select.tsx",
+   "start": 103.718,
+   "rawDuration": 16.885,
+   "duration": 16.885,
+   "props": {
+    "durationInFrames": 507,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     11.254,
+     14.245
+    ],
+    "question": "帮助他出图",
+    "options": [
+     "怎么工作的",
+     "换个场景换个要求"
+    ],
+    "selected": 1,
+    "equation": [
+     "不知道",
+     "下次换个场景"
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-07",
+   "slug": "per-character-rise",
+   "definitionId": "card-per-character-rise",
+   "compositionId": "CardPerCharacterRise",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/per-character-rise.tsx",
+   "start": 141.024,
+   "rawDuration": 4.06,
+   "duration": 4.06,
+   "props": {
+    "durationInFrames": 122,
+    "scrim": 0.82,
+    "anchors": [
+     0
+    ],
+    "text": "你用AI做什么的时候你就会得到什么"
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-08",
+   "slug": "alt-block-lines",
+   "definitionId": "card-alt-block-lines",
+   "compositionId": "CardAltBlockLines",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/alt-block-lines.tsx",
+   "start": 149.533,
+   "rawDuration": 10.26,
+   "duration": 10.26,
+   "props": {
+    "durationInFrames": 308,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     7.92
+    ],
+    "rows": [
+     {
+      "cls": "a",
+      "text": "而是在想为什么不行"
+     },
+     {
+      "cls": "a",
+      "text": "反过来向AI提问"
+     }
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-09",
+   "slug": "line-by-line-slide",
+   "definitionId": "card-line-by-line-slide",
+   "compositionId": "CardLineByLineSlide",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/line-by-line-slide.tsx",
+   "start": 224.082,
+   "rawDuration": 10.514,
+   "duration": 10.514,
+   "props": {
+    "durationInFrames": 315,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     3.154,
+     6.154,
+     8.274
+    ],
+    "lines": [
+     "跟你的提示词毫无关系",
+     "我们真正想要什么样的画面",
+     "把我们的需求说得更具体",
+     "让AI真正的明白"
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-10",
+   "slug": "title-demote-to-label",
+   "definitionId": "card-title-demote-to-label",
+   "compositionId": "CardTitleDemoteToLabel",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/title-demote-to-label.tsx",
+   "start": 251.791,
+   "rawDuration": 5.131,
+   "duration": 5.131,
+   "props": {
+    "durationInFrames": 154,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     1.08,
+     2.08,
+     3.051
+    ],
+    "title": "第一次听到这些词",
+    "items": [
+     "什么是景别",
+     "什么是运镜",
+     "什么是冲突",
+     "什么又是张力"
+    ],
+    "itemBg": [
+     "#12312C",
+     "#143036",
+     "#1A2A33",
+     "#2A2438"
+    ],
+    "accent": "#8FE3D1"
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-11",
+   "slug": "alt-block-lines",
+   "definitionId": "card-alt-block-lines",
+   "compositionId": "CardAltBlockLines",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/alt-block-lines.tsx",
+   "start": 261.887,
+   "rawDuration": 5.508,
+   "duration": 5.508,
+   "props": {
+    "durationInFrames": 165,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     2.628
+    ],
+    "rows": [
+     {
+      "cls": "a",
+      "text": "知道这些词和知道它的解释"
+     },
+     {
+      "cls": "a",
+      "text": "真正的能够把它用于创作"
+     }
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-12",
+   "slug": "source-converge",
+   "definitionId": "card-source-converge",
+   "compositionId": "CardSourceConverge",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/source-converge.tsx",
+   "start": 277.595,
+   "rawDuration": 17.804,
+   "duration": 17.804,
+   "props": {
+    "durationInFrames": 534,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     2.16,
+     14.804
+    ],
+    "title": "张力是什么",
+    "sources": [
+     "一个人",
+     "遇到一个问题",
+     "不断的反复的折磨观众"
+    ],
+    "hub": "张力",
+    "caption": "也在折磨观众",
+    "convAt": 14.804
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-13",
+   "slug": "word-slot-cycle",
+   "definitionId": "card-word-slot-cycle",
+   "compositionId": "CardWordSlotCycle",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/word-slot-cycle.tsx",
+   "start": 306.567,
+   "rawDuration": 4.241,
+   "duration": 4.241,
+   "props": {
+    "durationInFrames": 127,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     1.04,
+     1.821
+    ],
+    "stem": "这段故事，",
+    "words": [
+     "张力在哪里",
+     "有没有张力",
+     "如何去构建这个张力"
+    ],
+    "final": "可以直接问AI",
+    "accent": "#8FE3D1"
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-14",
+   "slug": "title-demote-to-label",
+   "definitionId": "card-title-demote-to-label",
+   "compositionId": "CardTitleDemoteToLabel",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/title-demote-to-label.tsx",
+   "start": 328.871,
+   "rawDuration": 9.219,
+   "duration": 9.219,
+   "props": {
+    "durationInFrames": 277,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     5.699,
+     7.219
+    ],
+    "title": "费曼学习法",
+    "items": [
+     "费曼学习法",
+     "干中学",
+     "边干边学"
+    ],
+    "itemBg": [
+     "#12312C",
+     "#143036",
+     "#1A2A33",
+     "#2A2438"
+    ],
+    "accent": "#8FE3D1"
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-15",
+   "slug": "per-character-rise",
+   "definitionId": "card-per-character-rise",
+   "compositionId": "CardPerCharacterRise",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/per-character-rise.tsx",
+   "start": 356.149,
+   "rawDuration": 4.6,
+   "duration": 4.6,
+   "props": {
+    "durationInFrames": 138,
+    "scrim": 0.82,
+    "anchors": [
+     0
+    ],
+    "text": "在AI时代我们一定要建立起来的核心竞争力"
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-1",
+   "slug": "source-converge",
+   "definitionId": "card-source-converge",
+   "compositionId": "CardSourceConverge",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/source-converge.tsx",
+   "start": 454.235,
+   "rawDuration": 5.039,
+   "duration": 5.039,
+   "props": {
+    "durationInFrames": 151,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     0.71,
+     1.453,
+     2.579
+    ],
+    "title": "左脚踩右脚",
+    "sources": [
+     "找到问题",
+     "分析问题",
+     "解决问题",
+     "成为自己的经验"
+    ],
+    "hub": "自己的经验",
+    "caption": "下一次更好用",
+    "convAt": 2.579
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-16",
+   "slug": "chip-grid-single-select",
+   "definitionId": "card-chip-grid-single-select",
+   "compositionId": "CardChipGridSingleSelect",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/chip-grid-single-select.tsx",
+   "start": 704.411,
+   "rawDuration": 6.521,
+   "duration": 6.521,
+   "props": {
+    "durationInFrames": 196,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     2.72,
+     4.321
+    ],
+    "question": "主动愿意",
+    "options": [
+     "简单回应",
+     "拒绝"
+    ],
+    "selected": 0,
+    "equation": [
+     "可以继续",
+     "礼貌结束"
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-17",
+   "slug": "step-timeline-vertical",
+   "definitionId": "card-step-timeline-vertical",
+   "compositionId": "CardStepTimelineVertical",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/step-timeline-vertical.tsx",
+   "start": 720.36,
+   "rawDuration": 9.133,
+   "duration": 9.133,
+   "props": {
+    "durationInFrames": 274,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     3.167,
+     7.133
+    ],
+    "steps": [
+     {
+      "at": 22,
+      "kicker": "第1步",
+      "title": "通过聊天了解彼此"
+     },
+     {
+      "at": 119.6783961867377,
+      "kicker": "第2步",
+      "title": "关键是有来有往"
+     },
+     {
+      "at": 242,
+      "kicker": "第3步",
+      "title": "分享自己"
+     }
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-18",
+   "slug": "alt-block-lines",
+   "definitionId": "card-alt-block-lines",
+   "compositionId": "CardAltBlockLines",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/alt-block-lines.tsx",
+   "start": 818.981,
+   "rawDuration": 9.911,
+   "duration": 9.911,
+   "props": {
+    "durationInFrames": 297,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     3.719,
+     7.571
+    ],
+    "rows": [
+     {
+      "cls": "a",
+      "text": "你自己也会有压力"
+     },
+     {
+      "cls": "a",
+      "text": "带来的就是失望恐惧压力"
+     },
+     {
+      "cls": "a",
+      "text": "每次开口都像考试"
+     }
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-2",
+   "slug": "numbered-step-stack",
+   "definitionId": "card-numbered-step-stack",
+   "compositionId": "CardNumberedStepStack",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/numbered-step-stack.tsx",
+   "start": 849.613,
+   "rawDuration": 8.921,
+   "duration": 8.921,
+   "props": {
+    "durationInFrames": 268,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     2.738,
+     6.521,
+     6.921
+    ],
+    "steps": [
+     {
+      "no": "01",
+      "txt": "整个步骤下来有10个步骤"
+     },
+     {
+      "no": "02",
+      "txt": "每一个步骤是不是可以把它拆"
+     },
+     {
+      "no": "03",
+      "txt": "第一步"
+     },
+     {
+      "no": "04",
+      "txt": "认识女生"
+     }
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  },
+  {
+   "segmentId": "V018-19",
+   "slug": "line-by-line-slide",
+   "definitionId": "card-line-by-line-slide",
+   "compositionId": "CardLineByLineSlide",
+   "source": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/workflows/laohu-video/模板/remotion-assets/workspace/src/cards/line-by-line-slide.tsx",
+   "start": 1401.794,
+   "rawDuration": 7.021,
+   "duration": 7.021,
+   "props": {
+    "durationInFrames": 211,
+    "scrim": 0.82,
+    "anchors": [
+     0,
+     2.957,
+     4.961
+    ],
+    "lines": [
+     "沉淀成为一个可以被复用的一个技能",
+     "可以去帮助别人",
+     "提升自己的效率"
+    ]
+   },
+   "anchorSource": "口播逐字锚点"
+  }
+ ]
+}

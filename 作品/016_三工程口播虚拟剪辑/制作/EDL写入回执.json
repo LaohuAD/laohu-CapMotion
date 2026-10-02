@@ -1,0 +1,13 @@
+{
+  "schema": "laohu.cap-edl-receipt/1",
+  "status": "applied",
+  "projectPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap",
+  "projectName": "016_人物设计与资产提取.cap",
+  "edlPath": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/016_三工程口播虚拟剪辑/制作/冻结剪辑清单.json",
+  "edlSha256": "1fc1103b9f808f93c1c88a729abbd9d3fb167814670b8cb863be63e6f44ab7a0",
+  "previousRevision": 43,
+  "newRevision": 44,
+  "segmentCount": 893,
+  "durationSeconds": 1691.0427459999903,
+  "appliedAt": "2026-09-10T12:33:42.874Z"
+}

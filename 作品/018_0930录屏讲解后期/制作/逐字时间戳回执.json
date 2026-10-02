@@ -1,0 +1,320 @@
+{
+  "schema": "laohu.word-timestamps-receipt/1",
+  "out": "作品/018_0930录屏讲解后期/制作/逐字时间戳.json",
+  "durationSeconds": 1454.813,
+  "coverage": {
+    "sentences": 532,
+    "totalWordsInSource": 8957,
+    "keptWords": 8276,
+    "droppedWords": 681,
+    "ledgerDeletedWords": 681,
+    "uncoveredWords": 0,
+    "keptRatio": 0.924,
+    "spanStart": 0,
+    "spanEnd": 1454.813,
+    "reconciles": true
+  },
+  "samples": [
+    {
+      "i": 0,
+      "text": "如果你现在学习AI还在学习AI工具的话那我用一年的经验教训告诉你大错特错",
+      "start": 0,
+      "end": 5.59,
+      "match": true,
+      "ok": true,
+      "words": [
+        {
+          "text": "如",
+          "start": 0,
+          "end": 0.12
+        },
+        {
+          "text": "果",
+          "start": 0.12,
+          "end": 0.2
+        },
+        {
+          "text": "你",
+          "start": 0.2,
+          "end": 0.32
+        },
+        {
+          "text": "现",
+          "start": 0.32,
+          "end": 0.48
+        },
+        {
+          "text": "在",
+          "start": 0.48,
+          "end": 0.6
+        },
+        {
+          "text": "学",
+          "start": 0.6,
+          "end": 0.8
+        },
+        {
+          "text": "习",
+          "start": 0.8,
+          "end": 0.92
+        },
+        {
+          "text": "AI",
+          "start": 1.04,
+          "end": 1.2
+        },
+        {
+          "text": "还",
+          "start": 1.36,
+          "end": 1.56
+        },
+        {
+          "text": "在",
+          "start": 1.56,
+          "end": 1.72
+        },
+        {
+          "text": "学",
+          "start": 1.72,
+          "end": 1.84
+        },
+        {
+          "text": "习",
+          "start": 1.84,
+          "end": 1.96
+        },
+        {
+          "text": "AI",
+          "start": 2.04,
+          "end": 2.16
+        },
+        {
+          "text": "工",
+          "start": 2.24,
+          "end": 2.36
+        },
+        {
+          "text": "具",
+          "start": 2.36,
+          "end": 2.48
+        },
+        {
+          "text": "的",
+          "start": 2.48,
+          "end": 2.64
+        },
+        {
+          "text": "话",
+          "start": 2.64,
+          "end": 2.792
+        },
+        {
+          "text": "那",
+          "start": 2.802,
+          "end": 3.002
+        },
+        {
+          "text": "我",
+          "start": 3.002,
+          "end": 3.162
+        },
+        {
+          "text": "用",
+          "start": 3.162,
+          "end": 3.282
+        },
+        {
+          "text": "一",
+          "start": 3.282,
+          "end": 3.442
+        },
+        {
+          "text": "年",
+          "start": 3.442,
+          "end": 3.602
+        },
+        {
+          "text": "的",
+          "start": 3.602,
+          "end": 3.802
+        },
+        {
+          "text": "经",
+          "start": 3.802,
+          "end": 3.882
+        },
+        {
+          "text": "验",
+          "start": 3.882,
+          "end": 4.002
+        },
+        {
+          "text": "教",
+          "start": 4.042,
+          "end": 4.202
+        },
+        {
+          "text": "训",
+          "start": 4.202,
+          "end": 4.322
+        },
+        {
+          "text": "告",
+          "start": 4.362,
+          "end": 4.522
+        },
+        {
+          "text": "诉",
+          "start": 4.522,
+          "end": 4.602
+        },
+        {
+          "text": "你",
+          "start": 4.602,
+          "end": 4.772
+        },
+        {
+          "text": "大",
+          "start": 4.772,
+          "end": 4.91
+        },
+        {
+          "text": "错",
+          "start": 4.91,
+          "end": 5.11
+        },
+        {
+          "text": "特",
+          "start": 5.15,
+          "end": 5.31
+        },
+        {
+          "text": "错",
+          "start": 5.35,
+          "end": 5.59
+        }
+      ]
+    },
+    {
+      "i": 266,
+      "text": "轻松的交流开始",
+      "start": 686.856,
+      "end": 688.514,
+      "match": true,
+      "ok": true,
+      "words": [
+        {
+          "text": "轻",
+          "start": 686.856,
+          "end": 687.015
+        },
+        {
+          "text": "松",
+          "start": 687.015,
+          "end": 687.175
+        },
+        {
+          "text": "的",
+          "start": 687.295,
+          "end": 687.455
+        },
+        {
+          "text": "交",
+          "start": 687.704,
+          "end": 687.874
+        },
+        {
+          "text": "流",
+          "start": 687.874,
+          "end": 688.074
+        },
+        {
+          "text": "开",
+          "start": 688.074,
+          "end": 688.314
+        },
+        {
+          "text": "始",
+          "start": 688.314,
+          "end": 688.514
+        }
+      ]
+    },
+    {
+      "i": 531,
+      "text": "好那么下面下期视频再见拜拜",
+      "start": 1452.096,
+      "end": 1454.813,
+      "match": true,
+      "ok": true,
+      "words": [
+        {
+          "text": "好",
+          "start": 1452.096,
+          "end": 1452.401
+        },
+        {
+          "text": "那",
+          "start": 1452.443,
+          "end": 1452.544
+        },
+        {
+          "text": "么",
+          "start": 1452.544,
+          "end": 1452.704
+        },
+        {
+          "text": "下",
+          "start": 1452.984,
+          "end": 1453.064
+        },
+        {
+          "text": "面",
+          "start": 1453.144,
+          "end": 1453.264
+        },
+        {
+          "text": "下",
+          "start": 1453.547,
+          "end": 1453.66
+        },
+        {
+          "text": "期",
+          "start": 1453.66,
+          "end": 1453.82
+        },
+        {
+          "text": "视",
+          "start": 1453.82,
+          "end": 1453.98
+        },
+        {
+          "text": "频",
+          "start": 1453.98,
+          "end": 1454.1
+        },
+        {
+          "text": "再",
+          "start": 1454.1,
+          "end": 1454.26
+        },
+        {
+          "text": "见",
+          "start": 1454.26,
+          "end": 1454.421
+        },
+        {
+          "text": "拜",
+          "start": 1454.421,
+          "end": 1454.533
+        },
+        {
+          "text": "拜",
+          "start": 1454.613,
+          "end": 1454.813
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-10-02T00:39:04.801Z"
+}

@@ -1,0 +1,45 @@
+{
+  "status": "PASS_ENGINEERING_OBSERVE_RHYTHM",
+  "revision": 45,
+  "durationSeconds": 1691.042746,
+  "previousDurationSeconds": 1912.879999,
+  "segments": 893,
+  "silentCuts": 1294,
+  "subtitlePairs": 499,
+  "sourceCaptions": 591,
+  "fontWeight": 500,
+  "chineseSize": 52,
+  "englishSize": 34,
+  "userPositionsPreserved": true,
+  "presetRevision": 7,
+  "supplementRange": {
+    "start": 1187.4747039999947,
+    "end": 1297.9727479999933
+  },
+  "asrBlockCount": 84,
+  "minimumTextSimilarity": 0.9355,
+  "meanTextSimilarity": 0.9874869047619047,
+  "development": {
+    "typecheck": "PASS",
+    "frontendTests": 25,
+    "projectRustTests": 17,
+    "presetCliTests": 4,
+    "edlAndGapTests": 11,
+    "cliIntegration": "PASS",
+    "GUIInteraction": "NOT_RUN",
+    "WindowsNative": "NOT_RUN",
+    "packaging": "NOT_REQUESTED_NOT_RUN",
+    "waveformOffsetTests": 2,
+    "desktopLibraryCompile": "PASS"
+  },
+  "limitations": [
+    "未进行全程人工听审，声学与ASR校验不能代替自然度判断",
+    "当前安装版波形仍有时间偏移显示问题，开发源码已修复、尚未打包",
+    "本轮未重新做GUI交互或Windows原生验收",
+    "字幕样式与用户轨位置已保留，当前工程需要重新读取磁盘时间轴"
+  ],
+  "finalAudioValidation": "当前1691.043秒音频重新ASR；282条识别与84讲述段交叉核对，未见明显整句缺失；不冒充全程人工听审",
+  "rhythmPolicy": "用户实听选择B：犹豫静音约20ms总余量，句内句间一致，实际字音与拖音不变速",
+  "quietOnlyWordTimestampOverlaps": 748,
+  "completelyLostWords": 0
+}

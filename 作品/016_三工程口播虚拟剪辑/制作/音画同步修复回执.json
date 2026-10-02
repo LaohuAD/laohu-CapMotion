@@ -1,0 +1,202 @@
+{
+  "status": "APPLIED",
+  "previousRevision": 45,
+  "newRevision": 46,
+  "project": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap",
+  "addedClips": [
+    {
+      "index": 12,
+      "offsets": {
+        "camera": 0.7360476,
+        "mic": 0.78988016,
+        "system_audio": 0.9146597
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 13,
+      "offsets": {
+        "camera": 0.209469,
+        "mic": 0.29820433,
+        "system_audio": 0.3520834
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 14,
+      "offsets": {
+        "camera": 0.29955992,
+        "mic": 0.35987112,
+        "system_audio": 0.4061869
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 15,
+      "offsets": {
+        "camera": 0.16118363,
+        "mic": 0.24653983,
+        "system_audio": 0.2890288
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 16,
+      "offsets": {
+        "camera": 0.20012812,
+        "mic": 0.2648691,
+        "system_audio": 0.2648691
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 17,
+      "offsets": {
+        "camera": 0.17445,
+        "mic": 0.24979255,
+        "system_audio": 0.24979255
+      },
+      "offsetsAutoCalculated": true
+    }
+  ],
+  "previousClips": [
+    {
+      "index": 0,
+      "offsets": {
+        "camera": 0.102367915,
+        "mic": 0.17312308,
+        "system_audio": 0.12917408
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 1,
+      "offsets": {
+        "camera": 0.092258915,
+        "mic": 0.18646196,
+        "system_audio": 0.15832667
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 2,
+      "offsets": {
+        "camera": 0.1151455,
+        "mic": 0.19312133,
+        "system_audio": 0.19312133
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 3,
+      "offsets": {
+        "camera": 0.17581575,
+        "mic": 0.2431267,
+        "system_audio": 0.28480414
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 4,
+      "offsets": {
+        "camera": 0.12833792,
+        "mic": 0.17145458,
+        "system_audio": 0.17145458
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 5,
+      "offsets": {
+        "camera": 0.25469363,
+        "mic": 0.33479166,
+        "system_audio": 0.4075049
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 6,
+      "offsets": {
+        "camera": 0.124774665,
+        "mic": 0.18478975,
+        "system_audio": 0.18478975
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 7,
+      "offsets": {
+        "camera": 0.16801392,
+        "mic": 0.23145595,
+        "system_audio": 0.29927287
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 8,
+      "offsets": {
+        "camera": 0.4368486,
+        "mic": 0.5014602,
+        "system_audio": 0.5014602
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 9,
+      "offsets": {
+        "camera": 0.22964175,
+        "mic": 0.28812283,
+        "system_audio": 0.36349905
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 10,
+      "offsets": {
+        "camera": 0.51603013,
+        "mic": 0.5681285,
+        "system_audio": 0.6270184
+      },
+      "offsetsAutoCalculated": true
+    },
+    {
+      "index": 11,
+      "offsets": {
+        "camera": 0.2521349,
+        "mic": 0.30811578,
+        "system_audio": 0.30811578
+      },
+      "offsetsAutoCalculated": true
+    }
+  ],
+  "timelineSha256": "64492ed621664820cca3ca276bbddb4fdc8c2daf1798080ca96ba71de45d386f",
+  "unchangedFields": [
+    "aspectRatio",
+    "background",
+    "camera",
+    "audio",
+    "cursor",
+    "hotkeys",
+    "timeline",
+    "captions",
+    "keyboard",
+    "annotations",
+    "motion",
+    "screenMotionBlur",
+    "screenMovementSpring",
+    "colorCorrection",
+    "textSizeVersion",
+    "textAnimVersion"
+  ],
+  "reason": "merged recording indices12-17 lacked source audio/camera offsets; playback/export defaulted to zero",
+  "prevention": {
+    "earliestFailure": "合并脚本重编号媒体与时间轴，遗漏同步配置的共同迁移",
+    "whyPreviousCheckMissed": "此前ASR检查的是按麦克风映射自行生成的主音频，并非Cap实际导出的音频",
+    "authority": ".agents/skills/laohu-video-postproduction/SKILL.md#多工程合并的同步完整性",
+    "implementation": "assemble-project.py已补逐段同步配置迁移和完整索引检查",
+    "protection": "已有0–11配置、剪口、字幕、时长及样式保持不变",
+    "futureRegression": "多工程索引重映射；单工程现有校准保持；实际导出换源剪口取音一致",
+    "validation": "用户要求节省额度并停止复核；未继续导出/听感回归，修复效果待用户导出确认",
+    "decision": "OBSERVE"
+  }
+}

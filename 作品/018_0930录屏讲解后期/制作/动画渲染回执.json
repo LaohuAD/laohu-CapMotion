@@ -1,0 +1,30 @@
+{
+  "projectRevision": 77,
+  "motionSegments": 19,
+  "rendered": [
+    "V018-03",
+    "V018-04",
+    "V018-05",
+    "V018-06",
+    "V018-07",
+    "V018-08",
+    "V018-09",
+    "V018-10",
+    "V018-11",
+    "V018-12",
+    "V018-13",
+    "V018-14",
+    "V018-15",
+    "V018-1",
+    "V018-16",
+    "V018-17",
+    "V018-18",
+    "V018-2",
+    "V018-19"
+  ],
+  "motionOverlapViolations": 0,
+  "cornerPanelException": [
+    "V018-17"
+  ],
+  "status": "rendered"
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "laohu.final-asr-provenance/1",
+  "generatedAt": "2026-10-01T13:55:42.812Z",
+  "media": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_成片.mp4",
+  "edl": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/018_0930录屏讲解后期/制作/剪辑清单.json",
+  "raw": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/018_0930录屏讲解后期/输出/成片-final.raw.json",
+  "srt": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/作品/018_0930录屏讲解后期/输出/成片-final.srt",
+  "mediaSha256": "3e69e9b6b19fb606d9bb71ba3f7bbc9dda539362d631f38f0b45be7a3b6214ac",
+  "edlSha256": "8a0e39da575dbc6c6f67a7784c0c56dec176ea7e8ae0053d6716e10a0b4e1518",
+  "rawSha256": "53ab61424d3655b8c067ac96879bbcccf588cd96c715f5c522770745b393b3b9",
+  "srtSha256": "dd8ffeacab0556dd6003ce6e544eb93df5996de997ac488ecbff3d25098c2165"
+}

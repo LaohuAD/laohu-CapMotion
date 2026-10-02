@@ -227,6 +227,12 @@ pub struct InterpolatedCursorPosition {
     pub cursor_id: String,
 }
 
+/// 采样间隔超过这个值时不再线性连线。
+///
+/// 移动事件流只在光标真正移动时才产生事件；间隔远大于正常采样周期，说明这段没有移动，
+/// 应当保持上一个位置，而不是把两端连成一条缓慢滑动的直线。
+const MAX_INTERPOLATION_GAP_MS: f64 = 500.0;
+
 pub fn interpolate_cursor(
     cursor: &CursorEvents,
     time_secs: f32,
@@ -302,8 +308,28 @@ fn interpolate_raw_cursor(
             let delta_ms = (next.time_ms - c.time_ms) as f32;
             let dt = (delta_ms / 1000.0).max(0.000_1);
             let velocity = XY::new(((next.x - c.x) as f32) / dt, ((next.y - c.y) as f32) / dt);
+            // 采样间隔内按真实线性插值定位。
+            //
+            // 这里原来是直接返回左端点坐标，等于把光标位置做成阶梯函数：两次采样之间不
+            // 动，下一次采样到达时整段瞬移。跟随相机每帧读取当前与 +horizon 两处位置，
+            // 采样间隔（约 140ms）常常跨过格子而比 prediction_horizon 更长，于是"未来
+            // 位置"在整级台阶与零之间反复跳变，提前量、速度与响应档位随之跳变，画面就
+            // 在每次采样到达时猛推一下再缓回来。插值后台阶消失，读数只按真实移动量变化。
+            //
+            // 间隔超过 MAX_INTERPOLATION_GAP_MS 时不连线：移动事件流里的长间隔表示这段
+            // 时间没有产生移动事件，光标是停住的；把两个相隔很远的点连成缓慢直线会让跟
+            // 随相机凭空平移。
+            let interpolate = (next.time_ms - c.time_ms) <= MAX_INTERPOLATION_GAP_MS;
+            let t = if interpolate {
+                ((time_ms - c.time_ms) / (next.time_ms - c.time_ms)).clamp(0.0, 1.0)
+            } else {
+                0.0
+            };
             Some(InterpolatedCursorPosition {
-                position: Coord::new(XY { x: c.x, y: c.y }),
+                position: Coord::new(XY {
+                    x: c.x + (next.x - c.x) * t,
+                    y: c.y + (next.y - c.y) * t,
+                }),
                 velocity,
                 cursor_id: c.cursor_id.clone(),
             })
@@ -645,6 +671,61 @@ mod tests {
             time_ms,
             down,
         }
+    }
+
+    fn events(moves: Vec<CursorMoveEvent>) -> CursorEvents {
+        CursorEvents {
+            moves,
+            clicks: vec![],
+        }
+    }
+
+    #[test]
+    fn raw_lookup_interpolates_between_samples() {
+        // 两个采样点之间应当取到真实中间位置，而不是停在左端点（阶梯函数）。
+        let cursor = events(vec![cursor_move(0.0, 0.2, 0.4), cursor_move(100.0, 0.6, 0.8)]);
+
+        let start = interpolate_raw_cursor(&cursor, 0.0).unwrap();
+        assert!((start.position.coord.x - 0.2).abs() < 1e-9);
+        assert!((start.position.coord.y - 0.4).abs() < 1e-9);
+
+        let middle = interpolate_raw_cursor(&cursor, 50.0).unwrap();
+        assert!((middle.position.coord.x - 0.4).abs() < 1e-6);
+        assert!((middle.position.coord.y - 0.6).abs() < 1e-6);
+
+        let end = interpolate_raw_cursor(&cursor, 99.0).unwrap();
+        assert!(end.position.coord.x > 0.59 && end.position.coord.x < 0.6);
+    }
+
+    #[test]
+    fn raw_lookup_holds_across_long_gaps() {
+        // 2.35 秒没有移动事件表示光标停住：保持上一个位置，不连成缓慢滑动的直线。
+        let cursor = events(vec![cursor_move(0.0, 0.30, 0.50), cursor_move(2350.0, 0.45, 0.50)]);
+
+        for probe_ms in [0.0, 500.0, 1200.0, 2349.0] {
+            let at = interpolate_raw_cursor(&cursor, probe_ms).unwrap();
+            assert!(
+                (at.position.coord.x - 0.30).abs() < 1e-9,
+                "gap probe at {probe_ms}ms should hold the previous sample, got {}",
+                at.position.coord.x
+            );
+        }
+
+        // 刚好在阈值内的一小段间隔仍然连线。
+        let short = events(vec![cursor_move(0.0, 0.30, 0.50), cursor_move(400.0, 0.50, 0.50)]);
+        let mid = interpolate_raw_cursor(&short, 200.0).unwrap();
+        assert!((mid.position.coord.x - 0.40).abs() < 1e-6);
+    }
+
+    #[test]
+    fn raw_lookup_still_clamps_at_both_ends() {
+        let cursor = events(vec![cursor_move(100.0, 0.2, 0.3), cursor_move(200.0, 0.6, 0.7)]);
+
+        let before = interpolate_raw_cursor(&cursor, 0.0).unwrap();
+        assert!((before.position.coord.x - 0.2).abs() < 1e-9);
+
+        let after = interpolate_raw_cursor(&cursor, 9999.0).unwrap();
+        assert!((after.position.coord.x - 0.6).abs() < 1e-9);
     }
 
     #[test]

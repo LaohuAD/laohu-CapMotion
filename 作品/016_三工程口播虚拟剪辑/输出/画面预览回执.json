@@ -1,0 +1,52 @@
+[
+  {
+    "estimated_size_mb": 993.9191311240587,
+    "actual_width": 1920,
+    "actual_height": 1080,
+    "frame_render_time_ms": 1230.79075,
+    "total_frames": 52531,
+    "image": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/screenshots/edit-review-24.jpg",
+    "time": 24,
+    "exitCode": 0
+  },
+  {
+    "estimated_size_mb": 993.9191311240587,
+    "actual_width": 1920,
+    "actual_height": 1080,
+    "frame_render_time_ms": 661.354833,
+    "total_frames": 52531,
+    "image": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/screenshots/edit-review-810.jpg",
+    "time": 810,
+    "exitCode": 0
+  },
+  {
+    "estimated_size_mb": 993.9191311240587,
+    "actual_width": 1920,
+    "actual_height": 1080,
+    "frame_render_time_ms": 850.0075,
+    "total_frames": 52531,
+    "image": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/screenshots/edit-review-1230.jpg",
+    "time": 1230,
+    "exitCode": 0
+  },
+  {
+    "estimated_size_mb": 993.9191311240587,
+    "actual_width": 1920,
+    "actual_height": 1080,
+    "frame_render_time_ms": 590.9025839999999,
+    "total_frames": 52531,
+    "image": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/screenshots/edit-review-1340.jpg",
+    "time": 1340,
+    "exitCode": 0
+  },
+  {
+    "estimated_size_mb": 993.9191311240587,
+    "actual_width": 1920,
+    "actual_height": 1080,
+    "frame_render_time_ms": 866.095292,
+    "total_frames": 52531,
+    "image": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/screenshots/edit-review-1720.jpg",
+    "time": 1720,
+    "exitCode": 0
+  }
+]

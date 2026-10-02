@@ -1,0 +1,31 @@
+{
+ "schema": "laohu.silence-audit/1",
+ "media": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_成片.mp4",
+ "durationSeconds": 1454.81,
+ "threshold": "-40dB / 0.2s",
+ "before": {
+  "intervals": 427,
+  "seconds": 216.0,
+  "share": "13.07%",
+  "longest": 1.25
+ },
+ "after": {
+  "intervals": 90,
+  "seconds": 23.53,
+  "share": "1.62%",
+  "longest": 0.51
+ },
+ "policy": "B档：犹豫与思考造成的无声空白不分句内句间，收紧至约 20ms 总余量（两侧各约 10ms）",
+ "method": "safe-speech-gap-refinement 的安全内核算法",
+ "keyFix": "ASR 词时码可能整段包住声学静音（如“AI”被判成 0.68 秒），此时不得把该词机械保护；整词落在静音里时保守保留，保证丢失词为 0",
+ "wordCoverage": {
+  "retained": 8276,
+  "ledgerDeleted": 681,
+  "uncovered": 0
+ },
+ "distribution": {
+  "0.20-0.50s": 89,
+  "0.50-1.00s": 1
+ },
+ "remaining": "90 处为词禁剪区与声学静音重叠处，按“整词消失必须阻止写入”保守保留"
+}

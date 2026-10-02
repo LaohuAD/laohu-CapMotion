@@ -1,0 +1,45 @@
+{
+  "symptom": "成片里同一句说了两遍、被自己的停顿切开的一句显示成两段、念稿改口的孤立字留在音频里、屏幕字幕写出本段没说过的话。",
+  "triggerScope": "PROJECT_CAPABILITY",
+  "earliestFailure": "laohu-video-postproduction 规定了重复删前留后，但没有规定这些处理落在音频层还是字幕层，于是审稿自行发明了“音频保留；屏幕字幕并入后句”这种规则里不存在的状态，把该剪掉的音频留在了成片里。",
+  "rootLayer": "STRUCTURE",
+  "hypothesis": "写明不通顺一律在音频层收口、被停顿切开的一句合并为一个成片单元、屏幕字幕必须由本段音频支持，并把三条做成硬校验，同构任务里这类问题会从“靠执行者意识到”变成“不通过”。",
+  "protection": [
+    "内容完整度优先于节奏压缩",
+    "最小重复语义单元删前留后",
+    "语气词单独成句且承担停顿作用时保留",
+    "不因合并改写口播事实",
+    "已审过的字幕切分不因返工被覆盖"
+  ],
+  "authorityPath": ".agents/skills/laohu-video-postproduction/SKILL.md",
+  "change": "新增“口播不通顺在音频层收口（2026-10-01）”一节：四类形态与对应音频动作表、语气词判定、短单元必须写明保留理由、屏幕字幕由本段音频支持、正文按音频补全而字幕按语义成稿。scripts/pre-edit-review.mjs 增加三条硬校验：相邻两条正文重复、可视字数不超过 3 必须有 note、屏幕字幕含相邻单元内容；并把句末停顿标点的检查从“逗号顿号”扩到“逗号句号顿号分号冒号”。",
+  "decisionChanges": [
+    "重复试说的处置从字幕层挪到 EDL 音频层",
+    "被停顿切开的一句从两条成片单元合并为一条",
+    "屏幕字幕新增“不得含相邻单元内容”的硬边界"
+  ],
+  "regressions": {
+    "current": [
+      "rev44 全量跑新校验：抓出 C061/C388 重复试说、C114/C251 字幕越界、9 个短单元缺交代"
+    ],
+    "legacy": [
+      "rev42 基线跑新校验：抓出 C020 句末停顿标点，证明旧数据的问题也能被拦住"
+    ],
+    "adjacent": [
+      "scripts/pre-edit-review.test.mjs 在改动前后同为 15 个失败，未新增失败；该套件与示例夹具当前不同步，属既有问题"
+    ]
+  },
+  "evidence": [
+    "作品/018_0930录屏后期/分析/口播不通顺扫描.json",
+    ".cache/restore/018-预剪辑审稿-rev42.json",
+    "scripts/pre-edit-review.mjs 改动前后同套件失败数 15 : 15"
+  ],
+  "rollback": "若加严后正常的语气词停顿或并列枚举拆分被判失败，退回对应单条检查，保留其余。",
+  "validation": {
+    "STRUCTURE": "PASS",
+    "ROUTE": "PASS",
+    "BEHAVIOR": "OBSERVE",
+    "QUALITY": "UNKNOWN"
+  },
+  "decision": "KEEP"
+}

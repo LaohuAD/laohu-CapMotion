@@ -1,0 +1,395 @@
+{
+  "schema": "laohu.overlay-assets/2",
+  "compositionId": "Work018Overlay",
+  "source": "workflows/laohu-video/模板/remotion-assets/workspace/src/works/Work018.tsx",
+  "placementRules": [
+    "只落在录屏画面静止窗口内",
+    "右上角有鼠标时用全幅压暗居中",
+    "后半段鼠标在中间偏左，用右侧竖条面板",
+    "角落常驻面板不适用全幅压暗的运动禁令（它一直在场，不构成突然出现）"
+  ],
+  "screenMotionWindows": [
+    [
+      5.59,
+      10.652998167
+    ],
+    [
+      11.514698875000018,
+      13.712577374999995
+    ],
+    [
+      218.92696725,
+      220.146
+    ],
+    [
+      241.838698875,
+      243.456577375
+    ],
+    [
+      406.39,
+      425.6139999999999
+    ],
+    [
+      434.611,
+      443.5940000000001
+    ],
+    [
+      445.9006378951572,
+      448.3383226451573
+    ],
+    [
+      449.42,
+      452.65999999999997
+    ],
+    [
+      681.4483213531572,
+      695.2553348531573
+    ],
+    [
+      711.476,
+      718.9030125611577
+    ],
+    [
+      749.759,
+      751.4390000000001
+    ],
+    [
+      795.8375889361577,
+      815.568
+    ],
+    [
+      838.3777696451573,
+      846.127247686157
+    ],
+    [
+      872.571,
+      1110.887
+    ],
+    [
+      1116.607,
+      1120.1009999999999
+    ],
+    [
+      1147.984,
+      1148.5729999999999
+    ],
+    [
+      1337.07696725,
+      1340.075
+    ],
+    [
+      1375.776,
+      1375.929577375
+    ],
+    [
+      1386.97,
+      1390.571998167
+    ]
+  ],
+  "units": {
+    "V018-03": {
+      "definitionId": "work018-contrast",
+      "kind": "contrast",
+      "form": "左右对照",
+      "start": 47.068,
+      "end": 57.461,
+      "durationSeconds": 10.39,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/3de5dc8a607db0a9a03914dade1df70a73349512437053a652e6e1788a8fd041/final.mov",
+      "contentHash": "3de5dc8a607db0a9a03914dade1df70a73349512437053a652e6e1788a8fd041",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-04": {
+      "definitionId": "work018-chain",
+      "kind": "chain",
+      "form": "箭头链",
+      "start": 57.461,
+      "end": 68.768,
+      "durationSeconds": 11.31,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/fbe9af44ddfa91db1d5bc915d58ddbf52a0d4ffaba9e682cdc9c28639cec58fb/final.mov",
+      "contentHash": "fbe9af44ddfa91db1d5bc915d58ddbf52a0d4ffaba9e682cdc9c28639cec58fb",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-05": {
+      "definitionId": "work018-list",
+      "kind": "list",
+      "form": "逐条清单",
+      "start": 85.503,
+      "end": 91.85,
+      "durationSeconds": 6.35,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/bf8034d0c3e2d892f3ad7d281ccd08b120d4b6b706fab5f144704c1b556666ab/final.mov",
+      "contentHash": "bf8034d0c3e2d892f3ad7d281ccd08b120d4b6b706fab5f144704c1b556666ab",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-06": {
+      "definitionId": "work018-branch",
+      "kind": "branch",
+      "form": "分支",
+      "start": 99.543,
+      "end": 119.384,
+      "durationSeconds": 19.84,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/1880c2555958a514a545accea12a036be69a38922d536f800ae4a6d2f9afadc9/final.mov",
+      "contentHash": "1880c2555958a514a545accea12a036be69a38922d536f800ae4a6d2f9afadc9",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-07": {
+      "definitionId": "work018-statement",
+      "kind": "statement",
+      "form": "大字卡",
+      "start": 136.704,
+      "end": 143.55800000000002,
+      "durationSeconds": 6.85,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/7e608f3a73b14f852621f8733ff8f0536c2a699df40da5deee4fda61cdcbfc4b/final.mov",
+      "contentHash": "7e608f3a73b14f852621f8733ff8f0536c2a699df40da5deee4fda61cdcbfc4b",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-08": {
+      "definitionId": "work018-contrast",
+      "kind": "contrast",
+      "form": "左右对照",
+      "start": 149.533,
+      "end": 161.73299999999998,
+      "durationSeconds": 12.2,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/60e3de336d0803ca09c774828fb345fb61e27021fb3340a258e394b6a1c8d025/final.mov",
+      "contentHash": "60e3de336d0803ca09c774828fb345fb61e27021fb3340a258e394b6a1c8d025",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-09": {
+      "definitionId": "work018-contrast",
+      "kind": "contrast",
+      "form": "左右对照",
+      "start": 222.427,
+      "end": 235.437,
+      "durationSeconds": 13.01,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/358c895eff93ba817533ca8e7841cfefe879387ed63c547e956756f5da9bc7bb/final.mov",
+      "contentHash": "358c895eff93ba817533ca8e7841cfefe879387ed63c547e956756f5da9bc7bb",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-10": {
+      "definitionId": "work018-list",
+      "kind": "list",
+      "form": "逐条清单",
+      "start": 251.791,
+      "end": 256.006,
+      "durationSeconds": 4.21,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/703ffe8941ef72fc0474482552dabaa93c0d53c5b4960429f46d96e48c849704/final.mov",
+      "contentHash": "703ffe8941ef72fc0474482552dabaa93c0d53c5b4960429f46d96e48c849704",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-11": {
+      "definitionId": "work018-contrast",
+      "kind": "contrast",
+      "form": "左右对照",
+      "start": 261.648,
+      "end": 268.87600000000003,
+      "durationSeconds": 7.23,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/ff97440737f8b2e54ac46122783b58bcd5ae987c4fdde4c3ebf9bbdbdc60691f/final.mov",
+      "contentHash": "ff97440737f8b2e54ac46122783b58bcd5ae987c4fdde4c3ebf9bbdbdc60691f",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-12": {
+      "definitionId": "work018-chain",
+      "kind": "chain",
+      "form": "箭头链",
+      "start": 274.516,
+      "end": 294.16,
+      "durationSeconds": 19.64,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/8a4d689ee8d72c61d2ade1ef5cb43cf285378e3d2b356ae352ceeaa0b72ffc56/final.mov",
+      "contentHash": "8a4d689ee8d72c61d2ade1ef5cb43cf285378e3d2b356ae352ceeaa0b72ffc56",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-13": {
+      "definitionId": "work018-list",
+      "kind": "list",
+      "form": "逐条清单",
+      "start": 304.236,
+      "end": 309.82599999999996,
+      "durationSeconds": 5.59,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/4954e8f8e4fba24f7f0379854a4e1e22217e3bb7cac540d18e2175b2aa88dca4/final.mov",
+      "contentHash": "4954e8f8e4fba24f7f0379854a4e1e22217e3bb7cac540d18e2175b2aa88dca4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-14": {
+      "definitionId": "work018-statement",
+      "kind": "statement",
+      "form": "大字卡",
+      "start": 326.799,
+      "end": 336.96999999999997,
+      "durationSeconds": 10.17,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/0df184b5d060b76906feaecdc249bc40210c60c94443209bd6f914c02fa5d8a3/final.mov",
+      "contentHash": "0df184b5d060b76906feaecdc249bc40210c60c94443209bd6f914c02fa5d8a3",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-15": {
+      "definitionId": "work018-statement",
+      "kind": "statement",
+      "form": "大字卡",
+      "start": 348.06,
+      "end": 363.469,
+      "durationSeconds": 15.41,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/3750c8e8a3b0aba6885570b0cb27f7732b6ac226aa2b1ac2d54b3c16e48b0b30/final.mov",
+      "contentHash": "3750c8e8a3b0aba6885570b0cb27f7732b6ac226aa2b1ac2d54b3c16e48b0b30",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-1": {
+      "definitionId": "work018-loop",
+      "kind": "loop",
+      "form": "三个 skill 闭环",
+      "start": 452.66,
+      "end": 465.742,
+      "durationSeconds": 13.08,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/0d6ad5b725d5c5630780f38cd06f0b387f2d2ca16213e1ca79b7acce06b776d6/final.mov",
+      "contentHash": "0d6ad5b725d5c5630780f38cd06f0b387f2d2ca16213e1ca79b7acce06b776d6",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-16": {
+      "definitionId": "work018-branch",
+      "kind": "branch",
+      "form": "分支",
+      "start": 700.554,
+      "end": 711.476,
+      "durationSeconds": 10.92,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/c3de5503474393fb5a34a804cd640bfd050c7a24d451fc1037fb6fe4710306ec/final.mov",
+      "contentHash": "c3de5503474393fb5a34a804cd640bfd050c7a24d451fc1037fb6fe4710306ec",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-17": {
+      "definitionId": "work018-panel",
+      "kind": "panel",
+      "form": "右侧步骤面板（自己生长，不显示总数）",
+      "start": 719.204,
+      "end": 799.092,
+      "durationSeconds": 79.89,
+      "screenMotionOverlapSeconds": 4.934,
+      "placement": "右侧竖条（避开鼠标、摄像头、字幕）",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/6212b317890ae90ed468011af92af1947b2c312c64b370b5c760fcf5a3977709/final.mov",
+      "contentHash": "6212b317890ae90ed468011af92af1947b2c312c64b370b5c760fcf5a3977709",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-18": {
+      "definitionId": "work018-contrast",
+      "kind": "contrast",
+      "form": "左右对照",
+      "start": 815.6,
+      "end": 827.993,
+      "durationSeconds": 12.39,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/8bc9b5956b8f97a6e59d5543bfb23e4dc9e29c0401686b27a87c8fdcf6d84cbc/final.mov",
+      "contentHash": "8bc9b5956b8f97a6e59d5543bfb23e4dc9e29c0401686b27a87c8fdcf6d84cbc",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-2": {
+      "definitionId": "work018-steps",
+      "kind": "steps",
+      "form": "十个步骤一览",
+      "start": 848.614,
+      "end": 857.534,
+      "durationSeconds": 8.92,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/85b9789da5d7f5e79fe82f7d285ab84677303556846e39c7033bcc96f9df5178/final.mov",
+      "contentHash": "85b9789da5d7f5e79fe82f7d285ab84677303556846e39c7033bcc96f9df5178",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    },
+    "V018-19": {
+      "definitionId": "work018-list",
+      "kind": "list",
+      "form": "逐条清单",
+      "start": 1394.055,
+      "end": 1404.511,
+      "durationSeconds": 10.46,
+      "screenMotionOverlapSeconds": 0,
+      "placement": "全幅压暗居中",
+      "artifactPath": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap/motion/cache/29fbdb1db6f69a040175700153d2db5ea0cdbe46aea51bb9267a5bc5dfa83830/final.mov",
+      "contentHash": "29fbdb1db6f69a040175700153d2db5ea0cdbe46aea51bb9267a5bc5dfa83830",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30.0,
+      "hasAlpha": true
+    }
+  }
+}

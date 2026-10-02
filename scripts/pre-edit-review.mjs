@@ -42,7 +42,7 @@ function checkSources(sources, label, allowRelative = false) {
 }
 
 export function validateReview(data) {
-	if (data?.schema !== "laohu.pre-edit-review/1")
+	if (!["laohu.pre-edit-review/1", "laohu.pre-edit-review/2"].includes(data?.schema))
 		fail("不支持的审稿数据 schema");
 	if (
 		!present(data.id) ||
@@ -75,6 +75,8 @@ export function validateReview(data) {
 	const segments = ids(data.segments, "字幕/事件");
 	if (!segments.size) fail("至少需要一个字幕或无字幕事件");
 	let previousEnd = data.scope.start;
+	let previousCaptionTexts = [];
+	let previousBareText = "";
 	for (const s of data.segments) {
 		if (
 			!range(s.finalRange) ||
@@ -84,7 +86,89 @@ export function validateReview(data) {
 			fail(`${s.id} 成片时间越界、重叠或乱序`);
 		if (!["CAPTION", "EVENT"].includes(s.kind) || !present(s.text))
 			fail(`${s.id} 缺最终字幕或无字幕事件正文`);
+		if (data.schema === "laohu.pre-edit-review/2" && !present(s.rawAsrText))
+			fail(`${s.id} 缺原始 ASR 文本`);
+		if (data.schema === "laohu.pre-edit-review/2" && s.kind === "CAPTION") {
+			if (!Array.isArray(s.rawAsrSegmentIds) || !s.rawAsrSegmentIds.length)
+				fail(`${s.id} 缺按源时码匹配的原始 ASR 段引用`);
+			if (!Array.isArray(s.rawAsrWords) || !s.rawAsrWords.length)
+				fail(`${s.id} 缺原始 ASR 词级定位`);
+			for (const word of s.rawAsrWords) {
+				if (!present(word.text) || !Number.isFinite(word.start) || !Number.isFinite(word.end) || word.end <= word.start)
+					fail(`${s.id} 原始 ASR 词级定位无效`);
+			}
+		}
 		checkSources(s.sourceRanges, s.id, data.isExample === true);
+		// 同一句说了两遍：相邻两条正文相同或互相包含，前一遍的音频必须删掉
+		const bareText = String(s.text ?? "").replace(/[^\u4e00-\u9fffA-Za-z0-9]/gu, "");
+		if (previousBareText && bareText.length >= 4) {
+			const shorter = bareText.length <= previousBareText.length ? bareText : previousBareText;
+			const longer = bareText.length <= previousBareText.length ? previousBareText : bareText;
+			if (
+				(shorter === longer || longer.includes(shorter)) &&
+				shorter.length / longer.length >= 0.75
+			)
+				fail(
+					`${s.id} 与上一段正文重复，属于同一句说了两遍，应在音频层删前留后`,
+				);
+		}
+		if (bareText.length > 0 && bareText.length <= 3 && !present(s.note))
+			fail(`${s.id} 可视字数不超过 3，需要在 note 写明是保留的语气词还是待合并的残词`);
+		// 屏幕字幕必须由本段音频支持：字幕里成串出现、又不属于本段正文或原始 ASR 的字，
+		// 说明它写进了相邻单元的内容。
+		const ownBare = `${s.text}${s.rawAsrText ?? ""}`.replace(
+			/[^\u4e00-\u9fffA-Za-z0-9]/gu,
+			"",
+		);
+		const selfIndex = data.segments.findIndex((item) => item.id === s.id);
+		for (const step of [-1, 1]) {
+			const neighbour = data.segments[selfIndex + step];
+			if (!neighbour) continue;
+			const neighbourBare = String(neighbour.text ?? "").replace(
+				/[^\u4e00-\u9fffA-Za-z0-9]/gu,
+				"",
+			);
+			for (const caption of s.screenCaptions ?? []) {
+				const captionBare = String(caption.text ?? "").replace(
+					/[^\u4e00-\u9fffA-Za-z0-9]/gu,
+					"",
+				);
+				for (let i = 0; i + 2 <= captionBare.length; i += 1) {
+					const run = captionBare.slice(i, i + 2);
+					if (neighbourBare.includes(run) && !ownBare.includes(run))
+						fail(
+							`${s.id} 屏幕字幕「${caption.text}」含相邻单元的内容「${run}」`,
+						);
+				}
+			}
+		}
+		previousBareText = bareText;
+		if (s.kind === "CAPTION") {
+			if ((!Array.isArray(s.screenCaptions) || !s.screenCaptions.length) && !/并入|跨片段/u.test(s.note || ""))
+				fail(`${s.id} 缺最终屏幕字幕层`);
+			let captionEnd = s.finalRange.start;
+			for (const [index, caption] of s.screenCaptions.entries()) {
+				const captionSegments = (caption.segmentIds || []).map((id) => data.segments.find((item) => item.id === id)).filter(Boolean);
+				const captionEnvelope = captionSegments.length
+					? { start: captionSegments[0].finalRange.start, end: captionSegments.at(-1).finalRange.end }
+					: s.finalRange;
+				if (!range(caption) || !inside(caption, captionEnvelope) || caption.start < captionEnd - 0.00001)
+					fail(`${s.id} 屏幕字幕 ${index + 1} 时码越界或重叠`);
+				if (!present(caption.text) || /^[，。！？、]/u.test(caption.text) || /[，。、；：,.;]$/u.test(caption.text))
+					fail(`${s.id} 屏幕字幕 ${index + 1} 含孤立标点或句末停顿标点`);
+				const visibleLength = [...caption.text.replace(/[^\u4e00-\u9fffA-Za-z0-9]/gu, "")].length;
+				const captionDuration = caption.end - caption.start;
+				if (visibleLength >= 12 && captionDuration < 0.8)
+					fail(`${s.id} 屏幕字幕 ${index + 1} 在过短片段中承载过长文本`);
+				if (previousCaptionTexts.some((text) => text === caption.text))
+					fail(`${s.id} 屏幕字幕 ${index + 1} 与相邻片段重复显示`);
+				if (!Array.isArray(caption.segmentIds) || !caption.segmentIds.length || caption.segmentIds.some((id) => !segments.has(id)))
+					fail(`${s.id} 屏幕字幕 ${index + 1} 的片段引用无效`);
+				checkSources(caption.sourceRanges, `${s.id} 屏幕字幕 ${index + 1}`, data.isExample === true);
+				captionEnd = caption.end;
+				previousCaptionTexts = [caption.text];
+			}
+		}
 		previousEnd = s.finalRange.end;
 	}
 	const visualIds = ids(data.visuals, "画面单元");
@@ -204,6 +288,8 @@ export function validateReview(data) {
 	if (!data.isExample && !data.sourceDecisions.length)
 		fail("正式审稿须包含源素材保留/删除/疑难决定，不能只交成片片段");
 	ids(data.sourceDecisions, "源决定");
+	const segmentById = new Map(data.segments.map((s) => [s.id, s]));
+	const decisionBySegment = new Map();
 	for (const d of data.sourceDecisions) {
 		checkSources(d.sourceRanges, d.id, data.isExample === true);
 		if (
@@ -212,6 +298,13 @@ export function validateReview(data) {
 			!present(d.text)
 		)
 			fail(`${d.id} 缺源审稿内容或理由`);
+		const segmentId = d.id.replace(/^D/, "C");
+		decisionBySegment.set(segmentId, d);
+		const segment = segmentById.get(segmentId);
+		if (d.decision === "DELETE" && segment)
+			fail(`${segmentId} 已标记 DELETE 但仍存在于最终字幕 segments`);
+		if (d.decision === "KEEP" && segment && d.text !== segment.text)
+			fail(`${segmentId} 的源决定字幕与最终字幕不一致`);
 	}
 	return data;
 }

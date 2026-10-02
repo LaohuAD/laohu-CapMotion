@@ -1,0 +1,1827 @@
+{
+  "sourceAudio": [
+    {
+      "segment": 0,
+      "track": "mic",
+      "channels": 1,
+      "duration": 486.343604,
+      "float48kBytes": 93377972
+    },
+    {
+      "segment": 0,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 486.343521,
+      "float48kBytes": 186755912
+    },
+    {
+      "segment": 1,
+      "track": "mic",
+      "channels": 1,
+      "duration": 418.718833,
+      "float48kBytes": 80394016
+    },
+    {
+      "segment": 1,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 418.718833,
+      "float48kBytes": 160788032
+    },
+    {
+      "segment": 2,
+      "track": "mic",
+      "channels": 1,
+      "duration": 530.002625,
+      "float48kBytes": 101760504
+    },
+    {
+      "segment": 2,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 530.003125,
+      "float48kBytes": 203521200
+    },
+    {
+      "segment": 3,
+      "track": "mic",
+      "channels": 1,
+      "duration": 155.875917,
+      "float48kBytes": 29928176
+    },
+    {
+      "segment": 3,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 155.917563,
+      "float48kBytes": 59872344
+    },
+    {
+      "segment": 4,
+      "track": "mic",
+      "channels": 1,
+      "duration": 528.603208,
+      "float48kBytes": 101491816
+    },
+    {
+      "segment": 4,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 528.608646,
+      "float48kBytes": 202985720
+    },
+    {
+      "segment": 5,
+      "track": "mic",
+      "channels": 1,
+      "duration": 108.285083,
+      "float48kBytes": 20790736
+    },
+    {
+      "segment": 5,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 108.357729,
+      "float48kBytes": 41609368
+    },
+    {
+      "segment": 6,
+      "track": "mic",
+      "channels": 1,
+      "duration": 366.804583,
+      "float48kBytes": 70426480
+    },
+    {
+      "segment": 6,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 366.808771,
+      "float48kBytes": 140854568
+    },
+    {
+      "segment": 7,
+      "track": "mic",
+      "channels": 1,
+      "duration": 134.850208,
+      "float48kBytes": 25891240
+    },
+    {
+      "segment": 7,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 134.918021,
+      "float48kBytes": 51808520
+    },
+    {
+      "segment": 8,
+      "track": "mic",
+      "channels": 1,
+      "duration": 21.99075,
+      "float48kBytes": 4222224
+    },
+    {
+      "segment": 8,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 21.996438,
+      "float48kBytes": 8446632
+    },
+    {
+      "segment": 9,
+      "track": "mic",
+      "channels": 1,
+      "duration": 169.549479,
+      "float48kBytes": 32553500
+    },
+    {
+      "segment": 9,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 169.624729,
+      "float48kBytes": 65135896
+    },
+    {
+      "segment": 10,
+      "track": "mic",
+      "channels": 1,
+      "duration": 108.666771,
+      "float48kBytes": 20864020
+    },
+    {
+      "segment": 10,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 108.725646,
+      "float48kBytes": 41750648
+    },
+    {
+      "segment": 11,
+      "track": "mic",
+      "channels": 1,
+      "duration": 62.066,
+      "float48kBytes": 11916672
+    },
+    {
+      "segment": 11,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 62.065958,
+      "float48kBytes": 23833328
+    },
+    {
+      "segment": 12,
+      "track": "mic",
+      "channels": 1,
+      "duration": 47.546229,
+      "float48kBytes": 9128876
+    },
+    {
+      "segment": 12,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 47.671,
+      "float48kBytes": 18305664
+    },
+    {
+      "segment": 13,
+      "track": "mic",
+      "channels": 1,
+      "duration": 267.532396,
+      "float48kBytes": 51366220
+    },
+    {
+      "segment": 13,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 267.586271,
+      "float48kBytes": 102753128
+    },
+    {
+      "segment": 14,
+      "track": "mic",
+      "channels": 1,
+      "duration": 722.079604,
+      "float48kBytes": 138639284
+    },
+    {
+      "segment": 14,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 722.125896,
+      "float48kBytes": 277296344
+    },
+    {
+      "segment": 15,
+      "track": "mic",
+      "channels": 1,
+      "duration": 1049.367083,
+      "float48kBytes": 201478480
+    },
+    {
+      "segment": 15,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 1049.409667,
+      "float48kBytes": 402973312
+    },
+    {
+      "segment": 16,
+      "track": "mic",
+      "channels": 1,
+      "duration": 232.549417,
+      "float48kBytes": 44649488
+    },
+    {
+      "segment": 16,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 232.548917,
+      "float48kBytes": 89298784
+    },
+    {
+      "segment": 17,
+      "track": "mic",
+      "channels": 1,
+      "duration": 222.086083,
+      "float48kBytes": 42640528
+    },
+    {
+      "segment": 17,
+      "track": "system_audio",
+      "channels": 2,
+      "duration": 222.086083,
+      "float48kBytes": 85281056
+    }
+  ],
+  "decodedAudioGiB": 3.02194681763649,
+  "postExportMemorySnapshots": [
+    {
+      "time": "2026-09-10 20:58:51",
+      "summary": [
+        "Physical footprint:         3.9G",
+        "Physical footprint (peak):  4.2G",
+        "DefaultMallocZone_0x1162f4000                   4.2G      21.1M      21.1M       3.6G     655151       4.1G         0K      0%     337"
+      ]
+    },
+    {
+      "time": "2026-09-10 20:59:07",
+      "summary": [
+        "Physical footprint:         3.9G",
+        "Physical footprint (peak):  4.2G",
+        "DefaultMallocZone_0x1162f4000                   4.2G      24.8M      24.8M       3.6G     654946       4.1G         0K      0%     338"
+      ]
+    },
+    {
+      "time": "2026-09-10 20:59:23",
+      "summary": [
+        "Physical footprint:         3.9G",
+        "Physical footprint (peak):  4.2G",
+        "DefaultMallocZone_0x1162f4000                   4.2G      21.3M      21.3M       3.6G     654990       4.1G         0K      0%     337"
+      ]
+    },
+    {
+      "time": "2026-09-10 20:59:39",
+      "summary": [
+        "Physical footprint:         3.9G",
+        "Physical footprint (peak):  4.2G",
+        "DefaultMallocZone_0x1162f4000                   4.2G      21.3M      21.3M       3.6G     655589       4.1G         0K      0%     337"
+      ]
+    }
+  ],
+  "measurementScope": {
+    "appVersion": "0.1.3",
+    "mainPID": 41632,
+    "exportFinishedAt": "2026-09-10 20:55:49 Asia/Shanghai",
+    "exportPeakMeasured": false,
+    "note": "measurement began after exporter exited; main-process snapshots only, not process-group peak or proof of leak"
+  },
+  "system": {
+    "physicalMemoryGiB": 16,
+    "swapUsedMiB": 18285.44,
+    "swapScope": "whole machine, not all attributable to CapMotion"
+  },
+  "audioBudgetGiB": {
+    "mic": 1.0072442069649696,
+    "system_audio": 2.0147026106715202
+  },
+  "findings": [
+    "main physical footprint3.9G stable across4samples spanning48s, peak4.2G; mallocallocated4.1G",
+    "current code eagerly decodes all36recording tracks to48k float32 and retains them; raw sample payload calculated3.02GiB, vectorcapacity/decoders extra",
+    "export process separately creates all source segments and awaits both audio tracks; editor pause does not free source audio",
+    "video encoder queue bounded4 frames, stderr tail bounded; no evidence yet these grow without bound",
+    "source captions track renders all998entries rather than visible subset; contributor candidate, not measured drag bottleneck",
+    "preview websocket logged29-30fps at512x288; created-to-sent usually0.2-0.3ms; not click-to-frame or drag response measurement",
+    "existing periodic memory logger onlyRSS+virtual size misses physical footprint incl compressed/swapped ownership"
+  ],
+  "nextAcceptance": [
+    "measure whole process group physical footprint over full export, repeat export2-3times and check postexport plateau",
+    "bounded decoded source-audio working set and eviction; export sequential decode instead of whole source retention",
+    "record seek request-to-present p50/p95 and UI frame times with export idle and active",
+    "all cache/build artifacts external disk; no app packaging without explicit authorization"
+  ],
+  "shortExportComparison": {
+    "project": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-10 09.28 PM.cap",
+    "durationSeconds": 79.523521,
+    "sourceSegments": 1,
+    "exportStart": "2026-09-10 21:30:50.925",
+    "exportCompleted": "2026-09-10 21:31:16.091",
+    "exportWallSeconds": 25.166,
+    "appObservedMiBRange": [
+      585.9,
+      586.3
+    ],
+    "exporterLastReportedLifetimePeakMiB": 599.1,
+    "maxSampledCombinedMiB": 1183.8,
+    "limits": [
+      "sampling began about10seconds after exportstart; final gap before exporterexit not captured",
+      "process pair only; excludes WebKit helpers and other apps",
+      "mainprocess lifetimepeak4.2G belongs earlier work, not this export",
+      "no growth reproduced in this79.5second single-source export; cannot exclude longexport issues"
+    ],
+    "samples": [
+      {
+        "time": "2026-09-10 21:31:01",
+        "elapsed": 2.78,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614780108.8,
+            "Physical footprint (peak)": 4509715660.8
+          },
+          {
+            "pid": 43952,
+            "kind": "exporter",
+            "Physical footprint": 626524160.0,
+            "Physical footprint (peak)": 626524160.0
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 22528.00M  used = 21771.06M  free = 756.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:06",
+        "elapsed": 7.42,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614780108.8,
+            "Physical footprint (peak)": 4509715660.8
+          },
+          {
+            "pid": 43952,
+            "kind": "exporter",
+            "Physical footprint": 598422323.2,
+            "Physical footprint (peak)": 628201881.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 22528.00M  used = 21747.06M  free = 780.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:10",
+        "elapsed": 12.05,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614675251.2,
+            "Physical footprint (peak)": 4509715660.8
+          },
+          {
+            "pid": 43952,
+            "kind": "exporter",
+            "Physical footprint": 607125504.0,
+            "Physical footprint (peak)": 628201881.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 22528.00M  used = 21739.06M  free = 788.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:15",
+        "elapsed": 16.68,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614570393.6,
+            "Physical footprint (peak)": 4509715660.8
+          },
+          {
+            "pid": 43952,
+            "kind": "exporter",
+            "Physical footprint": 609537228.8,
+            "Physical footprint (peak)": 628201881.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 22528.00M  used = 21739.06M  free = 788.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:19",
+        "elapsed": 20.65,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614465536.0,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21739.06M  free = 788.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:23",
+        "elapsed": 24.55,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614465536.0,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21731.06M  free = 796.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:27",
+        "elapsed": 28.42,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614360678.4,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21691.06M  free = 836.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:31",
+        "elapsed": 32.34,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614360678.4,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21691.06M  free = 836.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:35",
+        "elapsed": 36.25,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614360678.4,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21651.06M  free = 876.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:39",
+        "elapsed": 40.26,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614465536.0,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21571.06M  free = 956.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:43",
+        "elapsed": 44.27,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614465536.0,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21555.06M  free = 972.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:47",
+        "elapsed": 48.18,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614465536.0,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21547.06M  free = 980.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:50",
+        "elapsed": 52.08,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614465536.0,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21547.06M  free = 980.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-10 21:31:54",
+        "elapsed": 55.98,
+        "processes": [
+          {
+            "pid": 41632,
+            "kind": "app",
+            "Physical footprint": 614465536.0,
+            "Physical footprint (peak)": 4509715660.8
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 22528.00M  used = 21523.06M  free = 1004.94M  (encrypted)"
+      }
+    ]
+  },
+  "longExportObservation20260911": {
+    "samples": [
+      {
+        "time": "2026-09-11 09:41:59",
+        "elapsed": 5.59,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3543348019.2,
+            "Physical footprint (peak)": 3543348019.2
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 24576.00M  used = 23508.56M  free = 1067.44M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:42:06",
+        "elapsed": 12.83,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 24576.00M  used = 23484.56M  free = 1091.44M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:42:13",
+        "elapsed": 20.09,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 24576.00M  used = 23468.56M  free = 1107.44M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:42:20",
+        "elapsed": 27.2,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 24576.00M  used = 23436.56M  free = 1139.44M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:42:27",
+        "elapsed": 34.33,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 24576.00M  used = 23388.56M  free = 1187.44M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:42:35",
+        "elapsed": 41.68,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 24576.00M  used = 23515.12M  free = 1060.88M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:42:42",
+        "elapsed": 49.14,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 24576.00M  used = 23829.06M  free = 746.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:42:50",
+        "elapsed": 56.42,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 25600.00M  used = 24473.19M  free = 1126.81M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:42:57",
+        "elapsed": 63.62,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 25600.00M  used = 24462.50M  free = 1137.50M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:43:04",
+        "elapsed": 70.75,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 25600.00M  used = 24446.50M  free = 1153.50M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:43:11",
+        "elapsed": 78.15,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 25600.00M  used = 24430.50M  free = 1169.50M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:43:19",
+        "elapsed": 85.57,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 25600.00M  used = 24502.38M  free = 1097.62M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:43:26",
+        "elapsed": 92.89,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 25600.00M  used = 24721.88M  free = 878.12M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:43:33",
+        "elapsed": 100.27,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3650722201.6,
+            "Physical footprint (peak)": 3650722201.6
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 25600.00M  used = 24892.88M  free = 707.12M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:43:41",
+        "elapsed": 108.13,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3758096384.0,
+            "Physical footprint (peak)": 3758096384.0
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 26624.00M  used = 25975.19M  free = 648.81M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:43:49",
+        "elapsed": 115.49,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3758096384.0,
+            "Physical footprint (peak)": 3758096384.0
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 26624.00M  used = 26077.06M  free = 546.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:43:56",
+        "elapsed": 122.94,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3758096384.0,
+            "Physical footprint (peak)": 3758096384.0
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 26624.00M  used = 26037.06M  free = 586.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:03",
+        "elapsed": 130.1,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          },
+          {
+            "pid": 66308,
+            "kind": "exporter",
+            "Physical footprint": 3758096384.0,
+            "Physical footprint (peak)": 3758096384.0
+          }
+        ],
+        "exportActive": true,
+        "swap": "total = 26624.00M  used = 26029.06M  free = 594.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:07",
+        "elapsed": 134.37,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 26624.00M  used = 23488.56M  free = 3135.44M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:12",
+        "elapsed": 138.44,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 18432.00M  used = 11869.50M  free = 6562.50M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:16",
+        "elapsed": 142.4,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 14336.00M  used = 11839.00M  free = 2497.00M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:20",
+        "elapsed": 146.46,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 13312.00M  used = 11719.06M  free = 1592.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:24",
+        "elapsed": 150.66,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 13312.00M  used = 11671.06M  free = 1640.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:28",
+        "elapsed": 154.72,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 13312.00M  used = 11607.06M  free = 1704.94M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:32",
+        "elapsed": 158.85,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 13312.00M  used = 11554.12M  free = 1757.88M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:36",
+        "elapsed": 162.87,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 12288.00M  used = 11537.88M  free = 750.12M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:40",
+        "elapsed": 166.91,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 12288.00M  used = 11513.88M  free = 774.12M  (encrypted)"
+      },
+      {
+        "time": "2026-09-11 09:44:44",
+        "elapsed": 171.01,
+        "processes": [
+          {
+            "pid": 66263,
+            "kind": "app",
+            "Physical footprint": 3972844748.8,
+            "Physical footprint (peak)": 4187593113.6
+          }
+        ],
+        "exportActive": false,
+        "swap": "total = 12288.00M  used = 11505.88M  free = 782.12M  (encrypted)"
+      }
+    ],
+    "screenshotApplicationMemoryGB": 40.98,
+    "completedLocalTime": "2026-09-11 09:44:07",
+    "outputBytes": 1913229068,
+    "limitation": "仅覆盖导出末尾约两分钟及结束后37秒；主程序与导出器 footprint 不能解释系统截图40.98GB，未完整采集关联服务与全部内存类别，不能据此确认泄漏根因。"
+  },
+  "capmotion_0_1_4_development_export": {
+    "units": "MiB; IOSurface is mapped size, not application-group memory",
+    "baselineAt478_8Seconds": {
+      "iosurfaceMappedMiB": 29081.6,
+      "regions": 8339
+    },
+    "candidatePeak": {
+      "footprintMiB": 1126.4,
+      "iosurfaceMappedMiB": 3072.0
+    },
+    "candidateSamples": [
+      {
+        "elapsed": 0.0,
+        "footprintMiB": 0.078125,
+        "iosurfaceMappedMiB": 0
+      },
+      {
+        "elapsed": 10.0,
+        "footprintMiB": 0.09375,
+        "iosurfaceMappedMiB": 0
+      },
+      {
+        "elapsed": 20.1,
+        "footprintMiB": 288.9,
+        "iosurfaceMappedMiB": 102.7
+      },
+      {
+        "elapsed": 31.3,
+        "footprintMiB": 388.0,
+        "iosurfaceMappedMiB": 44.5
+      },
+      {
+        "elapsed": 42.1,
+        "footprintMiB": 378.6,
+        "iosurfaceMappedMiB": 0.171875
+      },
+      {
+        "elapsed": 52.9,
+        "footprintMiB": 394.3,
+        "iosurfaceMappedMiB": 0.171875
+      },
+      {
+        "elapsed": 63.6,
+        "footprintMiB": 876.1,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 74.7,
+        "footprintMiB": 887.1,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 85.6,
+        "footprintMiB": 873.5,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 96.9,
+        "footprintMiB": 697.5,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 109.8,
+        "footprintMiB": 667.9,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 123.1,
+        "footprintMiB": 700.9,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 134.1,
+        "footprintMiB": 701.9,
+        "iosurfaceMappedMiB": 2150.4
+      },
+      {
+        "elapsed": 145.2,
+        "footprintMiB": 694.2,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 156.7,
+        "footprintMiB": 700.9,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 167.7,
+        "footprintMiB": 694.4,
+        "iosurfaceMappedMiB": 2764.8
+      },
+      {
+        "elapsed": 178.7,
+        "footprintMiB": 705.1,
+        "iosurfaceMappedMiB": 1536.0
+      },
+      {
+        "elapsed": 189.5,
+        "footprintMiB": 688.3,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 200.4,
+        "footprintMiB": 694.1,
+        "iosurfaceMappedMiB": 2150.4
+      },
+      {
+        "elapsed": 211.4,
+        "footprintMiB": 695.5,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 222.5,
+        "footprintMiB": 735.1,
+        "iosurfaceMappedMiB": 776.9
+      },
+      {
+        "elapsed": 233.8,
+        "footprintMiB": 734.0,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 244.9,
+        "footprintMiB": 724.2,
+        "iosurfaceMappedMiB": 2150.4
+      },
+      {
+        "elapsed": 255.9,
+        "footprintMiB": 722.2,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 266.8,
+        "footprintMiB": 737.0,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 277.7,
+        "footprintMiB": 746.0,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 288.7,
+        "footprintMiB": 732.9,
+        "iosurfaceMappedMiB": 1638.4
+      },
+      {
+        "elapsed": 299.5,
+        "footprintMiB": 745.6,
+        "iosurfaceMappedMiB": 1536.0
+      },
+      {
+        "elapsed": 310.4,
+        "footprintMiB": 772.0,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 321.4,
+        "footprintMiB": 760.9,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 332.7,
+        "footprintMiB": 777.6,
+        "iosurfaceMappedMiB": 1638.4
+      },
+      {
+        "elapsed": 343.6,
+        "footprintMiB": 790.6,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 354.9,
+        "footprintMiB": 797.6,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 365.9,
+        "footprintMiB": 783.2,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 376.7,
+        "footprintMiB": 797.8,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 387.5,
+        "footprintMiB": 844.4,
+        "iosurfaceMappedMiB": 1536.0
+      },
+      {
+        "elapsed": 398.4,
+        "footprintMiB": 849.8,
+        "iosurfaceMappedMiB": 1638.4
+      },
+      {
+        "elapsed": 409.2,
+        "footprintMiB": 864.6,
+        "iosurfaceMappedMiB": 2355.2
+      },
+      {
+        "elapsed": 420.2,
+        "footprintMiB": 885.9,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 431.1,
+        "footprintMiB": 880.9,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 442.0,
+        "footprintMiB": 871.1,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 453.1,
+        "footprintMiB": 908.9,
+        "iosurfaceMappedMiB": 899.0
+      },
+      {
+        "elapsed": 464.0,
+        "footprintMiB": 925.7,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 475.4,
+        "footprintMiB": 933.8,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 486.5,
+        "footprintMiB": 922.9,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 497.5,
+        "footprintMiB": 940.0,
+        "iosurfaceMappedMiB": 1433.6
+      },
+      {
+        "elapsed": 508.5,
+        "footprintMiB": 977.3,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 520.0,
+        "footprintMiB": 993.8,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 531.5,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1638.4
+      },
+      {
+        "elapsed": 542.9,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 554.0,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 565.0,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 576.0,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 587.0,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2764.8
+      },
+      {
+        "elapsed": 599.0,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 610.9,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2764.8
+      },
+      {
+        "elapsed": 624.0,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2457.6
+      },
+      {
+        "elapsed": 635.4,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2355.2
+      },
+      {
+        "elapsed": 646.5,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2867.2
+      },
+      {
+        "elapsed": 659.2,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1536.0
+      },
+      {
+        "elapsed": 675.6,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 687.3,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2252.8
+      },
+      {
+        "elapsed": 698.4,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 709.6,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2560.0
+      },
+      {
+        "elapsed": 721.7,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 534.8
+      },
+      {
+        "elapsed": 732.6,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 743.6,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 754.6,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 765.7,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2150.4
+      },
+      {
+        "elapsed": 776.7,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 787.7,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 1638.4
+      },
+      {
+        "elapsed": 798.7,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2252.8
+      },
+      {
+        "elapsed": 809.7,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2560.0
+      },
+      {
+        "elapsed": 820.9,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 3072.0
+      },
+      {
+        "elapsed": 831.9,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2252.8
+      },
+      {
+        "elapsed": 842.8,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 853.9,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2457.6
+      },
+      {
+        "elapsed": 864.9,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2355.2
+      },
+      {
+        "elapsed": 876.0,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 887.8,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 956.0
+      },
+      {
+        "elapsed": 899.1,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 1638.4
+      },
+      {
+        "elapsed": 910.1,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2764.8
+      },
+      {
+        "elapsed": 921.4,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 932.4,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 950.5
+      },
+      {
+        "elapsed": 943.4,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2355.2
+      },
+      {
+        "elapsed": 954.4,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 1638.4
+      },
+      {
+        "elapsed": 965.5,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2252.8
+      },
+      {
+        "elapsed": 976.6,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 1536.0
+      },
+      {
+        "elapsed": 987.6,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 1843.2
+      }
+    ],
+    "exportExitCode": 0,
+    "exportWallSeconds": 999,
+    "outputProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "duration": "1691.066667",
+          "nb_frames": "50732"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 2,
+          "duration": "1691.043000",
+          "nb_frames": "79269"
+        }
+      ],
+      "format": {
+        "duration": "1691.066667",
+        "size": "1913971559"
+      }
+    },
+    "implementationCommit": "9ce3d54b5f9506f13d7c7ac017f9528588876b73",
+    "finalPackageCommit": "f3f2414809d414712da1161c4ad6cc5efb68d5fc",
+    "subsequentChanges": "源码格式/类型导入整理，以及安装验证脚本与CI产物留存修正，应用逻辑未变；最终包另验签名、安装、CLI事务和预览"
+  },
+  "capmotion_0_1_4_release_export": {
+    "exitCode": 0,
+    "wallSeconds": 470.8,
+    "binary": "/Volumes/Laohu_Work/项目/老胡/老胡自媒体/老胡画面讲解/target/capmotion-release/verified-macos/CapMotion.app/Contents/MacOS/cap-exporter",
+    "samples": [
+      {
+        "elapsed": 0.1,
+        "footprintMiB": 0.078125,
+        "iosurfaceMappedMiB": 0
+      },
+      {
+        "elapsed": 12.0,
+        "footprintMiB": 184.9,
+        "iosurfaceMappedMiB": 0.015625
+      },
+      {
+        "elapsed": 22.9,
+        "footprintMiB": 425.2,
+        "iosurfaceMappedMiB": 121.5
+      },
+      {
+        "elapsed": 34.1,
+        "footprintMiB": 992.1,
+        "iosurfaceMappedMiB": 1536.0
+      },
+      {
+        "elapsed": 44.9,
+        "footprintMiB": 997.5,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 55.9,
+        "footprintMiB": 990.8,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 66.9,
+        "footprintMiB": 990.9,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 77.8,
+        "footprintMiB": 811.6,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 88.7,
+        "footprintMiB": 813.3,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 99.6,
+        "footprintMiB": 817.7,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 110.4,
+        "footprintMiB": 820.2,
+        "iosurfaceMappedMiB": 2150.4
+      },
+      {
+        "elapsed": 121.3,
+        "footprintMiB": 837.7,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 132.2,
+        "footprintMiB": 835.0,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 143.3,
+        "footprintMiB": 834.9,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 154.3,
+        "footprintMiB": 842.0,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 165.2,
+        "footprintMiB": 843.5,
+        "iosurfaceMappedMiB": 2150.4
+      },
+      {
+        "elapsed": 176.2,
+        "footprintMiB": 846.0,
+        "iosurfaceMappedMiB": 1945.6
+      },
+      {
+        "elapsed": 187.4,
+        "footprintMiB": 907.8,
+        "iosurfaceMappedMiB": 1638.4
+      },
+      {
+        "elapsed": 198.3,
+        "footprintMiB": 924.1,
+        "iosurfaceMappedMiB": 1536.0
+      },
+      {
+        "elapsed": 209.2,
+        "footprintMiB": 922.6,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 220.1,
+        "footprintMiB": 963.6,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 231.0,
+        "footprintMiB": 970.1,
+        "iosurfaceMappedMiB": 2048.0
+      },
+      {
+        "elapsed": 241.8,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 252.7,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 2150.4
+      },
+      {
+        "elapsed": 263.5,
+        "footprintMiB": 1024.0,
+        "iosurfaceMappedMiB": 1843.2
+      },
+      {
+        "elapsed": 274.6,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 285.5,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2764.8
+      },
+      {
+        "elapsed": 296.4,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 307.3,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 318.2,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2764.8
+      },
+      {
+        "elapsed": 329.3,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 3481.6
+      },
+      {
+        "elapsed": 340.1,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 1740.8
+      },
+      {
+        "elapsed": 351.0,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2252.8
+      },
+      {
+        "elapsed": 362.0,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 372.9,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2457.6
+      },
+      {
+        "elapsed": 384.1,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2252.8
+      },
+      {
+        "elapsed": 395.0,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2457.6
+      },
+      {
+        "elapsed": 406.0,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2252.8
+      },
+      {
+        "elapsed": 416.9,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 1126.4
+      },
+      {
+        "elapsed": 427.9,
+        "footprintMiB": 1126.4,
+        "iosurfaceMappedMiB": 2662.4
+      },
+      {
+        "elapsed": 438.9,
+        "footprintMiB": 1228.8,
+        "iosurfaceMappedMiB": 2867.2
+      },
+      {
+        "elapsed": 450.0,
+        "footprintMiB": 1228.8,
+        "iosurfaceMappedMiB": 3686.4
+      },
+      {
+        "elapsed": 460.8,
+        "footprintMiB": 1228.8,
+        "iosurfaceMappedMiB": 1331.2
+      }
+    ],
+    "sampleCount": 43,
+    "footprintPeakMiB": 1228.8,
+    "iosurfaceMappedPeakMiB": 3686.4,
+    "implementationCommit": "9ce3d54b5f9506f13d7c7ac017f9528588876b73",
+    "finalPackageCommit": "f3f2414809d414712da1161c4ad6cc5efb68d5fc",
+    "subsequentChanges": "源码格式/类型导入整理，以及安装验证脚本与CI产物留存修正，应用逻辑未变；最终包另验签名、安装、CLI事务和预览"
+  },
+  "capmotion_0_1_4_delivery": {
+    "status": "published",
+    "version": "0.1.4",
+    "commit": "f3f2414809d414712da1161c4ad6cc5efb68d5fc",
+    "releaseUrl": "https://github.com/LaohuAD/laohu-CapMotion/releases/tag/v0.1.4",
+    "publishedAt": "2026-09-12T18:56:14Z",
+    "macInstalledPath": "/Applications/CapMotion.app",
+    "windowsBuildRun": 34709856234,
+    "windowsPublishRun": 34712536160,
+    "assets": [
+      {
+        "name": "CapMotion-0.1.4-macos-arm64.zip",
+        "bytes": 567419693,
+        "sha256": "sha256:11504456f38a6140d2aa178ae538cc3c400c4ada8e948ada11ea563227cca5c7"
+      },
+      {
+        "name": "capmotion-macos-verification.json",
+        "bytes": 1665,
+        "sha256": "sha256:12bd72d3d461d956b2a910d8e4c02dd328661befcbed5f0a532b25b9ebb36d02"
+      },
+      {
+        "name": "capmotion-windows-verification.json",
+        "bytes": 1138,
+        "sha256": "sha256:cd5c12c27aa949f7c5e101757e4d61d4068951117bb8680b3fe492717d519145"
+      },
+      {
+        "name": "CapMotion_0.1.4_x64-setup.exe",
+        "bytes": 382672061,
+        "sha256": "sha256:5a7ae6a85a2d83834c5f584aa6986a1d0347e31e4d7ca1fdec07863de1bf32a0"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 194,
+        "sha256": "sha256:ca9e6c638d77ebd301d8448ae690f23dfee6dd500640f17d1291f0c84bfeff88"
+      }
+    ],
+    "verification": "Both package digests, report digests, combined checksum file and release tag verified; Windows hardware recording and interactive latency remain outside current validation."
+  }
+}

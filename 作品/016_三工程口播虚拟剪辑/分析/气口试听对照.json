@@ -1,0 +1,185 @@
+{
+  "status": "AUDITION_ONLY",
+  "projectUnchanged": true,
+  "method": "-55dB quiet-core trimming, no time stretch, no word deletion; 60ms and20ms are audition targets only",
+  "cases": [
+    {
+      "id": "六个部分",
+      "sourceRanges": [
+        [
+          99.685,
+          103.905
+        ]
+      ],
+      "quietCores": [
+        [
+          102.615625,
+          103.324042
+        ]
+      ],
+      "variants": [
+        {
+          "label": "当前版",
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/气口试听_六个部分_当前版.mp3",
+          "duration": 4.22,
+          "retainedRanges": [
+            [
+              99.685,
+              103.905
+            ]
+          ],
+          "maxCutEdgeAmplitude": 0
+        },
+        {
+          "label": "A_60ms",
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/气口试听_六个部分_A_60ms.mp3",
+          "duration": 3.5715833333333333,
+          "retainedRanges": [
+            [
+              99.685,
+              102.645625
+            ],
+            [
+              103.294042,
+              103.905
+            ]
+          ],
+          "maxCutEdgeAmplitude": 0.000152587890625
+        },
+        {
+          "label": "B_20ms",
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/气口试听_六个部分_B_20ms.mp3",
+          "duration": 3.5315833333333333,
+          "retainedRanges": [
+            [
+              99.685,
+              102.625625
+            ],
+            [
+              103.314042,
+              103.905
+            ]
+          ],
+          "maxCutEdgeAmplitude": 0.00042724609375
+        }
+      ]
+    },
+    {
+      "id": "从原理到提示词到效果",
+      "sourceRanges": [
+        [
+          50.96,
+          53.157271
+        ],
+        [
+          53.6,
+          61.155
+        ]
+      ],
+      "quietCores": [
+        [
+          53.139958,
+          53.870083
+        ],
+        [
+          55.371062,
+          56.008542
+        ],
+        [
+          57.68775,
+          57.883354
+        ],
+        [
+          58.561854,
+          58.931396
+        ],
+        [
+          59.717458,
+          60.05925
+        ]
+      ],
+      "variants": [
+        {
+          "label": "当前版",
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/气口试听_从原理到提示词到效果_当前版.mp3",
+          "duration": 9.752270833333334,
+          "retainedRanges": [
+            [
+              50.96,
+              53.157271
+            ],
+            [
+              53.6,
+              61.155
+            ]
+          ],
+          "maxCutEdgeAmplitude": 0
+        },
+        {
+          "label": "A_60ms",
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/气口试听_从原理到提示词到效果_A_60ms.mp3",
+          "duration": 8.220458333333333,
+          "retainedRanges": [
+            [
+              50.96,
+              53.169958
+            ],
+            [
+              53.840083,
+              55.401062
+            ],
+            [
+              55.978542,
+              57.71775
+            ],
+            [
+              57.853353999999996,
+              58.591854
+            ],
+            [
+              58.901396,
+              59.747458
+            ],
+            [
+              60.02925,
+              61.155
+            ]
+          ],
+          "maxCutEdgeAmplitude": 0.000274658203125
+        },
+        {
+          "label": "B_20ms",
+          "file": "/Volumes/Laohu_Work/软件数据/Cap/录制/016_人物设计与资产提取.cap/assets/气口试听_从原理到提示词到效果_B_20ms.mp3",
+          "duration": 8.020458333333334,
+          "retainedRanges": [
+            [
+              50.96,
+              53.149958
+            ],
+            [
+              53.860083,
+              55.381062
+            ],
+            [
+              55.998542,
+              57.69775
+            ],
+            [
+              57.873354,
+              58.571853999999995
+            ],
+            [
+              58.921396,
+              59.727458
+            ],
+            [
+              60.04925,
+              61.155
+            ]
+          ],
+          "maxCutEdgeAmplitude": 0.001373291015625
+        }
+      ]
+    }
+  ]
+}

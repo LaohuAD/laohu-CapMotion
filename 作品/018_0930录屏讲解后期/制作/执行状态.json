@@ -1,0 +1,258 @@
+{
+  "schema": "laohu.postproduction-execution-state/1",
+  "work": "018_0930录屏讲解后期",
+  "executedAt": "2026-10-01T20:30:00Z",
+  "capProject": {
+    "sourcePath": "/Volumes/Laohu_Work/软件数据/Cap/录制/Mi Monitor (Area) 2026-09-30 10.31 PM.cap",
+    "path": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap",
+    "nonDestructiveCopy": true,
+    "sourceRevisionAtFreeze": 1,
+    "revision": 76
+  },
+  "review": {
+    "revision": 47,
+    "segments": 489,
+    "sha256": "96b4e060855879d5e56e8c59e4943ef67292186b5a17e08a7912f600cc618fff"
+  },
+  "edl": {
+    "retainedRanges": 969,
+    "durationSeconds": 1454.81,
+    "frozen": true,
+    "sha256": "8a0e39da575dbc6c6f67a7784c0c56dec176ea7e8ae0053d6716e10a0b4e1518"
+  },
+  "captions": {
+    "tracks": [
+      "zh-CN",
+      "en"
+    ],
+    "pairs": 810,
+    "total": 1620,
+    "font": "Source Han Sans CN VF",
+    "weight": 500,
+    "trackStyles": {
+      "zh-CN": 52,
+      "en": 26
+    },
+    "trackPositions": {
+      "zh-CN": 0.9347716,
+      "en": 0.98703706
+    },
+    "displayMode": "materialized"
+  },
+  "animation": {
+    "segments": [
+      "V018-03",
+      "V018-04",
+      "V018-05",
+      "V018-06",
+      "V018-07",
+      "V018-08",
+      "V018-09",
+      "V018-10",
+      "V018-11",
+      "V018-12",
+      "V018-13",
+      "V018-14",
+      "V018-15",
+      "V018-1",
+      "V018-16",
+      "V018-17",
+      "V018-18",
+      "V018-2",
+      "V018-19"
+    ],
+    "compositionId": "Work018Overlay",
+    "forms": [
+      "三个 skill 闭环",
+      "分支",
+      "十个步骤一览",
+      "右侧步骤面板（自己生长，不显示总数）",
+      "大字卡",
+      "左右对照",
+      "箭头链",
+      "逐条清单"
+    ],
+    "motionOverlapViolations": 0,
+    "source": "workflows/laohu-video/模板/remotion-assets/workspace/src/works/Work018.tsx",
+    "zoomAware": {
+      "mechanism": "画面推近时覆盖层缩小并让位，与摄像头小窗 scaleDuringZoom 同一机制",
+      "scale": 0.58,
+      "shiftX": 300,
+      "rampFrames": 12,
+      "dimShrinksToOverlayArea": true
+    }
+  },
+  "preset": {
+    "name": "Laohu",
+    "storeRevision": 10,
+    "applied": true,
+    "verified": [
+      "aspectRatio=wide",
+      "background currentDesktop 绑定本工程桌面快照",
+      "displayPosition y=0.44",
+      "字幕字体字号字重与双轨位置字号"
+    ]
+  },
+  "gates": {
+    "approval": "PENDING",
+    "contextReview": "NEEDS_REVIEW",
+    "edlFrozen": true,
+    "note": "审稿复核状态为 NEEDS_REVIEW：本版由执行方生成，最终听感仍待作者验收"
+  },
+  "coverage": {
+    "totalWords": 8957,
+    "retainedWords": 8276,
+    "ledgerDeletedWords": 681,
+    "uncoveredWords": 0
+  },
+  "notDone": [
+    "剩余 90 处词禁剪区内的短气口：为满足“整词消失必须阻止写入”而保守保留"
+  ],
+  "delivery": {
+    "capProject": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_工作工程.cap",
+    "finalVideo": "/Volumes/Laohu_Work/软件数据/Cap/录制/018_从使用AI工具到建立判断力_成片.mp4",
+    "finalVideoBytes": 1540794292,
+    "durationSeconds": 1454.81,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "streams": [
+      "video:h264",
+      "audio:aac"
+    ],
+    "finalAsr": {
+      "path": "作品/018_0930录屏讲解后期/输出/成片-final.raw.json",
+      "srt": "作品/018_0930录屏讲解后期/输出/成片-final.srt",
+      "cueCount": 338,
+      "provenance": "作品/018_0930录屏讲解后期/输出/最终ASR溯源回执.json",
+      "provenanceValid": true
+    },
+    "silence": {
+      "before": "216.00s / 13.07%",
+      "after": "23.53s / 1.62%"
+    },
+    "jitterCheck": {
+      "method": "相位相关逐帧全局位移",
+      "framesScanned": 43645,
+      "oscillationCandidates": 0,
+      "zoomWindowFrames": 10300,
+      "conclusion": "成片内无抖动"
+    }
+  },
+  "analyses": [
+    "作品/018_0930录屏讲解后期/分析/前半段注意力动画方案.md",
+    "作品/018_0930录屏讲解后期/分析/覆盖动画执行记录.md",
+    "作品/018_0930录屏讲解后期/分析/放大抖动测量.md"
+  ],
+  "sourceFix": {
+    "file": "crates/rendering/src/cursor_interpolation.rs",
+    "what": "interpolate_raw_cursor 改为真实线性插值；间隔>500ms 不连线",
+    "tests": "cargo test -p cap-rendering 11 项通过（含 3 项新增）",
+    "effectOnJitter": "无——实测前后一致",
+    "revertible": true
+  },
+  "openIssues": [
+    "多样性尚未落地：19 个单元仍集中在 9 张卡。已建成判据与工具（关系图形选型库、通道轮换规则、13 种图解工具），但还没按新判据重新分配卡片",
+    "画面排版与审美标准里的数值下限（字号 96/64/38/28/22、圆角 12、一屏 ≤3 卡）尚未回改进卡内建模",
+    "theme.ts 四个深色主题的 line 色不达 3:1，未改（属项目级取舍）"
+  ],
+  "upstreamAnimation": {
+    "route": "动画导演 → video-talkcraft 阶段限定调用（跳过其 ①/②-0/TTS；②-1 之后进入制作）",
+    "wordTimestamps": {
+      "script": "scripts/cap-word-timestamps.mjs",
+      "out": "制作/逐字时间戳.json",
+      "sentences": 532,
+      "keptWords": 8276,
+      "ledgerDeletedWords": 681,
+      "uncoveredWords": 0,
+      "reconciles": true,
+      "basis": "源 ASR 原词 + 真实词级时码 → 显示时钟 → 冻结 EDL → 成片时间；校正字幕另作显示语义，互不覆盖"
+    },
+    "mount": {
+      "script": "scripts/cap-overlay-mount.mjs",
+      "manifest": "制作/动画manifest.json",
+      "units": 19,
+      "commandsReplaced": "每条注册三次 CLI 调用"
+    },
+    "semantics": {
+      "script": "scripts/talkcraft-semantics-fill.mjs",
+      "result": "PASS 0 FAIL 0 WARN",
+      "sentences": 532,
+      "main": 112,
+      "sub": 420
+    },
+    "cards": {
+      "approach": "上游原卡 + 机械蒙皮：脚本按颜色映射与版式适配批量处理，卡的时序 / 缓动 / 几何 / 层级不动",
+      "skinScript": "scripts/talkcraft-skin-card.mjs",
+      "assembleScript": "scripts/cap-assemble-cards.mjs",
+      "cardsUsed": 10,
+      "unitsReplaced": "19/19（不再有本地手写组件）",
+      "fidelity": "card_lint PASS 10/10（相似度 0.67–0.95）",
+      "layoutAdaptation": "收掉上游卡的「人物占一侧半幅」——本片底画是录屏 + 角落摄像头，没有整侧人物",
+      "beatNotWallpaper": "每张卡按自己的自然时长挂载并对齐口播关键句，不把 2 秒的卡拉满 80 秒的窗口"
+    },
+    "spec": "workflows/laohu-video/规范/动画导演转译规范.md §5「上游覆盖资产的输出规格与挂载契约」",
+    "tests": "scripts/cap-word-timestamps.test.mjs 4 项 + scripts/cap-overlay-mount.test.mjs 6 项，共 10 项通过",
+    "shots": {
+      "total": 38,
+      "animated": 19,
+      "background": 19,
+      "semantics": "PASS 0 FAIL 0 WARN ｜ 532 句 / 38 主句 / 494 陪衬句",
+      "cardMatch": "38 镜全部有主句语义，0 条未覆盖",
+      "cardLint": "PASS 1/1 ｜ source-converge 相似度 0.69 ≥ 0.55"
+    },
+    "sample": {
+      "segmentId": "V018-04",
+      "window": "57.46–68.77 秒",
+      "card": "source-converge",
+      "convAt": "6.69 秒——汇入在成片 65.65 秒收束，正对他问「核心优势到底在什么地方」",
+      "skin": "白底舞台→透明底+0.62压暗；曲线/胶囊/汇聚点换深底配色与本片强调色；绘制面 ×2 铺满 1920×1080",
+      "fidelity": "时序 / 缓动 / 几何比例 / 层级未改"
+    },
+    "consistency": {
+      "definitionSourcesAllExist": true,
+      "manifestRerunnable": true,
+      "note": "卡片挪到约定的 src/cards/<slug>.tsx 后，manifest 与工程定义都已同步；整条链可从 manifest 重跑"
+    },
+    "cardLint": "PASS 1/1 ｜ source-converge 相似度 0.69 ≥ 0.55",
+    "knownGaps": [
+      "alt-block-lines 与 type-contrast-emphasis 的卡片自带 Host 组件仍留在文件里（未被渲染），只在版式上收掉了它的列",
+      "ink-underline / color-slam-beat-card / info-term-card 三张卡正文写死在 JSX 里，本次未采用"
+    ],
+    "speechAnchors": {
+      "rule": "逐个出现的元素，出现时刻 = 主讲人说出那句话的时刻；卡的存活期由第一个到最后一个关键词决定",
+      "scripts": [
+        "scripts/cap-anchor-plan.mjs",
+        "scripts/cap-assemble-cards.mjs"
+      ],
+      "alignment": "19/19 单元全部 100% 命中口播连续原文，0 处降级",
+      "measured": "修复前第五个元素比口播早 1.45 秒、他说的第一个关键词无对应动画；修复后逐帧核对一致",
+      "guard": "对齐率 <100% 直接报错——卡上写主讲人没说过的话，就等于放弃这句的触发权"
+    },
+    "aestheticFixes": {
+      "fontStack": "13 张卡原以苹方优先，本机苹方无 700 以上字重 → 700/800 是合成假粗体；改为 Noto Sans CJK SC 优先（本机真实 100/300/350/400/500/700/900）",
+      "fontWeights": "字重收敛到 500/700/900 三档（Noto CJK 无 SemiBold，600 会落到 500）",
+      "staleCards": "删除 3 张未使用也未注册的陈旧卡副本（color-slam-beat-card / info-term-card / ink-underline）"
+    },
+    "defectsFixed": {
+      "全片通审": "19/19 镜逐帧抽检（此前只抽查几帧就宣布通过，这是根因）",
+      "demo文案泄漏": "numbered-step-stack 真实 prop 是 steps 不是 lines，传错会静默回落到自带 demo；已改并显示本片内容",
+      "文字出血": "per-character-rise 固定 72px+nowrap 为 6~10 字设计；19 字 ×2 放大后 2736px 超出 1920；已改按字数自适应",
+      "浅底白字": "title-demote 的浅色底板未随深底皮肤换；word-slot-cycle 结论胶囊底色撞上文字色；已改深色",
+      "空画面": "4 张卡退场写在自带 demo 时长上（卡 4 秒、段落 10 秒）；已改为退场跟段落走",
+      "曲线不可见": "汇聚卡曲线 0.42/2px → 0.62/2.5px"
+    },
+    "channels": {
+      "分布": {
+        "字形+色彩": 1,
+        "连接+方向": 3,
+        "文字轮换": 2,
+        "位置": 10,
+        "文字升起": 2,
+        "时间轴": 1
+      },
+      "新增卡": "step-timeline-vertical（时间轴通道）用于 V018-17",
+      "仍空缺": "面积/比例、包含圆圈、标注、数字、趋势——需按同一注入机制逐张接入"
+    }
+  }
+}
